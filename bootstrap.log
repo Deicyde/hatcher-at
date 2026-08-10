@@ -1,0 +1,26 @@
+=== START Wed Jul 22 19:44:08 EDT 2026 ===
+=== lake update (fetch mathlib + deps from github) ===
+✔ [20/25] Built Cache.Hashing:c.o (281ms)
+✔ [21/25] Built Cache.Requests (2.1s)
+✔ [22/25] Built Cache.Requests:c.o (1.4s)
+✔ [23/25] Built Cache.Main (1.7s)
+✔ [24/25] Built Cache.Main:c.o (411ms)
+✔ [25/25] Built cache:exe (1.4s)
+Decompressing 8538 already-cached file(s) (4 already decompressed)
+Current branch: HEAD
+Using cache (Azure) from origin: (some leanprover-community/mathlib4)
+No files to download
+Decompressed 8538 already-cached file(s)
+Completed successfully in 70347 ms!
+=== lake exe cache get (unpack oleans from ~/.cache/mathlib) ===
+Current branch: HEAD
+Using cache (Azure) from origin: (some leanprover-community/mathlib4)
+No files to download
+Already decompressed 8542 file(s)
+=== unpacked Mathlib oleans ===
+       0
+=== lake build target (needs topology oleans) ===
+✔ [1514/1516] Built Hatcher.HomotopyEquivRel (40s)
+✔ [1515/1516] Built Hatcher (22s)
+Build completed successfully (1516 jobs).
+=== BOOTSTRAP DONE ===
