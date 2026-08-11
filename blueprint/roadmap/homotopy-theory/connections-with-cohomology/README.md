@@ -1,3 +1,7 @@
+---
+not_ready: true
+---
+
 # Connections with cohomology
 
 Hatcher §4.3 (pages 393–420). Mapped, not yet decomposed.

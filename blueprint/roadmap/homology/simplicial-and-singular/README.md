@@ -1,3 +1,7 @@
+---
+not_ready: true
+---
+
 # Simplicial and singular homology
 
 Hatcher §2.1 (pages 102–133). Mapped, not yet decomposed.

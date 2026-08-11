@@ -1,3 +1,7 @@
+---
+not_ready: true
+---
+
 # Covering spaces
 
 Hatcher §1.3 (pages 56–82). Mapped, not yet decomposed.

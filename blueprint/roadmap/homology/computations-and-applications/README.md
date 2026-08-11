@@ -1,3 +1,7 @@
+---
+not_ready: true
+---
+
 # Computations and applications
 
 Hatcher §2.2 (pages 134–159). Mapped, not yet decomposed.

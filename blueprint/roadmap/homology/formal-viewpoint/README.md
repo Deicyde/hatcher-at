@@ -1,3 +1,7 @@
+---
+not_ready: true
+---
+
 # The formal viewpoint
 
 Hatcher §2.3 (pages 160–165). Mapped, not yet decomposed.

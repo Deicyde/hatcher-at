@@ -1,3 +1,7 @@
+---
+not_ready: true
+---
+
 # Some underlying geometric notions
 
 Hatcher's Chapter 0 (pages 1–20) fixes the geometric vocabulary the rest of the

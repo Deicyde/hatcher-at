@@ -1,3 +1,7 @@
+---
+not_ready: true
+---
+
 # Van Kampen's theorem
 
 Hatcher §1.2 (pages 40–55). Mapped, not yet decomposed.

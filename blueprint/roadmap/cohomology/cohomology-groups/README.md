@@ -1,3 +1,7 @@
+---
+not_ready: true
+---
+
 # Cohomology groups
 
 Hatcher §3.1 (pages 190–205). Mapped, not yet decomposed.

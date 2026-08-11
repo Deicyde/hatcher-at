@@ -1,3 +1,7 @@
+---
+not_ready: true
+---
+
 # Poincaré duality
 
 Hatcher §3.3 (pages 230–260). Mapped, not yet decomposed.
