@@ -1,28 +1,25 @@
 # Algebraic Topology (Hatcher) roadmap
 
-No chapters yet.
+Formalize results from Hatcher's *Algebraic Topology* in Lean 4 on top of
+Mathlib, working outward from the fundamental group.
 
-<!-- AUTHORING NOTES — these comments are not published.
+Mathlib already carries much of the book's groundwork: path homotopy, the
+fundamental groupoid, covering spaces with their lifting theorems, CW
+complexes, and singular homology in degree zero. What it lacks is the book's
+spine of computations, starting with `π₁(S¹) ≅ ℤ`. The roadmap therefore maps
+the whole book but decomposes it from that point.
 
-     Replace the line above with a short statement of the goal, then link each
-     chapter below in reading order. This page is the book's preface and table
-     of contents; keep it short.
+Chapters follow Hatcher's own order. Only §1.1, Basic constructions, is
+decomposed into formalization nodes; the rest are mapped so the book reads end
+to end and later work has somewhere to land. The
+[coverage contract](../coverage/README.md) says which is which, and
+[the source notes](../sources/hatcher.md) fix the citation scheme.
 
-     A chapter is a DIRECTORY holding a README.md. That README.md *is* the
-     chapter: it carries the narrative prose, and the formalizable statements
-     beside it are placed into that prose where they are first used.
+## Chapters
 
-         roadmap/
-           README.md              <- this page
-           first-chapter/
-             README.md            <- the chapter, with its exposition
-             some-definition.md   <- a formalizable leaf
-             main-result.md
-
-     A chapter directory WITHOUT a README.md is not a chapter. Its pages
-     collapse to the top level and the published book has no structure. Write
-     the chapter as `<chapter>/README.md`, never as a sibling file beside the
-     directory, then run `autoform check`.
-
-     Add a `## Chapters` heading once there is more than one chapter to list.
--->
+- [Some underlying geometric notions](underlying-geometric-notions/README.md)
+- [The fundamental group](fundamental-group/README.md)
+- [Homology](homology/README.md)
+- [Cohomology](cohomology/README.md)
+- [Homotopy theory](homotopy-theory/README.md)
+- [Appendix](appendix/README.md)

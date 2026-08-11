@@ -1,10 +1,15 @@
 # Sources
 
-No sources recorded yet.
+The project formalizes results from a single reference.
+
+- [Hatcher, *Algebraic Topology*](hatcher.md) — edition, citation scheme, and
+  the chapter/section map the roadmap mirrors.
+- [Hatcher §1.1, Basic Constructions](hatcher-1-1.md) — the labelled results
+  behind the decomposed slice.
 
 <!-- AUTHORING NOTES — these comments are not published.
 
-     One page per reference. Each page maps stable source locators to the
-     roadmap articles that depend on them, so every statement can be traced
-     back to the passage it came from.
+     The book itself is NOT in this repository. `/sources/` is gitignored: the
+     text is copyrighted and this repository is public. Cite by chapter,
+     section, numbered result, and page. Do not paste passages in.
 -->
