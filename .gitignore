@@ -1,1 +1,8 @@
 /.lake/
+site/
+site-src/
+*.log
+
+# Hatcher's Algebraic Topology text. This repository is public; the book stays
+# local. Anchored so blueprint/sources/ is still tracked and published.
+/sources/
