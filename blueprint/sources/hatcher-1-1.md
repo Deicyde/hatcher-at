@@ -74,12 +74,28 @@ Absent, and therefore the work:
 - Borsuk–Ulam in any dimension (Theorem 1.10) and Corollary 1.11.
 - `π₁(Sⁿ) = 0` for `n ≥ 2` (Proposition 1.14) and Corollary 1.16.
 
-## Open source questions
+## Decisions taken
 
-- Hatcher's `S¹` is the unit circle in `ℝ²`. Mathlib's covering-space result is
-  stated for `AddCircle p`. Whether the project states Theorem 1.7 for
-  `AddCircle (1 : ℝ)`, for `Metric.sphere (0 : ℂ) 1`, or for `Circle`, and how
-  the transport between them is discharged, is not yet decided.
-- Proposition 1.14 and Corollary 1.16 need Lemma 1.15, which is the
-  path-connected-cover argument that §1.2 generalizes into van Kampen. Whether
-  to formalize Lemma 1.15 standalone or defer it to the §1.2 work is open.
+- **Which `S¹`.** Hatcher's circle is the unit circle in `ℝ²`, and Mathlib's
+  covering result is stated for `AddCircle p`. The project states Theorem 1.7
+  for Mathlib's `Circle`, the unit circle in `ℂ`, and transports along
+  `AddCircle.homeomorphCircle' : AddCircle (2 * π) ≃ₜ Circle`
+  (`Analysis/SpecialFunctions/Complex/Circle.lean`). This keeps the statement
+  close to Hatcher's while reusing `AddCircle.isCoveringMap_coe` unchanged.
+- **Lemma 1.15.** Formalized standalone in this section, because Proposition
+  1.14 needs it and §1.2 is not yet decomposed. §1.2's van Kampen theorem
+  subsumes it, so that work will likely generalize rather than cite it. The
+  duplication is recorded in the
+  [coverage contract](../coverage/README.md).
+
+## Still open
+
+- The Lean spelling of the winding number: a `MulEquiv` onto
+  `Multiplicative ℤ`, or an additive map after unfolding `π₁`. This decides the
+  shape of Theorem 1.7's statement.
+- Whether the covering map's generator needs explicit normalization so that
+  degree one is the counterclockwise loop, or whether the `AddCircle`
+  orientation already gives it.
+- Whether `π₁(Sⁿ) = 0` should be an `instance` on `SimplyConnectedSpace` or a
+  plain theorem. An instance is more useful downstream but risks unwanted
+  typeclass search on sphere-shaped goals.
