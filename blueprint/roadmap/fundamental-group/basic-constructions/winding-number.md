@@ -1,6 +1,9 @@
 ---
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Circle.windingNumber
 ---
 
 # Winding number of a loop in the circle
@@ -22,8 +25,16 @@ equivalently an additive map after unfolding `π₁`; the exact Lean spelling is
 part of this node. Hatcher works with the uniqueness of `n` rather than naming
 a map, so this construction is `bridged`.
 
-Intended artifact: `Hatcher.Circle.windingNumber` in
-`Hatcher/Circle/WindingNumber.lean`.
+Formalized in `Hatcher/Circle/WindingNumber.lean` as
+`Hatcher.Circle.windingNumber`, a `MonoidHom` into `Multiplicative ℤ`.
+
+Mathlib's `IsCoveringMap.monodromy` supplied more than expected: it is already
+defined on homotopy classes, so no well-definedness argument was needed. The
+work that remained was additivity, which is not formal. It rests on
+`Hatcher.Circle.monodromy_translate`: moving the starting lift by a point of
+the fibre moves the endpoint by the same amount. That is proved from
+uniqueness of lifts, using that `s ↦ s + n` is a deck transformation of
+`expMap`.
 
 ## Depends on
 
