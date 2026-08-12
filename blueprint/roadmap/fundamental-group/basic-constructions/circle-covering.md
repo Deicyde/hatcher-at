@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Circle.isCoveringMap_expMap
 ---
 
 # The real line covers the circle
@@ -21,8 +24,13 @@ Hatcher does not state this as a numbered result; it is the bridge from his
 concrete `p` to the Mathlib formulation, which is why its origin is `bridged`
 rather than `cited`.
 
-Intended artifact: `Hatcher.Circle.isCoveringMap_expMap` in
-`Hatcher/Circle/Covering.lean`.
+Formalized in `Hatcher/Circle/Covering.lean` as
+`Hatcher.Circle.isCoveringMap_expMap`, with `Hatcher.Circle.expMap` the
+period-one map itself. The file also proves `Hatcher.Circle.expMap_eq_one`,
+that the fibre over the basepoint is exactly `ℤ`. That is the normalization
+this node promised: a loop lifting to a path from `0` to `n` has winding number
+`n` with no factor of `2 * π` to divide out, which is what
+[winding number](winding-number.md) consumes.
 
 ## Depends on
 
