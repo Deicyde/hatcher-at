@@ -20,8 +20,12 @@ open Real unitInterval
 
 namespace Hatcher.Circle
 
-/-- The fibre of `expMap` over the basepoint. -/
-def Fibre : Set ℝ := (expMap : ℝ → _root_.Circle) ⁻¹' {1}
+/-- The fibre of `expMap` over the basepoint.
+
+Reducible on purpose: `IsCoveringMap.monodromy` is stated for
+`⇑expMap ⁻¹' {1}`, and rewriting under its dependent proof argument needs the
+two spellings to agree at `instances` transparency. -/
+abbrev Fibre : Set ℝ := (expMap : ℝ → _root_.Circle) ⁻¹' {1}
 
 theorem mem_fibre {s : ℝ} : s ∈ Fibre ↔ ∃ n : ℤ, s = n := expMap_eq_one
 

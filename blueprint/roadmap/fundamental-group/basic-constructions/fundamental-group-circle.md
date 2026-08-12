@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Circle.isCyclic_fundamentalGroup
 ---
 
 # The fundamental group of the circle
@@ -20,9 +23,31 @@ class of `f` is determined by its winding number.
 This is the project's main target. Nothing in the pinned Mathlib computes
 `π₁` of the circle, although every ingredient above is present.
 
-Intended artifact: `Hatcher.Circle.fundamentalGroupEquivInt` in
-`Hatcher/Circle/FundamentalGroup.lean`, stated as a `MulEquiv` onto
-`Multiplicative ℤ`.
+Formalized in `Hatcher/Circle/FundamentalGroup.lean`. The node's named
+declaration is `Hatcher.Circle.isCyclic_fundamentalGroup`, which asserts
+Hatcher's actual proposition, that the group is cyclic; the companion
+`infinite_fundamentalGroup` supplies "infinite". Both are read off
+`Hatcher.Circle.fundamentalGroupEquivInt`, the `MulEquiv` from
+`FundamentalGroup Circle 1` onto `Multiplicative ℤ`, which is the data
+witnessing the theorem. Hatcher's generator is `Hatcher.Circle.loopOfInt 1`,
+and `windingNumberFun_loopOfInt_one` records that its winding number is one.
+
+The split matters for the audit: the isomorphism is a `def`, so naming it in
+`lean:` while declaring the node a `theorem` is a kind mismatch. The
+proposition is what the source states, so the proposition is what the node
+names.
+
+Surjectivity is Hatcher's `ω̃ₙ` verbatim: the path `s ↦ ns` in `ℝ` is its own
+lift, so `ωₙ` has winding number `n`. Injectivity uses that `ℝ` is
+contractible, hence simply connected, via Mathlib's
+`SimplyConnectedSpace.ofContractible`, so two lifts sharing both endpoints are
+homotopic; projecting that homotopy down identifies the loops.
+
+One wrinkle worth recording for later nodes: projecting a homotopy of lifts
+lands in `Path (expMap 0) (expMap c)`, not `Path 1 1`. Those types differ
+because `expMap 0 = 1` holds propositionally but not definitionally, so the
+final step transports along `Path.cast`. The same transport will recur wherever
+a lift is pushed back down.
 
 ## Depends on
 
