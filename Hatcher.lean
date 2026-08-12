@@ -2,3 +2,4 @@
 import Hatcher.Circle.Covering
 import Hatcher.Circle.WindingNumber
 import Hatcher.Circle.FundamentalGroup
+import Hatcher.Disc.NoRetraction

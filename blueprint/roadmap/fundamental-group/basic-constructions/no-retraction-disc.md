@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Disc.not_exists_retraction
 ---
 
 # The circle is not a retract of the disc
@@ -21,8 +24,18 @@ the whole content of the deduction: Theorem 1.9 is a short corollary.
 Mathlib has convexity of the disc and contractibility of convex sets, so
 `π₁(D²) = 0` is available and does not need its own node.
 
-Intended artifact: `Hatcher.Disc.not_isRetract_circle` in
-`Hatcher/Disc/NoRetraction.lean`.
+Formalized in `Hatcher/Disc/NoRetraction.lean` as
+`Hatcher.Disc.not_exists_retraction`, with `D²` taken as
+`Metric.closedBall (0 : ℂ) 1` and the boundary inclusion as
+`Hatcher.Disc.incl`.
+
+The Lean proof does not go through induced homomorphisms. The pinned Mathlib
+has `FundamentalGroup.map` but no functoriality lemmas for it, so `π₁(r) ∘
+π₁(i) = id` is not available off the shelf. Running the argument directly on
+path classes is shorter: the boundary loop becomes nullhomotopic once pushed
+into the disc, because the disc is convex and hence contractible, and pushing
+that nullhomotopy back down through the retraction would make `ω`
+nullhomotopic in `S¹`, contradicting winding number one.
 
 ## Depends on
 
