@@ -1,12 +1,15 @@
 ---
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Disc.exists_fixed_point
 ---
 
 # Brouwer's fixed point theorem for the disc
 
-**Hatcher, Theorem 1.9 (page 31).** Every continuous `h : D² → D²` has a fixed
-point.
+**Hatcher, Theorem 1.9 (pages 31–32).** Every continuous `h : D² → D²` has a
+fixed point.
 
 If `h(x) ≠ x` for every `x`, define `r(x)` to be the point where the ray from
 `h(x)` through `x` meets `S¹`. This is continuous, and it fixes `S¹`
@@ -23,8 +26,8 @@ The general case comes from homology in
 [Chapter 2](../../homology/computations-and-applications/README.md); this node
 is only the two-dimensional case Hatcher proves from `π₁`.
 
-Intended artifact: `Hatcher.Disc.exists_fixed_point` in
-`Hatcher/Disc/Brouwer.lean`.
+Formalized in `Hatcher/Disc/Brouwer.lean` as
+`Hatcher.Disc.exists_fixed_point`.
 
 ## Depends on
 
@@ -32,4 +35,4 @@ Intended artifact: `Hatcher.Disc.exists_fixed_point` in
 
 ## Sources
 
-- [Hatcher §1.1, Theorem 1.9, page 31](../../../sources/hatcher-1-1.md)
+- [Hatcher §1.1, Theorem 1.9, pages 31–32](../../../sources/hatcher-1-1.md)
