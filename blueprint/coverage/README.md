@@ -7,6 +7,26 @@ what Mathlib already provides. Exactly one section is *decomposed* into
 formalization nodes. Mapping is not progress, and a mapped chapter must never
 be reported as covered.
 
+| Area | Coverage | Evidence |
+| --- | --- | --- |
+| §1.1 Basic constructions | `DECOMPOSED` | [Nine formalization nodes](../roadmap/fundamental-group/basic-constructions/README.md) cover the selected source results |
+| §1.1 deferred corollaries | `DEFERRED` | Corollaries 1.11 and 1.16 are reserved for a later §1.1 completion pass |
+| Chapter 0, underlying geometric notions | `MAPPED` | [Chapter map](../roadmap/underlying-geometric-notions/README.md) |
+| §1.2 Van Kampen's theorem | `MAPPED` | [Section map](../roadmap/fundamental-group/van-kampen/README.md) |
+| §1.3 Covering spaces | `MAPPED` | [Section map](../roadmap/fundamental-group/covering-spaces/README.md) |
+| §2.1 Simplicial and singular homology | `MAPPED` | [Section map](../roadmap/homology/simplicial-and-singular/README.md) |
+| §2.2 Computations and applications | `MAPPED` | [Section map](../roadmap/homology/computations-and-applications/README.md) |
+| §2.3 Formal viewpoint | `MAPPED` | [Section map](../roadmap/homology/formal-viewpoint/README.md) |
+| §3.1 Cohomology groups | `MAPPED` | [Section map](../roadmap/cohomology/cohomology-groups/README.md) |
+| §3.2 Cup product | `MAPPED` | [Section map](../roadmap/cohomology/cup-product/README.md) |
+| §3.3 Poincaré duality | `MAPPED` | [Section map](../roadmap/cohomology/poincare-duality/README.md) |
+| §4.1 Homotopy groups | `MAPPED` | [Section map](../roadmap/homotopy-theory/homotopy-groups/README.md) |
+| §4.2 Elementary methods | `MAPPED` | [Section map](../roadmap/homotopy-theory/elementary-methods/README.md) |
+| §4.3 Connections with cohomology | `MAPPED` | [Section map](../roadmap/homotopy-theory/connections-with-cohomology/README.md) |
+| Appendix | `MAPPED` | [Appendix map](../roadmap/appendix/README.md) |
+| Lettered additional topics | `OUT` | Supplementary sections are outside this project's main-line scope |
+| Exercises | `OUT` | Exercise sets are not source targets for this project |
+
 ## In scope
 
 [Hatcher §1.1, Basic constructions](../roadmap/fundamental-group/basic-constructions/README.md),
