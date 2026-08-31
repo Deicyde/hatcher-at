@@ -107,10 +107,11 @@ Absent, and therefore the work:
   `AddCircle.homeomorphCircle' : AddCircle (2 * π) ≃ₜ Circle`
   (`Analysis/SpecialFunctions/Complex/Circle.lean`). This keeps the statement
   close to Hatcher's while reusing `AddCircle.isCoveringMap_coe` unchanged.
-- **Lemma 1.15.** Planned as a standalone node in this section, because
-  Proposition 1.14 needs it and §1.2 is not yet decomposed. §1.2's van Kampen
-  theorem subsumes it, so later work may generalize rather than cite the local
-  statement. The duplication is recorded in the
+- **Lemma 1.15.** Formalized as a standalone node in this section, because
+  Proposition 1.14 needs it and §1.2 is not yet decomposed. The proof is adapted
+  from Mathlib PR #28246 for the pinned revision. §1.2's van Kampen theorem
+  subsumes it, so later work may generalize rather than cite the local
+  statement. The overlap is recorded in the
   [coverage contract](../coverage/README.md).
 - **Winding-number representation.** The implementation uses
   `Hatcher.Circle.windingNumber : FundamentalGroup Circle 1 →*

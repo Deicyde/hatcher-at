@@ -54,11 +54,10 @@ Formalizing Hatcher's derivation produces a second proof of a known result. It
 is in scope as a source target and must not be counted as new Mathlib coverage.
 No node in this project sets `mathlib: true`.
 
-**Lemma 1.15 will likely be superseded.** It is included as a planned node
-because Proposition 1.14 needs it, but §1.2's van Kampen theorem subsumes it.
-Mathlib PR #28246 now contains a matching open implementation, so this project
-should review that work before writing a duplicate; later §1.2 work may
-generalize the statement. The overlap is recorded on
+**Lemma 1.15 will likely be superseded.** It is formalized locally because
+Proposition 1.14 needs it, but §1.2's van Kampen theorem subsumes it. The proof
+is adapted from the matching implementation in open Mathlib PR #28246; later
+§1.2 work may generalize the statement. The overlap is recorded on
 [the node](../roadmap/fundamental-group/basic-constructions/loop-in-open-cover.md).
 
 ### Deferred within §1.1

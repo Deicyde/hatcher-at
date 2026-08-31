@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.loop_homotopic_prod_of_isOpenCover
 ---
 
 # A loop splits across an open cover
@@ -16,20 +19,19 @@ intersections to join each subdivision point back to `x₀` inside the
 intersection of the two neighbouring sets.
 
 This is the combinatorial heart of the van Kampen theorem, and §1.2 restates it
-in that generality. Formalizing it here means the §1.2 work will likely
-generalize rather than reuse this statement verbatim; that trade was accepted
-when the slice was scoped, and
+in that generality. The §1.2 work will likely generalize rather than reuse this
+statement verbatim; that trade was accepted when the slice was scoped, and
 [the §1.2 page](../van-kampen/README.md) records it.
 
 [Mathlib PR #28246](https://github.com/leanprover-community/mathlib4/pull/28246)
 contains
 `Path.Homotopic.exists_loops_homotopic_concat_of_open_cover`, explicitly
-documented as Hatcher's Lemma 1.15. It is open and not part of the pinned
-Mathlib, so this node remains planned; the PR is the implementation prior art
-to review before writing a separate proof.
+documented as Hatcher's Lemma 1.15. The local proof is adapted from that open
+PR for the pinned Mathlib revision and keeps the PR's copyright and Apache 2.0
+license notice.
 
-Intended artifact: `Hatcher.loop_homotopic_prod_of_isOpenCover` in
-`Hatcher/Sphere/LoopInOpenCover.lean`.
+Formalized in `Hatcher/Sphere/LoopInOpenCover.lean` as
+`Hatcher.loop_homotopic_prod_of_isOpenCover`.
 
 ## Depends on
 
