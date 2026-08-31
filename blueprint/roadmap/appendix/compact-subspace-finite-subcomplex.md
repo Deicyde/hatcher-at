@@ -1,0 +1,27 @@
+---
+declaration: proposition
+origin: cited
+---
+
+# Compact subsets lie in finite subcomplexes
+
+**Hatcher, Proposition A.1 (page 520).** Every compact subspace of a CW
+complex is contained in a finite subcomplex.
+
+Intended artifact: `Hatcher.compact_subset_finite_subcomplex`.
+
+State the result against Mathlib's classical `Topology.CWComplex` API: for a
+compact subset `K` of a CW complex, produce a `CWComplex.Subcomplex` containing
+`K` whose inherited CW structure satisfies `CWComplex.Finite`.
+
+The §1.2 proof that the 2-skeleton determines `π₁` uses this twice: a loop has
+image in a finite subcomplex, hence in some finite-dimensional skeleton, and a
+nullhomotopy of such a loop has image in another finite subcomplex.
+
+## Depends on
+
+None beyond the chosen Mathlib CW-complex representation.
+
+## Sources
+
+- [Hatcher §1.2 source map and Appendix prerequisite](../../sources/hatcher-1-2.md)

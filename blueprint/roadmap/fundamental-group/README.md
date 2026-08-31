@@ -16,15 +16,18 @@ the disc, and Borsuk–Ulam for `S²`.
 [Van Kampen's theorem](van-kampen/README.md) computes `π₁` of a space glued
 from pieces whose fundamental groups are known, as a free product of the pieces
 amalgamated over their intersections. It turns the circle computation into
-`π₁` of every graph, wedge, and two-dimensional cell complex.
+computations for wedges, the cube graph, and two-dimensional cell complexes.
+The general theorem that connected graphs have free fundamental group belongs
+to Hatcher §1.A, which is outside the main-line scope here.
 
 [Covering spaces](covering-spaces/README.md) recasts both: subgroups of
 `π₁(X)` correspond to covering spaces of `X`, and the loop-lifting argument
 behind the circle computation becomes an instance of a general classification.
 
 Mathlib has `FundamentalGroup`, `FundamentalGroupoid`, and the covering-space
-lifting theorems including monodromy, but none of the three computations. This
-chapter is where the project starts.
+lifting theorems including monodromy, but none of the three source-facing
+computations. The selected §1.1 slice is complete; §1.2 is now the active
+roadmap frontier.
 
 ## Sections
 

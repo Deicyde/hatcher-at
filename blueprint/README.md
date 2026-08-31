@@ -4,10 +4,11 @@ A Lean 4 formalization of results from Allen Hatcher's *Algebraic Topology*
 (Cambridge University Press, 2002), built on Mathlib. The book's text is not
 redistributed here; source notes cite it by chapter and section.
 
-Every chapter and numbered section of the book is mapped. One section, §1.1
-Basic constructions, is decomposed into formalization targets, aimed at
-`π₁(S¹) ≅ ℤ` and the theorems Hatcher derives from it. Mapping is not progress:
-the coverage contract says which chapters are only mapped.
+Every chapter and numbered section of the book is mapped. The selected
+nine-node §1.1 slice is fully formalized, §1.2 is decomposed into the next
+targets for van Kampen, wedge sums, and cell attachments, and one Appendix
+prerequisite is isolated. Mapping is not progress: the coverage contract says
+which chapters are only mapped.
 
 - [Roadmap](roadmap/README.md) — the book: chapters, statements, and their
   dependencies.
@@ -17,4 +18,3 @@ the coverage contract says which chapters are only mapped.
 <!-- Reference material goes in sources/. It is vault material rather than a
      chapter, so the site does not publish it: a statement's "## Sources" list
      links to the file in the repository instead. -->
-

@@ -18,10 +18,9 @@ subinterval maps into some `Aα`, then uses path-connectedness of the pairwise
 intersections to join each subdivision point back to `x₀` inside the
 intersection of the two neighbouring sets.
 
-This is the combinatorial heart of the van Kampen theorem, and §1.2 restates it
-in that generality. The §1.2 work will likely generalize rather than reuse this
-statement verbatim; that trade was accepted when the slice was scoped, and
-[the §1.2 page](../van-kampen/README.md) records it.
+This is the surjectivity argument in the van Kampen theorem. The §1.2 roadmap
+reuses this statement directly in
+[the cover-map surjectivity node](../van-kampen/van-kampen-surjective.md).
 
 [Mathlib PR #28246](https://github.com/leanprover-community/mathlib4/pull/28246)
 contains

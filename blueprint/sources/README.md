@@ -5,7 +5,9 @@ The project formalizes results from a single reference.
 - [Hatcher, *Algebraic Topology*](hatcher.md) — edition, citation scheme, and
   the chapter/section map the roadmap mirrors.
 - [Hatcher §1.1, Basic Constructions](hatcher-1-1.md) — the labelled results
-  behind the decomposed slice.
+  behind the completed selected slice.
+- [Hatcher §1.2, Van Kampen's Theorem](hatcher-1-2.md) — the source map,
+  selected spine, prior art, and representation decisions for the next slice.
 
 <!-- AUTHORING NOTES — these comments are not published.
 

@@ -3,16 +3,18 @@
 This project formalizes results from [Hatcher's *Algebraic Topology*](../sources/hatcher.md).
 It does not claim to formalize the book. The whole book is *mapped*: every
 chapter and numbered section has a roadmap page recording what it contains and
-what Mathlib already provides. Exactly one section is *decomposed* into
-formalization nodes. Mapping is not progress, and a mapped chapter must never
-be reported as covered.
+what Mathlib already provides. The selected §1.1 slice is formalized, §1.2 is
+decomposed into its next formalization units, and one Appendix prerequisite is
+decomposed. Mapping is not progress, and a mapped chapter must never be
+reported as covered.
 
 | Area | Coverage | Evidence |
 | --- | --- | --- |
-| §1.1 Basic constructions | `DECOMPOSED` | [Nine formalization nodes](../roadmap/fundamental-group/basic-constructions/README.md) cover the selected source results |
+| §1.1 Basic constructions | `DECOMPOSED` | [Nine fully formalized nodes](../roadmap/fundamental-group/basic-constructions/README.md) cover the selected source results |
 | §1.1 results outside the selected slice | `DEFERRED` | Corollaries 1.11 and 1.16, Propositions 1.17 and 1.18, and Lemma 1.19 are reserved for a later §1.1 completion pass |
 | Chapter 0, underlying geometric notions | `MAPPED` | [Chapter map](../roadmap/underlying-geometric-notions/README.md) |
-| §1.2 Van Kampen's theorem | `MAPPED` | [Section map](../roadmap/fundamental-group/van-kampen/README.md) |
+| §1.2 selected spine | `DECOMPOSED` | [Van Kampen, wedges, and cell-attachment nodes](../roadmap/fundamental-group/van-kampen/README.md) |
+| §1.2 results outside the selected slice | `DEFERRED` | Examples 1.22–1.25, Corollary 1.27, and the geometric remainder of Example 1.29 are reserved for later application milestones |
 | §1.3 Covering spaces | `MAPPED` | [Section map](../roadmap/fundamental-group/covering-spaces/README.md) |
 | §2.1 Simplicial and singular homology | `MAPPED` | [Section map](../roadmap/homology/simplicial-and-singular/README.md) |
 | §2.2 Computations and applications | `MAPPED` | [Section map](../roadmap/homology/computations-and-applications/README.md) |
@@ -23,7 +25,8 @@ be reported as covered.
 | §4.1 Homotopy groups | `MAPPED` | [Section map](../roadmap/homotopy-theory/homotopy-groups/README.md) |
 | §4.2 Elementary methods | `MAPPED` | [Section map](../roadmap/homotopy-theory/elementary-methods/README.md) |
 | §4.3 Connections with cohomology | `MAPPED` | [Section map](../roadmap/homotopy-theory/connections-with-cohomology/README.md) |
-| Appendix | `MAPPED` | [Appendix map](../roadmap/appendix/README.md) |
+| Appendix Proposition A.1 | `DECOMPOSED` | [Compact subsets lie in finite subcomplexes](../roadmap/appendix/compact-subspace-finite-subcomplex.md) |
+| Appendix remainder | `MAPPED` | [Appendix map](../roadmap/appendix/README.md) |
 | Lettered additional topics | `OUT` | Supplementary sections are outside this project's main-line scope |
 | Exercises | `OUT` | Exercise sets are not source targets for this project |
 
@@ -45,20 +48,31 @@ pages 25–38, decomposed into nine nodes. The main target is Theorem 1.7,
 | [Higher spheres are simply connected](../roadmap/fundamental-group/basic-constructions/sphere-simply-connected.md) | **Proposition 1.14** | cited |
 | [Borsuk–Ulam for `S²`](../roadmap/fundamental-group/basic-constructions/borsuk-ulam-sphere.md) | **Theorem 1.10** | cited |
 
-Two qualifications on what these nodes will and will not have proved.
+Two qualifications on what these nodes do and do not prove.
 
 **Theorem 1.8 is already upstream.** Its statement is Mathlib's
 `Complex.exists_root`, packaged by `Complex.isAlgClosed`, in
 `Analysis/Complex/Polynomial/Basic.lean` and proved by Liouville's theorem.
-Formalizing Hatcher's derivation produces a second proof of a known result. It
+The local formalization gives a second proof of a known result. It
 is in scope as a source target and must not be counted as new Mathlib coverage.
 No node in this project sets `mathlib: true`.
 
-**Lemma 1.15 will likely be superseded.** It is formalized locally because
-Proposition 1.14 needs it, but §1.2's van Kampen theorem subsumes it. The proof
-is adapted from the matching implementation in open Mathlib PR #28246; later
-§1.2 work may generalize the statement. The overlap is recorded on
+**Lemma 1.15 is reused by §1.2.** It was formalized locally because
+Proposition 1.14 needed it, and it now supplies the surjectivity clause of
+Theorem 1.20 exactly as in Hatcher. The proof is adapted from the matching
+implementation in open Mathlib PR #28246. The overlap is recorded on
 [the node](../roadmap/fundamental-group/basic-constructions/loop-in-open-cover.md).
+
+### §1.2 selected spine
+
+[Van Kampen's theorem](../roadmap/fundamental-group/van-kampen/README.md) is
+decomposed from its free-product presentation through the kernel calculation,
+wedge sums, cell attachments, and Corollary 1.28. Proposition 1.26 is split by
+part, and the Appendix compactness lemma needed for its 2-skeleton clause is a
+separate cross-chapter node. Two implementation gaps are marked not ready:
+Hatcher's threefold-incidence homotopy decomposition and the bridge between
+Mathlib's classical and categorical CW-complex APIs. No §1.2 node is claimed
+formalized yet.
 
 ### Deferred within §1.1
 
@@ -77,15 +91,14 @@ Everything else. These pages carry exposition and prior-art notes, and no
 formalization nodes:
 
 - Chapter 0, [Some underlying geometric notions](../roadmap/underlying-geometric-notions/README.md)
-- Chapter 1 §1.2 [Van Kampen's theorem](../roadmap/fundamental-group/van-kampen/README.md)
-  and §1.3 [Covering spaces](../roadmap/fundamental-group/covering-spaces/README.md)
+- Chapter 1 §1.3 [Covering spaces](../roadmap/fundamental-group/covering-spaces/README.md)
 - Chapter 2, [Homology](../roadmap/homology/README.md), all three sections
 - Chapter 3, [Cohomology](../roadmap/cohomology/README.md), all three sections
 - Chapter 4, [Homotopy theory](../roadmap/homotopy-theory/README.md), all three sections
-- The [Appendix](../roadmap/appendix/README.md)
+- The remainder of the [Appendix](../roadmap/appendix/README.md)
 
-Decomposing any of these is a future roadmap run, not proof work. §1.2 and §1.3
-are the intended next candidates, since they complete Chapter 1.
+Decomposing any of these is a future roadmap run, not proof work. §1.3 is the
+next intended candidate, since it completes Chapter 1.
 
 ## Out of scope
 
@@ -110,5 +123,5 @@ it is complete, *and* nothing numbered in it has been deferred. By that rule
 numbered results are deferred. A section that is merely mapped is never
 finished, whatever its prose says.
 
-The project as a whole makes no completion claim and will not until more than
-one section is decomposed.
+The project as a whole makes no completion claim. Decomposing additional
+sections does not by itself imply that their nodes are formalized.

@@ -83,18 +83,21 @@ Active upstream work, not present in the pinned revision:
 - [Mathlib PR #28246](https://github.com/leanprover-community/mathlib4/pull/28246)
   proves
   `Path.Homotopic.exists_loops_homotopic_concat_of_open_cover` and
-  `EuclideanSphere.simplyConnectedSpace`. These match Lemma 1.15 and
-  Proposition 1.14 closely enough that this project should review the PR for
-  reuse before independently implementing either node. The PR is open, so
-  neither result is marked as Mathlib-backed here.
+  `EuclideanSphere.simplyConnectedSpace`. This project adapted both results for
+  the pinned revision as `Hatcher.loop_homotopic_prod_of_isOpenCover` and
+  `Hatcher.Sphere.simplyConnectedSpace`. The PR is open, so neither local result
+  is marked as Mathlib-backed.
 
-Absent, and therefore the work:
+Absent from the pinned Mathlib:
 
-- `π₁(S¹) ≅ ℤ` (Theorem 1.7). No declaration in the pinned revision computes
-  it, though every input above exists.
-- Brouwer's fixed point theorem in any dimension (Theorem 1.9).
-- Borsuk–Ulam in any dimension (Theorem 1.10) and Corollary 1.11.
-- `π₁(Sⁿ) = 0` for `n ≥ 2` (Proposition 1.14) and Corollary 1.16.
+- `π₁(S¹) ≅ ℤ` (Theorem 1.7), locally formalized as
+  `Hatcher.Circle.fundamentalGroupEquivInt`.
+- Brouwer's fixed point theorem (Theorem 1.9), locally formalized for the disc
+  as `Hatcher.Disc.exists_fixed_point`.
+- Borsuk–Ulam (Theorem 1.10), locally formalized for `S²` as
+  `Hatcher.Sphere.exists_eq_neg`; Corollary 1.11 remains deferred.
+- `π₁(Sⁿ) = 0` for `n ≥ 2` (Proposition 1.14), locally formalized as
+  `Hatcher.Sphere.simplyConnectedSpace`; Corollary 1.16 remains deferred.
 - A named fundamental-group formulation of Proposition 1.17. The groupoid
   functoriality needed to derive it exists, but the source-facing theorem is
   not packaged in the pinned revision.
@@ -108,10 +111,10 @@ Absent, and therefore the work:
   (`Analysis/SpecialFunctions/Complex/Circle.lean`). This keeps the statement
   close to Hatcher's while reusing `AddCircle.isCoveringMap_coe` unchanged.
 - **Lemma 1.15.** Formalized as a standalone node in this section, because
-  Proposition 1.14 needs it and §1.2 is not yet decomposed. The proof is adapted
-  from Mathlib PR #28246 for the pinned revision. §1.2's van Kampen theorem
-  subsumes it, so later work may generalize rather than cite the local
-  statement. The overlap is recorded in the
+  Proposition 1.14 needed it before §1.2 was decomposed. The proof is adapted
+  from Mathlib PR #28246 for the pinned revision. The §1.2 roadmap now reuses
+  this theorem for the surjectivity clause of van Kampen, matching Hatcher's
+  own proof organization. The overlap is recorded in the
   [coverage contract](../coverage/README.md).
 - **Winding-number representation.** The implementation uses
   `Hatcher.Circle.windingNumber : FundamentalGroup Circle 1 →*
@@ -126,4 +129,4 @@ Absent, and therefore the work:
 
 ## Still open
 
-No representation choices remain open for the six formalized nodes.
+No representation choices remain open for the nine formalized nodes.

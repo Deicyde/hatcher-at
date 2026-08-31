@@ -1,6 +1,7 @@
 # Basic constructions
 
-Hatcher §1.1 (pages 25–38). This is the project's decomposed section.
+Hatcher §1.1 (pages 25–38). This is the project's first decomposed section;
+all nine nodes in the selected slice are formalized.
 
 Paths in a space `X` with fixed endpoints, taken up to homotopy, compose; loops
 at a basepoint `x₀` therefore form a group `π₁(X, x₀)`, and a path between
@@ -53,7 +54,7 @@ Mathlib already knows by other means.
 
 The closing part of the section turns to maps between spaces. Its one result
 this project needs is that higher spheres are simply connected, which rests on
-a subdivision lemma that §1.2 will later generalize into van Kampen.
+a subdivision lemma reused by §1.2 as the surjectivity step in van Kampen.
 
 - [A loop splits across an open cover](loop-in-open-cover.md)
 - [Higher spheres are simply connected](sphere-simply-connected.md)
