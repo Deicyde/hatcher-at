@@ -7,3 +7,4 @@ import Hatcher.Disc.NoRetraction
 import Hatcher.Disc.Brouwer
 import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected
+import Hatcher.Sphere.BorsukUlam
