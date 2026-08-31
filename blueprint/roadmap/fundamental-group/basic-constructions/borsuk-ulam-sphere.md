@@ -27,7 +27,7 @@ Borsuk–Ulam is not in the pinned Mathlib in any dimension.
 Intended artifact: `Hatcher.Sphere.exists_eq_neg` in
 `Hatcher/Sphere/BorsukUlam.lean`.
 
-## Proof depends on
+## Depends on
 
 - [The fundamental group of the circle](fundamental-group-circle.md)
 - [Higher spheres are simply connected](sphere-simply-connected.md)

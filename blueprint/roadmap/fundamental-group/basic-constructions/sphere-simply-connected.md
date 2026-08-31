@@ -34,7 +34,7 @@ open PR for the pinned Mathlib revision and keeps the PR's copyright and Apache
 Formalized in `Hatcher/Sphere/SimplyConnected.lean` as
 `Hatcher.Sphere.simplyConnectedSpace`, together with a matching instance.
 
-## Proof depends on
+## Depends on
 
 - [A loop splits across an open cover](loop-in-open-cover.md)
 

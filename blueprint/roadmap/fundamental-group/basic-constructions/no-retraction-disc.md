@@ -34,7 +34,7 @@ loop becomes nullhomotopic once pushed into the disc, and applying the
 retraction to that homotopy would make the winding-one loop nullhomotopic in
 `S¹`.
 
-## Proof depends on
+## Depends on
 
 - [The fundamental group of the circle](fundamental-group-circle.md)
 
