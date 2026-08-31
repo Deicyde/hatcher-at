@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.simplyConnectedSpace
 ---
 
 # Higher spheres are simply connected
@@ -24,12 +27,12 @@ the `proof_wanted` statements of the Poincaré conjecture in
 
 [Mathlib PR #28246](https://github.com/leanprover-community/mathlib4/pull/28246)
 now supplies `EuclideanSphere.simplyConnectedSpace` and a corresponding
-instance, using the same open-cover route. The PR is open and not part of the
-pinned Mathlib, so this node is not marked formalized; it should be reviewed
-for reuse before a project-local implementation is started.
+instance, using the same open-cover route. The local proof is adapted from that
+open PR for the pinned Mathlib revision and keeps the PR's copyright and Apache
+2.0 license notice.
 
-Intended artifact: `Hatcher.Sphere.simplyConnectedSpace` in
-`Hatcher/Sphere/SimplyConnected.lean`, ideally as an instance.
+Formalized in `Hatcher/Sphere/SimplyConnected.lean` as
+`Hatcher.Sphere.simplyConnectedSpace`, together with a matching instance.
 
 ## Proof depends on
 

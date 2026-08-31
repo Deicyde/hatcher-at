@@ -120,9 +120,10 @@ Absent, and therefore the work:
   `Hatcher.Circle.expMap_eq_one` identifies its basepoint fibre with the
   integers, so the counterclockwise degree-one generator needs no additional
   `2π` normalization.
+- **Sphere result shape.** The project exposes
+  `Hatcher.Sphere.simplyConnectedSpace` as a theorem and installs the same
+  result as an instance for Euclidean spheres of dimension at least two.
 
 ## Still open
 
-- Whether `π₁(Sⁿ) = 0` should be an `instance` on `SimplyConnectedSpace` or a
-  plain theorem. An instance is more useful downstream but risks unwanted
-  typeclass search on sphere-shaped goals.
+No representation choices remain open for the six formalized nodes.
