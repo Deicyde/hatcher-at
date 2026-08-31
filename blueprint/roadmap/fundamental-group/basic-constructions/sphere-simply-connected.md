@@ -22,10 +22,16 @@ instance for spheres; the only `SimplyConnectedSpace` mentions near spheres are
 the `proof_wanted` statements of the Poincaré conjecture in
 `Geometry/Manifold/PoincareConjecture.lean`, which are unrelated.
 
+[Mathlib PR #28246](https://github.com/leanprover-community/mathlib4/pull/28246)
+now supplies `EuclideanSphere.simplyConnectedSpace` and a corresponding
+instance, using the same open-cover route. The PR is open and not part of the
+pinned Mathlib, so this node is not marked formalized; it should be reviewed
+for reuse before a project-local implementation is started.
+
 Intended artifact: `Hatcher.Sphere.simplyConnectedSpace` in
 `Hatcher/Sphere/SimplyConnected.lean`, ideally as an instance.
 
-## Depends on
+## Proof depends on
 
 - [A loop splits across an open cover](loop-in-open-cover.md)
 

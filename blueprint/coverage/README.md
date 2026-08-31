@@ -10,7 +10,7 @@ be reported as covered.
 | Area | Coverage | Evidence |
 | --- | --- | --- |
 | §1.1 Basic constructions | `DECOMPOSED` | [Nine formalization nodes](../roadmap/fundamental-group/basic-constructions/README.md) cover the selected source results |
-| §1.1 deferred corollaries | `DEFERRED` | Corollaries 1.11 and 1.16 are reserved for a later §1.1 completion pass |
+| §1.1 results outside the selected slice | `DEFERRED` | Corollaries 1.11 and 1.16, Propositions 1.17 and 1.18, and Lemma 1.19 are reserved for a later §1.1 completion pass |
 | Chapter 0, underlying geometric notions | `MAPPED` | [Chapter map](../roadmap/underlying-geometric-notions/README.md) |
 | §1.2 Van Kampen's theorem | `MAPPED` | [Section map](../roadmap/fundamental-group/van-kampen/README.md) |
 | §1.3 Covering spaces | `MAPPED` | [Section map](../roadmap/fundamental-group/covering-spaces/README.md) |
@@ -48,24 +48,29 @@ pages 25–38, decomposed into nine nodes. The main target is Theorem 1.7,
 Two qualifications on what these nodes will and will not have proved.
 
 **Theorem 1.8 is already upstream.** Its statement is Mathlib's
-`Complex.isAlgClosed` in `Analysis/Complex/Polynomial/Basic.lean`, proved by
-Liouville's theorem. Formalizing Hatcher's derivation produces a second proof
-of a known result. It is in scope as a source target and must not be counted as
-new Mathlib coverage. No node in this project sets `mathlib: true`.
+`Complex.exists_root`, packaged by `Complex.isAlgClosed`, in
+`Analysis/Complex/Polynomial/Basic.lean` and proved by Liouville's theorem.
+Formalizing Hatcher's derivation produces a second proof of a known result. It
+is in scope as a source target and must not be counted as new Mathlib coverage.
+No node in this project sets `mathlib: true`.
 
-**Lemma 1.15 will likely be superseded.** It is formalized here because
-Proposition 1.14 needs it, but §1.2's van Kampen theorem subsumes it, so the
-§1.2 run will probably generalize the statement rather than reuse it. This is
-accepted duplication, recorded on
-[the §1.2 page](../roadmap/fundamental-group/van-kampen/README.md).
+**Lemma 1.15 will likely be superseded.** It is included as a planned node
+because Proposition 1.14 needs it, but §1.2's van Kampen theorem subsumes it.
+Mathlib PR #28246 now contains a matching open implementation, so this project
+should review that work before writing a duplicate; later §1.2 work may
+generalize the statement. The overlap is recorded on
+[the node](../roadmap/fundamental-group/basic-constructions/loop-in-open-cover.md).
 
 ### Deferred within §1.1
 
-Corollary 1.11 (`S²` as a union of three closed sets) and Corollary 1.16
-(`ℝ²` is not homeomorphic to `ℝⁿ` for `n ≠ 2`) are the section's remaining
-numbered results. Both are short given the nodes above, and both are
-deliberately excluded from this slice. §1.1 is therefore *not* fully covered
-even when all nine nodes are complete.
+Corollary 1.11 (`S²` as a union of three closed sets), Corollary 1.16
+(`ℝ²` is not homeomorphic to `ℝⁿ` for `n ≠ 2`), Proposition 1.17
+(retracts and deformation retracts), Proposition 1.18 (homotopy equivalences
+induce fundamental-group isomorphisms), and Lemma 1.19 (the basepoint-change
+formula for homotopic maps) are deliberately excluded from this slice. The
+latter two have close groupoid-level counterparts in Mathlib, but this project
+does not yet provide source-facing declarations for them. §1.1 is therefore
+*not* fully covered even when all nine nodes are complete.
 
 ## Mapped but not decomposed
 
@@ -102,9 +107,9 @@ Lean's three. The CI axiom audit is the check.
 
 A section counts as finished only when it is decomposed and every node beneath
 it is complete, *and* nothing numbered in it has been deferred. By that rule
-§1.1 cannot be reported finished under the current slice, because Corollaries
-1.11 and 1.16 are deferred. A section that is merely mapped is never finished,
-whatever its prose says.
+§1.1 cannot be reported finished under the current slice, because five
+numbered results are deferred. A section that is merely mapped is never
+finished, whatever its prose says.
 
 The project as a whole makes no completion claim and will not until more than
 one section is decomposed.

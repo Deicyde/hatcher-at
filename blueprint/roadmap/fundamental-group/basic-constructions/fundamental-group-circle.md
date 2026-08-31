@@ -59,4 +59,4 @@ a lift is pushed back down.
 
 ## Sources
 
-- [Hatcher §1.1, Theorem 1.7, page 29](../../../sources/hatcher-1-1.md)
+- [Hatcher §1.1, Theorem 1.7, pages 29–31](../../../sources/hatcher-1-1.md)

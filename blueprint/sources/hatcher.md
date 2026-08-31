@@ -4,6 +4,13 @@ Allen Hatcher, *Algebraic Topology*, Cambridge University Press, 2002.
 ISBN 0-521-79540-0. The author's freely available PDF is the working copy;
 page numbers below are the book's own printed numbers, which the PDF matches.
 
+Working source: [the author's official PDF](https://pi.math.cornell.edu/~hatcher/AT/AT.pdf),
+SHA-256
+`bebb3032bf9021b956da3bd070eb6c67dc662cf849be9cdf6679f677560e5618`.
+The ignored local search aid `sources/AT.txt` has SHA-256
+`23f3626e94eb3aa1cb740a21bfc1e080422cf202af41e489bacf7cdc16d39daf`;
+its extraction tool was not recorded, so citations are checked against the PDF.
+
 The text is not redistributed here. This repository is public and the book is
 copyrighted, so `/sources/` is gitignored and these notes carry coordinates
 rather than passages. Cite a result as *chapter/section, numbered result, page*

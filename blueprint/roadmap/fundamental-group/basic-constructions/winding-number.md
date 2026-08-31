@@ -42,4 +42,4 @@ uniqueness of lifts, using that `s ↦ s + n` is a deck transformation of
 
 ## Sources
 
-- [Hatcher §1.1, Theorem 1.7, page 29](../../../sources/hatcher-1-1.md)
+- [Hatcher §1.1, Theorem 1.7 and lifting facts, pages 29–30](../../../sources/hatcher-1-1.md)

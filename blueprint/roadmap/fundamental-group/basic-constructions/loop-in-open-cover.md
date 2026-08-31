@@ -21,13 +21,20 @@ generalize rather than reuse this statement verbatim; that trade was accepted
 when the slice was scoped, and
 [the §1.2 page](../van-kampen/README.md) records it.
 
+[Mathlib PR #28246](https://github.com/leanprover-community/mathlib4/pull/28246)
+contains
+`Path.Homotopic.exists_loops_homotopic_concat_of_open_cover`, explicitly
+documented as Hatcher's Lemma 1.15. It is open and not part of the pinned
+Mathlib, so this node remains planned; the PR is the implementation prior art
+to review before writing a separate proof.
+
 Intended artifact: `Hatcher.loop_homotopic_prod_of_isOpenCover` in
 `Hatcher/Sphere/LoopInOpenCover.lean`.
 
 ## Depends on
 
-No roadmap prerequisites. Rests on Mathlib's path algebra and the Lebesgue
-number lemma.
+No roadmap prerequisites. Rests on Mathlib's path algebra and its subdivision
+of the unit interval subordinate to an open cover.
 
 ## Sources
 

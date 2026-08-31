@@ -42,6 +42,13 @@ see the roadmap nodes for the exact declarations.
 | Proposition 1.14 | 35 | `π₁(Sⁿ) = 0` for `n ≥ 2`. |
 | Lemma 1.15 | 35 | A loop in a union of path-connected open sets, pairwise meeting in path-connected sets, factors through finitely many of them. |
 | Corollary 1.16 | 36 | `ℝ²` is not homeomorphic to `ℝⁿ` for `n ≠ 2`. |
+| Proposition 1.17 | 36 | If `X` retracts onto `A`, inclusion induces an injection on `π₁`; a deformation retract induces an isomorphism. |
+| Proposition 1.18 | 37 | A homotopy equivalence induces an isomorphism on fundamental groups at every basepoint. |
+| Lemma 1.19 | 37 | For a homotopy `φₜ` and the basepoint path `h(t) = φₜ(x₀)`, the induced maps satisfy `φ₀∗ = βₕ φ₁∗`. |
+
+The no-retraction argument used for Theorem 1.9 is on page 32 and works
+directly with a nullhomotopy of a loop. Proposition 1.17 revisits the same
+obstruction on page 36 in induced-homomorphism language.
 
 ## Prior art in the pinned Mathlib
 
@@ -57,14 +64,29 @@ Available and reusable:
   covering Proposition 1.6.
 - `FundamentalGroupoid.prodToProdTop` — `FundamentalGroupoid/Product.lean`,
   covering Proposition 1.12 at groupoid level.
+- `FundamentalGroupoidFunctor.homotopicMapsNatIso` and
+  `FundamentalGroupoidFunctor.equivOfHomotopyEquiv` —
+  `FundamentalGroupoid/InducedMaps.lean`, giving the groupoid-level content
+  of Lemma 1.19 and Proposition 1.18.
 - `IsCoveringMap.liftPath`, `liftHomotopy`, `monodromy`, `monodromy_theorem` —
   `Mathlib/Topology/Homotopy/Lifting.lean`. These are Hatcher's (a), (b), (c).
 - `AddCircle.isCoveringMap_coe : IsCoveringMap ((↑) : 𝕜 → AddCircle p)` —
   `Mathlib/Topology/Covering/AddCircle.lean`. Hatcher's `p : ℝ → S¹`, in
   `AddCircle` coordinates.
-- `Complex.isAlgClosed` — `Mathlib/Analysis/Complex/Polynomial/Basic.lean`.
-  Theorem 1.8's *statement* is upstream, proved by Liouville rather than by
-  `π₁`. Formalizing Hatcher's route gives a second proof, not a new result.
+- `Complex.exists_root` and `Complex.isAlgClosed` —
+  `Mathlib/Analysis/Complex/Polynomial/Basic.lean`. Theorem 1.8's statement
+  is upstream, proved by Liouville rather than by `π₁`. Formalizing Hatcher's
+  route gives a second proof, not a new result.
+
+Active upstream work, not present in the pinned revision:
+
+- [Mathlib PR #28246](https://github.com/leanprover-community/mathlib4/pull/28246)
+  proves
+  `Path.Homotopic.exists_loops_homotopic_concat_of_open_cover` and
+  `EuclideanSphere.simplyConnectedSpace`. These match Lemma 1.15 and
+  Proposition 1.14 closely enough that this project should review the PR for
+  reuse before independently implementing either node. The PR is open, so
+  neither result is marked as Mathlib-backed here.
 
 Absent, and therefore the work:
 
@@ -73,6 +95,9 @@ Absent, and therefore the work:
 - Brouwer's fixed point theorem in any dimension (Theorem 1.9).
 - Borsuk–Ulam in any dimension (Theorem 1.10) and Corollary 1.11.
 - `π₁(Sⁿ) = 0` for `n ≥ 2` (Proposition 1.14) and Corollary 1.16.
+- A named fundamental-group formulation of Proposition 1.17. The groupoid
+  functoriality needed to derive it exists, but the source-facing theorem is
+  not packaged in the pinned revision.
 
 ## Decisions taken
 
@@ -82,20 +107,21 @@ Absent, and therefore the work:
   `AddCircle.homeomorphCircle' : AddCircle (2 * π) ≃ₜ Circle`
   (`Analysis/SpecialFunctions/Complex/Circle.lean`). This keeps the statement
   close to Hatcher's while reusing `AddCircle.isCoveringMap_coe` unchanged.
-- **Lemma 1.15.** Formalized standalone in this section, because Proposition
-  1.14 needs it and §1.2 is not yet decomposed. §1.2's van Kampen theorem
-  subsumes it, so that work will likely generalize rather than cite it. The
-  duplication is recorded in the
+- **Lemma 1.15.** Planned as a standalone node in this section, because
+  Proposition 1.14 needs it and §1.2 is not yet decomposed. §1.2's van Kampen
+  theorem subsumes it, so later work may generalize rather than cite the local
+  statement. The duplication is recorded in the
   [coverage contract](../coverage/README.md).
+- **Winding-number representation.** The implementation uses
+  `Hatcher.Circle.windingNumber : FundamentalGroup Circle 1 →*
+  Multiplicative ℤ`.
+- **Covering normalization.** `Hatcher.Circle.expMap` has period one, and
+  `Hatcher.Circle.expMap_eq_one` identifies its basepoint fibre with the
+  integers, so the counterclockwise degree-one generator needs no additional
+  `2π` normalization.
 
 ## Still open
 
-- The Lean spelling of the winding number: a `MulEquiv` onto
-  `Multiplicative ℤ`, or an additive map after unfolding `π₁`. This decides the
-  shape of Theorem 1.7's statement.
-- Whether the covering map's generator needs explicit normalization so that
-  degree one is the counterclockwise loop, or whether the `AddCircle`
-  orientation already gives it.
 - Whether `π₁(Sⁿ) = 0` should be an `instance` on `SimplyConnectedSpace` or a
   plain theorem. An instance is more useful downstream but risks unwanted
   typeclass search on sphere-shaped goals.

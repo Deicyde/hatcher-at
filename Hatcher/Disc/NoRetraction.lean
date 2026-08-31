@@ -1,11 +1,10 @@
 /-
-Hatcher, *Algebraic Topology*, §1.1, inside the proof of Theorem 1.9 (page 31).
+Hatcher, *Algebraic Topology*, §1.1, inside the proof of Theorem 1.9 (page 32).
 
-There is no retraction `D² → S¹`. Hatcher phrases this through induced
-homomorphisms: a retraction would factor the identity of `π₁(S¹) ≅ ℤ` through
-`π₁(D²) = 0`. This file runs the same argument directly on path classes, since
-the pinned Mathlib has `FundamentalGroup.map` but no functoriality lemmas for
-it.
+There is no retraction `D² → S¹`. Hatcher proves this directly on loops:
+a loop in `S¹` becomes nullhomotopic in `D²`, and composing that homotopy
+with a retraction would make the original loop nullhomotopic in `S¹`.
+Proposition 1.17 later gives the induced-homomorphism reformulation.
 
 Concretely: the boundary loop `ω` becomes nullhomotopic once pushed into the
 disc, because the disc is convex and hence contractible. Pushing that
@@ -34,7 +33,7 @@ noncomputable def incl : C(_root_.Circle, unitDisc) where
 
 @[simp] theorem incl_coe (z : _root_.Circle) : ((incl z : unitDisc) : ℂ) = (z : ℂ) := rfl
 
-/-- **Hatcher, §1.1, page 31.** `S¹` is not a retract of `D²`. -/
+/-- **Hatcher, §1.1, page 32.** `S¹` is not a retract of `D²`. -/
 theorem not_exists_retraction :
     ¬ ∃ r : C(unitDisc, _root_.Circle), ∀ z : _root_.Circle, r (incl z) = z := by
   rintro ⟨r, hr⟩

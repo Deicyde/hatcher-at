@@ -6,8 +6,8 @@ Paths in a space `X` with fixed endpoints, taken up to homotopy, compose; loops
 at a basepoint `x₀` therefore form a group `π₁(X, x₀)`, and a path between
 basepoints induces an isomorphism between the groups it joins. Mathlib already
 has all of this as `Path.Homotopic` and `FundamentalGroup`, so Propositions
-1.2, 1.3, 1.5, and 1.6 are prior art rather than work, and the section's first
-half contributes no nodes.
+1.2, 1.3, 1.5, and 1.6, together with the convexity examples around them, are
+prior art rather than work, and the section's first half contributes no nodes.
 
 ## The circle
 
@@ -31,16 +31,20 @@ faithful. That is the theorem.
 
 - [The fundamental group of the circle](fundamental-group-circle.md)
 
+Mathlib's product construction for fundamental groupoids, together with the
+circle computation above, also supplies Proposition 1.12 and Example 1.13
+without separate roadmap nodes.
+
 ## Consequences
 
-Three classical theorems follow, all from the observation that a retraction
-`D² → S¹` would factor the identity of `ℤ` through the trivial group.
+The circle computation first rules out a retraction `D² → S¹`; Brouwer's
+theorem is the direct consequence of that obstruction.
 
 - [The circle is not a retract of the disc](no-retraction-disc.md)
 - [Brouwer's fixed point theorem for the disc](brouwer-disc.md)
 
-The same nonvanishing of winding number, applied to the loops traced by a
-polynomial on circles of growing radius, gives a topological proof of a result
+Separately, the nonvanishing of winding number applied to loops traced by a
+polynomial on circles of growing radius gives a topological proof of a result
 Mathlib already knows by other means.
 
 - [The fundamental theorem of algebra](fundamental-theorem-algebra.md)
@@ -60,8 +64,11 @@ and of odd winding number.
 
 - [Borsuk–Ulam for the two-sphere](borsuk-ulam-sphere.md)
 
-Corollary 1.11 and Corollary 1.16 close Hatcher's section and are deliberately
-out of this slice; see the [coverage contract](../../../coverage/README.md).
+Corollaries 1.11 and 1.16, Propositions 1.17 and 1.18, and Lemma 1.19 lie
+outside the selected nine-node slice. Mathlib already expresses the core of
+Proposition 1.18 and Lemma 1.19 at the fundamental-groupoid level; source-facing
+wrappers and the other deferred results belong to a later §1.1 completion
+pass. See the [coverage contract](../../../coverage/README.md).
 
 ## Sources
 
