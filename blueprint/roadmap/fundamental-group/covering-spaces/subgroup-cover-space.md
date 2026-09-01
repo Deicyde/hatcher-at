@@ -21,7 +21,7 @@ deferred material in Hatcher.
 
 ## Depends on
 
-- [The path-class universal-cover space](universal-cover-path-space.md)
+- [The path-class universal-cover space](universal-cover/universal-cover-path-space.md)
 
 ## Sources
 

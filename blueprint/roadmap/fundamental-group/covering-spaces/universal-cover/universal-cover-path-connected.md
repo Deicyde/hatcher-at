@@ -25,4 +25,4 @@ The same file must first prove continuity of the initial-segment family in the
 
 ## Sources
 
-- [Hatcher §1.3, path-connectedness proof on page 65](../../../sources/hatcher-1-3.md)
+- [Hatcher §1.3, path-connectedness proof on page 65](../../../../sources/hatcher-1-3.md)

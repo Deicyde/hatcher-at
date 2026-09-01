@@ -1,8 +1,8 @@
 # Covering spaces
 
-Hatcher §1.3 (pages 56–82). The selected slice follows the classification
-spine from lifting properties through Theorem 1.38. Deck transformations,
-permutation reconstruction, and geometric examples remain deferred.
+Hatcher §1.3 (pages 56–82). The selected slice follows the classification and
+deck-transformation spine from lifting properties through Proposition 1.40.
+Permutation reconstruction and geometric examples remain deferred.
 
 The pinned Mathlib already contains most of the hard lifting theory. The
 roadmap separates exact upstream declarations from the thin source-facing
@@ -43,13 +43,14 @@ roadmap uses Hatcher's `U[γ]` basis directly. Open Mathlib PR
 contains implementation prior art for based paths and universal covers, but its
 compact-open quotient topology is not silently mixed with the direct basis.
 
-- [Semilocally simply-connected spaces](semilocally-simply-connected.md)
-- [Small nullhomotopy neighborhoods form a basis](nullhomotopic-open-basis.md)
-- [The path-class universal-cover space](universal-cover-path-space.md)
-- [The universal-cover basic sets form a basis](universal-cover-basis.md)
-- [The endpoint map is a covering](universal-cover-is-covering.md)
-- [The path-class cover is path-connected](universal-cover-path-connected.md)
-- [The path-class cover is simply-connected](universal-cover-simply-connected.md)
+- [The path-class universal cover](universal-cover/README.md)
+- [Semilocally simply-connected spaces](universal-cover/semilocally-simply-connected.md)
+- [Small nullhomotopy neighborhoods form a basis](universal-cover/nullhomotopic-open-basis.md)
+- [The path-class universal-cover space](universal-cover/universal-cover-path-space.md)
+- [The universal-cover basic sets form a basis](universal-cover/universal-cover-basis.md)
+- [The endpoint map is a covering](universal-cover/universal-cover-is-covering.md)
+- [The path-class cover is path-connected](universal-cover/universal-cover-path-connected.md)
+- [The path-class cover is simply-connected](universal-cover/universal-cover-simply-connected.md)
 
 ## Subgroups and classification
 
@@ -73,13 +74,29 @@ ready until its universe boundary is fixed.
 - [Connected covers are classified by conjugacy classes](unpointed-cover-classification.md)
 - [A simply-connected cover maps uniquely to every pointed connected cover](universal-cover-initial.md)
 
+## Deck transformations and quotient actions
+
+Proposition 1.39 turns the induced subgroup into a deck-group calculation.
+The normalizer acts on the cover, its kernel is the covering subgroup, and
+normal covers are exactly those whose image subgroup is normal. Proposition
+1.40 applies this to orbit quotients satisfying Hatcher's exact local-disjoint
+condition.
+
+- [Deck transformations and quotient actions](deck-transformations/README.md)
+- [Deck transformations and normal covers](deck-transformations/deck-transformation-group.md)
+- [A deck transformation is determined by one lifted point](deck-transformations/deck-realization.md)
+- [The normalizer acts by deck transformations](deck-transformations/normalizer-to-deck.md)
+- [The normalizer map is surjective with kernel the covering subgroup](deck-transformations/normalizer-to-deck-exactness.md)
+- [The deck group is the normalizer quotient](deck-transformations/deck-group-calculation.md)
+- [Covering-space actions give quotient coverings](deck-transformations/covering-space-action.md)
+- [Orbit quotients are normal and have the expected deck group](deck-transformations/orbit-quotient-deck-group.md)
+- [The orbit-quotient fundamental group recovers the acting group](deck-transformations/orbit-quotient-fundamental-group.md)
+
 ## Deferred within §1.3
 
 Example 1.35, the reconstruction of arbitrary covers from permutation actions,
-Propositions 1.39–1.40, and Examples 1.41–1.48 are deferred.
-The next section milestone is the deck-transformation branch. Post-pin Mathlib
-PR #40135 supplies useful deck-group prior art, but it is not part of this
-build.
+and Examples 1.41–1.48 are deferred. Code from post-pin Mathlib PR #40135
+supplies useful deck-group prior art, but it is not part of this build.
 
 ## Sources
 

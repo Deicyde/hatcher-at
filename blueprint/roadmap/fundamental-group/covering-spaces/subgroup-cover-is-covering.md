@@ -23,9 +23,9 @@ their images are sheets over `U`.
 
 ## Proof depends on
 
-- [The endpoint map is a covering](universal-cover-is-covering.md)
-- [The path-class cover is path-connected](universal-cover-path-connected.md)
-- [The universal-cover basic sets form a basis](universal-cover-basis.md)
+- [The endpoint map is a covering](universal-cover/universal-cover-is-covering.md)
+- [The path-class cover is path-connected](universal-cover/universal-cover-path-connected.md)
+- [The universal-cover basic sets form a basis](universal-cover/universal-cover-basis.md)
 
 ## Sources
 

@@ -62,15 +62,15 @@ page 83 are outside this project's source targets.
 
 ## Selected slice
 
-The selected classification spine contains Propositions 1.30–1.34, the
-path-class construction of a universal cover, Propositions 1.36–1.37,
-Theorem 1.38, and the universal cover's initial property. Proposition 1.32 remains a side
-branch because it tests the monodromy action and infinite-cardinality behavior.
+The selected classification and deck spine contains Propositions 1.30–1.34,
+the path-class construction of a universal cover, Propositions 1.36–1.37,
+Theorem 1.38, the universal cover's initial property, and Propositions
+1.39–1.40. Proposition 1.32 remains a side branch because it tests the
+monodromy action and infinite-cardinality behavior.
 
-Example 1.35, the permutation classification on pages 68–70, Propositions
-1.39–1.40 and Examples 1.41–1.48 are deferred. They require
-specific geometric models, a general reconstruction from permutation actions,
-or a deck-transformation API beyond the first classification milestone.
+Example 1.35, the permutation classification on pages 68–70, and Examples
+1.41–1.48 are deferred. They require specific geometric models or a general
+reconstruction from permutation actions.
 
 ## Prior art in the pinned Mathlib
 
@@ -100,8 +100,10 @@ Available ingredients:
 - `IsQuotientCoveringMap` and
   `Topology.IsQuotientMap.isCoveringMapOn_of_smul_disjoint` in
   `Mathlib/Topology/Covering/Quotient.lean` provide later quotient-action
-  infrastructure. Mathlib's `ProperlyDiscontinuousSMul` is stronger than
-  Hatcher's condition `(*)` and is not an exact replacement.
+  infrastructure. Mathlib's `ProperlyDiscontinuousSMul` expresses a different
+  compact-set finiteness condition, not Hatcher's condition `(*)`. The pinned
+  theorem deriving local disjointness from it additionally assumes local
+  compactness and Hausdorffness.
 
 The pinned revision has no semilocally simply-connected API, universal-cover
 construction, arbitrary-subgroup cover, covering-isomorphism bundle,
@@ -120,8 +122,10 @@ classification theorem, or deck-transformation group.
   requested that the large change be split. This roadmap uses it as design
   prior art while retaining Hatcher's direct `U[γ]` topology.
 - [Mathlib PR #40135](https://github.com/leanprover-community/mathlib4/pull/40135)
-  merged after the pin and adds a deck-transformation subgroup. It belongs to
-  the deferred Proposition 1.39 milestone.
+  supplied the deck-transformation subgroup code that landed on Mathlib master
+  after the pin in Bors commit `1b878ee`, chiefly as
+  `Mathlib/Topology/Covering/Deck.lean`. It is the compatibility-layer prior
+  art for Propositions 1.39–1.40, not part of the pinned build.
 
 None of this post-pin work receives `mathlib: true`.
 
@@ -134,10 +138,14 @@ None of this post-pin work receives `mathlib: true`.
   1.31, and 1.33 where the pinned library contains the hard theorem but not the
   exact conjunction or equivalence stated by Hatcher. Proposition 1.34 is an
   exact pinned declaration.
-- **Monodromy orientation.** Define the based action using inverse endpoint
-  transport so multiplication agrees with Hatcher's left-to-right path
-  convention. State Proposition 1.32 first as a fiber-to-coset equivalence and
-  derive cardinal equality from it.
+- **Monodromy orientation.** Define the based action by direct endpoint
+  transport, matching Mathlib PR #33108. Mathlib's `FundamentalGroup`
+  multiplication already reverses categorical path composition, so inserting
+  another inverse would produce an antihomomorphism. State Proposition 1.32
+  first as an equivalence with Mathlib's ordinary quotient `π₁(X,x₀) ⧸ H`;
+  under the reversed multiplication this represents Hatcher's right cosets.
+  For the same reason, Hatcher's basepoint-change subgroup `g⁻¹ H g` is
+  `H.map (MulAut.conj g)` in the Lean group law.
 - **Universal cover.** Use Hatcher's direct `U[γ]` basis topology from pages
   63–65. PR #38292 remains implementation prior art for based paths and
   universal-cover proofs, but its compact-open quotient topology is not mixed
@@ -147,6 +155,21 @@ None of this post-pin work receives `mathlib: true`.
   of objects over `X`. Fix the total-space universe explicitly. Packaging the
   resulting isomorphism classes as a literal set-level bijection remains a
   not-ready node until the quotient and universe boundary is fixed.
+- **Deck groups and normality.** Backport the exact basic `deck` API from
+  post-pin PR #40135, while keeping the new classification results in the
+  project namespace. Define a normal cover to be surjective with a transitive
+  deck action on every fiber. This prevents the empty covering from satisfying
+  normality vacuously under Mathlib's covering-map convention.
+- **Normalizer orientation.** The homomorphism from `normalizer H` sends `g`
+  to the deck transformation whose value at the chosen point is
+  `monodromyPerm g⁻¹ e₀`. Direct monodromy is already multiplicative; this
+  separate inverse makes the endpoint-selected deck transformations compose
+  in the homomorphism order.
+- **Covering-space actions.** Formalize Hatcher's condition `(*)` directly as
+  local disjointness of nonidentity translates. Do not replace it with
+  `ProperlyDiscontinuousSMul`: that class states compact-set finiteness, and
+  the pinned bridge from it to local disjointness adds `LocallyCompactSpace`
+  and `T2Space` hypotheses absent from the source.
 - **Deferred material.** Do not treat monodromy alone as the permutation
   classification, and do not state the deck group as `π₁(X)/H` without the
   normality hypothesis.

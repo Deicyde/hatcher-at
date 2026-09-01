@@ -10,15 +10,21 @@ homomorphism
 
 `π₁(X,x₀) →* Equiv.Perm (p ⁻¹' {x₀})`.
 
-Intended artifact: `Hatcher.Covering.monodromyPerm`.
+Intended artifact: `IsCoveringMap.monodromyPerm`, backported with the exact
+post-pin API.
 
-Use the inverse of Mathlib's `IsCoveringMap.monodromy` transport so the
-homomorphism agrees with Hatcher's left-to-right path-composition convention.
+Use Mathlib's `IsCoveringMap.monodromy` transport directly. Its
+`FundamentalGroup` multiplication is already opposite categorical path
+composition, so `monodromy_trans_apply` makes direct endpoint transport a
+homomorphism to `Equiv.Perm`. Inverting transport here would reverse products
+and would not define the claimed homomorphism.
+
 The construction should expose its action on a represented loop and prove that
 the chosen lift closes exactly when the action fixes `e₀`.
 
-Merged Mathlib PR #33108 contains a post-pin implementation. It is prior art,
-not `mathlib: true` for this project.
+Merged Mathlib PR #33108 contains the exact post-pin implementation, with
+`coe_monodromyPerm` definitionally equal to `IsCoveringMap.monodromy`. It is
+prior art, not `mathlib: true` for this project.
 
 ## Depends on
 

@@ -20,4 +20,4 @@ definition, since Hatcher uses arbitrary endpoints when defining `U[γ]`.
 
 ## Sources
 
-- [Hatcher §1.3, small-open basis on page 64](../../../sources/hatcher-1-3.md)
+- [Hatcher §1.3, small-open basis on page 64](../../../../sources/hatcher-1-3.md)

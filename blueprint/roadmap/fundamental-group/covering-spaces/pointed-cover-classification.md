@@ -23,7 +23,7 @@ universe and call the result a set.
 ## Depends on
 
 - [Pointed connected covering spaces](based-connected-cover.md)
-- [Semilocally simply-connected spaces](semilocally-simply-connected.md)
+- [Semilocally simply-connected spaces](universal-cover/semilocally-simply-connected.md)
 
 ## Proof depends on
 

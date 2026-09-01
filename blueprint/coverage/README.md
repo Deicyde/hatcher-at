@@ -15,8 +15,8 @@ mapped chapter must never be reported as covered.
 | Chapter 0, underlying geometric notions | `MAPPED` | [Chapter map](../roadmap/underlying-geometric-notions/README.md) |
 | §1.2 selected spine | `DECOMPOSED` | [Van Kampen, wedges, and cell-attachment nodes](../roadmap/fundamental-group/van-kampen/README.md) |
 | §1.2 results outside the selected slice | `DEFERRED` | Examples 1.22–1.25, Corollary 1.27, and the geometric remainder of Example 1.29 are reserved for later application milestones |
-| §1.3 classification spine | `DECOMPOSED` | [Lifting through Theorem 1.38](../roadmap/fundamental-group/covering-spaces/README.md) |
-| §1.3 results outside the selected slice | `DEFERRED` | Example 1.35, permutation classification, Propositions 1.39–1.40, and Examples 1.41–1.48 are reserved for later milestones |
+| §1.3 classification and deck spine | `DECOMPOSED` | [Lifting through Proposition 1.40](../roadmap/fundamental-group/covering-spaces/README.md) |
+| §1.3 results outside the selected slice | `DEFERRED` | Example 1.35, permutation classification, and Examples 1.41–1.48 are reserved for later milestones |
 | §2.1 Simplicial and singular homology | `MAPPED` | [Section map](../roadmap/homology/simplicial-and-singular/README.md) |
 | §2.2 Computations and applications | `MAPPED` | [Section map](../roadmap/homology/computations-and-applications/README.md) |
 | §2.3 Formal viewpoint | `MAPPED` | [Section map](../roadmap/homology/formal-viewpoint/README.md) |
@@ -75,7 +75,7 @@ Hatcher's threefold-incidence homotopy decomposition and the bridge between
 Mathlib's classical and categorical CW-complex APIs. No §1.2 node is claimed
 formalized yet.
 
-### §1.3 selected classification spine
+### §1.3 selected classification and deck spine
 
 [Covering spaces](../roadmap/fundamental-group/covering-spaces/README.md) is
 decomposed from homotopy lifting through the subgroup classification of
@@ -83,6 +83,8 @@ connected covers. Exact pinned lifting results are separated from local
 source-facing wrappers. The path-class universal-cover construction and the
 cover-bundling boundary are explicit nodes, with unresolved representation
 work marked not ready rather than hidden in the final classification theorem.
+The deck-transformation branch continues through the normalizer quotient and
+orbit-action calculation in Propositions 1.39–1.40.
 
 ### Deferred within §1.1
 
@@ -107,8 +109,8 @@ formalization nodes:
 - The remainder of the [Appendix](../roadmap/appendix/README.md)
 
 Decomposing any of these is a future roadmap run, not proof work. Within
-Chapter 1, the next intended roadmap milestone is the deferred deck-
-transformation branch of §1.3.
+Chapter 1, Example 1.35, permutation reconstruction, and Examples 1.41–1.48
+remain deferred. The next mapped main-line section is §2.1.
 
 ## Out of scope
 

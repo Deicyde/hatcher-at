@@ -23,9 +23,9 @@ when its original homotopy class is trivial.
 
 - [The endpoint map is a covering](universal-cover-is-covering.md)
 - [The path-class cover is path-connected](universal-cover-path-connected.md)
-- [Covering maps inject path-homotopy classes](covering-injective-path-classes.md)
-- [The induced subgroup consists of loops with closed lifts](closed-lift-image.md)
+- [Covering maps inject path-homotopy classes](../covering-injective-path-classes.md)
+- [The induced subgroup consists of loops with closed lifts](../closed-lift-image.md)
 
 ## Sources
 
-- [Hatcher §1.3, simple connectivity proof on page 65](../../../sources/hatcher-1-3.md)
+- [Hatcher §1.3, simple connectivity proof on page 65](../../../../sources/hatcher-1-3.md)

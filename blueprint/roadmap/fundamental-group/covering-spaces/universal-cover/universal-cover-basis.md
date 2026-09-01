@@ -26,4 +26,4 @@ compact-open tube-neighborhood API from PR #38292.
 
 ## Sources
 
-- [Hatcher §1.3, universal-cover basic sets on page 64](../../../sources/hatcher-1-3.md)
+- [Hatcher §1.3, universal-cover basic sets on page 64](../../../../sources/hatcher-1-3.md)

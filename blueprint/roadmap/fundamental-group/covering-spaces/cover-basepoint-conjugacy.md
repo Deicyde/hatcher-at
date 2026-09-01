@@ -12,8 +12,9 @@ conjugate is realized by lifting a representative loop from `e₀`.
 
 Intended artifact: `Hatcher.Covering.range_mapOfEq_basepointChange`.
 
-The conjugation orientation must match Hatcher's path-composition convention;
-the source writes the new subgroup as `g⁻¹ H g`.
+The source writes the new subgroup as `g⁻¹ H g`. Mathlib's fundamental-group
+multiplication reverses Hatcher's first-then path concatenation, so the Lean
+statement becomes `g H g⁻¹`, represented by `H.map (MulAut.conj g)`.
 
 ## Depends on
 

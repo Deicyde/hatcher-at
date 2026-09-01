@@ -7,9 +7,9 @@ redistributed here; source notes cite it by chapter and section.
 Every chapter and numbered section of the book is mapped. The selected
 nine-node §1.1 slice is fully formalized, §1.2 is decomposed into
 targets for van Kampen, wedge sums, and cell attachments, and the selected
-§1.3 classification spine is decomposed. One Appendix prerequisite is
-isolated. Mapping is not progress: the coverage contract says which chapters
-are only mapped.
+§1.3 classification and deck spine is decomposed through Proposition 1.40.
+One Appendix prerequisite is isolated. Mapping is not progress: the coverage
+contract says which chapters are only mapped.
 
 - [Roadmap](roadmap/README.md) — the book: chapters, statements, and their
   dependencies.

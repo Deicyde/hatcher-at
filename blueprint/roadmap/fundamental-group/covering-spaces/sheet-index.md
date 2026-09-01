@@ -8,15 +8,15 @@ origin: cited
 **Hatcher, Proposition 1.32 (page 61).** For a pointed covering with
 path-connected base and total spaces, let `H` be the image subgroup in
 `π₁(X,x₀)`. The fiber over the basepoint is equivalent to Hatcher's right-coset
-type `H \ π₁(X,x₀)`, represented in Lean by
-`Quotient (QuotientGroup.rightRel H)`. Consequently the fiber and this coset
-type have equal cardinality.
+type `H \ π₁(X,x₀)`. Because Mathlib's fundamental-group multiplication is
+opposite Hatcher's first-then path concatenation, this is represented in Lean
+by the ordinary quotient `π₁(X,x₀) ⧸ H`, using `QuotientGroup.leftRel`.
+Consequently the fiber and this quotient have equal cardinality.
 
-The main artifact is `Hatcher.Covering.fiberEquivRightCosets`; the same file
-should derive `Hatcher.Covering.mk_fiber_eq_mk_rightCosets`. Since the local
-monodromy homomorphism uses inverse endpoint transport, send the class of `g`
-to `g⁻¹ • e₀`; this is the inversion bridge to Hatcher's forward-lift map
-`H g ↦ endpoint(lift g)`.
+The main artifact is `Hatcher.Covering.fiberEquivQuotientRange`; the same file
+should derive `Hatcher.Covering.mk_fiber_eq_mk_quotientRange`. Use the direct
+monodromy action, sending the class of `g` to `g • e₀`, which is the endpoint
+of the lift represented by `g` in Mathlib's convention.
 
 Do not state the general result only with `Subgroup.index : ℕ`: Mathlib assigns
 zero to an infinite index, while Hatcher's number of sheets is cardinal-valued.

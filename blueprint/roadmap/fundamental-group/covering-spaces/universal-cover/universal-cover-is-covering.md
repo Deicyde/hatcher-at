@@ -28,4 +28,4 @@ surjective because `X` is path-connected.
 
 ## Sources
 
-- [Hatcher §1.3, endpoint projection on pages 64–65](../../../sources/hatcher-1-3.md)
+- [Hatcher §1.3, endpoint projection on pages 64–65](../../../../sources/hatcher-1-3.md)

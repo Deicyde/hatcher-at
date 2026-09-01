@@ -24,4 +24,4 @@ None beyond pinned Mathlib.
 
 ## Sources
 
-- [Hatcher §1.3, semilocal simple connectivity on page 63](../../../sources/hatcher-1-3.md)
+- [Hatcher §1.3, semilocal simple connectivity on page 63](../../../../sources/hatcher-1-3.md)

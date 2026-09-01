@@ -24,4 +24,4 @@ The main artifact is `Hatcher.UniversalCover`; supporting artifacts should be
 
 ## Sources
 
-- [Hatcher §1.3, path-class construction on pages 63–65](../../../sources/hatcher-1-3.md)
+- [Hatcher §1.3, path-class construction on pages 63–65](../../../../sources/hatcher-1-3.md)
