@@ -1,0 +1,26 @@
+---
+declaration: proposition
+origin: cited
+---
+
+# Homotopies lift uniquely through a covering map
+
+**Hatcher, Proposition 1.30 (page 60).** Given a covering map `p : E → X`, a
+homotopy `H : I × A → X`, and a continuous lift `f₀ : A → E` of the time-zero
+map, there exists a unique continuous homotopy `H̃ : I × A → E` that lifts `H`
+and begins at `f₀`.
+
+Intended artifact: `Hatcher.Covering.existsUnique_liftHomotopy`.
+
+This is a thin source-facing wrapper around
+`IsCoveringMap.liftHomotopy`, `liftHomotopy_lifts`,
+`liftHomotopy_zero`, and `eq_liftHomotopy_iff'`. No new subdivision proof
+belongs in this node.
+
+## Depends on
+
+None beyond pinned Mathlib.
+
+## Sources
+
+- [Hatcher §1.3, Proposition 1.30](../../../sources/hatcher-1-3.md)

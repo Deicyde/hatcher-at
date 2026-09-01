@@ -3,10 +3,10 @@
 This project formalizes results from [Hatcher's *Algebraic Topology*](../sources/hatcher.md).
 It does not claim to formalize the book. The whole book is *mapped*: every
 chapter and numbered section has a roadmap page recording what it contains and
-what Mathlib already provides. The selected §1.1 slice is formalized, §1.2 is
-decomposed into its next formalization units, and one Appendix prerequisite is
-decomposed. Mapping is not progress, and a mapped chapter must never be
-reported as covered.
+what Mathlib already provides. The selected §1.1 slice is formalized, and the
+selected §1.2 and §1.3 spines are decomposed into formalization units. One
+Appendix prerequisite is also decomposed. Mapping is not progress, and a
+mapped chapter must never be reported as covered.
 
 | Area | Coverage | Evidence |
 | --- | --- | --- |
@@ -15,7 +15,8 @@ reported as covered.
 | Chapter 0, underlying geometric notions | `MAPPED` | [Chapter map](../roadmap/underlying-geometric-notions/README.md) |
 | §1.2 selected spine | `DECOMPOSED` | [Van Kampen, wedges, and cell-attachment nodes](../roadmap/fundamental-group/van-kampen/README.md) |
 | §1.2 results outside the selected slice | `DEFERRED` | Examples 1.22–1.25, Corollary 1.27, and the geometric remainder of Example 1.29 are reserved for later application milestones |
-| §1.3 Covering spaces | `MAPPED` | [Section map](../roadmap/fundamental-group/covering-spaces/README.md) |
+| §1.3 classification spine | `DECOMPOSED` | [Lifting through Theorem 1.38](../roadmap/fundamental-group/covering-spaces/README.md) |
+| §1.3 results outside the selected slice | `DEFERRED` | Example 1.35, permutation classification, Propositions 1.39–1.40, and Examples 1.41–1.48 are reserved for later milestones |
 | §2.1 Simplicial and singular homology | `MAPPED` | [Section map](../roadmap/homology/simplicial-and-singular/README.md) |
 | §2.2 Computations and applications | `MAPPED` | [Section map](../roadmap/homology/computations-and-applications/README.md) |
 | §2.3 Formal viewpoint | `MAPPED` | [Section map](../roadmap/homology/formal-viewpoint/README.md) |
@@ -55,7 +56,7 @@ Two qualifications on what these nodes do and do not prove.
 `Analysis/Complex/Polynomial/Basic.lean` and proved by Liouville's theorem.
 The local formalization gives a second proof of a known result. It
 is in scope as a source target and must not be counted as new Mathlib coverage.
-No node in this project sets `mathlib: true`.
+No §1.1 node in this project sets `mathlib: true`.
 
 **Lemma 1.15 is reused by §1.2.** It was formalized locally because
 Proposition 1.14 needed it, and it now supplies the surjectivity clause of
@@ -74,6 +75,15 @@ Hatcher's threefold-incidence homotopy decomposition and the bridge between
 Mathlib's classical and categorical CW-complex APIs. No §1.2 node is claimed
 formalized yet.
 
+### §1.3 selected classification spine
+
+[Covering spaces](../roadmap/fundamental-group/covering-spaces/README.md) is
+decomposed from homotopy lifting through the subgroup classification of
+connected covers. Exact pinned lifting results are separated from local
+source-facing wrappers. The path-class universal-cover construction and the
+cover-bundling boundary are explicit nodes, with unresolved representation
+work marked not ready rather than hidden in the final classification theorem.
+
 ### Deferred within §1.1
 
 Corollary 1.11 (`S²` as a union of three closed sets), Corollary 1.16
@@ -91,14 +101,14 @@ Everything else. These pages carry exposition and prior-art notes, and no
 formalization nodes:
 
 - Chapter 0, [Some underlying geometric notions](../roadmap/underlying-geometric-notions/README.md)
-- Chapter 1 §1.3 [Covering spaces](../roadmap/fundamental-group/covering-spaces/README.md)
 - Chapter 2, [Homology](../roadmap/homology/README.md), all three sections
 - Chapter 3, [Cohomology](../roadmap/cohomology/README.md), all three sections
 - Chapter 4, [Homotopy theory](../roadmap/homotopy-theory/README.md), all three sections
 - The remainder of the [Appendix](../roadmap/appendix/README.md)
 
-Decomposing any of these is a future roadmap run, not proof work. §1.3 is the
-next intended candidate, since it completes Chapter 1.
+Decomposing any of these is a future roadmap run, not proof work. Within
+Chapter 1, the next intended roadmap milestone is the deferred deck-
+transformation branch of §1.3.
 
 ## Out of scope
 

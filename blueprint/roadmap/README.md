@@ -10,9 +10,10 @@ spine of computations, starting with `π₁(S¹) ≅ ℤ`. The roadmap therefore
 the whole book but decomposes it from that point.
 
 Chapters follow Hatcher's own order. The selected §1.1 slice is fully
-formalized, §1.2 is decomposed into the next formalization nodes, and one
-Appendix prerequisite is isolated. The remaining source is mapped so the book
-reads end to end and later work has somewhere to land. The
+formalized, and the selected §1.2 and §1.3 spines are decomposed into
+formalization nodes. One Appendix prerequisite is isolated. The remaining
+source is mapped so the book reads end to end and later work has somewhere to
+land. The
 [coverage contract](../coverage/README.md) says which is which, and
 [the source notes](../sources/hatcher.md) fix the citation scheme.
 

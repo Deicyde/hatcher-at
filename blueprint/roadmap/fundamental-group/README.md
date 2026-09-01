@@ -24,10 +24,11 @@ to Hatcher §1.A, which is outside the main-line scope here.
 `π₁(X)` correspond to covering spaces of `X`, and the loop-lifting argument
 behind the circle computation becomes an instance of a general classification.
 
-Mathlib has `FundamentalGroup`, `FundamentalGroupoid`, and the covering-space
-lifting theorems including monodromy, but none of the three source-facing
-computations. The selected §1.1 slice is complete; §1.2 is now the active
-roadmap frontier.
+Mathlib has `FundamentalGroup`, `FundamentalGroupoid`, monodromy, and several
+of Hatcher's §1.3 lifting results. It does not contain the circle computation,
+van Kampen theorem, universal-cover construction, or classification spine as a
+whole. The selected §1.1 slice is complete; §1.2 is now the active proof
+frontier, while the §1.3 classification spine is decomposed behind it.
 
 ## Sections
 

@@ -7,7 +7,10 @@ The project formalizes results from a single reference.
 - [Hatcher §1.1, Basic Constructions](hatcher-1-1.md) — the labelled results
   behind the completed selected slice.
 - [Hatcher §1.2, Van Kampen's Theorem](hatcher-1-2.md) — the source map,
-  selected spine, prior art, and representation decisions for the next slice.
+  selected spine, prior art, and representation decisions for the van Kampen
+  slice.
+- [Hatcher §1.3, Covering Spaces](hatcher-1-3.md) — lifting, universal-cover,
+  and classification targets with pinned and post-pin Mathlib prior art.
 
 <!-- AUTHORING NOTES — these comments are not published.
 
