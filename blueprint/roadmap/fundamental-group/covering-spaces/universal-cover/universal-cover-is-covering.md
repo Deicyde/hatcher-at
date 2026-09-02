@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.UniversalCover.isCoveringMap_proj
 ---
 
 # The endpoint map is a covering
@@ -17,6 +20,10 @@ Intended artifact: `Hatcher.UniversalCover.isCoveringMap_proj`.
 
 Hatcher's general definition permits empty fibers, but this endpoint map is
 surjective because `X` is path-connected.
+
+Formalized in `Hatcher/Covering/UniversalCoverIsCovering.lean`. The file also
+exports continuity and surjectivity of the endpoint map, discreteness of its
+fibers, and openness of the basic sheets used in the covering trivializations.
 
 ## Depends on
 
