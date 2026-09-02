@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.exists_presentedGroup_equiv
 ---
 
 # Every group admits a generators-and-relations presentation
@@ -9,7 +12,9 @@ For every group `G`, produce a generator type, a family of relators in the free
 group on those generators, and a multiplicative equivalence from the resulting
 `PresentedGroup` to `G`.
 
-Intended artifact: `Hatcher.exists_presentedGroup_equiv`.
+Formalized as `Hatcher.exists_presentedGroup_equiv` in
+`Hatcher/VanKampen/PresentedGroup.lean`. The theorem chooses `G` itself as the
+generator type and the kernel of free-group evaluation as the relator set.
 
 Hatcher takes all elements of `G` as generators and a generating family for
 the kernel of the evaluation map as relators. Mathlib supplies
