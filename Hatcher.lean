@@ -33,5 +33,6 @@ import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected
 import Hatcher.Sphere.BorsukUlam
 import Hatcher.VanKampen.CoverGroupPresentation
+import Hatcher.VanKampen.CoverMapRelations
 import Hatcher.VanKampen.PointedWedge
 import Hatcher.VanKampen.PresentedGroup

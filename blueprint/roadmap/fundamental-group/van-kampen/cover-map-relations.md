@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.relationSubgroup_le_ker
 ---
 
 # Overlap relations vanish under the cover map
@@ -19,6 +22,10 @@ should define the supporting map `Hatcher.VanKampen.quotientCoverMap`.
 This is the formal-algebra inclusion in the kernel calculation. It should use
 the universal properties of `Monoid.CoprodI`, `Subgroup.normalClosure`, and
 `QuotientGroup`, without topological subdivision arguments.
+
+Formalized in `Hatcher/VanKampen/CoverMapRelations.lean`. The file also proves
+the individual relator calculation and exports the descended homomorphism
+`Hatcher.VanKampen.quotientCoverMap`.
 
 ## Depends on
 
