@@ -1,6 +1,9 @@
 ---
 declaration: proposition
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Covering.mem_range_map_iff_monodromy_fixed
 ---
 
 # The induced subgroup consists of loops with closed lifts
@@ -11,7 +14,10 @@ map from `π₁(E,e₀)` exactly when its lift beginning at `e₀` ends at `e₀
 Equivalently, the image subgroup is the stabilizer of `e₀` for the monodromy
 action.
 
-Intended artifact: `Hatcher.Covering.mem_range_map_iff_monodromy_fixed`.
+Formalized as `Hatcher.Covering.mem_range_map_iff_monodromy_fixed` in
+`Hatcher/Covering/Monodromy.lean`. The forward implication is Mathlib's
+`IsCoveringMap.monodromy_map`; the reverse implication lifts a representative
+loop and uses the fixed endpoint to make that lift a loop based at `e₀`.
 
 ## Depends on
 

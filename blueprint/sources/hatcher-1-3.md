@@ -26,6 +26,11 @@ has a neighborhood whose inclusion induces the trivial map on fundamental
 groups. Under local path-connectedness, the path-connected open neighborhoods
 with this property form a basis.
 
+Before constructing the universal cover, Hatcher also observes on page 63 that
+a covering space over a locally path-connected base is locally
+path-connected. This unnumbered fact is used when the lifting criterion is
+applied with one covering space as the domain.
+
 The universal cover is constructed from endpoint-preserving homotopy classes
 of paths starting at a fixed basepoint. Basic neighborhoods `U[γ]` extend a
 representative path inside one of the small open sets above. The endpoint map

@@ -8,8 +8,8 @@ lean: IsCoveringMap.monodromyPerm
 
 # The fundamental group acts on a covering fiber
 
-For a pointed covering `p : (E,e₀) → (X,x₀)`, package endpoint transport as a
-homomorphism
+For a covering `p : E → X` and basepoint `x₀ : X`, package endpoint transport
+on the fiber over `x₀` as a homomorphism
 
 `π₁(X,x₀) →* Equiv.Perm (p ⁻¹' {x₀})`.
 
