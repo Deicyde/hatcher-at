@@ -1,6 +1,9 @@
 ---
 declaration: proposition
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.BasedConnectedCover.nonempty_iso_iff_range_eq
 ---
 
 # Equal image subgroups characterize pointed cover isomorphism
@@ -10,7 +13,9 @@ path-connected. Two pointed path-connected covering spaces over `(X,x₀)` are
 isomorphic by a basepoint-preserving covering isomorphism if and only if their
 induced image subgroups in `π₁(X,x₀)` are equal.
 
-Intended artifact: `Hatcher.BasedConnectedCover.nonempty_iso_iff_range_eq`.
+Formalized as `Hatcher.BasedConnectedCover.nonempty_iso_iff_range_eq` in
+`Hatcher/Covering/Rigidity.lean`. The same file defines the source-facing image
+subgroup `Hatcher.BasedConnectedCover.fundamentalGroupRange`.
 
 For the reverse direction, lift each projection through the other cover using
 the lifting criterion. Unique lifting makes the two composites identities.
