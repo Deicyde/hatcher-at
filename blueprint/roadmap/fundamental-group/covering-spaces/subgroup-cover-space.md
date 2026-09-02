@@ -25,7 +25,8 @@ deferred material in Hatcher.
 Formalized in `Hatcher/Covering/SubgroupCoverSpace.lean`. The direct relation,
 its generated setoid, the endpoint projection, and the constant-path
 basepoint are all exported; the standard `Quotient` topology supplies the
-coinduced quotient topology without introducing a deck action.
+coinduced quotient topology through a named instance, without introducing a
+deck action.
 
 ## Depends on
 

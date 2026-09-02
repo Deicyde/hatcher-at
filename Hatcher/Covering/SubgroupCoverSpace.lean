@@ -90,6 +90,10 @@ namespace SubgroupCover
 
 variable (H : Subgroup (FundamentalGroup X x₀))
 
+/-- The quotient topology inherited from the path-class universal cover. -/
+instance instTopologicalSpace : TopologicalSpace (SubgroupCover H) :=
+  inferInstanceAs (TopologicalSpace (Quotient (subgroupCoverSetoid H)))
+
 /-- Endpoint projection from the subgroup cover. -/
 def proj : SubgroupCover H → X :=
   Quotient.lift UniversalCover.proj fun _ _ h ↦ h.choose
@@ -104,4 +108,3 @@ theorem proj_basepoint : proj H (basepoint H) = x₀ := rfl
 end SubgroupCover
 
 end Hatcher
-
