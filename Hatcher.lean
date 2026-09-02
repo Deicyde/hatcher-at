@@ -15,6 +15,7 @@ import Hatcher.Covering.NullhomotopicOpenBasis
 import Hatcher.Covering.Rigidity
 import Hatcher.Covering.SemilocallySimplyConnected
 import Hatcher.Covering.SheetIndex
+import Hatcher.Covering.UniversalCoverPathSpace
 import Hatcher.Circle.Covering
 import Hatcher.Circle.WindingNumber
 import Hatcher.Circle.FundamentalGroup
