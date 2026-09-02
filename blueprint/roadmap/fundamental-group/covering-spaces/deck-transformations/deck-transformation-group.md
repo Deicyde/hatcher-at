@@ -1,6 +1,9 @@
 ---
 declaration: def
 origin: cited
+statement: formalized
+proof: formalized
+lean: deck
 ---
 
 # Deck transformations and normal covers
@@ -25,6 +28,12 @@ Backport the final lower-camel-case API from post-pin Mathlib PR #40135 so the
 local compatibility layer can later be replaced without a naming migration.
 That code is not available at the pinned revision and must not receive
 `mathlib: true`.
+
+Formalized in `Hatcher/Covering/Deck.lean`. The global `deck` definition and
+its basic API match PR #40135. The project extension
+`deck.mulActionFiber` restricts the action to each fiber, and
+`Hatcher.Covering.IsNormal` records the covering, surjectivity, and fiberwise
+transitivity requirements.
 
 ## Depends on
 
