@@ -1,6 +1,9 @@
 ---
 declaration: proposition
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Covering.exists_lift_iff_range_le
 ---
 
 # A map lifts exactly when its fundamental group lands in the covering subgroup
@@ -11,13 +14,14 @@ pointed lift through `p : (E,e₀) → (X,x₀)` if and only if
 
 `range(f∗) ≤ range(p∗)`.
 
-Intended artifact: `Hatcher.Covering.exists_lift_iff_range_le`.
+Formalized as `Hatcher.Covering.exists_lift_iff_range_le` in
+`Hatcher/Covering/LiftingCriterion.lean`.
 
 The pinned theorem
 `IsCoveringMap.existsUnique_continuousMap_lifts_of_range_le` proves the hard
-direction and uniqueness. The reverse implication is functoriality of induced
-fundamental-group maps after a lift is supplied. Do not add a semilocal simple
-connectivity hypothesis on `X`; Hatcher's criterion does not need one.
+direction and uniqueness. The reverse implication uses the supplied lift and
+functoriality of induced fundamental-group maps. No semilocal simple
+connectivity hypothesis on `X` is needed.
 
 ## Depends on
 
