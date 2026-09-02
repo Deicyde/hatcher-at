@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.IsCoveringSpaceAction.isQuotientCoveringMap_orbitQuotient
 ---
 
 # Covering-space actions give quotient coverings
@@ -37,6 +40,11 @@ Hatcher's local pairwise-disjoint condition. The pinned theorem converting
 that class to a quotient covering additionally assumes `LocallyCompactSpace`
 and `T2Space`, which would strengthen this result. No connectedness,
 Hausdorffness, or local compactness is needed for this node.
+
+Formalized in `Hatcher/Covering/CoveringSpaceAction.lean`. The file also
+defines `Hatcher.Covering.actionToDeck`, proves the pairwise-disjoint-translates
+characterization, and shows that the deck action of a covering with
+path-connected total space is a covering-space action.
 
 ## Depends on
 

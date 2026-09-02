@@ -3,6 +3,7 @@ import Hatcher.Covering.BasepointChange
 import Hatcher.Covering.Deck
 import Hatcher.Covering.DeckGroupCalculation
 import Hatcher.Covering.ConnectedCover
+import Hatcher.Covering.CoveringSpaceAction
 import Hatcher.Covering.DeckRealization
 import Hatcher.Covering.HomotopyLifting
 import Hatcher.Covering.LiftingCriterion
