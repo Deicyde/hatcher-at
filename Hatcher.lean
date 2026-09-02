@@ -11,6 +11,7 @@ import Hatcher.Covering.LocalPathConnected
 import Hatcher.Covering.Monodromy
 import Hatcher.Covering.NormalizerToDeck
 import Hatcher.Covering.NormalizerToDeckExactness
+import Hatcher.Covering.NullhomotopicOpenBasis
 import Hatcher.Covering.Rigidity
 import Hatcher.Covering.SemilocallySimplyConnected
 import Hatcher.Covering.SheetIndex

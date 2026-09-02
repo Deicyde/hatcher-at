@@ -1,6 +1,9 @@
 ---
 declaration: lemma
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.isTopologicalBasis_nullhomotopicOpens
 ---
 
 # Small nullhomotopy neighborhoods form a basis
@@ -13,6 +16,9 @@ Intended artifact: `Hatcher.isTopologicalBasis_nullhomotopicOpens`.
 
 The statement must carry the basepoint-independence lemma from the semilocal
 definition, since Hatcher uses arbitrary endpoints when defining `U[γ]`.
+
+Formalized in `Hatcher/Covering/NullhomotopicOpenBasis.lean`, using the
+basepoint-independent predicate `Hatcher.IsNullhomotopicOpen`.
 
 ## Depends on
 

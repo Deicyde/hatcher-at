@@ -16,6 +16,14 @@ class SemilocallySimplyConnectedSpace (X : Type*) [TopologicalSpace X] : Prop wh
     (FundamentalGroup.map
       (⟨Subtype.val, continuous_subtype_val⟩ : C(U, X)) (⟨x, hx⟩ : U)).range = ⊥
 
+/-- An open, path-connected set whose inclusion induces the trivial map on
+fundamental groups at every basepoint. -/
+def IsNullhomotopicOpen (U : Set X) : Prop :=
+  IsOpen U ∧ IsPathConnected U ∧
+    ∀ x : U,
+      (FundamentalGroup.map
+        (⟨Subtype.val, continuous_subtype_val⟩ : C(U, X)) x).range = ⊥
+
 private theorem map_fundamentalGroupMulEquivOfPath
     {A B : Type*} [TopologicalSpace A] [TopologicalSpace B]
     (f : C(A, B)) {x y : A} (p : Path x y) (g : FundamentalGroup A x) :
