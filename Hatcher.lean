@@ -1,6 +1,7 @@
 -- Hatcher AT formalization. Target modules are imported here for project builds.
 import Hatcher.Covering.Deck
 import Hatcher.Covering.ConnectedCover
+import Hatcher.Covering.DeckRealization
 import Hatcher.Covering.HomotopyLifting
 import Hatcher.Covering.LiftingCriterion
 import Hatcher.Covering.LocalPathConnected
