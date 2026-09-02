@@ -12,9 +12,10 @@ the whole book but decomposes it from that point.
 Chapters follow Hatcher's own order. The selected §1.1 slice is fully
 formalized, and the selected §1.2, §1.3, and §2.1 spines are decomposed into
 formalization nodes. The §1.3 spine extends through Proposition 1.40; the §2.1
-spine covers singular-homology functoriality and homotopy invariance. One
-Appendix prerequisite is isolated. The remaining source is mapped so the book
-reads end to end and later work has somewhere to land. The
+spine covers singular-homology functoriality and homotopy invariance, with its
+two local targets formalized. One Appendix prerequisite is isolated. The
+remaining source is mapped so the book reads end to end and later work has
+somewhere to land. The
 [coverage contract](../coverage/README.md) says which is which, and
 [the source notes](../sources/hatcher.md) fix the citation scheme.
 

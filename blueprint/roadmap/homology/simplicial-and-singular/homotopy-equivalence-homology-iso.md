@@ -1,6 +1,9 @@
 ---
 declaration: def
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Singular.homologyIsoOfHomotopyEquiv
 ---
 
 # A homotopy equivalence induces homology isomorphisms
@@ -11,7 +14,7 @@ homotopy equivalence `e : X ≃ₕ Y`, a coefficient object `R : C`, and a degre
 Here `C` has a category structure, coproducts, a preadditive structure, and
 homology.
 
-The intended noncomputable definition is
+The noncomputable definition is
 `Hatcher.Singular.homologyIsoOfHomotopyEquiv`. Its source is
 `ContinuousMap.HomotopyEquiv`; its target is an `Iso` from
 `((singularHomologyFunctor C n).obj R).obj (TopCat.of X)` to the corresponding
@@ -21,6 +24,8 @@ Construct the inverse from `e.invFun`, then use functoriality and homotopy
 invariance for the two inverse laws. Mathlib's generic
 `HomotopyEquiv.toHomologyIso` is additional chain-complex-level prior art, but
 there is no pinned topological theorem with this interface.
+
+Formalized in `Hatcher/Singular/Homology.lean`.
 
 ## Depends on
 

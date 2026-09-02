@@ -17,7 +17,7 @@ mapped chapter must never be reported as covered.
 | §1.2 results outside the selected slice | `DEFERRED` | Examples 1.22–1.25, Corollary 1.27, and the geometric remainder of Example 1.29 are reserved for later application milestones |
 | §1.3 classification and deck spine | `DECOMPOSED` | [Lifting through Proposition 1.40](../roadmap/fundamental-group/covering-spaces/README.md) |
 | §1.3 results outside the selected slice | `DEFERRED` | Example 1.35, permutation classification, and Examples 1.41–1.48 are reserved for later milestones |
-| §2.1 singular-homology functoriality spine | `DECOMPOSED` | [Ten nodes through Proposition 2.12](../roadmap/homology/simplicial-and-singular/README.md) |
+| §2.1 singular-homology functoriality spine | `DECOMPOSED` | [Eight pinned Mathlib nodes and two local formalizations through Proposition 2.12](../roadmap/homology/simplicial-and-singular/README.md) |
 | §2.1 results outside the selected slice | `DEFERRED` | Proposition 2.6, Δ-complex homology, reduced and relative homology, excision, sphere applications, invariance of dimension, and the comparison theorem are reserved for later milestones |
 | §2.2 Computations and applications | `MAPPED` | [Section map](../roadmap/homology/computations-and-applications/README.md) |
 | §2.3 Formal viewpoint | `MAPPED` | [Section map](../roadmap/homology/formal-viewpoint/README.md) |
@@ -94,8 +94,8 @@ is decomposed through the singular-chain and singular-homology definitions,
 the exact `H₀` calculation, the point calculation, induced maps, chain-homotopy
 invariance, topological homotopy invariance, and Corollary 2.11. Eight nodes
 are exact declarations in the pinned Mathlib; the point calculation and
-homotopy-equivalence corollary are local source-facing results. The roadmap
-does not claim Hatcher's explicit prism formula is formalized.
+homotopy-equivalence corollary are formalized locally. The project does not
+claim Hatcher's explicit prism formula is formalized.
 
 ### Deferred within §1.1
 

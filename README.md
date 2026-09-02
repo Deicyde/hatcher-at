@@ -9,7 +9,7 @@ topological proof of the fundamental theorem of algebra, and Borsuk–Ulam for
 `S²`. §1.2 is decomposed into formalization units for van Kampen,
 wedge sums, and cell attachments. The §1.3 classification and deck spine is
 decomposed through Hatcher's Proposition 1.40. The selected §2.1 spine is
-decomposed through singular-homology functoriality and homotopy invariance.
+covered by eight pinned Mathlib declarations and two local formalizations.
 
 [Browse the formalization blueprint](blueprint/README.md).
 

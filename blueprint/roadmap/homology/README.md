@@ -14,8 +14,9 @@ long exact sequences.
 
 [Simplicial and singular homology](simplicial-and-singular/README.md) now has a
 ten-node first slice covering singular chains, `H₀`, the point calculation,
-functoriality, and homotopy invariance. Its Δ-complex, relative-homology, and
-excision branches remain deferred.
+functoriality, and homotopy invariance. Eight nodes are exact pinned Mathlib
+declarations and the other two are formalized locally. Its Δ-complex,
+relative-homology, and excision branches remain deferred.
 
 [Computations and applications](computations-and-applications/README.md) turns
 that machinery into results: the degree of a map `Sⁿ → Sⁿ`, cellular homology

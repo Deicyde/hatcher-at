@@ -13,8 +13,9 @@ builds the long exact sequence of a pair, proves excision by barycentric
 subdivision, and concludes that the two theories agree on Δ-complexes.
 
 The pinned Mathlib has exact categorical versions of most of this first slice.
-The roadmap makes those upstream results explicit, then isolates the two thin
-source-facing consequences still needed locally.
+The roadmap makes those upstream results explicit, and the two thin
+source-facing consequences are formalized locally in
+`Hatcher/Singular/Homology.lean`.
 
 ## Singular chains and low degrees
 
@@ -22,7 +23,7 @@ source-facing consequences still needed locally.
 - [Singular homology](singular-homology.md)
 - [Zeroth homology is free on path components](zeroth-homology-components.md)
 - [Higher homology vanishes for totally disconnected spaces](totally-disconnected-higher-homology.md)
-- [Positive-degree homology of a point vanishes](point-homology.md)
+- [Homology of a point](point-homology.md)
 
 ## Functoriality and homotopy invariance
 
