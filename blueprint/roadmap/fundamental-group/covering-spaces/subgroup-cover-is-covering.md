@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.SubgroupCover.isCoveringMap_proj
 ---
 
 # The subgroup projection is a path-connected covering
@@ -16,6 +19,10 @@ should provide `Hatcher.SubgroupCover.pathConnectedSpace`.
 Use the images of Hatcher's basic sets `U[γ]`. If any points from two such sets
 are identified by the subgroup relation, the whole sets are identified, so
 their images are sheets over `U`.
+
+Formalized in `Hatcher/Covering/SubgroupCoverIsCovering.lean`. The proof descends
+the universal-cover basic opens through the subgroup quotient, proves that they
+form disjoint sheets with discrete fibers, and builds the covering trivialization.
 
 ## Depends on
 
