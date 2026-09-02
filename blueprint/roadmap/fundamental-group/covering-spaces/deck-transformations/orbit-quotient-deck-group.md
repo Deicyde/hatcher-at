@@ -1,6 +1,9 @@
 ---
-declaration: proposition
+declaration: def
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Covering.actionEquivDeck
 ---
 
 # Orbit quotients are normal and have the expected deck group
@@ -21,6 +24,10 @@ needed. Fiber transitivity comes from
 quotient-covering structure. To prove every deck transformation arises from
 `G`, match it at one point and apply unique lifting on the path-connected total
 space.
+
+Formalized in `Hatcher/Covering/OrbitQuotientDeckGroup.lean`. The file also
+exports `Hatcher.Covering.isNormal_orbitQuotient`, whose statement does not
+require path-connectedness.
 
 ## Depends on
 
