@@ -21,6 +21,8 @@ Formalized in `Hatcher/VanKampen/CoverFactorization.lean`. Each factor is a
 loop in the relevant cover-member subtype, so its support condition is encoded
 in its type. `Hatcher.VanKampen.Factorization.word` evaluates the finite list
 of factors in the indexed free product.
+The list is multiplied in reverse order, matching Mathlib's composition
+convention for `FundamentalGroup`.
 
 ## Depends on
 

@@ -41,7 +41,7 @@ def word (F : Factorization U x₀ hx₀ γ) : CoverFreeProduct U x₀ hx₀ :=
   (List.ofFn fun k ↦
     Monoid.CoprodI.of
       (Path.Homotopic.Quotient.mk (F.factor k) :
-        CoverGroup U x₀ hx₀ (F.index k))).prod
+        CoverGroup U x₀ hx₀ (F.index k))).reverse.prod
 
 end Factorization
 
