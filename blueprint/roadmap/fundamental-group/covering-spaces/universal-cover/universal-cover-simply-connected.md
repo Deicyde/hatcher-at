@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.UniversalCover.simplyConnectedSpace
 ---
 
 # The path-class cover is simply-connected
@@ -14,6 +17,10 @@ Intended artifact: `Hatcher.UniversalCover.simplyConnectedSpace`.
 Follow Hatcher's proof. The endpoint projection injects fundamental groups,
 and a base loop in the image has a closed lift in the path-class cover only
 when its original homotopy class is trivial.
+
+Formalized in `Hatcher/Covering/UniversalCoverSimplyConnected.lean`. The proof
+identifies projected paths with their endpoint coordinates by lift uniqueness,
+cancels a projected loop, and applies covering-map injectivity on path classes.
 
 ## Depends on
 
