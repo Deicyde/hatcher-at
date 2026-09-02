@@ -20,6 +20,7 @@ import Hatcher.Covering.SheetIndex
 import Hatcher.Covering.SubgroupCoverSpace
 import Hatcher.Covering.UniversalCoverBasis
 import Hatcher.Covering.UniversalCoverPathSpace
+import Hatcher.Covering.UniversalCoverPathConnected
 import Hatcher.Circle.Covering
 import Hatcher.Circle.WindingNumber
 import Hatcher.Circle.FundamentalGroup
