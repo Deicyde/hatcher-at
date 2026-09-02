@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Covering.range_mapOfEq_basepointChange
 ---
 
 # Changing the lifted basepoint conjugates the image subgroup
@@ -10,7 +13,11 @@ fiber from `e₀` to `e₁` changes the induced image subgroup by conjugation wi
 the class of the projection of any path from `e₀` to `e₁`. Conversely, every
 conjugate is realized by lifting a representative loop from `e₀`.
 
-Intended artifact: `Hatcher.Covering.range_mapOfEq_basepointChange`.
+Formalized as `Hatcher.Covering.range_mapOfEq_basepointChange` in
+`Hatcher/Covering/BasepointChange.lean`. The same file proves the converse
+`Hatcher.Covering.exists_basepoint_range_eq_map_conj` by taking the monodromy
+endpoint of a representative class. The Lean theorem assumes the connecting
+path explicitly, so it does not need a global path-connectedness hypothesis.
 
 The source writes the new subgroup as `g⁻¹ H g`. Mathlib's fundamental-group
 multiplication reverses Hatcher's first-then path concatenation, so the Lean
@@ -18,7 +25,7 @@ statement becomes `g H g⁻¹`, represented by `H.map (MulAut.conj g)`.
 
 ## Depends on
 
-- [Pointed connected covering spaces](based-connected-cover.md)
+None beyond pinned Mathlib.
 
 ## Proof depends on
 

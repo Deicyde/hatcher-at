@@ -1,4 +1,5 @@
 -- Hatcher AT formalization. Target modules are imported here for project builds.
+import Hatcher.Covering.BasepointChange
 import Hatcher.Covering.Deck
 import Hatcher.Covering.ConnectedCover
 import Hatcher.Covering.DeckRealization
