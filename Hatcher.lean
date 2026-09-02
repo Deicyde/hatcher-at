@@ -1,4 +1,7 @@
 -- Hatcher AT formalization. Target modules are imported here for project builds.
+import Hatcher.Covering.HomotopyLifting
+import Hatcher.Covering.LocalPathConnected
+import Hatcher.Covering.Monodromy
 import Hatcher.Circle.Covering
 import Hatcher.Circle.WindingNumber
 import Hatcher.Circle.FundamentalGroup

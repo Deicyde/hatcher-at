@@ -1,6 +1,9 @@
 ---
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: IsCoveringMap.monodromyPerm
 ---
 
 # The fundamental group acts on a covering fiber
@@ -10,8 +13,8 @@ homomorphism
 
 `π₁(X,x₀) →* Equiv.Perm (p ⁻¹' {x₀})`.
 
-Intended artifact: `IsCoveringMap.monodromyPerm`, backported with the exact
-post-pin API.
+Formalized as `IsCoveringMap.monodromyPerm` in
+`Hatcher/Covering/Monodromy.lean`, backported with the exact post-pin API.
 
 Use Mathlib's `IsCoveringMap.monodromy` transport directly. Its
 `FundamentalGroup` multiplication is already opposite categorical path
@@ -19,8 +22,10 @@ composition, so `monodromy_trans_apply` makes direct endpoint transport a
 homomorphism to `Equiv.Perm`. Inverting transport here would reverse products
 and would not define the claimed homomorphism.
 
-The construction should expose its action on a represented loop and prove that
-the chosen lift closes exactly when the action fixes `e₀`.
+The supporting definition `IsCoveringMap.fundamentalGroupMulAction` exposes the
+action, and `IsCoveringMap.coe_monodromyPerm` identifies it pointwise with
+endpoint transport. The chosen lift's fixed-point criterion belongs to the
+next node.
 
 Merged Mathlib PR #33108 contains the exact post-pin implementation, with
 `coe_monodromyPerm` definitionally equal to `IsCoveringMap.monodromy`. It is

@@ -1,6 +1,9 @@
 ---
 declaration: proposition
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Covering.existsUnique_liftHomotopy
 ---
 
 # Homotopies lift uniquely through a covering map
@@ -10,7 +13,8 @@ homotopy `H : I × A → X`, and a continuous lift `f₀ : A → E` of the time-
 map, there exists a unique continuous homotopy `H̃ : I × A → E` that lifts `H`
 and begins at `f₀`.
 
-Intended artifact: `Hatcher.Covering.existsUnique_liftHomotopy`.
+Formalized as `Hatcher.Covering.existsUnique_liftHomotopy` in
+`Hatcher/Covering/HomotopyLifting.lean`.
 
 This is a thin source-facing wrapper around
 `IsCoveringMap.liftHomotopy`, `liftHomotopy_lifts`,

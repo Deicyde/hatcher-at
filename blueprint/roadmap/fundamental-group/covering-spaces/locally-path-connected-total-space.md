@@ -1,6 +1,9 @@
 ---
 declaration: lemma
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Covering.locPathConnectedSpace_total
 ---
 
 # Local path-connectedness ascends along a covering
@@ -8,7 +11,8 @@ origin: cited
 If `p : E → X` is a covering map and `X` is locally path-connected, then `E`
 is locally path-connected.
 
-Intended artifact: `Hatcher.Covering.locPathConnectedSpace_total`.
+Formalized as `Hatcher.Covering.locPathConnectedSpace_total` in
+`Hatcher/Covering/LocalPathConnected.lean`.
 
 Hatcher uses this unnumbered fact before the classification theorem. It is a
 small local-homeomorphism argument, but it must be explicit before applying
