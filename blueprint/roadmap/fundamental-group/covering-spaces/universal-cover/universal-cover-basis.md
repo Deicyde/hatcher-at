@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.UniversalCover.isTopologicalBasis_basicOpen
 ---
 
 # The sets U[γ] form the universal-cover basis
@@ -15,6 +18,10 @@ Intended artifact: `Hatcher.UniversalCover.isTopologicalBasis_basicOpen`.
 
 This node uses Hatcher's direct basis argument. It does not require the
 compact-open tube-neighborhood API from PR #38292.
+
+Formalized in `Hatcher/Covering/UniversalCoverBasis.lean`. The same file proves
+`basicOpen_eq_of_mem` and `bijOn_proj_basicOpen`, covering the equality and
+endpoint-bijection clauses of the source statement.
 
 ## Depends on
 
