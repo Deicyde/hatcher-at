@@ -3,6 +3,7 @@ import Hatcher.Covering.HomotopyLifting
 import Hatcher.Covering.LiftingCriterion
 import Hatcher.Covering.LocalPathConnected
 import Hatcher.Covering.Monodromy
+import Hatcher.Covering.SheetIndex
 import Hatcher.Circle.Covering
 import Hatcher.Circle.WindingNumber
 import Hatcher.Circle.FundamentalGroup

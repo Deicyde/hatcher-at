@@ -1,6 +1,9 @@
 ---
 declaration: proposition
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Covering.fiberEquivQuotientRange
 ---
 
 # Sheets are cosets of the induced subgroup
@@ -13,10 +16,12 @@ opposite Hatcher's first-then path concatenation, this is represented in Lean
 by the ordinary quotient `π₁(X,x₀) ⧸ H`, using `QuotientGroup.leftRel`.
 Consequently the fiber and this quotient have equal cardinality.
 
-The main artifact is `Hatcher.Covering.fiberEquivQuotientRange`; the same file
-should derive `Hatcher.Covering.mk_fiber_eq_mk_quotientRange`. Use the direct
-monodromy action, sending the class of `g` to `g • e₀`, which is the endpoint
-of the lift represented by `g` in Mathlib's convention.
+Formalized as `Hatcher.Covering.fiberEquivQuotientRange` in
+`Hatcher/Covering/SheetIndex.lean`, with the cardinal-valued corollary
+`Hatcher.Covering.mk_fiber_eq_mk_quotientRange`. The proof makes the direct
+monodromy action transitive using path-connectedness of the total space, then
+applies orbit-stabilizer and the closed-lift characterization of the
+stabilizer.
 
 Do not state the general result only with `Subgroup.index : ℕ`: Mathlib assigns
 zero to an infinite index, while Hatcher's number of sheets is cardinal-valued.
