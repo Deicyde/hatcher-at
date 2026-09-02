@@ -1,5 +1,5 @@
 ---
-declaration: proposition
+declaration: def
 origin: cited
 statement: formalized
 proof: formalized
