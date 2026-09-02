@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.coverMap_surjective
 ---
 
 # The van Kampen cover map is surjective
@@ -19,6 +22,11 @@ Intended artifact: `Hatcher.VanKampen.coverMap_surjective`.
 The proof should reuse the completed Lemma 1.15 node: split a loop into a
 finite concatenation of loops lying in cover members, then take the
 corresponding finite word in `Monoid.CoprodI`.
+
+Formalized in `Hatcher/VanKampen/CoverMapSurjective.lean`. The proof represents
+each factor loop in its cover member and inducts over the finite concatenation,
+accounting for the reversed multiplication convention in the fundamental
+group.
 
 ## Depends on
 

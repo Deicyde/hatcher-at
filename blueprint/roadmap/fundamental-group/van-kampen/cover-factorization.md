@@ -1,6 +1,9 @@
 ---
 declaration: structure
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.Factorization
 ---
 
 # Cover factorizations of a loop
@@ -13,6 +16,11 @@ evaluation is the associated word in the indexed free product.
 The main artifact is `Hatcher.VanKampen.Factorization`. Keeping the
 factorization data explicit makes the elementary moves and the homotopy-grid
 argument reviewable without hiding them behind choice functions.
+
+Formalized in `Hatcher/VanKampen/CoverFactorization.lean`. Each factor is a
+loop in the relevant cover-member subtype, so its support condition is encoded
+in its type. `Hatcher.VanKampen.Factorization.word` evaluates the finite list
+of factors in the indexed free product.
 
 ## Depends on
 
