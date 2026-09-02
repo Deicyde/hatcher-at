@@ -17,6 +17,7 @@ import Hatcher.Covering.OrbitQuotientFundamentalGroup
 import Hatcher.Covering.Rigidity
 import Hatcher.Covering.SemilocallySimplyConnected
 import Hatcher.Covering.SheetIndex
+import Hatcher.Covering.SubgroupCoverSpace
 import Hatcher.Covering.UniversalCoverPathSpace
 import Hatcher.Circle.Covering
 import Hatcher.Circle.WindingNumber

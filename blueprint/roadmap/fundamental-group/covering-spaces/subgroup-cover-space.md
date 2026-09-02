@@ -1,6 +1,9 @@
 ---
 declaration: def
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.SubgroupCover
 ---
 
 # The covering space associated to a subgroup
@@ -18,6 +21,11 @@ The main artifact is `Hatcher.SubgroupCover H`; supporting artifacts should be
 The equivalence relation and quotient topology must be stated directly. Do not
 silently assume a deck-transformation action, which is part of the later
 deferred material in Hatcher.
+
+Formalized in `Hatcher/Covering/SubgroupCoverSpace.lean`. The direct relation,
+its generated setoid, the endpoint projection, and the constant-path
+basepoint are all exported; the standard `Quotient` topology supplies the
+coinduced quotient topology without introducing a deck action.
 
 ## Depends on
 
