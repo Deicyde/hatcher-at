@@ -11,6 +11,8 @@ The project formalizes results from a single reference.
   slice.
 - [Hatcher §1.3, Covering Spaces](hatcher-1-3.md) — lifting, universal-cover,
   and classification targets with pinned and post-pin Mathlib prior art.
+- [Hatcher §2.1, Simplicial and Singular Homology](hatcher-2-1.md) records the
+  selected functoriality spine, deferred results, and current Mathlib boundary.
 
 <!-- AUTHORING NOTES — these comments are not published.
 

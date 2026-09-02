@@ -4,8 +4,8 @@ This project formalizes results from [Hatcher's *Algebraic Topology*](../sources
 It does not claim to formalize the book. The whole book is *mapped*: every
 chapter and numbered section has a roadmap page recording what it contains and
 what Mathlib already provides. The selected §1.1 slice is formalized, and the
-selected §1.2 and §1.3 spines are decomposed into formalization units. One
-Appendix prerequisite is also decomposed. Mapping is not progress, and a
+selected §1.2, §1.3, and §2.1 spines are decomposed into formalization units.
+One Appendix prerequisite is also decomposed. Mapping is not progress, and a
 mapped chapter must never be reported as covered.
 
 | Area | Coverage | Evidence |
@@ -17,7 +17,8 @@ mapped chapter must never be reported as covered.
 | §1.2 results outside the selected slice | `DEFERRED` | Examples 1.22–1.25, Corollary 1.27, and the geometric remainder of Example 1.29 are reserved for later application milestones |
 | §1.3 classification and deck spine | `DECOMPOSED` | [Lifting through Proposition 1.40](../roadmap/fundamental-group/covering-spaces/README.md) |
 | §1.3 results outside the selected slice | `DEFERRED` | Example 1.35, permutation classification, and Examples 1.41–1.48 are reserved for later milestones |
-| §2.1 Simplicial and singular homology | `MAPPED` | [Section map](../roadmap/homology/simplicial-and-singular/README.md) |
+| §2.1 singular-homology functoriality spine | `DECOMPOSED` | [Ten nodes through Proposition 2.12](../roadmap/homology/simplicial-and-singular/README.md) |
+| §2.1 results outside the selected slice | `DEFERRED` | Proposition 2.6, Δ-complex homology, reduced and relative homology, excision, sphere applications, invariance of dimension, and the comparison theorem are reserved for later milestones |
 | §2.2 Computations and applications | `MAPPED` | [Section map](../roadmap/homology/computations-and-applications/README.md) |
 | §2.3 Formal viewpoint | `MAPPED` | [Section map](../roadmap/homology/formal-viewpoint/README.md) |
 | §3.1 Cohomology groups | `MAPPED` | [Section map](../roadmap/cohomology/cohomology-groups/README.md) |
@@ -86,6 +87,16 @@ work marked not ready rather than hidden in the final classification theorem.
 The deck-transformation branch continues through the normalizer quotient and
 orbit-action calculation in Propositions 1.39–1.40.
 
+### §2.1 selected functoriality spine
+
+[Simplicial and singular homology](../roadmap/homology/simplicial-and-singular/README.md)
+is decomposed through the singular-chain and singular-homology definitions,
+the exact `H₀` calculation, the point calculation, induced maps, chain-homotopy
+invariance, topological homotopy invariance, and Corollary 2.11. Eight nodes
+are exact declarations in the pinned Mathlib; the point calculation and
+homotopy-equivalence corollary are local source-facing results. The roadmap
+does not claim Hatcher's explicit prism formula is formalized.
+
 ### Deferred within §1.1
 
 Corollary 1.11 (`S²` as a union of three closed sets), Corollary 1.16
@@ -103,14 +114,15 @@ Everything else. These pages carry exposition and prior-art notes, and no
 formalization nodes:
 
 - Chapter 0, [Some underlying geometric notions](../roadmap/underlying-geometric-notions/README.md)
-- Chapter 2, [Homology](../roadmap/homology/README.md), all three sections
+- Chapter 2, [Homology](../roadmap/homology/README.md), §§2.2–2.3
 - Chapter 3, [Cohomology](../roadmap/cohomology/README.md), all three sections
 - Chapter 4, [Homotopy theory](../roadmap/homotopy-theory/README.md), all three sections
 - The remainder of the [Appendix](../roadmap/appendix/README.md)
 
 Decomposing any of these is a future roadmap run, not proof work. Within
 Chapter 1, Example 1.35, permutation reconstruction, and Examples 1.41–1.48
-remain deferred. The next mapped main-line section is §2.1.
+remain deferred. The remainder of §2.1 is explicitly deferred, and the next
+mapped main-line section is §2.2.
 
 ## Out of scope
 

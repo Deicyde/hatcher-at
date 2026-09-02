@@ -1,6 +1,8 @@
 # Homology
 
-Hatcher's Chapter 2 (pages 97–184). Mapped, not yet decomposed.
+Hatcher's Chapter 2 (pages 97–184). The selected §2.1 singular-homology
+functoriality spine is decomposed; the rest of the chapter remains mapped or
+explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -10,9 +12,10 @@ combinatorially from a Δ-complex structure, and functorially from singular
 simplices — proves the two agree, and then makes them computable through the
 long exact sequences.
 
-[Simplicial and singular homology](simplicial-and-singular/README.md) gives
-both definitions, proves homotopy invariance, establishes excision and the long
-exact sequence of a pair, and reconciles the two theories.
+[Simplicial and singular homology](simplicial-and-singular/README.md) now has a
+ten-node first slice covering singular chains, `H₀`, the point calculation,
+functoriality, and homotopy invariance. Its Δ-complex, relative-homology, and
+excision branches remain deferred.
 
 [Computations and applications](computations-and-applications/README.md) turns
 that machinery into results: the degree of a map `Sⁿ → Sⁿ`, cellular homology
@@ -22,12 +25,10 @@ all dimensions and invariance of domain land here.
 [The formal viewpoint](formal-viewpoint/README.md) axiomatizes what was built,
 as the Eilenberg–Steenrod axioms, and introduces the categorical language.
 
-Mathlib defines singular homology in
-`Mathlib/AlgebraicTopology/SingularHomology/` and proves homotopy invariance
-and `H₀`, and states the Eilenberg–Steenrod axioms in
-`AlgebraicTopology/EilenbergSteenrod.lean`. Excision, the long exact sequence
-of a pair, Mayer–Vietoris for singular homology, `Hₙ(Sⁿ)`, degree, and cellular
-homology are all absent. Excision is the hard prerequisite for the rest.
+The pinned Mathlib defines singular homology and proves homotopy invariance and
+`H₀`. Relative simplicial-set homology merged after the pin, while singular
+excision, Mayer–Vietoris, `Hₙ(Sⁿ)`, degree, and cellular homology remain outside
+the pinned library. Excision is the main prerequisite for the rest.
 
 ## Sections
 
