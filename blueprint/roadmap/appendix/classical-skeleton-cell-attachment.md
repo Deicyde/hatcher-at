@@ -21,6 +21,14 @@ classical CW-complex definitions as a TODO and currently provides no bridge.
 The node remains not ready until the exact categorical pushout comparison is
 specified.
 
+The precise missing result is an `IsPushout` theorem for the coproduct square
+of the classical characteristic maps. The current API provides only the set
+identity describing the next skeleton and the weak-topology closed-set axiom.
+There is also no packaged arrow isomorphism between the classical sup-norm
+ball/sphere inclusion and the abstract `basicCell`, which uses an `ULift`ed
+Euclidean space with its L2 norm. Both pieces are prerequisites for an
+`AttachCells` bridge.
+
 ## Depends on
 
 None beyond pinned Mathlib.

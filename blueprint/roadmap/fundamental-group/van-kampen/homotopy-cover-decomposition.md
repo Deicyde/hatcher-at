@@ -25,6 +25,16 @@ intermediate vertical sides and a Lean representation of the resulting sweep.
 This node remains not ready until that finite planar data structure and its
 boundary API are fixed.
 
+A plain product grid is insufficient because four independently labelled
+rectangles may meet at an interior vertex. The required replacement is a
+staggered grid with strictly increasing row-specific subdivisions, prescribed
+refinements on the bottom and top edges, and disjoint interior cut sets in
+adjacent bands. The missing geometric lemma must deduplicate the weakly
+monotone grid supplied by Mathlib and strengthen the compactness argument so
+the perturbed cuts retain enough margin for every closed rectangle to remain
+inside one cover preimage. With that condition, each sweep event involves at
+most three labels.
+
 ## Depends on
 
 None beyond pinned Mathlib.
