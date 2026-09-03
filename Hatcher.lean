@@ -44,6 +44,7 @@ import Hatcher.VanKampen.CoverFactorization
 import Hatcher.VanKampen.CoverMapRelations
 import Hatcher.VanKampen.CoverMapSurjective
 import Hatcher.VanKampen.FactorizationMoves
+import Hatcher.VanKampen.HomotopyCoverDecomposition
 import Hatcher.VanKampen.PointedWedge
 import Hatcher.VanKampen.PresentedGroup
 import Hatcher.VanKampen.VanKampenKernel
