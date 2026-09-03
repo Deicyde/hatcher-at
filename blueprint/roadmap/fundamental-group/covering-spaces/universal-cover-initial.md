@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.BasedConnectedCover.existsUnique_map_fromSimplyConnected
 ---
 
 # A simply-connected cover maps uniquely to every pointed connected cover
@@ -20,6 +23,13 @@ pointed maps of covers over `X`. Existence is the lifting criterion because the
 source fundamental group is trivial. Unique lifting identifies comparison
 maps. A supporting local lemma should show that such a map between covers is
 itself a covering map.
+
+Formalized in `Hatcher/Covering/UniversalCoverInitial.lean`. The proof first
+constructs the unique lift by the fundamental-group lifting criterion. It then
+proves the comparison map is a covering by combining path-lifting
+surjectivity, cancellation for local homeomorphisms, and compatible
+path-connected trivialization neighborhoods. Applying the construction in
+both directions gives the pointed covering isomorphism.
 
 ## Depends on
 
