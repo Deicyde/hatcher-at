@@ -23,6 +23,9 @@ in its type. `Hatcher.VanKampen.Factorization.word` evaluates the finite list
 of factors in the indexed free product.
 The list is multiplied in reverse order, matching Mathlib's composition
 convention for `FundamentalGroup`.
+The theorem `Hatcher.VanKampen.Factorization.exists_of_word` proves the
+converse algebraic fact needed by the kernel calculation: every word in the
+indexed free product is represented by some cover factorization.
 
 ## Depends on
 

@@ -116,6 +116,83 @@ theorem coverMap_word (F : Factorization U x₀ hx₀ γ) :
   rw [word, coverMap_reverseProd_eq_concat]
   exact Path.Homotopic.Quotient.eq.mpr F.homotopic
 
+private noncomputable def representative
+    {i : ι} (g : CoverGroup U x₀ hx₀ i) :
+    Path (⟨x₀, hx₀ i⟩ : U i) ⟨x₀, hx₀ i⟩ :=
+  Quotient.out g.toPath
+
+@[simp]
+private theorem mk_representative
+    {i : ι} (g : CoverGroup U x₀ hx₀ i) :
+    (Path.Homotopic.Quotient.mk (representative g) :
+      CoverGroup U x₀ hx₀ i) = g :=
+  Quotient.out_eq g.toPath
+
+private noncomputable def prepend
+    (F : Factorization U x₀ hx₀ γ) (i : ι)
+    (g : CoverGroup U x₀ hx₀ i) :
+    Σ δ : Path x₀ x₀, Factorization U x₀ hx₀ δ := by
+  let entry : (k : Fin (F.n + 2)) →
+      Σ j, Path (⟨x₀, hx₀ j⟩ : U j) ⟨x₀, hx₀ j⟩ :=
+    Fin.cases ⟨i, representative g⟩ (fun k ↦ ⟨F.index k, F.factor k⟩)
+  let δ : Path x₀ x₀ :=
+    Path.concat (fun _ : Fin (F.n + 3) ↦ x₀)
+      (fun k ↦ (entry k).2.map continuous_subtype_val)
+  exact ⟨δ, {
+    n := F.n + 1
+    index := fun k ↦ (entry k).1
+    factor := fun k ↦ (entry k).2
+    homotopic := Path.Homotopic.refl δ }⟩
+
+@[simp]
+private theorem word_prepend
+    (F : Factorization U x₀ hx₀ γ) (i : ι)
+    (g : CoverGroup U x₀ hx₀ i) :
+    (prepend F i g).2.word = F.word * Monoid.CoprodI.of g := by
+  have hletter :
+      (Monoid.CoprodI.of
+        (FundamentalGroup.fromPath (Path.Homotopic.Quotient.mk (representative g)) :
+          CoverGroup U x₀ hx₀ i) : CoverFreeProduct U x₀ hx₀) =
+        Monoid.CoprodI.of g :=
+    congrArg (fun z : CoverGroup U x₀ hx₀ i ↦
+      (Monoid.CoprodI.of z : CoverFreeProduct U x₀ hx₀)) (mk_representative g)
+  simp [prepend, word, List.ofFn_succ, mul_assoc]
+  congr 2
+
+private noncomputable def one (i : ι) :
+    Factorization U x₀ hx₀ (Path.refl x₀) where
+  n := 0
+  index := fun _ ↦ i
+  factor := fun _ ↦ Path.refl _
+  homotopic := Path.Homotopic.concat_one _ _
+
+@[simp]
+private theorem word_one (i : ι) :
+    (one (U := U) (x₀ := x₀) (hx₀ := hx₀) i).word = 1 := by
+  change (Monoid.CoprodI.of (1 : CoverGroup U x₀ hx₀ i) :
+    CoverFreeProduct U x₀ hx₀) = 1
+  exact map_one _
+
+/-- Every indexed free-product word is represented by a cover factorization. -/
+theorem exists_of_word [Nonempty ι]
+    (w : CoverFreeProduct U x₀ hx₀) :
+    ∃ γ : Path x₀ x₀, ∃ F : Factorization U x₀ hx₀ γ, F.word = w := by
+  let motive : CoverFreeProduct U x₀ hx₀ → Prop := fun w ↦
+    ∃ γ : Path x₀ x₀, ∃ F : Factorization U x₀ hx₀ γ, F.word = w
+  have hind : ∀ w, motive w⁻¹ := by
+    intro w
+    induction w using Monoid.CoprodI.induction_left with
+    | one =>
+        let i := Classical.choice (inferInstance : Nonempty ι)
+        exact ⟨Path.refl x₀, one i, by simp⟩
+    | mul g w ih =>
+        obtain ⟨γ, F, hF⟩ := ih
+        let P := prepend F _ g⁻¹
+        refine ⟨P.1, P.2, ?_⟩
+        rw [word_prepend, hF]
+        simp
+  simpa only [inv_inv] using hind w⁻¹
+
 end Factorization
 
 end Hatcher.VanKampen
