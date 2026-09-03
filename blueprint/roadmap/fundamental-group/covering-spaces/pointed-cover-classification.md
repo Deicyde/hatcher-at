@@ -1,7 +1,9 @@
 ---
-declaration: theorem
+declaration: def
 origin: cited
-not_ready: true
+statement: formalized
+proof: formalized
+lean: Hatcher.BasedConnectedCover.classificationEquiv
 ---
 
 # Pointed connected covers are classified by subgroups
@@ -14,11 +16,13 @@ basepoint-preserving isomorphism classes of covers to subgroups of
 
 Intended artifact: `Hatcher.BasedConnectedCover.classificationEquiv`.
 
-The mathematical surjectivity and injectivity are already separate roadmap
-nodes. This packaging node remains not ready until the project fixes the exact
-quotient of the universe-indexed cover record by covering isomorphism, or an
-equivalent small skeleton. The theorem must not quantify over an unbounded
-universe and call the result a set.
+Formalized in `Hatcher/Covering/PointedCoverClassification.lean`. The
+classification uses the quotient of pointed connected covers whose total
+spaces live in the same universe as `X`. This fixed-universe quotient is
+equivalent to the subgroups of `π₁(X,x₀)`. A separate cross-universe theorem,
+`Hatcher.BasedConnectedCover.isomorphic_ofSubgroup_fundamentalGroupRange`,
+shows that every pointed connected cover in any universe is isomorphic to its
+canonical subgroup-cover representative in the fixed universe.
 
 ## Depends on
 

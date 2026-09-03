@@ -14,6 +14,7 @@ import Hatcher.Covering.NormalizerToDeckExactness
 import Hatcher.Covering.NullhomotopicOpenBasis
 import Hatcher.Covering.OrbitQuotientDeckGroup
 import Hatcher.Covering.OrbitQuotientFundamentalGroup
+import Hatcher.Covering.PointedCoverClassification
 import Hatcher.Covering.Rigidity
 import Hatcher.Covering.SemilocallySimplyConnected
 import Hatcher.Covering.SheetIndex
