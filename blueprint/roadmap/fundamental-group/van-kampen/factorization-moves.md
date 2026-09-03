@@ -20,6 +20,9 @@ The reflexive-transitive closure is packaged as
 `Hatcher.VanKampen.factorization_quotient_eq_of_sweep` proves quotient
 invariance for an arbitrary finite sweep without requiring intermediate entry
 lists to be realized by paths.
+The move toolkit is closed under arbitrary list contexts, combines or splits
+same-cover blocks in reverse-product order, and performs lists of
+overlap-certified cover changes pointwise.
 
 Formalized in `Hatcher/VanKampen/FactorizationMoves.lean`. Elementary moves
 act on the geometric-order list of indexed factor classes. Combining adjacent

@@ -71,6 +71,151 @@ inductive Move (U : ι → Set X) (x₀ : X) (hx₀ : ∀ i, x₀ ∈ U i) :
   | symm {es es' : List (Entry U x₀ hx₀)} :
       Move U x₀ hx₀ es es' → Move U x₀ hx₀ es' es
 
+/-- The reflexive-transitive closure of elementary factorization moves. -/
+abbrev Moves (es es' : List (Entry U x₀ hx₀)) : Prop :=
+  Relation.ReflTransGen (Move U x₀ hx₀) es es'
+
+/-- A move remains valid after adding an arbitrary common prefix. -/
+theorem Move.prefix {es es' : List (Entry U x₀ hx₀)}
+    (h : Move U x₀ hx₀ es es') (pre : List (Entry U x₀ hx₀)) :
+    Move U x₀ hx₀ (pre ++ es) (pre ++ es') := by
+  induction h with
+  | combine before after i a b =>
+      simpa only [List.append_assoc] using
+        Move.combine (pre ++ before) after i a b
+  | changeCover before after i j ω =>
+      simpa only [List.append_assoc] using
+        Move.changeCover (pre ++ before) after i j ω
+  | symm h ih => exact Move.symm ih
+
+/-- A move remains valid after adding an arbitrary common suffix. -/
+theorem Move.suffix {es es' : List (Entry U x₀ hx₀)}
+    (h : Move U x₀ hx₀ es es') (suffix : List (Entry U x₀ hx₀)) :
+    Move U x₀ hx₀ (es ++ suffix) (es' ++ suffix) := by
+  induction h with
+  | combine before after i a b =>
+      simpa only [List.append_assoc, List.cons_append] using
+        Move.combine before (after ++ suffix) i a b
+  | changeCover before after i j ω =>
+      simpa only [List.append_assoc, List.cons_append] using
+        Move.changeCover before (after ++ suffix) i j ω
+  | symm h ih => exact Move.symm ih
+
+/-- A move remains valid inside an arbitrary list context. -/
+theorem Move.context {es es' : List (Entry U x₀ hx₀)}
+    (h : Move U x₀ hx₀ es es')
+    (pre suffix : List (Entry U x₀ hx₀)) :
+    Move U x₀ hx₀ (pre ++ es ++ suffix) (pre ++ es' ++ suffix) :=
+  (h.prefix pre).suffix suffix
+
+/-- A chain of moves remains valid after adding an arbitrary common prefix. -/
+theorem Moves.prefix {es es' : List (Entry U x₀ hx₀)}
+    (h : Moves es es') (pre : List (Entry U x₀ hx₀)) :
+    Moves (pre ++ es) (pre ++ es') := by
+  induction h with
+  | refl => exact Relation.ReflTransGen.refl
+  | tail _ hmove ih => exact ih.tail (hmove.prefix pre)
+
+/-- A chain of moves remains valid after adding an arbitrary common suffix. -/
+theorem Moves.suffix {es es' : List (Entry U x₀ hx₀)}
+    (h : Moves es es') (suffix : List (Entry U x₀ hx₀)) :
+    Moves (es ++ suffix) (es' ++ suffix) := by
+  induction h with
+  | refl => exact Relation.ReflTransGen.refl
+  | tail _ hmove ih => exact ih.tail (hmove.suffix suffix)
+
+/-- A chain of moves remains valid inside an arbitrary list context. -/
+theorem Moves.context {es es' : List (Entry U x₀ hx₀)}
+    (h : Moves es es') (pre suffix : List (Entry U x₀ hx₀)) :
+    Moves (pre ++ es ++ suffix) (pre ++ es' ++ suffix) :=
+  (h.prefix pre).suffix suffix
+
+/-- Reverse a finite chain. `Move` already contains its inverse constructor. -/
+theorem Moves.symm {es es' : List (Entry U x₀ hx₀)}
+    (h : Moves es es') : Moves es' es := by
+  induction h with
+  | refl => exact Relation.ReflTransGen.refl
+  | tail _ hmove ih =>
+      exact (Relation.ReflTransGen.single (Move.symm hmove)).trans ih
+
+/-- Entries all carrying the same cover index. -/
+def sameCoverEntries (i : ι) (as : List (CoverGroup U x₀ hx₀ i)) :
+    List (Entry U x₀ hx₀) :=
+  as.map fun a ↦ ⟨i, a⟩
+
+/-- Repeatedly combining adjacent entries with a common cover index collapses
+a nonempty block to its reverse-order product. -/
+theorem moves_combine_sameCover (before after : List (Entry U x₀ hx₀))
+    (i : ι) (a : CoverGroup U x₀ hx₀ i) :
+    ∀ as : List (CoverGroup U x₀ hx₀ i),
+      Moves
+        (before ++ sameCoverEntries i (a :: as) ++ after)
+        (before ++ [⟨i, (a :: as).reverse.prod⟩] ++ after) := by
+  intro as
+  induction as generalizing a with
+  | nil =>
+      simpa [sameCoverEntries] using
+        (Relation.ReflTransGen.refl :
+          Moves (before ++ [⟨i, a⟩] ++ after) _)
+  | cons b bs ih =>
+      have hfirst : Move U x₀ hx₀
+          (before ++ sameCoverEntries i (a :: b :: bs) ++ after)
+          (before ++ sameCoverEntries i ((b * a) :: bs) ++ after) := by
+        simpa [sameCoverEntries, List.append_assoc] using
+          Move.combine before (sameCoverEntries i bs ++ after) i a b
+      refine (Relation.ReflTransGen.single hfirst).trans ?_
+      simpa [List.reverse_cons, List.prod_append, sameCoverEntries, mul_assoc] using
+        ih (a := b * a)
+
+/-- Split one cover-group entry into a prescribed nonempty list whose
+reverse-order product is that entry. -/
+theorem moves_split_sameCover (before after : List (Entry U x₀ hx₀))
+    (i : ι) (a : CoverGroup U x₀ hx₀ i)
+    (as : List (CoverGroup U x₀ hx₀ i)) :
+    Moves
+      (before ++ [⟨i, (a :: as).reverse.prod⟩] ++ after)
+      (before ++ sameCoverEntries i (a :: as) ++ after) :=
+  (moves_combine_sameCover before after i a as).symm
+
+/-- One possibly index-varying change of cover label, certified by a loop in
+the corresponding overlap. -/
+abbrev CoverChange :=
+  Σ i : ι, Σ j : ι, OverlapGroup U x₀ hx₀ i j
+
+namespace CoverChange
+
+def leftEntry (c : CoverChange (U := U) (x₀ := x₀) (hx₀ := hx₀)) :
+    Entry U x₀ hx₀ :=
+  ⟨c.1, overlapToLeft U x₀ hx₀ c.1 c.2.1 c.2.2⟩
+
+def rightEntry (c : CoverChange (U := U) (x₀ := x₀) (hx₀ := hx₀)) :
+    Entry U x₀ hx₀ :=
+  ⟨c.2.1, overlapToRight U x₀ hx₀ c.1 c.2.1 c.2.2⟩
+
+end CoverChange
+
+/-- Change the cover label pointwise across a list of overlap classes. -/
+theorem moves_changeCover_list (before after : List (Entry U x₀ hx₀)) :
+    ∀ changes : List (CoverChange (U := U) (x₀ := x₀) (hx₀ := hx₀)),
+      Moves
+        (before ++ changes.map CoverChange.leftEntry ++ after)
+        (before ++ changes.map CoverChange.rightEntry ++ after) := by
+  intro changes
+  induction changes generalizing before with
+  | nil => exact Relation.ReflTransGen.refl
+  | cons c cs ih =>
+      have hfirst : Move U x₀ hx₀
+          (before ++ (c :: cs).map CoverChange.leftEntry ++ after)
+          (before ++ CoverChange.rightEntry c ::
+            cs.map CoverChange.leftEntry ++ after) := by
+        rcases c with ⟨i, j, ω⟩
+        simpa [CoverChange.leftEntry, CoverChange.rightEntry,
+          List.append_assoc] using
+          Move.changeCover before (cs.map CoverChange.leftEntry ++ after) i j ω
+      refine (Relation.ReflTransGen.single hfirst).trans ?_
+      simpa [List.append_assoc] using
+        ih (before := before ++ [CoverChange.rightEntry c])
+
 private theorem wordOfEntries_eq_of_combine
     (before after : List (Entry U x₀ hx₀)) (i : ι)
     (a b : CoverGroup U x₀ hx₀ i) :
@@ -115,11 +260,11 @@ private theorem quotient_wordOfEntries_eq_of_move
 of two factorizations. Intermediate lists need not be packaged as paths. -/
 structure Sweep {δ : Path x₀ x₀} (F : Factorization U x₀ hx₀ γ)
     (G : Factorization U x₀ hx₀ δ) : Prop where
-  moves : Relation.ReflTransGen (Move U x₀ hx₀) F.entries G.entries
+  moves : Moves F.entries G.entries
 
 private theorem quotient_wordOfEntries_eq_of_moves
     {es es' : List (Entry U x₀ hx₀)}
-    (h : Relation.ReflTransGen (Move U x₀ hx₀) es es') :
+    (h : Moves es es') :
     QuotientGroup.mk' (relationSubgroup U x₀ hx₀) (wordOfEntries es) =
       QuotientGroup.mk' (relationSubgroup U x₀ hx₀) (wordOfEntries es') := by
   induction h with
