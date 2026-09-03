@@ -464,8 +464,9 @@ theorem unitHalf_strictMono : StrictMono unitHalf := by
 `Path.concat`. For `n + 1` factors the cuts are
 `0, 2⁻ⁿ, 2⁻⁽ⁿ⁻¹⁾, ..., 1/2, 1`. -/
 def concatSubdivisionPoint : (n : ℕ) → Fin (n + 2) → I
-  | 0 => Fin.cases 0 (fun _ ↦ 1)
-  | n + 1 => Fin.lastCases 1 (fun k ↦ unitHalf (concatSubdivisionPoint n k))
+  := fun n ↦ Nat.rec (motive := fun m ↦ Fin (m + 2) → I)
+    (Fin.cases 0 (fun _ ↦ 1))
+    (fun _ point ↦ Fin.lastCases 1 (fun k ↦ unitHalf (point k))) n
 
 @[simp] theorem concatSubdivisionPoint_zero (n : ℕ) :
     concatSubdivisionPoint n 0 = 0 := by
