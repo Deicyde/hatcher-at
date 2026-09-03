@@ -107,6 +107,21 @@ private theorem quotient_wordOfEntries_eq_of_move
       rw [quotient_overlap_eq i j ω]
   | symm h ih => exact ih.symm
 
+/-- A sweep is a finite chain of elementary changes between the entry lists
+of two factorizations. Intermediate lists need not be packaged as paths. -/
+structure Sweep {δ : Path x₀ x₀} (F : Factorization U x₀ hx₀ γ)
+    (G : Factorization U x₀ hx₀ δ) : Prop where
+  moves : Relation.ReflTransGen (Move U x₀ hx₀) F.entries G.entries
+
+private theorem quotient_wordOfEntries_eq_of_moves
+    {es es' : List (Entry U x₀ hx₀)}
+    (h : Relation.ReflTransGen (Move U x₀ hx₀) es es') :
+    QuotientGroup.mk' (relationSubgroup U x₀ hx₀) (wordOfEntries es) =
+      QuotientGroup.mk' (relationSubgroup U x₀ hx₀) (wordOfEntries es') := by
+  induction h with
+  | refl => rfl
+  | tail _ hmove ih => exact ih.trans (quotient_wordOfEntries_eq_of_move hmove)
+
 end Factorization
 
 /-- An elementary move does not change the class of a factorization word
@@ -120,5 +135,17 @@ theorem factorization_quotient_eq_of_move
   rw [Factorization.word_eq_orientedWord,
     Factorization.word_eq_orientedWord]
   exact Factorization.quotient_wordOfEntries_eq_of_move h
+
+/-- A finite sweep of elementary changes preserves the factorization class. -/
+theorem factorization_quotient_eq_of_sweep
+    {U : ι → Set X} {x₀ : X} {hx₀ : ∀ i, x₀ ∈ U i}
+    {γ δ : Path x₀ x₀} (F : Factorization U x₀ hx₀ γ)
+    (G : Factorization U x₀ hx₀ δ)
+    (h : Factorization.Sweep F G) :
+    QuotientGroup.mk' (relationSubgroup U x₀ hx₀) F.word =
+      QuotientGroup.mk' (relationSubgroup U x₀ hx₀) G.word := by
+  rw [Factorization.word_eq_orientedWord,
+    Factorization.word_eq_orientedWord]
+  exact Factorization.quotient_wordOfEntries_eq_of_moves h.moves
 
 end Hatcher.VanKampen

@@ -15,6 +15,12 @@ in the quotient by the overlap-relation subgroup.
 
 Intended artifact: `Hatcher.VanKampen.factorization_quotient_eq_of_move`.
 
+The reflexive-transitive closure is packaged as
+`Hatcher.VanKampen.Factorization.Sweep`; the theorem
+`Hatcher.VanKampen.factorization_quotient_eq_of_sweep` proves quotient
+invariance for an arbitrary finite sweep without requiring intermediate entry
+lists to be realized by paths.
+
 Formalized in `Hatcher/VanKampen/FactorizationMoves.lean`. Elementary moves
 act on the geometric-order list of indexed factor classes. Combining adjacent
 factors uses the reversed multiplication convention of `FundamentalGroup`,
