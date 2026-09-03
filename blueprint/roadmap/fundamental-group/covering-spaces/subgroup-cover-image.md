@@ -1,6 +1,9 @@
 ---
 declaration: proposition
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.SubgroupCover.range_map_eq
 ---
 
 # The subgroup cover realizes the chosen subgroup
@@ -15,6 +18,10 @@ Intended artifact: `Hatcher.SubgroupCover.range_map_eq`.
 A loop in `X` lifts from the constant-path class to the class represented by
 that loop, and this endpoint is the basepoint of the quotient precisely when
 the loop class belongs to `H`.
+
+Formalized in `Hatcher/Covering/SubgroupCoverImage.lean`. The proof computes
+the monodromy endpoint using the initial-segment lift and reduces equality with
+the quotient basepoint to the defining subgroup relation.
 
 ## Depends on
 

@@ -19,6 +19,7 @@ import Hatcher.Covering.SemilocallySimplyConnected
 import Hatcher.Covering.SheetIndex
 import Hatcher.Covering.SubgroupCoverSpace
 import Hatcher.Covering.SubgroupCoverIsCovering
+import Hatcher.Covering.SubgroupCoverImage
 import Hatcher.Covering.UniversalCoverBasis
 import Hatcher.Covering.UniversalCoverInitial
 import Hatcher.Covering.UniversalCoverIsCovering
