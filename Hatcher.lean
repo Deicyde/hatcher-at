@@ -28,6 +28,7 @@ import Hatcher.Covering.UniversalCoverIsCovering
 import Hatcher.Covering.UniversalCoverPathSpace
 import Hatcher.Covering.UniversalCoverPathConnected
 import Hatcher.Covering.UniversalCoverSimplyConnected
+import Hatcher.Covering.UnpointedCoverClassification
 import Hatcher.Circle.Covering
 import Hatcher.Circle.WindingNumber
 import Hatcher.Circle.FundamentalGroup

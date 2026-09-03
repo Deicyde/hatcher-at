@@ -1,7 +1,9 @@
 ---
-declaration: theorem
+declaration: def
 origin: cited
-not_ready: true
+statement: formalized
+proof: formalized
+lean: Hatcher.ConnectedCover.classificationEquivConjClasses
 ---
 
 # Connected covers are classified by conjugacy classes
@@ -13,10 +15,18 @@ conjugacy classes of subgroups of `π₁(X,x₀)`.
 
 Intended artifact: `Hatcher.ConnectedCover.classificationEquivConjClasses`.
 
-This remains not ready for the same size reason as the pointed classification,
-and additionally needs an explicit quotient of subgroups by conjugacy. The
-mathematical step from equality to conjugacy is isolated in the basepoint-
-change node.
+Formalized in `Hatcher/Covering/UnpointedCoverClassification.lean`. The
+classification uses the quotient of connected covers whose total spaces live
+in the same universe as `X`, and the quotient of subgroups by Mathlib's
+conjugation-orbit relation. Changing the chosen point over `x₀` changes the
+image subgroup only by conjugacy, so the resulting class is independent of
+that choice.
+
+As in the pointed classification, fixing the universe avoids a size mismatch
+between the type of all covers and the subgroup type. The cross-universe
+theorem `Hatcher.ConnectedCover.isomorphic_ofSubgroup_chosenRange` shows that
+every connected cover in any universe is isomorphic to a canonical subgroup
+cover in the fixed universe.
 
 ## Depends on
 
