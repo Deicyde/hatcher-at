@@ -34,6 +34,70 @@ def vertices (s : IntervalSubdivision) : Finset I :=
 def interiorVertices (s : IntervalSubdivision) : Finset I :=
   (s.vertices.erase 0).erase 1
 
+def commonVertices (s t : IntervalSubdivision) : Finset I :=
+  s.vertices ∪ t.vertices
+
+theorem zero_mem_vertices (s : IntervalSubdivision) : 0 ∈ s.vertices := by
+  rw [vertices]
+  exact Finset.mem_image.mpr ⟨0, Finset.mem_univ _, s.left⟩
+
+theorem one_mem_vertices (s : IntervalSubdivision) : 1 ∈ s.vertices := by
+  rw [vertices]
+  exact Finset.mem_image.mpr
+    ⟨Fin.last s.cells, Finset.mem_univ _, s.right⟩
+
+theorem one_le_card_commonVertices (s t : IntervalSubdivision) :
+    1 ≤ (commonVertices s t).card := by
+  rw [Finset.one_le_card]
+  exact ⟨0, Finset.mem_union_left _ s.zero_mem_vertices⟩
+
+/-- The subdivision whose vertices are exactly the union of two subdivisions'
+vertices. -/
+def commonRefinement (s t : IntervalSubdivision) : IntervalSubdivision := by
+  let V := commonVertices s t
+  have hcardPos : 0 < V.card := one_le_card_commonVertices s t
+  have hcard : V.card = (V.card - 1) + 1 :=
+    (Nat.sub_add_cancel hcardPos).symm
+  refine
+    { cells := V.card - 1
+      point := V.orderEmbOfFin hcard
+      left := ?_
+      right := ?_
+      strictMono := (V.orderEmbOfFin hcard).strictMono }
+  · change V.orderEmbOfFin hcard ⟨0, by omega⟩ = 0
+    rw [Finset.orderEmbOfFin_zero hcard]
+    apply le_antisymm
+    · exact Finset.min'_le V 0
+        (Finset.mem_union_left _ s.zero_mem_vertices)
+    · exact bot_le
+  · have hkpos : 0 < (V.card - 1) + 1 := by omega
+    change V.orderEmbOfFin hcard (Fin.last (V.card - 1)) = 1
+    rw [show Fin.last (V.card - 1) =
+        ⟨((V.card - 1) + 1) - 1, Nat.sub_lt hkpos (by omega)⟩ by
+          apply Fin.ext
+          simp]
+    rw [Finset.orderEmbOfFin_last hcard hkpos]
+    apply le_antisymm
+    · exact le_top
+    · exact Finset.le_max' V 1
+        (Finset.mem_union_left _ s.one_mem_vertices)
+
+theorem vertices_commonRefinement (s t : IntervalSubdivision) :
+    (commonRefinement s t).vertices = commonVertices s t := by
+  unfold vertices commonRefinement
+  dsimp only
+  exact Finset.image_orderEmbOfFin_univ _ _
+
+theorem vertices_subset_commonRefinement_left (s t : IntervalSubdivision) :
+    s.vertices ⊆ (commonRefinement s t).vertices := by
+  rw [vertices_commonRefinement]
+  exact Finset.subset_union_left
+
+theorem vertices_subset_commonRefinement_right (s t : IntervalSubdivision) :
+    t.vertices ⊆ (commonRefinement s t).vertices := by
+  rw [vertices_commonRefinement]
+  exact Finset.subset_union_right
+
 theorem interiorVertices_disjoint_of_point_not_mem
     (s : IntervalSubdivision) (forbidden : Finset I)
     (havoid : ∀ k, k ≠ 0 → k ≠ Fin.last s.cells → s.point k ∉ forbidden) :
