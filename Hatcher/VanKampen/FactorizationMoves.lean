@@ -31,6 +31,10 @@ def entries (F : Factorization U x₀ hx₀ γ) : List (Entry U x₀ hx₀) :=
       (Path.Homotopic.Quotient.mk (F.factor k) :
         CoverGroup U x₀ hx₀ (F.index k))⟩
 
+@[simp]
+theorem retarget_entries {δ : Path x₀ x₀} (F : Factorization U x₀ hx₀ γ)
+    (h : γ.Homotopic δ) : (F.retarget h).entries = F.entries := rfl
+
 private def entryWord (e : Entry U x₀ hx₀) : CoverFreeProduct U x₀ hx₀ :=
   match e with
   | ⟨_, g⟩ => Monoid.CoprodI.of g

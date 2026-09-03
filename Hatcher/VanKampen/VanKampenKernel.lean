@@ -73,4 +73,15 @@ noncomputable def quotientEquivFundamentalGroup_of_ker_eq
   (QuotientGroup.quotientMulEquivOfEq hker).trans
     (QuotientGroup.quotientKerEquivOfSurjective (coverMap U x₀ hx₀) hsurj)
 
+@[simp]
+theorem quotientEquivFundamentalGroup_of_ker_eq_mk
+    (U : ι → Set X) (x₀ : X) (hx₀ : ∀ i, x₀ ∈ U i)
+    (hker : relationSubgroup U x₀ hx₀ = MonoidHom.ker (coverMap U x₀ hx₀))
+    (hsurj : Function.Surjective (coverMap U x₀ hx₀))
+    (w : CoverFreeProduct U x₀ hx₀) :
+    quotientEquivFundamentalGroup_of_ker_eq U x₀ hx₀ hker hsurj
+        (QuotientGroup.mk' (relationSubgroup U x₀ hx₀) w) =
+      coverMap U x₀ hx₀ w := by
+  rfl
+
 end Hatcher.VanKampen
