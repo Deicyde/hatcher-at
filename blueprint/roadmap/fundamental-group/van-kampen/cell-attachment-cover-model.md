@@ -1,6 +1,7 @@
 ---
 declaration: lemma
 origin: bridged
+not_ready: true
 ---
 
 # An open-cover model for attached cells
@@ -19,6 +20,14 @@ State the input using `HomotopicalAlgebra.AttachCells` for
 `TopCat.RelativeCWComplex.basicCell n`. This node packages the geometric work
 shared by Proposition 1.26(a) and (b); it does not calculate `π₁(A ∩ B)` or
 assert either final fundamental-group result.
+
+This node is not yet ready to formalize against the pinned Mathlib API.
+`HomotopicalAlgebra.AttachCells` supplies an abstract coproduct and pushout but
+no point-set adjunction-space model, embedding of the original space, disk
+collar, mapping-cylinder construction, or deformation-retraction data. The
+statement also needs an explicit basepoint, a dimension hypothesis, and an
+empty-family case. Those interfaces must be fixed before the open sets and
+their intersection cover can be stated without hiding the geometric content.
 
 ## Depends on
 
