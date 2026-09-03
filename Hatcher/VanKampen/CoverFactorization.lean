@@ -116,6 +116,30 @@ theorem coverMap_word (F : Factorization U x₀ hx₀ γ) :
   rw [word, coverMap_reverseProd_eq_concat]
   exact Path.Homotopic.Quotient.eq.mpr F.homotopic
 
+/-- The ambient concatenated path represented by a factorization. -/
+def concatenatedPath (F : Factorization U x₀ hx₀ γ) : Path x₀ x₀ :=
+  Path.concat (fun _ : Fin (F.n + 2) ↦ x₀) (fun k ↦ F.ambientFactor k)
+
+/-- Regard a factorization as representing a homotopic loop. Its factors and
+word do not change. -/
+def retarget {δ : Path x₀ x₀} (F : Factorization U x₀ hx₀ γ)
+    (h : γ.Homotopic δ) : Factorization U x₀ hx₀ δ where
+  n := F.n
+  index := F.index
+  factor := F.factor
+  homotopic := F.homotopic.trans h
+
+@[simp]
+theorem retarget_word {δ : Path x₀ x₀} (F : Factorization U x₀ hx₀ γ)
+    (h : γ.Homotopic δ) : (F.retarget h).word = F.word := rfl
+
+/-- A chosen endpoint-fixed homotopy between the ambient concatenations of
+factorizations whose represented loops are homotopic. -/
+noncomputable def boundaryHomotopy {δ : Path x₀ x₀}
+    (F : Factorization U x₀ hx₀ γ) (G : Factorization U x₀ hx₀ δ)
+    (h : γ.Homotopic δ) : F.concatenatedPath.Homotopy G.concatenatedPath :=
+  (F.homotopic.trans (h.trans G.homotopic.symm)).some
+
 private noncomputable def representative
     {i : ι} (g : CoverGroup U x₀ hx₀ i) :
     Path (⟨x₀, hx₀ i⟩ : U i) ⟨x₀, hx₀ i⟩ :=

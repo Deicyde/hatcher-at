@@ -26,6 +26,9 @@ convention for `FundamentalGroup`.
 The theorem `Hatcher.VanKampen.Factorization.exists_of_word` proves the
 converse algebraic fact needed by the kernel calculation: every word in the
 indexed free product is represented by some cover factorization.
+`Hatcher.VanKampen.Factorization.boundaryHomotopy` chooses the endpoint-fixed
+homotopy between the ambient concatenations of two factorizations representing
+homotopic loops; this is the square decomposed by the later sweep argument.
 
 ## Depends on
 
