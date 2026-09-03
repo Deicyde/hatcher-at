@@ -46,3 +46,4 @@ import Hatcher.VanKampen.CoverMapSurjective
 import Hatcher.VanKampen.FactorizationMoves
 import Hatcher.VanKampen.PointedWedge
 import Hatcher.VanKampen.PresentedGroup
+import Hatcher.VanKampen.VanKampenKernel

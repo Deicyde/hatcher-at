@@ -1,0 +1,76 @@
+import Hatcher.VanKampen.CoverFactorization
+import Hatcher.VanKampen.CoverMapRelations
+import Hatcher.VanKampen.CoverMapSurjective
+
+noncomputable section
+
+namespace Hatcher.VanKampen
+
+universe u v
+
+variable {ι : Type u} {X : Type v} [TopologicalSpace X]
+
+private def Factorization.trivialOfNullhomotopic
+    (U : ι → Set X) (x₀ : X) (hx₀ : ∀ i, x₀ ∈ U i)
+    (i : ι) {γ : Path x₀ x₀} (hγ : (Path.refl x₀).Homotopic γ) :
+    Factorization U x₀ hx₀ γ where
+  n := 0
+  index := fun _ ↦ i
+  factor := fun _ ↦ Path.refl (⟨x₀, hx₀ i⟩ : U i)
+  homotopic := by
+    have hp :
+        (Path.refl (⟨x₀, hx₀ i⟩ : U i)).map continuous_subtype_val =
+          Path.refl x₀ := by
+      ext t
+      rfl
+    simpa only [hp] using (Path.Homotopic.concat_one
+      (fun _ : Fin 2 ↦ x₀) (fun _ : Fin 1 ↦ Path.refl x₀)).trans hγ
+
+@[simp]
+private theorem Factorization.word_trivialOfNullhomotopic
+    (U : ι → Set X) (x₀ : X) (hx₀ : ∀ i, x₀ ∈ U i)
+    (i : ι) {γ : Path x₀ x₀} (hγ : (Path.refl x₀).Homotopic γ) :
+    (Factorization.trivialOfNullhomotopic U x₀ hx₀ i hγ).word = 1 := by
+  change (Monoid.CoprodI.of (1 : CoverGroup U x₀ hx₀ i) :
+    CoverFreeProduct U x₀ hx₀) = 1
+  exact map_one _
+
+/-- If any two factorizations of the same loop have equal classes modulo the
+overlap relations, then those relations are exactly the kernel of the cover map. -/
+theorem relationSubgroup_eq_ker_of_factorization_quotient_eq
+    (U : ι → Set X) (x₀ : X) (hx₀ : ∀ i, x₀ ∈ U i)
+    (hUcover : Set.univ ⊆ ⋃ i, U i)
+    (hfactorization : ∀ {γ : Path x₀ x₀}
+      (F G : Factorization U x₀ hx₀ γ),
+      QuotientGroup.mk' (relationSubgroup U x₀ hx₀) F.word =
+        QuotientGroup.mk' (relationSubgroup U x₀ hx₀) G.word) :
+    relationSubgroup U x₀ hx₀ = MonoidHom.ker (coverMap U x₀ hx₀) := by
+  apply le_antisymm (relationSubgroup_le_ker U x₀ hx₀)
+  intro w hw
+  have hxcover : x₀ ∈ ⋃ i, U i := hUcover (Set.mem_univ x₀)
+  rw [Set.mem_iUnion] at hxcover
+  obtain ⟨i, _⟩ := hxcover
+  letI : Nonempty ι := ⟨i⟩
+  obtain ⟨γ, F, rfl⟩ := Factorization.exists_of_word w
+  have hγ : FundamentalGroup.fromPath (.mk γ) = 1 := by
+    rw [← F.coverMap_word]
+    exact MonoidHom.mem_ker.mp hw
+  have hnull : γ.Homotopic (Path.refl x₀) := by
+    apply Path.Homotopic.Quotient.eq.mp
+    exact hγ
+  let G := Factorization.trivialOfNullhomotopic U x₀ hx₀ i hnull.symm
+  apply (QuotientGroup.eq_one_iff F.word).mp
+  simpa [G] using hfactorization F G
+
+/-- The quotient by the overlap subgroup is the target whenever that subgroup
+is the kernel and the cover map is onto. -/
+noncomputable def quotientEquivFundamentalGroup_of_ker_eq
+    (U : ι → Set X) (x₀ : X) (hx₀ : ∀ i, x₀ ∈ U i)
+    (hker : relationSubgroup U x₀ hx₀ = MonoidHom.ker (coverMap U x₀ hx₀))
+    (hsurj : Function.Surjective (coverMap U x₀ hx₀)) :
+    CoverFreeProduct U x₀ hx₀ ⧸ relationSubgroup U x₀ hx₀ ≃*
+      FundamentalGroup X x₀ :=
+  (QuotientGroup.quotientMulEquivOfEq hker).trans
+    (QuotientGroup.quotientKerEquivOfSurjective (coverMap U x₀ hx₀) hsurj)
+
+end Hatcher.VanKampen
