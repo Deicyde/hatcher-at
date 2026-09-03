@@ -39,5 +39,6 @@ import Hatcher.VanKampen.CoverGroupPresentation
 import Hatcher.VanKampen.CoverFactorization
 import Hatcher.VanKampen.CoverMapRelations
 import Hatcher.VanKampen.CoverMapSurjective
+import Hatcher.VanKampen.FactorizationMoves
 import Hatcher.VanKampen.PointedWedge
 import Hatcher.VanKampen.PresentedGroup
