@@ -212,6 +212,24 @@ theorem commonRefinement_cell_subset_right (s t : IntervalSubdivision)
   exact commonRefinement_cell_subset_of_vertices_subset s t t
     Finset.subset_union_right k
 
+noncomputable def commonRefinementLeftCell (s t : IntervalSubdivision)
+    (k : Fin (commonRefinement s t).cells) : Fin s.cells :=
+  Classical.choose (commonRefinement_cell_subset_left s t k)
+
+theorem commonRefinementLeftCell_spec (s t : IntervalSubdivision)
+    (k : Fin (commonRefinement s t).cells) :
+    (commonRefinement s t).cell k ⊆ s.cell (commonRefinementLeftCell s t k) :=
+  Classical.choose_spec (commonRefinement_cell_subset_left s t k)
+
+noncomputable def commonRefinementRightCell (s t : IntervalSubdivision)
+    (k : Fin (commonRefinement s t).cells) : Fin t.cells :=
+  Classical.choose (commonRefinement_cell_subset_right s t k)
+
+theorem commonRefinementRightCell_spec (s t : IntervalSubdivision)
+    (k : Fin (commonRefinement s t).cells) :
+    (commonRefinement s t).cell k ⊆ t.cell (commonRefinementRightCell s t k) :=
+  Classical.choose_spec (commonRefinement_cell_subset_right s t k)
+
 theorem interiorVertices_disjoint_of_point_not_mem
     (s : IntervalSubdivision) (forbidden : Finset I)
     (havoid : ∀ k, k ≠ 0 → k ≠ Fin.last s.cells → s.point k ∉ forbidden) :

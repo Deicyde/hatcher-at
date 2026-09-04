@@ -52,7 +52,7 @@ private theorem exists_path_range_of_isPathConnected_inter
   exact range_subset_iff.mpr hγ
 
 /-- Cancelling the connecting paths in a concatenation leaves the original subdivided path. -/
-private lemma concat_trans_trans_symm {n : ℕ} (p q : Fin (n + 1) → X)
+lemma concat_trans_trans_symm {n : ℕ} (p q : Fin (n + 1) → X)
     (F : ∀ k : Fin n, Path (p k.castSucc) (p k.succ))
     (G : ∀ k : Fin (n + 1), Path (q k) (p k)) :
     (Path.concat q (fun k ↦ (G k.castSucc) ≫ₚ (F k) ≫ₚ (G k.succ).symm)).Homotopic
@@ -72,7 +72,7 @@ private lemma concat_trans_trans_symm {n : ℕ} (p q : Fin (n + 1) → X)
     grind
 
 /-- Remove endpoint casts around a homotopy after adjoining constant paths. -/
-private lemma cast_trans_trans_homotopic_of_homotopic_cast {x x₀ x₁ : X}
+lemma cast_trans_trans_homotopic_of_homotopic_cast {x x₀ x₁ : X}
     {h₀ : x₀ = x} {h₁ : x₁ = x} {p : Path x₀ x₁} {q : Path x x}
     (h : p.Homotopic (q.cast h₀ h₁)) :
     (((Path.refl x).cast rfl h₀) ≫ₚ p ≫ₚ ((Path.refl x).cast h₁ rfl)).Homotopic q := by
