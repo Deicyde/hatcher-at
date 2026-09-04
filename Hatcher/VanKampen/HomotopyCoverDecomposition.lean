@@ -46,6 +46,54 @@ theorem one_mem_vertices (s : IntervalSubdivision) : 1 ∈ s.vertices := by
   exact Finset.mem_image.mpr
     ⟨Fin.last s.cells, Finset.mem_univ _, s.right⟩
 
+theorem cells_pos (s : IntervalSubdivision) : 0 < s.cells := by
+  by_contra h
+  have hc : s.cells = 0 := Nat.eq_zero_of_not_pos h
+  have hi : (0 : Fin (s.cells + 1)) = Fin.last s.cells := by
+    apply Fin.ext
+    simp [hc]
+  have hzero_one : (0 : I) = 1 :=
+    s.left.symm.trans ((congrArg s.point hi).trans s.right)
+  exact zero_ne_one hzero_one
+
+/-- Every point of the unit interval belongs to a cell of a strict
+subdivision. -/
+theorem exists_mem_cell (s : IntervalSubdivision) (x : I) :
+    ∃ k : Fin s.cells, x ∈ s.cell k := by
+  let p : Fin (s.cells + 1) → Prop := fun j ↦ x ≤ s.point j
+  have hp : ∃ j, p j := by
+    refine ⟨Fin.last s.cells, ?_⟩
+    change x ≤ s.point (Fin.last s.cells)
+    rw [s.right]
+    exact le_top
+  let j := Fin.find p hp
+  by_cases hj0 : j = 0
+  · have hx0 : x = 0 := by
+      apply le_antisymm
+      · have := Fin.find_spec hp
+        change x ≤ s.point j at this
+        rw [hj0, s.left] at this
+        exact this
+      · exact bot_le
+    refine ⟨⟨0, s.cells_pos⟩, ?_⟩
+    rw [cell, hx0]
+    constructor
+    · rw [show (⟨0, s.cells_pos⟩ : Fin s.cells).castSucc = 0 by rfl, s.left]
+    · exact bot_le
+  · obtain ⟨k, hk⟩ := Fin.exists_succ_eq.mpr hj0
+    refine ⟨k, ?_⟩
+    rw [cell]
+    constructor
+    · have hklt : k.castSucc < j := by
+        rw [← hk]
+        exact Fin.castSucc_lt_succ
+      have hnot := Fin.find_min hp hklt
+      change ¬x ≤ s.point k.castSucc at hnot
+      exact le_of_lt (lt_of_not_ge hnot)
+    · have := Fin.find_spec hp
+      change x ≤ s.point j at this
+      rwa [← hk] at this
+
 theorem one_le_card_commonVertices (s t : IntervalSubdivision) :
     1 ≤ (commonVertices s t).card := by
   rw [Finset.one_le_card]
@@ -97,6 +145,72 @@ theorem vertices_subset_commonRefinement_right (s t : IntervalSubdivision) :
     t.vertices ⊆ (commonRefinement s t).vertices := by
   rw [vertices_commonRefinement]
   exact Finset.subset_union_right
+
+/-- No vertex of either original subdivision lies strictly inside a cell of
+their common refinement. -/
+theorem not_mem_Ioo_of_mem_commonVertices (s t : IntervalSubdivision)
+    (k : Fin (commonRefinement s t).cells) (x : I)
+    (hx : x ∈ commonVertices s t) :
+    x ∉ Ioo ((commonRefinement s t).point k.castSucc)
+      ((commonRefinement s t).point k.succ) := by
+  intro hxIoo
+  have hxv : x ∈ (commonRefinement s t).vertices := by
+    rw [vertices_commonRefinement]
+    exact hx
+  rw [vertices] at hxv
+  obtain ⟨j, _hj, rfl⟩ := Finset.mem_image.mp hxv
+  have hleft : k.castSucc < j := by
+    by_contra h
+    exact (not_lt_of_ge ((commonRefinement s t).strictMono.monotone
+      (le_of_not_gt h))) hxIoo.1
+  have hright : j < k.succ := by
+    by_contra h
+    exact (not_lt_of_ge ((commonRefinement s t).strictMono.monotone
+      (le_of_not_gt h))) hxIoo.2
+  have hleft' : k.val + 1 ≤ j.val := by
+    exact hleft
+  have hright' : j.val < k.val + 1 := by
+    exact hright
+  exact (not_lt_of_ge hleft') hright'
+
+/-- If all vertices of `q` occur in the common refinement of `s` and `t`,
+then every common-refinement cell lies in a cell of `q`. -/
+theorem commonRefinement_cell_subset_of_vertices_subset
+    (s t q : IntervalSubdivision) (hq : q.vertices ⊆ commonVertices s t)
+    (k : Fin (commonRefinement s t).cells) :
+    ∃ i : Fin q.cells, (commonRefinement s t).cell k ⊆ q.cell i := by
+  let r := commonRefinement s t
+  have hab : r.point k.castSucc < r.point k.succ :=
+    r.strictMono Fin.castSucc_lt_succ
+  obtain ⟨y, hay, hyb⟩ := exists_between hab
+  obtain ⟨i, hycell⟩ := q.exists_mem_cell y
+  refine ⟨i, Icc_subset_Icc ?_ ?_⟩
+  · by_contra hle
+    have hinside : q.point i.castSucc ∈
+        Ioo (r.point k.castSucc) (r.point k.succ) :=
+      ⟨lt_of_not_ge hle, hycell.1.trans_lt hyb⟩
+    exact not_mem_Ioo_of_mem_commonVertices s t k (q.point i.castSucc)
+      (hq <| Finset.mem_image.mpr
+        ⟨i.castSucc, Finset.mem_univ _, rfl⟩) hinside
+  · by_contra hle
+    have hinside : q.point i.succ ∈
+        Ioo (r.point k.castSucc) (r.point k.succ) :=
+      ⟨hay.trans_le hycell.2, lt_of_not_ge hle⟩
+    exact not_mem_Ioo_of_mem_commonVertices s t k (q.point i.succ)
+      (hq <| Finset.mem_image.mpr
+        ⟨i.succ, Finset.mem_univ _, rfl⟩) hinside
+
+theorem commonRefinement_cell_subset_left (s t : IntervalSubdivision)
+    (k : Fin (commonRefinement s t).cells) :
+    ∃ i : Fin s.cells, (commonRefinement s t).cell k ⊆ s.cell i := by
+  exact commonRefinement_cell_subset_of_vertices_subset s t s
+    Finset.subset_union_left k
+
+theorem commonRefinement_cell_subset_right (s t : IntervalSubdivision)
+    (k : Fin (commonRefinement s t).cells) :
+    ∃ i : Fin t.cells, (commonRefinement s t).cell k ⊆ t.cell i := by
+  exact commonRefinement_cell_subset_of_vertices_subset s t t
+    Finset.subset_union_right k
 
 theorem interiorVertices_disjoint_of_point_not_mem
     (s : IntervalSubdivision) (forbidden : Finset I)
