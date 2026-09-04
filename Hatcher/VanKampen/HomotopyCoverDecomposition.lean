@@ -1026,6 +1026,44 @@ theorem exists_common_top_collar (B : BoundaryCover U q)
 
 end BoundaryCover
 
+/-- The intersection of the cover members in a finite set of labels. -/
+def coverIntersection (U : ι → Set X) (labels : Finset ι) : Set X :=
+  {x | ∀ i ∈ labels, x ∈ U i}
+
+/-- Member, pairwise, and triple path-connectivity imply path-connectivity of
+any nonempty intersection involving at most three distinct cover labels. -/
+theorem isPathConnected_coverIntersection_of_card_le_three
+    [TopologicalSpace X] (U : ι → Set X) (labels : Finset ι)
+    (hnonempty : labels.Nonempty) (hcard : labels.card ≤ 3)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k)) :
+    IsPathConnected (coverIntersection U labels) := by
+  classical
+  have hcases : labels.card = 1 ∨ labels.card = 2 ∨ labels.card = 3 := by
+    have hpos := Finset.card_pos.mpr hnonempty
+    omega
+  rcases hcases with hcard1 | hcard2 | hcard3
+  · obtain ⟨i, rfl⟩ := Finset.card_eq_one.mp hcard1
+    simpa [coverIntersection] using hone i
+  · obtain ⟨i, j, _hij, rfl⟩ := Finset.card_eq_two.mp hcard2
+    simpa [coverIntersection, and_assoc] using htwo i j
+  · obtain ⟨i, j, k, _hij, _hik, _hjk, rfl⟩ :=
+      Finset.card_eq_three.mp hcard3
+    have heq : coverIntersection U {i, j, k} = U i ∩ U j ∩ U k := by
+      ext x
+      constructor
+      · intro hx
+        exact ⟨⟨hx i (by simp), hx j (by simp)⟩, hx k (by simp)⟩
+      · rintro ⟨⟨hxi, hxj⟩, hxk⟩ a ha
+        simp only [Finset.mem_insert, Finset.mem_singleton] at ha
+        rcases ha with rfl | rfl | rfl
+        · exact hxi
+        · exact hxj
+        · exact hxk
+    rw [heq]
+    exact hthree i j k
+
 /-- A boundary-compatible staggered grid, using time as the first coordinate
 of the homotopy square. -/
 structure StaggeredCoverGrid {X : Type v} [TopologicalSpace X]
@@ -1163,6 +1201,50 @@ theorem homotopy_mem_of_mem_interfaceLabels {X : Type v} [TopologicalSpace X]
           (show r.succ.castSucc < r.succ.succ from Fin.castSucc_lt_succ)).le
       exact ⟨le_rfl, hlevel⟩
     · exact ((G.horizontal r.succ).subdivision.mem_incidentCells x k).mp hk
+
+/-- A connector from the shared basepoint to one interface point, chosen in
+the intersection of all incident cover labels. -/
+noncomputable def interfaceConnector {X : Type v} [TopologicalSpace X]
+    {U : ι → Set X} {x₀ x₁ : X} {p q : Path x₀ x₁}
+    {H : p.Homotopy q} {bottom : BoundaryCover U p}
+    {top : BoundaryCover U q} (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) (x : I) :
+    Path x₀ (H (G.level r.castSucc.succ, x)) :=
+  let labels := G.interfaceLabels r x
+  let hconnected := isPathConnected_coverIntersection_of_card_le_three
+    U labels (G.interfaceLabels_nonempty r x)
+      (G.card_interfaceLabels_le_three r x) hone htwo hthree
+  let hbase : x₀ ∈ coverIntersection U labels :=
+    fun i _ ↦ hx₀ i
+  let hpoint : H (G.level r.castSucc.succ, x) ∈
+      coverIntersection U labels :=
+    fun i hi ↦ G.homotopy_mem_of_mem_interfaceLabels r x i hi
+  (hconnected.joinedIn x₀ hbase _ hpoint).somePath
+
+theorem interfaceConnector_range {X : Type v} [TopologicalSpace X]
+    {U : ι → Set X} {x₀ x₁ : X} {p q : Path x₀ x₁}
+    {H : p.Homotopy q} {bottom : BoundaryCover U p}
+    {top : BoundaryCover U q} (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) (x : I) {i : ι}
+    (hi : i ∈ G.interfaceLabels r x) :
+    Set.range (G.interfaceConnector hx₀ hone htwo hthree r x) ⊆ U i := by
+  intro y hy
+  obtain ⟨t, rfl⟩ := hy
+  exact (JoinedIn.somePath_mem
+    ((isPathConnected_coverIntersection_of_card_le_three
+      U (G.interfaceLabels r x) (G.interfaceLabels_nonempty r x)
+      (G.card_interfaceLabels_le_three r x) hone htwo hthree).joinedIn
+        x₀ (fun i _ ↦ hx₀ i)
+        (H (G.level r.castSucc.succ, x))
+        (fun i hi ↦ G.homotopy_mem_of_mem_interfaceLabels r x i hi)) t) i hi
 
 end StaggeredCoverGrid
 
