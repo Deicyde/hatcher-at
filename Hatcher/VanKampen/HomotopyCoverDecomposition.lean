@@ -1084,6 +1084,86 @@ theorem interfaceIncidentCellCount_le_three {X : Type v} [TopologicalSpace X]
     unfold interfaceIncidentCellCount
     omega
 
+/-- The cover labels of all closed grid cells incident to one interface
+point. -/
+def interfaceLabels {X : Type v} [TopologicalSpace X]
+    {U : ι → Set X} {x₀ x₁ : X} {p q : Path x₀ x₁}
+    {H : p.Homotopy q} {bottom : BoundaryCover U p}
+    {top : BoundaryCover U q} (G : StaggeredCoverGrid U H bottom top)
+    (r : Fin (G.extraRows + 2)) (x : I) : Finset ι := by
+  classical
+  exact
+    ((G.horizontal r.castSucc).subdivision.incidentCells x).image
+        (G.horizontal r.castSucc).label ∪
+      ((G.horizontal r.succ).subdivision.incidentCells x).image
+        (G.horizontal r.succ).label
+
+theorem interfaceLabels_nonempty {X : Type v} [TopologicalSpace X]
+    {U : ι → Set X} {x₀ x₁ : X} {p q : Path x₀ x₁}
+    {H : p.Homotopy q} {bottom : BoundaryCover U p}
+    {top : BoundaryCover U q} (G : StaggeredCoverGrid U H bottom top)
+    (r : Fin (G.extraRows + 2)) (x : I) :
+    (G.interfaceLabels r x).Nonempty := by
+  classical
+  obtain ⟨k, hk⟩ :=
+    (G.horizontal r.castSucc).subdivision.exists_mem_cell x
+  refine ⟨(G.horizontal r.castSucc).label k, ?_⟩
+  unfold interfaceLabels
+  apply Finset.mem_union_left
+  exact Finset.mem_image.mpr
+    ⟨k, ((G.horizontal r.castSucc).subdivision.mem_incidentCells x k).mpr hk, rfl⟩
+
+theorem card_interfaceLabels_le_three {X : Type v} [TopologicalSpace X]
+    {U : ι → Set X} {x₀ x₁ : X} {p q : Path x₀ x₁}
+    {H : p.Homotopy q} {bottom : BoundaryCover U p}
+    {top : BoundaryCover U q} (G : StaggeredCoverGrid U H bottom top)
+    (r : Fin (G.extraRows + 2)) (x : I) :
+    (G.interfaceLabels r x).card ≤ 3 := by
+  classical
+  calc
+    (G.interfaceLabels r x).card ≤
+        (((G.horizontal r.castSucc).subdivision.incidentCells x).image
+          (G.horizontal r.castSucc).label).card +
+        (((G.horizontal r.succ).subdivision.incidentCells x).image
+          (G.horizontal r.succ).label).card := by
+      simpa [interfaceLabels] using
+        (Finset.card_union_le
+          (((G.horizontal r.castSucc).subdivision.incidentCells x).image
+            (G.horizontal r.castSucc).label)
+          (((G.horizontal r.succ).subdivision.incidentCells x).image
+            (G.horizontal r.succ).label))
+    _ ≤ ((G.horizontal r.castSucc).subdivision.incidentCells x).card +
+        ((G.horizontal r.succ).subdivision.incidentCells x).card :=
+      Nat.add_le_add Finset.card_image_le Finset.card_image_le
+    _ = G.interfaceIncidentCellCount r x := rfl
+    _ ≤ 3 := G.interfaceIncidentCellCount_le_three r x
+
+/-- The homotopy point on an interface lies in every incident cell label. -/
+theorem homotopy_mem_of_mem_interfaceLabels {X : Type v} [TopologicalSpace X]
+    {U : ι → Set X} {x₀ x₁ : X} {p q : Path x₀ x₁}
+    {H : p.Homotopy q} {bottom : BoundaryCover U p}
+    {top : BoundaryCover U q} (G : StaggeredCoverGrid U H bottom top)
+    (r : Fin (G.extraRows + 2)) (x : I) (i : ι)
+    (hi : i ∈ G.interfaceLabels r x) :
+    H (G.level r.castSucc.succ, x) ∈ U i := by
+  classical
+  rw [interfaceLabels, Finset.mem_union, Finset.mem_image,
+    Finset.mem_image] at hi
+  rcases hi with ⟨k, hk, hki⟩ | ⟨k, hk, hki⟩
+  · subst i
+    apply G.subordinate r.castSucc k
+    constructor
+    · exact ⟨(G.level_strictMono Fin.castSucc_lt_succ).le, le_rfl⟩
+    · exact ((G.horizontal r.castSucc).subdivision.mem_incidentCells x k).mp hk
+  · subst i
+    apply G.subordinate r.succ k
+    constructor
+    · have hlevel : G.level r.succ.castSucc ≤ G.level r.succ.succ :=
+        (G.level_strictMono
+          (show r.succ.castSucc < r.succ.succ from Fin.castSucc_lt_succ)).le
+      exact ⟨le_rfl, hlevel⟩
+    · exact ((G.horizontal r.succ).subdivision.mem_incidentCells x k).mp hk
+
 end StaggeredCoverGrid
 
 /-- The geometric row pattern used by the constructor. -/

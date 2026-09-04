@@ -216,6 +216,50 @@ theorem moves_changeCover_list (before after : List (Entry U x₀ hx₀)) :
       simpa [List.append_assoc] using
         ih (before := before ++ [CoverChange.rightEntry c])
 
+/-- Reinterpret an inverse connector through an overlap, then cancel it with
+the connector on the other side. -/
+theorem moves_cancel_connector_pair
+    (before after : List (Entry U x₀ hx₀)) (i j : ι)
+    (ω : OverlapGroup U x₀ hx₀ i j) :
+    Moves
+      (before ++ ⟨i, (overlapToLeft U x₀ hx₀ i j ω)⁻¹⟩ ::
+        ⟨j, overlapToRight U x₀ hx₀ i j ω⟩ :: after)
+      (before ++ ⟨j, 1⟩ :: after) := by
+  have hchange : Move U x₀ hx₀
+      (before ++ ⟨i, (overlapToLeft U x₀ hx₀ i j ω)⁻¹⟩ ::
+        ⟨j, overlapToRight U x₀ hx₀ i j ω⟩ :: after)
+      (before ++ ⟨j, (overlapToRight U x₀ hx₀ i j ω)⁻¹⟩ ::
+        ⟨j, overlapToRight U x₀ hx₀ i j ω⟩ :: after) := by
+    simpa only [map_inv] using Move.changeCover before
+      (⟨j, overlapToRight U x₀ hx₀ i j ω⟩ :: after) i j ω⁻¹
+  have hcombine : Move U x₀ hx₀
+      (before ++ ⟨j, (overlapToRight U x₀ hx₀ i j ω)⁻¹⟩ ::
+        ⟨j, overlapToRight U x₀ hx₀ i j ω⟩ :: after)
+      (before ++ ⟨j, 1⟩ :: after) := by
+    simpa using Move.combine before after j
+        (overlapToRight U x₀ hx₀ i j ω)⁻¹
+        (overlapToRight U x₀ hx₀ i j ω)
+  exact (Relation.ReflTransGen.single hchange).tail hcombine
+
+/-- Cancel an interface connector and absorb the resulting identity into the
+following entry. -/
+theorem moves_cancel_connector
+    (before after : List (Entry U x₀ hx₀)) (i j : ι)
+    (b : CoverGroup U x₀ hx₀ j)
+    (ω : OverlapGroup U x₀ hx₀ i j) :
+    Moves
+      (before ++ ⟨i, (overlapToLeft U x₀ hx₀ i j ω)⁻¹⟩ ::
+        ⟨j, overlapToRight U x₀ hx₀ i j ω⟩ :: ⟨j, b⟩ :: after)
+      (before ++ ⟨j, b⟩ :: after) := by
+  have hpair := moves_cancel_connector_pair
+    (U := U) (x₀ := x₀) (hx₀ := hx₀)
+    before (⟨j, b⟩ :: after) i j ω
+  have hone : Move U x₀ hx₀
+      (before ++ ⟨j, 1⟩ :: ⟨j, b⟩ :: after)
+      (before ++ ⟨j, b⟩ :: after) := by
+    simpa using Move.combine before after j 1 b
+  exact hpair.tail hone
+
 private theorem wordOfEntries_eq_of_combine
     (before after : List (Entry U x₀ hx₀)) (i : ι)
     (a b : CoverGroup U x₀ hx₀ i) :
