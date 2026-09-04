@@ -48,6 +48,7 @@ import Hatcher.VanKampen.FactorizationMoves
 import Hatcher.VanKampen.HomotopyCoverDecomposition
 import Hatcher.VanKampen.SubdivisionRefinement
 import Hatcher.VanKampen.InterfaceFactorization
+import Hatcher.VanKampen.BandSweep
 import Hatcher.VanKampen.PointedWedge
 import Hatcher.VanKampen.PresentedGroup
 import Hatcher.VanKampen.RefinementProduct
