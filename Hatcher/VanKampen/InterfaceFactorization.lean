@@ -1,4 +1,6 @@
 import Hatcher.VanKampen.BoundaryFactorization
+import Hatcher.VanKampen.SubdivisionRefinement
+import Mathlib.Topology.Homotopy.Product
 
 noncomputable section
 
@@ -23,7 +25,7 @@ endpoints. -/
 def basedSegmentLoop {X : Type v} [TopologicalSpace X] {x₀ : X}
     (p : Path x₀ x₀) (a b : I)
     (ca : Path x₀ (p a)) (cb : Path x₀ (p b)) : Path x₀ x₀ :=
-  (ca.trans (p.subpath a b)).trans cb.symm
+  ca.trans ((p.subpath a b).trans cb.symm)
 
 theorem basedSegmentLoop_mem {X : Type v} [TopologicalSpace X]
     {x₀ : X} (p : Path x₀ x₀) (a b : I) (hab : a ≤ b)
@@ -36,9 +38,169 @@ theorem basedSegmentLoop_mem {X : Type v} [TopologicalSpace X]
     exact image_subset_iff.mpr hp
   have hrange : Set.range (basedSegmentLoop p a b ca cb) ⊆ S := by
     rw [basedSegmentLoop, Path.trans_range, Path.trans_range, Path.symm_range]
-    exact union_subset (union_subset (range_subset_iff.mpr hca) hseg)
-      (range_subset_iff.mpr hcb)
+    exact union_subset (range_subset_iff.mpr hca)
+      (union_subset hseg (range_subset_iff.mpr hcb))
   exact hrange ⟨t, rfl⟩
+
+namespace UnitSquare
+
+/-- The identity path of the unit interval. -/
+def idPath : Path (0 : I) (1 : I) where
+  toFun := id
+  continuous_toFun := continuous_id
+  source' := rfl
+  target' := rfl
+
+/-- The lower-then-right route across the unit square. -/
+def lowerRight : Path ((0 : I), (0 : I)) ((1 : I), (1 : I)) :=
+  Path.prod ((Path.refl (0 : I)).trans idPath)
+    (idPath.trans (Path.refl (1 : I)))
+
+/-- The left-then-upper route across the unit square. -/
+def leftUpper : Path ((0 : I), (0 : I)) ((1 : I), (1 : I)) :=
+  Path.prod (idPath.trans (Path.refl (1 : I)))
+    ((Path.refl (0 : I)).trans idPath)
+
+/-- The lower side of the unit square, traversed from left to right. -/
+def lower : Path ((0 : I), (0 : I)) ((0 : I), (1 : I)) :=
+  (Path.refl (0 : I)).prod idPath
+
+/-- The right side of the unit square, traversed from bottom to top. -/
+def right : Path ((0 : I), (1 : I)) ((1 : I), (1 : I)) :=
+  idPath.prod (Path.refl (1 : I))
+
+/-- The left side of the unit square, traversed from bottom to top. -/
+def left : Path ((0 : I), (0 : I)) ((1 : I), (0 : I)) :=
+  idPath.prod (Path.refl (0 : I))
+
+/-- The upper side of the unit square, traversed from left to right. -/
+def upper : Path ((1 : I), (0 : I)) ((1 : I), (1 : I)) :=
+  (Path.refl (1 : I)).prod idPath
+
+theorem lower_trans_right : lower.trans right = lowerRight :=
+  Path.trans_prod_eq_prod_trans _ _ _ _
+
+theorem left_trans_upper : left.trans upper = leftUpper :=
+  Path.trans_prod_eq_prod_trans _ _ _ _
+
+/-- The two monotone boundary routes across the unit square are homotopic. -/
+def boundaryHomotopy : lowerRight.Homotopy leftUpper :=
+  Path.Homotopic.prodHomotopy
+    ((Path.Homotopy.reflTrans idPath).trans
+      (Path.Homotopy.transRefl idPath).symm)
+    ((Path.Homotopy.transRefl idPath).trans
+      (Path.Homotopy.reflTrans idPath).symm)
+
+/-- Mapping the square gives the usual homotopy between its two monotone
+boundary routes. -/
+def mappedBoundaryHomotopy {Y : Type*} [TopologicalSpace Y]
+    (f : C(I × I, Y)) :
+    (lower.map f.continuous).trans (right.map f.continuous) |>.Homotopy
+      ((left.map f.continuous).trans (upper.map f.continuous)) := by
+  rw [← Path.map_trans, lower_trans_right]
+  rw [← Path.map_trans, left_trans_upper]
+  exact boundaryHomotopy.map f
+
+end UnitSquare
+
+local infixr:80 " ≫ₚ " => Path.trans
+
+/-- Close a directed edge to a loop at a chosen basepoint. -/
+def closeEdge {Y : Type*} [TopologicalSpace Y] {base a b : Y}
+    (ca : Path base a) (e : Path a b) (cb : Path base b) : Path base base :=
+  ca ≫ₚ e ≫ₚ cb.symm
+
+theorem Path.Homotopic.Quotient.symm_trans_eq {Y : Type*}
+    [TopologicalSpace Y] {a b c : Y}
+    (p : Path.Homotopic.Quotient a b)
+    (q : Path.Homotopic.Quotient b c) :
+    (p.trans q).symm = q.symm.trans p.symm := by
+  induction p using Path.Homotopic.Quotient.ind with
+  | mk p =>
+      induction q using Path.Homotopic.Quotient.ind with
+      | mk q =>
+          change Path.Homotopic.Quotient.mk ((p.trans q).symm) =
+            Path.Homotopic.Quotient.mk (q.symm.trans p.symm)
+          rw [Path.trans_symm]
+
+@[simp]
+theorem Path.Homotopic.Quotient.symm_symm_eq {Y : Type*}
+    [TopologicalSpace Y] {a b : Y}
+    (p : Path.Homotopic.Quotient a b) : p.symm.symm = p := by
+  induction p using Path.Homotopic.Quotient.ind with
+  | mk p =>
+      change Path.Homotopic.Quotient.mk p.symm.symm =
+        Path.Homotopic.Quotient.mk p
+      rw [Path.symm_symm]
+
+@[simp]
+theorem Path.Homotopic.Quotient.symm_trans_assoc_eq {Y : Type*}
+    [TopologicalSpace Y] {a b c : Y}
+    (p : Path.Homotopic.Quotient a b)
+    (q : Path.Homotopic.Quotient b c) :
+    p.symm.trans (p.trans q) = q := by
+  rw [← Path.Homotopic.Quotient.trans_assoc,
+    Path.Homotopic.Quotient.symm_trans,
+    Path.Homotopic.Quotient.refl_trans]
+
+private theorem fundamentalGroup_fromPath_trans {Y : Type*}
+    [TopologicalSpace Y] {base : Y} (p q : Path base base) :
+    FundamentalGroup.fromPath (.mk (p.trans q)) =
+      FundamentalGroup.fromPath (.mk q) * FundamentalGroup.fromPath (.mk p) := by
+  rw [Path.Homotopic.Quotient.mk_trans]
+  rfl
+
+private theorem fundamentalGroup_fromPath_symm {Y : Type*}
+    [TopologicalSpace Y] {base : Y} (p : Path base base) :
+    FundamentalGroup.fromPath (.mk p.symm) =
+      (FundamentalGroup.fromPath (.mk p))⁻¹ := by
+  rw [Path.Homotopic.Quotient.mk_symm]
+  rfl
+
+/-- The four based edge loops of a homotopy square satisfy the cellular
+boundary identity in the fundamental group. -/
+theorem fundamentalGroup_cell_relation {Y : Type*} [TopologicalSpace Y]
+    {base a b c d : Y}
+    (ca : Path base a) (cb : Path base b)
+    (cc : Path base c) (cd : Path base d)
+    (bottom : Path a b) (right : Path b d)
+    (left : Path a c) (upper : Path c d)
+    (hsquare : (bottom ≫ₚ right).Homotopic (left ≫ₚ upper)) :
+    FundamentalGroup.fromPath (.mk (closeEdge ca bottom cb)) =
+      (FundamentalGroup.fromPath (.mk (closeEdge cb right cd)))⁻¹ *
+        FundamentalGroup.fromPath (.mk (closeEdge cc upper cd)) *
+          FundamentalGroup.fromPath (.mk (closeEdge ca left cc)) := by
+  have hsquare' := Path.Homotopic.Quotient.eq.mpr hsquare
+  simp only [Path.Homotopic.Quotient.mk_trans] at hsquare'
+  have hbottom : Path.Homotopic.Quotient.mk bottom =
+      ((Path.Homotopic.Quotient.mk left).trans
+        (Path.Homotopic.Quotient.mk upper)).trans
+          (Path.Homotopic.Quotient.mk right).symm := by
+    calc
+      Path.Homotopic.Quotient.mk bottom =
+          ((Path.Homotopic.Quotient.mk bottom).trans
+            (Path.Homotopic.Quotient.mk right)).trans
+              (Path.Homotopic.Quotient.mk right).symm := by simp
+      _ = ((Path.Homotopic.Quotient.mk left).trans
+          (Path.Homotopic.Quotient.mk upper)).trans
+            (Path.Homotopic.Quotient.mk right).symm :=
+        congrArg (fun z ↦ z.trans (Path.Homotopic.Quotient.mk right).symm)
+          hsquare'
+  have hbased : (closeEdge ca bottom cb).Homotopic
+      (((closeEdge ca left cc) ≫ₚ (closeEdge cc upper cd)) ≫ₚ
+        (closeEdge cb right cd).symm) := by
+    apply Path.Homotopic.Quotient.exact
+    simp only [closeEdge, Path.Homotopic.Quotient.mk_trans,
+      Path.Homotopic.Quotient.mk_symm,
+      Path.Homotopic.Quotient.symm_trans_eq,
+      Path.Homotopic.Quotient.symm_symm_eq]
+    rw [hbottom]
+    simp only [Path.Homotopic.Quotient.trans_assoc,
+      Path.Homotopic.Quotient.symm_trans_assoc_eq]
+  have hq := Path.Homotopic.Quotient.eq.mpr hbased
+  have hgroup := congrArg FundamentalGroup.fromPath hq
+  simpa only [fundamentalGroup_fromPath_trans,
+    fundamentalGroup_fromPath_symm, mul_assoc] using hgroup
 
 namespace StaggeredCoverGrid
 
@@ -360,6 +522,28 @@ def coverLoopClass (i : ι) (p : Path x₀ x₀) (hp : ∀ t, p t ∈ U i) :
     CoverGroup U x₀ hx₀ i :=
   Path.Homotopic.Quotient.mk (pathInSet p (U i) (hx₀ i) (hx₀ i) hp)
 
+theorem boundaryConnector_factor_eq_coverLoopClass
+    {p : Path x₀ x₀} {B : BoundaryCover U p}
+    (C : BoundaryConnectors B) (k : Fin B.subdivision.cells) :
+    (Path.Homotopic.Quotient.mk (C.factor (hx₀ := hx₀) k) :
+      CoverGroup U x₀ hx₀ (B.label k)) =
+    coverLoopClass (B.label k)
+      (basedSegmentLoop p (B.subdivision.point k.castSucc)
+        (B.subdivision.point k.succ) (C.path k.castSucc) (C.path k.succ))
+      (fun t ↦ basedSegmentLoop_mem p _ _
+        (B.subdivision.strictMono.monotone (Fin.castSucc_le_succ k))
+        (C.path k.castSucc) (C.path k.succ) (U (B.label k))
+        (fun t ↦ C.range_left k ⟨t, rfl⟩)
+        (fun t ↦ C.range_right k ⟨t, rfl⟩) (B.mapsTo k) t) := by
+  unfold coverLoopClass
+  congr 1
+  ext t
+  change ((C.factor (hx₀ := hx₀) k).map continuous_subtype_val) t = _
+  rw [C.factor_map]
+  change basedSegmentLoop p (B.subdivision.point k.castSucc)
+    (B.subdivision.point k.succ) (C.path k.castSucc) (C.path k.succ) t = _
+  rfl
+
 /-- The overlap-group class of an ambient based loop known to stay in two
 cover members. -/
 def overlapLoopClass (i j : ι) (p : Path x₀ x₀)
@@ -449,18 +633,24 @@ theorem overlapClass_right
       coverLoopClass (D.upperLabel k) (D.loop k) (D.loop_mem_upper k) :=
   overlapToRight_overlapLoopClass _ _ _ _
 
+def lowerEntries (D : AlignedInterface (U := U) (x₀ := x₀) p) :
+    List (Entry U x₀ hx₀) :=
+  List.ofFn fun k ↦
+    ⟨D.lowerLabel k,
+      coverLoopClass (hx₀ := hx₀) (D.lowerLabel k) (D.loop k)
+        (D.loop_mem_lower k)⟩
+
+def upperEntries (D : AlignedInterface (U := U) (x₀ := x₀) p) :
+    List (Entry U x₀ hx₀) :=
+  List.ofFn fun k ↦
+    ⟨D.upperLabel k,
+      coverLoopClass (hx₀ := hx₀) (D.upperLabel k) (D.loop k)
+        (D.loop_mem_upper k)⟩
+
 /-- Corresponding refined entries immediately below and above one interface
 are related by pointwise changes of cover. -/
 theorem moves (D : AlignedInterface (U := U) (x₀ := x₀) p) :
-    Moves
-      (List.ofFn fun k ↦
-        (⟨D.lowerLabel k,
-          coverLoopClass (hx₀ := hx₀) (D.lowerLabel k) (D.loop k)
-            (D.loop_mem_lower k)⟩ : Entry U x₀ hx₀))
-      (List.ofFn fun k ↦
-        (⟨D.upperLabel k,
-          coverLoopClass (hx₀ := hx₀) (D.upperLabel k) (D.loop k)
-            (D.loop_mem_upper k)⟩ : Entry U x₀ hx₀)) := by
+    Moves (D.lowerEntries (hx₀ := hx₀)) (D.upperEntries (hx₀ := hx₀)) := by
   have h := moves_changeCover_ofFn (hx₀ := hx₀) D.cells
     D.lowerLabel D.upperLabel (D.overlapClass (hx₀ := hx₀))
   have hl :
@@ -488,7 +678,7 @@ theorem moves (D : AlignedInterface (U := U) (x₀ := x₀) p) :
     funext k
     rw [D.overlapClass_right k]
   rw [hl, hu] at h
-  exact h
+  simpa [lowerEntries, upperEntries] using h
 
 /-- Build the aligned refined interface of two adjacent rows of a staggered
 grid. -/
@@ -502,95 +692,23 @@ def ofGrid
     (r : Fin (G.extraRows + 2)) :
     AlignedInterface (U := U) (x₀ := x₀)
       (H.eval (G.level r.castSucc.succ)) := by
-  classical
-  let lower := G.horizontal r.castSucc
-  let upper := G.horizontal r.succ
-  let refined := IntervalSubdivision.commonRefinement
-    lower.subdivision upper.subdivision
+  let lowerBoundary := G.lowerInterfaceBoundary r
+  let upperBoundary := G.upperInterfaceBoundary r
+  let lowerConnectors := G.lowerInterfaceConnectors hx₀ hone htwo hthree r
+  let upperConnectors := G.upperInterfaceConnectors hx₀ hone htwo hthree r
   refine
-    { cells := refined.cells
-      point := refined.point
-      strictMono := refined.strictMono
-      lowerLabel := fun k ↦ lower.label
-        (IntervalSubdivision.commonRefinementLeftCell
-          lower.subdivision upper.subdivision k)
-      upperLabel := fun k ↦ upper.label
-        (IntervalSubdivision.commonRefinementRightCell
-          lower.subdivision upper.subdivision k)
-      lowerSegment := ?_
-      upperSegment := ?_
-      connector := fun j ↦
-        G.interfaceVertexConnector hx₀ hone htwo hthree r j
-      connector_lower_left := ?_
-      connector_lower_right := ?_
-      connector_upper_left := ?_
-      connector_upper_right := ?_ }
-  · intro k x hx
-    change H (G.level r.castSucc.succ, x) ∈ U
-      (lower.label (IntervalSubdivision.commonRefinementLeftCell
-        lower.subdivision upper.subdivision k))
-    apply G.subordinate r.castSucc
-      (IntervalSubdivision.commonRefinementLeftCell
-        lower.subdivision upper.subdivision k)
-    exact ⟨⟨(G.level_strictMono Fin.castSucc_lt_succ).le, le_rfl⟩,
-      IntervalSubdivision.commonRefinementLeftCell_spec
-        lower.subdivision upper.subdivision k hx⟩
-  · intro k x hx
-    change H (G.level r.castSucc.succ, x) ∈ U
-      (upper.label (IntervalSubdivision.commonRefinementRightCell
-        lower.subdivision upper.subdivision k))
-    apply G.subordinate r.succ
-      (IntervalSubdivision.commonRefinementRightCell
-        lower.subdivision upper.subdivision k)
-    refine ⟨⟨le_rfl, ?_⟩,
-      IntervalSubdivision.commonRefinementRightCell_spec
-        lower.subdivision upper.subdivision k hx⟩
-    rw [show r.castSucc.succ = r.succ.castSucc by rfl]
-    exact (G.level_strictMono Fin.castSucc_lt_succ).le
-  · intro k t
-    refine G.interfaceVertexConnector_range hx₀ hone htwo hthree r
-      k.castSucc ?_ ⟨t, rfl⟩
-    unfold StaggeredCoverGrid.interfaceLabels
-    apply Finset.mem_union_left
-    apply Finset.mem_image.mpr
-    refine ⟨IntervalSubdivision.commonRefinementLeftCell
-      lower.subdivision upper.subdivision k, ?_, rfl⟩
-    rw [IntervalSubdivision.mem_incidentCells]
-    apply IntervalSubdivision.commonRefinementLeftCell_spec
-    exact ⟨le_rfl, (refined.strictMono Fin.castSucc_lt_succ).le⟩
-  · intro k t
-    refine G.interfaceVertexConnector_range hx₀ hone htwo hthree r
-      k.succ ?_ ⟨t, rfl⟩
-    unfold StaggeredCoverGrid.interfaceLabels
-    apply Finset.mem_union_left
-    apply Finset.mem_image.mpr
-    refine ⟨IntervalSubdivision.commonRefinementLeftCell
-      lower.subdivision upper.subdivision k, ?_, rfl⟩
-    rw [IntervalSubdivision.mem_incidentCells]
-    apply IntervalSubdivision.commonRefinementLeftCell_spec
-    exact ⟨(refined.strictMono Fin.castSucc_lt_succ).le, le_rfl⟩
-  · intro k t
-    refine G.interfaceVertexConnector_range hx₀ hone htwo hthree r
-      k.castSucc ?_ ⟨t, rfl⟩
-    unfold StaggeredCoverGrid.interfaceLabels
-    apply Finset.mem_union_right
-    apply Finset.mem_image.mpr
-    refine ⟨IntervalSubdivision.commonRefinementRightCell
-      lower.subdivision upper.subdivision k, ?_, rfl⟩
-    rw [IntervalSubdivision.mem_incidentCells]
-    apply IntervalSubdivision.commonRefinementRightCell_spec
-    exact ⟨le_rfl, (refined.strictMono Fin.castSucc_lt_succ).le⟩
-  · intro k t
-    refine G.interfaceVertexConnector_range hx₀ hone htwo hthree r
-      k.succ ?_ ⟨t, rfl⟩
-    unfold StaggeredCoverGrid.interfaceLabels
-    apply Finset.mem_union_right
-    apply Finset.mem_image.mpr
-    refine ⟨IntervalSubdivision.commonRefinementRightCell
-      lower.subdivision upper.subdivision k, ?_, rfl⟩
-    rw [IntervalSubdivision.mem_incidentCells]
-    apply IntervalSubdivision.commonRefinementRightCell_spec
-    exact ⟨(refined.strictMono Fin.castSucc_lt_succ).le, le_rfl⟩
+    { cells := (G.interfaceSubdivision r).cells
+      point := (G.interfaceSubdivision r).point
+      strictMono := (G.interfaceSubdivision r).strictMono
+      lowerLabel := lowerBoundary.label
+      upperLabel := upperBoundary.label
+      lowerSegment := lowerBoundary.mapsTo
+      upperSegment := upperBoundary.mapsTo
+      connector := G.interfaceVertexConnector hx₀ hone htwo hthree r
+      connector_lower_left := fun k t ↦ lowerConnectors.range_left k ⟨t, rfl⟩
+      connector_lower_right := fun k t ↦ lowerConnectors.range_right k ⟨t, rfl⟩
+      connector_upper_left := fun k t ↦ upperConnectors.range_left k ⟨t, rfl⟩
+      connector_upper_right := fun k t ↦ upperConnectors.range_right k ⟨t, rfl⟩ }
 
 end AlignedInterface
 
@@ -671,4 +789,105 @@ theorem moves
 end InterfaceFactorizationData
 
 end Factorization
+
+namespace StaggeredCoverGrid
+
+variable {ι : Type u} {X : Type v} [TopologicalSpace X]
+  {U : ι → Set X} {x₀ : X} {p q : Path x₀ x₀}
+  {H : p.Homotopy q} {bottom : BoundaryCover U p}
+  {top : BoundaryCover U q}
+
+def alignedInterface
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) :
+    Factorization.AlignedInterface (U := U) (x₀ := x₀) (G.interfacePath r) :=
+  Factorization.AlignedInterface.ofGrid G hx₀ hone htwo hthree r
+
+def lowerInterfaceFactorization
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) :
+    Factorization U x₀ hx₀ (G.interfacePath r) :=
+  (G.lowerInterfaceConnectors hx₀ hone htwo hthree r).toFactorization
+
+def upperInterfaceFactorization
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) :
+    Factorization U x₀ hx₀ (G.interfacePath r) :=
+  (G.upperInterfaceConnectors hx₀ hone htwo hthree r).toFactorization
+
+theorem lowerInterfaceFactorization_entries
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) :
+    (G.lowerInterfaceFactorization hx₀ hone htwo hthree r).entries =
+      (G.alignedInterface hx₀ hone htwo hthree r).lowerEntries
+        (hx₀ := hx₀) := by
+  unfold lowerInterfaceFactorization
+  rw [BoundaryConnectors.toFactorization_entries]
+  unfold alignedInterface Factorization.AlignedInterface.lowerEntries
+  unfold Factorization.AlignedInterface.ofGrid
+  dsimp only
+  congr 1
+  funext k
+  apply Sigma.ext
+  · rfl
+  · rw [Factorization.boundaryConnector_factor_eq_coverLoopClass]
+    rfl
+
+theorem upperInterfaceFactorization_entries
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) :
+    (G.upperInterfaceFactorization hx₀ hone htwo hthree r).entries =
+      (G.alignedInterface hx₀ hone htwo hthree r).upperEntries
+        (hx₀ := hx₀) := by
+  unfold upperInterfaceFactorization
+  rw [BoundaryConnectors.toFactorization_entries]
+  unfold alignedInterface Factorization.AlignedInterface.upperEntries
+  unfold Factorization.AlignedInterface.ofGrid
+  dsimp only
+  congr 1
+  funext k
+  apply Sigma.ext
+  · rfl
+  · rw [Factorization.boundaryConnector_factor_eq_coverLoopClass]
+    rfl
+
+/-- Relabeling the common refinement across one staggered interface is a
+finite sequence of elementary factorization moves. -/
+theorem interfaceSweep
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) :
+    Factorization.Sweep
+      (G.lowerInterfaceFactorization hx₀ hone htwo hthree r)
+      (G.upperInterfaceFactorization hx₀ hone htwo hthree r) := by
+  constructor
+  rw [G.lowerInterfaceFactorization_entries hx₀ hone htwo hthree r,
+    G.upperInterfaceFactorization_entries hx₀ hone htwo hthree r]
+  exact (G.alignedInterface hx₀ hone htwo hthree r).moves
+
+end StaggeredCoverGrid
+
 end Hatcher.VanKampen
