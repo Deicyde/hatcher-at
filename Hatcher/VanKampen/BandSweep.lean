@@ -312,3 +312,276 @@ theorem moves_of_band_cell_relations {n : ℕ}
   exact hsplit.trans (hcancel.trans (hleftMove.trans hrightMove))
 
 end Hatcher.VanKampen.Factorization
+
+open Set
+open scoped unitInterval
+
+namespace Hatcher.VanKampen
+
+namespace Factorization
+
+variable {ι : Type u} {X : Type v} [TopologicalSpace X]
+  {U : ι → Set X} {x₀ a b : X} {hx₀ : ∀ i, x₀ ∈ U i}
+
+theorem closeEdge_mem (ca : Path x₀ a) (e : Path a b) (cb : Path x₀ b)
+    (S : Set X) (hca : ∀ t, ca t ∈ S) (he : ∀ t, e t ∈ S)
+    (hcb : ∀ t, cb t ∈ S) (t : I) : closeEdge ca e cb t ∈ S := by
+  have hrange : Set.range (closeEdge ca e cb) ⊆ S := by
+    rw [closeEdge, Path.trans_range, Path.trans_range, Path.symm_range]
+    exact union_subset (range_subset_iff.mpr hca)
+      (union_subset (range_subset_iff.mpr he) (range_subset_iff.mpr hcb))
+  exact hrange ⟨t, rfl⟩
+
+theorem closeEdge_pathInSet_class
+    (i : ι) (ca : Path x₀ a) (e : Path a b) (cb : Path x₀ b)
+    (ha : a ∈ U i) (hb : b ∈ U i)
+    (hca : ∀ t, ca t ∈ U i) (he : ∀ t, e t ∈ U i)
+    (hcb : ∀ t, cb t ∈ U i) :
+    FundamentalGroup.fromPath (.mk (closeEdge
+      (pathInSet ca (U i) (hx₀ i) ha hca)
+      (pathInSet e (U i) ha hb he)
+      (pathInSet cb (U i) (hx₀ i) hb hcb))) =
+      coverLoopClass i (closeEdge ca e cb)
+        (closeEdge_mem ca e cb (U i) hca he hcb) := by
+  unfold coverLoopClass
+  apply Quotient.sound
+  have heq : closeEdge
+      (pathInSet ca (U i) (hx₀ i) ha hca)
+      (pathInSet e (U i) ha hb he)
+      (pathInSet cb (U i) (hx₀ i) hb hcb) =
+      pathInSet (closeEdge ca e cb) (U i) (hx₀ i) (hx₀ i)
+        (closeEdge_mem ca e cb (U i) hca he hcb) := by
+    ext t
+    simp [closeEdge, pathInSet, Path.trans_apply, Path.symm_apply]
+    split_ifs <;> rfl
+  rw [heq]
+
+/-- A shared based edge loop gives the two classes used by connector
+cancellation. -/
+theorem sharedEdge_overlap_classes
+    (i j : ι) (ca : Path x₀ a) (e : Path a b) (cb : Path x₀ b)
+    (hai : a ∈ U i) (hbi : b ∈ U i)
+    (haj : a ∈ U j) (hbj : b ∈ U j)
+    (hcai : ∀ t, ca t ∈ U i) (hei : ∀ t, e t ∈ U i)
+    (hcbi : ∀ t, cb t ∈ U i)
+    (hcaj : ∀ t, ca t ∈ U j) (hej : ∀ t, e t ∈ U j)
+    (hcbj : ∀ t, cb t ∈ U j) :
+    ∃ ω : OverlapGroup U x₀ hx₀ i j,
+      FundamentalGroup.fromPath (.mk (closeEdge
+        (pathInSet ca (U i) (hx₀ i) hai hcai)
+        (pathInSet e (U i) hai hbi hei)
+        (pathInSet cb (U i) (hx₀ i) hbi hcbi))) =
+          overlapToLeft U x₀ hx₀ i j ω ∧
+      FundamentalGroup.fromPath (.mk (closeEdge
+        (pathInSet ca (U j) (hx₀ j) haj hcaj)
+        (pathInSet e (U j) haj hbj hej)
+        (pathInSet cb (U j) (hx₀ j) hbj hcbj))) =
+          overlapToRight U x₀ hx₀ i j ω := by
+  let loop := closeEdge ca e cb
+  have hloop : ∀ t, loop t ∈ U i ∩ U j := fun t ↦
+    ⟨closeEdge_mem ca e cb (U i) hcai hei hcbi t,
+      closeEdge_mem ca e cb (U j) hcaj hej hcbj t⟩
+  let ω := overlapLoopClass (hx₀ := hx₀) i j loop hloop
+  refine ⟨ω, ?_, ?_⟩
+  · rw [closeEdge_pathInSet_class]
+    exact (overlapToLeft_overlapLoopClass i j loop hloop).symm
+  · rw [closeEdge_pathInSet_class]
+    exact (overlapToRight_overlapLoopClass i j loop hloop).symm
+
+end Factorization
+
+namespace StaggeredCoverGrid
+
+variable {ι : Type u} {X : Type v} [TopologicalSpace X]
+  {U : ι → Set X} {x₀ : X} {p q : Path x₀ x₀}
+  {H : p.Homotopy q} {bottom : BoundaryCover U p}
+  {top : BoundaryCover U q}
+
+private theorem convexComb_mem_cell {a b : I} (hab : a ≤ b) (t : I) :
+    Icc.convexComb a b t ∈ Icc a b := by
+  constructor <;>
+    change (_ : ℝ) ≤ _ <;>
+    simp only [Icc.coe_convexComb] <;>
+    nlinarith [t.property.1, t.property.2, show (a : ℝ) ≤ b from hab]
+
+/-- Reparameterize one actual staggered-grid cell onto the unit square. -/
+def bandCellMap (G : StaggeredCoverGrid U H bottom top)
+    (r : Fin (G.extraRows + 3))
+    (k : Fin (G.horizontal r).subdivision.cells) :
+    C(I × I, U ((G.horizontal r).label k)) where
+  toFun z := ⟨H
+    (Icc.convexComb (G.level r.castSucc) (G.level r.succ) z.1,
+      Icc.convexComb ((G.horizontal r).subdivision.point k.castSucc)
+        ((G.horizontal r).subdivision.point k.succ) z.2), by
+    apply G.subordinate r k
+    constructor
+    · exact convexComb_mem_cell
+        (G.level_strictMono Fin.castSucc_lt_succ).le z.1
+    · exact convexComb_mem_cell
+        ((G.horizontal r).subdivision.strictMono
+          Fin.castSucc_lt_succ).le z.2⟩
+  continuous_toFun := by
+    apply Continuous.subtype_mk
+    apply H.continuous.comp
+    apply Continuous.prodMk
+    · exact (Icc.continuous_convexComb _ _).comp continuous_fst
+    · exact (Icc.continuous_convexComb _ _).comp continuous_snd
+
+/-- The square relation in one actual staggered-grid cell gives the
+corresponding elementary factorization moves. -/
+theorem bandCell_moves
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (r : Fin (G.extraRows + 3))
+    (k : Fin (G.horizontal r).subdivision.cells)
+    (ca : Path (⟨x₀, hx₀ ((G.horizontal r).label k)⟩ :
+        U ((G.horizontal r).label k))
+      (G.bandCellMap r k ((0 : I), (0 : I))))
+    (cb : Path (⟨x₀, hx₀ ((G.horizontal r).label k)⟩ :
+        U ((G.horizontal r).label k))
+      (G.bandCellMap r k ((0 : I), (1 : I))))
+    (cc : Path (⟨x₀, hx₀ ((G.horizontal r).label k)⟩ :
+        U ((G.horizontal r).label k))
+      (G.bandCellMap r k ((1 : I), (0 : I))))
+    (cd : Path (⟨x₀, hx₀ ((G.horizontal r).label k)⟩ :
+        U ((G.horizontal r).label k))
+      (G.bandCellMap r k ((1 : I), (1 : I))))
+    (before after : List (Factorization.Entry U x₀ hx₀)) :
+    Factorization.Moves
+      (before ++ [⟨(G.horizontal r).label k,
+        FundamentalGroup.fromPath (.mk (closeEdge ca
+          (UnitSquare.lower.map (G.bandCellMap r k).continuous) cb))⟩] ++ after)
+      (before ++
+        [⟨(G.horizontal r).label k,
+          FundamentalGroup.fromPath (.mk (closeEdge ca
+            (UnitSquare.left.map (G.bandCellMap r k).continuous) cc))⟩,
+         ⟨(G.horizontal r).label k,
+          FundamentalGroup.fromPath (.mk (closeEdge cc
+            (UnitSquare.upper.map (G.bandCellMap r k).continuous) cd))⟩,
+         ⟨(G.horizontal r).label k,
+          (FundamentalGroup.fromPath (.mk (closeEdge cb
+            (UnitSquare.right.map (G.bandCellMap r k).continuous) cd)))⁻¹⟩] ++
+        after) := by
+  apply Factorization.moves_expand_cell_of_homotopy
+  exact ⟨UnitSquare.mappedBoundaryHomotopy (G.bandCellMap r k)⟩
+
+private theorem convexComb_mem_levels {a b : I} (hab : a ≤ b) (t : I) :
+    Icc.convexComb a b t ∈ Icc a b := by
+  constructor <;>
+    change (_ : ℝ) ≤ _ <;>
+    simp only [Icc.coe_convexComb] <;>
+    nlinarith [t.property.1, t.property.2, show (a : ℝ) ≤ b from hab]
+
+/-- The vertical path through a point of one horizontal grid row. -/
+def bandVerticalPath (G : StaggeredCoverGrid U H bottom top)
+    (r : Fin (G.extraRows + 3)) (x : I) :
+    Path (H (G.level r.castSucc, x)) (H (G.level r.succ, x)) where
+  toFun t := H (Icc.convexComb (G.level r.castSucc) (G.level r.succ) t, x)
+  continuous_toFun := by
+    apply H.continuous.comp
+    apply Continuous.prodMk
+    · exact Icc.continuous_convexComb _ _
+    · exact continuous_const
+  source' := by simp
+  target' := by simp
+
+theorem bandVerticalPath_mem
+    (G : StaggeredCoverGrid U H bottom top)
+    (r : Fin (G.extraRows + 3))
+    (k : Fin (G.horizontal r).subdivision.cells)
+    (x : I) (hx : x ∈ (G.horizontal r).subdivision.cell k)
+    (t : I) : G.bandVerticalPath r x t ∈ U ((G.horizontal r).label k) := by
+  apply G.subordinate r k
+  exact ⟨convexComb_mem_levels
+    (G.level_strictMono Fin.castSucc_lt_succ).le t, hx⟩
+
+theorem bandVerticalPath_source_mem
+    (G : StaggeredCoverGrid U H bottom top)
+    (r : Fin (G.extraRows + 3))
+    (k : Fin (G.horizontal r).subdivision.cells)
+    (x : I) (hx : x ∈ (G.horizontal r).subdivision.cell k) :
+    H (G.level r.castSucc, x) ∈ U ((G.horizontal r).label k) := by
+  apply G.subordinate r k
+  exact ⟨⟨le_rfl, (G.level_strictMono Fin.castSucc_lt_succ).le⟩, hx⟩
+
+theorem bandVerticalPath_target_mem
+    (G : StaggeredCoverGrid U H bottom top)
+    (r : Fin (G.extraRows + 3))
+    (k : Fin (G.horizontal r).subdivision.cells)
+    (x : I) (hx : x ∈ (G.horizontal r).subdivision.cell k) :
+    H (G.level r.succ, x) ∈ U ((G.horizontal r).label k) := by
+  apply G.subordinate r k
+  exact ⟨⟨(G.level_strictMono Fin.castSucc_lt_succ).le, le_rfl⟩, hx⟩
+
+/-- At a shared horizontal boundary point, the vertical based loop has
+compatible classes in the labels of both incident band cells. -/
+theorem bandVerticalPath_overlap_classes
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (r : Fin (G.extraRows + 3))
+    (k l : Fin (G.horizontal r).subdivision.cells)
+    (x : I)
+    (hxk : x ∈ (G.horizontal r).subdivision.cell k)
+    (hxl : x ∈ (G.horizontal r).subdivision.cell l)
+    (cBottom : Path x₀ (H (G.level r.castSucc, x)))
+    (cTop : Path x₀ (H (G.level r.succ, x)))
+    (hbottomK : ∀ t, cBottom t ∈ U ((G.horizontal r).label k))
+    (htopK : ∀ t, cTop t ∈ U ((G.horizontal r).label k))
+    (hbottomL : ∀ t, cBottom t ∈ U ((G.horizontal r).label l))
+    (htopL : ∀ t, cTop t ∈ U ((G.horizontal r).label l)) :
+    ∃ ω : OverlapGroup U x₀ hx₀
+        ((G.horizontal r).label k) ((G.horizontal r).label l),
+      FundamentalGroup.fromPath (.mk (closeEdge
+        (pathInSet cBottom (U ((G.horizontal r).label k))
+          (hx₀ ((G.horizontal r).label k))
+          (G.bandVerticalPath_source_mem r k x hxk) hbottomK)
+        (pathInSet (G.bandVerticalPath r x)
+          (U ((G.horizontal r).label k))
+          (G.bandVerticalPath_source_mem r k x hxk)
+          (G.bandVerticalPath_target_mem r k x hxk)
+          (G.bandVerticalPath_mem r k x hxk))
+        (pathInSet cTop (U ((G.horizontal r).label k))
+          (hx₀ ((G.horizontal r).label k))
+          (G.bandVerticalPath_target_mem r k x hxk) htopK))) =
+          overlapToLeft U x₀ hx₀ ((G.horizontal r).label k)
+            ((G.horizontal r).label l) ω ∧
+      FundamentalGroup.fromPath (.mk (closeEdge
+        (pathInSet cBottom (U ((G.horizontal r).label l))
+          (hx₀ ((G.horizontal r).label l))
+          (G.bandVerticalPath_source_mem r l x hxl) hbottomL)
+        (pathInSet (G.bandVerticalPath r x)
+          (U ((G.horizontal r).label l))
+          (G.bandVerticalPath_source_mem r l x hxl)
+          (G.bandVerticalPath_target_mem r l x hxl)
+          (G.bandVerticalPath_mem r l x hxl))
+        (pathInSet cTop (U ((G.horizontal r).label l))
+          (hx₀ ((G.horizontal r).label l))
+          (G.bandVerticalPath_target_mem r l x hxl) htopL))) =
+          overlapToRight U x₀ hx₀ ((G.horizontal r).label k)
+            ((G.horizontal r).label l) ω := by
+  have hstartK : H (G.level r.castSucc, x) ∈
+      U ((G.horizontal r).label k) := by
+    apply G.subordinate r k
+    exact ⟨⟨le_rfl, (G.level_strictMono Fin.castSucc_lt_succ).le⟩, hxk⟩
+  have hendK : H (G.level r.succ, x) ∈
+      U ((G.horizontal r).label k) := by
+    apply G.subordinate r k
+    exact ⟨⟨(G.level_strictMono Fin.castSucc_lt_succ).le, le_rfl⟩, hxk⟩
+  have hstartL : H (G.level r.castSucc, x) ∈
+      U ((G.horizontal r).label l) := by
+    apply G.subordinate r l
+    exact ⟨⟨le_rfl, (G.level_strictMono Fin.castSucc_lt_succ).le⟩, hxl⟩
+  have hendL : H (G.level r.succ, x) ∈
+      U ((G.horizontal r).label l) := by
+    apply G.subordinate r l
+    exact ⟨⟨(G.level_strictMono Fin.castSucc_lt_succ).le, le_rfl⟩, hxl⟩
+  exact Factorization.sharedEdge_overlap_classes
+    ((G.horizontal r).label k) ((G.horizontal r).label l)
+    cBottom (G.bandVerticalPath r x) cTop
+    hstartK hendK hstartL hendL
+    hbottomK (G.bandVerticalPath_mem r k x hxk) htopK
+    hbottomL (G.bandVerticalPath_mem r l x hxl) htopL
+
+end StaggeredCoverGrid
+
+end Hatcher.VanKampen
