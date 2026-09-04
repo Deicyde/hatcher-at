@@ -52,6 +52,7 @@ import Hatcher.VanKampen.BandSweep
 import Hatcher.VanKampen.BandGeometry
 import Hatcher.VanKampen.InterfaceRefinement
 import Hatcher.VanKampen.HomotopySweep
+import Hatcher.VanKampen.FinalBandSweep
 import Hatcher.VanKampen.PointedWedge
 import Hatcher.VanKampen.PresentedGroup
 import Hatcher.VanKampen.RefinementProduct
