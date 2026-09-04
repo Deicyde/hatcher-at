@@ -331,6 +331,91 @@ structure Sweep {δ : Path x₀ x₀} (F : Factorization U x₀ hx₀ γ)
     (G : Factorization U x₀ hx₀ δ) : Prop where
   moves : Moves F.entries G.entries
 
+/-- Compose a finite family of move chains indexed by the adjacent pairs of
+states. -/
+theorem moves_fin_chain {n : ℕ}
+    (state : Fin (n + 1) → List (Entry U x₀ hx₀))
+    (step : ∀ k : Fin n, Moves (state k.castSucc) (state k.succ)) :
+    Moves (state 0) (state (Fin.last n)) := by
+  induction n with
+  | zero => exact Relation.ReflTransGen.refl
+  | succ n ih =>
+      let initial : Fin (n + 1) → List (Entry U x₀ hx₀) :=
+        fun k ↦ state k.castSucc
+      have hinitial : Moves (initial 0) (initial (Fin.last n)) := by
+        apply ih initial
+        intro k
+        simpa only [initial, Fin.succ_castSucc] using step k.castSucc
+      have hlast := step (Fin.last n)
+      simpa [initial, Fin.succ_last] using hinitial.trans hlast
+
+/-- Compose alternating band sweeps and interface sweeps. There are `n + 1`
+bands and `n` interfaces. -/
+theorem moves_alternating {n : ℕ}
+    (lower upper : Fin (n + 1) → List (Entry U x₀ hx₀))
+    (band : ∀ k, Moves (lower k) (upper k))
+    (interface : ∀ k : Fin n, Moves (upper k.castSucc) (lower k.succ)) :
+    Moves (lower 0) (upper (Fin.last n)) := by
+  have hlower : Moves (lower 0) (lower (Fin.last n)) := by
+    apply moves_fin_chain lower
+    intro k
+    exact (band k.castSucc).trans (interface k)
+  exact hlower.trans (band (Fin.last n))
+
+/-- Entry-list form of the complete alternating sweep, with only the two
+endpoint factorizations kept as dependent objects. -/
+theorem sweep_of_moves_alternating
+    {δ : Path x₀ x₀} {n : ℕ}
+    (F : Factorization U x₀ hx₀ γ) (K : Factorization U x₀ hx₀ δ)
+    (lower upper : Fin (n + 1) → List (Entry U x₀ hx₀))
+    (hfirst : lower 0 = F.entries)
+    (hlast : upper (Fin.last n) = K.entries)
+    (band : ∀ k, Moves (lower k) (upper k))
+    (interface : ∀ k : Fin n, Moves (upper k.castSucc) (lower k.succ)) :
+    Sweep F K := by
+  constructor
+  rw [← hfirst, ← hlast]
+  exact moves_alternating lower upper band interface
+
+/-- A path and a factorization of that path, packaged so a finite family may
+vary its path with the row index. -/
+abbrev PackedFactorization :=
+  Σ p : Path x₀ x₀, Factorization U x₀ hx₀ p
+
+/-- Package-level form of `moves_alternating`. -/
+theorem sweep_alternating {n : ℕ}
+    (lower upper : Fin (n + 1) →
+      PackedFactorization (U := U) (x₀ := x₀) (hx₀ := hx₀))
+    (band : ∀ k, Sweep (lower k).2 (upper k).2)
+    (interface : ∀ k : Fin n,
+      Sweep (upper k.castSucc).2 (lower k.succ).2) :
+    Sweep (lower 0).2 (upper (Fin.last n)).2 := by
+  constructor
+  exact moves_alternating
+    (fun k ↦ (lower k).2.entries)
+    (fun k ↦ (upper k).2.entries)
+    (fun k ↦ (band k).moves)
+    (fun k ↦ (interface k).moves)
+
+/-- Add entry-list identifications at the two ends of an alternating sweep. -/
+theorem sweep_of_alternating_of_entries_eq
+    {δ : Path x₀ x₀} {n : ℕ}
+    (F : Factorization U x₀ hx₀ γ) (K : Factorization U x₀ hx₀ δ)
+    (lower upper : Fin (n + 1) →
+      PackedFactorization (U := U) (x₀ := x₀) (hx₀ := hx₀))
+    (hfirst : (lower 0).2.entries = F.entries)
+    (hlast : (upper (Fin.last n)).2.entries = K.entries)
+    (band : ∀ k, Sweep (lower k).2 (upper k).2)
+    (interface : ∀ k : Fin n,
+      Sweep (upper k.castSucc).2 (lower k.succ).2) :
+    Sweep F K :=
+  sweep_of_moves_alternating F K
+    (fun k ↦ (lower k).2.entries)
+    (fun k ↦ (upper k).2.entries)
+    hfirst hlast
+    (fun k ↦ (band k).moves)
+    (fun k ↦ (interface k).moves)
+
 private theorem quotient_wordOfEntries_eq_of_moves
     {es es' : List (Entry U x₀ hx₀)}
     (h : Moves es es') :
