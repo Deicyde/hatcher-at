@@ -54,6 +54,7 @@ import Hatcher.VanKampen.InterfaceRefinement
 import Hatcher.VanKampen.InterfaceCoarsening
 import Hatcher.VanKampen.HomotopySweep
 import Hatcher.VanKampen.FinalBandSweep
+import Hatcher.VanKampen.NonfinalBandSweep
 import Hatcher.VanKampen.VanKampenHomotopy
 import Hatcher.VanKampen.PointedWedge
 import Hatcher.VanKampen.PresentedGroup
