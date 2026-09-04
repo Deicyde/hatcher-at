@@ -51,6 +51,7 @@ import Hatcher.VanKampen.InterfaceFactorization
 import Hatcher.VanKampen.BandSweep
 import Hatcher.VanKampen.BandGeometry
 import Hatcher.VanKampen.InterfaceRefinement
+import Hatcher.VanKampen.InterfaceCoarsening
 import Hatcher.VanKampen.HomotopySweep
 import Hatcher.VanKampen.FinalBandSweep
 import Hatcher.VanKampen.VanKampenHomotopy
