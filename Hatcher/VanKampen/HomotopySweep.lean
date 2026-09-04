@@ -146,6 +146,138 @@ theorem lastBandUpperConnectors_entries
     castBoundaryConnectors_toFactorization_entries]
   exact K.canonicalBoundaryFactorization_entries
 
+/-- Entry lists at the lower edges of all grid bands. The first is the
+original factorization; every later one is the upper labeling of the
+preceding interface. -/
+def chainLowerEntries
+    (F : Factorization U x₀ hx₀ γ) (K : Factorization U x₀ hx₀ δ)
+    (h : γ.Homotopic δ)
+    (G : StaggeredCoverGrid U (F.boundaryHomotopy K h)
+      F.boundaryCover K.boundaryCover)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 3)) : List (Factorization.Entry U x₀ hx₀) :=
+  Fin.cases
+    ((G.firstBandLowerConnectors F K h).toFactorization
+      (hx₀ := hx₀)).entries
+    (fun k ↦
+      (G.upperInterfaceFactorization hx₀ hone htwo hthree k).entries)
+    r
+
+/-- Entry lists at the upper edges of all grid bands. Every non-final one is
+the lower labeling of its following interface; the final one is the target
+factorization. -/
+def chainUpperEntries
+    (F : Factorization U x₀ hx₀ γ) (K : Factorization U x₀ hx₀ δ)
+    (h : γ.Homotopic δ)
+    (G : StaggeredCoverGrid U (F.boundaryHomotopy K h)
+      F.boundaryCover K.boundaryCover)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 3)) : List (Factorization.Entry U x₀ hx₀) :=
+  Fin.lastCases
+    ((G.lastBandUpperConnectors F K h).toFactorization
+      (hx₀ := hx₀)).entries
+    (fun k ↦
+      (G.lowerInterfaceFactorization hx₀ hone htwo hthree k).entries)
+    r
+
+@[simp]
+theorem chainLowerEntries_zero
+    (F : Factorization U x₀ hx₀ γ) (K : Factorization U x₀ hx₀ δ)
+    (h : γ.Homotopic δ)
+    (G : StaggeredCoverGrid U (F.boundaryHomotopy K h)
+      F.boundaryCover K.boundaryCover)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k)) :
+    G.chainLowerEntries F K h hone htwo hthree 0 = F.entries := by
+  unfold chainLowerEntries
+  rw [Fin.cases_zero]
+  exact G.firstBandLowerConnectors_entries F K h
+
+@[simp]
+theorem chainUpperEntries_last
+    (F : Factorization U x₀ hx₀ γ) (K : Factorization U x₀ hx₀ δ)
+    (h : γ.Homotopic δ)
+    (G : StaggeredCoverGrid U (F.boundaryHomotopy K h)
+      F.boundaryCover K.boundaryCover)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k)) :
+    G.chainUpperEntries F K h hone htwo hthree
+      (Fin.last (G.extraRows + 2)) = K.entries := by
+  unfold chainUpperEntries
+  rw [Fin.lastCases_last]
+  exact G.lastBandUpperConnectors_entries F K h
+
+/-- The adjacent entry lists at every internal boundary are related by the
+already-constructed interface sweep. -/
+theorem chainInterfaceMoves
+    (F : Factorization U x₀ hx₀ γ) (K : Factorization U x₀ hx₀ δ)
+    (h : γ.Homotopic δ)
+    (G : StaggeredCoverGrid U (F.boundaryHomotopy K h)
+      F.boundaryCover K.boundaryCover)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) :
+    Factorization.Moves
+      (G.chainUpperEntries F K h hone htwo hthree r.castSucc)
+      (G.chainLowerEntries F K h hone htwo hthree r.succ) := by
+  unfold chainUpperEntries chainLowerEntries
+  rw [Fin.lastCases_castSucc, Fin.cases_succ]
+  exact (G.interfaceSweep hx₀ hone htwo hthree r).moves
+
+/-- Once every geometric band supplies its move chain, the endpoint
+factorizations are connected by one finite sweep. -/
+theorem sweep_of_band_moves
+    (F : Factorization U x₀ hx₀ γ) (K : Factorization U x₀ hx₀ δ)
+    (h : γ.Homotopic δ)
+    (G : StaggeredCoverGrid U (F.boundaryHomotopy K h)
+      F.boundaryCover K.boundaryCover)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (band : ∀ r : Fin (G.extraRows + 3),
+      Factorization.Moves
+        (G.chainLowerEntries F K h hone htwo hthree r)
+        (G.chainUpperEntries F K h hone htwo hthree r)) :
+    Factorization.Sweep F K := by
+  apply Factorization.sweep_of_moves_alternating F K
+    (G.chainLowerEntries F K h hone htwo hthree)
+    (G.chainUpperEntries F K h hone htwo hthree)
+  · exact G.chainLowerEntries_zero F K h hone htwo hthree
+  · exact G.chainUpperEntries_last F K h hone htwo hthree
+  · exact band
+  · exact G.chainInterfaceMoves F K h hone htwo hthree
+
+/-- It suffices to prove all non-final band moves uniformly and the final
+band move separately. -/
+theorem sweep_of_nonfinal_and_last_band_moves
+    (F : Factorization U x₀ hx₀ γ) (K : Factorization U x₀ hx₀ δ)
+    (h : γ.Homotopic δ)
+    (G : StaggeredCoverGrid U (F.boundaryHomotopy K h)
+      F.boundaryCover K.boundaryCover)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (band : ∀ r : Fin (G.extraRows + 2),
+      Factorization.Moves
+        (G.chainLowerEntries F K h hone htwo hthree r.castSucc)
+        (G.chainUpperEntries F K h hone htwo hthree r.castSucc))
+    (lastBand : Factorization.Moves
+      (G.chainLowerEntries F K h hone htwo hthree
+        (Fin.last (G.extraRows + 2)))
+      (G.chainUpperEntries F K h hone htwo hthree
+        (Fin.last (G.extraRows + 2)))) :
+    Factorization.Sweep F K := by
+  apply G.sweep_of_band_moves F K h hone htwo hthree
+  intro r
+  exact Fin.lastCases lastBand band r
+
 end StaggeredCoverGrid
 
 end Hatcher.VanKampen
