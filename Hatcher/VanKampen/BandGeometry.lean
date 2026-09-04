@@ -698,6 +698,195 @@ theorem bandTopClass_eq_factor
     split_ifs <;> simp_all only [Path.symm_apply, Function.comp_apply]
   rw [heq]
 
+theorem bandLeftClass_zero
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i) (r : Fin (G.extraRows + 2))
+    (C₀ : BoundaryConnectors (G.bandLowerBoundary r))
+    (C₁ : BoundaryConnectors (G.bandUpperBoundary r))
+    {n : ℕ} (hn : n + 1 = (G.horizontal r.castSucc).subdivision.cells) :
+    G.bandLeftClass hx₀ r C₀ C₁
+      (Fin.cast hn (0 : Fin (n + 1))) = 1 := by
+  let k₀ := Fin.cast hn (0 : Fin (n + 1))
+  have hlower (t : I) :
+      ((G.bandLowerLeftConnector hx₀ r C₀ k₀ t :
+        U ((G.horizontal r.castSucc).label k₀)) : X) = x₀ := by
+    change C₀.path
+      (0 : Fin ((G.bandLowerBoundary r).subdivision.cells + 1)) t = x₀
+    rw [C₀.left_eq, Path.cast_coe]
+    rfl
+  have hedge (t : I) :
+      ((G.bandLeftEdge r k₀ t :
+        U ((G.horizontal r.castSucc).label k₀)) : X) = x₀ := by
+    unfold bandLeftEdge
+    rw [Path.map_coe]
+    change ((G.lowerBandCellMap r k₀ (UnitSquare.left t)) : X) = x₀
+    change H
+        (Icc.convexComb (G.level r.castSucc.castSucc)
+          (G.level r.castSucc.succ) (UnitSquare.left t).1,
+        Icc.convexComb
+          ((G.horizontal r.castSucc).subdivision.point k₀.castSucc)
+          ((G.horizontal r.castSucc).subdivision.point k₀.succ)
+          (UnitSquare.left t).2) = x₀
+    have hk : k₀.castSucc = 0 := by
+      ext
+      simp [k₀]
+    rw [hk, (G.horizontal r.castSucc).subdivision.left]
+    simp [UnitSquare.left, UnitSquare.idPath,
+      H.source]
+  have hupper (t : I) :
+      ((G.bandUpperLeftConnector hx₀ r C₁ k₀ t :
+        U ((G.horizontal r.castSucc).label k₀)) : X) = x₀ := by
+    change C₁.path
+      (0 : Fin ((G.bandUpperBoundary r).subdivision.cells + 1)) t = x₀
+    rw [C₁.left_eq, Path.cast_coe]
+    rfl
+  have hloop : G.bandLeftLoop hx₀ r C₀ C₁ k₀ =
+      Path.refl (⟨x₀, hx₀ ((G.horizontal r.castSucc).label k₀)⟩ :
+        U ((G.horizontal r.castSucc).label k₀)) := by
+    apply Path.ext
+    funext t
+    apply Subtype.ext
+    unfold bandLeftLoop closeEdge
+    simp only [Path.trans_apply, Path.refl_apply]
+    split_ifs <;>
+      simp_all only [Path.symm_apply, Function.comp_apply]
+  unfold bandLeftClass
+  change FundamentalGroup.fromPath
+      (.mk (G.bandLeftLoop hx₀ r C₀ C₁ k₀)) = 1
+  rw [hloop, Path.Homotopic.Quotient.mk_refl]
+  rfl
+
+theorem bandRightClass_last
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i) (r : Fin (G.extraRows + 2))
+    (C₀ : BoundaryConnectors (G.bandLowerBoundary r))
+    (C₁ : BoundaryConnectors (G.bandUpperBoundary r))
+    {n : ℕ} (hn : n + 1 = (G.horizontal r.castSucc).subdivision.cells) :
+    G.bandRightClass hx₀ r C₀ C₁
+      (Fin.cast hn (Fin.last n)) = 1 := by
+  let k₁ := Fin.cast hn (Fin.last n)
+  have hk : k₁.succ =
+      Fin.last (G.horizontal r.castSucc).subdivision.cells := by
+    apply Fin.ext
+    simp [k₁]
+    omega
+  have hlower (t : I) :
+      ((G.bandLowerRightConnector hx₀ r C₀ k₁ t :
+        U ((G.horizontal r.castSucc).label k₁)) : X) = x₀ := by
+    change C₀.path k₁.succ t = x₀
+    rw [hk]
+    change C₀.path
+      (Fin.last (G.bandLowerBoundary r).subdivision.cells) t = x₀
+    rw [C₀.right_eq, Path.cast_coe]
+    rfl
+  have hedge (t : I) :
+      ((G.bandRightEdge r k₁ t :
+        U ((G.horizontal r.castSucc).label k₁)) : X) = x₀ := by
+    unfold bandRightEdge
+    rw [Path.map_coe]
+    change ((G.lowerBandCellMap r k₁ (UnitSquare.right t)) : X) = x₀
+    change H
+        (Icc.convexComb (G.level r.castSucc.castSucc)
+          (G.level r.castSucc.succ) (UnitSquare.right t).1,
+        Icc.convexComb
+          ((G.horizontal r.castSucc).subdivision.point k₁.castSucc)
+          ((G.horizontal r.castSucc).subdivision.point k₁.succ)
+          (UnitSquare.right t).2) = x₀
+    rw [hk, (G.horizontal r.castSucc).subdivision.right]
+    simp [UnitSquare.right, UnitSquare.idPath, H.target]
+  have hupper (t : I) :
+      ((G.bandUpperRightConnector hx₀ r C₁ k₁ t :
+        U ((G.horizontal r.castSucc).label k₁)) : X) = x₀ := by
+    change C₁.path k₁.succ t = x₀
+    rw [hk]
+    change C₁.path
+      (Fin.last (G.bandUpperBoundary r).subdivision.cells) t = x₀
+    rw [C₁.right_eq, Path.cast_coe]
+    rfl
+  have hloop : G.bandRightLoop hx₀ r C₀ C₁ k₁ =
+      Path.refl (⟨x₀, hx₀ ((G.horizontal r.castSucc).label k₁)⟩ :
+        U ((G.horizontal r.castSucc).label k₁)) := by
+    apply Path.ext
+    funext t
+    apply Subtype.ext
+    unfold bandRightLoop closeEdge
+    simp only [Path.trans_apply, Path.refl_apply]
+    split_ifs <;>
+      simp_all only [Path.symm_apply, Function.comp_apply]
+  unfold bandRightClass
+  change FundamentalGroup.fromPath
+      (.mk (G.bandRightLoop hx₀ r C₀ C₁ k₁)) = 1
+  rw [hloop, Path.Homotopic.Quotient.mk_refl]
+  rfl
+
+theorem bandMoves
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i) (r : Fin (G.extraRows + 2))
+    (C₀ : BoundaryConnectors (G.bandLowerBoundary r))
+    (C₁ : BoundaryConnectors (G.bandUpperBoundary r)) :
+    Factorization.Moves
+      (C₀.toFactorization (hx₀ := hx₀)).entries
+      (C₁.toFactorization (hx₀ := hx₀)).entries := by
+  let n := (G.horizontal r.castSucc).subdivision.cells - 1
+  have hn : n + 1 = (G.horizontal r.castSucc).subdivision.cells :=
+    Nat.sub_add_cancel (G.horizontal r.castSucc).subdivision.cells_pos
+  let index : Fin (n + 1) → ι := fun k ↦
+    (G.horizontal r.castSucc).label (Fin.cast hn k)
+  let bottomClass : ∀ k, CoverGroup U x₀ hx₀ (index k) := fun k ↦
+    G.bandBottomClass hx₀ r C₀ (Fin.cast hn k)
+  let topClass : ∀ k, CoverGroup U x₀ hx₀ (index k) := fun k ↦
+    G.bandTopClass hx₀ r C₁ (Fin.cast hn k)
+  let leftClass : ∀ k, CoverGroup U x₀ hx₀ (index k) := fun k ↦
+    G.bandLeftClass hx₀ r C₀ C₁ (Fin.cast hn k)
+  let rightClass : ∀ k, CoverGroup U x₀ hx₀ (index k) := fun k ↦
+    G.bandRightClass hx₀ r C₀ C₁ (Fin.cast hn k)
+  let overlap : ∀ k : Fin n,
+      OverlapGroup U x₀ hx₀ (index k.castSucc) (index k.succ) := fun k ↦
+    G.bandVerticalOverlapClass hx₀ r C₀ C₁ hn k
+  have hraw := Factorization.moves_of_band_cell_relations
+    (U := U) (x₀ := x₀) (hx₀ := hx₀)
+    index bottomClass topClass leftClass rightClass overlap
+    (fun k ↦ G.bandCell_relation hx₀ r C₀ C₁ (Fin.cast hn k))
+    (fun k ↦ (G.overlapToLeft_bandVerticalOverlapClass
+      hx₀ r C₀ C₁ hn k).symm)
+    (fun k ↦ (G.overlapToRight_bandVerticalOverlapClass
+      hx₀ r C₀ C₁ hn k).symm)
+    (G.bandLeftClass_zero hx₀ r C₀ C₁ hn)
+    (G.bandRightClass_last hx₀ r C₀ C₁ hn)
+  have hbottom :
+      (List.ofFn fun k ↦
+        (⟨index k, bottomClass k⟩ : Factorization.Entry U x₀ hx₀)) =
+        (C₀.toFactorization (hx₀ := hx₀)).entries := by
+    rw [C₀.toFactorization_entries]
+    rw [List.ofFn_congr hn]
+    congr 1
+    funext k
+    apply Sigma.ext
+    · rfl
+    · exact heq_of_eq (G.bandBottomClass_eq_factor hx₀ r C₀ k)
+  have htop : Factorization.bandTopEntries index topClass =
+      (C₁.toFactorization (hx₀ := hx₀)).entries := by
+    rw [C₁.toFactorization_entries]
+    unfold Factorization.bandTopEntries
+    rw [List.ofFn_congr hn]
+    congr 1
+    funext k
+    apply Sigma.ext
+    · rfl
+    · exact heq_of_eq (G.bandTopClass_eq_factor hx₀ r C₁ k)
+  rw [hbottom, htop] at hraw
+  exact hraw
+
+theorem bandSweep
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i) (r : Fin (G.extraRows + 2))
+    (C₀ : BoundaryConnectors (G.bandLowerBoundary r))
+    (C₁ : BoundaryConnectors (G.bandUpperBoundary r)) :
+    Factorization.Sweep
+      (C₀.toFactorization (hx₀ := hx₀))
+      (C₁.toFactorization (hx₀ := hx₀)) := by
+  exact ⟨G.bandMoves hx₀ r C₀ C₁⟩
+
 end StaggeredCoverGrid
 
 end Hatcher.VanKampen
