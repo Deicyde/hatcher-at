@@ -177,6 +177,31 @@ theorem moves_split_sameCover (before after : List (Entry U x₀ hx₀))
       (before ++ sameCoverEntries i (a :: as) ++ after) :=
   (moves_combine_sameCover before after i a as).symm
 
+/-- Split one entry into an arbitrary nonempty same-cover block. -/
+theorem moves_split_sameCover_nonempty
+    (before after : List (Entry U x₀ hx₀)) (i : ι)
+    (as : List (CoverGroup U x₀ hx₀ i)) (has : as ≠ []) :
+    Moves
+      (before ++ [⟨i, as.reverse.prod⟩] ++ after)
+      (before ++ sameCoverEntries i as ++ after) := by
+  cases as with
+  | nil => exact (has rfl).elim
+  | cons a tail => exact moves_split_sameCover before after i a tail
+
+/-- Replace a coarse entry by a nonempty refined block once its class is the
+reverse-order product of the refined classes. -/
+theorem moves_replace_by_sameCover_block
+    (before after : List (Entry U x₀ hx₀)) (i : ι)
+    (coarse : CoverGroup U x₀ hx₀ i)
+    (refined : List (CoverGroup U x₀ hx₀ i))
+    (hrefined : refined ≠ [])
+    (hprod : refined.reverse.prod = coarse) :
+    Moves
+      (before ++ [⟨i, coarse⟩] ++ after)
+      (before ++ sameCoverEntries i refined ++ after) := by
+  rw [← hprod]
+  exact moves_split_sameCover_nonempty before after i refined hrefined
+
 /-- One possibly index-varying change of cover label, certified by a loop in
 the corresponding overlap. -/
 abbrev CoverChange :=
