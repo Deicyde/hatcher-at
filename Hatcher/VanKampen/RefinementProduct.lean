@@ -79,4 +79,47 @@ theorem reverseProd_closedEdges_eq_of_homotopic {Y : Type u}
         (Path.Homotopic.refl _)
         (Path.Homotopic.hcomp hwhole (Path.Homotopic.refl _))
 
+/-- The coordinate of a point inside a nondegenerate unit-interval segment. -/
+def intervalCoordinate (a b x : I) (hab : a < b) (hx : x ∈ Set.Icc a b) : I :=
+  ⟨((x : ℝ) - a) / ((b : ℝ) - a), by
+    have hd : 0 < (b : ℝ) - a := sub_pos.mpr hab
+    have hax : (a : ℝ) ≤ x := hx.1
+    have hxb : (x : ℝ) ≤ b := hx.2
+    constructor
+    · exact div_nonneg (sub_nonneg.mpr hax) hd.le
+    · exact (div_le_one hd).2 (sub_le_sub_right hxb (a : ℝ))⟩
+
+@[simp]
+theorem convexComb_intervalCoordinate (a b x : I) (hab : a < b)
+    (hx : x ∈ Set.Icc a b) :
+    Set.Icc.convexComb a b (intervalCoordinate a b x hab hx) = x := by
+  apply Subtype.ext
+  simp only [Set.Icc.coe_convexComb, intervalCoordinate]
+  have hd : (b : ℝ) - a ≠ 0 := ne_of_gt (sub_pos.mpr hab)
+  field_simp
+  ring
+
+/-- Restricting a subpath to coordinates corresponding to ambient points
+recovers the direct subpath between those points. -/
+theorem subpath_subpath_intervalCoordinate {X : Type*} [TopologicalSpace X]
+    {a₀ a₁ : X} (p : Path a₀ a₁) (a b x y : I) (hab : a < b)
+    (hx : x ∈ Set.Icc a b) (hy : y ∈ Set.Icc a b) :
+    (p.subpath a b).subpath
+        (intervalCoordinate a b x hab hx)
+        (intervalCoordinate a b y hab hy) =
+      (p.subpath x y).cast
+        (congrArg p (convexComb_intervalCoordinate a b x hab hx))
+        (congrArg p (convexComb_intervalCoordinate a b y hab hy)) := by
+  ext t
+  change p (Set.Icc.convexComb a b
+      (Set.Icc.convexComb (intervalCoordinate a b x hab hx)
+        (intervalCoordinate a b y hab hy) t)) =
+    p (Set.Icc.convexComb x y t)
+  congr 1
+  apply Subtype.ext
+  simp only [Set.Icc.coe_convexComb, intervalCoordinate]
+  have hd : (b : ℝ) - a ≠ 0 := ne_of_gt (sub_pos.mpr hab)
+  field_simp
+  ring
+
 end Hatcher.VanKampen
