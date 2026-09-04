@@ -496,6 +496,361 @@ theorem reverseProd_upperRefinedBlockClass_eq_upperCoarseFactor
   rw [hpath]
   exact Path.Homotopic.refl _
 
+private theorem ofFn_finCast {α : Type*} {m n : ℕ} (h : m = n)
+    (f : Fin n → α) :
+    List.ofFn (fun j : Fin m ↦ f (Fin.cast h j)) = List.ofFn f := by
+  subst n
+  rfl
+
+private theorem coverLoopClass_heq_of_eq
+    {i j : ι} (hij : i = j) (p q : Path x₀ x₀)
+    (hp : ∀ t, p t ∈ U i) (hq : ∀ t, q t ∈ U j) (hpq : p = q) :
+    HEq (Factorization.coverLoopClass (hx₀ := hx₀) i p hp)
+      (Factorization.coverLoopClass (hx₀ := hx₀) j q hq) := by
+  subst j
+  subst q
+  rfl
+
+/-- The nonempty block of refined upper-edge factors inside one coarse
+horizontal cell. -/
+def upperRefinedCoverBlock
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2))
+    (k : Fin (G.horizontal r.castSucc).subdivision.cells) :
+    Factorization.CoverBlock (U := U) (x₀ := x₀) (hx₀ := hx₀) := by
+  let N := IntervalSubdivision.commonRefinementLeftBlockSize
+    (G.horizontal r.castSucc).subdivision
+    (G.horizontal r.succ).subdivision k
+  have hN : N - 1 + 1 = N := Nat.sub_add_cancel <|
+    IntervalSubdivision.commonRefinementLeftBlockSize_pos
+      (G.horizontal r.castSucc).subdivision
+      (G.horizontal r.succ).subdivision k
+  exact Factorization.coverBlockOfFn ((G.horizontal r.castSucc).label k)
+    (fun j : Fin (N - 1 + 1) ↦
+      G.upperRefinedBlockClass hx₀ hone htwo hthree r k (Fin.cast hN j))
+
+theorem upperRefinedCoverBlock_coarseEntry
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2))
+    (k : Fin (G.horizontal r.castSucc).subdivision.cells) :
+    (G.upperRefinedCoverBlock hx₀ hone htwo hthree r k).coarseEntry =
+      ⟨(G.horizontal r.castSucc).label k,
+        (Path.Homotopic.Quotient.mk
+          ((G.upperCoarseConnectors hx₀ hone htwo hthree r).factor
+            (hx₀ := hx₀) k) :
+          CoverGroup U x₀ hx₀ ((G.horizontal r.castSucc).label k))⟩ := by
+  unfold upperRefinedCoverBlock
+  dsimp only
+  rw [Factorization.coverBlockOfFn_coarseEntry]
+  apply Sigma.ext
+  · rfl
+  · dsimp only
+    rw [ofFn_finCast]
+    exact heq_of_eq <|
+      G.reverseProd_upperRefinedBlockClass_eq_upperCoarseFactor
+        hx₀ hone htwo hthree r k
+
+theorem upperRefinedCoverBlock_fineEntries
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2))
+    (k : Fin (G.horizontal r.castSucc).subdivision.cells) :
+    (G.upperRefinedCoverBlock hx₀ hone htwo hthree r k).fineEntries =
+      List.ofFn fun j ↦
+        (⟨(G.horizontal r.castSucc).label k,
+          G.upperRefinedBlockClass hx₀ hone htwo hthree r k j⟩ :
+          Factorization.Entry U x₀ hx₀) := by
+  let N := IntervalSubdivision.commonRefinementLeftBlockSize
+    (G.horizontal r.castSucc).subdivision
+    (G.horizontal r.succ).subdivision k
+  have hN : N - 1 + 1 = N := Nat.sub_add_cancel <|
+    IntervalSubdivision.commonRefinementLeftBlockSize_pos
+      (G.horizontal r.castSucc).subdivision
+      (G.horizontal r.succ).subdivision k
+  change (Factorization.coverBlockOfFn
+    ((G.horizontal r.castSucc).label k)
+    (fun j : Fin (N - 1 + 1) ↦
+      G.upperRefinedBlockClass hx₀ hone htwo hthree r k
+        (Fin.cast hN j))).fineEntries = _
+  rw [Factorization.coverBlockOfFn_fineEntries]
+  exact ofFn_finCast hN (fun j ↦
+    (⟨(G.horizontal r.castSucc).label k,
+      G.upperRefinedBlockClass hx₀ hone htwo hthree r k j⟩ :
+      Factorization.Entry U x₀ hx₀))
+
+theorem upperRefinedBlockEntry_eq_alignedLowerEntry
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2))
+    (k : Fin (G.horizontal r.castSucc).subdivision.cells)
+    (j : Fin (IntervalSubdivision.commonRefinementLeftBlockSize
+      (G.horizontal r.castSucc).subdivision
+      (G.horizontal r.succ).subdivision k)) :
+    (⟨(G.horizontal r.castSucc).label k,
+      G.upperRefinedBlockClass hx₀ hone htwo hthree r k j⟩ :
+      Factorization.Entry U x₀ hx₀) =
+    let D := G.alignedInterface hx₀ hone htwo hthree r
+    let c := IntervalSubdivision.commonRefinementLeftBlockCell
+      (G.horizontal r.castSucc).subdivision
+      (G.horizontal r.succ).subdivision k j
+    ⟨D.lowerLabel c,
+      Factorization.coverLoopClass (D.lowerLabel c) (D.loop c)
+        (D.loop_mem_lower c)⟩ := by
+  dsimp only
+  have hlabel :
+      (G.alignedInterface hx₀ hone htwo hthree r).lowerLabel
+          (IntervalSubdivision.commonRefinementLeftBlockCell
+            (G.horizontal r.castSucc).subdivision
+            (G.horizontal r.succ).subdivision k j) =
+        (G.horizontal r.castSucc).label k := by
+    simp [alignedInterface, Factorization.AlignedInterface.ofGrid,
+      lowerInterfaceBoundary]
+  apply Sigma.ext
+  · exact hlabel.symm
+  · dsimp only
+    let c := IntervalSubdivision.commonRefinementLeftBlockCell
+      (G.horizontal r.castSucc).subdivision
+      (G.horizontal r.succ).subdivision k j
+    let localLoop := basedSegmentLoop (G.interfacePath r)
+      (G.upperRefinedBlockPoint r k j.castSucc)
+      (G.upperRefinedBlockPoint r k j.succ)
+      (G.upperRefinedBlockConnector hx₀ hone htwo hthree r k j.castSucc)
+      (G.upperRefinedBlockConnector hx₀ hone htwo hthree r k j.succ)
+    have hlocalMem (t : I) :
+        localLoop t ∈ U ((G.horizontal r.castSucc).label k) := by
+      exact basedSegmentLoop_mem _ _ _
+        ((G.upperRefinedBlockPoint_strictMono r k)
+          Fin.castSucc_lt_succ).le _ _ _
+        (fun t ↦ G.upperRefinedBlockConnector_range
+          hx₀ hone htwo hthree r k j.castSucc ⟨t, rfl⟩)
+        (fun t ↦ G.upperRefinedBlockConnector_range
+          hx₀ hone htwo hthree r k j.succ ⟨t, rfl⟩)
+        (fun _x hmem ↦ (G.bandUpperBoundary r).mapsTo k
+          ⟨(G.upperRefinedBlockPoint_mem_cell r k j.castSucc).1.trans hmem.1,
+            hmem.2.trans (G.upperRefinedBlockPoint_mem_cell r k j.succ).2⟩) t
+    have hlocalClass :
+        G.upperRefinedBlockClass hx₀ hone htwo hthree r k j =
+          Factorization.coverLoopClass
+            ((G.horizontal r.castSucc).label k) localLoop hlocalMem := by
+      rfl
+    have hloop : localLoop =
+        (G.alignedInterface hx₀ hone htwo hthree r).loop c := by
+      have hv₀ :
+          IntervalSubdivision.commonRefinementLeftBlockVertex
+              (G.horizontal r.castSucc).subdivision
+              (G.horizontal r.succ).subdivision k j.castSucc = c.castSucc :=
+        IntervalSubdivision.commonRefinementLeftBlockVertex_castSucc _ _ _ _
+      have hv₁ :
+          IntervalSubdivision.commonRefinementLeftBlockVertex
+              (G.horizontal r.castSucc).subdivision
+              (G.horizontal r.succ).subdivision k j.succ = c.succ :=
+        IntervalSubdivision.commonRefinementLeftBlockVertex_succ _ _ _ _
+      have hleft (t : I) :
+          G.upperRefinedBlockConnector hx₀ hone htwo hthree r k j.castSucc t =
+            (G.alignedInterface hx₀ hone htwo hthree r).connector c.castSucc t := by
+        exact congrArg (fun z ↦
+          G.interfaceVertexConnector hx₀ hone htwo hthree r z t) hv₀
+      have hright (t : I) :
+          G.upperRefinedBlockConnector hx₀ hone htwo hthree r k j.succ t =
+            (G.alignedInterface hx₀ hone htwo hthree r).connector c.succ t := by
+        exact congrArg (fun z ↦
+          G.interfaceVertexConnector hx₀ hone htwo hthree r z t) hv₁
+      have hsegment (t : I) :
+          (G.interfacePath r).subpath
+              (G.upperRefinedBlockPoint r k j.castSucc)
+              (G.upperRefinedBlockPoint r k j.succ) t =
+            (G.interfacePath r).subpath
+              ((G.alignedInterface hx₀ hone htwo hthree r).point c.castSucc)
+              ((G.alignedInterface hx₀ hone htwo hthree r).point c.succ) t := by
+        change G.interfacePath r
+            (Icc.convexComb
+              ((G.interfaceSubdivision r).point _)
+              ((G.interfaceSubdivision r).point _) t) =
+          G.interfacePath r
+            (Icc.convexComb
+              ((G.interfaceSubdivision r).point _)
+              ((G.interfaceSubdivision r).point _) t)
+        rw [hv₀, hv₁]
+      apply Path.ext
+      funext t
+      simp only [localLoop, Factorization.AlignedInterface.loop,
+        basedSegmentLoop, Path.trans_apply]
+      split
+      · exact hleft _
+      · split
+        · exact hsegment _
+        · simp only [Path.symm_apply, Function.comp_apply]
+          exact hright _
+    exact (heq_of_eq hlocalClass).trans <|
+      coverLoopClass_heq_of_eq hlabel.symm localLoop
+        ((G.alignedInterface hx₀ hone htwo hthree r).loop c)
+        hlocalMem ((G.alignedInterface hx₀ hone htwo hthree r).loop_mem_lower c)
+        hloop
+
+/-- The coarse upper-row cells, each carrying its ordered block of interface
+refinement factors. -/
+def upperRefinedCoverBlocks
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) :
+    List (Factorization.CoverBlock (U := U) (x₀ := x₀) (hx₀ := hx₀)) :=
+  List.ofFn fun k ↦
+    G.upperRefinedCoverBlock hx₀ hone htwo hthree r k
+
+theorem upperRefinedCoverBlocks_coarseEntries
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) :
+    Factorization.coarseEntries
+        (G.upperRefinedCoverBlocks hx₀ hone htwo hthree r) =
+      ((G.upperCoarseConnectors hx₀ hone htwo hthree r).toFactorization
+        (hx₀ := hx₀)).entries := by
+  rw [BoundaryConnectors.toFactorization_entries]
+  unfold upperRefinedCoverBlocks Factorization.coarseEntries
+  simp only [List.map_ofFn]
+  change (List.ofFn fun k : Fin (G.horizontal r.castSucc).subdivision.cells ↦
+      (G.upperRefinedCoverBlock hx₀ hone htwo hthree r k).coarseEntry) =
+    List.ofFn fun k : Fin (G.horizontal r.castSucc).subdivision.cells ↦
+      (⟨(G.horizontal r.castSucc).label k,
+        (Path.Homotopic.Quotient.mk
+          ((G.upperCoarseConnectors hx₀ hone htwo hthree r).factor
+            (hx₀ := hx₀) k) :
+          CoverGroup U x₀ hx₀ ((G.horizontal r.castSucc).label k))⟩ :
+        Factorization.Entry U x₀ hx₀)
+  rw [List.ofFn_inj]
+  funext k
+  exact G.upperRefinedCoverBlock_coarseEntry hx₀ hone htwo hthree r k
+
+theorem upperRefinedCoverBlocks_fineEntries
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) :
+    Factorization.fineEntries
+        (G.upperRefinedCoverBlocks hx₀ hone htwo hthree r) =
+      (G.alignedInterface hx₀ hone htwo hthree r).lowerEntries
+        (hx₀ := hx₀) := by
+  change ((G.upperRefinedCoverBlocks hx₀ hone htwo hthree r).map
+    Factorization.CoverBlock.fineEntries).flatten = _
+  unfold upperRefinedCoverBlocks
+  rw [List.map_ofFn]
+  change (List.ofFn fun k : Fin (G.horizontal r.castSucc).subdivision.cells ↦
+    (G.upperRefinedCoverBlock hx₀ hone htwo hthree r k).fineEntries).flatten = _
+  simp_rw [G.upperRefinedCoverBlock_fineEntries hx₀ hone htwo hthree r]
+  simp_rw [G.upperRefinedBlockEntry_eq_alignedLowerEntry
+    hx₀ hone htwo hthree r]
+  unfold Factorization.AlignedInterface.lowerEntries
+  let entry : Fin (IntervalSubdivision.commonRefinement
+      (G.horizontal r.castSucc).subdivision
+      (G.horizontal r.succ).subdivision).cells →
+      Factorization.Entry U x₀ hx₀ := fun c ↦
+    let D := G.alignedInterface hx₀ hone htwo hthree r
+    ⟨D.lowerLabel c,
+      Factorization.coverLoopClass (D.lowerLabel c) (D.loop c)
+        (D.loop_mem_lower c)⟩
+  change (List.ofFn fun k : Fin (G.horizontal r.castSucc).subdivision.cells ↦
+      List.ofFn fun j : Fin (IntervalSubdivision.commonRefinementLeftBlockSize
+        (G.horizontal r.castSucc).subdivision
+        (G.horizontal r.succ).subdivision k) ↦
+        entry (IntervalSubdivision.commonRefinementLeftBlockCell
+          (G.horizontal r.castSucc).subdivision
+          (G.horizontal r.succ).subdivision k j)).flatten =
+    List.ofFn entry
+  have hblocks :
+      (List.ofFn fun k : Fin (G.horizontal r.castSucc).subdivision.cells ↦
+        List.ofFn fun j : Fin (IntervalSubdivision.commonRefinementLeftBlockSize
+          (G.horizontal r.castSucc).subdivision
+          (G.horizontal r.succ).subdivision k) ↦
+          entry (IntervalSubdivision.commonRefinementLeftBlockCell
+            (G.horizontal r.castSucc).subdivision
+            (G.horizontal r.succ).subdivision k j)) =
+        List.ofFn fun k : Fin (G.horizontal r.castSucc).subdivision.cells ↦
+          (IntervalSubdivision.commonRefinementLeftBlockCells
+            (G.horizontal r.castSucc).subdivision
+            (G.horizontal r.succ).subdivision k).map entry := by
+    rw [List.ofFn_inj]
+    funext k
+    unfold IntervalSubdivision.commonRefinementLeftBlockCells
+    rw [List.map_ofFn]
+    rfl
+  rw [hblocks]
+  have houter :
+      (List.ofFn fun k : Fin (G.horizontal r.castSucc).subdivision.cells ↦
+        (IntervalSubdivision.commonRefinementLeftBlockCells
+          (G.horizontal r.castSucc).subdivision
+          (G.horizontal r.succ).subdivision k).map entry) =
+        (List.ofFn fun k : Fin (G.horizontal r.castSucc).subdivision.cells ↦
+          IntervalSubdivision.commonRefinementLeftBlockCells
+            (G.horizontal r.castSucc).subdivision
+            (G.horizontal r.succ).subdivision k).map (List.map entry) := by
+    rw [List.map_ofFn]
+    rfl
+  rw [houter]
+  rw [← List.map_flatten,
+    IntervalSubdivision.commonRefinementLeftBlockCells_flatten]
+  rw [List.map_ofFn]
+  rfl
+
+/-- Splitting each coarse upper-row factor into its common-refinement block
+produces the lower-labeled entries of the aligned interface. -/
+theorem moves_upperCoarseEntries_to_alignedLowerEntries
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) :
+    Factorization.Moves
+      ((G.upperCoarseConnectors hx₀ hone htwo hthree r).toFactorization
+        (hx₀ := hx₀)).entries
+      ((G.alignedInterface hx₀ hone htwo hthree r).lowerEntries
+        (hx₀ := hx₀)) := by
+  have h := Factorization.moves_split_blocks
+    (G.upperRefinedCoverBlocks hx₀ hone htwo hthree r)
+  rw [G.upperRefinedCoverBlocks_coarseEntries hx₀ hone htwo hthree r,
+    G.upperRefinedCoverBlocks_fineEntries hx₀ hone htwo hthree r] at h
+  exact h
+
+/-- The coarse upper boundary of a band refines to the lower-labeled
+factorization at the next interface. -/
+theorem upperCoarseToLowerInterfaceSweep
+    (G : StaggeredCoverGrid U H bottom top)
+    (hx₀ : ∀ i, x₀ ∈ U i)
+    (hone : ∀ i, IsPathConnected (U i))
+    (htwo : ∀ i j, IsPathConnected (U i ∩ U j))
+    (hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k))
+    (r : Fin (G.extraRows + 2)) :
+    Factorization.Sweep
+      ((G.upperCoarseConnectors hx₀ hone htwo hthree r).toFactorization
+        (hx₀ := hx₀))
+      (G.lowerInterfaceFactorization hx₀ hone htwo hthree r) := by
+  constructor
+  rw [G.lowerInterfaceFactorization_entries hx₀ hone htwo hthree r]
+  exact G.moves_upperCoarseEntries_to_alignedLowerEntries
+    hx₀ hone htwo hthree r
+
 end StaggeredCoverGrid
 
 end Hatcher.VanKampen
