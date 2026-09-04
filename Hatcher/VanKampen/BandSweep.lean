@@ -146,4 +146,169 @@ theorem moves_across_two_adjacent_cells_of_homotopies
   · exact hsharedI
   · exact hsharedJ
 
+def bandCellEntries {n : ℕ} (index : Fin (n + 1) → ι)
+    (top left right : ∀ k, CoverGroup U x₀ hx₀ (index k))
+    (k : Fin (n + 1)) : List (Entry U x₀ hx₀) :=
+  [⟨index k, left k⟩, ⟨index k, top k⟩, ⟨index k, (right k)⁻¹⟩]
+
+def bandExpandedEntries {n : ℕ} (index : Fin (n + 1) → ι)
+    (top left right : ∀ k, CoverGroup U x₀ hx₀ (index k)) :
+    List (Entry U x₀ hx₀) :=
+  (List.ofFn fun k ↦ bandCellEntries index top left right k).flatten
+
+def bandTopEntries {n : ℕ} (index : Fin (n + 1) → ι)
+    (top : ∀ k, CoverGroup U x₀ hx₀ (index k)) :
+    List (Entry U x₀ hx₀) :=
+  List.ofFn fun k ↦ ⟨index k, top k⟩
+
+def bandOpenEntries {n : ℕ} (index : Fin (n + 1) → ι)
+    (top left right : ∀ k, CoverGroup U x₀ hx₀ (index k)) :
+    List (Entry U x₀ hx₀) :=
+  ⟨index 0, left 0⟩ :: bandTopEntries index top ++
+    [⟨index (Fin.last n), (right (Fin.last n))⁻¹⟩]
+
+/-- Adjacent vertical connector loops cancel after changing cover through
+their common overlap. The two exterior connector loops are retained. -/
+theorem moves_cancel_band_internal_connectors {n : ℕ}
+    (index : Fin (n + 1) → ι)
+    (top left right : ∀ k, CoverGroup U x₀ hx₀ (index k))
+    (overlap : ∀ k : Fin n,
+      OverlapGroup U x₀ hx₀ (index k.castSucc) (index k.succ))
+    (hright : ∀ k : Fin n, right k.castSucc =
+      overlapToLeft U x₀ hx₀ (index k.castSucc) (index k.succ) (overlap k))
+    (hleft : ∀ k : Fin n, left k.succ =
+      overlapToRight U x₀ hx₀ (index k.castSucc) (index k.succ) (overlap k)) :
+    Moves (bandExpandedEntries index top left right)
+      (bandOpenEntries index top left right) := by
+  induction n with
+  | zero =>
+      exact Relation.ReflTransGen.refl
+  | succ n ih =>
+      let index' : Fin (n + 1) → ι := index ∘ Fin.succ
+      let top' : ∀ k, CoverGroup U x₀ hx₀ (index' k) :=
+        fun k ↦ top k.succ
+      let left' : ∀ k, CoverGroup U x₀ hx₀ (index' k) :=
+        fun k ↦ left k.succ
+      let right' : ∀ k, CoverGroup U x₀ hx₀ (index' k) :=
+        fun k ↦ right k.succ
+      let overlap' : ∀ k : Fin n,
+          OverlapGroup U x₀ hx₀ (index' k.castSucc) (index' k.succ) :=
+        fun k ↦ overlap k.succ
+      have htail : Moves
+          (bandExpandedEntries index' top' left' right')
+          (bandOpenEntries index' top' left' right') := by
+        apply ih index' top' left' right' overlap'
+        · intro k
+          exact hright k.succ
+        · intro k
+          exact hleft k.succ
+      let firstCell : List (Entry U x₀ hx₀) :=
+        bandCellEntries index top left right 0
+      have htail' := htail.prefix firstCell
+      have hcancel := moves_cancel_connector
+        (U := U) (x₀ := x₀) (hx₀ := hx₀)
+        [⟨index 0, left 0⟩, ⟨index 0, top 0⟩]
+        (List.ofFn (fun k : Fin n ↦
+          (⟨index k.succ.succ, top k.succ.succ⟩ : Entry U x₀ hx₀)) ++
+          [⟨index (Fin.last (n + 1)), (right (Fin.last (n + 1)))⁻¹⟩])
+        (index (0 : Fin (n + 1)).castSucc)
+        (index (0 : Fin (n + 1)).succ)
+        (top (0 : Fin (n + 1)).succ) (overlap 0)
+      rw [← hright 0, ← hleft 0] at hcancel
+      have hexpanded : bandExpandedEntries index top left right =
+          firstCell ++ bandExpandedEntries index' top' left' right' := by
+        unfold bandExpandedEntries firstCell
+        rw [List.ofFn_succ, List.flatten_cons]
+        rfl
+      have htail'' : Moves
+          (bandExpandedEntries index top left right)
+          (firstCell ++ bandOpenEntries index' top' left' right') := by
+        rw [hexpanded]
+        exact htail'
+      have hcancel' : Moves
+          (firstCell ++ bandOpenEntries index' top' left' right')
+          (bandOpenEntries index top left right) := by
+        unfold bandOpenEntries bandTopEntries
+        convert hcancel using 1 <;>
+          simp [bandCellEntries, firstCell, index', top', left', right',
+            List.ofFn_succ, Fin.succ_last]
+        all_goals exact ⟨rfl, rfl⟩
+      exact htail''.trans hcancel'
+
+/-- A row of cellular identities gives a move chain from the bottom entries
+to the top entries once the two exterior vertical loops are trivial. -/
+theorem moves_of_band_cell_relations {n : ℕ}
+    (index : Fin (n + 1) → ι)
+    (bottom top left right : ∀ k, CoverGroup U x₀ hx₀ (index k))
+    (overlap : ∀ k : Fin n,
+      OverlapGroup U x₀ hx₀ (index k.castSucc) (index k.succ))
+    (hcell : ∀ k, bottom k = (right k)⁻¹ * top k * left k)
+    (hright : ∀ k : Fin n, right k.castSucc =
+      overlapToLeft U x₀ hx₀ (index k.castSucc) (index k.succ) (overlap k))
+    (hleft : ∀ k : Fin n, left k.succ =
+      overlapToRight U x₀ hx₀ (index k.castSucc) (index k.succ) (overlap k))
+    (hleft_zero : left 0 = 1)
+    (hright_last : right (Fin.last n) = 1) :
+    Moves (List.ofFn fun k ↦ (⟨index k, bottom k⟩ : Entry U x₀ hx₀))
+      (bandTopEntries index top) := by
+  let blocks : List (CoverBlock (U := U) (x₀ := x₀) (hx₀ := hx₀)) :=
+    List.ofFn fun k ↦
+      { index := index k
+        head := left k
+        tail := [top k, (right k)⁻¹] }
+  have hsplit := moves_split_blocks blocks
+  have hcoarse : coarseEntries blocks =
+      List.ofFn fun k ↦ (⟨index k, bottom k⟩ : Entry U x₀ hx₀) := by
+    unfold coarseEntries
+    simp only [blocks, List.map_ofFn]
+    rw [List.ofFn_inj]
+    funext k
+    simpa [Function.comp_def, CoverBlock.coarseEntry, mul_assoc] using
+      congrArg (fun z : CoverGroup U x₀ hx₀ (index k) ↦
+        (⟨index k, z⟩ : Entry U x₀ hx₀)) (hcell k).symm
+  have hfine : fineEntries blocks =
+      bandExpandedEntries index top left right := by
+    change (blocks.map CoverBlock.fineEntries).flatten = _
+    unfold bandExpandedEntries
+    congr 1
+    simp only [blocks, List.map_ofFn]
+    rw [List.ofFn_inj]
+    funext k
+    unfold Function.comp CoverBlock.fineEntries sameCoverEntries
+    rfl
+  rw [hcoarse, hfine] at hsplit
+  have hcancel := moves_cancel_band_internal_connectors index top left right
+    overlap hright hleft
+  have hleftMove : Moves
+      (bandOpenEntries index top left right)
+      (bandTopEntries index top ++
+        [⟨index (Fin.last n), (right (Fin.last n))⁻¹⟩]) := by
+    have h := Relation.ReflTransGen.single <| Move.combine
+      (U := U) (x₀ := x₀) (hx₀ := hx₀)
+      ([] : List (Entry U x₀ hx₀))
+      (List.ofFn (fun k : Fin n ↦
+        (⟨index k.succ, top k.succ⟩ : Entry U x₀ hx₀)) ++
+        [⟨index (Fin.last n), (right (Fin.last n))⁻¹⟩])
+      (index 0) (left 0) (top 0)
+    rw [hleft_zero] at h
+    unfold bandOpenEntries bandTopEntries
+    rw [List.ofFn_succ, hleft_zero]
+    simpa [List.append_assoc] using h
+  have hrightMove : Moves
+      (bandTopEntries index top ++
+        [⟨index (Fin.last n), (right (Fin.last n))⁻¹⟩])
+      (bandTopEntries index top) := by
+    have h := Relation.ReflTransGen.single <| Move.combine
+      (U := U) (x₀ := x₀) (hx₀ := hx₀)
+      (List.ofFn fun k : Fin n ↦
+        (⟨index k.castSucc, top k.castSucc⟩ : Entry U x₀ hx₀))
+      ([] : List (Entry U x₀ hx₀))
+      (index (Fin.last n)) (top (Fin.last n))
+      (right (Fin.last n))⁻¹
+    rw [hright_last] at h
+    unfold bandTopEntries
+    rw [List.ofFn_succ_last, hright_last]
+    simpa using h
+  exact hsplit.trans (hcancel.trans (hleftMove.trans hrightMove))
+
 end Hatcher.VanKampen.Factorization
