@@ -11,6 +11,7 @@ first point-set construction around Hatcher's cell-attachment applications.
 - [The cone-side cover member is contractible](single-cone-upper-contractible.md)
 - [The cone on a disk boundary is the disk](cone-disk-homeomorphism.md)
 - [A single cone attachment is a topological pushout](single-cone-pushout.md)
+- [A single cone attachment is a standard cell attachment](single-basic-cell-attachment.md)
 
 The indexed quotient has one apex per cell, but its upper member is generally
 disconnected. Hatcher's connected auxiliary cover and its intersection cover

@@ -15,9 +15,12 @@ open scoped unitInterval
 
 namespace Hatcher.VanKampen.ConeAttachment
 
+universe u
+
 private abbrev E (n : ℕ) := EuclideanSpace ℝ (Fin n)
 
-private abbrev Boundary (n : ℕ) := (TopCat.diskBoundary n : Type)
+private abbrev Boundary (n : ℕ) :=
+  ((TopCat.diskBoundary.{u} n : TopCat.{u}) : Type u)
 
 private abbrev DiskPrequotient (n : ℕ) :=
   Prequotient (Boundary n) (Boundary n)
@@ -253,21 +256,21 @@ private def rawDiskHomeomorph (n : ℕ) :
 map recovers the standard `n`-disk. -/
 def diskHomeomorph (n : ℕ) :
     Hatcher.VanKampen.ConeAttachment
-        (id : ((TopCat.diskBoundary n : TopCat) : Type) →
-          ((TopCat.diskBoundary n : TopCat) : Type)) ≃ₜ
-      ((TopCat.disk n : TopCat) : Type) :=
+        (id : ((TopCat.diskBoundary.{u} n : TopCat.{u}) : Type u) →
+          ((TopCat.diskBoundary.{u} n : TopCat.{u}) : Type u)) ≃ₜ
+      ((TopCat.disk.{u} n : TopCat.{u}) : Type u) :=
   (rawDiskHomeomorph n).trans Homeomorph.ulift.symm
 
 /-- On the retained boundary, `diskHomeomorph` is the standard boundary
 inclusion into the disk. -/
 @[simp]
 theorem diskHomeomorph_base_eq_diskBoundaryInclusion (n : ℕ)
-    (x : ((TopCat.diskBoundary n : TopCat) : Type)) :
+    (x : ((TopCat.diskBoundary.{u} n : TopCat.{u}) : Type u)) :
     diskHomeomorph n
         (base
-          (id : ((TopCat.diskBoundary n : TopCat) : Type) →
-            ((TopCat.diskBoundary n : TopCat) : Type)) x) =
-      TopCat.diskBoundaryInclusion n x :=
+          (id : ((TopCat.diskBoundary.{u} n : TopCat.{u}) : Type u) →
+            ((TopCat.diskBoundary.{u} n : TopCat.{u}) : Type u)) x) =
+      TopCat.diskBoundaryInclusion.{u} n x :=
   rfl
 
 /-- The cone apex corresponds to the center of the disk. -/
@@ -275,9 +278,9 @@ theorem diskHomeomorph_base_eq_diskBoundaryInclusion (n : ℕ)
 theorem diskHomeomorph_apex (n : ℕ) :
     diskHomeomorph n
         (apex
-          (id : ((TopCat.diskBoundary n : TopCat) : Type) →
-            ((TopCat.diskBoundary n : TopCat) : Type))) =
-      ULift.up
+          (id : ((TopCat.diskBoundary.{u} n : TopCat.{u}) : Type u) →
+            ((TopCat.diskBoundary.{u} n : TopCat.{u}) : Type u))) =
+      ULift.up.{u}
         (⟨0, by simp⟩ :
           Metric.closedBall (0 : EuclideanSpace ℝ (Fin n)) 1) :=
   rfl
@@ -285,12 +288,12 @@ theorem diskHomeomorph_apex (n : ℕ) :
 /-- A cone cylinder point maps to its radial point in the disk. -/
 @[simp]
 theorem diskHomeomorph_cylinder (n : ℕ)
-    (x : ((TopCat.diskBoundary n : TopCat) : Type)) (t : I) :
+    (x : ((TopCat.diskBoundary.{u} n : TopCat.{u}) : Type u)) (t : I) :
     diskHomeomorph n
         (cylinder
-          (id : ((TopCat.diskBoundary n : TopCat) : Type) →
-            ((TopCat.diskBoundary n : TopCat) : Type)) x t) =
-      ULift.up
+          (id : ((TopCat.diskBoundary.{u} n : TopCat.{u}) : Type u) →
+            ((TopCat.diskBoundary.{u} n : TopCat.{u}) : Type u)) x t) =
+      ULift.up.{u}
         (⟨(t : ℝ) • (x.down : EuclideanSpace ℝ (Fin n)), by
           rw [mem_closedBall_zero_iff, norm_smul_of_nonneg t.2.1,
             mem_sphere_zero_iff_norm.mp x.down.2, mul_one]

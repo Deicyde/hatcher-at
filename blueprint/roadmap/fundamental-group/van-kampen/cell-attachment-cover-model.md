@@ -30,10 +30,11 @@ its retained-cone boundary. Its base-side cover strongly deformation-retracts
 onto `X`, and its cone-side cover is contractible. An indexed quotient with one
 apex per cell and the correct empty-family behavior is also formalized, but its
 upper cover is generally disconnected. The remaining geometry is Hatcher's
-connected auxiliary cover and the open cover of its intersection. Transport
-from the retained cone to `TopCat.RelativeCWComplex.basicCell` is tracked by a
-separate bridge. The final statement also needs an explicit basepoint and a
-dimension hypothesis. Those interfaces must be fixed without hiding the
+connected auxiliary cover and the open cover of its intersection. For a single
+disk, the explicit quotient is now connected to Mathlib's exact
+`TopCat.RelativeCWComplex.basicCell`; extending this comparison to the indexed
+construction remains. The final statement also needs an explicit basepoint and
+a dimension hypothesis. Those interfaces must be fixed without hiding the
 geometric content.
 
 ## Depends on
@@ -48,6 +49,7 @@ None beyond pinned Mathlib.
 - [The cone-side cover member is contractible](cell-attachment-support/single-cone-upper-contractible.md)
 - [The cone on a disk boundary is the disk](cell-attachment-support/cone-disk-homeomorphism.md)
 - [A single cone attachment is a topological pushout](cell-attachment-support/single-cone-pushout.md)
+- [A single cone attachment is a standard cell attachment](cell-attachment-support/single-basic-cell-attachment.md)
 
 ## Sources
 

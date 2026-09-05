@@ -76,5 +76,6 @@ import Hatcher.VanKampen.ConeAttachment
 import Hatcher.VanKampen.ConeAttachmentDeformation
 import Hatcher.VanKampen.ConeAttachmentDisk
 import Hatcher.VanKampen.ConeAttachmentPushout
+import Hatcher.VanKampen.ConeAttachmentBasicCell
 import Hatcher.VanKampen.IndexedConeAttachment
 import Hatcher.VanKampen.CellAttachmentAlgebra
