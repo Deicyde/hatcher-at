@@ -688,6 +688,7 @@ theorem memberProjection_inclusion_self (i : ι) (x : X i) :
     memberProjection x₀ i (inclusion x₀ i x) = x := by
   simp [memberProjection, memberProjectionPre, inclusion]
 
+@[simp]
 theorem memberProjection_inclusion_of_ne
     {i j : ι} (hji : j ≠ i) (x : X j) :
     memberProjection x₀ i (inclusion x₀ j x) = x₀ i := by

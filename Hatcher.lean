@@ -59,6 +59,7 @@ import Hatcher.VanKampen.VanKampenHomotopy
 import Hatcher.VanKampen.PointedWedge
 import Hatcher.VanKampen.WellPointedWedgeCover
 import Hatcher.VanKampen.WellPointedWedgeNeckContraction
+import Hatcher.VanKampen.WellPointedWedgeMemberDeformation
 import Hatcher.VanKampen.PresentedGroup
 import Hatcher.VanKampen.RefinementProduct
 import Hatcher.VanKampen.VanKampenKernel
