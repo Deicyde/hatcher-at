@@ -1,6 +1,9 @@
 ---
-declaration: theorem
+declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.pushoutEquivFundamentalGroup
 ---
 
 # Binary van Kampen is a group pushout
@@ -16,6 +19,10 @@ This is the two-set specialization stated immediately after Example 1.22. Its
 proof identifies Mathlib's `Monoid.PushoutI` with the free-product quotient in
 Theorem 1.20. It is not the representation of the arbitrary-cover theorem,
 where each pair of cover members has its own intersection group.
+
+Formalized in `Hatcher/VanKampen/BinaryVanKampen.lean` for a cover indexed by
+`Fin 2`. The equivalence is proved to have the canonical pushout map as its
+underlying homomorphism.
 
 ## Depends on
 
