@@ -298,6 +298,103 @@ theorem univ_subset_iUnion_coverSet [Nonempty ι]
           change coverPreimage N p.1 (some p)
           exact Or.inl rfl
 
+/-- The saturated prequotient set underlying the common neck of the standard
+wedge cover. -/
+def neckPreimage (N : ∀ i, Set (X i)) : Set (Option (Σ i, X i)) :=
+  fun z => match z with
+    | none => True
+    | some p => p.2 ∈ N p.1
+
+omit [∀ i, TopologicalSpace (X i)] in
+private theorem neckPreimage_eq_of_eqvGen
+    (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i)
+    {a b : Option (Σ i, X i)}
+    (h : Relation.EqvGen (Rel X x₀) a b) :
+    neckPreimage N a = neckPreimage N b := by
+  induction h with
+  | rel a b h =>
+      cases h with
+      | base i => simp [neckPreimage, hN i]
+  | refl => rfl
+  | symm _ _ _ ih => exact ih.symm
+  | trans _ _ _ _ _ ih₁ ih₂ => exact ih₁.trans ih₂
+
+/-- The common neck contained in every member of the standard wedge cover. -/
+def neckSet (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i) :
+    Set (Hatcher.PointedWedge X x₀) :=
+  fun z => Quotient.liftOn z (fun a => a ∈ neckPreimage N)
+    (fun _ _ h => neckPreimage_eq_of_eqvGen x₀ N hN h)
+
+omit [∀ i, TopologicalSpace (X i)] in
+@[simp]
+theorem quotientMk_preimage_neckSet
+    (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i) :
+    (Quotient.mk (setoid X x₀)) ⁻¹' neckSet x₀ N hN =
+      neckPreimage N := by
+  ext z
+  rfl
+
+/-- The common neck is open when all chosen neighborhoods are open. -/
+theorem isOpen_neckSet
+    (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i)
+    (hNopen : ∀ i, IsOpen (N i)) :
+    IsOpen (neckSet x₀ N hN) := by
+  rw [isOpen_coinduced]
+  change @IsOpen (Option (Σ i, X i))
+    (TopologicalSpace.coinduced (fun z : Σ i, X i ↦ some z) inferInstance ⊔
+      TopologicalSpace.coinduced
+        (fun _ : Unit ↦ (none : Option (Σ i, X i))) inferInstance)
+    (neckPreimage N)
+  rw [isOpen_sup]
+  constructor
+  · rw [isOpen_coinduced, isOpen_sigma_iff]
+    exact hNopen
+  · rw [isOpen_coinduced]
+    change IsOpen (Set.univ : Set Unit)
+    exact isOpen_univ
+
+omit [∀ i, TopologicalSpace (X i)] in
+/-- The common neck is contained in every member of the standard wedge cover. -/
+theorem neckSet_subset_coverSet
+    (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i) (i : ι) :
+    neckSet x₀ N hN ⊆ coverSet x₀ N hN i := by
+  intro z hz
+  induction z using Quotient.inductionOn with
+  | _ a =>
+      change neckPreimage N a at hz
+      change coverPreimage N i a
+      cases a with
+      | none => trivial
+      | some p => exact Or.inr hz
+
+omit [∀ i, TopologicalSpace (X i)] in
+/-- Distinct members of the standard wedge cover meet exactly in the common
+neck. -/
+theorem coverSet_inter_eq_neckSet_of_ne
+    (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i)
+    {i j : ι} (hij : i ≠ j) :
+    coverSet x₀ N hN i ∩ coverSet x₀ N hN j =
+      neckSet x₀ N hN := by
+  ext z
+  induction z using Quotient.inductionOn with
+  | _ a =>
+      cases a with
+      | none =>
+          change (True ∧ True) ↔ True
+          simp
+      | some p =>
+          change ((p.1 = i ∨ p.2 ∈ N p.1) ∧
+            (p.1 = j ∨ p.2 ∈ N p.1)) ↔ p.2 ∈ N p.1
+          constructor
+          · rintro ⟨hi, hj⟩
+            rcases hi with hip | hp
+            · rcases hj with hjp | hp
+              · exact (hij (hip.symm.trans hjp)).elim
+              · exact hp
+            · exact hp
+          · intro hp
+            exact ⟨Or.inr hp, Or.inr hp⟩
+
 /-- The standard cover associated to chosen well-pointed neighborhoods. -/
 def vanKampenCover (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι) :
     Set (Hatcher.PointedWedge X x₀) :=
@@ -352,6 +449,46 @@ theorem univ_subset_iUnion_vanKampenCover [Nonempty ι]
     (hwell : ∀ i, WellPointedAt (x₀ i)) :
     Set.univ ⊆ ⋃ i, vanKampenCover x₀ hwell i :=
   univ_subset_iUnion_coverSet x₀ _ _
+
+/-- The prequotient common neck determined by the chosen well-pointed
+neighborhoods. -/
+def vanKampenNeckPreimage (hwell : ∀ i, WellPointedAt (x₀ i)) :
+    Set (Option (Σ i, X i)) :=
+  neckPreimage fun i ↦ (hwell i).neighborhood
+
+/-- The common neck of the well-pointed wedge cover. -/
+def vanKampenNeck (hwell : ∀ i, WellPointedAt (x₀ i)) :
+    Set (Hatcher.PointedWedge X x₀) :=
+  neckSet x₀ (fun i ↦ (hwell i).neighborhood)
+    (fun i ↦ (hwell i).mem_neighborhood)
+
+@[simp]
+theorem quotientMk_preimage_vanKampenNeck
+    (hwell : ∀ i, WellPointedAt (x₀ i)) :
+    (Quotient.mk (setoid X x₀)) ⁻¹' vanKampenNeck x₀ hwell =
+      vanKampenNeckPreimage x₀ hwell :=
+  quotientMk_preimage_neckSet x₀ _ _
+
+/-- The common neck of the well-pointed wedge cover is open. -/
+theorem isOpen_vanKampenNeck
+    (hwell : ∀ i, WellPointedAt (x₀ i)) :
+    IsOpen (vanKampenNeck x₀ hwell) :=
+  isOpen_neckSet x₀ _ _ (fun i ↦ (hwell i).isOpen_neighborhood)
+
+/-- The common neck lies in every member of the well-pointed wedge cover. -/
+theorem vanKampenNeck_subset
+    (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι) :
+    vanKampenNeck x₀ hwell ⊆ vanKampenCover x₀ hwell i :=
+  neckSet_subset_coverSet x₀ _ _ i
+
+/-- Two distinct members of the well-pointed wedge cover intersect exactly
+in the common neck. -/
+theorem vanKampenCover_inter_eq_vanKampenNeck
+    (hwell : ∀ i, WellPointedAt (x₀ i))
+    {i j : ι} (hij : i ≠ j) :
+    vanKampenCover x₀ hwell i ∩ vanKampenCover x₀ hwell j =
+      vanKampenNeck x₀ hwell :=
+  coverSet_inter_eq_neckSet_of_ne x₀ _ _ hij
 
 end PointedWedge
 
