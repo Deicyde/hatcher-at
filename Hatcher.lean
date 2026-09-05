@@ -37,6 +37,7 @@ import Hatcher.FundamentalGroup.Product
 import Hatcher.Applications.FundamentalTheoremAlgebra
 import Hatcher.Disc.NoRetraction
 import Hatcher.Disc.Brouwer
+import Hatcher.Euclidean.Dimension
 import Hatcher.Singular.Homology
 import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected

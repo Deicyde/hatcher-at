@@ -1,7 +1,8 @@
 # Basic constructions
 
-Hatcher §1.1 (pages 25–38). This is the project's first decomposed section;
-all nine nodes in the selected slice are formalized.
+Hatcher §1.1 (pages 25–38). This is the project's first completed section.
+All sixteen local nodes are formalized, and its preliminary path and
+fundamental-group facts are exact results in the pinned Mathlib.
 
 Paths in a space `X` with fixed endpoints, taken up to homotopy, compose; loops
 at a basepoint `x₀` therefore form a group `π₁(X, x₀)`, and a path between
@@ -33,8 +34,7 @@ faithful. That is the theorem.
 - [The fundamental group of the circle](fundamental-group-circle.md)
 
 Mathlib's product construction for fundamental groupoids, together with the
-circle computation above, also supplies Proposition 1.12 and Example 1.13
-without separate roadmap nodes.
+circle computation above, supplies Proposition 1.12 and Example 1.13.
 
 ## Consequences
 
@@ -60,6 +60,7 @@ on a subdivision lemma reused by §1.2 as the surjectivity step in van Kampen.
 - [The fundamental group of the torus](torus-fundamental-group.md)
 - [A loop splits across an open cover](loop-in-open-cover.md)
 - [Higher spheres are simply connected](sphere-simply-connected.md)
+- [Euclidean two-space is distinguished by dimension](euclidean-two-not-homeomorphic.md)
 
 Borsuk–Ulam combines both halves of the section: the equator of `S²` bounds a
 disc, so an odd map `S² → S¹` restricted to it is simultaneously nullhomotopic
@@ -75,8 +76,8 @@ equivalence, beginning with the special case of retracts.
 - [A homotopy equivalence induces a fundamental-group isomorphism](homotopy-equivalence-fundamental-group.md)
 - [Homotopic maps differ by basepoint change](homotopic-maps-fundamental-group.md)
 
-Corollary 1.16 remains outside the selected slice and belongs to a later §1.1
-completion pass. See the
+Together with the exact pinned Mathlib groundwork listed above, these nodes
+cover the section's numbered results and named examples. See the
 [coverage contract](../../../coverage/README.md).
 
 ## Sources
