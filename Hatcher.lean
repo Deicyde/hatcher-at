@@ -60,3 +60,4 @@ import Hatcher.VanKampen.PointedWedge
 import Hatcher.VanKampen.PresentedGroup
 import Hatcher.VanKampen.RefinementProduct
 import Hatcher.VanKampen.VanKampenKernel
+import Hatcher.VanKampen.BinaryVanKampen
