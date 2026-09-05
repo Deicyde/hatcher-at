@@ -4,8 +4,9 @@ A Lean 4 formalization of results from Allen Hatcher's *Algebraic Topology*
 (Cambridge University Press, 2002), built on Mathlib. The book's text is not
 redistributed here; source notes cite it by chapter and section.
 
-Every chapter and numbered section of the book is mapped. The selected
-nine-node §1.1 slice is fully formalized, §1.2 is decomposed into targets for
+Every chapter and numbered section of the book is mapped. Section §1.1 is
+complete through twenty-two explicit nodes: eighteen local formalizations and
+four pinned Mathlib-backed nodes. Section §1.2 is decomposed into targets for
 van Kampen, wedge sums, and cell attachments, and the selected §1.3
 classification and deck spine is decomposed through Proposition 1.40. The
 selected §2.1 spine is decomposed through singular-homology functoriality and

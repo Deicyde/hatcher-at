@@ -10,7 +10,7 @@ mapped chapter must never be reported as covered.
 
 | Area | Coverage | Evidence |
 | --- | --- | --- |
-| §1.1 Basic constructions | `DECOMPOSED` | [Sixteen fully formalized nodes](../roadmap/fundamental-group/basic-constructions/README.md), together with exact pinned Mathlib groundwork, cover the section |
+| §1.1 Basic constructions | `DECOMPOSED` | [Twenty-two explicit nodes](../roadmap/fundamental-group/basic-constructions/README.md): eighteen local formalizations and four pinned Mathlib-backed nodes cover the section |
 | Chapter 0, underlying geometric notions | `MAPPED` | [Chapter map](../roadmap/underlying-geometric-notions/README.md) |
 | §1.2 selected spine | `DECOMPOSED` | [Van Kampen, wedges, and cell-attachment nodes](../roadmap/fundamental-group/van-kampen/README.md) |
 | §1.2 results outside the selected slice | `DEFERRED` | Examples 1.22–1.25, Corollary 1.27, and the geometric remainder of Example 1.29 are reserved for later application milestones |
@@ -34,11 +34,17 @@ mapped chapter must never be reported as covered.
 ## In scope
 
 [Hatcher §1.1, Basic constructions](../roadmap/fundamental-group/basic-constructions/README.md),
-pages 25–38, decomposed into sixteen nodes. The main target is Theorem 1.7,
+pages 25–38, decomposed into twenty-two explicit nodes. The main target is Theorem 1.7,
 `π₁(S¹) ≅ ℤ`. The section's other in-scope results are:
 
 | Node | Source result | Kind |
 | --- | --- | --- |
+| [Straight-line homotopy between paths](../roadmap/fundamental-group/basic-constructions/affine-path-homotopy.md) | **Example 1.1** | cited |
+| [Path homotopy is an equivalence relation](../roadmap/fundamental-group/basic-constructions/path-homotopy-equivalence.md) | **Proposition 1.2** | pinned Mathlib |
+| [Path concatenation gives the fundamental-group law](../roadmap/fundamental-group/basic-constructions/fundamental-group-law.md) | **Proposition 1.3** | cited |
+| [Convex sets have trivial fundamental group](../roadmap/fundamental-group/basic-constructions/convex-trivial-fundamental-group.md) | **Example 1.4** | pinned Mathlib bridge |
+| [A path induces change of basepoint](../roadmap/fundamental-group/basic-constructions/change-of-basepoint.md) | **Proposition 1.5** | pinned Mathlib |
+| [Simply connected spaces have unique path-homotopy classes](../roadmap/fundamental-group/basic-constructions/simply-connected-unique-path-classes.md) | **Proposition 1.6** | pinned Mathlib |
 | [The real line covers the circle](../roadmap/fundamental-group/basic-constructions/circle-covering.md) | page 29, unnumbered | bridged |
 | [Winding number](../roadmap/fundamental-group/basic-constructions/winding-number.md) | page 29, unnumbered | bridged |
 | [Fundamental group of the circle](../roadmap/fundamental-group/basic-constructions/fundamental-group-circle.md) | **Theorem 1.7** | cited |
@@ -56,14 +62,23 @@ pages 25–38, decomposed into sixteen nodes. The main target is Theorem 1.7,
 | [A homotopy equivalence induces a fundamental-group isomorphism](../roadmap/fundamental-group/basic-constructions/homotopy-equivalence-fundamental-group.md) | **Proposition 1.18** | cited |
 | [Homotopic maps differ by basepoint change](../roadmap/fundamental-group/basic-constructions/homotopic-maps-fundamental-group.md) | **Lemma 1.19** | cited |
 
-Two qualifications on what these nodes do and do not prove.
+Three qualifications on what these nodes do and do not prove.
+
+**The opening results are explicit nodes.** Propositions 1.2, 1.5, and 1.6
+track the exact pinned declarations `Path.Homotopic.equivalence`,
+`FundamentalGroup.fundamentalGroupMulEquivOfPath`, and
+`simply_connected_iff_unique_homotopic`. Example 1.4 tracks the exact stronger
+input `Convex.contractibleSpace`; `SimplyConnectedSpace.ofContractible` and
+Mathlib's subsingleton fundamental-group instance give Hatcher's conclusion.
+Example 1.1 and Proposition 1.3 are local formalizations because they record
+Hatcher's explicit affine homotopy and left-then-right concatenation
+convention.
 
 **Theorem 1.8 is already upstream.** Its statement is Mathlib's
 `Complex.exists_root`, packaged by `Complex.isAlgClosed`, in
 `Analysis/Complex/Polynomial/Basic.lean` and proved by Liouville's theorem.
 The local formalization gives a second proof of a known result. It
 is in scope as a source target and must not be counted as new Mathlib coverage.
-No §1.1 node in this project sets `mathlib: true`.
 
 **Lemma 1.15 is reused by §1.2.** It was formalized locally because
 Proposition 1.14 needed it, and it now supplies the surjectivity clause of
@@ -134,9 +149,11 @@ mapped main-line section is §2.2.
 
 ## Done means
 
-A node is complete when its named Lean declarations compile, its main result
-carries `proof: formalized`, and the proof uses no `sorry` and no axioms beyond
-Lean's three. The CI axiom audit is the check.
+A local node is complete when its named Lean declarations compile, its main
+result carries `proof: formalized`, and the proof uses no `sorry` and no axioms
+beyond Lean's three. A Mathlib-backed node is complete when its exact pinned
+declaration, kind, and declaring file pass provenance checks. CI performs both
+checks.
 
 A section counts as finished only when it is decomposed and every node beneath
 it is complete, *and* nothing numbered in it has been deferred. By that rule

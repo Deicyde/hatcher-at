@@ -1,15 +1,23 @@
 # Basic constructions
 
 Hatcher §1.1 (pages 25–38). This is the project's first completed section.
-All sixteen local nodes are formalized, and its preliminary path and
-fundamental-group facts are exact results in the pinned Mathlib.
+Its twenty-two explicit roadmap nodes comprise eighteen local formalizations
+and four pinned Mathlib-backed nodes.
+
+## Paths and homotopy
 
 Paths in a space `X` with fixed endpoints, taken up to homotopy, compose; loops
 at a basepoint `x₀` therefore form a group `π₁(X, x₀)`, and a path between
-basepoints induces an isomorphism between the groups it joins. Mathlib already
-has all of this as `Path.Homotopic` and `FundamentalGroup`, so Propositions
-1.2, 1.3, 1.5, and 1.6, together with the convexity examples around them, are
-prior art rather than work, and the section's first half contributes no nodes.
+basepoints induces an isomorphism between the groups it joins. Each opening
+result now has its own node, including the local wrappers needed to match
+Hatcher's affine formula and path-concatenation convention.
+
+- [Straight-line homotopy between paths](affine-path-homotopy.md)
+- [Path homotopy is an equivalence relation](path-homotopy-equivalence.md)
+- [Path concatenation gives the fundamental-group law](fundamental-group-law.md)
+- [Convex sets have trivial fundamental group](convex-trivial-fundamental-group.md)
+- [A path induces change of basepoint](change-of-basepoint.md)
+- [Simply connected spaces have unique path-homotopy classes](simply-connected-unique-path-classes.md)
 
 ## The circle
 
@@ -76,9 +84,9 @@ equivalence, beginning with the special case of retracts.
 - [A homotopy equivalence induces a fundamental-group isomorphism](homotopy-equivalence-fundamental-group.md)
 - [Homotopic maps differ by basepoint change](homotopic-maps-fundamental-group.md)
 
-Together with the exact pinned Mathlib groundwork listed above, these nodes
-cover the section's numbered results and named examples. See the
-[coverage contract](../../../coverage/README.md).
+These twenty-two explicit nodes cover the section's numbered results, named
+examples, and the intermediate circle and no-retraction constructions used by
+its proofs. See the [coverage contract](../../../coverage/README.md).
 
 ## Sources
 
