@@ -74,6 +74,7 @@ kept as an explicit blocker rather than treated as existing Mathlib coverage.
 
 - [An open-cover model for attached cells](cell-attachment-cover-model.md)
 - [The attaching-sphere pieces generate the intersection group](attaching-spheres-generate-intersection.md)
+- [A binary cover with a trivial second fundamental group](binary-cover-trivial-piece-quotient.md)
 - [A binary cover with a contractible second piece](binary-cover-contractible-piece.md)
 - [Attaching 2-cells adds the attaching relations](attach-two-cells-fundamental-group.md)
 - [Attaching higher cells preserves the fundamental group](attach-higher-cells-fundamental-group.md)

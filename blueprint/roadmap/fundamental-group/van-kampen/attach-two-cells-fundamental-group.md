@@ -25,7 +25,8 @@ None beyond pinned Mathlib.
 
 - [An open-cover model for attached cells](cell-attachment-cover-model.md)
 - [The attaching-sphere pieces generate the intersection group](attaching-spheres-generate-intersection.md)
-- [Binary van Kampen is a group pushout](binary-van-kampen-pushout.md)
+- [A binary cover with a trivial second fundamental group](binary-cover-trivial-piece-quotient.md)
+- [Retractions and deformation retracts on the fundamental group](../basic-constructions/retractions-fundamental-group.md)
 - [The fundamental group of the circle](../basic-constructions/fundamental-group-circle.md)
 
 ## Sources
