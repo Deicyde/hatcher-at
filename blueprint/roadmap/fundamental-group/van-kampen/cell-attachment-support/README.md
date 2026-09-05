@@ -6,11 +6,13 @@ first point-set construction around Hatcher's cell-attachment applications.
 ## Point-set geometry
 
 - [A single cone attachment has a two-set open cover](single-cone-open-cover.md)
+- [The base-side cone cover retracts onto the original space](single-cone-base-retract.md)
+- [The cone-side cover member is contractible](single-cone-upper-contractible.md)
 - [The cone on a disk boundary is the disk](cone-disk-homeomorphism.md)
 - [A single cone attachment is a topological pushout](single-cone-pushout.md)
 
-This is one cone only. The arbitrary-family attachment model and its
-deformation retractions remain in the parent roadmap.
+This is one cone only. The arbitrary-family attachment model and the connected
+intersection cover remain in the parent roadmap.
 
 ## Binary-cover algebra
 
