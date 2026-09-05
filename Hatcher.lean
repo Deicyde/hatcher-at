@@ -72,4 +72,5 @@ import Hatcher.VanKampen.BinaryVanKampen
 import Hatcher.VanKampen.CyclicPresentationAlgebra
 import Hatcher.VanKampen.WedgeFundamentalGroup
 import Hatcher.VanKampen.WedgeCircles
+import Hatcher.VanKampen.ConeAttachment
 import Hatcher.VanKampen.CellAttachmentAlgebra

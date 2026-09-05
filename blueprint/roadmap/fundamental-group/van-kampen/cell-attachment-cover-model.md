@@ -21,17 +21,22 @@ State the input using `HomotopicalAlgebra.AttachCells` for
 shared by Proposition 1.26(a) and (b); it does not calculate `π₁(A ∩ B)` or
 assert either final fundamental-group result.
 
-This node is not yet ready to formalize against the pinned Mathlib API.
+This node is not yet ready to formalize against the pinned Mathlib API. The
+single-cone quotient and its two open cover members are now explicit, but the
+arbitrary-family construction still needs one apex per cell, deformation
+retractions of both cover members, and the intersection cover.
 `HomotopicalAlgebra.AttachCells` supplies an abstract coproduct and pushout but
-no point-set adjunction-space model, embedding of the original space, disk
-collar, mapping-cylinder construction, or deformation-retraction data. The
-statement also needs an explicit basepoint, a dimension hypothesis, and an
-empty-family case. Those interfaces must be fixed before the open sets and
-their intersection cover can be stated without hiding the geometric content.
+no comparison with this point-set adjunction model. The final statement also
+needs an explicit basepoint, a dimension hypothesis, and an empty-family case.
+Those interfaces must be fixed without hiding the geometric content.
 
 ## Depends on
 
 None beyond pinned Mathlib.
+
+## Proof depends on
+
+- [A single cone attachment has a two-set open cover](cell-attachment-support/single-cone-open-cover.md)
 
 ## Sources
 
