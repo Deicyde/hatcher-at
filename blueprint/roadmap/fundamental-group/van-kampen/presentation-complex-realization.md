@@ -34,10 +34,9 @@ two-dimensional conclusion.
 This node is not ready. Mathlib's `HomotopicalAlgebra.AttachCells` records an
 abstract coproduct and pushout, but it does not provide the point-set
 adjunction-space model, collar neighborhoods, or deformation data needed by
-the current proof of the 2-cell attachment theorem. The development also
-still needs the elementary well-pointed neighborhood of the circle in order
-to instantiate the completed wedge theorem. These are geometric obligations,
-not consequences of `PresentedGroup`.
+the current proof of the 2-cell attachment theorem. The required well-pointed
+neighborhood of the circle is now formalized, but the attachment geometry
+remains a separate obligation rather than a consequence of `PresentedGroup`.
 
 Once this theorem exists, the arbitrary-group corollary is only the
 composition of its equivalence with `Hatcher.exists_presentedGroup_equiv`.
@@ -49,6 +48,7 @@ None beyond pinned Mathlib.
 ## Proof depends on
 
 - [The fundamental group of a wedge](wedge-fundamental-group.md)
+- [The circle is well-pointed at one](circle-well-pointed.md)
 - [Attaching 2-cells adds the attaching relations](attach-two-cells-fundamental-group.md)
 - [The fundamental group of the circle](../basic-constructions/fundamental-group-circle.md)
 

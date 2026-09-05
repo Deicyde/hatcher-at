@@ -79,9 +79,9 @@ part, and the Appendix compactness lemma needed for its 2-skeleton clause is a
 separate cross-chapter node. The cover presentation, threefold-incidence
 homotopy decomposition, and quotient form of van Kampen's theorem are
 formalized, as are the pointed-wedge theorem, the higher-cell binary-cover
-algebra, and the cyclic quotient calculation. The point-set cell-attachment
-model and the bridge between Mathlib's classical and categorical CW-complex
-APIs remain not ready.
+algebra, the circle's well-pointed neighborhood, and the cyclic quotient
+calculation. The point-set cell-attachment model and the bridge between
+Mathlib's classical and categorical CW-complex APIs remain not ready.
 
 ### §1.3 selected classification and deck spine
 

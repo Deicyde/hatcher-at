@@ -64,6 +64,7 @@ wedge sums.
 - [The pointed wedge of a family of spaces](pointed-wedge.md)
 - [The standard cover of a well-pointed wedge](well-pointed-wedge-cover.md)
 - [The fundamental group of a wedge](wedge-fundamental-group.md)
+- [The circle is well-pointed at one](circle-well-pointed.md)
 
 Mathlib supplies the abstract coproduct-and-pushout data in
 `HomotopicalAlgebra.AttachCells`, but not the point-set adjunction-space
