@@ -57,6 +57,7 @@ import Hatcher.VanKampen.FinalBandSweep
 import Hatcher.VanKampen.NonfinalBandSweep
 import Hatcher.VanKampen.VanKampenHomotopy
 import Hatcher.VanKampen.PointedWedge
+import Hatcher.VanKampen.WellPointedWedgeCover
 import Hatcher.VanKampen.PresentedGroup
 import Hatcher.VanKampen.RefinementProduct
 import Hatcher.VanKampen.VanKampenKernel
