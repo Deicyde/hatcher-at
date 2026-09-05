@@ -255,10 +255,11 @@ noncomputable def fundamentalGroupEquivPointedWedgeOfRetracts
     [Nonempty ι] [∀ i, PathConnectedSpace (X i)]
     (hwell : ∀ i, WellPointedAt (x₀ i))
     (hmember : ∀ i,
-      StrongDeformationRetract (vanKampenCoverInclusion x₀ hwell i))
-    [ContractibleSpace (vanKampenNeck x₀ hwell)] :
+      StrongDeformationRetract (vanKampenCoverInclusion x₀ hwell i)) :
     Monoid.CoprodI (fun i => FundamentalGroup (X i) (x₀ i)) ≃*
       FundamentalGroup (Hatcher.PointedWedge X x₀) (basepoint x₀) := by
+  letI : ContractibleSpace (vanKampenNeck x₀ hwell) :=
+    contractibleSpace_vanKampenNeck x₀ hwell
   let U := vanKampenCover x₀ hwell
   let hx₀ := basepoint_mem_vanKampenCover x₀ hwell
   have hone : ∀ i, IsPathConnected (U i) := by
@@ -301,7 +302,6 @@ theorem fundamentalGroupEquivPointedWedgeOfRetracts_of
     (hwell : ∀ i, WellPointedAt (x₀ i))
     (hmember : ∀ i,
       StrongDeformationRetract (vanKampenCoverInclusion x₀ hwell i))
-    [ContractibleSpace (vanKampenNeck x₀ hwell)]
     (i : ι) (g : FundamentalGroup (X i) (x₀ i)) :
     fundamentalGroupEquivPointedWedgeOfRetracts x₀ hwell hmember
         (Monoid.CoprodI.of g) =
@@ -320,4 +320,3 @@ theorem fundamentalGroupEquivPointedWedgeOfRetracts_of
 end PointedWedge
 
 end Hatcher
-
