@@ -64,6 +64,7 @@ wedge sums.
 - [The pointed wedge of a family of spaces](pointed-wedge.md)
 - [The standard cover of a well-pointed wedge](well-pointed-wedge-cover.md)
 - [The fundamental group of a wedge](wedge-fundamental-group.md)
+- [The fundamental group of a wedge of circles](wedge-circles-free-group.md)
 - [Cell-attachment support](cell-attachment-support/README.md)
 
 Mathlib supplies the abstract coproduct-and-pushout data in
