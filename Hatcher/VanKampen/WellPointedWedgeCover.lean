@@ -683,6 +683,21 @@ def memberProjection (i : ι) : C(Hatcher.PointedWedge X x₀, X i) where
   continuous_toFun := continuous_quotientLift x₀ _ _
     (continuous_memberProjectionPre_some x₀ i)
 
+@[simp]
+theorem memberProjection_inclusion_self (i : ι) (x : X i) :
+    memberProjection x₀ i (inclusion x₀ i x) = x := by
+  simp [memberProjection, memberProjectionPre, inclusion]
+
+theorem memberProjection_inclusion_of_ne
+    {i j : ι} (hji : j ≠ i) (x : X j) :
+    memberProjection x₀ i (inclusion x₀ j x) = x₀ i := by
+  simp [memberProjection, memberProjectionPre, inclusion, hji]
+
+@[simp]
+theorem memberProjection_basepoint (i : ι) :
+    memberProjection x₀ i (basepoint x₀) = x₀ i :=
+  rfl
+
 /-- The projection restricted to one member of the standard cover. -/
 def vanKampenCoverRetraction
     (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι) :
