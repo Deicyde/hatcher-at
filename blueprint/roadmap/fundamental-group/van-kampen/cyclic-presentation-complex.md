@@ -33,6 +33,7 @@ None beyond pinned Mathlib.
 ## Proof depends on
 
 - [Attaching 2-cells adds the attaching relations](attach-two-cells-fundamental-group.md)
+- [The degree-n circle map sends the generator to the degree-n loop](circle-degree-map.md)
 - [The degree-n circle relation gives the cyclic group](cyclic-relation-quotient.md)
 
 ## Sources

@@ -94,6 +94,7 @@ available independently of that geometry.
 - [Every group admits a generators-and-relations presentation](every-group-presentation.md)
 - [Presented groups have two-dimensional presentation complexes](presentation-complex-realization.md)
 - [Every group is a fundamental group](every-group-fundamental-group.md)
+- [The degree-n circle map sends the generator to the degree-n loop](circle-degree-map.md)
 - [The degree-n circle relation gives the cyclic group](cyclic-relation-quotient.md)
 - [The cyclic presentation complex](cyclic-presentation-complex.md)
 

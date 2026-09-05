@@ -20,6 +20,54 @@ theorem fundamentalGroupEquivInt_degreeLoopClass (n : ℕ) :
   exact congrArg Multiplicative.ofAdd
     (windingNumberFun_loopOfInt (n : ℤ))
 
+/-- The degree-`n` self-map of the circle, `z ↦ z ^ n`. -/
+noncomputable def degreeMap (n : ℕ) : C(_root_.Circle, _root_.Circle) where
+  toFun z := z ^ n
+  continuous_toFun := continuous_pow n
+
+@[simp]
+theorem degreeMap_apply (n : ℕ) (z : _root_.Circle) :
+    degreeMap n z = z ^ n :=
+  rfl
+
+@[simp]
+theorem degreeMap_one (n : ℕ) : degreeMap n 1 = 1 := by
+  simp [degreeMap]
+
+theorem degreeMap_map_loopOfInt (n : ℕ) (m : ℤ) :
+    ((loopOfInt m).map (degreeMap n).continuous).cast
+        (degreeMap_one n).symm (degreeMap_one n).symm =
+      loopOfInt ((n : ℤ) * m) := by
+  apply Path.ext
+  funext t
+  rw [show
+    (((loopOfInt m).map (degreeMap n).continuous).cast
+        (degreeMap_one n).symm (degreeMap_one n).symm) t =
+      ((loopOfInt m).map (degreeMap n).continuous) t from
+    congrFun (Path.cast_coe _ _ _) t]
+  rw [show ((loopOfInt m).map (degreeMap n).continuous) t =
+      degreeMap n (loopOfInt m t) from rfl]
+  rw [degreeMap_apply]
+  unfold loopOfInt
+  simp only [expMap_apply, Path.coe_mk', ContinuousMap.coe_mk]
+  rw [show 2 * Real.pi * ((((n : ℤ) * m : ℤ) : ℝ) * (t : ℝ)) =
+    (n : ℝ) * (2 * Real.pi * ((m : ℝ) * (t : ℝ))) by
+      push_cast
+      ring]
+  exact (_root_.Circle.exp_natCast_mul
+    (2 * Real.pi * ((m : ℝ) * (t : ℝ))) n).symm
+
+@[simp]
+theorem mapOfEq_degreeMap_degreeLoopClass_one (n : ℕ) :
+    FundamentalGroup.mapOfEq (degreeMap n) (degreeMap_one n)
+        (degreeLoopClass 1) =
+      degreeLoopClass n := by
+  unfold degreeLoopClass
+  rw [FundamentalGroup.mapOfEq_apply]
+  apply congrArg FundamentalGroup.fromPath
+  apply congrArg Path.Homotopic.Quotient.mk
+  simpa using degreeMap_map_loopOfInt n 1
+
 end Circle
 
 private theorem normalClosure_singleton_eq_zpowers
