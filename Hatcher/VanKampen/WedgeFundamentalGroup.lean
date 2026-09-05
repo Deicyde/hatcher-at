@@ -1,5 +1,6 @@
 import Hatcher.VanKampen.VanKampenKernel
 import Hatcher.VanKampen.WellPointedWedgeNeckContraction
+import Hatcher.VanKampen.WellPointedWedgeMemberDeformation
 import Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected
 
 noncomputable section
@@ -318,5 +319,94 @@ theorem fundamentalGroupEquivPointedWedgeOfRetracts_of
       rfl
 
 end PointedWedge
+
+end Hatcher
+
+namespace Hatcher.PointedWedge
+
+universe u v
+
+variable {ι : Type u} {X : ι → Type v} [∀ i, TopologicalSpace (X i)]
+  (x₀ : ∀ i, X i)
+
+/-- The standard well-pointed wedge cover satisfies all connectivity
+hypotheses used by van Kampen's theorem. -/
+theorem exists_vanKampenCover
+    [Nonempty ι] [∀ i, PathConnectedSpace (X i)]
+    (hwell : ∀ i, WellPointedAt (x₀ i)) :
+    ∃ U : ι → Set (Hatcher.PointedWedge X x₀),
+      (∀ i, IsOpen (U i)) ∧
+      Set.univ ⊆ ⋃ i, U i ∧
+      (∀ i, IsPathConnected (U i)) ∧
+      (∀ i j, IsPathConnected (U i ∩ U j)) ∧
+      (∀ i j k, IsPathConnected (U i ∩ U j ∩ U k)) ∧
+      (∀ i, basepoint x₀ ∈ U i) := by
+  let U := vanKampenCover x₀ hwell
+  have hone : ∀ i, IsPathConnected (U i) :=
+    isPathConnected_vanKampenCover x₀ hwell
+  have hneck : IsPathConnected (vanKampenNeck x₀ hwell) :=
+    isPathConnected_vanKampenNeck x₀ hwell
+  have htwo : ∀ i j, IsPathConnected (U i ∩ U j) := by
+    intro i j
+    by_cases hij : i = j
+    · subst j
+      simpa using hone i
+    · rw [vanKampenCover_inter_eq_vanKampenNeck x₀ hwell hij]
+      exact hneck
+  have hthree : ∀ i j k, IsPathConnected (U i ∩ U j ∩ U k) := by
+    intro i j k
+    by_cases hij : i = j
+    · subst j
+      simpa using htwo i k
+    · rw [vanKampenCover_inter_eq_vanKampenNeck x₀ hwell hij]
+      rw [inter_eq_left.mpr (vanKampenNeck_subset x₀ hwell k)]
+      exact hneck
+  exact ⟨U, isOpen_vanKampenCover x₀ hwell,
+    univ_subset_iUnion_vanKampenCover x₀ hwell, hone, htwo, hthree,
+    basepoint_mem_vanKampenCover x₀ hwell⟩
+
+end Hatcher.PointedWedge
+
+namespace Hatcher
+
+universe u v
+
+/-- **Hatcher, Example 1.21 (page 43).** The inclusions of a family of
+path-connected well-pointed spaces induce an equivalence from the indexed
+free product of their fundamental groups to the fundamental group of their
+pointed wedge. -/
+noncomputable def fundamentalGroupEquivPointedWedge
+    {ι : Type u} {X : ι → Type v} [∀ i, TopologicalSpace (X i)]
+    [∀ i, PathConnectedSpace (X i)]
+    (x₀ : ∀ i, X i) (hwell : ∀ i, WellPointedAt (x₀ i)) :
+    Monoid.CoprodI (fun i => FundamentalGroup (X i) (x₀ i)) ≃*
+      FundamentalGroup (PointedWedge X x₀) (PointedWedge.basepoint x₀) := by
+  classical
+  by_cases hι : Nonempty ι
+  · letI := hι
+    exact PointedWedge.fundamentalGroupEquivPointedWedgeOfRetracts x₀ hwell
+      (PointedWedge.vanKampenCoverStrongDeformationRetract x₀ hwell)
+  · letI : IsEmpty ι := ⟨fun i => hι ⟨i⟩⟩
+    exact PointedWedge.fundamentalGroupEquivPointedWedgeOfIsEmpty x₀
+
+/-- On each free-product factor, the wedge equivalence is the map induced by
+the canonical summand inclusion. -/
+@[simp]
+theorem fundamentalGroupEquivPointedWedge_of
+    {ι : Type u} {X : ι → Type v} [∀ i, TopologicalSpace (X i)]
+    [∀ i, PathConnectedSpace (X i)]
+    (x₀ : ∀ i, X i) (hwell : ∀ i, WellPointedAt (x₀ i))
+    (i : ι) (g : FundamentalGroup (X i) (x₀ i)) :
+    fundamentalGroupEquivPointedWedge x₀ hwell (Monoid.CoprodI.of g) =
+      FundamentalGroup.mapOfEq
+        (⟨PointedWedge.inclusion x₀ i,
+          PointedWedge.continuous_inclusion x₀ i⟩ :
+          C(X i, PointedWedge X x₀))
+        (PointedWedge.inclusion_basepoint x₀ i) g := by
+  classical
+  let hι : Nonempty ι := ⟨i⟩
+  letI := hι
+  simp [fundamentalGroupEquivPointedWedge, hι,
+    PointedWedge.fundamentalGroupEquivPointedWedgeOfRetracts_of]
 
 end Hatcher

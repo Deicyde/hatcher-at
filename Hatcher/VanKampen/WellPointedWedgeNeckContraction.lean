@@ -174,10 +174,12 @@ private def commonNeckPreimageEquiv
 
 section PrequotientTopology
 
-local instance : TopologicalSpace (Option (Σ i, X i)) :=
+local instance neckAmbientPrequotientTopologyInstance :
+    TopologicalSpace (Option (Σ i, X i)) :=
   prequotientTopology (X := X)
 
-local instance (hwell : ∀ i, WellPointedAt (x₀ i)) :
+local instance neckModelPrequotientTopologyInstance
+    (hwell : ∀ i, WellPointedAt (x₀ i)) :
     TopologicalSpace (Option (Σ i, (hwell i).neighborhood)) :=
   prequotientTopology (X := fun i => (hwell i).neighborhood)
 

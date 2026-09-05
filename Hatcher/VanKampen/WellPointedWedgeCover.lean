@@ -355,7 +355,8 @@ theorem isOpen_neckSet
 
 section SourceTopology
 
-local instance : TopologicalSpace (Option (Σ i, X i)) :=
+local instance coverSourceTopologyInstance :
+    TopologicalSpace (Option (Σ i, X i)) :=
   prequotientTopology (X := X)
 
 /-- The defining quotient map for the pointed wedge is a quotient map when
@@ -618,7 +619,8 @@ private theorem triple_pathConnected_of_member_neck
 
 section MemberProjection
 
-local instance : DecidableEq ι := Classical.decEq ι
+local instance memberProjectionDecidableEq : DecidableEq ι :=
+  Classical.decEq ι
 
 private theorem continuous_quotientLift
     {Y : Type*} [TopologicalSpace Y]

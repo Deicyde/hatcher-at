@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.PointedWedge.exists_vanKampenCover
 ---
 
 # The standard cover of a well-pointed wedge
@@ -28,7 +31,7 @@ triple-intersection path-connectivity hypotheses required by van Kampen.
 
 Intended artifact: `Hatcher.PointedWedge.exists_vanKampenCover`.
 
-The same module should handle the empty-family boundary case separately by
+The same development should handle the empty-family boundary case separately by
 showing that `Hatcher.PointedWedge X x₀` is a one-point, hence contractible,
 space when the index type is empty. The cover theorem itself is scoped to a
 nonempty index type, since an empty indexed family cannot cover the wedge
@@ -38,6 +41,10 @@ This node owns the quotient-space elimination and continuity lemmas needed to
 define the cover and its simultaneous deformation homotopies. The final wedge
 fundamental-group theorem should consume this package rather than reconstruct
 the point-set topology.
+
+Formalized across `Hatcher/VanKampen/WellPointedWedgeCover.lean`,
+`WellPointedWedgeNeckContraction.lean`, and
+`WellPointedWedgeMemberDeformation.lean`.
 
 ## Depends on
 

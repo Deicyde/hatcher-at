@@ -1,6 +1,9 @@
 ---
 declaration: def
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.fundamentalGroupEquivPointedWedge
 ---
 
 # The fundamental group of a wedge
@@ -16,6 +19,9 @@ Intended artifact: `Hatcher.fundamentalGroupEquivPointedWedge`.
 Do not restrict the family to a finite index type. The well-pointed hypothesis
 is part of Hatcher's statement and makes the standard open cover of the wedge
 available to van Kampen.
+
+Formalized in `Hatcher/VanKampen/WedgeFundamentalGroup.lean`, including the
+empty-family case and the canonical formula on each free-product factor.
 
 ## Depends on
 

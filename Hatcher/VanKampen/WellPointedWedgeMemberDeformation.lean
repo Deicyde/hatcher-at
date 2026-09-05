@@ -13,8 +13,10 @@ universe u v w
 variable {ι : Type u} {X : ι → Type v} [∀ i, TopologicalSpace (X i)]
   (x₀ : ∀ i, X i)
 
-local instance : DecidableEq ι := Classical.decEq ι
-local instance (p : Prop) : Decidable p := Classical.propDecidable p
+local instance memberDeformationDecidableEq : DecidableEq ι :=
+  Classical.decEq ι
+local instance memberDeformationDecidableProp (p : Prop) : Decidable p :=
+  Classical.propDecidable p
 
 
 private theorem continuous_quotientLift_prod
@@ -280,10 +282,12 @@ private def coverFiberPreimageEquiv
 
 section CoverFiberTopology
 
-local instance : TopologicalSpace (Option (Σ j, X j)) :=
+local instance memberAmbientPrequotientTopologyInstance :
+    TopologicalSpace (Option (Σ j, X j)) :=
   prequotientTopology (X := X)
 
-local instance (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι) :
+local instance memberModelPrequotientTopologyInstance
+    (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι) :
     TopologicalSpace (Option (Σ j, coverFiber x₀ hwell i j)) :=
   prequotientTopology (X := fun j => coverFiber x₀ hwell i j)
 
@@ -674,4 +678,3 @@ end CoverFiberTopology
 
 
 end Hatcher.PointedWedge
-
