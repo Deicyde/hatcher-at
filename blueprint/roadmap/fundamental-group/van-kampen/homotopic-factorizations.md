@@ -1,6 +1,9 @@
 ---
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.factorization_quotient_eq_of_homotopic
 ---
 
 # Homotopic factorizations have the same quotient class

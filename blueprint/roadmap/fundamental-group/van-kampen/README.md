@@ -14,7 +14,7 @@ free products of groups and closes with applications to cell complexes,
 including `π₁` of a wedge of circles and of a two-dimensional CW complex
 presented by generators and relations.
 
-The public theorem will retain Hatcher's shared-basepoint group statement.
+The public theorem retains Hatcher's shared-basepoint group statement.
 Mathlib supplies indexed free products, normal closures, quotient groups, and
 an initial unit-square subdivision lemma, but not the topological theorem or
 Hatcher's required threefold-incidence refinement. A groupoid proof may be

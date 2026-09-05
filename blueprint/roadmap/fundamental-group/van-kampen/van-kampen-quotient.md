@@ -1,6 +1,9 @@
 ---
-declaration: theorem
+declaration: def
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.quotientEquivFundamentalGroup
 ---
 
 # Van Kampen's quotient isomorphism
