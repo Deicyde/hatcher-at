@@ -70,10 +70,9 @@ equivalence, beginning with the special case of retracts.
 
 - [Retractions and deformation retracts on the fundamental group](retractions-fundamental-group.md)
 - [A homotopy equivalence induces a fundamental-group isomorphism](homotopy-equivalence-fundamental-group.md)
+- [Homotopic maps differ by basepoint change](homotopic-maps-fundamental-group.md)
 
-Corollaries 1.11 and 1.16 and Lemma 1.19 remain outside the selected slice.
-Mathlib already expresses the core of Lemma 1.19 at the fundamental-groupoid
-level; its source-facing wrapper and the other deferred results belong to a
+Corollaries 1.11 and 1.16 remain outside the selected slice and belong to a
 later §1.1 completion pass. See the
 [coverage contract](../../../coverage/README.md).
 

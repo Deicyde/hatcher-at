@@ -5,7 +5,7 @@ import Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected
 
 noncomputable section
 
-open CategoryTheory Set
+open CategoryTheory FundamentalGroupoid Set
 open scoped ContinuousMap
 
 namespace Hatcher
@@ -170,6 +170,40 @@ theorem fundamentalGroupMulEquivOfDeformationRetract_apply
         hdeformation a g =
       FundamentalGroup.map inclusion a g := by
   rfl
+
+private lemma eq_comp_inv_of_comp_eq
+    {D : Type*} [Groupoid D] {a b : D} (u : a ⟶ b)
+    (p : a ⟶ a) (q : b ⟶ b) (h : p ≫ u = u ≫ q) :
+    p = u ≫ q ≫ Groupoid.inv u := by
+  rw [← cancel_mono u]
+  rw [h]
+  simp
+
+/-- Homotopic maps induce fundamental-group maps that differ by basepoint
+change along the path traced by the basepoint. -/
+theorem fundamentalGroupMap_eq_basepointChange_comp
+    {X : Type u} {Y : Type v} [TopologicalSpace X] [TopologicalSpace Y]
+    {f g : C(X, Y)} (H : f.Homotopy g) (x : X) :
+    FundamentalGroup.map f x =
+      (FundamentalGroup.fundamentalGroupMulEquivOfPath
+        (H.evalAt x)).symm.toMonoidHom.comp
+        (FundamentalGroup.map g x) := by
+  ext p
+  change (FundamentalGroupoid.map f).map p =
+    (FundamentalGroup.fundamentalGroupMulEquivOfPath (H.evalAt x)).symm
+      ((FundamentalGroupoid.map g).map p)
+  change (FundamentalGroupoid.map f).map p =
+    ⟦H.evalAt x⟧ ≫ (FundamentalGroupoid.map g).map p ≫
+      Groupoid.inv ⟦H.evalAt x⟧
+  have hn := (FundamentalGroupoidFunctor.homotopicMapsNatIso H).naturality p
+  change (FundamentalGroupoid.map f).map p ≫ ⟦H.evalAt x⟧ =
+    ⟦H.evalAt x⟧ ≫ (FundamentalGroupoid.map g).map p at hn
+  exact eq_comp_inv_of_comp_eq
+    (D := FundamentalGroupoid Y)
+    (u := ⟦H.evalAt x⟧)
+    (p := (FundamentalGroupoid.map f).map p)
+    (q := (FundamentalGroupoid.map g).map p)
+    hn
 
 namespace StrongDeformationRetract
 

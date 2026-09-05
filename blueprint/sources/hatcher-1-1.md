@@ -67,7 +67,8 @@ Available and reusable:
 - `FundamentalGroupoidFunctor.homotopicMapsNatIso` and
   `FundamentalGroupoidFunctor.equivOfHomotopyEquiv` —
   `FundamentalGroupoid/InducedMaps.lean`, giving the groupoid-level content
-  of Lemma 1.19 and Proposition 1.18. The latter is packaged locally as
+  of Lemma 1.19 and Proposition 1.18. They are packaged locally as
+  `Hatcher.fundamentalGroupMap_eq_basepointChange_comp` and
   `Hatcher.fundamentalGroupMulEquivOfHomotopyEquiv`.
 - Functoriality of `FundamentalGroupoid.map` packages Proposition 1.17
   locally as `Hatcher.fundamentalGroupMap_injective_of_retraction` and
