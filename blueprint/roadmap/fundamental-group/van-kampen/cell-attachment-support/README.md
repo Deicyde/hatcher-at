@@ -7,6 +7,7 @@ first point-set construction around Hatcher's cell-attachment applications.
 
 - [A single cone attachment has a two-set open cover](single-cone-open-cover.md)
 - [The cone on a disk boundary is the disk](cone-disk-homeomorphism.md)
+- [A single cone attachment is a topological pushout](single-cone-pushout.md)
 
 This is one cone only. The arbitrary-family attachment model and its
 deformation retractions remain in the parent roadmap.

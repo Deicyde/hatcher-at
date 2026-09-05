@@ -74,4 +74,5 @@ import Hatcher.VanKampen.WedgeFundamentalGroup
 import Hatcher.VanKampen.WedgeCircles
 import Hatcher.VanKampen.ConeAttachment
 import Hatcher.VanKampen.ConeAttachmentDisk
+import Hatcher.VanKampen.ConeAttachmentPushout
 import Hatcher.VanKampen.CellAttachmentAlgebra

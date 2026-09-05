@@ -24,13 +24,14 @@ assert either final fundamental-group result.
 This node is not yet ready to formalize against the pinned Mathlib API. The
 single-cone quotient and its two open cover members are now explicit, and the
 identity attachment on `TopCat.diskBoundary n` has been identified with
-`TopCat.disk n`. The arbitrary-family construction still needs one apex per
-cell, deformation retractions of both cover members, and the intersection
-cover.
-`HomotopicalAlgebra.AttachCells` supplies an abstract coproduct and pushout but
-no comparison with this point-set adjunction model. The final statement also
-needs an explicit basepoint, a dimension hypothesis, and an empty-family case.
-Those interfaces must be fixed without hiding the geometric content.
+`TopCat.disk n`. The single-cone quotient is also proved to be a `TopCat`
+pushout and carries a one-cell `HomotopicalAlgebra.AttachCells` structure for
+its retained-cone boundary. The arbitrary-family construction still needs one
+apex per cell, deformation retractions of both cover members, the intersection
+cover, and transport from the retained cone to `TopCat.RelativeCWComplex.basicCell`.
+The final statement also needs an explicit basepoint, a dimension hypothesis,
+and an empty-family case. Those interfaces must be fixed without hiding the
+geometric content.
 
 ## Depends on
 
@@ -40,6 +41,7 @@ None beyond pinned Mathlib.
 
 - [A single cone attachment has a two-set open cover](cell-attachment-support/single-cone-open-cover.md)
 - [The cone on a disk boundary is the disk](cell-attachment-support/cone-disk-homeomorphism.md)
+- [A single cone attachment is a topological pushout](cell-attachment-support/single-cone-pushout.md)
 
 ## Sources
 
