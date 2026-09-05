@@ -1,5 +1,5 @@
 import Hatcher.VanKampen.PointedWedge
-import Mathlib.Topology.Homotopy.Basic
+import Mathlib.Topology.Homotopy.Contractible
 
 noncomputable section
 
@@ -72,10 +72,128 @@ theorem contraction_basepoint (h : WellPointedAt x₀) (t : I) :
 
 end WellPointedAt
 
+/-- A strong deformation retract presented by its inclusion into the ambient
+space. -/
+structure StrongDeformationRetract
+    {A : Type u} {Y : Type v} [TopologicalSpace A] [TopologicalSpace Y]
+    (inclusion : C(A, Y)) where
+  retract : C(Y, A)
+  retract_inclusion : retract.comp inclusion = ContinuousMap.id A
+  deformation :
+    (ContinuousMap.id Y).HomotopyRel (inclusion.comp retract) (Set.range inclusion)
+
+namespace StrongDeformationRetract
+
+variable {A : Type u} {Y : Type v} [TopologicalSpace A] [TopologicalSpace Y]
+  {inclusion : C(A, Y)}
+
+/-- A strong deformation retract supplies the corresponding homotopy
+equivalence. -/
+def toHomotopyEquiv (h : StrongDeformationRetract inclusion) :
+    ContinuousMap.HomotopyEquiv Y A where
+  toFun := h.retract
+  invFun := inclusion
+  left_inv := ⟨h.deformation.toHomotopy.symm⟩
+  right_inv := by
+    rw [h.retract_inclusion]
+
+/-- A strong deformation retract onto a contractible space is contractible. -/
+theorem contractibleSpace [ContractibleSpace A]
+    (h : StrongDeformationRetract inclusion) : ContractibleSpace Y :=
+  h.toHomotopyEquiv.contractibleSpace
+
+/-- A strong deformation retract onto a path-connected space is
+path-connected. -/
+theorem pathConnectedSpace [PathConnectedSpace A]
+    (h : StrongDeformationRetract inclusion) : PathConnectedSpace Y where
+  nonempty := by
+    obtain ⟨a⟩ := (PathConnectedSpace.nonempty : Nonempty A)
+    exact ⟨inclusion a⟩
+  joined y z := by
+    have hy : Joined y (inclusion (h.retract y)) :=
+      ⟨h.deformation.toHomotopy.evalAt y⟩
+    have hz : Joined z (inclusion (h.retract z)) :=
+      ⟨h.deformation.toHomotopy.evalAt z⟩
+    have ha : Joined (h.retract y) (h.retract z) :=
+      PathConnectedSpace.joined _ _
+    have hi : Joined (inclusion (h.retract y)) (inclusion (h.retract z)) :=
+      ⟨ha.somePath.map inclusion.continuous⟩
+    exact hy.trans (hi.trans hz.symm)
+
+/-- A contraction fixing its center is a strong deformation retract onto that
+point, represented by `Unit`. -/
+def ofPointedContraction (y₀ : Y)
+    (H : (ContinuousMap.id Y).HomotopyRel
+      (ContinuousMap.const Y y₀) {y₀}) :
+    StrongDeformationRetract (ContinuousMap.const Unit y₀) where
+  retract := ContinuousMap.const Y ()
+  retract_inclusion := by
+    ext
+  deformation := by
+    change (ContinuousMap.id Y).HomotopyRel (ContinuousMap.const Y y₀)
+      (Set.range fun _ : Unit ↦ y₀)
+    rw [Set.range_const]
+    exact H
+
+/-- A pointed contraction supplies contractibility. -/
+theorem contractibleSpace_of_pointedContraction (y₀ : Y)
+    (H : (ContinuousMap.id Y).HomotopyRel
+      (ContinuousMap.const Y y₀) {y₀}) :
+    ContractibleSpace Y :=
+  (ofPointedContraction y₀ H).contractibleSpace
+
+end StrongDeformationRetract
+
 namespace PointedWedge
 
 variable {ι : Type u} {X : ι → Type v} [∀ i, TopologicalSpace (X i)]
   (x₀ : ∀ i, X i)
+
+omit [∀ i, TopologicalSpace (X i)] in
+/-- Every point of an empty pointed wedge is its basepoint. -/
+theorem eq_basepoint_of_isEmpty [IsEmpty ι]
+    (z : Hatcher.PointedWedge X x₀) : z = basepoint x₀ := by
+  induction z using Quotient.inductionOn with
+  | _ z =>
+    cases z with
+    | none => rfl
+    | some p => exact isEmptyElim p.1
+
+omit [∀ i, TopologicalSpace (X i)] in
+/-- An empty pointed wedge has exactly one point. -/
+instance instUniqueOfIsEmpty [IsEmpty ι] :
+    Unique (Hatcher.PointedWedge X x₀) where
+  default := basepoint x₀
+  uniq := eq_basepoint_of_isEmpty x₀
+
+/-- An empty pointed wedge is contractible. -/
+instance instContractibleSpaceOfIsEmpty [IsEmpty ι] :
+    ContractibleSpace (Hatcher.PointedWedge X x₀) :=
+  inferInstance
+
+/-- The canonical summand inclusion, with codomain restricted to a subset
+that contains the whole summand. -/
+def inclusionToSubset (W : Set (Hatcher.PointedWedge X x₀)) (i : ι)
+    (hW : ∀ x, inclusion x₀ i x ∈ W) : C(X i, W) where
+  toFun x := ⟨inclusion x₀ i x, hW x⟩
+  continuous_toFun := (continuous_inclusion x₀ i).subtype_mk _
+
+@[simp]
+theorem coe_inclusionToSubset
+    (W : Set (Hatcher.PointedWedge X x₀)) (i : ι)
+    (hW : ∀ x, inclusion x₀ i x ∈ W) (x : X i) :
+    ((inclusionToSubset x₀ W i hW x : W) :
+      Hatcher.PointedWedge X x₀) = inclusion x₀ i x :=
+  rfl
+
+@[simp]
+theorem inclusionToSubset_basepoint
+    (W : Set (Hatcher.PointedWedge X x₀)) (i : ι)
+    (hW : ∀ x, inclusion x₀ i x ∈ W) :
+    inclusionToSubset x₀ W i hW (x₀ i) =
+      ⟨basepoint x₀, by simpa using hW (x₀ i)⟩ := by
+  apply Subtype.ext
+  exact inclusion_basepoint x₀ i
 
 /-- The saturated prequotient set underlying the standard wedge cover member. -/
 def coverPreimage (N : ∀ i, Set (X i)) (i : ι) :
@@ -192,6 +310,28 @@ theorem inclusion_mem_vanKampenCover
     (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι) (x : X i) :
     inclusion x₀ i x ∈ vanKampenCover x₀ hwell i :=
   inclusion_mem_coverSet x₀ _ _ i x
+
+/-- The canonical summand inclusion into its member of the well-pointed wedge
+cover. -/
+def vanKampenCoverInclusion
+    (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι) :
+    C(X i, vanKampenCover x₀ hwell i) :=
+  inclusionToSubset x₀ _ i (inclusion_mem_vanKampenCover x₀ hwell i)
+
+@[simp]
+theorem coe_vanKampenCoverInclusion
+    (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι) (x : X i) :
+    ((vanKampenCoverInclusion x₀ hwell i x : vanKampenCover x₀ hwell i) :
+      Hatcher.PointedWedge X x₀) = inclusion x₀ i x :=
+  rfl
+
+@[simp]
+theorem vanKampenCoverInclusion_basepoint
+    (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι) :
+    vanKampenCoverInclusion x₀ hwell i (x₀ i) =
+      ⟨basepoint x₀, basepoint_mem_coverSet x₀ _ _ i⟩ := by
+  apply Subtype.ext
+  exact inclusion_basepoint x₀ i
 
 /-- Every member of the well-pointed wedge cover contains the wedge point. -/
 @[simp]
