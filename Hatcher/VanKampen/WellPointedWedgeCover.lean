@@ -490,6 +490,35 @@ theorem vanKampenCover_inter_eq_vanKampenNeck
       vanKampenNeck x₀ hwell :=
   coverSet_inter_eq_neckSet_of_ne x₀ _ _ hij
 
+private theorem pairwise_pathConnected_of_member_neck
+    (hwell : ∀ i, WellPointedAt (x₀ i))
+    (hmember : ∀ i, IsPathConnected (vanKampenCover x₀ hwell i))
+    (hneck : IsPathConnected (vanKampenNeck x₀ hwell)) :
+    ∀ i j, IsPathConnected
+      (vanKampenCover x₀ hwell i ∩ vanKampenCover x₀ hwell j) := by
+  intro i j
+  by_cases hij : i = j
+  · subst j
+    simpa using hmember i
+  · rw [vanKampenCover_inter_eq_vanKampenNeck x₀ hwell hij]
+    exact hneck
+
+private theorem triple_pathConnected_of_member_neck
+    (hwell : ∀ i, WellPointedAt (x₀ i))
+    (hmember : ∀ i, IsPathConnected (vanKampenCover x₀ hwell i))
+    (hneck : IsPathConnected (vanKampenNeck x₀ hwell)) :
+    ∀ i j k, IsPathConnected
+      (vanKampenCover x₀ hwell i ∩ vanKampenCover x₀ hwell j ∩
+        vanKampenCover x₀ hwell k) := by
+  intro i j k
+  by_cases hij : i = j
+  · subst j
+    simpa using
+      pairwise_pathConnected_of_member_neck x₀ hwell hmember hneck i k
+  · rw [vanKampenCover_inter_eq_vanKampenNeck x₀ hwell hij]
+    rw [inter_eq_left.mpr (vanKampenNeck_subset x₀ hwell k)]
+    exact hneck
+
 end PointedWedge
 
 end Hatcher
