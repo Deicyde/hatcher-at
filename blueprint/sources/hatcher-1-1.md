@@ -102,7 +102,8 @@ Absent from the pinned Mathlib:
 - Brouwer's fixed point theorem (Theorem 1.9), locally formalized for the disc
   as `Hatcher.Disc.exists_fixed_point`.
 - Borsuk–Ulam (Theorem 1.10), locally formalized for `S²` as
-  `Hatcher.Sphere.exists_eq_neg`; Corollary 1.11 remains deferred.
+  `Hatcher.Sphere.exists_eq_neg`; Corollary 1.11 is formalized as
+  `Hatcher.Sphere.exists_antipodal_pair_of_three_closed_sets`.
 - `π₁(Sⁿ) = 0` for `n ≥ 2` (Proposition 1.14), locally formalized as
   `Hatcher.Sphere.simplyConnectedSpace`; Corollary 1.16 remains deferred.
 

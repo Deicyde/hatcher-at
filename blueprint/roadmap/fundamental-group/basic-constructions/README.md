@@ -66,6 +66,7 @@ disc, so an odd map `S² → S¹` restricted to it is simultaneously nullhomotop
 and of odd winding number.
 
 - [Borsuk–Ulam for the two-sphere](borsuk-ulam-sphere.md)
+- [Three closed sets covering the sphere contain an antipodal pair](three-closed-sets-antipodal.md)
 
 The section also records the fundamental group's invariance under homotopy
 equivalence, beginning with the special case of retracts.
@@ -74,8 +75,8 @@ equivalence, beginning with the special case of retracts.
 - [A homotopy equivalence induces a fundamental-group isomorphism](homotopy-equivalence-fundamental-group.md)
 - [Homotopic maps differ by basepoint change](homotopic-maps-fundamental-group.md)
 
-Corollaries 1.11 and 1.16 remain outside the selected slice and belong to a
-later §1.1 completion pass. See the
+Corollary 1.16 remains outside the selected slice and belongs to a later §1.1
+completion pass. See the
 [coverage contract](../../../coverage/README.md).
 
 ## Sources
