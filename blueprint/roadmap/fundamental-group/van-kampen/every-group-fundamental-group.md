@@ -10,9 +10,25 @@ two-dimensional cell complex `X_G` with `π₁(X_G) ≃* G`.
 
 Intended artifact: `Hatcher.exists_twoDimensionalCWComplex_fundamentalGroupEquiv`.
 
+The source-facing Lean statement should be equivalent to:
+
+```lean
+theorem exists_twoDimensionalCWComplex_fundamentalGroupEquiv
+    (G : Type u) [Group G] :
+    ∃ (X : TopCat.{u}) (x₀ : X) (c : TopCat.CWComplex X),
+      (∀ γ : HomotopicalAlgebra.RelativeCellComplex.Cells c, γ.j ≤ 2) ∧
+        Nonempty (FundamentalGroup X x₀ ≃* G)
+```
+
 Use the generator type of a presentation of `G` to form a wedge of circles,
 then attach one 2-cell for each relator. The statement is for arbitrary groups,
 not only finitely presented groups.
+
+This corollary is algebraic once the presentation-complex realization theorem
+is available: choose the presentation supplied by
+`Hatcher.exists_presentedGroup_equiv`, realize it geometrically, and compose
+the two group equivalences. It should not reconstruct the wedge or attachment
+geometry itself.
 
 ## Depends on
 
@@ -21,9 +37,7 @@ None beyond pinned Mathlib.
 ## Proof depends on
 
 - [Every group admits a generators-and-relations presentation](every-group-presentation.md)
-- [The fundamental group of a wedge](wedge-fundamental-group.md)
-- [Attaching 2-cells adds the attaching relations](attach-two-cells-fundamental-group.md)
-- [The fundamental group of the circle](../basic-constructions/fundamental-group-circle.md)
+- [Presented groups have two-dimensional presentation complexes](presentation-complex-realization.md)
 
 ## Sources
 

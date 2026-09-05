@@ -65,14 +65,16 @@ wedge sums.
 - [The standard cover of a well-pointed wedge](well-pointed-wedge-cover.md)
 - [The fundamental group of a wedge](wedge-fundamental-group.md)
 
-Mathlib's pushout-based cell-attachment API supplies the representation for
-Proposition 1.26. Hatcher's auxiliary open cover is isolated so both the
-2-cell quotient theorem and the higher-cell invariance theorem use the same
-geometry. Its second van Kampen application, which computes the intersection
-group from the attaching spheres, is a separate proof unit.
+Mathlib supplies the abstract coproduct-and-pushout data in
+`HomotopicalAlgebra.AttachCells`, but not the point-set adjunction-space
+representation needed for Hatcher's proof of Proposition 1.26. In particular,
+it does not provide the disk collars, auxiliary open cover, or deformation
+retractions used by the van Kampen calculation. That missing representation is
+kept as an explicit blocker rather than treated as existing Mathlib coverage.
 
 - [An open-cover model for attached cells](cell-attachment-cover-model.md)
 - [The attaching-sphere pieces generate the intersection group](attaching-spheres-generate-intersection.md)
+- [A binary cover with a contractible second piece](binary-cover-contractible-piece.md)
 - [Attaching 2-cells adds the attaching relations](attach-two-cells-fundamental-group.md)
 - [Attaching higher cells preserves the fundamental group](attach-higher-cells-fundamental-group.md)
 - [The 2-skeleton determines the fundamental group](two-skeleton-fundamental-group.md)
@@ -82,11 +84,15 @@ attachment theorem uses its categorical API. Their missing bridge is recorded
 as a not-ready [Appendix node](../../appendix/classical-skeleton-cell-attachment.md)
 rather than assumed silently.
 
-These results produce the construction promised in the section introduction
-and its simplest presentation complex.
+The presentation-complex realization step will package these results into the
+construction promised in the section introduction. It remains blocked on the
+point-set attachment model above. The cyclic quotient calculation is already
+available independently of that geometry.
 
 - [Every group admits a generators-and-relations presentation](every-group-presentation.md)
+- [Presented groups have two-dimensional presentation complexes](presentation-complex-realization.md)
 - [Every group is a fundamental group](every-group-fundamental-group.md)
+- [The degree-n circle relation gives the cyclic group](cyclic-relation-quotient.md)
 - [The cyclic presentation complex](cyclic-presentation-complex.md)
 
 Examples 1.22–1.25, Corollary 1.27, and the geometric claims in Example 1.29

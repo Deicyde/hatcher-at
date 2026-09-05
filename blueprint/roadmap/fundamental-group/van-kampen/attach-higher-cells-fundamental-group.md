@@ -23,7 +23,7 @@ None beyond pinned Mathlib.
 
 - [An open-cover model for attached cells](cell-attachment-cover-model.md)
 - [The attaching-sphere pieces generate the intersection group](attaching-spheres-generate-intersection.md)
-- [Binary van Kampen is a group pushout](binary-van-kampen-pushout.md)
+- [A binary cover with a contractible second piece](binary-cover-contractible-piece.md)
 - [Higher spheres are simply connected](../basic-constructions/sphere-simply-connected.md)
 
 ## Sources

@@ -64,4 +64,6 @@ import Hatcher.VanKampen.PresentedGroup
 import Hatcher.VanKampen.RefinementProduct
 import Hatcher.VanKampen.VanKampenKernel
 import Hatcher.VanKampen.BinaryVanKampen
+import Hatcher.VanKampen.CyclicPresentationAlgebra
 import Hatcher.VanKampen.WedgeFundamentalGroup
+import Hatcher.VanKampen.CellAttachmentAlgebra
