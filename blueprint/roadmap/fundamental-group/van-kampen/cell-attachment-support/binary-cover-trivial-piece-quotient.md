@@ -33,8 +33,8 @@ None beyond pinned Mathlib.
 
 ## Proof depends on
 
-- [Binary van Kampen is a group pushout](binary-van-kampen-pushout.md)
+- [Binary van Kampen is a group pushout](../binary-van-kampen-pushout.md)
 
 ## Sources
 
-- [Hatcher §1.2, proof of Proposition 1.26(a), page 50](../../../sources/hatcher-1-2.md)
+- [Hatcher §1.2, proof of Proposition 1.26(a), page 50](../../../../sources/hatcher-1-2.md)

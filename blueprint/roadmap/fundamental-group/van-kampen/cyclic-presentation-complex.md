@@ -20,7 +20,7 @@ does not currently supply that point-set space or the open-cover geometry used
 by the attachment theorem, so this node remains not ready.
 
 The quotient calculation after the geometric step is already formalized in
-[The degree-n circle relation gives the cyclic group](cyclic-relation-quotient.md).
+[The degree-n circle relation gives the cyclic group](cell-attachment-support/cyclic-relation-quotient.md).
 
 This node does not claim the example's later geometric assertions identifying
 the `n = 2` case with `ℝP²` or excluding embeddings and surface structures for
@@ -33,8 +33,8 @@ None beyond pinned Mathlib.
 ## Proof depends on
 
 - [Attaching 2-cells adds the attaching relations](attach-two-cells-fundamental-group.md)
-- [The degree-n circle map sends the generator to the degree-n loop](circle-degree-map.md)
-- [The degree-n circle relation gives the cyclic group](cyclic-relation-quotient.md)
+- [The degree-n circle map sends the generator to the degree-n loop](cell-attachment-support/circle-degree-map.md)
+- [The degree-n circle relation gives the cyclic group](cell-attachment-support/cyclic-relation-quotient.md)
 
 ## Sources
 

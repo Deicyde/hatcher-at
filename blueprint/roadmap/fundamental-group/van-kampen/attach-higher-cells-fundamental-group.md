@@ -23,7 +23,7 @@ None beyond pinned Mathlib.
 
 - [An open-cover model for attached cells](cell-attachment-cover-model.md)
 - [The attaching-sphere pieces generate the intersection group](attaching-spheres-generate-intersection.md)
-- [A binary cover with a contractible second piece](binary-cover-contractible-piece.md)
+- [A binary cover with a contractible second piece](cell-attachment-support/binary-cover-contractible-piece.md)
 - [Higher spheres are simply connected](../basic-constructions/sphere-simply-connected.md)
 
 ## Sources

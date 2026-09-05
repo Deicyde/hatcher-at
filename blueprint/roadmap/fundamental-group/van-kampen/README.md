@@ -64,7 +64,7 @@ wedge sums.
 - [The pointed wedge of a family of spaces](pointed-wedge.md)
 - [The standard cover of a well-pointed wedge](well-pointed-wedge-cover.md)
 - [The fundamental group of a wedge](wedge-fundamental-group.md)
-- [The circle is well-pointed at one](circle-well-pointed.md)
+- [Cell-attachment support](cell-attachment-support/README.md)
 
 Mathlib supplies the abstract coproduct-and-pushout data in
 `HomotopicalAlgebra.AttachCells`, but not the point-set adjunction-space
@@ -75,8 +75,6 @@ kept as an explicit blocker rather than treated as existing Mathlib coverage.
 
 - [An open-cover model for attached cells](cell-attachment-cover-model.md)
 - [The attaching-sphere pieces generate the intersection group](attaching-spheres-generate-intersection.md)
-- [A binary cover with a trivial second fundamental group](binary-cover-trivial-piece-quotient.md)
-- [A binary cover with a contractible second piece](binary-cover-contractible-piece.md)
 - [Attaching 2-cells adds the attaching relations](attach-two-cells-fundamental-group.md)
 - [Attaching higher cells preserves the fundamental group](attach-higher-cells-fundamental-group.md)
 - [The 2-skeleton determines the fundamental group](two-skeleton-fundamental-group.md)
@@ -94,8 +92,6 @@ available independently of that geometry.
 - [Every group admits a generators-and-relations presentation](every-group-presentation.md)
 - [Presented groups have two-dimensional presentation complexes](presentation-complex-realization.md)
 - [Every group is a fundamental group](every-group-fundamental-group.md)
-- [The degree-n circle map sends the generator to the degree-n loop](circle-degree-map.md)
-- [The degree-n circle relation gives the cyclic group](cyclic-relation-quotient.md)
 - [The cyclic presentation complex](cyclic-presentation-complex.md)
 
 Examples 1.22–1.25, Corollary 1.27, and the geometric claims in Example 1.29

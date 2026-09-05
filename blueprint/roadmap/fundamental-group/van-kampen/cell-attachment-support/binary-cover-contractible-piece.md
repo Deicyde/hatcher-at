@@ -30,9 +30,9 @@ None beyond pinned Mathlib.
 
 ## Proof depends on
 
-- [Binary van Kampen is a group pushout](binary-van-kampen-pushout.md)
-- [Retractions and deformation retracts on the fundamental group](../basic-constructions/retractions-fundamental-group.md)
+- [Binary van Kampen is a group pushout](../binary-van-kampen-pushout.md)
+- [Retractions and deformation retracts on the fundamental group](../../basic-constructions/retractions-fundamental-group.md)
 
 ## Sources
 
-- [Hatcher §1.2, proof of Proposition 1.26(b), pages 50–51](../../../sources/hatcher-1-2.md)
+- [Hatcher §1.2, proof of Proposition 1.26(b), pages 50–51](../../../../sources/hatcher-1-2.md)

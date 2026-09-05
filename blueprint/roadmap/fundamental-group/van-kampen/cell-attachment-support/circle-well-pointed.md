@@ -27,4 +27,4 @@ None beyond pinned Mathlib.
 
 ## Sources
 
-- [Hatcher §1.2, wedge and presentation-complex applications](../../../sources/hatcher-1-2.md)
+- [Hatcher §1.2, wedge and presentation-complex applications](../../../../sources/hatcher-1-2.md)

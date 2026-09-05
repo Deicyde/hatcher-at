@@ -23,8 +23,8 @@ complex. It does not construct that cell attachment.
 
 ## Depends on
 
-- [The fundamental group of the circle](../basic-constructions/fundamental-group-circle.md)
+- [The fundamental group of the circle](../../basic-constructions/fundamental-group-circle.md)
 
 ## Sources
 
-- [Hatcher §1.2, Example 1.29, page 52](../../../sources/hatcher-1-2.md)
+- [Hatcher §1.2, Example 1.29, page 52](../../../../sources/hatcher-1-2.md)

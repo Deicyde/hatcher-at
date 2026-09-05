@@ -24,8 +24,8 @@ or prove that attaching a 2-cell imposes this relation.
 
 ## Depends on
 
-- [The fundamental group of the circle](../basic-constructions/fundamental-group-circle.md)
+- [The fundamental group of the circle](../../basic-constructions/fundamental-group-circle.md)
 
 ## Sources
 
-- [Hatcher §1.2, Example 1.29, page 52](../../../sources/hatcher-1-2.md)
+- [Hatcher §1.2, Example 1.29, page 52](../../../../sources/hatcher-1-2.md)

@@ -48,7 +48,7 @@ None beyond pinned Mathlib.
 ## Proof depends on
 
 - [The fundamental group of a wedge](wedge-fundamental-group.md)
-- [The circle is well-pointed at one](circle-well-pointed.md)
+- [The circle is well-pointed at one](cell-attachment-support/circle-well-pointed.md)
 - [Attaching 2-cells adds the attaching relations](attach-two-cells-fundamental-group.md)
 - [The fundamental group of the circle](../basic-constructions/fundamental-group-circle.md)
 
