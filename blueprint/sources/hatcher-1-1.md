@@ -67,7 +67,8 @@ Available and reusable:
 - `FundamentalGroupoidFunctor.homotopicMapsNatIso` and
   `FundamentalGroupoidFunctor.equivOfHomotopyEquiv` —
   `FundamentalGroupoid/InducedMaps.lean`, giving the groupoid-level content
-  of Lemma 1.19 and Proposition 1.18.
+  of Lemma 1.19 and Proposition 1.18. The latter is packaged locally as
+  `Hatcher.fundamentalGroupMulEquivOfHomotopyEquiv`.
 - `IsCoveringMap.liftPath`, `liftHomotopy`, `monodromy`, `monodromy_theorem` —
   `Mathlib/Topology/Homotopy/Lifting.lean`. These are Hatcher's (a), (b), (c).
 - `AddCircle.isCoveringMap_coe : IsCoveringMap ((↑) : 𝕜 → AddCircle p)` —

@@ -65,11 +65,16 @@ and of odd winding number.
 
 - [Borsuk–Ulam for the two-sphere](borsuk-ulam-sphere.md)
 
-Corollaries 1.11 and 1.16, Propositions 1.17 and 1.18, and Lemma 1.19 lie
-outside the selected nine-node slice. Mathlib already expresses the core of
-Proposition 1.18 and Lemma 1.19 at the fundamental-groupoid level; source-facing
-wrappers and the other deferred results belong to a later §1.1 completion
-pass. See the [coverage contract](../../../coverage/README.md).
+The section also records the fundamental group's invariance under homotopy
+equivalence.
+
+- [A homotopy equivalence induces a fundamental-group isomorphism](homotopy-equivalence-fundamental-group.md)
+
+Corollaries 1.11 and 1.16, Proposition 1.17, and Lemma 1.19 remain outside the
+selected slice. Mathlib already expresses the core of Lemma 1.19 at the
+fundamental-groupoid level; its source-facing wrapper and the other deferred
+results belong to a later §1.1 completion pass. See the
+[coverage contract](../../../coverage/README.md).
 
 ## Sources
 
