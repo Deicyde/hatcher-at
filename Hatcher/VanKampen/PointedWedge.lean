@@ -33,7 +33,7 @@ variable {ι : Type u} {X : ι → Type v} (x₀ : ∀ i, X i)
 
 /-- The coproduct topology on the prequotient `Option (Σ i, X i)`. -/
 @[reducible]
-private def sourceTopology [∀ i, TopologicalSpace (X i)] :
+def prequotientTopology [∀ i, TopologicalSpace (X i)] :
     TopologicalSpace (Option (Σ i, X i)) :=
   TopologicalSpace.coinduced (fun z : Σ i, X i => some z) inferInstance ⊔
     TopologicalSpace.coinduced (fun _ : Unit => (none : Option (Σ i, X i))) inferInstance
@@ -44,7 +44,7 @@ instance instTopologicalSpace [∀ i, TopologicalSpace (X i)] :
   TopologicalSpace.coinduced
     (Quotient.mk (PointedWedge.setoid X x₀) :
       Option (Σ i, X i) → Hatcher.PointedWedge X x₀)
-    (sourceTopology (X := X))
+    (prequotientTopology (X := X))
 
 /-- The common basepoint of the pointed wedge. -/
 def basepoint : Hatcher.PointedWedge X x₀ :=
@@ -55,7 +55,7 @@ def inclusion (i : ι) : X i → Hatcher.PointedWedge X x₀ :=
   fun x => Quotient.mk (PointedWedge.setoid X x₀) (some ⟨i, x⟩)
 
 private theorem continuous_some_sigma [∀ i, TopologicalSpace (X i)] (i : ι) :
-    @Continuous (X i) (Option (Σ i, X i)) _ (sourceTopology (X := X))
+    @Continuous (X i) (Option (Σ i, X i)) _ (prequotientTopology (X := X))
       (fun x => some ⟨i, x⟩) := by
   letI : TopologicalSpace (Option (Σ i, X i)) :=
     TopologicalSpace.coinduced (fun z : Σ i, X i => some z) inferInstance
@@ -65,14 +65,14 @@ private theorem continuous_some_sigma [∀ i, TopologicalSpace (X i)] (i : ι) :
 
 private theorem continuous_mk [∀ i, TopologicalSpace (X i)] :
     @Continuous (Option (Σ i, X i)) (Hatcher.PointedWedge X x₀)
-      (sourceTopology (X := X)) (instTopologicalSpace x₀)
+      (prequotientTopology (X := X)) (instTopologicalSpace x₀)
       (Quotient.mk (PointedWedge.setoid X x₀)) :=
   continuous_coinduced_rng
 
 /-- Each canonical summand inclusion is continuous. -/
 theorem continuous_inclusion [∀ i, TopologicalSpace (X i)] (i : ι) :
     Continuous (inclusion x₀ i) := by
-  letI : TopologicalSpace (Option (Σ i, X i)) := sourceTopology (X := X)
+  letI : TopologicalSpace (Option (Σ i, X i)) := prequotientTopology (X := X)
   change Continuous (fun x : X i =>
     Quotient.mk (PointedWedge.setoid X x₀) (some ⟨i, x⟩))
   exact (continuous_mk (X := X) x₀).comp (continuous_some_sigma (X := X) i)

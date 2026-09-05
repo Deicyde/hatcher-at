@@ -3,7 +3,7 @@ import Mathlib.Topology.Homotopy.Contractible
 
 noncomputable section
 
-open Set
+open Set Topology
 open scoped unitInterval
 
 namespace Hatcher
@@ -352,6 +352,103 @@ theorem isOpen_neckSet
   · rw [isOpen_coinduced]
     change IsOpen (Set.univ : Set Unit)
     exact isOpen_univ
+
+section SourceTopology
+
+local instance : TopologicalSpace (Option (Σ i, X i)) :=
+  prequotientTopology (X := X)
+
+/-- The defining quotient map for the pointed wedge is a quotient map when
+the source carries its coproduct topology. -/
+theorem isQuotientMap_quotientMk :
+    IsQuotientMap
+      (Quotient.mk (setoid X x₀) :
+        Option (Σ i, X i) → Hatcher.PointedWedge X x₀) := by
+  refine ⟨⟨rfl⟩, ?_⟩
+  exact Quotient.mk_surjective
+
+/-- The pointed-wedge quotient map restricted to one cover preimage. -/
+def coverQuotientMap
+    (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i) (i : ι) :
+    coverPreimage N i → coverSet x₀ N hN i :=
+  fun z => ⟨Quotient.mk (setoid X x₀) z.1, by
+    change z.1 ∈
+      (Quotient.mk (setoid X x₀)) ⁻¹' coverSet x₀ N hN i
+    rw [quotientMk_preimage_coverSet]
+    exact z.2⟩
+
+theorem isQuotientMap_coverQuotientMap
+    (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i)
+    (hNopen : ∀ i, IsOpen (N i)) (i : ι) :
+    IsQuotientMap (coverQuotientMap x₀ N hN i) := by
+  have hq :=
+    (isQuotientMap_quotientMk x₀).restrictPreimage_isOpen
+      (isOpen_coverSet x₀ N hN hNopen i)
+  let e : coverPreimage N i ≃ₜ
+      (Quotient.mk (setoid X x₀)) ⁻¹' coverSet x₀ N hN i :=
+    Homeomorph.setCongr
+      (quotientMk_preimage_coverSet x₀ N hN i).symm
+  have hcomp := hq.comp e.isQuotientMap
+  have hfun :
+      (coverSet x₀ N hN i).restrictPreimage
+          (Quotient.mk (setoid X x₀)) ∘ e =
+        coverQuotientMap x₀ N hN i := by
+    funext z
+    apply Subtype.ext
+    rfl
+  exact hfun ▸ hcomp
+
+/-- Continuity out of a cover set can be checked on its saturated
+prequotient. -/
+theorem continuous_iff_comp_coverQuotientMap
+    {Y : Type*} [TopologicalSpace Y]
+    (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i)
+    (hNopen : ∀ i, IsOpen (N i)) (i : ι)
+    (f : coverSet x₀ N hN i → Y) :
+    Continuous f ↔ Continuous (f ∘ coverQuotientMap x₀ N hN i) :=
+  (isQuotientMap_coverQuotientMap x₀ N hN hNopen i).continuous_iff
+
+/-- The pointed-wedge quotient map restricted to the common neck preimage. -/
+def neckQuotientMap
+    (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i) :
+    neckPreimage N → neckSet x₀ N hN :=
+  fun z => ⟨Quotient.mk (setoid X x₀) z.1, by
+    change z.1 ∈
+      (Quotient.mk (setoid X x₀)) ⁻¹' neckSet x₀ N hN
+    rw [quotientMk_preimage_neckSet]
+    exact z.2⟩
+
+theorem isQuotientMap_neckQuotientMap
+    (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i)
+    (hNopen : ∀ i, IsOpen (N i)) :
+    IsQuotientMap (neckQuotientMap x₀ N hN) := by
+  have hq :=
+    (isQuotientMap_quotientMk x₀).restrictPreimage_isOpen
+      (isOpen_neckSet x₀ N hN hNopen)
+  let e : neckPreimage N ≃ₜ
+      (Quotient.mk (setoid X x₀)) ⁻¹' neckSet x₀ N hN :=
+    Homeomorph.setCongr
+      (quotientMk_preimage_neckSet x₀ N hN).symm
+  have hcomp := hq.comp e.isQuotientMap
+  have hfun :
+      (neckSet x₀ N hN).restrictPreimage
+          (Quotient.mk (setoid X x₀)) ∘ e =
+        neckQuotientMap x₀ N hN := by
+    funext z
+    apply Subtype.ext
+    rfl
+  exact hfun ▸ hcomp
+
+/-- Continuity out of the neck can be checked on its saturated prequotient. -/
+theorem continuous_iff_comp_neckQuotientMap
+    {Y : Type*} [TopologicalSpace Y]
+    (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i)
+    (hNopen : ∀ i, IsOpen (N i))
+    (f : neckSet x₀ N hN → Y) :
+    Continuous f ↔ Continuous (f ∘ neckQuotientMap x₀ N hN) :=
+  (isQuotientMap_neckQuotientMap x₀ N hN hNopen).continuous_iff
+
+end SourceTopology
 
 omit [∀ i, TopologicalSpace (X i)] in
 /-- The common neck is contained in every member of the standard wedge cover. -/
