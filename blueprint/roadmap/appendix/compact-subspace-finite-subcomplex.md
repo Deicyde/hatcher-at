@@ -1,4 +1,6 @@
 ---
+article_id: af_7fbee0c3ad37e661e770ab4d
+source_units: [appendix-proposition-a-1]
 declaration: proposition
 origin: cited
 statement: formalized

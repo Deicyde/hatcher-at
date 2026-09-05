@@ -1,4 +1,6 @@
 ---
+article_id: af_150143235a6365f6fb31116a
+source_units: [hatcher-1-2-selected-spine]
 declaration: proposition
 origin: cited
 ---

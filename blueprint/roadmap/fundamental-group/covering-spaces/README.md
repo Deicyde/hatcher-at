@@ -1,3 +1,7 @@
+---
+article_id: af_8533335ec609314256d907b0
+---
+
 # Covering spaces
 
 Hatcher §1.3 (pages 56–82). The selected slice follows the classification and

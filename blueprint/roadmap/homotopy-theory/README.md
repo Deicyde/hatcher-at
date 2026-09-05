@@ -1,3 +1,7 @@
+---
+article_id: af_037caa30bf6a99390ba6eb23
+---
+
 # Homotopy theory
 
 Hatcher's Chapter 4 (pages 337–518). Mapped, not yet decomposed.

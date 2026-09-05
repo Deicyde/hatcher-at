@@ -1,3 +1,7 @@
+---
+article_id: af_e566022fcd1062ff9f95ca71
+---
+
 # Deck transformations and quotient actions
 
 Hatcher's Propositions 1.39 and 1.40 identify the deck group of a connected

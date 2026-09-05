@@ -1,3 +1,7 @@
+---
+article_id: af_d8263fa293c57dc52465f995
+---
+
 # Simplicial and singular homology
 
 Hatcher §2.1 (pages 102–133). The selected first slice covers singular

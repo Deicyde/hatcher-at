@@ -1,4 +1,6 @@
 ---
+article_id: af_bdc7528d23af5d56f0b7e4ef
+source_units: [hatcher-1-1-basic-constructions]
 declaration: def
 origin: cited
 mathlib: true

@@ -13,6 +13,7 @@ van Kampen, wedge sums, and cell attachments. The §1.3 classification and deck
 spine is decomposed through Hatcher's Proposition 1.40. The selected §2.1 spine
 is covered by eight pinned Mathlib declarations and two local formalizations.
 
-[Browse the formalization blueprint](blueprint/README.md).
+[Browse the published formalization blueprint](https://deicyde.github.io/hatcher-at/)
+or [inspect its Markdown source](blueprint/README.md).
 
 Developed with [AutoformBot](https://github.com/facebookresearch/autoform-bot).

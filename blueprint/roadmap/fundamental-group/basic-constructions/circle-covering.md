@@ -1,4 +1,6 @@
 ---
+article_id: af_88db0f1093e08d3ab00257ce
+source_units: [hatcher-1-1-basic-constructions]
 declaration: theorem
 origin: bridged
 statement: formalized

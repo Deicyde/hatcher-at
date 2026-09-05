@@ -1,4 +1,6 @@
 ---
+article_id: af_1b551d825f8642fe8e8eec1a
+source_units: [hatcher-1-1-basic-constructions]
 declaration: theorem
 origin: cited
 statement: formalized

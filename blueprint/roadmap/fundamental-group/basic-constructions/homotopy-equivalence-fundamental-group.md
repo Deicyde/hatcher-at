@@ -1,4 +1,6 @@
 ---
+article_id: af_1f0895b5c7dfb77e33224fd8
+source_units: [hatcher-1-1-basic-constructions]
 declaration: def
 origin: cited
 statement: formalized

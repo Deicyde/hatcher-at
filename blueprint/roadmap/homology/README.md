@@ -1,3 +1,7 @@
+---
+article_id: af_9da1e6c5697d0bac0b2a1624
+---
+
 # Homology
 
 Hatcher's Chapter 2 (pages 97–184). The selected §2.1 singular-homology

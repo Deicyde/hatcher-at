@@ -1,4 +1,6 @@
 ---
+article_id: af_51e0760947368340fe1d5c5f
+source_units: [hatcher-1-2-selected-spine]
 declaration: theorem
 origin: bridged
 statement: formalized

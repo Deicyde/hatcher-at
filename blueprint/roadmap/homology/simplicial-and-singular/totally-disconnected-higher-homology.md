@@ -1,4 +1,6 @@
 ---
+article_id: af_48578e29aa987a0a17839619
+source_units: [hatcher-2-1-selected-spine]
 declaration: lemma
 origin: bridged
 mathlib: true

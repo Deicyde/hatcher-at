@@ -1,4 +1,6 @@
 ---
+article_id: af_6620be96e3373fceee281549
+source_units: [hatcher-2-1-selected-spine]
 declaration: lemma
 origin: cited
 mathlib: true

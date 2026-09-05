@@ -1,0 +1,20 @@
+hatcher-1-1-basic-constructions — §1.1 Basic constructions — Hatcher §1.1, pages 25–38 — The selected section is decomposed into its explicit source-facing and Mathlib-backed leaves.
+chapter-0-underlying-geometric-notions — Chapter 0, underlying geometric notions — Hatcher Chapter 0, pages 1–20 — Deferred to a future roadmap milestone; the current chapter page is an informational map.
+hatcher-1-2-selected-spine — §1.2 selected spine — Hatcher §1.2, pages 40–55 — The selected van Kampen, wedge, cell-attachment, and classical-CW bridge spine is decomposed into formalizable leaves.
+hatcher-1-2-deferred-remainder — §1.2 results outside the selected slice — Hatcher §1.2, pages 40–55 — Examples 1.22–1.25, Corollary 1.27, and the geometric remainder of Example 1.29 are reserved for later application milestones.
+hatcher-1-3-selected-spine — §1.3 classification and deck spine — Hatcher §1.3, pages 56–82 — The selected lifting, universal-cover, classification, and deck-transformation spine is decomposed into formalizable leaves.
+hatcher-1-3-deferred-remainder — §1.3 results outside the selected slice — Hatcher §1.3, pages 56–82 — Example 1.35, permutation classification, and Examples 1.41–1.48 are reserved for later milestones.
+hatcher-2-1-selected-spine — §2.1 singular-homology functoriality spine — Hatcher §2.1, pages 102–133 — The selected singular-chain, homology, and homotopy-invariance spine is decomposed into formalizable leaves.
+hatcher-2-1-deferred-remainder — §2.1 results outside the selected slice — Hatcher §2.1, pages 102–133 — Proposition 2.6, Δ-complex homology, reduced and relative homology, excision, sphere applications, invariance of dimension, and the comparison theorem are reserved for later milestones.
+hatcher-2-2-computations-applications — §2.2 Computations and applications — Hatcher §2.2, pages 134–159 — Deferred to a future roadmap milestone; the current section page is an informational map.
+hatcher-2-3-formal-viewpoint — §2.3 Formal viewpoint — Hatcher §2.3, pages 160–165 — Deferred to a future roadmap milestone; the current section page is an informational map.
+hatcher-3-1-cohomology-groups — §3.1 Cohomology groups — Hatcher §3.1, pages 190–205 — Deferred to a future roadmap milestone; the current section page is an informational map.
+hatcher-3-2-cup-product — §3.2 Cup product — Hatcher §3.2, pages 206–229 — Deferred to a future roadmap milestone; the current section page is an informational map.
+hatcher-3-3-poincare-duality — §3.3 Poincaré duality — Hatcher §3.3, pages 230–260 — Deferred to a future roadmap milestone; the current section page is an informational map.
+hatcher-4-1-homotopy-groups — §4.1 Homotopy groups — Hatcher §4.1, pages 339–359 — Deferred to a future roadmap milestone; the current section page is an informational map.
+hatcher-4-2-elementary-methods — §4.2 Elementary methods — Hatcher §4.2, pages 360–392 — Deferred to a future roadmap milestone; the current section page is an informational map.
+hatcher-4-3-connections-cohomology — §4.3 Connections with cohomology — Hatcher §4.3, pages 393–420 — Deferred to a future roadmap milestone; the current section page is an informational map.
+appendix-proposition-a-1 — Appendix Proposition A.1 — Hatcher Appendix, Proposition A.1 — The compact-subspace theorem is represented by its source-facing formalization leaf.
+appendix-remainder — Appendix remainder — Hatcher Appendix after Proposition A.1 — Deferred to a future roadmap milestone; the current appendix page is an informational map.
+lettered-additional-topics — Lettered additional topics — Hatcher §§1.A–4.L — Supplementary lettered sections are outside this project's main-line scope.
+exercises — Exercises — Exercise sets throughout Hatcher — Exercise sets are not source targets for this project.

@@ -1,3 +1,7 @@
+---
+article_id: af_35ba5b2232930b795a42f6a6
+---
+
 # The fundamental group
 
 Hatcher's Chapter 1 (pages 21–96) builds the first algebraic invariant of a

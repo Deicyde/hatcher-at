@@ -1,4 +1,6 @@
 ---
+article_id: af_03778eab6bda848bf3919cc7
+source_units: [hatcher-1-3-selected-spine]
 declaration: lemma
 origin: cited
 statement: formalized

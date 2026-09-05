@@ -1,4 +1,6 @@
 ---
+article_id: af_6b3c5494b72549253646f155
+source_units: [hatcher-1-1-basic-constructions]
 declaration: def
 origin: bridged
 statement: formalized
