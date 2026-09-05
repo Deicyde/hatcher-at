@@ -10,7 +10,7 @@ mapped chapter must never be reported as covered.
 
 | Area | Coverage | Evidence |
 | --- | --- | --- |
-| §1.1 Basic constructions | `DECOMPOSED` | [Twelve fully formalized nodes](../roadmap/fundamental-group/basic-constructions/README.md) cover the selected source results |
+| §1.1 Basic constructions | `DECOMPOSED` | [Fourteen fully formalized nodes](../roadmap/fundamental-group/basic-constructions/README.md) cover the selected source results |
 | §1.1 results outside the selected slice | `DEFERRED` | Corollaries 1.11 and 1.16 are reserved for a later §1.1 completion pass |
 | Chapter 0, underlying geometric notions | `MAPPED` | [Chapter map](../roadmap/underlying-geometric-notions/README.md) |
 | §1.2 selected spine | `DECOMPOSED` | [Van Kampen, wedges, and cell-attachment nodes](../roadmap/fundamental-group/van-kampen/README.md) |
@@ -35,7 +35,7 @@ mapped chapter must never be reported as covered.
 ## In scope
 
 [Hatcher §1.1, Basic constructions](../roadmap/fundamental-group/basic-constructions/README.md),
-pages 25–38, decomposed into twelve nodes. The main target is Theorem 1.7,
+pages 25–38, decomposed into fourteen nodes. The main target is Theorem 1.7,
 `π₁(S¹) ≅ ℤ`. The section's other in-scope results are:
 
 | Node | Source result | Kind |
@@ -46,6 +46,8 @@ pages 25–38, decomposed into twelve nodes. The main target is Theorem 1.7,
 | [No retraction of the disc](../roadmap/fundamental-group/basic-constructions/no-retraction-disc.md) | page 31, inside Thm 1.9's proof | bridged |
 | [Brouwer for the disc](../roadmap/fundamental-group/basic-constructions/brouwer-disc.md) | **Theorem 1.9** | cited |
 | [Fundamental theorem of algebra](../roadmap/fundamental-group/basic-constructions/fundamental-theorem-algebra.md) | **Theorem 1.8** | cited |
+| [The fundamental group of a product](../roadmap/fundamental-group/basic-constructions/product-fundamental-group.md) | **Proposition 1.12** | cited |
+| [The fundamental group of the torus](../roadmap/fundamental-group/basic-constructions/torus-fundamental-group.md) | **Example 1.13** | cited |
 | [Loop splits across an open cover](../roadmap/fundamental-group/basic-constructions/loop-in-open-cover.md) | **Lemma 1.15** | cited |
 | [Higher spheres are simply connected](../roadmap/fundamental-group/basic-constructions/sphere-simply-connected.md) | **Proposition 1.14** | cited |
 | [Borsuk–Ulam for `S²`](../roadmap/fundamental-group/basic-constructions/borsuk-ulam-sphere.md) | **Theorem 1.10** | cited |
@@ -106,7 +108,7 @@ claim Hatcher's explicit prism formula is formalized.
 
 Corollary 1.11 (`S²` as a union of three closed sets) and Corollary 1.16
 (`ℝ²` is not homeomorphic to `ℝⁿ` for `n ≠ 2`) are deliberately excluded from
-this slice. §1.1 is therefore *not* fully covered even when all twelve nodes
+this slice. §1.1 is therefore *not* fully covered even when all fourteen nodes
 are complete.
 
 ## Mapped but not decomposed

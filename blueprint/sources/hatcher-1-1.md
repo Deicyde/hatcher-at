@@ -63,7 +63,9 @@ Available and reusable:
 - `SimplyConnectedSpace` — `FundamentalGroupoid/SimplyConnected.lean`,
   covering Proposition 1.6.
 - `FundamentalGroupoid.prodToProdTop` — `FundamentalGroupoid/Product.lean`,
-  covering Proposition 1.12 at groupoid level.
+  covering Proposition 1.12 at groupoid level. It is packaged locally as
+  `Hatcher.fundamentalGroupProdEquiv`; composing with the circle calculation
+  gives `Hatcher.torusFundamentalGroupEquiv` for Example 1.13.
 - `FundamentalGroupoidFunctor.homotopicMapsNatIso` and
   `FundamentalGroupoidFunctor.equivOfHomotopyEquiv` —
   `FundamentalGroupoid/InducedMaps.lean`, giving the groupoid-level content

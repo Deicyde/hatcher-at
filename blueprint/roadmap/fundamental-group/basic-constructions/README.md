@@ -52,10 +52,12 @@ Mathlib already knows by other means.
 
 ## Induced homomorphisms
 
-The closing part of the section turns to maps between spaces. Its one result
-this project needs is that higher spheres are simply connected, which rests on
-a subdivision lemma reused by §1.2 as the surjectivity step in van Kampen.
+The closing part of the section turns to maps between spaces. The product
+formula immediately computes the torus. The higher-sphere calculation rests
+on a subdivision lemma reused by §1.2 as the surjectivity step in van Kampen.
 
+- [The fundamental group of a product](product-fundamental-group.md)
+- [The fundamental group of the torus](torus-fundamental-group.md)
 - [A loop splits across an open cover](loop-in-open-cover.md)
 - [Higher spheres are simply connected](sphere-simply-connected.md)
 
