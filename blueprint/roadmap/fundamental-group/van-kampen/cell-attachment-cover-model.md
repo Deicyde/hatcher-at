@@ -27,10 +27,11 @@ identity attachment on `TopCat.diskBoundary n` has been identified with
 `TopCat.disk n`. The single-cone quotient is also proved to be a `TopCat`
 pushout and carries a one-cell `HomotopicalAlgebra.AttachCells` structure for
 its retained-cone boundary. Its base-side cover strongly deformation-retracts
-onto `X`, and its cone-side cover is contractible. An indexed quotient with one
-apex per cell and the correct empty-family behavior is also formalized, but its
-upper cover is generally disconnected. The remaining geometry is Hatcher's
-connected auxiliary cover and the open cover of its intersection. For a single
+onto `X`, its cone-side cover is contractible, and their intersection has the
+homotopy type of the attaching space. An indexed quotient with one apex per
+cell and the correct empty-family behavior is also formalized, but its upper
+cover is generally disconnected. The remaining geometry is Hatcher's connected
+auxiliary family cover and the corresponding intersection cover. For a single
 disk, the explicit quotient is now connected to Mathlib's exact
 `TopCat.RelativeCWComplex.basicCell`; extending this comparison to the indexed
 construction remains. The final statement also needs an explicit basepoint and
@@ -47,6 +48,7 @@ None beyond pinned Mathlib.
 - [An indexed family of cones has a two-set open cover](cell-attachment-support/indexed-cone-open-cover.md)
 - [The base-side cone cover retracts onto the original space](cell-attachment-support/single-cone-base-retract.md)
 - [The cone-side cover member is contractible](cell-attachment-support/single-cone-upper-contractible.md)
+- [The single-cone cover intersection has the homotopy type of its boundary](cell-attachment-support/single-cone-intersection.md)
 - [The cone on a disk boundary is the disk](cell-attachment-support/cone-disk-homeomorphism.md)
 - [A single cone attachment is a topological pushout](cell-attachment-support/single-cone-pushout.md)
 - [A single cone attachment is a standard cell attachment](cell-attachment-support/single-basic-cell-attachment.md)

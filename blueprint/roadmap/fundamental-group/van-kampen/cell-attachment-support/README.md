@@ -9,6 +9,7 @@ first point-set construction around Hatcher's cell-attachment applications.
 - [An indexed family of cones has a two-set open cover](indexed-cone-open-cover.md)
 - [The base-side cone cover retracts onto the original space](single-cone-base-retract.md)
 - [The cone-side cover member is contractible](single-cone-upper-contractible.md)
+- [The single-cone cover intersection has the homotopy type of its boundary](single-cone-intersection.md)
 - [The cone on a disk boundary is the disk](cone-disk-homeomorphism.md)
 - [A single cone attachment is a topological pushout](single-cone-pushout.md)
 - [A single cone attachment is a standard cell attachment](single-basic-cell-attachment.md)
