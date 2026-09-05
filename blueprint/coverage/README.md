@@ -10,8 +10,8 @@ mapped chapter must never be reported as covered.
 
 | Area | Coverage | Evidence |
 | --- | --- | --- |
-| §1.1 Basic constructions | `DECOMPOSED` | [Ten fully formalized nodes](../roadmap/fundamental-group/basic-constructions/README.md) cover the selected source results |
-| §1.1 results outside the selected slice | `DEFERRED` | Corollaries 1.11 and 1.16, Proposition 1.17, and Lemma 1.19 are reserved for a later §1.1 completion pass |
+| §1.1 Basic constructions | `DECOMPOSED` | [Eleven fully formalized nodes](../roadmap/fundamental-group/basic-constructions/README.md) cover the selected source results |
+| §1.1 results outside the selected slice | `DEFERRED` | Corollaries 1.11 and 1.16 and Lemma 1.19 are reserved for a later §1.1 completion pass |
 | Chapter 0, underlying geometric notions | `MAPPED` | [Chapter map](../roadmap/underlying-geometric-notions/README.md) |
 | §1.2 selected spine | `DECOMPOSED` | [Van Kampen, wedges, and cell-attachment nodes](../roadmap/fundamental-group/van-kampen/README.md) |
 | §1.2 results outside the selected slice | `DEFERRED` | Examples 1.22–1.25, Corollary 1.27, and the geometric remainder of Example 1.29 are reserved for later application milestones |
@@ -35,7 +35,7 @@ mapped chapter must never be reported as covered.
 ## In scope
 
 [Hatcher §1.1, Basic constructions](../roadmap/fundamental-group/basic-constructions/README.md),
-pages 25–38, decomposed into ten nodes. The main target is Theorem 1.7,
+pages 25–38, decomposed into eleven nodes. The main target is Theorem 1.7,
 `π₁(S¹) ≅ ℤ`. The section's other in-scope results are:
 
 | Node | Source result | Kind |
@@ -49,6 +49,7 @@ pages 25–38, decomposed into ten nodes. The main target is Theorem 1.7,
 | [Loop splits across an open cover](../roadmap/fundamental-group/basic-constructions/loop-in-open-cover.md) | **Lemma 1.15** | cited |
 | [Higher spheres are simply connected](../roadmap/fundamental-group/basic-constructions/sphere-simply-connected.md) | **Proposition 1.14** | cited |
 | [Borsuk–Ulam for `S²`](../roadmap/fundamental-group/basic-constructions/borsuk-ulam-sphere.md) | **Theorem 1.10** | cited |
+| [Retractions and deformation retracts on the fundamental group](../roadmap/fundamental-group/basic-constructions/retractions-fundamental-group.md) | **Proposition 1.17** | cited |
 | [A homotopy equivalence induces a fundamental-group isomorphism](../roadmap/fundamental-group/basic-constructions/homotopy-equivalence-fundamental-group.md) | **Proposition 1.18** | cited |
 
 Two qualifications on what these nodes do and do not prove.
@@ -101,12 +102,12 @@ claim Hatcher's explicit prism formula is formalized.
 ### Deferred within §1.1
 
 Corollary 1.11 (`S²` as a union of three closed sets), Corollary 1.16
-(`ℝ²` is not homeomorphic to `ℝⁿ` for `n ≠ 2`), Proposition 1.17
-(retracts and deformation retracts), and Lemma 1.19 (the basepoint-change
-formula for homotopic maps) are deliberately excluded from this slice.
+(`ℝ²` is not homeomorphic to `ℝⁿ` for `n ≠ 2`), and Lemma 1.19 (the
+basepoint-change formula for homotopic maps) are deliberately excluded from
+this slice.
 Lemma 1.19 has a close groupoid-level counterpart in Mathlib, but this project
 does not yet provide its source-facing declaration. §1.1 is therefore *not*
-fully covered even when all ten nodes are complete.
+fully covered even when all eleven nodes are complete.
 
 ## Mapped but not decomposed
 

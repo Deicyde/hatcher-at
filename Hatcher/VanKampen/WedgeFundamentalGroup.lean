@@ -127,6 +127,50 @@ theorem fundamentalGroupMulEquivOfHomotopyEquivOfEq_apply
     ((FundamentalGroup.map e.toFun x) g) = _
   rw [CategoryTheory.Iso.refl_conj]
 
+/-- A continuous map admitting a continuous retraction induces an injective
+homomorphism on fundamental groups. -/
+theorem fundamentalGroupMap_injective_of_retraction
+    {A : Type u} {X : Type v} [TopologicalSpace A] [TopologicalSpace X]
+    (inclusion : C(A, X)) (retract : C(X, A))
+    (hretract : retract.comp inclusion = ContinuousMap.id A) (a : A) :
+    Function.Injective (FundamentalGroup.map inclusion a) := by
+  letI : (FundamentalGroupoid.map inclusion).Faithful :=
+    Functor.Faithful.of_comp_eq
+      (F := FundamentalGroupoid.map inclusion)
+      (G := FundamentalGroupoid.map retract)
+      (H := 𝟭 (FundamentalGroupoid A)) (by
+        rw [← FundamentalGroupoid.map_comp, hretract,
+          FundamentalGroupoid.map_id])
+  exact (FundamentalGroupoid.map inclusion).map_injective
+
+/-- A deformation retraction induces an equivalence of fundamental groups
+whose forward map is induced by the inclusion. -/
+noncomputable def fundamentalGroupMulEquivOfDeformationRetract
+    {A : Type u} {X : Type v} [TopologicalSpace A] [TopologicalSpace X]
+    (inclusion : C(A, X)) (retract : C(X, A))
+    (hretract : retract.comp inclusion = ContinuousMap.id A)
+    (hdeformation : (ContinuousMap.id X).Homotopic
+      (inclusion.comp retract)) (a : A) :
+    FundamentalGroup A a ≃* FundamentalGroup X (inclusion a) := by
+  let e : X ≃ₕ A :=
+    { toFun := retract
+      invFun := inclusion
+      left_inv := hdeformation.symm
+      right_inv := by rw [hretract] }
+  exact fundamentalGroupMulEquivOfHomotopyEquiv e.symm a
+
+@[simp]
+theorem fundamentalGroupMulEquivOfDeformationRetract_apply
+    {A : Type u} {X : Type v} [TopologicalSpace A] [TopologicalSpace X]
+    (inclusion : C(A, X)) (retract : C(X, A))
+    (hretract : retract.comp inclusion = ContinuousMap.id A)
+    (hdeformation : (ContinuousMap.id X).Homotopic
+      (inclusion.comp retract)) (a : A) (g : FundamentalGroup A a) :
+    fundamentalGroupMulEquivOfDeformationRetract inclusion retract hretract
+        hdeformation a g =
+      FundamentalGroup.map inclusion a g := by
+  rfl
+
 namespace StrongDeformationRetract
 
 variable {A : Type u} {Y : Type v} [TopologicalSpace A] [TopologicalSpace Y]

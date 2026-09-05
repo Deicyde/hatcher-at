@@ -69,6 +69,9 @@ Available and reusable:
   `FundamentalGroupoid/InducedMaps.lean`, giving the groupoid-level content
   of Lemma 1.19 and Proposition 1.18. The latter is packaged locally as
   `Hatcher.fundamentalGroupMulEquivOfHomotopyEquiv`.
+- Functoriality of `FundamentalGroupoid.map` packages Proposition 1.17
+  locally as `Hatcher.fundamentalGroupMap_injective_of_retraction` and
+  `Hatcher.fundamentalGroupMulEquivOfDeformationRetract`.
 - `IsCoveringMap.liftPath`, `liftHomotopy`, `monodromy`, `monodromy_theorem` —
   `Mathlib/Topology/Homotopy/Lifting.lean`. These are Hatcher's (a), (b), (c).
 - `AddCircle.isCoveringMap_coe : IsCoveringMap ((↑) : 𝕜 → AddCircle p)` —
@@ -99,9 +102,6 @@ Absent from the pinned Mathlib:
   `Hatcher.Sphere.exists_eq_neg`; Corollary 1.11 remains deferred.
 - `π₁(Sⁿ) = 0` for `n ≥ 2` (Proposition 1.14), locally formalized as
   `Hatcher.Sphere.simplyConnectedSpace`; Corollary 1.16 remains deferred.
-- A named fundamental-group formulation of Proposition 1.17. The groupoid
-  functoriality needed to derive it exists, but the source-facing theorem is
-  not packaged in the pinned revision.
 
 ## Decisions taken
 
