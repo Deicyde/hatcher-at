@@ -616,6 +616,91 @@ private theorem triple_pathConnected_of_member_neck
     rw [inter_eq_left.mpr (vanKampenNeck_subset x₀ hwell k)]
     exact hneck
 
+section MemberProjection
+
+local instance : DecidableEq ι := Classical.decEq ι
+
+private theorem continuous_quotientLift
+    {Y : Type*} [TopologicalSpace Y]
+    (f : Option (Σ i, X i) → Y)
+    (hrel : ∀ a b, (setoid X x₀).r a b → f a = f b)
+    (hsummand : ∀ i, Continuous fun x : X i ↦ f (some ⟨i, x⟩)) :
+    @Continuous (Hatcher.PointedWedge X x₀) Y
+      (instTopologicalSpace x₀) _ (Quotient.lift f hrel) := by
+  change @Continuous (Hatcher.PointedWedge X x₀) Y
+    (TopologicalSpace.coinduced
+      (Quotient.mk (setoid X x₀) :
+        Option (Σ i, X i) → Hatcher.PointedWedge X x₀)
+      (prequotientTopology (X := X))) _ (Quotient.lift f hrel)
+  rw [continuous_coinduced_dom]
+  change @Continuous (Option (Σ i, X i)) Y
+    (TopologicalSpace.coinduced (fun z : Σ i, X i ↦ some z) inferInstance ⊔
+      TopologicalSpace.coinduced
+        (fun _ : Unit ↦ (none : Option (Σ i, X i))) inferInstance)
+    _ f
+  rw [continuous_sup_dom]
+  constructor
+  · rw [continuous_coinduced_dom, continuous_sigma_iff]
+    exact hsummand
+  · rw [continuous_coinduced_dom]
+    fun_prop
+
+private def memberProjectionPre (i : ι) : Option (Σ j, X j) → X i
+  | none => x₀ i
+  | some ⟨j, x⟩ => if h : j = i then h ▸ x else x₀ i
+
+omit [∀ i, TopologicalSpace (X i)] in
+private theorem memberProjectionPre_eq_of_eqvGen (i : ι)
+    {a b : Option (Σ j, X j)}
+    (h : Relation.EqvGen (Rel X x₀) a b) :
+    memberProjectionPre x₀ i a = memberProjectionPre x₀ i b := by
+  induction h with
+  | rel a b h =>
+      cases h with
+      | base j =>
+          by_cases hji : j = i
+          · subst j
+            simp [memberProjectionPre]
+          · simp [memberProjectionPre, hji]
+  | refl => rfl
+  | symm _ _ _ ih => exact ih.symm
+  | trans _ _ _ _ _ ih₁ ih₂ => exact ih₁.trans ih₂
+
+private theorem continuous_memberProjectionPre_some (i j : ι) :
+    Continuous fun x : X j ↦ memberProjectionPre x₀ i (some ⟨j, x⟩) := by
+  by_cases hji : j = i
+  · subst j
+    convert (continuous_id : Continuous (id : X i → X i)) using 1
+    ext x
+    simp [memberProjectionPre]
+  · simp only [memberProjectionPre, hji, ↓reduceDIte]
+    fun_prop
+
+/-- The continuous projection of the wedge onto one summand. -/
+def memberProjection (i : ι) : C(Hatcher.PointedWedge X x₀, X i) where
+  toFun := Quotient.lift (memberProjectionPre x₀ i)
+    (fun _ _ h ↦ memberProjectionPre_eq_of_eqvGen x₀ i h)
+  continuous_toFun := continuous_quotientLift x₀ _ _
+    (continuous_memberProjectionPre_some x₀ i)
+
+/-- The projection restricted to one member of the standard cover. -/
+def vanKampenCoverRetraction
+    (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι) :
+    C(vanKampenCover x₀ hwell i, X i) :=
+  (memberProjection x₀ i).comp
+    ⟨Subtype.val, continuous_subtype_val⟩
+
+theorem vanKampenCoverRetraction_comp_inclusion
+    (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι) :
+    (vanKampenCoverRetraction x₀ hwell i).comp
+        (vanKampenCoverInclusion x₀ hwell i) =
+      ContinuousMap.id (X i) := by
+  ext x
+  simp [vanKampenCoverRetraction, memberProjection,
+    memberProjectionPre, inclusion]
+
+end MemberProjection
+
 end PointedWedge
 
 end Hatcher
