@@ -62,6 +62,7 @@ The first application is the free-product formula for arbitrary well-pointed
 wedge sums.
 
 - [The pointed wedge of a family of spaces](pointed-wedge.md)
+- [The standard cover of a well-pointed wedge](well-pointed-wedge-cover.md)
 - [The fundamental group of a wedge](wedge-fundamental-group.md)
 
 Mathlib's pushout-based cell-attachment API supplies the representation for

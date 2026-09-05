@@ -1,5 +1,5 @@
 ---
-declaration: theorem
+declaration: def
 origin: cited
 ---
 
@@ -20,6 +20,7 @@ available to van Kampen.
 ## Depends on
 
 - [The pointed wedge of a family of spaces](pointed-wedge.md)
+- [The standard cover of a well-pointed wedge](well-pointed-wedge-cover.md)
 
 ## Proof depends on
 
