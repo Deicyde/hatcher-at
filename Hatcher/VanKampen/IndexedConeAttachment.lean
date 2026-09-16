@@ -1,6 +1,6 @@
 import Mathlib.Topology.Constructions
 import Mathlib.Topology.UnitInterval
-import Hatcher.VanKampen.ConeAttachmentPushout
+import Hatcher.VanKampen.ConeAttachmentBasicCell
 import Mathlib.Topology.Category.TopCat.Limits.Products
 
 /-!
@@ -650,6 +650,18 @@ def attachCells_indexedConeAttachment (f : ∀ j, S j → X)
   g₁ := sigmaAttachingHom f hf
   g₂ := sigmaConeHom f hf
   isPushout := isPushout_indexedConeAttachment f hf
+
+/-- An indexed family of cones on standard disk boundaries gives an
+`AttachCells` structure for Mathlib's standard `n`-cell family. -/
+def attachCells_basicCell (n : ℕ) {X J : Type u} [TopologicalSpace X]
+    (f : ∀ _j : J,
+      ((TopCat.diskBoundary.{u} n : TopCat.{u}) : Type u) → X)
+    (hf : ∀ j, Continuous (f j)) :
+    HomotopicalAlgebra.AttachCells.{u}
+      (TopCat.RelativeCWComplex.basicCell.{u} n) (baseHom f) :=
+  (attachCells_indexedConeAttachment f hf).reindexCellTypes
+    (TopCat.RelativeCWComplex.basicCell.{u} n) (fun _ ↦ ())
+    (fun _ ↦ ConeAttachment.coneBoundaryIsoBasicCell n)
 
 end Pushout
 

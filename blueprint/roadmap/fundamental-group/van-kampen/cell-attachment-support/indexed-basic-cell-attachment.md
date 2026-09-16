@@ -3,6 +3,9 @@ article_id: af_a19e022e940644366ba5f04a
 source_units: [hatcher-1-2-selected-spine]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.IndexedConeAttachment.attachCells_basicCell
 ---
 
 # An indexed cone attachment is a standard cell attachment
