@@ -1,5 +1,7 @@
 import Mathlib.Topology.Constructions
 import Mathlib.Topology.UnitInterval
+import Hatcher.VanKampen.ConeAttachmentPushout
+import Mathlib.Topology.Category.TopCat.Limits.Products
 
 /-!
 # An indexed family of cone attachments
@@ -18,6 +20,7 @@ contractible auxiliary cover for a family of cell attachments.
 noncomputable section
 
 open Set Topology
+open CategoryTheory CategoryTheory.Limits
 open scoped unitInterval
 
 namespace Hatcher.VanKampen
@@ -384,6 +387,271 @@ def emptyIndexHomeomorph
   toEquiv := emptyIndexEquiv f
   continuous_toFun := continuous_emptyIndexEquiv f
   continuous_invFun := continuous_emptyIndexEquiv_symm f
+
+section Pushout
+
+variable {X J : Type u} {S : J → Type u}
+variable [TopologicalSpace X] [∀ j, TopologicalSpace (S j)]
+
+/-- The canonical map from the base into an indexed cone attachment is continuous. -/
+theorem continuous_base (f : ∀ j, S j → X) : Continuous (base f) := by
+  change Continuous (fun x : X ↦ quotientMk f (Sum.inl x))
+  exact (isQuotientMap_quotientMk f).continuous.comp continuous_inl
+
+/-- The cylinder map for one member of an indexed cone attachment is continuous. -/
+theorem continuous_cylinder (f : ∀ j, S j → X) (j : J) :
+    Continuous (fun p : S j × I ↦ cylinder f j p.1 p.2) := by
+  change Continuous
+    (fun p : S j × I ↦ quotientMk f (Sum.inr ⟨j, Sum.inr p⟩))
+  have hinner : Continuous
+      (fun p : S j × I ↦ (Sum.inr p : Unit ⊕ (S j × I))) :=
+    continuous_inr
+  have hsigma : Continuous
+      (fun z : Unit ⊕ (S j × I) ↦
+        (⟨j, z⟩ : Σ j, Unit ⊕ (S j × I))) :=
+    (TopCat.sigmaι
+      (fun j ↦ TopCat.of (Unit ⊕ (S j × I))) j).hom.continuous
+  have houter : Continuous
+      (fun z : Σ j, Unit ⊕ (S j × I) ↦
+        (Sum.inr z : Prequotient X S)) :=
+    continuous_inr
+  exact (isQuotientMap_quotientMk f).continuous.comp
+    (houter.comp (hsigma.comp hinner))
+
+private def coneRaw (f : ∀ j, S j → X) (j : J) :
+    ConeAttachment.Prequotient (S j) (S j) →
+      Hatcher.VanKampen.IndexedConeAttachment f
+  | Sum.inl s => base f (f j s)
+  | Sum.inr (Sum.inl _) => apex f j
+  | Sum.inr (Sum.inr (s, t)) => cylinder f j s t
+
+omit [TopologicalSpace X] [∀ j, TopologicalSpace (S j)] in
+private theorem coneRaw_normalForm (f : ∀ j, S j → X) (j : J)
+    (z : ConeAttachment.Prequotient (S j) (S j)) :
+    coneRaw f j (ConeAttachment.normalForm (id : S j → S j) z) =
+      coneRaw f j z := by
+  rcases z with s | z
+  · rfl
+  · rcases z with u₀ | ⟨s, t⟩
+    · rcases u₀ with ⟨⟩
+      rfl
+    · by_cases h0 : t = 0
+      · subst t
+        simp [ConeAttachment.normalForm, coneRaw]
+      · by_cases h1 : t = 1
+        · subst t
+          simp [ConeAttachment.normalForm, coneRaw]
+        · simp [ConeAttachment.normalForm, coneRaw, h0, h1]
+
+/-- The canonical map from the retained cone at index `j` into the indexed
+cone attachment. -/
+def coneMap (f : ∀ j, S j → X) (j : J) :
+    Hatcher.VanKampen.ConeAttachment (id : S j → S j) →
+      Hatcher.VanKampen.IndexedConeAttachment f :=
+  Quotient.lift (coneRaw f j) (by
+    intro a b hab
+    change ConeAttachment.normalForm (id : S j → S j) a =
+      ConeAttachment.normalForm id b at hab
+    rw [← coneRaw_normalForm f j a, ← coneRaw_normalForm f j b, hab])
+
+omit [TopologicalSpace X] [∀ j, TopologicalSpace (S j)] in
+@[simp]
+theorem coneMap_base (f : ∀ j, S j → X) (j : J) (s : S j) :
+    coneMap f j (ConeAttachment.base id s) = base f (f j s) := rfl
+
+omit [TopologicalSpace X] [∀ j, TopologicalSpace (S j)] in
+@[simp]
+theorem coneMap_apex (f : ∀ j, S j → X) (j : J) :
+    coneMap f j (ConeAttachment.apex id) = apex f j := rfl
+
+omit [TopologicalSpace X] [∀ j, TopologicalSpace (S j)] in
+@[simp]
+theorem coneMap_cylinder (f : ∀ j, S j → X) (j : J) (s : S j) (t : I) :
+    coneMap f j (ConeAttachment.cylinder id s t) = cylinder f j s t := rfl
+
+theorem continuous_coneMap (f : ∀ j, S j → X)
+    (hf : ∀ j, Continuous (f j)) (j : J) : Continuous (coneMap f j) := by
+  apply (ConeAttachment.isQuotientMap_quotientMk
+    (id : S j → S j)).continuous_iff.mpr
+  rw [continuous_sum_dom]
+  constructor
+  · simpa [coneMap, coneRaw, ConeAttachment.quotientMk, Function.comp_def] using
+      (continuous_base f).comp (hf j)
+  · rw [continuous_sum_dom]
+    constructor
+    · simpa [coneMap, coneRaw, ConeAttachment.quotientMk, Function.comp_def] using
+        (continuous_const : Continuous (fun _ : Unit ↦ apex f j))
+    · simpa [coneMap, coneRaw, ConeAttachment.quotientMk, Function.comp_def] using
+        continuous_cylinder f j
+
+/-- The coproduct of all attaching maps. -/
+def sigmaAttachingHom (f : ∀ j, S j → X) (hf : ∀ j, Continuous (f j)) :
+    TopCat.of (Σ j, S j) ⟶ TopCat.of X :=
+  TopCat.ofHom ⟨fun p ↦ f p.1 p.2, by
+    rw [continuous_sigma_iff]
+    intro j
+    simpa using hf j⟩
+
+/-- The coproduct of the retained-boundary inclusions into the explicit cones. -/
+def sigmaConeBoundaryHom (S : J → Type u) [∀ j, TopologicalSpace (S j)] :
+    TopCat.of (Σ j, S j) ⟶
+      TopCat.of (Σ j, Hatcher.VanKampen.ConeAttachment (id : S j → S j)) :=
+  TopCat.ofHom ⟨fun p ↦ ⟨p.1, ConeAttachment.base id p.2⟩, by
+    rw [continuous_sigma_iff]
+    intro j
+    exact (TopCat.sigmaι
+      (fun j ↦ TopCat.of
+        (Hatcher.VanKampen.ConeAttachment (id : S j → S j))) j).hom.continuous.comp
+      (ConeAttachment.continuous_base id)⟩
+
+/-- The canonical base inclusion as a morphism of topological spaces. -/
+def baseHom (f : ∀ j, S j → X) :
+    TopCat.of X ⟶ TopCat.of (Hatcher.VanKampen.IndexedConeAttachment f) :=
+  TopCat.ofHom ⟨base f, continuous_base f⟩
+
+/-- The coproduct of the canonical maps from the retained cones into the
+indexed cone attachment. -/
+def sigmaConeHom (f : ∀ j, S j → X) (hf : ∀ j, Continuous (f j)) :
+    TopCat.of (Σ j, Hatcher.VanKampen.ConeAttachment (id : S j → S j)) ⟶
+      TopCat.of (Hatcher.VanKampen.IndexedConeAttachment f) :=
+  TopCat.ofHom ⟨fun p ↦ coneMap f p.1 p.2, by
+    rw [continuous_sigma_iff]
+    intro j
+    exact continuous_coneMap f hf j⟩
+
+private def descRaw {Z : Type u} (_f : ∀ j, S j → X) (h : X → Z)
+    (k : (Σ j, Hatcher.VanKampen.ConeAttachment (id : S j → S j)) → Z) :
+    Prequotient X S → Z
+  | Sum.inl x => h x
+  | Sum.inr ⟨j, Sum.inl _⟩ => k ⟨j, ConeAttachment.apex id⟩
+  | Sum.inr ⟨j, Sum.inr (s, t)⟩ => k ⟨j, ConeAttachment.cylinder id s t⟩
+
+omit [TopologicalSpace X] [∀ j, TopologicalSpace (S j)] in
+private theorem descRaw_normalForm {Z : Type u} (f : ∀ j, S j → X)
+    (h : X → Z)
+    (k : (Σ j, Hatcher.VanKampen.ConeAttachment (id : S j → S j)) → Z)
+    (w : ∀ j s, h (f j s) = k ⟨j, ConeAttachment.base id s⟩)
+    (z : Prequotient X S) :
+    descRaw f h k (normalForm f z) = descRaw f h k z := by
+  rcases z with x | ⟨j, z⟩
+  · rfl
+  · rcases z with u₀ | ⟨s, t⟩
+    · rcases u₀ with ⟨⟩
+      rfl
+    · by_cases h0 : t = 0
+      · subst t
+        simp [normalForm, descRaw]
+      · by_cases h1 : t = 1
+        · subst t
+          simpa [normalForm, descRaw] using w j s
+        · simp [normalForm, descRaw, h0, h1]
+
+private def desc {Z : Type u} (f : ∀ j, S j → X) (h : X → Z)
+    (k : (Σ j, Hatcher.VanKampen.ConeAttachment (id : S j → S j)) → Z)
+    (w : ∀ j s, h (f j s) = k ⟨j, ConeAttachment.base id s⟩) :
+    Hatcher.VanKampen.IndexedConeAttachment f → Z :=
+  Quotient.lift (descRaw f h k) (by
+    intro a b hab
+    change normalForm f a = normalForm f b at hab
+    rw [← descRaw_normalForm f h k w a, ← descRaw_normalForm f h k w b, hab])
+
+private theorem continuous_desc {Z : Type u} [TopologicalSpace Z]
+    (f : ∀ j, S j → X) (h : X → Z)
+    (k : (Σ j, Hatcher.VanKampen.ConeAttachment (id : S j → S j)) → Z)
+    (w : ∀ j s, h (f j s) = k ⟨j, ConeAttachment.base id s⟩)
+    (hh : Continuous h) (hk : Continuous k) : Continuous (desc f h k w) := by
+  apply (isQuotientMap_quotientMk f).continuous_iff.mpr
+  rw [continuous_sum_dom]
+  constructor
+  · simpa [desc, descRaw, quotientMk, Function.comp_def] using hh
+  · rw [continuous_sigma_iff]
+    intro j
+    rw [continuous_sum_dom]
+    constructor
+    · simpa [desc, descRaw, quotientMk, Function.comp_def] using
+        (continuous_const : Continuous
+          (fun _ : Unit ↦ k ⟨j, ConeAttachment.apex id⟩))
+    · have hj : Continuous
+          (fun p : S j × I ↦
+            (⟨j, ConeAttachment.cylinder id p.1 p.2⟩ :
+              Σ j, Hatcher.VanKampen.ConeAttachment (id : S j → S j))) :=
+        (TopCat.sigmaι
+          (fun j ↦ TopCat.of
+            (Hatcher.VanKampen.ConeAttachment (id : S j → S j))) j).hom.continuous.comp
+          (ConeAttachment.continuous_cylinder id)
+      simpa [desc, descRaw, quotientMk, Function.comp_def] using hk.comp hj
+
+/-- The explicit indexed cone attachment is the pushout of the coproduct of
+its attaching maps and the coproduct of its retained-boundary inclusions. -/
+theorem isPushout_indexedConeAttachment (f : ∀ j, S j → X)
+    (hf : ∀ j, Continuous (f j)) :
+    IsPushout (sigmaAttachingHom f hf) (sigmaConeBoundaryHom S)
+      (baseHom f) (sigmaConeHom f hf) := by
+  have comm : sigmaAttachingHom f hf ≫ baseHom f =
+      sigmaConeBoundaryHom S ≫ sigmaConeHom f hf := by
+    ext p
+    rcases p with ⟨j, s⟩
+    rfl
+  let d (c : PushoutCocone (sigmaAttachingHom f hf) (sigmaConeBoundaryHom S)) :
+      TopCat.of (Hatcher.VanKampen.IndexedConeAttachment f) ⟶ c.pt :=
+    let w : ∀ j s, c.inl (f j s) =
+        c.inr ⟨j, ConeAttachment.base id s⟩ := fun j s ↦
+      ConcreteCategory.congr_hom c.condition ⟨j, s⟩
+    TopCat.ofHom ⟨desc f c.inl c.inr w,
+      continuous_desc f c.inl c.inr w
+        c.inl.hom.continuous c.inr.hom.continuous⟩
+  refine { w := comm, isColimit' := ⟨?_⟩ }
+  refine PushoutCocone.IsColimit.mk comm d ?_ ?_ ?_
+  · intro c
+    ext x
+    rfl
+  · intro c
+    let w : ∀ j s, c.inl (f j s) =
+        c.inr ⟨j, ConeAttachment.base id s⟩ := fun j s ↦
+      ConcreteCategory.congr_hom c.condition ⟨j, s⟩
+    ext q
+    rcases q with ⟨j, q⟩
+    refine Quotient.inductionOn q ?_
+    intro z
+    rcases z with s | z
+    · exact w j s
+    · rcases z with u₀ | ⟨s, t⟩
+      · rfl
+      · rfl
+  · intro c m hmBase hmCone
+    ext q
+    refine Quotient.inductionOn q ?_
+    intro z
+    rcases z with x | ⟨j, z⟩
+    · exact ConcreteCategory.congr_hom hmBase x
+    · rcases z with u₀ | ⟨s, t⟩
+      · exact ConcreteCategory.congr_hom hmCone
+          ⟨j, ConeAttachment.apex id⟩
+      · exact ConcreteCategory.congr_hom hmCone
+          ⟨j, ConeAttachment.cylinder id s t⟩
+
+/-- The indexed cone pushout as an `AttachCells` structure for the retained
+cone boundary maps. -/
+def attachCells_indexedConeAttachment (f : ∀ j, S j → X)
+    (hf : ∀ j, Continuous (f j)) :
+    HomotopicalAlgebra.AttachCells.{u}
+      (fun j : J ↦ ConeAttachment.coneBoundaryHom (S j)) (baseHom f) where
+  ι := J
+  π := id
+  cofan₁ := TopCat.sigmaCofan (fun j ↦ TopCat.of (S j))
+  cofan₂ := TopCat.sigmaCofan (fun j ↦ TopCat.of
+    (Hatcher.VanKampen.ConeAttachment (id : S j → S j)))
+  isColimit₁ := TopCat.sigmaCofanIsColimit _
+  isColimit₂ := TopCat.sigmaCofanIsColimit _
+  m := sigmaConeBoundaryHom S
+  hm j := by
+    ext s
+    rfl
+  g₁ := sigmaAttachingHom f hf
+  g₂ := sigmaConeHom f hf
+  isPushout := isPushout_indexedConeAttachment f hf
+
+end Pushout
 
 end IndexedConeAttachment
 
