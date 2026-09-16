@@ -17,10 +17,17 @@ first point-set construction around Hatcher's cell-attachment applications.
 - [The cone on a disk boundary is the disk](cone-disk-homeomorphism.md)
 - [A single cone attachment is a topological pushout](single-cone-pushout.md)
 - [A single cone attachment is a standard cell attachment](single-basic-cell-attachment.md)
+- [An indexed family of cone attachments is a topological pushout](indexed-cone-pushout.md)
+- [An indexed cone attachment is a standard cell attachment](indexed-basic-cell-attachment.md)
+- [Every abstract cell attachment has an indexed cone model](abstract-cell-attachment-indexed-model.md)
+- [An attachment with no cells is an isomorphism](empty-cell-attachment-iso.md)
 
-The indexed quotient has one apex per cell, but its upper member is generally
-disconnected. Hatcher's connected auxiliary cover and its intersection cover
-remain in the parent roadmap.
+The raw indexed quotient has one apex per cell, so its upper member is generally
+disconnected. Hatcher repairs this by adjoining a shared spine and one strip per
+cell. The remaining point-set work is organized in
+[Hatcher's auxiliary cell-attachment cover](auxiliary/README.md). The separate
+[two-disk boundary comparison](disk-boundary-two-circle.md) fixes the circle
+parameterization used by the two-cell relation calculation.
 
 ## Binary-cover algebra
 

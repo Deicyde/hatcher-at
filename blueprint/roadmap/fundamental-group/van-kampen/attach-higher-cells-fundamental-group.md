@@ -24,6 +24,8 @@ None beyond pinned Mathlib.
 ## Proof depends on
 
 - [An open-cover model for attached cells](cell-attachment-cover-model.md)
+- [An attachment with no cells is an isomorphism](cell-attachment-support/empty-cell-attachment-iso.md)
+- [The auxiliary cover basepoint transports to the original basepoint](cell-attachment-support/auxiliary/auxiliary-cover-basepoint-transport.md)
 - [The attaching-sphere pieces generate the intersection group](attaching-spheres-generate-intersection.md)
 - [A binary cover with a contractible second piece](cell-attachment-support/binary-cover-contractible-piece.md)
 - [Higher spheres are simply connected](../basic-constructions/sphere-simply-connected.md)

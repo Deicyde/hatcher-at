@@ -3,57 +3,47 @@ article_id: af_d40cc60ada4364ba06f00457
 source_units: [hatcher-1-2-selected-spine]
 declaration: lemma
 origin: bridged
-not_ready: true
 ---
 
 # An open-cover model for attached cells
 
-For a family of fixed-dimensional cells attached to a path-connected space
-`X`, construct Hatcher's auxiliary space `Z`, homotopy equivalent to the
-pushout `Y`, with a deformation retraction `Z → Y` and a two-set open cover
-`A ∪ B`. The construction must identify `A ≃ X`, prove `B` contractible, and
-equip the path-connected intersection `A ∩ B` with Hatcher's open cover whose
-pieces deformation retract onto the attaching spheres transported to the
-common basepoint.
+Let `c : HomotopicalAlgebra.AttachCells.{u}
+(TopCat.RelativeCWComplex.basicCell n) f`, where `X` is path-connected, the
+cell-index type is nonempty, and `1 < n`. For a basepoint `x₀ : X`, a chosen
+point `s₀ : TopCat.diskBoundary n`, and paths from `x₀` to every attaching
+point, construct Hatcher's auxiliary cover package for `c`.
 
 Intended artifact: `Hatcher.VanKampen.exists_cellAttachmentCover`.
 
-State the input using `HomotopicalAlgebra.AttachCells` for
-`TopCat.RelativeCWComplex.basicCell n`. This node packages the geometric work
-shared by Proposition 1.26(a) and (b); it does not calculate `π₁(A ∩ B)` or
-assert either final fundamental-group result.
+The result returns `Nonempty (CellAttachmentCover c x₀ s₀ γ)`. This package
+contains the strip-enlarged space `Z`, its strong deformation retraction onto
+the indexed model of the target, the open cover `A ∪ B`, the strong deformation
+retraction `A → X`, a contraction of `B`, and the pointed indexed cover of
+`A ∩ B` by pieces homotopy equivalent to the disk boundary. It also records the
+spine path from the overlap basepoint to the image of `x₀` and the exact
+basepoint-change equations induced by the lower retraction.
 
-This node is not yet ready to formalize against the pinned Mathlib API. The
-single-cone quotient and its two open cover members are now explicit, and the
-identity attachment on `TopCat.diskBoundary n` has been identified with
-`TopCat.disk n`. The single-cone quotient is also proved to be a `TopCat`
-pushout and carries a one-cell `HomotopicalAlgebra.AttachCells` structure for
-its retained-cone boundary. Its base-side cover strongly deformation-retracts
-onto `X`, its cone-side cover is contractible, and their intersection has the
-homotopy type of the attaching space. An indexed quotient with one apex per
-cell and the correct empty-family behavior is also formalized, but its upper
-cover is generally disconnected. The remaining geometry is Hatcher's connected
-auxiliary family cover and the corresponding intersection cover. For a single
-disk, the explicit quotient is now connected to Mathlib's exact
-`TopCat.RelativeCWComplex.basicCell`; extending this comparison to the indexed
-construction remains. The final statement also needs an explicit basepoint and
-a dimension hypothesis. Those interfaces must be fixed without hiding the
-geometric content.
+State the input using `HomotopicalAlgebra.AttachCells` for
+`TopCat.RelativeCWComplex.basicCell n`. This node is the final integrator of the
+geometric work shared by Proposition 1.26(a) and (b); it does not calculate
+`π₁(A ∩ B)` or assert either final fundamental-group result. The empty-index
+case is intentionally handled by a separate isomorphism rather than by adding
+a dummy cell to the connected cover.
 
 ## Depends on
 
-None beyond pinned Mathlib.
+- [Every abstract cell attachment has an indexed cone model](cell-attachment-support/abstract-cell-attachment-indexed-model.md)
+- [The strip-enlarged cell-attachment space](cell-attachment-support/auxiliary/auxiliary-cell-attachment-space.md)
 
 ## Proof depends on
 
-- [A single cone attachment has a two-set open cover](cell-attachment-support/single-cone-open-cover.md)
-- [An indexed family of cones has a two-set open cover](cell-attachment-support/indexed-cone-open-cover.md)
-- [The base-side cone cover retracts onto the original space](cell-attachment-support/single-cone-base-retract.md)
-- [The cone-side cover member is contractible](cell-attachment-support/single-cone-upper-contractible.md)
-- [The single-cone cover intersection has the homotopy type of its boundary](cell-attachment-support/single-cone-intersection.md)
-- [The cone on a disk boundary is the disk](cell-attachment-support/cone-disk-homeomorphism.md)
-- [A single cone attachment is a topological pushout](cell-attachment-support/single-cone-pushout.md)
-- [A single cone attachment is a standard cell attachment](cell-attachment-support/single-basic-cell-attachment.md)
+- [The strip enlargement retracts onto the attached space](cell-attachment-support/auxiliary/auxiliary-attachment-retract.md)
+- [Hatcher's binary cover of the strip enlargement](cell-attachment-support/auxiliary/auxiliary-cell-attachment-open-cover.md)
+- [The base-side auxiliary cover retracts onto the original space](cell-attachment-support/auxiliary/auxiliary-base-cover-retract.md)
+- [The strip-connected upper cover is contractible](cell-attachment-support/auxiliary/auxiliary-upper-cover-contractible.md)
+- [The auxiliary cover basepoint transports to the original basepoint](cell-attachment-support/auxiliary/auxiliary-cover-basepoint-transport.md)
+- [The auxiliary overlap has an indexed open cover](cell-attachment-support/auxiliary/auxiliary-overlap-open-cover.md)
+- [Each overlap piece has the homotopy type of its attaching sphere](cell-attachment-support/auxiliary/auxiliary-overlap-piece-sphere.md)
 
 ## Sources
 

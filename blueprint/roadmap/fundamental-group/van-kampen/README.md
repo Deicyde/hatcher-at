@@ -73,10 +73,11 @@ wedge sums.
 
 Mathlib supplies the abstract coproduct-and-pushout data in
 `HomotopicalAlgebra.AttachCells`, but not the point-set adjunction-space
-representation needed for Hatcher's proof of Proposition 1.26. In particular,
-it does not provide the disk collars, auxiliary open cover, or deformation
-retractions used by the van Kampen calculation. That missing representation is
-kept as an explicit blocker rather than treated as existing Mathlib coverage.
+representation needed for Hatcher's proof of Proposition 1.26. The missing
+work is decomposed under cell-attachment support: first compare the abstract
+pushout with the explicit indexed cone quotient, then construct Hatcher's
+strip-enlarged space, binary cover, deformation retractions, and overlap cover.
+None of these interfaces is treated as existing Mathlib coverage.
 
 - [An open-cover model for attached cells](cell-attachment-cover-model.md)
 - [The attaching-sphere pieces generate the intersection group](attaching-spheres-generate-intersection.md)
