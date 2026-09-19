@@ -3,6 +3,9 @@ article_id: af_4d712408a8cbf7efd1b49e64
 source_units: [hatcher-1-2-selected-spine]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.AuxiliaryCellAttachment.contractibleSpace_upperCover
 ---
 
 # The strip-connected upper cover is contractible

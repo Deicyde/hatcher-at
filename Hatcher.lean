@@ -82,6 +82,7 @@ import Hatcher.VanKampen.IndexedConeAttachment
 import Hatcher.VanKampen.AuxiliaryCellAttachment
 import Hatcher.VanKampen.AuxiliaryCellAttachmentCover
 import Hatcher.VanKampen.AuxiliaryCellAttachmentDeformation
+import Hatcher.VanKampen.AuxiliaryCellAttachmentUpperContractible
 import Hatcher.VanKampen.AuxiliaryCellAttachmentBasepoint
 import Hatcher.VanKampen.CellAttachmentAlgebra
 import Hatcher.VanKampen.DiskBoundaryCircle
