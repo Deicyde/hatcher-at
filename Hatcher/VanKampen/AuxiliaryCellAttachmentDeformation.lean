@@ -1010,4 +1010,34 @@ def baseCoverStrongDeformationRetract
     (indexedLowerStrongDeformationRetract f hf)
     (indexedLowerToBaseCoverStrongDeformationRetract f s₀ x₀ γ)
 
+/-- The base-side retraction collapses the common auxiliary spine to the
+chosen basepoint of the original space. -/
+@[simp] theorem baseCoverStrongDeformationRetract_retract_spine
+    (hf : ∀ j, Continuous (f j)) (t : I) :
+    (baseCoverStrongDeformationRetract f s₀ x₀ γ hf).retract
+        ⟨spine f s₀ x₀ γ t, spine_mem_baseCover f s₀ x₀ γ t⟩ = x₀ := by
+  change indexedLowerRetraction f hf
+    (baseCoverToIndexedLower f s₀ x₀ γ
+      ⟨spine f s₀ x₀ γ t, spine_mem_baseCover f s₀ x₀ γ t⟩) = x₀
+  have hr : retraction f s₀ x₀ γ (spine f s₀ x₀ γ t) =
+      IndexedConeAttachment.base f x₀ := by
+    change retraction f s₀ x₀ γ
+      (quotientMk f s₀ x₀ γ (Sum.inr (Sum.inl t))) = _
+    rw [retraction_quotientMk]
+    rfl
+  rw [show baseCoverToIndexedLower f s₀ x₀ γ
+      ⟨spine f s₀ x₀ γ t, spine_mem_baseCover f s₀ x₀ γ t⟩ =
+      indexedLowerBaseInclusion f x₀ by
+    apply Subtype.ext
+    exact hr]
+  exact indexedLowerRetraction_apply_base f hf x₀
+
+/-- In particular, the chosen binary-cover basepoint retracts to `x₀`. -/
+@[simp] theorem baseCoverStrongDeformationRetract_retract_overlapBasepoint
+    (hf : ∀ j, Continuous (f j)) :
+    (baseCoverStrongDeformationRetract f s₀ x₀ γ hf).retract
+        ⟨overlapBasepoint f s₀ x₀ γ,
+          overlapBasepoint_mem_baseCover f s₀ x₀ γ⟩ = x₀ := by
+  simp [overlapBasepoint]
+
 end Hatcher.VanKampen.AuxiliaryCellAttachment
