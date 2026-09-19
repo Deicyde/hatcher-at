@@ -3,6 +3,8 @@ article_id: af_b4073e48cecc2c23414164fb
 source_units: [hatcher-1-2-selected-spine]
 declaration: def
 origin: bridged
+statement: formalized
+lean: Hatcher.VanKampen.AuxiliaryCellAttachment.attachmentStrongDeformationRetract
 ---
 
 # The strip enlargement retracts onto the attached space
