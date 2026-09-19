@@ -34,7 +34,7 @@ abbrev Prequotient (X : Type u) {J : Type w} (S : J → Type v) :=
   X ⊕ (Σ j, Unit ⊕ (S j × I))
 
 /-- Canonical representatives for an indexed family of cone attachments. -/
-private def normalForm {X : Type u} {J : Type w} {S : J → Type v}
+def normalForm {X : Type u} {J : Type w} {S : J → Type v}
     (f : ∀ j, S j → X) : Prequotient X S → Prequotient X S
   | Sum.inl x => Sum.inl x
   | Sum.inr ⟨j, Sum.inl _⟩ => Sum.inr ⟨j, Sum.inl ()⟩
@@ -109,7 +109,7 @@ theorem cylinder_one {X : Type u} {J : Type w} {S : J → Type v}
   simp [normalForm]
 
 /-- The raw lower member contains the base and positive-height cone points. -/
-private def lowerPreimage {X : Type u} {J : Type w} {S : J → Type v} :
+def lowerPreimage {X : Type u} {J : Type w} {S : J → Type v} :
     Set (Prequotient X S) := fun z =>
   match z with
   | Sum.inl _ => True
@@ -125,7 +125,7 @@ private def upperPreimage {X : Type u} {J : Type w} {S : J → Type v} :
   | Sum.inr ⟨_, Sum.inr (_, t)⟩ => t < 1
 
 /-- The raw lower member is open in the indexed coproduct. -/
-private theorem isOpen_lowerPreimage {X : Type u} {J : Type w} {S : J → Type v}
+theorem isOpen_lowerPreimage {X : Type u} {J : Type w} {S : J → Type v}
     [TopologicalSpace X] [∀ j, TopologicalSpace (S j)] :
     IsOpen (lowerPreimage (X := X) (S := S)) := by
   rw [isOpen_sum_iff]
@@ -273,7 +273,7 @@ def lowerCover {X : Type u} {J : Type w} {S : J → Type v}
     z
 
 /-- The lower quotient member has exactly the declared raw preimage. -/
-private theorem quotientMk_preimage_lowerCover
+theorem quotientMk_preimage_lowerCover
     {X : Type u} {J : Type w} {S : J → Type v}
     (f : ∀ j, S j → X) :
     quotientMk f ⁻¹' lowerCover f = lowerPreimage := by
@@ -310,13 +310,23 @@ private theorem quotientMk_preimage_lowerCover
   rfl
 
 /-- The lower quotient member is open. -/
-private theorem isOpen_lowerCover
+theorem isOpen_lowerCover
     {X : Type u} {J : Type w} {S : J → Type v}
     [TopologicalSpace X] [∀ j, TopologicalSpace (S j)]
     (f : ∀ j, S j → X) : IsOpen (lowerCover f) := by
   apply (isQuotientMap_quotientMk f).isCoinducing.isOpen_preimage.mp
   rw [quotientMk_preimage_lowerCover]
   exact isOpen_lowerPreimage
+
+/-- Restricting the indexed quotient map over the lower open member remains a
+quotient map. -/
+theorem isQuotientMap_restrictPreimage_lowerCover
+    {X : Type u} {J : Type w} {S : J → Type v}
+    [TopologicalSpace X] [∀ j, TopologicalSpace (S j)]
+    (f : ∀ j, S j → X) :
+    IsQuotientMap ((lowerCover f).restrictPreimage (quotientMk f)) :=
+  (isQuotientMap_quotientMk f).restrictPreimage_isOpen
+    (isOpen_lowerCover f)
 
 /-- The saturated upper member descended to the quotient. It is generally
 disconnected, with one separate truncated cone piece for each index, and is not

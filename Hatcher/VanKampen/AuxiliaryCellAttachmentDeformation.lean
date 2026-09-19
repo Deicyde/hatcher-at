@@ -1,6 +1,5 @@
-import Hatcher.VanKampen.AuxiliaryCellAttachment
-import Hatcher.VanKampen.WellPointedWedgeCover
-import Mathlib.Topology.CompactOpen
+import Hatcher.VanKampen.AuxiliaryCellAttachmentCover
+import Hatcher.VanKampen.ConeAttachmentDeformation
 
 /-!
 # Deformation of Hatcher's auxiliary cell attachment
@@ -452,5 +451,563 @@ def attachmentStrongDeformationRetract :
   retract := retraction f s₀ x₀ γ
   retract_inclusion := retraction_comp_attachment f s₀ x₀ γ
   deformation := deformation f s₀ x₀ γ
+
+/-!
+## Retraction of the base-side auxiliary cover
+
+The indexed lower cone cover retracts radially onto the original base.  The
+existing strip deformation restricts to the auxiliary base-side member, and
+composition gives Hatcher's base-side strong deformation retraction.
+-/
+
+private def indexedLowerRaw :
+    I × IndexedConeAttachment.Prequotient X S →
+      Hatcher.VanKampen.IndexedConeAttachment f
+  | (_, Sum.inl x) => IndexedConeAttachment.base f x
+  | (_, Sum.inr ⟨j, Sum.inl _⟩) => IndexedConeAttachment.apex f j
+  | (u, Sum.inr ⟨j, Sum.inr (s, t)⟩) =>
+      IndexedConeAttachment.cylinder f j s
+        (Set.Icc.convexComb t 1 u)
+
+private theorem continuous_indexedLowerRaw :
+    Continuous (indexedLowerRaw f) := by
+  let gsigma : (Σ j : J, (Unit ⊕ (S j × I)) × I) →
+      Hatcher.VanKampen.IndexedConeAttachment f
+    | ⟨j, Sum.inl _, _⟩ => IndexedConeAttachment.apex f j
+    | ⟨j, Sum.inr (s, t), u⟩ =>
+        IndexedConeAttachment.cylinder f j s
+          (Set.Icc.convexComb t 1 u)
+  have hgsigma : Continuous gsigma := by
+    rw [continuous_sigma_iff]
+    intro j
+    let gj : (Unit × I) ⊕ ((S j × I) × I) →
+        Hatcher.VanKampen.IndexedConeAttachment f
+      | Sum.inl _ => IndexedConeAttachment.apex f j
+      | Sum.inr ((s, t), u) => IndexedConeAttachment.cylinder f j s
+          (Set.Icc.convexComb t 1 u)
+    have hgj : Continuous gj := by
+      rw [continuous_sum_dom]
+      constructor
+      · exact continuous_const
+      · exact (IndexedConeAttachment.continuous_cylinder f j).comp
+          ((continuous_fst.comp continuous_fst).prodMk
+            (Set.Icc.continuous_convexComb_prod.comp
+              ((continuous_snd.comp continuous_fst).prodMk
+                (continuous_const.prodMk continuous_snd))))
+    apply (hgj.comp
+      (Homeomorph.sumProdDistrib :
+        (Unit ⊕ (S j × I)) × I ≃ₜ
+          (Unit × I) ⊕ ((S j × I) × I)).continuous).congr
+    rintro ⟨_ | ⟨s, t⟩, u⟩ <;> rfl
+  let g : (I × X) ⊕ (I × (Σ j : J, Unit ⊕ (S j × I))) →
+      Hatcher.VanKampen.IndexedConeAttachment f
+    | Sum.inl (_, x) => IndexedConeAttachment.base f x
+    | Sum.inr p => gsigma
+        ((Homeomorph.sigmaProdDistrib :
+          (Σ j : J, Unit ⊕ (S j × I)) × I ≃ₜ
+            Σ j : J, (Unit ⊕ (S j × I)) × I)
+          (Prod.swap p))
+  have hg : Continuous g := by
+    rw [continuous_sum_dom]
+    constructor
+    · exact (IndexedConeAttachment.continuous_base f).comp continuous_snd
+    · exact hgsigma.comp
+        ((Homeomorph.sigmaProdDistrib :
+          (Σ j : J, Unit ⊕ (S j × I)) × I ≃ₜ
+            Σ j : J, (Unit ⊕ (S j × I)) × I).continuous.comp
+          continuous_swap)
+  apply (hg.comp
+    (Homeomorph.prodSumDistrib :
+      I × IndexedConeAttachment.Prequotient X S ≃ₜ
+        (I × X) ⊕ (I × (Σ j : J, Unit ⊕ (S j × I)))).continuous).congr
+  rintro ⟨u, x | ⟨j, (_ | ⟨s, t⟩)⟩⟩ <;> rfl
+
+omit [TopologicalSpace X] [∀ j, TopologicalSpace (S j)] in
+private theorem indexedLowerSource_mem (z :
+    IndexedConeAttachment.quotientMk f ⁻¹'
+      IndexedConeAttachment.lowerCover f) :
+    z.1 ∈ IndexedConeAttachment.lowerPreimage := by
+  exact Set.ext_iff.mp
+    (IndexedConeAttachment.quotientMk_preimage_lowerCover f) z.1 |>.mp z.2
+
+omit [TopologicalSpace X] [∀ j, TopologicalSpace (S j)] in
+private theorem indexedLowerRaw_mem (u : I)
+    (z : IndexedConeAttachment.quotientMk f ⁻¹'
+      IndexedConeAttachment.lowerCover f) :
+    indexedLowerRaw f (u, z.1) ∈ IndexedConeAttachment.lowerCover f := by
+  have hz := indexedLowerSource_mem f z
+  rcases z with ⟨x | ⟨j, (_ | ⟨s, t⟩)⟩, hz'⟩
+  · exact IndexedConeAttachment.base_mem_lowerCover f x
+  · contradiction
+  · simp only [indexedLowerRaw]
+    rw [IndexedConeAttachment.cylinder_mem_lowerCover_iff]
+    change 0 < t at hz
+    exact hz.trans_le (Set.Icc.le_convexComb unitInterval.le_one' u)
+
+private def indexedLowerRawRestricted :
+    I × (IndexedConeAttachment.quotientMk f ⁻¹'
+      IndexedConeAttachment.lowerCover f) →
+        IndexedConeAttachment.lowerCover f :=
+  fun p => ⟨indexedLowerRaw f (p.1, p.2.1),
+    indexedLowerRaw_mem f p.1 p.2⟩
+
+private theorem continuous_indexedLowerRawRestricted :
+    Continuous (indexedLowerRawRestricted f) := by
+  apply Continuous.subtype_mk
+  exact (continuous_indexedLowerRaw f).comp
+    (continuous_fst.prodMk (continuous_subtype_val.comp continuous_snd))
+
+omit [TopologicalSpace X] [∀ j, TopologicalSpace (S j)] in
+private theorem indexedLowerRaw_eq_of_normalForm_eq (u : I)
+    {a b : IndexedConeAttachment.Prequotient X S}
+    (ha : a ∈ IndexedConeAttachment.lowerPreimage)
+    (hb : b ∈ IndexedConeAttachment.lowerPreimage)
+    (h : IndexedConeAttachment.normalForm f a =
+      IndexedConeAttachment.normalForm f b) :
+    indexedLowerRaw f (u, a) = indexedLowerRaw f (u, b) := by
+  rcases a with x | ⟨j, a⟩
+  · rcases b with y | ⟨k, b⟩
+    · simp_all [IndexedConeAttachment.normalForm, indexedLowerRaw]
+    · rcases b with _ | ⟨r, v⟩
+      · change False at hb
+        contradiction
+      · change 0 < v at hb
+        simp only [IndexedConeAttachment.normalForm] at h
+        split_ifs at h
+        all_goals simp_all [indexedLowerRaw]
+  · rcases a with _ | ⟨s, t⟩
+    · change False at ha
+      contradiction
+    · change 0 < t at ha
+      rcases b with y | ⟨k, b⟩
+      · simp only [IndexedConeAttachment.normalForm] at h
+        split_ifs at h
+        all_goals simp_all [indexedLowerRaw]
+      · rcases b with _ | ⟨r, v⟩
+        · change False at hb
+          contradiction
+        · change 0 < v at hb
+          simp only [IndexedConeAttachment.normalForm] at h
+          split_ifs at h
+          all_goals try simp_all [indexedLowerRaw]
+          obtain ⟨rfl, hsr⟩ := h
+          cases hsr
+          rfl
+
+omit [TopologicalSpace X] [∀ j, TopologicalSpace (S j)] in
+private theorem indexedLowerRawRestricted_eq_of_quotient_eq (u : I)
+    {a b : IndexedConeAttachment.quotientMk f ⁻¹'
+      IndexedConeAttachment.lowerCover f}
+    (h : (IndexedConeAttachment.lowerCover f).restrictPreimage
+        (IndexedConeAttachment.quotientMk f) a =
+      (IndexedConeAttachment.lowerCover f).restrictPreimage
+        (IndexedConeAttachment.quotientMk f) b) :
+    indexedLowerRawRestricted f (u, a) =
+      indexedLowerRawRestricted f (u, b) := by
+  apply Subtype.ext
+  apply indexedLowerRaw_eq_of_normalForm_eq f u
+  · exact indexedLowerSource_mem f a
+  · exact indexedLowerSource_mem f b
+  · have hrel := Quotient.exact (congrArg Subtype.val h)
+    change IndexedConeAttachment.normalForm f a.1 =
+      IndexedConeAttachment.normalForm f b.1 at hrel
+    exact hrel
+
+private noncomputable def indexedLowerDeformationMap :
+    I × IndexedConeAttachment.lowerCover f →
+      IndexedConeAttachment.lowerCover f := fun p =>
+  indexedLowerRawRestricted f
+    (p.1, Function.surjInv
+      (IndexedConeAttachment.isQuotientMap_restrictPreimage_lowerCover f).surjective p.2)
+
+private theorem indexedLowerDeformationMap_quotientMap (u : I)
+    (z : IndexedConeAttachment.quotientMk f ⁻¹'
+      IndexedConeAttachment.lowerCover f) :
+    indexedLowerDeformationMap f
+        (u, (IndexedConeAttachment.lowerCover f).restrictPreimage
+          (IndexedConeAttachment.quotientMk f) z) =
+      indexedLowerRawRestricted f (u, z) := by
+  apply indexedLowerRawRestricted_eq_of_quotient_eq f u
+  exact Function.surjInv_eq
+    (IndexedConeAttachment.isQuotientMap_restrictPreimage_lowerCover f).surjective _
+
+private theorem continuous_indexedLowerDeformationMap :
+    Continuous (indexedLowerDeformationMap f) := by
+  apply (IndexedConeAttachment.isQuotientMap_restrictPreimage_lowerCover f).continuous_lift_prod_right
+  apply (continuous_indexedLowerRawRestricted f).congr
+  rintro ⟨u, z⟩
+  exact (indexedLowerDeformationMap_quotientMap f u z).symm
+
+private def indexedLowerRetractionPre :
+    (IndexedConeAttachment.quotientMk f ⁻¹'
+      IndexedConeAttachment.lowerCover f) → X
+  | ⟨Sum.inl x, _⟩ => x
+  | ⟨Sum.inr ⟨_, Sum.inl _⟩, h⟩ => False.elim <| by
+      have hz : (Sum.inr ⟨_, Sum.inl ()⟩ :
+          IndexedConeAttachment.Prequotient X S) ∈
+          IndexedConeAttachment.lowerPreimage :=
+        Set.ext_iff.mp
+          (IndexedConeAttachment.quotientMk_preimage_lowerCover f) _ |>.mp h
+      exact hz
+  | ⟨Sum.inr ⟨j, Sum.inr (s, _)⟩, _⟩ => f j s
+
+private theorem continuous_indexedLowerRetractionPre
+    (hf : ∀ j, Continuous (f j)) :
+    Continuous (indexedLowerRetractionPre f) := by
+  cases isEmpty_or_nonempty X with
+  | inl hX =>
+      letI : IsEmpty X := hX
+      exact continuous_empty_function _
+  | inr hX =>
+      let x₀' : X := Classical.choice hX
+      let g : IndexedConeAttachment.Prequotient X S → X
+        | Sum.inl x => x
+        | Sum.inr ⟨_, Sum.inl _⟩ => x₀'
+        | Sum.inr ⟨j, Sum.inr (s, _)⟩ => f j s
+      have hg : Continuous g := by
+        rw [continuous_sum_dom]
+        constructor
+        · exact continuous_id
+        · rw [continuous_sigma_iff]
+          intro j
+          rw [continuous_sum_dom]
+          exact ⟨continuous_const, (hf j).comp continuous_fst⟩
+      apply (hg.comp continuous_subtype_val).congr
+      intro z
+      have hz := indexedLowerSource_mem f z
+      rcases z with ⟨x | ⟨j, (_ | ⟨s, t⟩)⟩, hz'⟩
+      · rfl
+      · contradiction
+      · rfl
+
+omit [TopologicalSpace X] [∀ j, TopologicalSpace (S j)] in
+private theorem indexedLowerRetractionPre_eq_of_quotient_eq
+    {a b : IndexedConeAttachment.quotientMk f ⁻¹'
+      IndexedConeAttachment.lowerCover f}
+    (h : (IndexedConeAttachment.lowerCover f).restrictPreimage
+        (IndexedConeAttachment.quotientMk f) a =
+      (IndexedConeAttachment.lowerCover f).restrictPreimage
+        (IndexedConeAttachment.quotientMk f) b) :
+    indexedLowerRetractionPre f a = indexedLowerRetractionPre f b := by
+  have ha := indexedLowerSource_mem f a
+  have hb := indexedLowerSource_mem f b
+  have hrel := Quotient.exact (congrArg Subtype.val h)
+  change IndexedConeAttachment.normalForm f a.1 =
+    IndexedConeAttachment.normalForm f b.1 at hrel
+  obtain ⟨a, ha'⟩ := a
+  obtain ⟨b, hb'⟩ := b
+  rcases a with x | ⟨j, a⟩
+  · rcases b with y | ⟨k, b⟩
+    · simp_all [IndexedConeAttachment.normalForm, indexedLowerRetractionPre]
+    · rcases b with _ | ⟨r, v⟩
+      · change False at hb
+        contradiction
+      · change 0 < v at hb
+        simp only [IndexedConeAttachment.normalForm] at hrel
+        split_ifs at hrel
+        all_goals simp_all [indexedLowerRetractionPre]
+  · rcases a with _ | ⟨s, t⟩
+    · change False at ha
+      contradiction
+    · change 0 < t at ha
+      rcases b with y | ⟨k, b⟩
+      · simp only [IndexedConeAttachment.normalForm] at hrel
+        split_ifs at hrel
+        all_goals simp_all [indexedLowerRetractionPre]
+      · rcases b with _ | ⟨r, v⟩
+        · change False at hb
+          contradiction
+        · change 0 < v at hb
+          simp only [IndexedConeAttachment.normalForm] at hrel
+          split_ifs at hrel
+          all_goals try simp_all [indexedLowerRetractionPre]
+          obtain ⟨rfl, hsr⟩ := hrel
+          cases hsr
+          rfl
+
+private noncomputable def indexedLowerRetractionMap :
+    IndexedConeAttachment.lowerCover f → X := fun z =>
+  indexedLowerRetractionPre f
+    (Function.surjInv
+      (IndexedConeAttachment.isQuotientMap_restrictPreimage_lowerCover f).surjective z)
+
+private theorem indexedLowerRetractionMap_quotientMap
+    (z : IndexedConeAttachment.quotientMk f ⁻¹'
+      IndexedConeAttachment.lowerCover f) :
+    indexedLowerRetractionMap f
+        ((IndexedConeAttachment.lowerCover f).restrictPreimage
+          (IndexedConeAttachment.quotientMk f) z) =
+      indexedLowerRetractionPre f z := by
+  apply indexedLowerRetractionPre_eq_of_quotient_eq f
+  exact Function.surjInv_eq
+    (IndexedConeAttachment.isQuotientMap_restrictPreimage_lowerCover f).surjective _
+
+private theorem continuous_indexedLowerRetractionMap
+    (hf : ∀ j, Continuous (f j)) :
+    Continuous (indexedLowerRetractionMap f) := by
+  apply (IndexedConeAttachment.isQuotientMap_restrictPreimage_lowerCover f).continuous_iff.mpr
+  apply (continuous_indexedLowerRetractionPre f hf).congr
+  intro z
+  exact (indexedLowerRetractionMap_quotientMap f z).symm
+
+private def indexedLowerBaseInclusion :
+    C(X, IndexedConeAttachment.lowerCover f) where
+  toFun x := ⟨IndexedConeAttachment.base f x,
+    IndexedConeAttachment.base_mem_lowerCover f x⟩
+  continuous_toFun := (IndexedConeAttachment.continuous_base f).subtype_mk _
+
+private noncomputable def indexedLowerRetraction
+    (hf : ∀ j, Continuous (f j)) :
+    C(IndexedConeAttachment.lowerCover f, X) where
+  toFun := indexedLowerRetractionMap f
+  continuous_toFun := continuous_indexedLowerRetractionMap f hf
+
+@[simp] private theorem indexedLowerRetraction_apply_base
+    (hf : ∀ j, Continuous (f j)) (x : X) :
+    indexedLowerRetraction f hf (indexedLowerBaseInclusion f x) = x := by
+  let a : IndexedConeAttachment.quotientMk f ⁻¹'
+      IndexedConeAttachment.lowerCover f :=
+    ⟨Sum.inl x, IndexedConeAttachment.base_mem_lowerCover f x⟩
+  have ha : (IndexedConeAttachment.lowerCover f).restrictPreimage
+      (IndexedConeAttachment.quotientMk f) a =
+      indexedLowerBaseInclusion f x := rfl
+  change indexedLowerRetractionMap f (indexedLowerBaseInclusion f x) = x
+  rw [← ha, indexedLowerRetractionMap_quotientMap f]
+  rfl
+
+private theorem indexedLowerDeformationMap_zero
+    (z : IndexedConeAttachment.lowerCover f) :
+    indexedLowerDeformationMap f (0, z) = z := by
+  obtain ⟨a, rfl⟩ :=
+    (IndexedConeAttachment.isQuotientMap_restrictPreimage_lowerCover f).surjective z
+  rw [indexedLowerDeformationMap_quotientMap]
+  apply Subtype.ext
+  rcases a with ⟨x | ⟨j, (_ | ⟨s, t⟩)⟩, ha⟩ <;>
+    simp [indexedLowerRawRestricted, indexedLowerRaw,
+      IndexedConeAttachment.base, IndexedConeAttachment.apex,
+      IndexedConeAttachment.cylinder]
+
+private theorem indexedLowerDeformationMap_one
+    (hf : ∀ j, Continuous (f j))
+    (z : IndexedConeAttachment.lowerCover f) :
+    indexedLowerDeformationMap f (1, z) =
+      indexedLowerBaseInclusion f (indexedLowerRetraction f hf z) := by
+  obtain ⟨a, rfl⟩ :=
+    (IndexedConeAttachment.isQuotientMap_restrictPreimage_lowerCover f).surjective z
+  rw [indexedLowerDeformationMap_quotientMap]
+  change indexedLowerRawRestricted f (1, a) =
+    indexedLowerBaseInclusion f
+      (indexedLowerRetractionMap f
+        ((IndexedConeAttachment.lowerCover f).restrictPreimage
+          (IndexedConeAttachment.quotientMk f) a))
+  rw [indexedLowerRetractionMap_quotientMap f]
+  apply Subtype.ext
+  have ha := indexedLowerSource_mem f a
+  rcases a with ⟨x | ⟨j, (_ | ⟨s, t⟩)⟩, ha'⟩
+  · rfl
+  · contradiction
+  · simp [indexedLowerRawRestricted, indexedLowerRaw,
+      indexedLowerBaseInclusion, indexedLowerRetractionPre]
+
+private theorem indexedLowerDeformationMap_base (u : I) (x : X) :
+    indexedLowerDeformationMap f (u, indexedLowerBaseInclusion f x) =
+      indexedLowerBaseInclusion f x := by
+  let a : IndexedConeAttachment.quotientMk f ⁻¹'
+      IndexedConeAttachment.lowerCover f :=
+    ⟨Sum.inl x, IndexedConeAttachment.base_mem_lowerCover f x⟩
+  have ha : (IndexedConeAttachment.lowerCover f).restrictPreimage
+      (IndexedConeAttachment.quotientMk f) a =
+      indexedLowerBaseInclusion f x := rfl
+  rw [← ha, indexedLowerDeformationMap_quotientMap]
+  rfl
+
+private def indexedLowerDeformation
+    (hf : ∀ j, Continuous (f j)) :
+    (ContinuousMap.id (IndexedConeAttachment.lowerCover f)).HomotopyRel
+      ((indexedLowerBaseInclusion f).comp (indexedLowerRetraction f hf))
+      (Set.range (indexedLowerBaseInclusion f)) where
+  toFun := indexedLowerDeformationMap f
+  continuous_toFun := continuous_indexedLowerDeformationMap f
+  map_zero_left := indexedLowerDeformationMap_zero f
+  map_one_left := indexedLowerDeformationMap_one f hf
+  prop' u z hz := by
+    obtain ⟨x, rfl⟩ := hz
+    exact indexedLowerDeformationMap_base f u x
+
+private def indexedLowerStrongDeformationRetract
+    (hf : ∀ j, Continuous (f j)) :
+    Hatcher.StrongDeformationRetract (indexedLowerBaseInclusion f) where
+  retract := indexedLowerRetraction f hf
+  retract_inclusion := by
+    ext x
+    exact indexedLowerRetraction_apply_base f hf x
+  deformation := indexedLowerDeformation f hf
+
+/-- The indexed lower cover included into the auxiliary base cover. -/
+private def indexedLowerToBaseCover :
+    C(IndexedConeAttachment.lowerCover f, baseCover f s₀ x₀ γ) where
+  toFun y := ⟨attachment f s₀ x₀ γ y,
+    (attachment_mem_baseCover_iff f s₀ x₀ γ y).2 y.2⟩
+  continuous_toFun := (attachment f s₀ x₀ γ).continuous.comp
+    continuous_subtype_val |>.subtype_mk _
+
+private theorem auxiliaryRetraction_mem_indexedLower
+    (z : baseCover f s₀ x₀ γ) :
+    retraction f s₀ x₀ γ z.1 ∈ IndexedConeAttachment.lowerCover f := by
+  obtain ⟨a, ha⟩ :=
+    (isQuotientMap_restrictPreimage_baseCover f s₀ x₀ γ).surjective z
+  have haval : quotientMk f s₀ x₀ γ a.1 = z.1 :=
+    congrArg Subtype.val ha
+  rw [← haval, retraction_quotientMk]
+  rcases a with ⟨y | (t | ⟨j, p⟩), hmem⟩
+  · change attachment f s₀ x₀ γ y ∈ baseCover f s₀ x₀ γ at hmem
+    exact (attachment_mem_baseCover_iff f s₀ x₀ γ y).1 hmem
+  · exact IndexedConeAttachment.base_mem_lowerCover f x₀
+  · simp only [retractionRaw]
+    unfold stripRetraction
+    split_ifs
+    · exact IndexedConeAttachment.base_mem_lowerCover f _
+    · exact (IndexedConeAttachment.cylinder_mem_lowerCover_iff f j
+        (s₀ j) _).2 (truncatedRadialHeight_pos _)
+
+private noncomputable def baseCoverToIndexedLower :
+    C(baseCover f s₀ x₀ γ, IndexedConeAttachment.lowerCover f) where
+  toFun z := ⟨retraction f s₀ x₀ γ z.1,
+    auxiliaryRetraction_mem_indexedLower f s₀ x₀ γ z⟩
+  continuous_toFun := (retraction f s₀ x₀ γ).continuous.comp
+    continuous_subtype_val |>.subtype_mk _
+
+private theorem auxiliaryDeformation_mem_baseCover (u : I)
+    (z : baseCover f s₀ x₀ γ) :
+    deformationMap f s₀ x₀ γ (u, z.1) ∈ baseCover f s₀ x₀ γ := by
+  obtain ⟨a, ha⟩ :=
+    (isQuotientMap_restrictPreimage_baseCover f s₀ x₀ γ).surjective z
+  have haval : quotientMk f s₀ x₀ γ a.1 = z.1 :=
+    congrArg Subtype.val ha
+  rw [← haval, deformationMap_quotientMk]
+  rcases a with ⟨y | (t | ⟨j, p⟩), hmem⟩
+  · change attachment f s₀ x₀ γ y ∈ baseCover f s₀ x₀ γ at hmem
+    exact hmem
+  · exact spine_mem_baseCover f s₀ x₀ γ _
+  · exact strip_mem_baseCover f s₀ x₀ γ j _
+
+private noncomputable def auxiliaryBaseCoverDeformationMap :
+    I × baseCover f s₀ x₀ γ → baseCover f s₀ x₀ γ :=
+  fun p => ⟨deformationMap f s₀ x₀ γ (p.1, p.2.1),
+    auxiliaryDeformation_mem_baseCover f s₀ x₀ γ p.1 p.2⟩
+
+private theorem continuous_auxiliaryBaseCoverDeformationMap :
+    Continuous (auxiliaryBaseCoverDeformationMap f s₀ x₀ γ) := by
+  apply Continuous.subtype_mk
+  exact (continuous_deformationMap f s₀ x₀ γ).comp
+    (continuous_fst.prodMk (continuous_subtype_val.comp continuous_snd))
+
+private theorem auxiliaryBaseCoverDeformationMap_zero
+    (z : baseCover f s₀ x₀ γ) :
+    auxiliaryBaseCoverDeformationMap f s₀ x₀ γ (0, z) = z := by
+  apply Subtype.ext
+  exact deformationMap_zero f s₀ x₀ γ z.1
+
+private theorem auxiliaryBaseCoverDeformationMap_one
+    (z : baseCover f s₀ x₀ γ) :
+    auxiliaryBaseCoverDeformationMap f s₀ x₀ γ (1, z) =
+      indexedLowerToBaseCover f s₀ x₀ γ
+        (baseCoverToIndexedLower f s₀ x₀ γ z) := by
+  apply Subtype.ext
+  exact deformationMap_one f s₀ x₀ γ z.1
+
+private theorem auxiliaryBaseCoverDeformationMap_indexedLower
+    (u : I) (y : IndexedConeAttachment.lowerCover f) :
+    auxiliaryBaseCoverDeformationMap f s₀ x₀ γ
+        (u, indexedLowerToBaseCover f s₀ x₀ γ y) =
+      indexedLowerToBaseCover f s₀ x₀ γ y := by
+  apply Subtype.ext
+  exact deformationMap_attachment f s₀ x₀ γ u y.1
+
+private def auxiliaryBaseCoverDeformation :
+    (ContinuousMap.id (baseCover f s₀ x₀ γ)).HomotopyRel
+      ((indexedLowerToBaseCover f s₀ x₀ γ).comp
+        (baseCoverToIndexedLower f s₀ x₀ γ))
+      (Set.range (indexedLowerToBaseCover f s₀ x₀ γ)) where
+  toFun := auxiliaryBaseCoverDeformationMap f s₀ x₀ γ
+  continuous_toFun := continuous_auxiliaryBaseCoverDeformationMap f s₀ x₀ γ
+  map_zero_left := auxiliaryBaseCoverDeformationMap_zero f s₀ x₀ γ
+  map_one_left := auxiliaryBaseCoverDeformationMap_one f s₀ x₀ γ
+  prop' u z hz := by
+    obtain ⟨y, rfl⟩ := hz
+    exact auxiliaryBaseCoverDeformationMap_indexedLower f s₀ x₀ γ u y
+
+private def indexedLowerToBaseCoverStrongDeformationRetract :
+    Hatcher.StrongDeformationRetract
+      (indexedLowerToBaseCover f s₀ x₀ γ) where
+  retract := baseCoverToIndexedLower f s₀ x₀ γ
+  retract_inclusion := by
+    ext y
+    exact retraction_attachment f s₀ x₀ γ y.1
+  deformation := auxiliaryBaseCoverDeformation f s₀ x₀ γ
+
+private def strongDeformationRetractTrans
+    {A B Y : Type u} [TopologicalSpace A] [TopologicalSpace B]
+    [TopologicalSpace Y] {i : C(A, B)} {j : C(B, Y)}
+    (hAB : Hatcher.StrongDeformationRetract i)
+    (hBY : Hatcher.StrongDeformationRetract j) :
+    Hatcher.StrongDeformationRetract (j.comp i) where
+  retract := hAB.retract.comp hBY.retract
+  retract_inclusion := by
+    ext a
+    have houter := congrArg (fun g : C(B, B) => g (i a))
+      hBY.retract_inclusion
+    have hinner := congrArg (fun g : C(A, A) => g a)
+      hAB.retract_inclusion
+    exact (congrArg hAB.retract houter).trans hinner
+  deformation := by
+    let F : (ContinuousMap.id Y).HomotopyRel
+        (j.comp hBY.retract) (Set.range (j.comp i)) := {
+      toFun := hBY.deformation
+      continuous_toFun := hBY.deformation.continuous
+      map_zero_left := hBY.deformation.apply_zero
+      map_one_left := hBY.deformation.apply_one
+      prop' t y hy := by
+        apply hBY.deformation.eq_fst
+        rcases hy with ⟨a, rfl⟩
+        exact ⟨i a, rfl⟩ }
+    let G : (j.comp hBY.retract).HomotopyRel
+        ((j.comp i).comp (hAB.retract.comp hBY.retract))
+        (Set.range (j.comp i)) := {
+      toFun p := j (hAB.deformation (p.1, hBY.retract p.2))
+      continuous_toFun := j.continuous.comp
+        (hAB.deformation.continuous.comp
+          (continuous_fst.prodMk (hBY.retract.continuous.comp continuous_snd)))
+      map_zero_left y := by
+        simp only [hAB.deformation.apply_zero]
+        rfl
+      map_one_left y := by
+        simp only [hAB.deformation.apply_one]
+        rfl
+      prop' t y hy := by
+        rcases hy with ⟨a, rfl⟩
+        have houter := congrArg (fun g : C(B, B) => g (i a))
+          hBY.retract_inclusion
+        change j (hAB.deformation (t, hBY.retract (j (i a)))) =
+          j (hBY.retract (j (i a)))
+        rw [show hBY.retract (j (i a)) = i a by exact houter]
+        exact congrArg j (hAB.deformation.eq_fst t ⟨a, rfl⟩) }
+    exact F.trans G
+
+/-- The base-side member of the auxiliary cover strongly deformation-retracts
+onto the canonical copy of the original base. -/
+def baseCoverStrongDeformationRetract
+    (hf : ∀ j, Continuous (f j)) :
+    Hatcher.StrongDeformationRetract (baseToBaseCover f s₀ x₀ γ) := by
+  have hcomp :
+      (indexedLowerToBaseCover f s₀ x₀ γ).comp
+          (indexedLowerBaseInclusion f) =
+        baseToBaseCover f s₀ x₀ γ := by
+    ext x
+    rfl
+  rw [← hcomp]
+  exact strongDeformationRetractTrans
+    (indexedLowerStrongDeformationRetract f hf)
+    (indexedLowerToBaseCoverStrongDeformationRetract f s₀ x₀ γ)
 
 end Hatcher.VanKampen.AuxiliaryCellAttachment
