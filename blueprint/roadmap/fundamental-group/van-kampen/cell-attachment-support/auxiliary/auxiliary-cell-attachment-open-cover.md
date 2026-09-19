@@ -3,6 +3,9 @@ article_id: af_1a04a09d1dd81895c2a78411
 source_units: [hatcher-1-2-selected-spine]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.AuxiliaryCellAttachment.isOpenCover_base_upper
 ---
 
 # Hatcher's binary cover of the strip enlargement

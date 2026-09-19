@@ -280,6 +280,35 @@ private theorem quotientMk_preimage_lowerCover
   ext z
   exact normalForm_mem_lowerPreimage_iff f z
 
+/-- The canonical base lies in the lower member of the indexed cover. -/
+@[simp] theorem base_mem_lowerCover
+    {X : Type u} {J : Type w} {S : J → Type v}
+    (f : ∀ j, S j → X) (x : X) :
+    base f x ∈ lowerCover f := by
+  change (Sum.inl x : Prequotient X S) ∈ quotientMk f ⁻¹' lowerCover f
+  rw [quotientMk_preimage_lowerCover]
+  trivial
+
+/-- Every indexed apex is omitted from the lower cover member. -/
+@[simp] theorem apex_not_mem_lowerCover
+    {X : Type u} {J : Type w} {S : J → Type v}
+    (f : ∀ j, S j → X) (j : J) :
+    apex f j ∉ lowerCover f := by
+  change (Sum.inr ⟨j, Sum.inl ()⟩ : Prequotient X S) ∉
+    quotientMk f ⁻¹' lowerCover f
+  rw [quotientMk_preimage_lowerCover]
+  exact id
+
+/-- A cylinder point belongs to the lower member exactly at positive height. -/
+@[simp] theorem cylinder_mem_lowerCover_iff
+    {X : Type u} {J : Type w} {S : J → Type v}
+    (f : ∀ j, S j → X) (j : J) (s : S j) (t : I) :
+    cylinder f j s t ∈ lowerCover f ↔ 0 < t := by
+  change (Sum.inr ⟨j, Sum.inr (s, t)⟩ : Prequotient X S) ∈
+    quotientMk f ⁻¹' lowerCover f ↔ 0 < t
+  rw [quotientMk_preimage_lowerCover]
+  rfl
+
 /-- The lower quotient member is open. -/
 private theorem isOpen_lowerCover
     {X : Type u} {J : Type w} {S : J → Type v}
@@ -307,6 +336,35 @@ private theorem quotientMk_preimage_upperCover
     quotientMk f ⁻¹' upperCover f = upperPreimage := by
   ext z
   exact normalForm_mem_upperPreimage_iff f z
+
+/-- The canonical base is omitted from the upper member of the indexed cover. -/
+@[simp] theorem base_not_mem_upperCover
+    {X : Type u} {J : Type w} {S : J → Type v}
+    (f : ∀ j, S j → X) (x : X) :
+    base f x ∉ upperCover f := by
+  change (Sum.inl x : Prequotient X S) ∉ quotientMk f ⁻¹' upperCover f
+  rw [quotientMk_preimage_upperCover]
+  exact id
+
+/-- Every indexed apex belongs to the upper cover member. -/
+@[simp] theorem apex_mem_upperCover
+    {X : Type u} {J : Type w} {S : J → Type v}
+    (f : ∀ j, S j → X) (j : J) :
+    apex f j ∈ upperCover f := by
+  change (Sum.inr ⟨j, Sum.inl ()⟩ : Prequotient X S) ∈
+    quotientMk f ⁻¹' upperCover f
+  rw [quotientMk_preimage_upperCover]
+  trivial
+
+/-- A cylinder point belongs to the upper member exactly below height one. -/
+@[simp] theorem cylinder_mem_upperCover_iff
+    {X : Type u} {J : Type w} {S : J → Type v}
+    (f : ∀ j, S j → X) (j : J) (s : S j) (t : I) :
+    cylinder f j s t ∈ upperCover f ↔ t < 1 := by
+  change (Sum.inr ⟨j, Sum.inr (s, t)⟩ : Prequotient X S) ∈
+    quotientMk f ⁻¹' upperCover f ↔ t < 1
+  rw [quotientMk_preimage_upperCover]
+  rfl
 
 /-- The upper quotient member is open. -/
 private theorem isOpen_upperCover
