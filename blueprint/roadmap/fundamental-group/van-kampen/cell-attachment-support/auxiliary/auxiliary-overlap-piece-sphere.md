@@ -3,6 +3,8 @@ article_id: af_7f02274bbda3e997009bd431
 source_units: [hatcher-1-2-selected-spine]
 declaration: def
 origin: bridged
+statement: formalized
+lean: Hatcher.VanKampen.AuxiliaryCellAttachment.intersectionPieceHomotopyEquivBoundary
 ---
 
 # Each overlap piece has the homotopy type of its attaching sphere
