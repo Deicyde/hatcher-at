@@ -3,6 +3,9 @@ article_id: af_01425aa8a8d4928d8039e3e6
 source_units: [hatcher-1-2-selected-spine]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.AuxiliaryCellAttachment.isOpenCover_intersectionPieces
 ---
 
 # The auxiliary overlap has an indexed open cover
