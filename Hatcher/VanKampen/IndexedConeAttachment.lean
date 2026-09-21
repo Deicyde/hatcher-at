@@ -406,30 +406,31 @@ theorem isOpenCover_lower_upper
   ⟨isOpen_lowerCover f, isOpen_upperCover f, lowerCover_union_upperCover f⟩
 
 /-- With no indices, the construction is exactly the base, with no apex summand left over. -/
-private def emptyIndexEquiv {X : Type u} {S : Empty → Type v}
+private def emptyIndexEquiv {X : Type u} {J : Type w} {S : J → Type v}
+    [IsEmpty J]
     (f : ∀ j, S j → X) :
     Hatcher.VanKampen.IndexedConeAttachment f ≃ X where
   toFun := Quotient.lift
     (fun z => match z with
       | Sum.inl x => x
-      | Sum.inr ⟨j, _⟩ => nomatch j)
+      | Sum.inr z => isEmptyElim z.1)
     (by
       intro a b h
       change normalForm f a = normalForm f b at h
-      rcases a with x | ⟨j, a⟩
-      · rcases b with y | ⟨k, b⟩
+      rcases a with x | a
+      · rcases b with y | b
         · exact Sum.inl.inj h
-        · exact Empty.elim k
-      · exact Empty.elim j)
+        · exact isEmptyElim b.1
+      · exact isEmptyElim a.1)
   invFun := base f
   left_inv q := Quotient.inductionOn' q fun z => by
-    rcases z with x | ⟨j, z⟩
+    rcases z with x | z
     · rfl
-    · exact Empty.elim j
+    · exact isEmptyElim z.1
   right_inv _ := rfl
 
 private theorem continuous_emptyIndexEquiv
-    {X : Type u} {S : Empty → Type v}
+    {X : Type u} {J : Type w} {S : J → Type v} [IsEmpty J]
     [TopologicalSpace X] [∀ j, TopologicalSpace (S j)]
     (f : ∀ j, S j → X) : Continuous (emptyIndexEquiv f) := by
   apply Continuous.quotient_lift
@@ -437,10 +438,10 @@ private theorem continuous_emptyIndexEquiv
   constructor
   · exact continuous_id
   · rw [continuous_sigma_iff]
-    exact fun j => Empty.elim j
+    exact fun j => isEmptyElim j
 
 private theorem continuous_emptyIndexEquiv_symm
-    {X : Type u} {S : Empty → Type v}
+    {X : Type u} {J : Type w} {S : J → Type v} [IsEmpty J]
     [TopologicalSpace X] [∀ j, TopologicalSpace (S j)]
     (f : ∀ j, S j → X) : Continuous (emptyIndexEquiv f).symm := by
   change Continuous (fun x => quotientMk f (Sum.inl x))
@@ -448,7 +449,7 @@ private theorem continuous_emptyIndexEquiv_symm
 
 /-- With no indices, the quotient topology is homeomorphic to the topology on the base. -/
 def emptyIndexHomeomorph
-    {X : Type u} {S : Empty → Type v}
+    {X : Type u} {J : Type w} {S : J → Type v} [IsEmpty J]
     [TopologicalSpace X] [∀ j, TopologicalSpace (S j)]
     (f : ∀ j, S j → X) :
     Hatcher.VanKampen.IndexedConeAttachment f ≃ₜ X where

@@ -80,6 +80,7 @@ import Hatcher.VanKampen.ConeAttachmentPushout
 import Hatcher.VanKampen.ConeAttachmentBasicCell
 import Hatcher.VanKampen.IndexedConeAttachment
 import Hatcher.VanKampen.CellAttachmentModel
+import Hatcher.VanKampen.CellAttachmentEmpty
 import Hatcher.VanKampen.AuxiliaryCellAttachment
 import Hatcher.VanKampen.AuxiliaryCellAttachmentCover
 import Hatcher.VanKampen.AuxiliaryCellAttachmentOverlapCover

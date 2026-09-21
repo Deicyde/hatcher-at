@@ -3,6 +3,8 @@ article_id: af_9d7266d5983f276518daca8e
 source_units: [hatcher-1-2-selected-spine]
 declaration: def
 origin: bridged
+statement: formalized
+lean: Hatcher.VanKampen.CellAttachment.targetIsoOfIsEmpty
 ---
 
 # An attachment with no cells is an isomorphism
