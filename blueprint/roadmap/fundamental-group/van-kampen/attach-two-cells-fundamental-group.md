@@ -1,8 +1,10 @@
 ---
 article_id: af_603e02ac39cec77ac40e768f
 source_units: [hatcher-1-2-selected-spine]
-declaration: proposition
+declaration: def
 origin: cited
+statement: formalized
+lean: Hatcher.fundamentalGroup_quotient_of_attachTwoCells
 ---
 
 # Attaching 2-cells adds the attaching relations
