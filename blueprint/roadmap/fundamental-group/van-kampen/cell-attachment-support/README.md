@@ -21,6 +21,8 @@ first point-set construction around Hatcher's cell-attachment applications.
 - [An indexed cone attachment is a standard cell attachment](indexed-basic-cell-attachment.md)
 - [Every abstract cell attachment has an indexed cone model](abstract-cell-attachment-indexed-model.md)
 - [An attachment with no cells is an isomorphism](empty-cell-attachment-iso.md)
+- [Higher-cell attachments preserve path components](higher-cell-attachment-path-components.md)
+- [The 2-skeleton of a path-connected CW complex is path-connected](path-connected-two-skeleton.md)
 
 The raw indexed quotient has one apex per cell, so its upper member is generally
 disconnected. Hatcher repairs this by adjoining a shared spine and one strip per

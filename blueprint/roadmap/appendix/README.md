@@ -6,7 +6,7 @@ article_id: af_247873c85c1da470b0a52dce
 
 Hatcher's appendix (pages 519–539). Most of the appendix remains mapped. One
 cross-chapter source prerequisite is decomposed because §1.2 uses it, alongside
-one implementation bridge between Mathlib's two CW-complex APIs.
+the bounded successor-stage bridge between Mathlib's two CW-complex APIs.
 
 The point-set facts the main text uses without proving: the topology of cell
 complexes, including that CW complexes are normal, locally contractible, and
@@ -25,6 +25,8 @@ main chapters have a home rather than being invented inline.
 ## CW-complex prerequisites
 
 - [Compact subsets lie in finite subcomplexes](compact-subspace-finite-subcomplex.md)
+- [Compact subsets lie in a bounded skeleton](classical-cw-bridge/compact-subset-bounded-skeleton.md)
+- [Classical CW bridge support](classical-cw-bridge/README.md)
 - [Classical skeleton inclusions are abstract cell attachments](classical-skeleton-cell-attachment.md)
 
 ## Sources

@@ -84,12 +84,16 @@ Mathlib coverage.
 - [The attaching-sphere pieces generate the intersection group](attaching-spheres-generate-intersection.md)
 - [Attaching 2-cells adds the attaching relations](attach-two-cells-fundamental-group.md)
 - [Attaching higher cells preserves the fundamental group](attach-higher-cells-fundamental-group.md)
+- [Finite skeleta above dimension two have the same fundamental group](finite-skeleton-fundamental-group.md)
 - [The 2-skeleton determines the fundamental group](two-skeleton-fundamental-group.md)
 
 The 2-skeleton argument uses Mathlib's classical CW-complex API, while the
 attachment theorem uses its categorical API. Their missing bridge is recorded
-as a not-ready [Appendix node](../../appendix/classical-skeleton-cell-attachment.md)
-rather than assumed silently.
+as a bounded [Appendix support chain](../../appendix/classical-cw-bridge/README.md):
+it compares the two cell shapes, proves the successor-skeleton quotient, and
+packages the inclusion as `AttachCells`. Separate connectivity and
+finite-stage nodes discharge the path-connectedness hypotheses needed during
+the induction rather than assuming them silently.
 
 The remaining presentation-complex work is no longer an unstructured blocker.
 Its support roadmap separates the pointed-wedge mapping and connectivity
@@ -100,7 +104,7 @@ and concrete single-two-cell example are already formalized.
 - [Every group admits a generators-and-relations presentation](every-group-presentation.md)
 - [Presented groups have two-dimensional presentation complexes](presentation-complex/presentation-complex-realization.md)
 - [Every group is a fundamental group](every-group-fundamental-group.md)
-- [The cyclic presentation complex](cyclic-presentation-complex.md)
+- [The cyclic presentation complex](presentation-complex/cyclic-presentation-complex.md)
 
 Examples 1.22–1.25, Corollary 1.27, and the geometric claims in Example 1.29
 are deferred. They require graph, knot-complement, wild-space, or surface

@@ -27,7 +27,7 @@ Hatcher's example; at `n = 0` the same construction yields the valid extension
 with fundamental group `ZMod 0 ≃+ ℤ`.
 
 The quotient calculation after the geometric step is already formalized in
-[The degree-n circle relation gives the cyclic group](cell-attachment-support/cyclic-relation-quotient.md).
+[The degree-n circle relation gives the cyclic group](../cell-attachment-support/cyclic-relation-quotient.md).
 
 This node does not claim the example's later geometric assertions identifying
 the `n = 2` case with `ℝP²` or excluding embeddings and surface structures for
@@ -35,13 +35,13 @@ higher `n`.
 
 ## Depends on
 
-- [An indexed family of cones has a two-set open cover](cell-attachment-support/indexed-cone-open-cover.md)
-- [The boundary of the two-disk is the circle](cell-attachment-support/disk-boundary-two-circle.md)
-- [The degree-n circle map sends the generator to the degree-n loop](cell-attachment-support/circle-degree-map.md)
-- [An indexed cone attachment is a standard cell attachment](cell-attachment-support/indexed-basic-cell-attachment.md)
-- [Attaching 2-cells adds the attaching relations](attach-two-cells-fundamental-group.md)
-- [The degree-n circle relation gives the cyclic group](cell-attachment-support/cyclic-relation-quotient.md)
+- [An indexed family of cones has a two-set open cover](../cell-attachment-support/indexed-cone-open-cover.md)
+- [The boundary of the two-disk is the circle](../cell-attachment-support/disk-boundary-two-circle.md)
+- [The degree-n circle map sends the generator to the degree-n loop](../cell-attachment-support/circle-degree-map.md)
+- [An indexed cone attachment is a standard cell attachment](../cell-attachment-support/indexed-basic-cell-attachment.md)
+- [Attaching 2-cells adds the attaching relations](../attach-two-cells-fundamental-group.md)
+- [The degree-n circle relation gives the cyclic group](../cell-attachment-support/cyclic-relation-quotient.md)
 
 ## Sources
 
-- [Hatcher §1.2, Example 1.29](../../../sources/hatcher-1-2.md)
+- [Hatcher §1.2, Example 1.29](../../../../sources/hatcher-1-2.md)

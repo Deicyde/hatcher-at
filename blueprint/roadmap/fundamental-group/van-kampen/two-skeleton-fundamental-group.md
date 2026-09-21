@@ -13,20 +13,22 @@ complex `X`, inclusion of the 2-skeleton induces an isomorphism
 
 Intended artifact: `Hatcher.fundamentalGroupEquiv_twoSkeleton`.
 
-Finite-dimensional complexes follow by repeatedly attaching higher cells. In
-the general case, compactness places every loop and loop homotopy inside a
-finite subcomplex.
-
 State this using Mathlib's classical `Topology.CWComplex` and
-`CWComplex.skeleton`. The attachment theorem uses the abstract categorical CW
-API, so its use here goes through the explicit bridge node rather than an
-unstated identification of the two models.
+`CWComplex.skeleton`. The induced homomorphism is an isomorphism because it is
+both surjective and injective. For surjectivity, put the compact image of a
+representative loop inside a bounded skeleton and use the finite-stage
+equivalence. For injectivity, do the same with the compact image of a null
+homotopy and use the finite-stage equivalence's application lemma. This is the
+two-use compactness argument in Hatcher's proof.
+
+Do not silently assume that the 2-skeleton is path-connected. That instance is
+an explicit prerequisite, and each finite-stage comparison transports the
+basepoint along the actual subtype inclusion.
 
 ## Depends on
 
-- [Attaching higher cells preserves the fundamental group](attach-higher-cells-fundamental-group.md)
-- [Classical skeleton inclusions are abstract cell attachments](../../appendix/classical-skeleton-cell-attachment.md)
-- [Compact subsets lie in finite subcomplexes](../../appendix/compact-subspace-finite-subcomplex.md)
+- [Finite skeleta above dimension two have the same fundamental group](finite-skeleton-fundamental-group.md)
+- [Compact subsets lie in a bounded skeleton](../../appendix/classical-cw-bridge/compact-subset-bounded-skeleton.md)
 
 ## Sources
 

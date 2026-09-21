@@ -27,5 +27,8 @@ abstract CW-complex sequence.
 
 The two final interfaces feed the source-facing
 [presentation-complex realization](presentation-complex-realization.md).
+The already formalized
+[cyclic presentation complex](cyclic-presentation-complex.md) is the concrete
+one-generator, one-relator example of the same attachment pattern.
 The exact implementation conventions are recorded in the
 [project specification](../../../../sources/presentation-complex-implementation.md).

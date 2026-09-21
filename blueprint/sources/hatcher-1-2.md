@@ -83,6 +83,10 @@ Available ingredients:
   `Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean` expresses
   cell attachment as a pushout, and `TopCat.RelativeCWComplex` specializes the
   relative-cell-complex API to disks and spheres.
+- `Topology.CWComplex.skeletonLT_union_iUnion_closedCell_eq_skeletonLT_succ`
+  and `Topology.CWComplex.closed` describe the underlying set and weak topology
+  of a classical successor skeleton. The pinned library does not package this
+  square as `AttachCells`.
 - `PresentedGroup` in `Mathlib/GroupTheory/PresentedGroup.lean` supplies
   groups by generators and relations.
 
@@ -104,6 +108,15 @@ relations.
 - [Mathlib PR #28246](https://github.com/leanprover-community/mathlib4/pull/28246)
   remains open. This project already adapted its open-cover loop decomposition
   for Hatcher's Lemma 1.15.
+- Robert Maxton's open PRs
+  [#29788](https://github.com/leanprover-community/mathlib4/pull/29788),
+  [#29790](https://github.com/leanprover-community/mathlib4/pull/29790), and
+  [#29792](https://github.com/leanprover-community/mathlib4/pull/29792) develop
+  coproduct-map helpers, coherent-cover descent, and the colimit of classical
+  skeleta. His unsubmitted
+  [forward-bridge commit](https://github.com/robertmaxton42/mathlib4/commit/0fef4116bba65c7017f7c3298ab1bc6d48afaded)
+  is especially close implementation prior art, but it is unreviewed, absent
+  from the pin, and uses a different classical cell norm.
 
 None of these open PRs receives `mathlib: true`.
 
@@ -132,9 +145,12 @@ None of these open PRs receives `mathlib: true`.
 - **Cell attachments.** State Proposition 1.26(a) and (b) against Mathlib's
   pushout-based `HomotopicalAlgebra.AttachCells` API. State Proposition A.1 and
   the 2-skeleton result against the classical `Topology.CWComplex` API. An
-  explicit bridge between classical skeleton inclusions and abstract cell
-  attachments is a separate, currently not-ready roadmap node; Mathlib records
-  this equivalence as a TODO.
+  explicit successor-stage bridge compares the sup- and L2-norm cell arrows,
+  proves the classical quotient topology, and packages each skeleton inclusion
+  as an abstract attachment. This is deliberately smaller than a full
+  equivalence between the two CW APIs. The 2-skeleton path-connectedness and
+  finite-stage fundamental-group induction are separate prerequisites, so the
+  ambient path-connectedness hypothesis is not silently strengthened.
 - **Presentation complexes.** Implement Corollary 1.28 directly in the abstract
   categorical CW API. Use the pointed wedge as an indexed one-cell attachment,
   the relators as an indexed two-cell attachment, and an eventually constant

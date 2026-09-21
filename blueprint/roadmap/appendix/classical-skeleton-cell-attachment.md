@@ -1,41 +1,45 @@
 ---
 article_id: af_273a5ce6a092b8f64f470004
 source_units: [hatcher-1-2-selected-spine]
-declaration: theorem
+declaration: def
 origin: bridged
-not_ready: true
 ---
 
 # Classical skeleton inclusions are abstract cell attachments
 
-For a classical Mathlib CW complex, present the inclusion from one skeleton to
-the next as an instance of the categorical cell-attachment construction
-`HomotopicalAlgebra.AttachCells` for `TopCat.RelativeCWComplex.basicCell`.
-The cells and attaching maps must be obtained from the classical
-`Topology.CWComplex` characteristic maps.
+For a classical Mathlib CW complex, package the inclusion from one strict
+skeleton to the next as a standard categorical cell attachment.
 
-Intended artifact: `Hatcher.classicalSkeletonInclusion_relativeCWComplex`.
+Intended main artifact:
 
-This is the bridge needed to apply the abstract attachment theorem to the
-classical `CWComplex.skeleton` used by Hatcher's Proposition 1.26(c) and
-Appendix Proposition A.1. Mathlib documents the equivalence of its abstract and
-classical CW-complex definitions as a TODO and currently provides no bridge.
-The node remains not ready until the exact categorical pushout comparison is
-specified.
+```lean
+noncomputable def Hatcher.ClassicalCW.skeletonLTInclusion_attachCells
+    {X : Type u} [TopologicalSpace X] [T2Space X]
+    (C : Set X) {D : Set X} [Topology.RelCWComplex C D] (n : ℕ) :
+    HomotopicalAlgebra.AttachCells.{u}
+      (TopCat.RelativeCWComplex.basicCell.{u} n)
+      (Hatcher.ClassicalCW.skeletonLTInclusion C n)
+```
 
-The precise missing result is an `IsPushout` theorem for the coproduct square
-of the classical characteristic maps. The current API provides only the set
-identity describing the next skeleton and the weak-topology closed-set axiom.
-There is also no packaged arrow isomorphism between the classical sup-norm
-ball/sphere inclusion and the abstract `basicCell`, which uses an `ULift`ed
-Euclidean space with its L2 norm. Both pieces are prerequisites for an
-`AttachCells` bridge.
+First turn the successor-stage quotient theorem into a `TopCat` pushout for
+the coproduct of classical sup-norm cells. Then transport the cell family
+along `classicalCellArrowIso` with `AttachCells.reindexCellTypes`. Also expose
+the wrapper
+`Hatcher.ClassicalCW.skeletonInclusion_attachCells C n`, whose cells have
+dimension `n + 1` and whose underlying map is
+`CWComplex.skeleton C n → CWComplex.skeleton C (n + 1)`.
+
+This is the one-stage bridge needed by Hatcher's Proposition 1.26(c). It does
+not construct a full abstract CW structure from a classical one. Mathlib
+documents that broader comparison as a TODO and provides no bridge in the
+pinned revision.
 
 ## Depends on
 
-None beyond pinned Mathlib.
+- [Classical and standard cells have isomorphic attaching arrows](classical-cw-bridge/classical-cell-arrow-iso.md)
+- [A successor classical skeleton has the cell-attachment quotient topology](classical-cw-bridge/successor-skeleton-quotient.md)
 
 ## Sources
 
-- [Hatcher §1.2 and Appendix prerequisite](../../sources/hatcher-1-2.md)
+- [Hatcher §1.2 bridge specification](../../sources/classical-abstract-cw-bridge.md)
 - [Mathlib abstract CW-complex implementation notes](https://github.com/leanprover-community/mathlib4/blob/fabf563a7c95a166b8d7b6efca11c8b4dc9d911f/Mathlib/Topology/CWComplex/Abstract/Basic.lean)

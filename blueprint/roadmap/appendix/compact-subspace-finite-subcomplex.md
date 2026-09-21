@@ -26,9 +26,10 @@ proof first shows that a compact subset meets only finitely many open cells,
 then closes this finite family under cell frontiers and constructs the
 resulting finite subcomplex.
 
-The §1.2 proof that the 2-skeleton determines `π₁` uses this twice: a loop has
-image in a finite subcomplex, hence in some finite-dimensional skeleton, and a
-nullhomotopy of such a loop has image in another finite subcomplex.
+The §1.2 proof that the 2-skeleton determines `π₁` uses this twice. The
+separate [bounded-skeleton corollary](classical-cw-bridge/compact-subset-bounded-skeleton.md)
+packages the exact form consumed there: a loop image, or the image of its
+nullhomotopy, lies in one finite skeleton.
 
 ## Depends on
 
