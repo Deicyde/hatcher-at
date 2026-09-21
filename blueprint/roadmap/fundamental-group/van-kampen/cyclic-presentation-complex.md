@@ -3,6 +3,8 @@ article_id: af_f9c5fec59717acad10d01cee
 source_units: [hatcher-1-2-selected-spine]
 declaration: def
 origin: cited
+statement: formalized
+lean: Hatcher.fundamentalGroupEquiv_cyclicPresentationComplex
 ---
 
 # The cyclic presentation complex
@@ -19,6 +21,10 @@ to `Circle`, using the boundary-of-the-two-disk homeomorphism followed by
 `IndexedConeAttachment.attachCells_basicCell` supplies the required abstract
 2-cell attachment, so the generic attachment theorem and the cyclic quotient
 calculation now complete the group computation.
+
+The Lean artifact is defined for every `n : ℕ`. Its positive cases are exactly
+Hatcher's example; at `n = 0` the same construction yields the valid extension
+with fundamental group `ZMod 0 ≃+ ℤ`.
 
 The quotient calculation after the geometric step is already formalized in
 [The degree-n circle relation gives the cyclic group](cell-attachment-support/cyclic-relation-quotient.md).

@@ -95,3 +95,4 @@ import Hatcher.VanKampen.CellAttachmentAlgebra
 import Hatcher.VanKampen.CellAttachmentTwo
 import Hatcher.VanKampen.CellAttachmentHigher
 import Hatcher.VanKampen.DiskBoundaryCircle
+import Hatcher.VanKampen.CyclicPresentationComplex
