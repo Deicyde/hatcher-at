@@ -1,3 +1,4 @@
+import Hatcher.VanKampen.AuxiliaryCellAttachmentBasepoint
 import Hatcher.VanKampen.AuxiliaryCellAttachmentOverlapCover
 import Hatcher.VanKampen.ConeAttachmentIntersection
 
@@ -1006,5 +1007,317 @@ chosen point of the selected attaching space. -/
     rfl
   rw [hbase, pieceRetraction_ambientIntersectionPieceBasepoint,
     interiorPieceHomotopyEquivBase_selectedInteriorMidpoint]
+
+/-!
+## Compatibility with the attaching map
+
+The equivalence above is used with the inclusion of an overlap piece into the
+base-side cover.  The following maps keep that inclusion and its retraction
+canonical; in particular, downstream statements do not have to choose a
+second model of the overlap piece.
+-/
+
+/-- Inclusion of one indexed overlap piece into the base-side cover. -/
+def intersectionPieceToBaseCover (j : J) :
+    C(↑(intersectionPiece f s₀ x₀ γ j), baseCover f s₀ x₀ γ) where
+  toFun z := ⟨z.1.1, z.1.2.1⟩
+  continuous_toFun :=
+    (continuous_subtype_val.comp continuous_subtype_val).subtype_mk _
+
+/-- The map from an overlap piece to the original base supplied by the
+base-side deformation retraction. -/
+def intersectionPieceToBase (hf : ∀ j, Continuous (f j)) (j : J) :
+    C(↑(intersectionPiece f s₀ x₀ γ j), X) :=
+  (baseCoverRetraction f s₀ x₀ γ hf).comp
+    (intersectionPieceToBaseCover f s₀ x₀ γ j)
+
+@[simp] theorem intersectionPieceToBaseCover_basepoint (j : J) :
+    intersectionPieceToBaseCover f s₀ x₀ γ j
+        (intersectionPieceBasepoint f s₀ x₀ γ j) =
+      baseCoverBasepoint f s₀ x₀ γ := by
+  apply Subtype.ext
+  rfl
+
+@[simp] theorem intersectionPieceToBase_basepoint
+    (hf : ∀ j, Continuous (f j)) (j : J) :
+    intersectionPieceToBase f s₀ x₀ γ hf j
+        (intersectionPieceBasepoint f s₀ x₀ γ j) = x₀ := by
+  exact baseCoverRetraction_overlapBasepoint f s₀ x₀ γ hf
+
+private def ambientPieceToBaseCover (j : J) :
+    C(↑(intersectionPieceAmbient f s₀ x₀ γ j),
+      baseCover f s₀ x₀ γ) where
+  toFun z :=
+    ⟨z.1, (intersectionPieceAmbient_subset_coverIntersection
+      f s₀ x₀ γ j z.2).1⟩
+  continuous_toFun := continuous_subtype_val.subtype_mk _
+
+private def intersectionPieceToAmbientPiece (j : J) :
+    C(↑(intersectionPiece f s₀ x₀ γ j),
+      ↑(intersectionPieceAmbient f s₀ x₀ γ j)) where
+  toFun :=
+    (intersectionPieceAmbientHomeomorphIntersectionPiece
+      f s₀ x₀ γ j).symm
+  continuous_toFun :=
+    (intersectionPieceAmbientHomeomorphIntersectionPiece
+      f s₀ x₀ γ j).symm.continuous
+
+private def ambientPieceToBase (hf : ∀ j, Continuous (f j)) (j : J) :
+    C(↑(intersectionPieceAmbient f s₀ x₀ γ j), X) :=
+  (baseCoverRetraction f s₀ x₀ γ hf).comp
+    (ambientPieceToBaseCover f s₀ x₀ γ j)
+
+private theorem phaseAMap_ambientIntersectionPieceBasepoint
+    (j : J) (u : I) :
+    phaseAMap f s₀ x₀ γ j
+        (u, ambientIntersectionPieceBasepoint f s₀ x₀ γ j) =
+      ambientIntersectionPieceBasepoint f s₀ x₀ γ j := by
+  let raw : quotientMk f s₀ x₀ γ ⁻¹'
+      intersectionPieceAmbient f s₀ x₀ γ j :=
+    ⟨Sum.inr (Sum.inl (1 : I)),
+      (spine_mem_intersectionPieceAmbient_iff
+        f s₀ x₀ γ j 1).mpr zero_lt_one⟩
+  have hraw :
+      (intersectionPieceAmbient f s₀ x₀ γ j).restrictPreimage
+          (quotientMk f s₀ x₀ γ) raw =
+        ambientIntersectionPieceBasepoint f s₀ x₀ γ j := by
+    apply Subtype.ext
+    rfl
+  rw [← hraw, phaseAMap_quotientMap]
+  apply Subtype.ext
+  rfl
+
+private theorem phaseBMap_ambientIntersectionPieceBasepoint
+    (j : J) (u : I) :
+    phaseBMap f s₀ x₀ γ j
+        (u, ambientIntersectionPieceBasepoint f s₀ x₀ γ j) =
+      ⟨strip f s₀ x₀ γ j (u, 1),
+        (strip_mem_intersectionPieceAmbient_iff
+          f s₀ x₀ γ j j u 1).mpr
+            ⟨zero_lt_one, Or.inl rfl⟩⟩ := by
+  let raw : quotientMk f s₀ x₀ γ ⁻¹'
+      intersectionPieceAmbient f s₀ x₀ γ j :=
+    ⟨Sum.inr (Sum.inl (1 : I)),
+      (spine_mem_intersectionPieceAmbient_iff
+        f s₀ x₀ γ j 1).mpr zero_lt_one⟩
+  have hraw :
+      (intersectionPieceAmbient f s₀ x₀ γ j).restrictPreimage
+          (quotientMk f s₀ x₀ γ) raw =
+        ambientIntersectionPieceBasepoint f s₀ x₀ γ j := by
+    apply Subtype.ext
+    rfl
+  rw [← hraw, phaseBMap_quotientMap]
+  apply Subtype.ext
+  rfl
+
+private theorem ambientPieceToBase_interiorPiece
+    (hf : ∀ j, Continuous (f j)) (j : J)
+    (y : ↑(IndexedConeAttachment.interiorPiece f j)) :
+    ambientPieceToBase f s₀ x₀ γ hf j
+        (interiorPieceInclusion f s₀ x₀ γ j y) =
+      f j (interiorPieceHomotopyEquivBase f j y) := by
+  let e := IndexedConeAttachment.interiorCylinderHomeomorphInteriorPiece f j
+  rcases hst : e.symm y with ⟨s, t⟩
+  have hy : y = e (s, t) := by
+    calc
+      y = e (e.symm y) := (e.apply_symm_apply y).symm
+      _ = e (s, t) := congrArg e hst
+  rw [hy]
+  change baseCoverRetraction f s₀ x₀ γ hf
+      ⟨attachment f s₀ x₀ γ (e (s, t)).1, _⟩ =
+    f j ((interiorCylinderProjection (S j)) (e.symm (e (s, t))))
+  rw [e.symm_apply_apply]
+  change baseCoverRetraction f s₀ x₀ γ hf
+      ⟨attachment f s₀ x₀ γ
+          (IndexedConeAttachment.cylinder f j s t.1), _⟩ = f j s
+  exact baseCoverRetraction_attachment_cylinder
+    f s₀ x₀ γ hf j s t.1 t.2.1
+
+private noncomputable def intersectionPieceAttachingHomotopyRaw
+    (hf : ∀ j, Continuous (f j)) (j : J) := by
+  let toAmbient := intersectionPieceToAmbientPiece f s₀ x₀ γ j
+  let toBase := ambientPieceToBase f s₀ x₀ γ hf j
+  let D := (ambientPieceDeformation f s₀ x₀ γ j).compContinuousMap toBase
+  exact D.toHomotopy.compContinuousMap toAmbient
+
+private theorem intersectionPieceAttachingHomotopyRaw_zero
+    (hf : ∀ j, Continuous (f j)) (j : J) :
+    (ambientPieceToBase f s₀ x₀ γ hf j).comp
+        (intersectionPieceToAmbientPiece f s₀ x₀ γ j) =
+      intersectionPieceToBase f s₀ x₀ γ hf j := by
+  ext z
+  rfl
+
+private theorem intersectionPieceAttachingHomotopyRaw_one
+    (hf : ∀ j, Continuous (f j)) (j : J) :
+    (ambientPieceToBase f s₀ x₀ γ hf j).comp
+        ((interiorPieceInclusion f s₀ x₀ γ j).comp
+          ((pieceRetraction f s₀ x₀ γ j).comp
+            (intersectionPieceToAmbientPiece f s₀ x₀ γ j))) =
+      (⟨f j, hf j⟩ : C(S j, X)).comp
+        (intersectionPieceHomotopyEquivBoundary f s₀ x₀ γ j).toFun := by
+  ext z
+  change ambientPieceToBase f s₀ x₀ γ hf j
+      (interiorPieceInclusion f s₀ x₀ γ j
+        (pieceRetraction f s₀ x₀ γ j
+          ((intersectionPieceAmbientHomeomorphIntersectionPiece
+            f s₀ x₀ γ j).symm z))) =
+    f j (interiorPieceHomotopyEquivBase f j
+      (pieceRetraction f s₀ x₀ γ j
+        ((intersectionPieceAmbientHomeomorphIntersectionPiece
+          f s₀ x₀ γ j).symm z)))
+  exact ambientPieceToBase_interiorPiece f s₀ x₀ γ hf j _
+
+/-- The canonical homotopy comparing an overlap piece followed by the
+base-side retraction with its attaching map. -/
+noncomputable def intersectionPieceAttachingHomotopy
+    (hf : ∀ j, Continuous (f j)) (j : J) :
+    (intersectionPieceToBase f s₀ x₀ γ hf j).Homotopy
+      ((⟨f j, hf j⟩ : C(S j, X)).comp
+        (intersectionPieceHomotopyEquivBoundary f s₀ x₀ γ j).toFun) := by
+  apply (intersectionPieceAttachingHomotopyRaw f s₀ x₀ γ hf j).cast
+  · ext z
+    exact DFunLike.congr_fun
+      (intersectionPieceAttachingHomotopyRaw_zero f s₀ x₀ γ hf j) z
+  · ext z
+    exact DFunLike.congr_fun
+      (intersectionPieceAttachingHomotopyRaw_one f s₀ x₀ γ hf j) z
+
+@[simp] private theorem intersectionPieceAttachingHomotopy_apply
+    (hf : ∀ j, Continuous (f j)) (j : J) (u : I)
+    (z : ↑(intersectionPiece f s₀ x₀ γ j)) :
+    intersectionPieceAttachingHomotopy f s₀ x₀ γ hf j (u, z) =
+      ambientPieceToBase f s₀ x₀ γ hf j
+        (ambientPieceDeformation f s₀ x₀ γ j
+          (u, intersectionPieceToAmbientPiece f s₀ x₀ γ j z)) := by
+  rfl
+
+private def secondPhaseParameter (u : I) : I :=
+  ⟨max 0 (2 * (u : ℝ) - 1), by
+    constructor
+    · exact le_max_left _ _
+    · exact max_le zero_le_one (by nlinarith [u.property.2])⟩
+
+private theorem continuous_secondPhaseParameter :
+    Continuous secondPhaseParameter := by
+  apply Continuous.subtype_mk
+  fun_prop
+
+private theorem secondPhaseParameter_eq_zero {u : I}
+    (hu : (u : ℝ) ≤ 1 / 2) : secondPhaseParameter u = 0 := by
+  apply Subtype.ext
+  change max 0 (2 * (u : ℝ) - 1) = 0
+  rw [max_eq_left]
+  linarith
+
+private theorem secondPhaseParameter_eq_of_not_le {u : I}
+    (hu : ¬(u : ℝ) ≤ 1 / 2) :
+    secondPhaseParameter u =
+      ⟨2 * (u : ℝ) - 1,
+        unitInterval.two_mul_sub_one_mem_iff.mpr
+          ⟨(not_le.mp hu).le, u.property.2⟩⟩ := by
+  apply Subtype.ext
+  change max 0 (2 * (u : ℝ) - 1) = 2 * (u : ℝ) - 1
+  rw [max_eq_right]
+  linarith [not_le.mp hu]
+
+/-- Reparameterization of `γ j` traced by the basepoint during the canonical
+overlap-piece deformation. -/
+def intersectionPieceAttachingTraceParameter (u : I) : I :=
+  topStripRetractionParameter (secondPhaseParameter u)
+
+theorem continuous_intersectionPieceAttachingTraceParameter :
+    Continuous intersectionPieceAttachingTraceParameter :=
+  continuous_topStripRetractionParameter.comp
+    continuous_secondPhaseParameter
+
+@[simp] theorem intersectionPieceAttachingTraceParameter_zero :
+    intersectionPieceAttachingTraceParameter 0 = 0 := by
+  rw [intersectionPieceAttachingTraceParameter,
+    secondPhaseParameter_eq_zero (by norm_num),
+    topStripRetractionParameter_zero]
+
+@[simp] theorem intersectionPieceAttachingTraceParameter_one :
+    intersectionPieceAttachingTraceParameter 1 = 1 := by
+  have hsecond : secondPhaseParameter (1 : I) = 1 := by
+    apply Subtype.ext
+    norm_num [secondPhaseParameter]
+  rw [intersectionPieceAttachingTraceParameter, hsecond]
+  rw [topStripRetractionParameter_one]
+
+/-- The path traced by the common basepoint during
+`intersectionPieceAttachingHomotopy`, with endpoints expressed in the
+original base space. -/
+noncomputable def intersectionPieceAttachingTrace
+    (hf : ∀ j, Continuous (f j)) (j : J) :
+    Path x₀ (f j (s₀ j)) :=
+  ((intersectionPieceAttachingHomotopy f s₀ x₀ γ hf j).evalAt
+      (intersectionPieceBasepoint f s₀ x₀ γ j)).cast
+    (intersectionPieceToBase_basepoint f s₀ x₀ γ hf j).symm
+    (congrArg (f j)
+      (intersectionPieceHomotopyEquivBoundary_basepoint
+        f s₀ x₀ γ j)).symm
+
+@[simp] theorem intersectionPieceAttachingTrace_apply
+    (hf : ∀ j, Continuous (f j)) (j : J) (u : I) :
+    intersectionPieceAttachingTrace f s₀ x₀ γ hf j u =
+      γ j (intersectionPieceAttachingTraceParameter u) := by
+  have hambient :
+      intersectionPieceToAmbientPiece f s₀ x₀ γ j
+          (intersectionPieceBasepoint f s₀ x₀ γ j) =
+        ambientIntersectionPieceBasepoint f s₀ x₀ γ j := by
+    apply Subtype.ext
+    rfl
+  change ambientPieceToBase f s₀ x₀ γ hf j
+      (ambientPieceDeformation f s₀ x₀ γ j
+        (u, intersectionPieceToAmbientPiece f s₀ x₀ γ j
+          (intersectionPieceBasepoint f s₀ x₀ γ j))) = _
+  rw [hambient, ambientPieceDeformation,
+    ContinuousMap.HomotopyRel.trans_apply]
+  split_ifs with hu
+  · let v : I :=
+      ⟨2 * (u : ℝ),
+        (unitInterval.mul_pos_mem_iff zero_lt_two).mpr
+          ⟨u.property.1, hu⟩⟩
+    change ambientPieceToBase f s₀ x₀ γ hf j
+      (phaseAMap f s₀ x₀ γ j
+        (v, ambientIntersectionPieceBasepoint f s₀ x₀ γ j)) = _
+    rw [phaseAMap_ambientIntersectionPieceBasepoint]
+    rw [intersectionPieceAttachingTraceParameter,
+      secondPhaseParameter_eq_zero hu,
+      topStripRetractionParameter_zero, (γ j).source]
+    exact baseCoverRetraction_overlapBasepoint f s₀ x₀ γ hf
+  · let v : I :=
+      ⟨2 * (u : ℝ) - 1,
+        unitInterval.two_mul_sub_one_mem_iff.mpr
+          ⟨(not_le.mp hu).le, u.property.2⟩⟩
+    change ambientPieceToBase f s₀ x₀ γ hf j
+      (phaseBMap f s₀ x₀ γ j
+        (v, ambientIntersectionPieceBasepoint f s₀ x₀ γ j)) = _
+    rw [phaseBMap_ambientIntersectionPieceBasepoint]
+    change baseCoverRetraction f s₀ x₀ γ hf
+      ⟨strip f s₀ x₀ γ j (v, 1), _⟩ = _
+    rw [baseCoverRetraction_strip_top]
+    rw [intersectionPieceAttachingTraceParameter,
+      secondPhaseParameter_eq_of_not_le hu]
+
+/-- The basepoint track of the overlap-piece deformation is the prescribed
+path `γ j`, up to its explicit endpoint-preserving reparameterization. -/
+theorem intersectionPieceAttachingTrace_homotopic
+    (hf : ∀ j, Continuous (f j)) (j : J) :
+    Path.Homotopic (intersectionPieceAttachingTrace f s₀ x₀ γ hf j) (γ j) := by
+  have hpath : intersectionPieceAttachingTrace f s₀ x₀ γ hf j =
+      (γ j).reparam intersectionPieceAttachingTraceParameter
+        continuous_intersectionPieceAttachingTraceParameter
+        intersectionPieceAttachingTraceParameter_zero
+        intersectionPieceAttachingTraceParameter_one := by
+    ext u
+    simp
+  rw [hpath]
+  exact ⟨(Path.Homotopy.reparam (γ j)
+    intersectionPieceAttachingTraceParameter
+    continuous_intersectionPieceAttachingTraceParameter
+    intersectionPieceAttachingTraceParameter_zero
+    intersectionPieceAttachingTraceParameter_one).symm⟩
 
 end Hatcher.VanKampen.AuxiliaryCellAttachment

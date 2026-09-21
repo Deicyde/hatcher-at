@@ -126,6 +126,32 @@ def baseCoverRetraction (hf : ∀ j, Continuous (f j)) :
     baseCoverRetraction f s₀ x₀ γ hf (baseCoverBasepoint f s₀ x₀ γ) = x₀ := by
   exact baseCoverStrongDeformationRetract_retract_overlapBasepoint f s₀ x₀ γ hf
 
+/-- The base-cover retraction sends a positive-height cone cylinder to its
+attaching point in the original base. -/
+@[simp] theorem baseCoverRetraction_attachment_cylinder
+    (hf : ∀ j, Continuous (f j)) (j : J) (s : S j) (t : I)
+    (ht : 0 < t) :
+    baseCoverRetraction f s₀ x₀ γ hf
+        ⟨attachment f s₀ x₀ γ
+            (IndexedConeAttachment.cylinder f j s t),
+          (attachment_mem_baseCover_iff f s₀ x₀ γ _).mpr
+            ((IndexedConeAttachment.cylinder_mem_lowerCover_iff
+              f j s t).mpr ht)⟩ =
+      f j s :=
+  baseCoverStrongDeformationRetract_retract_attachment_cylinder
+    f s₀ x₀ γ hf j s t ht
+
+/-- The base-cover retraction sends the top edge of a strip to the chosen
+basepoint path, with its canonical reparameterization. -/
+@[simp] theorem baseCoverRetraction_strip_top
+    (hf : ∀ j, Continuous (f j)) (j : J) (a : I) :
+    baseCoverRetraction f s₀ x₀ γ hf
+        ⟨strip f s₀ x₀ γ j (a, 1),
+          strip_mem_baseCover f s₀ x₀ γ j (a, 1)⟩ =
+      γ j (topStripRetractionParameter a) :=
+  baseCoverStrongDeformationRetract_retract_strip_top
+    f s₀ x₀ γ hf j a
+
 @[simp] theorem baseCoverRetraction_basepointPath_apply
     (hf : ∀ j, Continuous (f j)) (t : I) :
     baseCoverRetraction f s₀ x₀ γ hf (basepointPath f s₀ x₀ γ t) = x₀ := by

@@ -3,6 +3,9 @@ article_id: af_7e63b8ef03a5c3457a6322f0
 source_units: [hatcher-1-2-selected-spine]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.AuxiliaryCellAttachment.intersectionMeridian_eq_attachingLoop
 ---
 
 # Overlap meridians recover the attaching loops

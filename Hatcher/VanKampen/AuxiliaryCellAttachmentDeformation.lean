@@ -775,6 +775,31 @@ private noncomputable def indexedLowerRetraction
   rw [← ha, indexedLowerRetractionMap_quotientMap f]
   rfl
 
+@[simp] private theorem indexedLowerRetraction_apply_cylinder
+    (hf : ∀ j, Continuous (f j)) (j : J) (s : S j) (t : I)
+    (ht : 0 < t) :
+    indexedLowerRetraction f hf
+        ⟨IndexedConeAttachment.cylinder f j s t,
+          (IndexedConeAttachment.cylinder_mem_lowerCover_iff
+            f j s t).mpr ht⟩ =
+      f j s := by
+  let a : IndexedConeAttachment.quotientMk f ⁻¹'
+      IndexedConeAttachment.lowerCover f :=
+    ⟨Sum.inr ⟨j, Sum.inr (s, t)⟩,
+      (IndexedConeAttachment.cylinder_mem_lowerCover_iff
+        f j s t).mpr ht⟩
+  have ha :
+      (IndexedConeAttachment.lowerCover f).restrictPreimage
+          (IndexedConeAttachment.quotientMk f) a =
+        ⟨IndexedConeAttachment.cylinder f j s t,
+          (IndexedConeAttachment.cylinder_mem_lowerCover_iff
+            f j s t).mpr ht⟩ := by
+    apply Subtype.ext
+    rfl
+  change indexedLowerRetractionMap f _ = f j s
+  rw [← ha, indexedLowerRetractionMap_quotientMap]
+  rfl
+
 private theorem indexedLowerDeformationMap_zero
     (z : IndexedConeAttachment.lowerCover f) :
     indexedLowerDeformationMap f (0, z) = z := by
@@ -1039,5 +1064,105 @@ chosen basepoint of the original space. -/
         ⟨overlapBasepoint f s₀ x₀ γ,
           overlapBasepoint_mem_baseCover f s₀ x₀ γ⟩ = x₀ := by
   simp [overlapBasepoint]
+
+/-- On the positive-height cylinder in an attached cone, the base-side
+retraction is the original attaching map. -/
+@[simp] theorem baseCoverStrongDeformationRetract_retract_attachment_cylinder
+    (hf : ∀ j, Continuous (f j)) (j : J) (s : S j) (t : I)
+    (ht : 0 < t) :
+    (baseCoverStrongDeformationRetract f s₀ x₀ γ hf).retract
+        ⟨attachment f s₀ x₀ γ
+            (IndexedConeAttachment.cylinder f j s t),
+          (attachment_mem_baseCover_iff f s₀ x₀ γ _).mpr
+            ((IndexedConeAttachment.cylinder_mem_lowerCover_iff
+              f j s t).mpr ht)⟩ =
+      f j s := by
+  let y : IndexedConeAttachment.lowerCover f :=
+    ⟨IndexedConeAttachment.cylinder f j s t,
+      (IndexedConeAttachment.cylinder_mem_lowerCover_iff
+        f j s t).mpr ht⟩
+  change indexedLowerRetraction f hf
+    (baseCoverToIndexedLower f s₀ x₀ γ
+      ⟨attachment f s₀ x₀ γ y.1,
+        (attachment_mem_baseCover_iff f s₀ x₀ γ y.1).mpr y.2⟩) = f j s
+  have haux : baseCoverToIndexedLower f s₀ x₀ γ
+      ⟨attachment f s₀ x₀ γ y.1,
+        (attachment_mem_baseCover_iff f s₀ x₀ γ y.1).mpr y.2⟩ = y := by
+    apply Subtype.ext
+    exact retraction_attachment f s₀ x₀ γ y.1
+  rw [haux]
+  let raw : IndexedConeAttachment.quotientMk f ⁻¹'
+      IndexedConeAttachment.lowerCover f :=
+    ⟨Sum.inr ⟨j, Sum.inr (s, t)⟩,
+      (IndexedConeAttachment.cylinder_mem_lowerCover_iff
+        f j s t).mpr ht⟩
+  have hraw :
+      (IndexedConeAttachment.lowerCover f).restrictPreimage
+          (IndexedConeAttachment.quotientMk f) raw = y := by
+    apply Subtype.ext
+    rfl
+  change indexedLowerRetractionMap f y = f j s
+  rw [← hraw, indexedLowerRetractionMap_quotientMap]
+  rfl
+
+/-- Parameter traced in the chosen basepoint path by the top edge of an
+auxiliary strip. It runs from `0` to `1`, then remains at `1`. -/
+def topStripRetractionParameter (a : I) : I :=
+  foldBottom (a, 1)
+
+theorem continuous_topStripRetractionParameter :
+    Continuous topStripRetractionParameter :=
+  continuous_foldBottom.comp (continuous_id.prodMk continuous_const)
+
+@[simp] theorem topStripRetractionParameter_zero :
+    topStripRetractionParameter 0 = 0 := by
+  apply Subtype.ext
+  simp [topStripRetractionParameter, foldBottom, foldParameter]
+
+@[simp] theorem topStripRetractionParameter_one :
+    topStripRetractionParameter 1 = 1 := by
+  apply Subtype.ext
+  simp [topStripRetractionParameter, foldBottom, foldParameter]
+
+/-- The top edge of the `j`-th strip retracts to the chosen path `γ j`,
+with the harmless pause encoded by `topStripRetractionParameter`. -/
+@[simp] theorem baseCoverStrongDeformationRetract_retract_strip_top
+    (hf : ∀ j, Continuous (f j)) (j : J) (a : I) :
+    (baseCoverStrongDeformationRetract f s₀ x₀ γ hf).retract
+        ⟨strip f s₀ x₀ γ j (a, 1),
+          strip_mem_baseCover f s₀ x₀ γ j (a, 1)⟩ =
+      γ j (topStripRetractionParameter a) := by
+  let z : baseCover f s₀ x₀ γ :=
+    ⟨strip f s₀ x₀ γ j (a, 1),
+      strip_mem_baseCover f s₀ x₀ γ j (a, 1)⟩
+  change indexedLowerRetraction f hf
+    (baseCoverToIndexedLower f s₀ x₀ γ z) =
+      γ j (topStripRetractionParameter a)
+  have hz : (baseCoverToIndexedLower f s₀ x₀ γ z).1 =
+      stripRetraction f s₀ x₀ γ j (a, 1) := by
+    change retraction f s₀ x₀ γ
+      (quotientMk f s₀ x₀ γ
+        (Sum.inr (Sum.inr ⟨j, (a, (1 : I))⟩))) = _
+    rw [retraction_quotientMk]
+    rfl
+  rw [show baseCoverToIndexedLower f s₀ x₀ γ z =
+      ⟨stripRetraction f s₀ x₀ γ j (a, 1),
+        auxiliaryRetraction_mem_indexedLower f s₀ x₀ γ z⟩ by
+    apply Subtype.ext
+    exact hz]
+  unfold stripRetraction
+  split_ifs with h
+  · change indexedLowerRetraction f hf
+      (indexedLowerBaseInclusion f (γ j (foldBottom (a, 1)))) = _
+    rw [indexedLowerRetraction_apply_base]
+    rfl
+  · have hb : foldBottom (a, 1) = 1 := by
+      apply Subtype.ext
+      change min 1 (foldParameter (a, 1)) = 1
+      rw [min_eq_left]
+      exact le_of_not_ge h
+    rw [indexedLowerRetraction_apply_cylinder]
+    · rw [topStripRetractionParameter, hb, (γ j).target]
+    · exact truncatedRadialHeight_pos _
 
 end Hatcher.VanKampen.AuxiliaryCellAttachment
