@@ -3,6 +3,8 @@ article_id: af_44c18946ee5a142c153be548
 source_units: [hatcher-1-2-selected-spine]
 declaration: def
 origin: bridged
+statement: formalized
+lean: Hatcher.VanKampen.CellAttachment.modelIso
 ---
 
 # Every abstract cell attachment has an indexed cone model
