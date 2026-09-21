@@ -3,6 +3,9 @@ article_id: af_6526ed4b12ff934cdb825655
 source_units: [hatcher-1-2-selected-spine]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.attachmentIntersection_coverMap_surjective
 ---
 
 # The attaching-sphere pieces generate the intersection group
