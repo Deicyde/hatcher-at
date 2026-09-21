@@ -3,6 +3,9 @@ article_id: af_d40cc60ada4364ba06f00457
 source_units: [hatcher-1-2-selected-spine]
 declaration: lemma
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.exists_cellAttachmentCover
 ---
 
 # An open-cover model for attached cells
