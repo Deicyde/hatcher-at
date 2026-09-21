@@ -29,6 +29,10 @@ cell. The strip-enlarged point-set construction is organized in
 [two-disk boundary comparison](disk-boundary-two-circle.md) fixes the circle
 parameterization used by the two-cell relation calculation.
 
+The finite-stage constructors, pointed-wedge interfaces, and relator family
+needed for Corollary 1.28 are decomposed in
+[presentation-complex support](../presentation-complex/README.md).
+
 ## Binary-cover algebra
 
 - [A binary cover with a trivial second fundamental group](binary-cover-trivial-piece-quotient.md)

@@ -135,5 +135,11 @@ None of these open PRs receives `mathlib: true`.
   explicit bridge between classical skeleton inclusions and abstract cell
   attachments is a separate, currently not-ready roadmap node; Mathlib records
   this equivalence as a TODO.
+- **Presentation complexes.** Implement Corollary 1.28 directly in the abstract
+  categorical CW API. Use the pointed wedge as an indexed one-cell attachment,
+  the relators as an indexed two-cell attachment, and an eventually constant
+  sequence with empty higher-dimensional cell indices. The precise interfaces
+  are fixed in the
+  [project-authored implementation specification](presentation-complex-implementation.md).
 - **Source granularity.** Proposition 1.26(a), (b), and (c) are separate nodes.
   Completing one part does not mark the others complete.

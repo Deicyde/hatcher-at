@@ -39,7 +39,7 @@ None beyond pinned Mathlib.
 ## Proof depends on
 
 - [Every group admits a generators-and-relations presentation](every-group-presentation.md)
-- [Presented groups have two-dimensional presentation complexes](presentation-complex-realization.md)
+- [Presented groups have two-dimensional presentation complexes](presentation-complex/presentation-complex-realization.md)
 
 ## Sources
 

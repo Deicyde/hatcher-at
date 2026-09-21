@@ -70,6 +70,7 @@ wedge sums.
 - [The fundamental group of a wedge](wedge-fundamental-group.md)
 - [The fundamental group of a wedge of circles](wedge-circles-free-group.md)
 - [Cell-attachment support](cell-attachment-support/README.md)
+- [Presentation-complex support](presentation-complex/README.md)
 
 Mathlib supplies the abstract coproduct-and-pushout data in
 `HomotopicalAlgebra.AttachCells`. This project now compares that data with an
@@ -90,15 +91,14 @@ attachment theorem uses its categorical API. Their missing bridge is recorded
 as a not-ready [Appendix node](../../appendix/classical-skeleton-cell-attachment.md)
 rather than assumed silently.
 
-The remaining presentation-complex work is no longer blocked on the 2-cell
-point-set geometry. It must construct a one-dimensional CW model compatible
-with the computed pointed wedge, choose continuous based loops representing
-arbitrary relators, and package the subsequent attachment as a two-dimensional
-CW complex. The cyclic quotient calculation is already available, and its
-concrete single-2-cell attachment can now be built from the indexed cone model.
+The remaining presentation-complex work is no longer an unstructured blocker.
+Its support roadmap separates the pointed-wedge mapping and connectivity
+interfaces, zero- and one-cell models, arbitrary relator family, quotient
+calculation, and finite CW-sequence assembly. The cyclic quotient calculation
+and concrete single-two-cell example are already formalized.
 
 - [Every group admits a generators-and-relations presentation](every-group-presentation.md)
-- [Presented groups have two-dimensional presentation complexes](presentation-complex-realization.md)
+- [Presented groups have two-dimensional presentation complexes](presentation-complex/presentation-complex-realization.md)
 - [Every group is a fundamental group](every-group-fundamental-group.md)
 - [The cyclic presentation complex](cyclic-presentation-complex.md)
 
