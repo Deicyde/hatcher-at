@@ -6,13 +6,14 @@ redistributed here; source notes cite it by chapter and section.
 
 Every chapter and numbered section of the book is mapped. Section §1.1 is
 complete through twenty-two explicit nodes: eighteen local formalizations and
-four pinned Mathlib-backed nodes. Section §1.2 is decomposed into targets for
-van Kampen, wedge sums, and cell attachments, and the selected §1.3
-classification and deck spine is decomposed through Proposition 1.40. The
-selected §2.1 spine is decomposed through singular-homology functoriality and
-homotopy invariance, with its two local targets now formalized. One Appendix
-prerequisite is isolated. Mapping is not progress: the coverage contract says
-which chapters are only mapped.
+four pinned Mathlib-backed nodes. The selected §1.2 spine is formalized through
+van Kampen, wedges, and Proposition 1.26(a)–(b). Its classical 2-skeleton bridge
+and presentation-complex applications remain. The selected §1.3 classification
+and deck spine is decomposed through Proposition 1.40. The selected §2.1 spine
+is decomposed through singular-homology functoriality and homotopy invariance,
+with its two local targets now formalized. One Appendix prerequisite is
+isolated. Mapping is not progress: the coverage contract says which chapters
+are only mapped.
 
 - [Roadmap](roadmap/README.md) — the book: chapters, statements, and their
   dependencies.

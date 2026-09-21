@@ -93,13 +93,12 @@ decomposed from its free-product presentation through the kernel calculation,
 wedge sums, cell attachments, and Corollary 1.28. Proposition 1.26 is split by
 part, and the Appendix compactness lemma needed for its 2-skeleton clause is a
 separate cross-chapter node. The cover presentation, threefold-incidence
-homotopy decomposition, and quotient form of van Kampen's theorem are
-formalized, as are the pointed-wedge theorem, the higher-cell binary-cover
-algebra, the circle's well-pointed neighborhood, and the cyclic quotient
-calculation. The point-set cell-attachment model is now decomposed from the
-indexed pushout comparison through Hatcher's strip cover and overlap pieces;
-those leaves remain to be formalized. The bridge between Mathlib's classical
-and categorical CW-complex APIs remains not ready.
+homotopy decomposition, quotient form of van Kampen, pointed-wedge theorem,
+point-set cell-attachment model, strip cover, overlap analysis, and Proposition
+1.26(a)–(b) are formalized. The bridge between Mathlib's classical and
+categorical CW-complex APIs remains not ready. The presentation-complex
+realization still needs a compatible one-dimensional CW model and relator-loop
+construction.
 
 ### §1.3 selected classification and deck spine
 
@@ -151,11 +150,13 @@ explicitly deferred as well.
 
 ## Done means
 
-A local node is complete when its named Lean declarations compile, its main
-result carries `proof: formalized`, and the proof uses no `sorry` and no axioms
-beyond Lean's three. A Mathlib-backed node is complete when its exact pinned
-declaration, kind, and declaring file pass provenance checks. CI performs both
-checks.
+A local theorem-like node is complete when its named Lean declarations compile
+and its main result carries both `statement: formalized` and
+`proof: formalized`. A data-valued declaration has no separate proof phase and
+is complete when its main result compiles with `statement: formalized`. In both
+cases, the implementation uses no `sorry` and no axioms beyond Lean's three. A
+Mathlib-backed node is complete when its exact pinned declaration, kind, and
+declaring file pass provenance checks. CI performs these checks.
 
 A section counts as finished only when it is decomposed and every node beneath
 it is complete, *and* nothing numbered in it has been deferred. By that rule

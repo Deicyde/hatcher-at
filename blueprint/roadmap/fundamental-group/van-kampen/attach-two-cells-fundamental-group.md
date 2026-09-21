@@ -23,15 +23,11 @@ proposition.
 
 ## Depends on
 
-None beyond pinned Mathlib.
-
-## Proof depends on
-
 - [An open-cover model for attached cells](cell-attachment-cover-model.md)
+- [The boundary of the two-disk is the circle](cell-attachment-support/disk-boundary-two-circle.md)
 - [An attachment with no cells is an isomorphism](cell-attachment-support/empty-cell-attachment-iso.md)
 - [The auxiliary cover basepoint transports to the original basepoint](cell-attachment-support/auxiliary/auxiliary-cover-basepoint-transport.md)
 - [Overlap meridians recover the attaching loops](cell-attachment-support/auxiliary/auxiliary-overlap-attaching-map.md)
-- [The boundary of the two-disk is the circle](cell-attachment-support/disk-boundary-two-circle.md)
 - [The attaching-sphere pieces generate the intersection group](attaching-spheres-generate-intersection.md)
 - [A binary cover with a trivial second fundamental group](cell-attachment-support/binary-cover-trivial-piece-quotient.md)
 - [Retractions and deformation retracts on the fundamental group](../basic-constructions/retractions-fundamental-group.md)

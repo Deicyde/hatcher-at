@@ -33,12 +33,16 @@ that these are the only positive-dimensional cells; merely producing a space
 with the required fundamental group does not establish Hatcher's
 two-dimensional conclusion.
 
-This node is not ready. Mathlib's `HomotopicalAlgebra.AttachCells` records an
-abstract coproduct and pushout, but it does not provide the point-set
-adjunction-space model, collar neighborhoods, or deformation data needed by
-the current proof of the 2-cell attachment theorem. The required well-pointed
-neighborhood of the circle is now formalized, but the attachment geometry
-remains a separate obligation rather than a consequence of `PresentedGroup`.
+The generic 2-cell attachment model and theorem are now formalized, so
+point-set collar geometry is no longer the blocker. The unresolved roadmap
+work is the one-skeleton: the existing pointed-wedge calculation does not yet
+equip that space with a compatible one-dimensional `TopCat.CWComplex`
+structure or identify it with an indexed basic-cell attachment. The proof must
+also choose continuous based loops representing arbitrary free-group relators
+compatibly with `Hatcher.fundamentalGroupEquivWedgeCircles`, then assemble the
+0-, 1-, and 2-cell stages with empty higher stages into Mathlib's raw
+natural-number-indexed `TopCat.CWComplex`. This node remains not ready until
+those interfaces are specified and decomposed.
 
 Once this theorem exists, the arbitrary-group corollary is only the
 composition of its equivalence with `Hatcher.exists_presentedGroup_equiv`.
@@ -50,6 +54,7 @@ None beyond pinned Mathlib.
 ## Proof depends on
 
 - [The fundamental group of a wedge of circles](wedge-circles-free-group.md)
+- [An indexed cone attachment is a standard cell attachment](cell-attachment-support/indexed-basic-cell-attachment.md)
 - [Attaching 2-cells adds the attaching relations](attach-two-cells-fundamental-group.md)
 
 ## Sources

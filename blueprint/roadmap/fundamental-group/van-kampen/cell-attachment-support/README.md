@@ -24,7 +24,7 @@ first point-set construction around Hatcher's cell-attachment applications.
 
 The raw indexed quotient has one apex per cell, so its upper member is generally
 disconnected. Hatcher repairs this by adjoining a shared spine and one strip per
-cell. The remaining point-set work is organized in
+cell. The strip-enlarged point-set construction is organized in
 [Hatcher's auxiliary cell-attachment cover](auxiliary/README.md). The separate
 [two-disk boundary comparison](disk-boundary-two-circle.md) fixes the circle
 parameterization used by the two-cell relation calculation.
@@ -40,6 +40,6 @@ parameterization used by the two-cell relation calculation.
 - [The degree-n circle map sends the generator to the degree-n loop](circle-degree-map.md)
 - [The degree-n circle relation gives the cyclic group](cyclic-relation-quotient.md)
 
-The family open-cover construction and attaching-sphere analysis remain in
-the parent [Van Kampen roadmap](../README.md), where they feed the cited cell
-attachment theorems.
+The family open-cover construction and attaching-sphere analysis are packaged
+in the parent [Van Kampen roadmap](../README.md), where they feed the
+now-formalized 2-cell and higher-cell attachment theorems.

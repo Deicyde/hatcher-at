@@ -72,12 +72,12 @@ wedge sums.
 - [Cell-attachment support](cell-attachment-support/README.md)
 
 Mathlib supplies the abstract coproduct-and-pushout data in
-`HomotopicalAlgebra.AttachCells`, but not the point-set adjunction-space
-representation needed for Hatcher's proof of Proposition 1.26. The missing
-work is decomposed under cell-attachment support: first compare the abstract
-pushout with the explicit indexed cone quotient, then construct Hatcher's
-strip-enlarged space, binary cover, deformation retractions, and overlap cover.
-None of these interfaces is treated as existing Mathlib coverage.
+`HomotopicalAlgebra.AttachCells`. This project now compares that data with an
+explicit indexed cone quotient and formalizes Hatcher's strip-enlarged space,
+binary cover, deformation retractions, and overlap cover. Together with the
+binary-cover algebra, these interfaces prove both the 2-cell and higher-cell
+clauses of Proposition 1.26. These are local formalizations, not existing
+Mathlib coverage.
 
 - [An open-cover model for attached cells](cell-attachment-cover-model.md)
 - [The attaching-sphere pieces generate the intersection group](attaching-spheres-generate-intersection.md)
@@ -90,10 +90,12 @@ attachment theorem uses its categorical API. Their missing bridge is recorded
 as a not-ready [Appendix node](../../appendix/classical-skeleton-cell-attachment.md)
 rather than assumed silently.
 
-The presentation-complex realization step will package these results into the
-construction promised in the section introduction. It remains blocked on the
-point-set attachment model above. The cyclic quotient calculation is already
-available independently of that geometry.
+The remaining presentation-complex work is no longer blocked on the 2-cell
+point-set geometry. It must construct a one-dimensional CW model compatible
+with the computed pointed wedge, choose continuous based loops representing
+arbitrary relators, and package the subsequent attachment as a two-dimensional
+CW complex. The cyclic quotient calculation is already available, and its
+concrete single-2-cell attachment can now be built from the indexed cone model.
 
 - [Every group admits a generators-and-relations presentation](every-group-presentation.md)
 - [Presented groups have two-dimensional presentation complexes](presentation-complex-realization.md)

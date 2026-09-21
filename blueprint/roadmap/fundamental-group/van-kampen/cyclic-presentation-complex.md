@@ -1,9 +1,8 @@
 ---
 article_id: af_f9c5fec59717acad10d01cee
 source_units: [hatcher-1-2-selected-spine]
-declaration: theorem
+declaration: def
 origin: cited
-not_ready: true
 ---
 
 # The cyclic presentation complex
@@ -14,12 +13,12 @@ resulting presentation complex has fundamental group isomorphic to `ℤ/nℤ`.
 
 Intended artifact: `Hatcher.fundamentalGroupEquiv_cyclicPresentationComplex`.
 
-Before this theorem can be stated, define the concrete adjunction space, its
-basepoint, and its degree-`n` attaching map. An arbitrary space realizing the
-presentation `⟨x | xⁿ⟩` is not enough: Hatcher's example identifies the group
-of this specific one-cell attachment. Mathlib's abstract `AttachCells` data
-does not currently supply that point-set space or the open-cover geometry used
-by the attachment theorem, so this node remains not ready.
+Define `cyclicPresentationComplex n` as the singleton indexed cone attachment
+to `Circle`, using the boundary-of-the-two-disk homeomorphism followed by
+`Circle.degreeMap n` as attaching map, and use the image of `1` as basepoint.
+`IndexedConeAttachment.attachCells_basicCell` supplies the required abstract
+2-cell attachment, so the generic attachment theorem and the cyclic quotient
+calculation now complete the group computation.
 
 The quotient calculation after the geometric step is already formalized in
 [The degree-n circle relation gives the cyclic group](cell-attachment-support/cyclic-relation-quotient.md).
@@ -30,12 +29,11 @@ higher `n`.
 
 ## Depends on
 
-None beyond pinned Mathlib.
-
-## Proof depends on
-
-- [Attaching 2-cells adds the attaching relations](attach-two-cells-fundamental-group.md)
+- [An indexed family of cones has a two-set open cover](cell-attachment-support/indexed-cone-open-cover.md)
+- [The boundary of the two-disk is the circle](cell-attachment-support/disk-boundary-two-circle.md)
 - [The degree-n circle map sends the generator to the degree-n loop](cell-attachment-support/circle-degree-map.md)
+- [An indexed cone attachment is a standard cell attachment](cell-attachment-support/indexed-basic-cell-attachment.md)
+- [Attaching 2-cells adds the attaching relations](attach-two-cells-fundamental-group.md)
 - [The degree-n circle relation gives the cyclic group](cell-attachment-support/cyclic-relation-quotient.md)
 
 ## Sources

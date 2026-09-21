@@ -1,7 +1,7 @@
 ---
 article_id: af_43621dbc2063991527df5593
 source_units: [hatcher-1-2-selected-spine]
-declaration: proposition
+declaration: def
 origin: cited
 ---
 
@@ -23,10 +23,6 @@ API, so its use here goes through the explicit bridge node rather than an
 unstated identification of the two models.
 
 ## Depends on
-
-None beyond pinned Mathlib.
-
-## Proof depends on
 
 - [Attaching higher cells preserves the fundamental group](attach-higher-cells-fundamental-group.md)
 - [Classical skeleton inclusions are abstract cell attachments](../../appendix/classical-skeleton-cell-attachment.md)
