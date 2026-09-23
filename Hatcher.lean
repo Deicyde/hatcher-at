@@ -105,5 +105,6 @@ import Hatcher.VanKampen.CellAttachmentHigher
 import Hatcher.VanKampen.DiskBoundaryCircle
 import Hatcher.VanKampen.DiskBoundaryRepresentative
 import Hatcher.VanKampen.PresentationRelatorAttachment
+import Hatcher.VanKampen.PresentationComplexCW
 import Hatcher.VanKampen.PresentationComplexFundamentalGroup
 import Hatcher.VanKampen.CyclicPresentationComplex

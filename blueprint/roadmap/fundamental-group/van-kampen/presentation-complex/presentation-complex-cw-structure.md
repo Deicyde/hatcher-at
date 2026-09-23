@@ -3,6 +3,9 @@ article_id: af_5722cc28c5abdb41e886a338
 source_units: [hatcher-1-2-selected-spine]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.presentationComplexCWComplex
 ---
 
 # The presentation complex is an abstract two-dimensional CW complex
