@@ -9,7 +9,7 @@ source. The isomorphism below uses the original attachment map as its inverse.
 
 noncomputable section
 
-open CategoryTheory HomotopicalAlgebra
+open CategoryTheory CategoryTheory.Limits HomotopicalAlgebra
 open scoped TopCat
 
 namespace Hatcher.VanKampen.CellAttachment
@@ -17,6 +17,21 @@ namespace Hatcher.VanKampen.CellAttachment
 universe u
 
 variable {n : ℕ} {X Y : TopCat.{u}} {f : X ⟶ Y}
+
+/-- The identity map is the attachment of an empty family of standard cells. -/
+noncomputable def attachCellsId (n : ℕ) (X : TopCat.{u}) :
+    AttachCells.{u} (TopCat.RelativeCWComplex.basicCell.{u} n) (𝟙 X) where
+  ι := PEmpty
+  π := PEmpty.elim
+  cofan₁ := Cofan.mk (⊥_ TopCat.{u}) PEmpty.elim
+  cofan₂ := Cofan.mk (⊥_ TopCat.{u}) PEmpty.elim
+  isColimit₁ := (isColimitEquivIsInitialOfIsEmpty TopCat _).symm initialIsInitial
+  isColimit₂ := (isColimitEquivIsInitialOfIsEmpty TopCat _).symm initialIsInitial
+  m := 𝟙 _
+  hm i := i.elim
+  g₁ := initial.to X
+  g₂ := initial.to X
+  isPushout := IsPushout.of_id_snd
 
 private noncomputable def modelToBaseIso
     (c : AttachCells.{u} (TopCat.RelativeCWComplex.basicCell.{u} n) f)
