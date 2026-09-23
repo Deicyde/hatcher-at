@@ -105,6 +105,7 @@ import Hatcher.VanKampen.CellAttachmentAlgebra
 import Hatcher.VanKampen.CellAttachmentTwo
 import Hatcher.VanKampen.CellAttachmentHigher
 import Hatcher.VanKampen.FiniteSkeletonFundamentalGroup
+import Hatcher.VanKampen.TwoSkeletonFundamentalGroup
 import Hatcher.VanKampen.DiskBoundaryCircle
 import Hatcher.VanKampen.DiskBoundaryRepresentative
 import Hatcher.VanKampen.PresentationRelatorAttachment

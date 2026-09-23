@@ -3,6 +3,9 @@ article_id: af_43621dbc2063991527df5593
 source_units: [hatcher-1-2-selected-spine]
 declaration: def
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.fundamentalGroupEquiv_twoSkeleton
 ---
 
 # The 2-skeleton determines the fundamental group
@@ -26,6 +29,10 @@ an explicit prerequisite, and each finite-stage comparison transports the
 basepoint along the actual subtype inclusion.
 
 ## Depends on
+
+None beyond pinned Mathlib.
+
+## Proof depends on
 
 - [Finite skeleta above dimension two have the same fundamental group](finite-skeleton-fundamental-group.md)
 - [Compact subsets lie in a bounded skeleton](../../appendix/classical-cw-bridge/compact-subset-bounded-skeleton.md)
