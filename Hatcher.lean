@@ -108,4 +108,5 @@ import Hatcher.VanKampen.PresentationRelatorAttachment
 import Hatcher.VanKampen.PresentationComplexCW
 import Hatcher.VanKampen.PresentationComplexFundamentalGroup
 import Hatcher.VanKampen.PresentationComplexRealization
+import Hatcher.VanKampen.EveryGroupFundamentalGroup
 import Hatcher.VanKampen.CyclicPresentationComplex
