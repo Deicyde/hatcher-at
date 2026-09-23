@@ -85,6 +85,7 @@ import Hatcher.VanKampen.ConeAttachmentPushout
 import Hatcher.VanKampen.ConeAttachmentBasicCell
 import Hatcher.VanKampen.IndexedConeAttachment
 import Hatcher.VanKampen.PointCellAttachment
+import Hatcher.VanKampen.WedgeCirclesCellAttachment
 import Hatcher.VanKampen.CellAttachmentModel
 import Hatcher.VanKampen.CellAttachmentEmpty
 import Hatcher.VanKampen.EventuallyConstantCellSequence
