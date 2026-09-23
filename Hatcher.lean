@@ -1,6 +1,7 @@
 -- Hatcher AT formalization. Target modules are imported here for project builds.
 import Hatcher.Appendix.CompactSubspaceFiniteSubcomplex
 import Hatcher.Appendix.ClassicalCellArrowIso
+import Hatcher.Appendix.SuccessorSkeletonQuotient
 import Hatcher.Covering.BasepointChange
 import Hatcher.Covering.Deck
 import Hatcher.Covering.DeckGroupCalculation

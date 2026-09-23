@@ -3,6 +3,9 @@ article_id: af_83ffc141377e9db9715f7e9e
 source_units: [hatcher-1-2-selected-spine]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.skeletonLTStepJointMap_isQuotient
 ---
 
 # A successor classical skeleton has the cell-attachment quotient topology
@@ -36,7 +39,7 @@ with the attaching identifications are internal lemmas of this node.
 
 ## Depends on
 
-None beyond pinned Mathlib.
+- [Classical and standard cells have isomorphic attaching arrows](classical-cell-arrow-iso.md)
 
 ## Sources
 
