@@ -3,6 +3,9 @@ article_id: af_273a5ce6a092b8f64f470004
 source_units: [hatcher-1-2-selected-spine]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.skeletonLTInclusion_attachCells
 ---
 
 # Classical skeleton inclusions are abstract cell attachments

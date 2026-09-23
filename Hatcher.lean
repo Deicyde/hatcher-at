@@ -2,6 +2,7 @@
 import Hatcher.Appendix.CompactSubspaceFiniteSubcomplex
 import Hatcher.Appendix.ClassicalCellArrowIso
 import Hatcher.Appendix.SuccessorSkeletonQuotient
+import Hatcher.Appendix.ClassicalSkeletonCellAttachment
 import Hatcher.Covering.BasepointChange
 import Hatcher.Covering.Deck
 import Hatcher.Covering.DeckGroupCalculation
