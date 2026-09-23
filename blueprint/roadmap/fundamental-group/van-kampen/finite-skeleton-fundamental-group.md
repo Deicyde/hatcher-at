@@ -3,6 +3,9 @@ article_id: af_3c10e2334ea23d186e4a5f3b
 source_units: [hatcher-1-2-selected-spine]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.fundamentalGroupEquiv_twoSkeleton_skeleton
 ---
 
 # Finite skeleta above dimension two have the same fundamental group
@@ -33,6 +36,10 @@ propagate path-connectedness to the next skeleton. The base case is the
 identity equivalence, and all basepoint transports must be explicit.
 
 ## Depends on
+
+None beyond pinned Mathlib.
+
+## Proof depends on
 
 - [Classical skeleton inclusions are abstract cell attachments](../../appendix/classical-skeleton-cell-attachment.md)
 - [The 2-skeleton of a path-connected CW complex is path-connected](cell-attachment-support/path-connected-two-skeleton.md)
