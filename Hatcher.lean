@@ -89,6 +89,7 @@ import Hatcher.VanKampen.WedgeCirclesCellAttachment
 import Hatcher.VanKampen.CellAttachmentModel
 import Hatcher.VanKampen.CellAttachmentEmpty
 import Hatcher.VanKampen.CellAttachmentComponents
+import Hatcher.VanKampen.TwoSkeletonPathConnected
 import Hatcher.VanKampen.EventuallyConstantCellSequence
 import Hatcher.VanKampen.AuxiliaryCellAttachment
 import Hatcher.VanKampen.AuxiliaryCellAttachmentCover

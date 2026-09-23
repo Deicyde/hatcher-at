@@ -3,6 +3,9 @@ article_id: af_5fb3ca54030c6288d4ce8eea
 source_units: [hatcher-1-2-selected-spine]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.pathConnectedSpace_twoSkeleton
 ---
 
 # The 2-skeleton of a path-connected CW complex is path-connected
