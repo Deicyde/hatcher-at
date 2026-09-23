@@ -1,4 +1,5 @@
 import Mathlib.Data.Setoid.Basic
+import Mathlib.Topology.Connected.PathConnected
 import Mathlib.Topology.Constructions
 
 namespace Hatcher
@@ -85,6 +86,27 @@ theorem inclusion_basepoint (i : ι) :
     Quotient.mk (PointedWedge.setoid X x₀) none
   exact Quotient.sound <| Relation.EqvGen.symm _ _
     (Relation.EqvGen.rel _ _ (Rel.base (X := X) (x₀ := x₀) i))
+
+/-- A pointed wedge of path-connected spaces is path-connected, including
+the empty wedge, which is represented by its extra basepoint. -/
+instance instPathConnectedSpace [∀ i, TopologicalSpace (X i)]
+    [∀ i, PathConnectedSpace (X i)] :
+    PathConnectedSpace (Hatcher.PointedWedge X x₀) := by
+  constructor
+  · exact ⟨basepoint x₀⟩
+  · intro p q
+    have hbase : ∀ z : Hatcher.PointedWedge X x₀, Joined z (basepoint x₀) := by
+      intro z
+      induction z using Quotient.inductionOn with
+      | _ z =>
+        cases z with
+        | none => exact Joined.refl _
+        | some z =>
+          rcases z with ⟨i, x⟩
+          rcases PathConnectedSpace.joined x (x₀ i) with ⟨γ⟩
+          exact ⟨(γ.map (continuous_inclusion x₀ i)).cast rfl
+            (inclusion_basepoint x₀ i).symm⟩
+    exact (hbase p).trans (hbase q).symm
 
 end PointedWedge
 

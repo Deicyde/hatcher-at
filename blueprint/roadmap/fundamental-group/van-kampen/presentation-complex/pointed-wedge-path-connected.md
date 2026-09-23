@@ -3,6 +3,9 @@ article_id: af_566c2d0d935658850d39e13f
 source_units: [hatcher-1-2-selected-spine]
 declaration: instance
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.PointedWedge.instPathConnectedSpace
 ---
 
 # Pointed wedges of path-connected spaces are path-connected
