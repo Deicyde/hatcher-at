@@ -83,6 +83,7 @@ import Hatcher.VanKampen.IndexedConeAttachment
 import Hatcher.VanKampen.PointCellAttachment
 import Hatcher.VanKampen.CellAttachmentModel
 import Hatcher.VanKampen.CellAttachmentEmpty
+import Hatcher.VanKampen.EventuallyConstantCellSequence
 import Hatcher.VanKampen.AuxiliaryCellAttachment
 import Hatcher.VanKampen.AuxiliaryCellAttachmentCover
 import Hatcher.VanKampen.AuxiliaryCellAttachmentOverlapCover
