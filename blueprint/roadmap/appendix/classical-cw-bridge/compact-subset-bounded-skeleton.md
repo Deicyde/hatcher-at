@@ -3,6 +3,9 @@ article_id: af_db2445f3fea351a02e084322
 source_units: [appendix-proposition-a-1]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.compact_subset_skeleton
 ---
 
 # Compact subsets lie in a bounded skeleton

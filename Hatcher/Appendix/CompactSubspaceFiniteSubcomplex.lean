@@ -244,4 +244,28 @@ theorem compact_subset_finite_subcomplex
   apply Set.mem_iUnion.mpr
   exact ⟨⟨(⟨n, i⟩ : Cell C), ⟨x, hxK, hxi⟩⟩, hxi⟩
 
+/-- Every compact subset of a CW complex is contained in a finite-dimensional
+skeleton. This is the form of Appendix Proposition A.1 used in the proof of
+Hatcher's Proposition 1.26(c). -/
+theorem compact_subset_skeleton
+    [T2Space X] (hK : IsCompact K) (hKC : K ⊆ C) :
+    ∃ n : ℕ, K ⊆ CWComplex.skeleton C n := by
+  obtain ⟨E, hKE, hEfinite⟩ := compact_subset_finite_subcomplex hK hKC
+  letI : CWComplex.Finite (E : Set X) := hEfinite
+  have hdim := RelCWComplex.FiniteDimensional.eventually_isEmpty_cell
+    (C := (E : Set X)) (D := ∅)
+  rw [Filter.eventually_atTop] at hdim
+  obtain ⟨N, hN⟩ := hdim
+  refine ⟨N, hKE.trans ?_⟩
+  rw [← CWComplex.Subcomplex.union (E := E)]
+  apply iUnion_subset
+  intro n
+  apply iUnion_subset
+  intro j
+  have hn : n < N := by
+    by_contra hn
+    exact (hN n (Nat.le_of_not_gt hn)).false j
+  exact (CWComplex.openCell_subset_skeleton (C := C) n j.1).trans
+    (CWComplex.skeleton_mono (C := C) (Nat.cast_le.mpr hn.le))
+
 end Hatcher
