@@ -88,6 +88,7 @@ import Hatcher.VanKampen.PointCellAttachment
 import Hatcher.VanKampen.WedgeCirclesCellAttachment
 import Hatcher.VanKampen.CellAttachmentModel
 import Hatcher.VanKampen.CellAttachmentEmpty
+import Hatcher.VanKampen.CellAttachmentComponents
 import Hatcher.VanKampen.EventuallyConstantCellSequence
 import Hatcher.VanKampen.AuxiliaryCellAttachment
 import Hatcher.VanKampen.AuxiliaryCellAttachmentCover

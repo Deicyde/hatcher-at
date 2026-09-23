@@ -868,6 +868,32 @@ private def indexedLowerStrongDeformationRetract
     exact indexedLowerRetraction_apply_base f hf x
   deformation := indexedLowerDeformation f hf
 
+/-- Retraction of the indexed lower cone cover onto the original base. -/
+noncomputable def indexedLowerCoverRetraction
+    (hf : ∀ j, Continuous (f j)) :
+    C(IndexedConeAttachment.lowerCover f, X) :=
+  indexedLowerRetraction f hf
+
+/-- The indexed lower-cover retraction fixes every base point. -/
+@[simp] theorem indexedLowerCoverRetraction_base
+    (hf : ∀ j, Continuous (f j)) (x : X) :
+    indexedLowerCoverRetraction f hf
+        ⟨IndexedConeAttachment.base f x,
+          IndexedConeAttachment.base_mem_lowerCover f x⟩ = x := by
+  change indexedLowerRetraction f hf (indexedLowerBaseInclusion f x) = x
+  exact indexedLowerRetraction_apply_base f hf x
+
+/-- The indexed lower-cover retraction sends a positive-height cone point to
+its attaching point in the base. -/
+@[simp] theorem indexedLowerCoverRetraction_cylinder
+    (hf : ∀ j, Continuous (f j)) (j : J) (s : S j) (t : I)
+    (ht : 0 < t) :
+    indexedLowerCoverRetraction f hf
+        ⟨IndexedConeAttachment.cylinder f j s t,
+          (IndexedConeAttachment.cylinder_mem_lowerCover_iff
+            f j s t).mpr ht⟩ = f j s := by
+  exact indexedLowerRetraction_apply_cylinder f hf j s t ht
+
 /-- The indexed lower cover included into the auxiliary base cover. -/
 private def indexedLowerToBaseCover :
     C(IndexedConeAttachment.lowerCover f, baseCover f s₀ x₀ γ) where

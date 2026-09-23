@@ -3,6 +3,9 @@ article_id: af_bdf4b6a0596bcc5d303eeaf9
 source_units: [hatcher-1-2-selected-spine]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.joined_iff_of_attachCells_of_one_lt
 ---
 
 # Higher-cell attachments preserve path components
@@ -38,7 +41,9 @@ None beyond pinned Mathlib.
 
 ## Proof depends on
 
+- [An indexed family of cones has a two-set open cover](indexed-cone-open-cover.md)
 - [Every abstract cell attachment has an indexed cone model](abstract-cell-attachment-indexed-model.md)
+- [The base-side auxiliary cover retracts onto the original space](auxiliary/auxiliary-base-cover-retract.md)
 - [An attachment with no cells is an isomorphism](empty-cell-attachment-iso.md)
 
 ## Sources
