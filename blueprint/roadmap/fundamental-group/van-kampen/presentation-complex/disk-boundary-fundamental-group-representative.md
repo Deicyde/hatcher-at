@@ -3,6 +3,9 @@ article_id: af_28607389cd096a6a3db5da9a
 source_units: [hatcher-1-2-selected-spine]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.diskBoundaryMapOfFundamentalGroup
 ---
 
 # Every fundamental-group element has a based disk-boundary representative
