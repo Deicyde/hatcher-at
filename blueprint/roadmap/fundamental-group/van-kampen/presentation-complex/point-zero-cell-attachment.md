@@ -3,6 +3,9 @@ article_id: af_65cb9c02fe8911d8b404bb3b
 source_units: [hatcher-1-2-selected-spine]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.VanKampen.pointAttachCells
 ---
 
 # A point is one standard zero-cell
