@@ -29,23 +29,21 @@ theorem exists_presentationComplex_fundamentalGroupEquiv
         Nonempty (PresentedGroup rels ≃* FundamentalGroup X x₀)
 ```
 
-The construction must use the wedge of `S` circles as the 1-skeleton and
-attach one 2-cell along a loop representing each relator. The proof must check
-that these are the only positive-dimensional cells; merely producing a space
-with the required fundamental group does not establish Hatcher's
-two-dimensional conclusion.
+The construction uses the wedge of `S` circles as the 1-skeleton and attaches
+one 2-cell along a loop representing each relator. The proof checks that these
+are the only positive-dimensional cells; merely producing a space with the
+required fundamental group would not establish Hatcher's two-dimensional
+conclusion.
 
-The generic 2-cell attachment model and theorem are formalized. The remaining
-construction is now decomposed in
-[presentation-complex support](README.md):
-it supplies the wedge's one-cell attachment, based representatives for
-relators, the concrete two-cell attachment and group calculation, and the
-eventually constant CW sequence with its dimension bound. These interfaces
-avoid the unrelated unresolved bridge between Mathlib's classical and
-categorical CW APIs.
+The supporting formalizations in
+[presentation-complex support](README.md) supply the wedge's one-cell
+attachment, based representatives for relators, the concrete two-cell
+attachment and group calculation, and the eventually constant CW sequence
+with its dimension bound. These interfaces avoid the unrelated unresolved
+bridge between Mathlib's classical and categorical CW APIs.
 
-Once this theorem exists, the arbitrary-group corollary is only the
-composition of its equivalence with `Hatcher.exists_presentedGroup_equiv`.
+The arbitrary-group corollary composes this theorem's equivalence with
+`Hatcher.exists_presentedGroup_equiv`.
 
 ## Depends on
 

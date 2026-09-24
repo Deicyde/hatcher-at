@@ -133,6 +133,6 @@ Absent from the pinned Mathlib:
   `Hatcher.Sphere.simplyConnectedSpace` as a theorem and installs the same
   result as an instance for Euclidean spheres of dimension at least two.
 
-## Still open
+## Resolved choices
 
-No representation choices remain open for the nine formalized nodes.
+No representation choices remain open for this selected slice.

@@ -31,9 +31,10 @@ behind the circle computation becomes an instance of a general classification.
 Mathlib has `FundamentalGroup`, `FundamentalGroupoid`, monodromy, and several
 of Hatcher's §1.3 lifting results. It does not contain the circle computation,
 van Kampen theorem, universal-cover construction, or classification and deck
-spine as a whole. The selected §1.1 slice is complete; §1.2 is now the active
-proof frontier, while the §1.3 spine through Proposition 1.40 is decomposed
-behind it.
+spine as a whole. Every formalizable leaf in the selected §1.1, §1.2, and
+§1.3 spines is complete locally or backed by an exact declaration in the
+pinned Mathlib. The examples and reconstruction results outside those selected
+spines remain explicitly deferred.
 
 ## Sections
 

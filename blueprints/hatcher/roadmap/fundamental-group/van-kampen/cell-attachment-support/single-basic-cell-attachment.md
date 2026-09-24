@@ -20,8 +20,8 @@ proof first identifies the retained cone with `TopCat.disk n`, including its
 boundary map, then transports the explicit cone pushout along that arrow
 isomorphism using Mathlib's `AttachCells.reindexCellTypes`.
 
-This closes the representation bridge for one disk. The remaining roadmap
-work is to assemble arbitrary indexed families and Hatcher's connected
+This closes the representation bridge for one disk. The formalized downstream
+nodes extend it to arbitrary indexed families and Hatcher's connected
 auxiliary cover.
 
 ## Depends on

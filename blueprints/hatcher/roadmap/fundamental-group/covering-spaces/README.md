@@ -68,8 +68,9 @@ same-endpoint relation and calculate the image subgroup. This is Proposition
 
 The classification is phrased through a small project-local bundle of pointed
 connected covers. Realization and rigidity do not need a category of all
-objects over `X`. The literal quotient of covers by isomorphism is marked not
-ready until its universe boundary is fixed.
+objects over `X`. The formalized classification uses a fixed-universe quotient
+of covers by isomorphism, while a separate cross-universe theorem identifies
+every pointed connected cover with its canonical subgroup-cover representative.
 
 - [Pointed connected covering spaces](based-connected-cover.md)
 - [Equal image subgroups characterize pointed cover isomorphism](pointed-cover-rigidity.md)

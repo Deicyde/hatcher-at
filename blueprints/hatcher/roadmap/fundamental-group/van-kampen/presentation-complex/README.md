@@ -8,7 +8,7 @@ These nodes turn Hatcher's proof of Corollary 1.28 into explicit interfaces
 for the project's pointed wedge, indexed cone attachment, and Mathlib's
 abstract CW-complex sequence.
 
-## Ready foundations
+## Formalized foundations
 
 - [Continuous maps out of a pointed wedge](pointed-wedge-universal-property.md)
 - [Pointed wedges of path-connected spaces are path-connected](pointed-wedge-path-connected.md)
@@ -25,9 +25,9 @@ abstract CW-complex sequence.
 - [The presentation complex has the presented fundamental group](presentation-complex-fundamental-group.md)
 - [The presentation complex is an abstract two-dimensional CW complex](presentation-complex-cw-structure.md)
 
-The two final interfaces feed the source-facing
+The two final interfaces feed the completed source-facing
 [presentation-complex realization](presentation-complex-realization.md).
-The already formalized
+The formalized
 [cyclic presentation complex](cyclic-presentation-complex.md) is the concrete
 one-generator, one-relator example of the same attachment pattern.
 The exact implementation conventions are recorded in the

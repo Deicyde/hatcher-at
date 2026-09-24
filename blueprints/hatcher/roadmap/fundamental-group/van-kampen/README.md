@@ -4,9 +4,9 @@ article_id: af_2e10d266b793c4020852fe44
 
 # Van Kampen's theorem
 
-Hatcher §1.2 (pages 40–55). This section is decomposed along the spine
-advertised at its opening: free products, van Kampen, wedges, cell attachments,
-and realization of groups as fundamental groups.
+Hatcher §1.2 (pages 40–55). The selected 67-node spine is completely
+formalized: free products, van Kampen, wedges, cell attachments, finite
+skeleta, and realization of groups as fundamental groups.
 
 If `X` is covered by path-connected open sets `Aα` sharing the basepoint, and
 the pairwise intersections are path-connected, then the inclusions induce a
@@ -88,18 +88,18 @@ Mathlib coverage.
 - [The 2-skeleton determines the fundamental group](two-skeleton-fundamental-group.md)
 
 The 2-skeleton argument uses Mathlib's classical CW-complex API, while the
-attachment theorem uses its categorical API. Their missing bridge is recorded
-as a bounded [Appendix support chain](../../appendix/classical-cw-bridge/README.md):
+attachment theorem uses its categorical API. The bridge between them is
+supplied by a bounded [Appendix support chain](../../appendix/classical-cw-bridge/README.md):
 it compares the two cell shapes, proves the successor-skeleton quotient, and
 packages the inclusion as `AttachCells`. Separate connectivity and
 finite-stage nodes discharge the path-connectedness hypotheses needed during
 the induction rather than assuming them silently.
 
-The remaining presentation-complex work is no longer an unstructured blocker.
-Its support roadmap separates the pointed-wedge mapping and connectivity
-interfaces, zero- and one-cell models, arbitrary relator family, quotient
-calculation, and finite CW-sequence assembly. The cyclic quotient calculation
-and concrete single-two-cell example are already formalized.
+The presentation-complex branch is complete. Its support roadmap separates the
+formalized pointed-wedge mapping and connectivity interfaces, zero- and
+one-cell models, arbitrary relator family, quotient calculation, and finite
+CW-sequence assembly. The cyclic quotient calculation and concrete
+single-two-cell example are formalized as well.
 
 - [Every group admits a generators-and-relations presentation](every-group-presentation.md)
 - [Presented groups have two-dimensional presentation complexes](presentation-complex/presentation-complex-realization.md)

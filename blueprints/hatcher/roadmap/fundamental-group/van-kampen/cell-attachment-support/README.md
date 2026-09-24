@@ -32,7 +32,7 @@ cell. The strip-enlarged point-set construction is organized in
 parameterization used by the two-cell relation calculation.
 
 The finite-stage constructors, pointed-wedge interfaces, and relator family
-needed for Corollary 1.28 are decomposed in
+needed for Corollary 1.28 are formalized in
 [presentation-complex support](../presentation-complex/README.md).
 
 ## Binary-cover algebra

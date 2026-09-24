@@ -158,8 +158,11 @@ None of this post-pin work receives `mathlib: true`.
 - **Cover bundles.** Use a small project-local record for a pointed connected
   cover and its basepoint-preserving isomorphisms rather than a full category
   of objects over `X`. Fix the total-space universe explicitly. Packaging the
-  resulting isomorphism classes as a literal set-level bijection remains a
-  not-ready node until the quotient and universe boundary is fixed.
+  resulting fixed-universe isomorphism classes as a literal set-level bijection
+  is formalized as `Hatcher.BasedConnectedCover.classificationEquiv`. The
+  separate theorem
+  `Hatcher.BasedConnectedCover.isomorphic_ofSubgroup_fundamentalGroupRange`
+  supplies the cross-universe comparison.
 - **Deck groups and normality.** Backport the exact basic `deck` API from
   post-pin PR #40135, while keeping the new classification results in the
   project namespace. Define a normal cover to be surjective with a transitive

@@ -32,9 +32,9 @@ Formalized in `Hatcher/Circle/WindingNumber.lean` as
 
 Mathlib's `IsCoveringMap.monodromy` supplied more than expected: it is already
 defined on homotopy classes, so no well-definedness argument was needed. The
-work that remained was additivity, which is not formal. It rests on
+remaining additivity step is formalized using
 `Hatcher.Circle.monodromy_translate`: moving the starting lift by a point of
-the fibre moves the endpoint by the same amount. That is proved from
+the fibre moves the endpoint by the same amount. That theorem follows from
 uniqueness of lifts, using that `s ↦ s + n` is a deck transformation of
 `expMap`.
 

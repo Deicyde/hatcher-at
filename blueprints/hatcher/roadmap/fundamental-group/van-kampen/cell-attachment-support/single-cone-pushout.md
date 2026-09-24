@@ -23,8 +23,9 @@ The same module packages this square as
 `Hatcher.VanKampen.ConeAttachment.attachCells_coneAttachment`, a one-cell
 `HomotopicalAlgebra.AttachCells` structure for the retained-cone cell type.
 The separate cone-to-disk homeomorphism identifies that cell geometrically
-with Mathlib's standard disk; transporting this structure to
-`TopCat.RelativeCWComplex.basicCell` is the next bridge.
+with Mathlib's standard disk; the
+[single standard-cell bridge](single-basic-cell-attachment.md) transports this
+structure to `TopCat.RelativeCWComplex.basicCell`.
 
 ## Depends on
 

@@ -95,23 +95,21 @@ part, and the Appendix compactness lemma needed for its 2-skeleton clause is a
 separate cross-chapter chain. The cover presentation, threefold-incidence
 homotopy decomposition, quotient form of van Kampen, pointed-wedge theorem,
 point-set cell-attachment model, strip cover, overlap analysis, and Proposition
-1.26(a)–(b) are formalized. The classical successor-skeleton bridge is now
-decomposed into a cell-arrow comparison, quotient-topology theorem,
-`AttachCells` package, 2-skeleton connectivity input, and finite-stage
-fundamental-group induction. The independent presentation-complex route is
-fully decomposed into explicit pointed-wedge, cell-attachment, relator,
-group-calculation, and eventually constant CW-sequence interfaces.
+1.26(a)–(b) are formalized. The classical successor-skeleton bridge, its
+2-skeleton connectivity and finite-stage induction, and the independent
+presentation-complex route are formalized as well. All 67 leaves linked from
+the selected §1.2 unit are complete.
 
 ### §1.3 selected classification and deck spine
 
 [Covering spaces](../roadmap/fundamental-group/covering-spaces/README.md) is
 decomposed from homotopy lifting through the subgroup classification of
 connected covers. Exact pinned lifting results are separated from local
-source-facing wrappers. The path-class universal-cover construction and the
-cover-bundling boundary are explicit nodes, with unresolved representation
-work marked not ready rather than hidden in the final classification theorem.
-The deck-transformation branch continues through the normalizer quotient and
-orbit-action calculation in Propositions 1.39–1.40.
+source-facing wrappers. The path-class universal-cover construction, the
+fixed-universe quotient of pointed connected covers, and its cross-universe
+rigidity theorem are formalized. The deck-transformation branch continues
+through the normalizer quotient and orbit-action calculation in Propositions
+1.39–1.40. All 32 leaves linked from the selected §1.3 unit are complete.
 
 ### §2.1 selected functoriality spine
 
@@ -120,8 +118,9 @@ is decomposed through the singular-chain and singular-homology definitions,
 the exact `H₀` calculation, the point calculation, induced maps, chain-homotopy
 invariance, topological homotopy invariance, and Corollary 2.11. Eight nodes
 are exact declarations in the pinned Mathlib; the point calculation and
-homotopy-equivalence corollary are formalized locally. The project does not
-claim Hatcher's explicit prism formula is formalized.
+homotopy-equivalence corollary are formalized locally, so all ten linked leaves
+are complete. The project does not claim Hatcher's explicit prism formula is
+formalized.
 
 ## Deferred roadmap expansion
 
