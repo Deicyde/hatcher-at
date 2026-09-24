@@ -4,14 +4,17 @@ A Lean 4 formalization of results from Allen Hatcher's *Algebraic Topology*,
 built on Mathlib. The book's text is not redistributed here.
 
 The whole book's numbered sections are mapped in the roadmap and coverage
-contract. The selected scope has 133 complete formalizable leaves: 119 local
-declarations and 14 pinned Mathlib declarations. They comprise all twenty-two
-nodes in [§1.1](blueprints/hatcher/roadmap/fundamental-group/basic-constructions/README.md),
+contract. The pre-existing selected scope has 133 complete formalizable
+leaves: 119 local declarations and 14 pinned Mathlib declarations. They
+comprise all twenty-two nodes in
+[§1.1](blueprints/hatcher/roadmap/fundamental-group/basic-constructions/README.md),
 the selected 67-node §1.2 spine, the selected 32-node §1.3 classification and
 deck spine through Proposition 1.40, the selected ten-node §2.1 functoriality
-spine, and two Appendix A.1 prerequisites. Thirteen other source units are
-explicitly deferred; lettered additional topics and exercises remain out of
-scope.
+spine, and two Appendix A.1 prerequisites. A second fifteen-leaf §2.1 slice
+now decomposes reduced and relative homology, exact sequences, naturality, and
+relative homotopy invariance; its simplicial-pair foundation is gated on a
+Mathlib pin update. Thirteen other source units are explicitly deferred;
+lettered additional topics and exercises remain out of scope.
 
 [Browse the published formalization blueprint](https://deicyde.github.io/hatcher-at/)
 or [inspect its Markdown source](blueprints/hatcher/README.md).

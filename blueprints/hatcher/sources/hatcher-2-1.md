@@ -22,8 +22,9 @@ taking all singular simplices as generators.
 | **Proposition 2.8** | 110 | A point has `H₀ ≅ ℤ` and zero homology in positive degrees. |
 
 The reduced groups immediately following Proposition 2.8 are defined from the
-augmented singular chain complex. They are not part of the selected first
-slice because the pinned Mathlib has no packaged reduced singular homology.
+augmented singular chain complex. They are part of the selected second slice;
+their roadmap representation is local because the pinned Mathlib has no
+packaged reduced singular homology.
 
 ## Functoriality and homotopy invariance (110–113)
 
@@ -65,13 +66,24 @@ Theorem 2.13 is a source-order trap: it is stated before relative homology and
 excision are developed, but its proof uses Theorem 2.20 and Proposition 2.22.
 It must not be planned as an early independent theorem.
 
+On pages 127–128 Hatcher records naturality of the long exact sequence of a
+pair and of its reduced variant. Those two naturality statements are selected.
+The triple sequence and the quotient sequence used with Theorem 2.13 are not.
+
 ## Selected slice
 
-This pass decomposes the singular-homology definitions and Propositions
-2.7–2.12. Proposition 2.6 is deferred because the pinned Mathlib has only the
-degree-zero component decomposition. Reduced homology, relative homology,
-excision, the sphere calculation, invariance of dimension, and the Δ-complex
-comparison are later milestones.
+The first selected slice decomposes the singular-homology definitions and
+Propositions 2.7–2.12. A second fifteen-leaf slice covers the augmented
+definition and functoriality of reduced homology, relative chains and homology,
+Theorem 2.16, the long exact sequence of a pair and its naturality, Example
+2.18, and Proposition 2.19. Its representation is fixed in the
+[relative-homology implementation specification](relative-homology-implementation.md).
+
+Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
+component decomposition. Lemma 2.1, Examples 2.2–2.5, Theorem 2.13, Example
+2.17, the triple sequence, excision and quotient-pair comparison, the remaining
+sphere applications, invariance of dimension, and the Δ-complex comparison
+are later milestones.
 
 For roadmap notation, write
 `Hₙ(X; R) := ((AlgebraicTopology.singularHomologyFunctor C n).obj R).obj X`.
@@ -99,6 +111,9 @@ Available exactly:
 - `TopCat.Homotopy.singularChainComplexFunctorObjMap` and
   `TopCat.Homotopy.congr_homologyMap_singularChainComplexFunctor` in
   `Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvariance.lean`.
+- `HomologicalComplex.HomologySequence.composableArrows₅_exact` and
+  `HomologicalComplex.HomologySequence.δ_naturality` in
+  `Mathlib/Algebra/Homology/HomologySequenceLemmas.lean`.
 
 The proof of topological homotopy invariance passes through the singular
 simplicial set. It proves Hatcher's theorem, but it does not formalize the
@@ -112,31 +127,36 @@ singular homology, relative singular homology, singular excision, and
 
 - Mathlib PR
   [#41285](https://github.com/leanprover-community/mathlib4/pull/41285),
-  merged on 2026-08-31, adds relative homology for simplicial-set pairs and
-  the associated exact-sequence API. It is not available at this repository's
-  pin.
+  merged as commit
+  [`dbd0e3c605be1c1ac468d358d0815b9183566a8a`](https://github.com/leanprover-community/mathlib4/commit/dbd0e3c605be1c1ac468d358d0815b9183566a8a),
+  adds relative homology for simplicial-set pairs and the associated
+  exact-sequence API. It is included in stable Mathlib `v4.34.1`, but not at
+  this repository's pin.
 - Mathlib PR
   [#37659](https://github.com/leanprover-community/mathlib4/pull/37659), an
-  older relative singular-homology proposal, remains open after review moved
-  the design toward simplicial-set pairs.
+  older direct relative singular-homology proposal, remains open and is
+  superseded in design by the merged simplicial-set-pair API.
 - Mathlib PR
   [#41318](https://github.com/leanprover-community/mathlib4/pull/41318), for
   the long exact sequence of a triple, is open and paused pending excision.
 - Joël Riou's
-  [`excision`](https://github.com/joelriou/excision) development contains the
-  active subdivision, small-chain, pair, and excision design. Later roadmap
-  work should follow that upstream direction rather than create a competing
-  relative-homology architecture.
+  [`excision`](https://github.com/joelriou/excision/tree/8b56cd0c8e5f39a7c2f36418c80b298e469596a6)
+  development contains the active subdivision, small-chain, pair, and excision
+  design. It is unreleased implementation prior art, not a project dependency.
 
 ## Decisions taken
 
-- **First boundary.** Decompose the well-supported 2.7–2.12 spine now. Record
-  all other results in §2.1 as deferred.
+- **Selected boundaries.** Keep the completed 2.7–2.12 spine and add the
+  reduced/relative exact-sequence slice described above. Leave the
+  excision-dependent and Δ-complex results deferred.
 - **Coefficients.** State exact Mathlib nodes with their coefficient-general
   categorical API. Treat Hatcher's integral theory as its abelian-group
   specialization.
 - **Proof route.** Accept Mathlib's singular-simplicial-set proof of Theorem
   2.10. Do not claim that Hatcher's prism operator itself is formalized.
-- **Relative theory.** Do not design a local cokernel API against a stale pin.
-  Revisit the pin and adopt the merged `SSetPair` design before decomposing
-  Theorem 2.16 and relative homology.
+- **Reduced theory.** Define reduced homology from Hatcher's augmented complex,
+  shifted through `ChainComplex.augment`; do not define it as homology relative
+  to a basepoint, since that is Example 2.18.
+- **Relative theory.** Target the merged `SSetPair` design. Keep its foundation
+  `not_ready` until Setup upgrades the pin and validates the existing project;
+  do not copy an unpinned competing cokernel API into the project.

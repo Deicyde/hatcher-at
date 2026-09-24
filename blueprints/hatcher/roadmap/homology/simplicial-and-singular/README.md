@@ -4,9 +4,11 @@ article_id: af_d8263fa293c57dc52465f995
 
 # Simplicial and singular homology
 
-Hatcher §2.1 (pages 102–133). The selected first slice covers singular
+Hatcher §2.1 (pages 102–133). The completed first slice covers singular
 homology, its low-degree checks, functoriality, and homotopy invariance through
-Corollary 2.11 and Proposition 2.12.
+Corollary 2.11 and Proposition 2.12. A second selected slice decomposes reduced
+and relative homology, exact sequences, naturality, and relative homotopy
+invariance.
 
 Simplicial homology takes a Δ-complex structure and forms the chain complex of
 its simplices; it is finite and computable but depends on the chosen structure.
@@ -16,10 +18,12 @@ proves homotopy invariance of singular homology by a prism decomposition,
 builds the long exact sequence of a pair, proves excision by barycentric
 subdivision, and concludes that the two theories agree on Δ-complexes.
 
-The pinned Mathlib has exact categorical versions of most of this first slice.
+The pinned Mathlib has exact categorical versions of most of the first slice.
 The roadmap makes those upstream results explicit, and the two thin
 source-facing consequences are formalized locally in
-`Hatcher/Singular/Homology.lean`.
+`Hatcher/Singular/Homology.lean`. It also contains the generic algebraic long
+exact sequence. The second slice's `SSetPair` foundation is available only
+after the current pin and is therefore an explicit readiness gate.
 
 ## Singular chains and low degrees
 
@@ -37,19 +41,24 @@ source-facing consequences are formalized locally in
 - [Homotopic maps induce the same singular-homology map](singular-homology-homotopy-invariance.md)
 - [A homotopy equivalence induces homology isomorphisms](homotopy-equivalence-homology-iso.md)
 
+## Reduced and relative homology
+
+- [Relative homology and exact sequences](relative-homology/README.md)
+
 ## Deferred within §2.1
 
 Lemma 2.1 and Examples 2.2–2.5 need a source-faithful Δ-complex chain model.
 Proposition 2.6 needs additivity over all path components in every degree; the
-pin contains only its degree-zero case. Reduced and relative homology,
-Theorems 2.13 and 2.16, excision, sphere calculations, invariance of dimension,
-and the Δ-complex comparison are also deferred.
+pin contains only its degree-zero case. Theorem 2.13, Example 2.17, the triple
+sequence, excision and quotient-pair comparison, the remaining sphere
+applications, invariance of dimension, and the Δ-complex comparison also
+remain deferred.
 
 Relative homology for simplicial-set pairs merged after the repository's
 Mathlib pin in PR
-[#41285](https://github.com/leanprover-community/mathlib4/pull/41285).
-Excision remains active upstream work. The next pass should evaluate a pin
-update and follow that design rather than introduce a competing local API.
+[#41285](https://github.com/leanprover-community/mathlib4/pull/41285) and is in
+stable `v4.34.1`. Setup must validate a pin upgrade before the gated node is
+claimed ready. Excision remains active upstream work.
 
 ## Sources
 
