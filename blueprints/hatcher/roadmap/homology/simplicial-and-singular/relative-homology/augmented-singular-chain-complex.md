@@ -3,6 +3,8 @@ article_id: af_7968fc65ae53f656ce78c58d
 source_units: [hatcher-2-1-relative-homology-les]
 declaration: def
 origin: cited
+lean: Hatcher.Reduced.augmentedSingularChainComplexFunctor
+statement: formalized
 ---
 
 # The augmented singular chain complex

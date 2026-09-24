@@ -43,6 +43,7 @@ import Hatcher.Disc.NoRetraction
 import Hatcher.Disc.Brouwer
 import Hatcher.Euclidean.Dimension
 import Hatcher.Singular.Homology
+import Hatcher.Singular.Reduced
 import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected
 import Hatcher.Sphere.BorsukUlam
