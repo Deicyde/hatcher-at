@@ -5,5 +5,5 @@ site-src/
 .DS_Store
 
 # Hatcher's Algebraic Topology text. This repository is public; the book stays
-# local. Anchored so blueprint/sources/ is still tracked and published.
+# local. Anchored so the blueprint vault's source notes remain tracked.
 /sources/

@@ -4,7 +4,7 @@ A Lean 4 formalization of results from Allen Hatcher's *Algebraic Topology*,
 built on Mathlib. The book's text is not redistributed here.
 
 The whole book is mapped.
-[Section §1.1](blueprint/roadmap/fundamental-group/basic-constructions/README.md)
+[Section §1.1](blueprints/hatcher/roadmap/fundamental-group/basic-constructions/README.md)
 is complete through twenty-two explicit nodes: eighteen local formalizations
 and four pinned Mathlib-backed nodes. These include the circle computation,
 Brouwer, the topological proof of the fundamental theorem of algebra, and
@@ -14,6 +14,6 @@ spine is decomposed through Hatcher's Proposition 1.40. The selected §2.1 spine
 is covered by eight pinned Mathlib declarations and two local formalizations.
 
 [Browse the published formalization blueprint](https://deicyde.github.io/hatcher-at/)
-or [inspect its Markdown source](blueprint/README.md).
+or [inspect its Markdown source](blueprints/hatcher/README.md).
 
 Developed with [AutoformBot](https://github.com/facebookresearch/autoform-bot).

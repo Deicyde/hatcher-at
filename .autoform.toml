@@ -1,0 +1,10 @@
+schema = "autoform-workspace/v1"
+
+[locations."blueprints"]
+path = "blueprints"
+provides = ["blueprints"]
+
+[projects]
+[projects."hatcher"]
+title = "Algebraic Topology (Hatcher)"
+blueprint = {location = "blueprints", path = "hatcher"}

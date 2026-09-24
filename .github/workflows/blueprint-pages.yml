@@ -4,13 +4,15 @@ on:
   push:
     branches: [main]
     paths:
-      - "blueprint/**"
+      - ".autoform.toml"
+      - "blueprints/**"
       - "**.lean"
       - "mkdocs.yml"
       - ".github/workflows/blueprint-pages.yml"
   pull_request:
     paths:
-      - "blueprint/**"
+      - ".autoform.toml"
+      - "blueprints/**"
       - "**.lean"
       - "mkdocs.yml"
       - ".github/workflows/blueprint-pages.yml"
@@ -39,15 +41,16 @@ jobs:
       # declaration that is not in the sources.
       - name: Validate the theorem DAG and its declarations
         run: >-
-          uvx --from git+https://github.com/facebookresearch/autoform-bot.git@1cf2ca825fec5e6d3303e24374e218bf3e8ab5c1
-          autoform check blueprint --lean-root .
+          uvx --from https://github.com/facebookresearch/autoform-bot/archive/1cf2ca825fec5e6d3303e24374e218bf3e8ab5c1.tar.gz
+          autoform workspace check . --lean-root .
 
       # Writes site-src/: statement boxes, derived statuses, the Mermaid graph,
       # and permalinks into the Lean code at this exact commit.
       - name: Render the blueprint
         run: >-
-          uvx --from git+https://github.com/facebookresearch/autoform-bot.git@1cf2ca825fec5e6d3303e24374e218bf3e8ab5c1
-          autoform render blueprint
+          uvx --from https://github.com/facebookresearch/autoform-bot/archive/1cf2ca825fec5e6d3303e24374e218bf3e8ab5c1.tar.gz
+          autoform render .
+          --project hatcher
           --output site-src
           --lean-root .
           --require-declarations

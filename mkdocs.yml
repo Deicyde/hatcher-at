@@ -1,8 +1,8 @@
 site_name: Algebraic Topology (Hatcher)
 repo_url: https://github.com/Deicyde/hatcher-at
 
-# `autoform render` writes this directory from blueprint/. The vault stays the
-# source of truth; everything here is regenerated.
+# `autoform render` writes this directory from the selected registered vault.
+# The vault stays the source of truth; everything here is regenerated.
 docs_dir: site-src
 site_dir: site
 use_directory_urls: false
