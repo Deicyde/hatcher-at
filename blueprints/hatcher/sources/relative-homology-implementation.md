@@ -75,9 +75,9 @@ Use the short exact sequence from absolute chains of `A`, absolute chains of
 connecting morphism sends a relative cycle represented by `α` to the homology
 class of `∂α`, as on page 117, after specializing to ordinary integral
 homology. This pair sequence and representative formula are formalized locally.
-Naturality covers maps of pairs and the pair and reduced-pair
-sequences discussed on pages 127–128; the triple sequence and the quotient
-sequence for Theorem 2.13 are not part of this slice.
+Its naturality for maps of pairs is also formalized. Reduced-pair-sequence
+naturality remains downstream; the triple sequence and the quotient sequence
+for Theorem 2.13 are not part of this slice.
 
 ## Relative homotopy invariance
 
@@ -110,8 +110,8 @@ provides `SSetPair`, `SSetPair.chainComplex`, `SSetPair.homologyFunctor`,
 foundation is therefore exact Mathlib coverage, and `singular-pair-functor` is
 formalized locally. The relative chain-complex and homology functors are also
 formalized locally by composition with this API. The pair long exact sequence,
-including its connecting-map formula, is formalized from the associated short
-exact sequence.
+including its connecting-map formula and naturality, is formalized from the
+associated short exact sequence.
 
 Andrew Yang's PR
 [#37659](https://github.com/leanprover-community/mathlib4/pull/37659) is an
@@ -128,7 +128,8 @@ triple sequence remains open and paused pending excision.
 ## Readiness status
 
 The Mathlib gate is satisfied: the simplicial-pair foundation is complete at
-`v4.34.1`, and the singular-pair and relative-homology functors and pair long
-exact sequence are formalized locally. Nine of the fifteen relative-homology
-leaves are complete, with six downstream leaves incomplete; five are ready to
-state, while reduced-pair-sequence naturality awaits pair-sequence naturality.
+`v4.34.1`, and the singular-pair and relative-homology functors, pair long exact
+sequence, and pair-sequence naturality are formalized locally. Ten of the
+fifteen relative-homology leaves are complete, with five downstream leaves
+incomplete; four are ready to state, while reduced-pair-sequence naturality
+awaits only the reduced pair sequence.

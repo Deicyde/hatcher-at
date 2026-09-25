@@ -3,6 +3,9 @@ article_id: af_6423c35a3510db89ce80b6a0
 source_units: [hatcher-2-1-relative-homology-les]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.pairConnecting_naturality
 ---
 
 # The pair long exact sequence is natural
@@ -12,10 +15,11 @@ between their long exact homology sequences. In particular it commutes with
 the inclusion maps, the maps induced by the relative-chain quotients, and the
 connecting homomorphisms.
 
-The main artifact should be `Hatcher.Relative.pairConnecting_naturality`.
-Naturality of the ordinary and relative homology functors supplies the first
-two squares; the substantive compatibility is the square containing the
-connecting morphism.
+`Hatcher.Relative.pairSequenceMap` packages the induced morphism between six
+consecutive terms. Naturality of the ordinary and relative homology functors
+supplies its inclusion and quotient squares, while
+`Hatcher.Relative.pairConnecting_naturality` proves the substantive square
+containing the connecting morphism.
 
 ## Depends on
 

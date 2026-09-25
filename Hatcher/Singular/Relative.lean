@@ -1,7 +1,8 @@
-import Mathlib.AlgebraicTopology.SimplicialSet.Homology.Relative
-import Mathlib.AlgebraicTopology.SingularSet
-import Mathlib.AlgebraicTopology.SingularHomology.Basic
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
+import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
+import Mathlib.AlgebraicTopology.SimplicialSet.Homology.Relative
+import Mathlib.AlgebraicTopology.SingularHomology.Basic
+import Mathlib.AlgebraicTopology.SingularSet
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
 import Mathlib.Topology.Category.TopPair
@@ -133,6 +134,23 @@ section ExactSequence
 
 variable {C : Type u} [Category.{v} C] [HasCoproducts.{w} C] [Abelian C]
 
+/-- The short complex of subspace, ambient, and relative chains, before
+specializing to a topological pair. -/
+private noncomputable abbrev sSetPairChainComplexShortComplex (R : C) :
+    ShortComplex (SSetPair.{w} ⥤ ChainComplex C ℕ) :=
+  ShortComplex.mk
+    ((SSetPair.chainComplexFunctorLeftToRight C).app R)
+    ((SSetPair.chainComplexFunctorπ C).app R)
+    (NatTrans.congr_app (SSetPair.chainComplexFunctor_condition C) R)
+
+/-- The short complex of subspace, ambient, and relative singular chains,
+functorial in the topological pair. -/
+noncomputable def pairChainComplexShortComplexFunctor (R : C) :
+    TopPair.{w} ⥤ ShortComplex (ChainComplex C ℕ) :=
+  singularPairFunctor ⋙
+    (ShortComplex.functorEquivalence SSetPair.{w} (ChainComplex C ℕ)).functor.obj
+      (sSetPairChainComplexShortComplex R)
+
 /-- The connecting morphism from relative singular homology in degree `n` to
 the singular homology of the subspace in the adjacent degree `m`. -/
 noncomputable def pairConnecting
@@ -148,6 +166,17 @@ noncomputable def pairSequence
     ComposableArrows C 5 :=
   HomologicalComplex.HomologySequence.composableArrows₅
     ((singularPairFunctor.obj P).shortExact_chainComplexShortComplex R)
+    n m (by simpa)
+
+/-- A map of topological pairs induces a morphism between six consecutive
+terms of their long exact singular-homology sequences. -/
+noncomputable def pairSequenceMap {P Q : TopPair.{w}} (f : P ⟶ Q)
+    (R : C) (n m : ℕ) (h : m + 1 = n) :
+    pairSequence P R n m h ⟶ pairSequence Q R n m h :=
+  HomologicalComplex.HomologySequence.mapComposableArrows₅
+    ((pairChainComplexShortComplexFunctor R).map f)
+    ((singularPairFunctor.obj P).shortExact_chainComplexShortComplex R)
+    ((singularPairFunctor.obj Q).shortExact_chainComplexShortComplex R)
     n m (by simpa)
 
 /-- **Hatcher, Theorem 2.16 (page 117).** The singular-homology sequence of a
@@ -183,6 +212,21 @@ theorem pairConnecting_eq
   let hP := (singularPairFunctor.obj P).shortExact_chainComplexShortComplex R
   change _ ≫ _ ≫ hP.δ n m _ = _
   exact hP.δ_eq n m (by simpa using h) x₃ hx₃ x₂ hx₂ x₁ hx₁ k hk
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **Hatcher, §2.1 (page 127).** The connecting morphism in the long exact
+sequence of a pair is natural with respect to maps of topological pairs. -/
+@[reassoc]
+lemma pairConnecting_naturality {P Q : TopPair.{w}} (f : P ⟶ Q)
+    (R : C) (n m : ℕ) (h : m + 1 = n) :
+    pairConnecting P R n m h ≫
+        ((singularHomologyFunctor C m).obj R).map (TopPair.Hom.snd f) =
+      (homologyFunctor R n).map f ≫ pairConnecting Q R n m h := by
+  exact HomologicalComplex.HomologySequence.δ_naturality
+    ((pairChainComplexShortComplexFunctor R).map f)
+    ((singularPairFunctor.obj P).shortExact_chainComplexShortComplex R)
+    ((singularPairFunctor.obj Q).shortExact_chainComplexShortComplex R)
+    n m (by simpa)
 
 end ExactSequence
 
