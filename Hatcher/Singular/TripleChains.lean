@@ -357,6 +357,45 @@ theorem tripleChainComplexShortComplex_shortExact (T : TopTriple.{w}) (R : C) :
         exact pairXA_naturality)
   exact ShortComplex.shortExact_of_iso e hTail
 
+/-- The connecting morphism
+`H_n(X,A;R) ⟶ H_m(A,B;R)` for adjacent degrees in the homology sequence
+of a topological triple. -/
+noncomputable def tripleConnecting
+    (T : TopTriple.{w}) (R : C) (n m : ℕ) (h : m + 1 = n) :
+    (homologyFunctor R n).obj (TopTriple.pairXA.obj T) ⟶
+      (homologyFunctor R m).obj (TopTriple.pairAB.obj T) :=
+  (tripleChainComplexShortComplex_shortExact T R).δ n m (by simpa)
+
+/-- Six consecutive terms in the long exact relative-homology sequence of a
+topological triple. -/
+noncomputable def tripleSequence
+    (T : TopTriple.{w}) (R : C) (n m : ℕ) (h : m + 1 = n) :
+    ComposableArrows C 5 :=
+  HomologicalComplex.HomologySequence.composableArrows₅
+    (tripleChainComplexShortComplex_shortExact T R)
+    n m (by simpa)
+
+/-- **Hatcher, §2.1 (pages 118–119).** Six consecutive terms in the
+relative-homology sequence of a topological triple are exact. -/
+theorem tripleSequence_exact
+    (T : TopTriple.{w}) (R : C) (n m : ℕ) (h : m + 1 = n) :
+    (tripleSequence T R n m h).Exact := by
+  exact HomologicalComplex.HomologySequence.composableArrows₅_exact
+    (tripleChainComplexShortComplex_shortExact T R)
+    n m (by simpa)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The terminal degree-zero map
+`H₀(X,B;R) ⟶ H₀(X,A;R)` in the homology sequence of a topological
+triple is an epimorphism. -/
+theorem tripleHomologyMapXBToXA_zero_epi (T : TopTriple.{w}) (R : C) :
+    Epi ((homologyFunctor R 0).map (TopTriple.pairXBToXA T)) := by
+  haveI : Epi (tripleChainComplexMapXBToXA T R) :=
+    (tripleChainComplexShortComplex_shortExact T R).epi_g
+  change Epi (HomologicalComplex.homologyMap
+    (tripleChainComplexMapXBToXA T R) 0)
+  exact HomologicalComplex.epi_homologyMap_of_epi_of_not_rel _ _ (by simp)
+
 end TripleChains
 
 end Hatcher.Relative
