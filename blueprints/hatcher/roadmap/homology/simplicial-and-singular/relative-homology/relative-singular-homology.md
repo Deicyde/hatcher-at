@@ -3,6 +3,9 @@ article_id: af_e709207d0f23c61c8259719f
 source_units: [hatcher-2-1-relative-homology-les]
 declaration: def
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.homologyFunctor
 ---
 
 # Relative singular chains and homology
@@ -12,13 +15,14 @@ relative singular chains as `Cₙ(X;R) / Cₙ(A;R)` and relative singular
 homology as their homology. A map of pairs induces the corresponding map on
 relative chains and homology.
 
-The main artifact should be `Hatcher.Relative.homologyFunctor`; supporting
-artifacts include `Hatcher.Relative.chainComplexFunctor` and the quotient map
-from absolute chains. Supporting lemmas characterize relative cycles as chains
-whose boundary lies in the subspace chain complex, and relative boundaries as
-classes represented by an absolute boundary modulo a subspace chain. These
-definitions are obtained by composing the topological singular-pair functor
-with Mathlib's `SSetPair` functors.
+Formalized as `Hatcher.Relative.homologyFunctor`, with
+`Hatcher.Relative.chainComplexFunctor` for relative chains and
+`Hatcher.Relative.chainComplexFunctorπ` for the natural quotient from ambient
+singular chains. These definitions compose the topological singular-pair
+functor with Mathlib's `SSetPair` functors, whose cokernel construction supplies
+the categorical quotient behavior. The elementwise description of the
+connecting map is recorded with the integral long exact sequence rather than
+imposed on arbitrary coefficient categories.
 
 ## Depends on
 

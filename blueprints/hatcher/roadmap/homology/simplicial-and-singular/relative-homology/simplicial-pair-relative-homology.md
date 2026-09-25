@@ -23,8 +23,8 @@ API includes `SSetPair.chainComplex`, `homologyπ`, `homologyδ`, and
 
 Mathlib `v4.34.1` contains PR #41285, so this foundational node is complete.
 [The singular-pair functor](singular-pair-functor.md) is now formalized, and
-[relative singular homology](relative-singular-homology.md) is the next ready
-node.
+[relative singular homology](relative-singular-homology.md) is formalized on
+top of it.
 
 ## Depends on
 

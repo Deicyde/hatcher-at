@@ -107,7 +107,8 @@ and is included at the repository's current stable Mathlib `v4.34.1` pin. It
 provides `SSetPair`, `SSetPair.chainComplex`, `SSetPair.homologyFunctor`,
 `SSetPair.homologyδ`, and `SSetPair.homology_exact₁/₂/₃`. The simplicial-pair
 foundation is therefore exact Mathlib coverage, and `singular-pair-functor` is
-formalized locally. `relative-singular-homology` is next ready.
+formalized locally. The relative chain-complex and homology functors are also
+formalized locally by composition with this API.
 
 Andrew Yang's PR
 [#37659](https://github.com/leanprover-community/mathlib4/pull/37659) is an
@@ -124,6 +125,6 @@ triple sequence remains open and paused pending excision.
 ## Readiness status
 
 The Mathlib gate is satisfied: the simplicial-pair foundation is complete at
-`v4.34.1`, and `singular-pair-functor` is formalized locally. Seven of the
-fifteen relative-homology leaves are complete, with eight downstream leaves
-incomplete; `relative-singular-homology` is next ready.
+`v4.34.1`, and the singular-pair and relative-homology functors are formalized
+locally. Eight of the fifteen relative-homology leaves are complete, with seven
+downstream leaves incomplete; four statements are ready to formalize.
