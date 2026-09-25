@@ -3,6 +3,9 @@ article_id: af_28eb45968cda0d7223634efb
 source_units: [hatcher-2-1-relative-homology-les]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.pairSequence_exact
 ---
 
 # The long exact sequence of a pair
@@ -13,10 +16,13 @@ an exact sequence
 
 `... → Hₙ(A;R) → Hₙ(X;R) → Hₙ(X,A;R) → Hₙ₋₁(A;R) → ...`.
 
-The main artifact should be `Hatcher.Relative.pairSequence_exact`, uniformly
-quantified over adjacent degrees. In the integral `AddCommGrp` specialization,
-the connecting map must agree with the source's elementwise description: a
-relative cycle represented by `α` is sent to the class of `∂α`.
+`Hatcher.Relative.pairSequence` packages six consecutive terms, while
+`Hatcher.Relative.pairSequence_exact` proves exactness at every position,
+uniformly over adjacent degrees. `Hatcher.Relative.pairConnecting` exposes the
+connecting morphism, and `Hatcher.Relative.pairConnecting_eq` proves that it
+sends a relative cycle represented by `α` to the homology class of `∂α`. In
+the integral `AddCommGrpCat` specialization, generalized elements from `ℤ`
+recover the source's elementwise formula `δ[α] = [∂α]`.
 
 ## Depends on
 

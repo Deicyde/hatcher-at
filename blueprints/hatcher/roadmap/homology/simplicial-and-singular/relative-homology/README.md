@@ -17,9 +17,12 @@ node are complete. The `SSetPair` relative-homology foundation is also complete
 because the current Mathlib `v4.34.1` pin contains PR #41285, and
 [the singular-pair functor](singular-pair-functor.md) is formalized locally.
 [Relative singular homology](relative-singular-homology.md) is also
-formalized. Thus eight of the fifteen leaves are complete and seven downstream
-leaves remain; Autoform exposes four statements across the exact-sequence,
-pointed-comparison, and homotopy-invariance branches.
+formalized, as is [the pair long exact sequence](pair-long-exact-sequence.md),
+including its connecting-map formula. Thus nine of the fifteen leaves are
+complete and six downstream leaves remain. Autoform exposes five statements:
+pair-sequence naturality, the reduced pair sequence, the pointed comparison,
+and the two relative-homotopy-invariance nodes. Reduced-pair-sequence
+naturality remains blocked on pair-sequence naturality.
 
 ## Reduced homology
 

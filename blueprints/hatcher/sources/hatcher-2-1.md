@@ -78,10 +78,12 @@ definition and functoriality of reduced homology, relative chains and homology,
 Theorem 2.16, the long exact sequence of a pair and its naturality, Example
 2.18, and Proposition 2.19. Its representation is fixed in the
 [relative-homology implementation specification](relative-homology-implementation.md).
-Eight of these fifteen leaves are complete. The simplicial-pair foundation is
+Nine of these fifteen leaves are complete. The simplicial-pair foundation is
 available at the current pin, and the singular-pair and relative-homology
-functors are formalized locally. Seven downstream leaves remain incomplete;
-four statements are ready to formalize.
+functors and pair long exact sequence are formalized locally. The latter
+includes the integral connecting-map formula. Six downstream leaves remain
+incomplete; five are ready to state, while reduced-pair-sequence naturality
+awaits pair-sequence naturality.
 
 Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
 component decomposition. Lemma 2.1, Examples 2.2–2.5, Theorem 2.13, Example
@@ -163,6 +165,7 @@ excision, and Δ-complex homology with its comparison theorem.
   to a basepoint, since that is Example 2.18.
 - **Relative theory.** Use the merged `SSetPair` design. Its foundational node
   is exact Mathlib coverage at the current `v4.34.1` pin, and
-  the singular-pair and relative-homology functors are formalized locally. Use
+  the singular-pair and relative-homology functors and the pair long exact
+  sequence are formalized locally, including the connecting-map formula. Use
   the upstream cokernel and exact-sequence APIs for the remaining nodes; do not
   copy a competing cokernel API into the project.

@@ -1,6 +1,7 @@
 import Mathlib.AlgebraicTopology.SimplicialSet.Homology.Relative
 import Mathlib.AlgebraicTopology.SingularSet
 import Mathlib.AlgebraicTopology.SingularHomology.Basic
+import Mathlib.Algebra.Homology.HomologySequenceLemmas
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
 import Mathlib.Topology.Category.TopPair
@@ -127,5 +128,62 @@ noncomputable def homologyFunctor (R : C) (n : ℕ) : TopPair.{w} ⥤ C :=
   singularPairFunctor ⋙ SSetPair.homologyFunctor R n
 
 end Homology
+
+section ExactSequence
+
+variable {C : Type u} [Category.{v} C] [HasCoproducts.{w} C] [Abelian C]
+
+/-- The connecting morphism from relative singular homology in degree `n` to
+the singular homology of the subspace in the adjacent degree `m`. -/
+noncomputable def pairConnecting
+    (P : TopPair.{w}) (R : C) (n m : ℕ) (h : m + 1 = n) :
+    (homologyFunctor R n).obj P ⟶
+      ((singularHomologyFunctor C m).obj R).obj P.snd :=
+  (singularPairFunctor.obj P).homologyδ R n m h
+
+/-- Six consecutive terms in the long exact singular-homology sequence of a
+topological pair. -/
+noncomputable def pairSequence
+    (P : TopPair.{w}) (R : C) (n m : ℕ) (h : m + 1 = n) :
+    ComposableArrows C 5 :=
+  HomologicalComplex.HomologySequence.composableArrows₅
+    ((singularPairFunctor.obj P).shortExact_chainComplexShortComplex R)
+    n m (by simpa)
+
+/-- **Hatcher, Theorem 2.16 (page 117).** The singular-homology sequence of a
+topological pair is exact at every position across adjacent degrees. -/
+theorem pairSequence_exact
+    (P : TopPair.{w}) (R : C) (n m : ℕ) (h : m + 1 = n) :
+    (pairSequence P R n m h).Exact := by
+  exact HomologicalComplex.HomologySequence.composableArrows₅_exact
+    ((singularPairFunctor.obj P).shortExact_chainComplexShortComplex R)
+    n m (by simpa)
+
+/-- The connecting morphism sends a relative cycle to the homology class of
+its boundary in the subspace.  Specializing to `AddCommGrpCat` and generalized
+elements from `ℤ` gives Hatcher's formula `δ[α] = [∂α]`. -/
+theorem pairConnecting_eq
+    (P : TopPair.{w}) (R : C) (n m : ℕ) (h : m + 1 = n)
+    {T : C}
+    (x₃ : T ⟶ ((singularPairFunctor.obj P).chainComplex R).X n)
+    (hx₃ : x₃ ≫ ((singularPairFunctor.obj P).chainComplex R).d n m = 0)
+    (x₂ : T ⟶ ((singularPairFunctor.obj P).right.chainComplex R).X n)
+    (hx₂ : x₂ ≫ ((singularPairFunctor.obj P).chainComplexπ R).f n = x₃)
+    (x₁ : T ⟶ ((singularPairFunctor.obj P).left.chainComplex R).X m)
+    (hx₁ : x₁ ≫ (SSet.chainComplexMap (singularPairFunctor.obj P).hom R).f m =
+      x₂ ≫ ((singularPairFunctor.obj P).right.chainComplex R).d n m)
+    (k : ℕ) (hk : (ComplexShape.down ℕ).next m = k)
+    (hx₁cycle : x₁ ≫ ((singularPairFunctor.obj P).left.chainComplex R).d m k = 0) :
+    ((singularPairFunctor.obj P).chainComplex R).liftCycles x₃ m
+        ((ComplexShape.down ℕ).next_eq' (by simpa using h)) hx₃ ≫
+      ((singularPairFunctor.obj P).chainComplex R).homologyπ n ≫
+      pairConnecting P R n m h =
+    ((singularPairFunctor.obj P).left.chainComplex R).liftCycles x₁ k hk hx₁cycle ≫
+      ((singularPairFunctor.obj P).left.chainComplex R).homologyπ m := by
+  let hP := (singularPairFunctor.obj P).shortExact_chainComplexShortComplex R
+  change _ ≫ _ ≫ hP.δ n m _ = _
+  exact hP.δ_eq n m (by simpa using h) x₃ hx₃ x₂ hx₂ x₁ hx₁ k hk
+
+end ExactSequence
 
 end Hatcher.Relative

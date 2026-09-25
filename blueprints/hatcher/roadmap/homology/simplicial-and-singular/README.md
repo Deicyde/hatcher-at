@@ -8,7 +8,7 @@ Hatcher §2.1 (pages 102–133). The completed first slice covers singular
 homology, its low-degree checks, functoriality, and homotopy invariance through
 Corollary 2.11 and Proposition 2.12. A second selected slice decomposes reduced
 and relative homology, exact sequences, naturality, and relative homotopy
-invariance; eight of its fifteen leaves are complete.
+invariance; nine of its fifteen leaves are complete.
 
 Simplicial homology takes a Δ-complex structure and forms the chain complex of
 its simplices; it is finite and computable but depends on the chosen structure.
@@ -25,8 +25,10 @@ source-facing consequences are formalized locally in
 exact sequence and, at the current `v4.34.1` pin, the `SSetPair` relative-
 homology foundation from PR #41285. The four reduced-homology leaves, generic
 algebraic exact-sequence leaf, simplicial-pair foundation, singular-pair
-functor, and relative-homology functor are complete. Seven downstream leaves
-remain incomplete, with four statements ready to formalize.
+functor, relative-homology functor, and pair long exact sequence are complete.
+The latter includes the integral connecting-map formula. Six downstream leaves
+remain incomplete; five are ready to state and reduced-pair-sequence
+naturality awaits pair-sequence naturality.
 
 ## Singular chains and low degrees
 
@@ -63,9 +65,13 @@ present at the repository's `v4.34.1` pin. The simplicial-pair foundation is
 therefore complete, and
 [the singular-pair functor](relative-homology/singular-pair-functor.md) and
 [relative singular homology](relative-homology/relative-singular-homology.md)
-are now formalized. The exact-sequence, pointed-comparison, and relative
-homotopy-invariance statements are the next available work. Excision remains
-active upstream work.
+are now formalized. The
+[pair long exact sequence](relative-homology/pair-long-exact-sequence.md),
+including its connecting-map formula, is also formalized. Pair-sequence
+naturality, the reduced pair sequence, the pointed comparison, and the two
+relative-homotopy-invariance nodes are ready to state; reduced-pair-sequence
+naturality remains blocked on pair-sequence naturality. Excision remains active
+upstream work.
 
 ## Sources
 

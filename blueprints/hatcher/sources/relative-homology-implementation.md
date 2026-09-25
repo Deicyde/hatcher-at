@@ -56,8 +56,8 @@ object.
 
 At the current Mathlib `v4.34.1` pin,
 `Hatcher.Relative.singularPairFunctor : TopPair ⥤ SSetPair` is formalized.
-The next implementation node obtains the relative singular chain-complex and
-homology functors by composing it with `SSetPair.chainComplexFunctor` and
+The relative singular chain-complex and homology functors are obtained by
+composing it with `SSetPair.chainComplexFunctor` and
 `SSetPair.homologyFunctor`. These are the quotient chains
 `Cₙ(X; R) / Cₙ(A; R)` from pages 115–116. Maps of pairs are handled by
 functoriality rather than by a second ad hoc map construction.
@@ -74,7 +74,8 @@ Use the short exact sequence from absolute chains of `A`, absolute chains of
 `X`, and relative chains of `(X,A)` to expose Hatcher's pair sequence. Its
 connecting morphism sends a relative cycle represented by `α` to the homology
 class of `∂α`, as on page 117, after specializing to ordinary integral
-homology. Naturality covers maps of pairs and the pair and reduced-pair
+homology. This pair sequence and representative formula are formalized locally.
+Naturality covers maps of pairs and the pair and reduced-pair
 sequences discussed on pages 127–128; the triple sequence and the quotient
 sequence for Theorem 2.13 are not part of this slice.
 
@@ -108,7 +109,9 @@ provides `SSetPair`, `SSetPair.chainComplex`, `SSetPair.homologyFunctor`,
 `SSetPair.homologyδ`, and `SSetPair.homology_exact₁/₂/₃`. The simplicial-pair
 foundation is therefore exact Mathlib coverage, and `singular-pair-functor` is
 formalized locally. The relative chain-complex and homology functors are also
-formalized locally by composition with this API.
+formalized locally by composition with this API. The pair long exact sequence,
+including its connecting-map formula, is formalized from the associated short
+exact sequence.
 
 Andrew Yang's PR
 [#37659](https://github.com/leanprover-community/mathlib4/pull/37659) is an
@@ -125,6 +128,7 @@ triple sequence remains open and paused pending excision.
 ## Readiness status
 
 The Mathlib gate is satisfied: the simplicial-pair foundation is complete at
-`v4.34.1`, and the singular-pair and relative-homology functors are formalized
-locally. Eight of the fifteen relative-homology leaves are complete, with seven
-downstream leaves incomplete; four statements are ready to formalize.
+`v4.34.1`, and the singular-pair and relative-homology functors and pair long
+exact sequence are formalized locally. Nine of the fifteen relative-homology
+leaves are complete, with six downstream leaves incomplete; five are ready to
+state, while reduced-pair-sequence naturality awaits pair-sequence naturality.
