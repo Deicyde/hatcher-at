@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSES/Apache-2.0.t
 Authors: Jack McCarthy
 -/
 import Mathlib.Algebra.Homology.Augment
+import Mathlib.AlgebraicTopology.SimplicialSet.TopAdj
 import Mathlib.AlgebraicTopology.SingularHomology.Basic
+import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-!
 # Reduced singular chains
@@ -154,6 +156,45 @@ noncomputable def homologyIsoOfPositiveDegree (R : C) (n : ℕ) (hn : 0 < n) :
           (Functor.isoWhiskerLeft ((singularChainComplexFunctor C).obj R)
             (HomologicalComplex.homologyFunctorIso' C (ComplexShape.down ℕ)
               (k + 2) (k + 1) k (by simp) (by simp))).symm
+
+/-- **Hatcher, §2.1 (page 110).** A chosen point splits zeroth singular
+homology as the biproduct of reduced zeroth homology and the coefficient
+object. This isomorphism is not asserted to be natural in unpointed spaces. -/
+noncomputable def homologyZeroIso [HasBinaryBiproducts C]
+    (R : C) (X : TopCat.{w}) (x : X) :
+    ((singularHomologyFunctor.{w} C 0).obj R).obj X ≅
+      (homologyFunctor.{w} R 0).obj X ⊞ R := by
+  let K := ((singularChainComplexFunctor.{w} C).obj R).obj X
+  let A := (augmentedSingularChainComplexFunctor.{w} R).obj X
+  let e₀ : K.homology 0 ≅ K.opcycles 0 :=
+    K.isoHomologyι 0 0 (by simp) (by simp)
+  let hK := K.opcyclesIsCokernel 1 0 (by simp)
+  let hA := A.opcyclesIsCokernel 2 1 (by simp)
+  dsimp [A, augmentedSingularChainComplexFunctor,
+    ChainComplex.augment] at hA
+  let e₁ : K.opcycles 0 ≅ A.opcycles 1 :=
+    IsColimit.coconePointUniqueUpToIso hK hA
+  let x₀ := TopCat.toSSetObj₀Equiv.symm x
+  let vertex : R ⟶ A.X 1 := by
+    change R ⟶ K.X 0
+    exact (TopCat.toSSet.obj X).ιChainComplex x₀
+  have hvertex : vertex ≫ A.d 1 0 = 𝟙 R := by
+    change (TopCat.toSSet.obj X).ιChainComplex x₀ ≫
+      chainAugmentation R X = 𝟙 R
+    exact ι_chainAugmentation R X x₀
+  let s : R ⟶ A.opcycles 1 := vertex ≫ A.pOpcycles 1
+  have hs : s ≫ A.fromOpcycles 1 0 = 𝟙 R := by
+    dsimp only [s]
+    rw [Category.assoc, A.p_fromOpcycles]
+    exact hvertex
+  letI : IsSplitEpi (A.fromOpcycles 1 0) :=
+    IsSplitEpi.mk' { section_ := s, id := hs }
+  let hker := A.homologyIsKernel 1 0 (by simp)
+  let e₂ : A.opcycles 1 ≅ A.homology 1 ⊞ R :=
+    ((isBilimitBinaryBiconeOfIsSplitEpiOfKernel hker).isLimit).conePointUniqueUpToIso
+      (BinaryBiproduct.isLimit _ _)
+  change K.homology 0 ≅ A.homology 1 ⊞ R
+  exact e₀.trans (e₁.trans e₂)
 
 end Homology
 
