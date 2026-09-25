@@ -3,6 +3,8 @@ article_id: af_d419a29f857a10423aa75cdf
 source_units: [hatcher-2-1-relative-homology-les]
 declaration: def
 origin: cited
+lean: Hatcher.Reduced.homologyFunctor
+statement: formalized
 ---
 
 # Reduced singular homology

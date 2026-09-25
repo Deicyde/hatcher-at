@@ -104,4 +104,17 @@ noncomputable def augmentedSingularChainComplexFunctor (R : C) :
     · simp [augmentedMap]
     · simp [augmentedMap]
 
+section Homology
+
+variable [CategoryWithHomology C]
+
+/-- **Hatcher, §2.1 (pages 110 and 113).** Reduced singular homology in degree
+`n`, defined as degree `n + 1` homology of the augmented singular chain
+complex. This is functorial in the space. -/
+noncomputable def homologyFunctor (R : C) (n : ℕ) : TopCat.{w} ⥤ C :=
+  augmentedSingularChainComplexFunctor R ⋙
+    HomologicalComplex.homologyFunctor C (ComplexShape.down ℕ) (n + 1)
+
+end Homology
+
 end Hatcher.Reduced
