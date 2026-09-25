@@ -30,13 +30,13 @@ theorem proj_mk (q : UniversalCover X x₀) :
   rfl
 
 theorem continuous_proj
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X] :
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X] :
     Continuous (proj H) := by
   exact (UniversalCover.continuous_proj (X := X) (x₀ := x₀)).quotient_lift
     (fun a b h ↦ (show subgroupCoverRel H a b from h).choose)
 
 /-- The subgroup-cover quotient is path-connected. -/
-instance pathConnectedSpace [PathConnectedSpace X] [LocPathConnectedSpace X]
+instance pathConnectedSpace [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X] : PathConnectedSpace (SubgroupCover H) :=
   (Quotient.mk_surjective.pathConnectedSpace continuous_quot_mk)
 
@@ -71,7 +71,7 @@ private theorem subgroupCoverRel_of_trans_right {x y : X}
   simpa [CategoryTheory.Category.assoc] using hab
 
 private theorem subgroupCoverRel_of_mem_basicOpen
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     {U : Set X} (hU : IsNullhomotopicOpen U)
     {a b q r : UniversalCover X x₀} (haU : a.1 ∈ U) (hbU : b.1 ∈ U)
     (hab : subgroupCoverRel H a b)
@@ -108,7 +108,7 @@ private theorem subgroupCoverRel_of_mem_basicOpen
   exact hext
 
 private theorem subgroupCoverRel_base_of_mem_basicOpen
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     {U : Set X} (hU : IsNullhomotopicOpen U)
     {a b q r : UniversalCover X x₀} (haU : a.1 ∈ U) (hbU : b.1 ∈ U)
     (habEnd : a.1 = b.1)
@@ -145,7 +145,7 @@ private theorem subgroupCoverRel_base_of_mem_basicOpen
   exact subgroupCoverRel_of_trans_right H a b dX hext
 
 private theorem image_basicOpen_eq_of_rel
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     {U : Set X} (hU : IsNullhomotopicOpen U)
     {a b : UniversalCover X x₀} (haU : a.1 ∈ U) (hbU : b.1 ∈ U)
     (hab : subgroupCoverRel H a b) :
@@ -184,7 +184,7 @@ private theorem proj_representative (q : SubgroupCover H) :
     _ = proj H q := congrArg (proj H) (mk_representative H q)
 
 private theorem isOpen_image_basicOpen
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     {U : Set X} (hU : IsNullhomotopicOpen U)
     {x : X} (hx : x ∈ U) (a : Path.Homotopic.Quotient x₀ x) :
     IsOpen (mk H '' UniversalCover.basicOpen U hx a) := by
@@ -223,14 +223,14 @@ private def sheet {x : X} (U : Set X) (hx : x ∈ U)
     (representative H e.1).2
 
 private theorem isOpen_sheet
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     {x : X} {U : Set X} (hU : IsNullhomotopicOpen U) (hx : x ∈ U)
     (e : (proj H) ⁻¹' ({x} : Set X)) : IsOpen (sheet H U hx e) :=
   isOpen_image_basicOpen H hU (fiberRepresentativeMem H hx e)
     (representative H e.1).2
 
 private theorem bijOn_proj_sheet
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     {x : X} {U : Set X} (hU : IsNullhomotopicOpen U) (hx : x ∈ U)
     (e : (proj H) ⁻¹' ({x} : Set X)) :
     Set.BijOn (proj H) (sheet H U hx e) U := by
@@ -258,7 +258,7 @@ private theorem self_mem_sheet
     (representative H e.1).2
 
 theorem discreteTopology_fiber_proj
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X] (x : X) :
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X] (x : X) :
     DiscreteTopology ((proj H) ⁻¹' ({x} : Set X)) := by
   rw [discreteTopology_iff_isOpen_singleton]
   intro e
@@ -283,7 +283,7 @@ theorem discreteTopology_fiber_proj
     exact e'.2.trans e.2.symm
 
 private theorem isOpen_iff_preimage_inter_sheet
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     {x : X} {U W : Set X} (hU : IsNullhomotopicOpen U) (hWU : W ⊆ U)
     (hx : x ∈ U) (e : (proj H) ⁻¹' ({x} : Set X)) :
     IsOpen W ↔ IsOpen (proj H ⁻¹' W ∩ sheet H U hx e) := by
@@ -322,7 +322,7 @@ private theorem isOpen_iff_preimage_inter_sheet
     exact hrW
 
 private theorem pairwise_disjoint_sheet
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     {x : X} {U : Set X} (hU : IsNullhomotopicOpen U) (hx : x ∈ U) :
     Pairwise fun e e' : (proj H) ⁻¹' ({x} : Set X) ↦
       Disjoint (sheet H U hx e) (sheet H U hx e') := by
@@ -347,7 +347,7 @@ private theorem pairwise_disjoint_sheet
     _ = e'.1 := mk_representative H e'.1
 
 private theorem preimage_subset_iUnion_sheet
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     {x : X} {U : Set X} (hU : IsNullhomotopicOpen U) (hx : x ∈ U) :
     proj H ⁻¹' U ⊆ ⋃ e : (proj H) ⁻¹' ({x} : Set X), sheet H U hx e := by
   intro q hqU
@@ -387,7 +387,7 @@ theorem surjective_proj [PathConnectedSpace X] : Function.Surjective (proj H) :=
 
 /-- The endpoint projection from the covering associated to `H` is a covering map. -/
 theorem isCoveringMap_proj
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X] : IsCoveringMap (proj H) := by
   intro x
   obtain ⟨U, hU, hx, -⟩ :=

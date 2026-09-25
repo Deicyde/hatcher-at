@@ -290,7 +290,11 @@ private theorem wordOfEntries_eq_of_combine
     (a b : CoverGroup U x₀ hx₀ i) :
     wordOfEntries (before ++ ⟨i, a⟩ :: ⟨i, b⟩ :: after) =
       wordOfEntries (before ++ ⟨i, b * a⟩ :: after) := by
-  simp [wordOfEntries, entryWord, List.reverse_append, map_mul, mul_assoc]
+  simp only [wordOfEntries, entryWord, List.reverse_append, List.reverse_cons,
+    List.map_append, List.map_cons, List.map_nil, List.prod_append,
+    List.prod_cons, List.prod_nil, mul_one]
+  rw [map_mul]
+  simp only [mul_assoc]
 
 private theorem quotient_overlap_eq (i j : ι)
     (ω : OverlapGroup U x₀ hx₀ i j) :

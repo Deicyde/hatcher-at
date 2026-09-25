@@ -1300,6 +1300,7 @@ private theorem indexedArmMap_zero_eq_indexedRadialMap_one
   · exact armPoint_one f s₀ x₀ γ j 1
   · exact armPoint_one f s₀ x₀ γ j 1
 
+set_option backward.isDefEq.respectTransparency false in
 @[simp] private theorem phaseAMap_zero (z : upperCover f s₀ x₀ γ) :
     phaseAMap f s₀ x₀ γ (0, z) = z := by
   obtain ⟨a, rfl⟩ :=

@@ -54,7 +54,7 @@ private def normalizerEndpoint
     ⟨C.basepoint, C.proj_basepoint⟩
 
 private theorem fundamentalGroupRange_rebase_normalizerEndpoint
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀)
     (g : Subgroup.normalizer
       (C.fundamentalGroupRange : Set (FundamentalGroup X x₀))) :
@@ -71,7 +71,7 @@ private theorem fundamentalGroupRange_rebase_normalizerEndpoint
   exact (hchange.trans hnormal).symm
 
 private def normalizerDeck
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀)
     (g : Subgroup.normalizer
       (C.fundamentalGroupRange : Set (FundamentalGroup X x₀))) : deck C.proj :=
@@ -80,7 +80,7 @@ private def normalizerDeck
       (fundamentalGroupRange_rebase_normalizerEndpoint C g)
 
 private theorem normalizerDeck_apply_basepoint
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀)
     (g : Subgroup.normalizer
       (C.fundamentalGroupRange : Set (FundamentalGroup X x₀))) :
@@ -92,7 +92,7 @@ private theorem normalizerDeck_apply_basepoint
 /-- The normalizer of a connected covering's image subgroup maps to its deck
 transformation group. -/
 def normalizerToDeck
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀) :
     Subgroup.normalizer
         (C.fundamentalGroupRange : Set (FundamentalGroup X x₀)) →* deck C.proj where
@@ -100,7 +100,10 @@ def normalizerToDeck
   map_one' := by
     apply deck.ext_of_eq_at C.isCoveringMap (e := C.basepoint)
     rw [normalizerDeck_apply_basepoint]
-    simp [normalizerEndpoint]
+    change (C.isCoveringMap.monodromyPerm x₀ (1 : FundamentalGroup X x₀)
+      ⟨C.basepoint, C.proj_basepoint⟩).1 = C.basepoint
+    rw [map_one]
+    rfl
   map_mul' g h := by
     apply deck.ext_of_eq_at C.isCoveringMap (e := C.basepoint)
     rw [normalizerDeck_apply_basepoint, mul_smul, normalizerDeck_apply_basepoint]
@@ -128,7 +131,7 @@ def normalizerToDeck
 whose value at the chosen point is its inverse-monodromy endpoint. -/
 @[simp]
 theorem normalizerToDeck_smul_basepoint
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀)
     (g : Subgroup.normalizer
       (C.fundamentalGroupRange : Set (FundamentalGroup X x₀))) :

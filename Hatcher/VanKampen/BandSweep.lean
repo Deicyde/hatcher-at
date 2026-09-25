@@ -167,6 +167,7 @@ def bandOpenEntries {n : ℕ} (index : Fin (n + 1) → ι)
   ⟨index 0, left 0⟩ :: bandTopEntries index top ++
     [⟨index (Fin.last n), (right (Fin.last n))⁻¹⟩]
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Adjacent vertical connector loops cancel after changing cover through
 their common overlap. The two exterior connector loops are retained. -/
 theorem moves_cancel_band_internal_connectors {n : ℕ}
@@ -232,9 +233,9 @@ theorem moves_cancel_band_internal_connectors {n : ℕ}
         convert hcancel using 1 <;>
           simp [bandCellEntries, firstCell, index', top', left', right',
             List.ofFn_succ, Fin.succ_last]
-        all_goals exact ⟨rfl, rfl⟩
       exact htail''.trans hcancel'
 
+set_option backward.isDefEq.respectTransparency false in
 /-- A row of cellular identities gives a move chain from the bottom entries
 to the top entries once the two exterior vertical loops are trivial. -/
 theorem moves_of_band_cell_relations {n : ℕ}
@@ -308,7 +309,10 @@ theorem moves_of_band_cell_relations {n : ℕ}
     rw [hright_last] at h
     unfold bandTopEntries
     rw [List.ofFn_succ_last, hright_last]
-    simpa using h
+    simpa only [CategoryTheory.Aut.Aut_inv_def,
+      CategoryTheory.Aut.Aut_mul_def, CategoryTheory.Iso.refl_symm,
+      CategoryTheory.Iso.refl_trans, inv_one, one_mul, List.append_assoc,
+      List.singleton_append] using h
   exact hsplit.trans (hcancel.trans (hleftMove.trans hrightMove))
 
 end Hatcher.VanKampen.Factorization

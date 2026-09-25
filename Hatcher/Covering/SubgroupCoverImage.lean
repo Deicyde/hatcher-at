@@ -12,6 +12,7 @@ universe u
 variable {X : Type u} [TopologicalSpace X] {x₀ : X}
 variable (H : Subgroup (FundamentalGroup X x₀))
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem mk_loop_eq_basepoint_iff (g : FundamentalGroup X x₀) :
     mk H ⟨x₀, g.toPath⟩ = basepoint H ↔ g ∈ H := by
   rw [show basepoint H = mk H (UniversalCover.basepoint (X := X) (x₀ := x₀)) from rfl]
@@ -40,20 +41,20 @@ private theorem mk_loop_eq_basepoint_iff (g : FundamentalGroup X x₀) :
       Path.Homotopic.Quotient.trans_refl]
     exact hg
 
-private def subgroupLift [LocPathConnectedSpace X]
+private def subgroupLift [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X] (g : Path x₀ x₀) :
     Path (basepoint H)
       (mk H ⟨x₀, Path.Homotopic.Quotient.mk g⟩) :=
   (UniversalCover.initialSegmentPath g).map continuous_quot_mk
 
-private theorem subgroupLift_map [LocPathConnectedSpace X]
+private theorem subgroupLift_map [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X] (g : Path x₀ x₀) :
     (subgroupLift H g).map (continuous_proj H) = g := by
   ext t
   rfl
 
 private theorem monodromy_basepoint [PathConnectedSpace X]
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     (g : FundamentalGroup X x₀) :
     (isCoveringMap_proj H).monodromyPerm x₀ g ⟨basepoint H, rfl⟩ =
       ⟨mk H ⟨x₀, g.toPath⟩, rfl⟩ := by
@@ -73,8 +74,9 @@ private theorem monodromy_basepoint [PathConnectedSpace X]
   convert hm using 1
   congr 2
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The subgroup covering realizes the subgroup used in its construction. -/
-theorem range_map_eq [PathConnectedSpace X] [LocPathConnectedSpace X]
+theorem range_map_eq [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X] :
     (FundamentalGroup.map
       ⟨proj H, (isCoveringMap_proj H).continuous⟩ (basepoint H)).range = H := by

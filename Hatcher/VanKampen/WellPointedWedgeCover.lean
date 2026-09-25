@@ -258,7 +258,11 @@ theorem isOpen_coverSet
     (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i)
     (hNopen : ∀ i, IsOpen (N i)) (i : ι) :
     IsOpen (coverSet x₀ N hN i) := by
-  rw [isOpen_coinduced]
+  change @IsOpen (Option (Σ j, X j)) (prequotientTopology (X := X))
+    ((Quotient.mk (setoid X x₀) :
+      Option (Σ j, X j) → Hatcher.PointedWedge X x₀) ⁻¹'
+      coverSet x₀ N hN i)
+  rw [quotientMk_preimage_coverSet]
   change @IsOpen (Option (Σ j, X j))
     (TopologicalSpace.coinduced (fun z : Σ j, X j => some z) inferInstance ⊔
       TopologicalSpace.coinduced
@@ -339,7 +343,11 @@ theorem isOpen_neckSet
     (N : ∀ i, Set (X i)) (hN : ∀ i, x₀ i ∈ N i)
     (hNopen : ∀ i, IsOpen (N i)) :
     IsOpen (neckSet x₀ N hN) := by
-  rw [isOpen_coinduced]
+  change @IsOpen (Option (Σ i, X i)) (prequotientTopology (X := X))
+    ((Quotient.mk (setoid X x₀) :
+      Option (Σ i, X i) → Hatcher.PointedWedge X x₀) ⁻¹'
+      neckSet x₀ N hN)
+  rw [quotientMk_preimage_neckSet]
   change @IsOpen (Option (Σ i, X i))
     (TopologicalSpace.coinduced (fun z : Σ i, X i ↦ some z) inferInstance ⊔
       TopologicalSpace.coinduced
@@ -629,10 +637,10 @@ private theorem continuous_quotientLift
     (hsummand : ∀ i, Continuous fun x : X i ↦ f (some ⟨i, x⟩)) :
     @Continuous (Hatcher.PointedWedge X x₀) Y
       (instTopologicalSpace x₀) _ (Quotient.lift f hrel) := by
-  change @Continuous (Hatcher.PointedWedge X x₀) Y
+  change @Continuous (Quotient (setoid X x₀)) Y
     (TopologicalSpace.coinduced
       (Quotient.mk (setoid X x₀) :
-        Option (Σ i, X i) → Hatcher.PointedWedge X x₀)
+        Option (Σ i, X i) → Quotient (setoid X x₀))
       (prequotientTopology (X := X))) _ (Quotient.lift f hrel)
   rw [continuous_coinduced_dom]
   change @Continuous (Option (Σ i, X i)) Y
@@ -688,13 +696,15 @@ def memberProjection (i : ι) : C(Hatcher.PointedWedge X x₀, X i) where
 @[simp]
 theorem memberProjection_inclusion_self (i : ι) (x : X i) :
     memberProjection x₀ i (inclusion x₀ i x) = x := by
-  simp [memberProjection, memberProjectionPre, inclusion]
+  change memberProjectionPre x₀ i (some ⟨i, x⟩) = x
+  simp [memberProjectionPre]
 
 @[simp]
 theorem memberProjection_inclusion_of_ne
     {i j : ι} (hji : j ≠ i) (x : X j) :
     memberProjection x₀ i (inclusion x₀ j x) = x₀ i := by
-  simp [memberProjection, memberProjectionPre, inclusion, hji]
+  change memberProjectionPre x₀ i (some ⟨j, x⟩) = x₀ i
+  simp [memberProjectionPre, hji]
 
 @[simp]
 theorem memberProjection_basepoint (i : ι) :
@@ -714,8 +724,8 @@ theorem vanKampenCoverRetraction_comp_inclusion
         (vanKampenCoverInclusion x₀ hwell i) =
       ContinuousMap.id (X i) := by
   ext x
-  simp [vanKampenCoverRetraction, memberProjection,
-    memberProjectionPre, inclusion]
+  change memberProjection x₀ i (inclusion x₀ i x) = x
+  exact memberProjection_inclusion_self x₀ i x
 
 end MemberProjection
 

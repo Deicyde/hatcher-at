@@ -43,6 +43,7 @@ theorem fundamentalGroupRange_le_of_iso
   let η : Path D.basepoint D.basepoint :=
     (δ.map e.toHomeomorph.continuous).cast e.map_basepoint.symm e.map_basepoint.symm
   refine ⟨FundamentalGroup.fromPath (.mk η), ?_⟩
+  dsimp [projMap]
   rw [FundamentalGroup.mapOfEq_apply, FundamentalGroup.mapOfEq_apply]
   apply congrArg FundamentalGroup.fromPath
   apply congrArg Path.Homotopic.Quotient.mk
@@ -82,7 +83,7 @@ private theorem map_range_le_mapOfEq_of_fundamentalGroupRange_le
 /-- Two pointed path-connected covers are isomorphic exactly when their image
 subgroups agree. This is Hatcher, Proposition 1.37. -/
 theorem nonempty_iso_iff_range_eq
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀)
     (D : Hatcher.BasedConnectedCover.{w, v} X x₀) :
     Nonempty (C.Iso D) ↔ C.fundamentalGroupRange = D.fundamentalGroupRange := by
@@ -91,9 +92,9 @@ theorem nonempty_iso_iff_range_eq
     exact le_antisymm (fundamentalGroupRange_le_of_iso e)
       (fundamentalGroupRange_le_of_iso e.symm)
   · intro h
-    letI : LocPathConnectedSpace C.E :=
+    letI : LocallyPathConnectedSpace C.E :=
       Hatcher.Covering.locPathConnectedSpace_total C.isCoveringMap
-    letI : LocPathConnectedSpace D.E :=
+    letI : LocallyPathConnectedSpace D.E :=
       Hatcher.Covering.locPathConnectedSpace_total D.isCoveringMap
     let hCD : D.proj D.basepoint = C.proj C.basepoint :=
       D.proj_basepoint.trans C.proj_basepoint.symm

@@ -127,6 +127,7 @@ def upperCoarseConnectorPath
         exact congrArg (G.interfacePath r)
           (G.upperCoarseVertex_spec r j).symm
 
+set_option backward.isDefEq.respectTransparency false in
 def upperCoarseConnectors
     (G : StaggeredCoverGrid U H bottom top)
     (hx₀ : ∀ i, x₀ ∈ U i)
@@ -518,6 +519,7 @@ theorem overlapToLeft_bandVerticalOverlapClass
   apply Path.Homotopic.Quotient.eq.mpr
   apply Path.Homotopic.refl
 
+set_option backward.isDefEq.respectTransparency false in
 theorem overlapToRight_bandVerticalOverlapClass
     (G : StaggeredCoverGrid U H bottom top)
     (hx₀ : ∀ i, x₀ ∈ U i) (r : Fin (G.extraRows + 2))
@@ -534,12 +536,11 @@ theorem overlapToRight_bandVerticalOverlapClass
   apply Path.Homotopic.Quotient.eq.mpr
   convert Path.Homotopic.refl
     (G.bandLeftLoop hx₀ r C₀ C₁ (Fin.cast hn k.succ)) using 1
-  · rfl
-  · rfl
-  · ext t
-    exact congrArg (fun z : Path x₀ x₀ ↦ z t)
-      (G.bandRightLoop_map_eq_bandLeftLoop_map hx₀ r C₀ C₁ hn k)
+  ext t
+  exact congrArg (fun z : Path x₀ x₀ ↦ z t)
+    (G.bandRightLoop_map_eq_bandLeftLoop_map hx₀ r C₀ C₁ hn k)
 
+set_option backward.isDefEq.respectTransparency false in
 theorem bandBottomClass_eq_factor
     (G : StaggeredCoverGrid U H bottom top)
     (hx₀ : ∀ i, x₀ ∈ U i) (r : Fin (G.extraRows + 2))
@@ -619,6 +620,7 @@ theorem bandBottomClass_eq_factor
     split_ifs <;> simp_all only [Path.symm_apply, Function.comp_apply]
   rw [heq]
 
+set_option backward.isDefEq.respectTransparency false in
 theorem bandTopClass_eq_factor
     (G : StaggeredCoverGrid U H bottom top)
     (hx₀ : ∀ i, x₀ ∈ U i) (r : Fin (G.extraRows + 2))

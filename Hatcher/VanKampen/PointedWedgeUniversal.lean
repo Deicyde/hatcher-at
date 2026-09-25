@@ -30,6 +30,13 @@ def desc {Y : Type w} [∀ i, TopologicalSpace (X i)] [TopologicalSpace Y]
   toFun := Quotient.lift (descPre y₀ fun i => f i)
     (fun _ _ h => descPre_eq_of_rel x₀ y₀ (fun i => f i) hf h)
   continuous_toFun := by
+    change @Continuous (Quotient (PointedWedge.setoid X x₀)) Y
+      (TopologicalSpace.coinduced
+        (Quotient.mk (PointedWedge.setoid X x₀) :
+          Option (Σ i, X i) → Quotient (PointedWedge.setoid X x₀))
+        (prequotientTopology (X := X))) _
+      (Quotient.lift (descPre y₀ fun i => f i)
+        (fun _ _ h => descPre_eq_of_rel x₀ y₀ (fun i => f i) hf h))
     rw [continuous_coinduced_dom]
     change @Continuous (Option (Σ i, X i)) Y
       (prequotientTopology (X := X)) _ (descPre y₀ fun i => f i)

@@ -12,7 +12,7 @@ variable {X : Type v} [TopologicalSpace X] {x₀ : X}
 /-- The deck group of a connected covering is the quotient of the normalizer
 of its image subgroup by that subgroup. -/
 noncomputable def normalizerQuotientEquivDeck
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀) :
     Subgroup.normalizer
           (C.fundamentalGroupRange : Set (FundamentalGroup X x₀)) ⧸
@@ -38,7 +38,7 @@ theorem proj_surjective [PathConnectedSpace X]
     (γ.source.trans C.proj_basepoint.symm)) 1).trans γ.target
 
 private theorem deck_isPretransitive_baseFiber
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀)
     (hH : C.fundamentalGroupRange.Normal) :
     letI := deck.mulActionFiber C.proj x₀
@@ -66,7 +66,7 @@ private theorem deck_isPretransitive_baseFiber
   simpa [n, g, e₀] using congrArg Subtype.val hg
 
 private theorem deck_isPretransitive_fiber
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀)
     (hH : C.fundamentalGroupRange.Normal) (x : X) :
     letI := deck.mulActionFiber C.proj x
@@ -101,7 +101,7 @@ private theorem deck_isPretransitive_fiber
 /-- A connected covering is normal exactly when its fundamental-group image
 is a normal subgroup. -/
 theorem isNormal_iff_range_normal
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀) :
     Hatcher.Covering.IsNormal C.proj ↔ C.fundamentalGroupRange.Normal := by
   constructor
@@ -135,14 +135,14 @@ private def toNormalizerOfNormal
   map_mul' _ _ := rfl
 
 private def fundamentalGroupToDeckOfNormal
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀)
     (hH : C.fundamentalGroupRange.Normal) :
     FundamentalGroup X x₀ →* deck C.proj :=
   C.normalizerToDeck.comp (toNormalizerOfNormal C hH)
 
 private theorem fundamentalGroupToDeckOfNormal_ker_and_surjective
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀)
     (hH : C.fundamentalGroupRange.Normal) :
     (fundamentalGroupToDeckOfNormal C hH).ker =
@@ -162,7 +162,7 @@ private theorem fundamentalGroupToDeckOfNormal_ker_and_surjective
 /-- For a normal connected covering, the deck group is the fundamental group
 modulo the covering subgroup. -/
 noncomputable def fundamentalGroupQuotientEquivDeck
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀)
     (hnormal : Hatcher.Covering.IsNormal C.proj) :
     letI : C.fundamentalGroupRange.Normal :=

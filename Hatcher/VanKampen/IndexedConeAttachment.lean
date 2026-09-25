@@ -544,14 +544,14 @@ theorem continuous_coneMap (f : ∀ j, S j → X)
     (id : S j → S j)).continuous_iff.mpr
   rw [continuous_sum_dom]
   constructor
-  · simpa [coneMap, coneRaw, ConeAttachment.quotientMk, Function.comp_def] using
-      (continuous_base f).comp (hf j)
+  · change Continuous (fun s : S j ↦ base f (f j s))
+    exact (continuous_base f).comp (hf j)
   · rw [continuous_sum_dom]
     constructor
-    · simpa [coneMap, coneRaw, ConeAttachment.quotientMk, Function.comp_def] using
-        (continuous_const : Continuous (fun _ : Unit ↦ apex f j))
-    · simpa [coneMap, coneRaw, ConeAttachment.quotientMk, Function.comp_def] using
-        continuous_cylinder f j
+    · change Continuous (fun _ : Unit ↦ apex f j)
+      exact continuous_const
+    · change Continuous (fun p : S j × I ↦ cylinder f j p.1 p.2)
+      exact continuous_cylinder f j
 
 /-- The coproduct of all attaching maps. -/
 def sigmaAttachingHom (f : ∀ j, S j → X) (hf : ∀ j, Continuous (f j)) :
@@ -632,14 +632,14 @@ private theorem continuous_desc {Z : Type u} [TopologicalSpace Z]
   apply (isQuotientMap_quotientMk f).continuous_iff.mpr
   rw [continuous_sum_dom]
   constructor
-  · simpa [desc, descRaw, quotientMk, Function.comp_def] using hh
+  · change Continuous h
+    exact hh
   · rw [continuous_sigma_iff]
     intro j
     rw [continuous_sum_dom]
     constructor
-    · simpa [desc, descRaw, quotientMk, Function.comp_def] using
-        (continuous_const : Continuous
-          (fun _ : Unit ↦ k ⟨j, ConeAttachment.apex id⟩))
+    · change Continuous (fun _ : Unit ↦ k ⟨j, ConeAttachment.apex id⟩)
+      exact continuous_const
     · have hj : Continuous
           (fun p : S j × I ↦
             (⟨j, ConeAttachment.cylinder id p.1 p.2⟩ :
@@ -648,7 +648,9 @@ private theorem continuous_desc {Z : Type u} [TopologicalSpace Z]
           (fun j ↦ TopCat.of
             (Hatcher.VanKampen.ConeAttachment (id : S j → S j))) j).hom.continuous.comp
           (ConeAttachment.continuous_cylinder id)
-      simpa [desc, descRaw, quotientMk, Function.comp_def] using hk.comp hj
+      change Continuous (fun p : S j × I ↦
+        k ⟨j, ConeAttachment.cylinder id p.1 p.2⟩)
+      exact hk.comp hj
 
 /-- The explicit indexed cone attachment is the pushout of the coproduct of
 its attaching maps and the coproduct of its retained-boundary inclusions. -/

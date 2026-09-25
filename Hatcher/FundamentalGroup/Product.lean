@@ -42,6 +42,7 @@ theorem fundamentalGroupProdEquiv_symm_apply (x : X) (y : Y)
       Path.Homotopic.prod p.1 p.2 :=
   rfl
 
+set_option backward.isDefEq.respectTransparency false in
 @[simp]
 theorem fundamentalGroupProdEquiv_prod (x : X) (y : Y)
     (p : FundamentalGroup X x) (q : FundamentalGroup Y y) :

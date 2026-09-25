@@ -100,7 +100,7 @@ def _root_.Hatcher.BasedConnectedCover.Iso.toConnectedCoverIso
 /-- An unpointed isomorphism makes the image subgroups at arbitrary fiber
 points conjugate. -/
 theorem exists_conj_fundamentalGroupRange_eq_of_iso
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     {C : ConnectedCover.{u, v} X} {D : ConnectedCover.{w, v} X}
     (F : C.Iso D) (c : C.proj ⁻¹' {x₀}) (d : D.proj ⁻¹' {x₀}) :
     ∃ g : FundamentalGroup X x₀,
@@ -125,7 +125,7 @@ theorem exists_conj_fundamentalGroupRange_eq_of_iso
 /-- Conjugate subgroups give isomorphic unpointed canonical covers. -/
 theorem isomorphic_toConnectedCover_of_eq_map_conj
     {X : Type u} [TopologicalSpace X] {x₀ : X}
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [Hatcher.SemilocallySimplyConnectedSpace X]
     (H K : Subgroup (FundamentalGroup X x₀)) (g : FundamentalGroup X x₀)
     (hK : K = H.map (MulAut.conj g)) :
@@ -157,7 +157,7 @@ theorem isomorphic_toConnectedCover_of_eq_map_conj
 canonical cover of the subgroup obtained from a chosen point over `x₀`. -/
 theorem isomorphic_ofSubgroup_chosenRange
     {X : Type u} [TopologicalSpace X] (x₀ : X)
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [Hatcher.SemilocallySimplyConnectedSpace X]
     (C : ConnectedCover.{w, u} X) :
     ConnectedCover.Isomorphic C
@@ -173,7 +173,7 @@ variable {X : Type u} [TopologicalSpace X]
 
 /-- The image subgroup, modulo conjugacy, of an unpointed connected cover. -/
 private noncomputable def fundamentalGroupRangeConjugacyClass
-    [PathConnectedSpace X] [LocPathConnectedSpace X] (x₀ : X) :
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X] (x₀ : X) :
     IsomorphismClasses X → SubgroupConjugacyClasses (FundamentalGroup X x₀) :=
   Quotient.lift
     (fun C ↦ Quotient.mk (SubgroupConjugacySetoid (FundamentalGroup X x₀))
@@ -185,7 +185,7 @@ private noncomputable def fundamentalGroupRangeConjugacyClass
 /-- The unpointed canonical cover attached to a subgroup descends to a
 conjugacy class of subgroups. -/
 private noncomputable def coverClassOfSubgroupConjugacyClass
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [Hatcher.SemilocallySimplyConnectedSpace X] (x₀ : X) :
     SubgroupConjugacyClasses (FundamentalGroup X x₀) → IsomorphismClasses X :=
   Quotient.lift
@@ -198,7 +198,7 @@ private noncomputable def coverClassOfSubgroupConjugacyClass
 /-- Fixed-universe classification of connected covers by conjugacy classes of
 subgroups of the fundamental group. -/
 noncomputable def classificationEquivConjClasses
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [Hatcher.SemilocallySimplyConnectedSpace X] (x₀ : X) :
     IsomorphismClasses X ≃ SubgroupConjugacyClasses (FundamentalGroup X x₀) where
   toFun := fundamentalGroupRangeConjugacyClass x₀

@@ -43,7 +43,7 @@ private theorem surjective_of_comp_eq_of_covering
   exact ⟨Γ 1, (congrFun hEq 1).trans γ.target⟩
 
 private theorem isCoveringMap_of_comp_eq
-    [PathConnectedSpace E] [LocPathConnectedSpace X]
+    [PathConnectedSpace E] [LocallyPathConnectedSpace X]
     (hq : IsCoveringMap q) (hp : IsCoveringMap p)
     (F : C(A, E)) (hF : p ∘ F = q) (a₀ : A) (e₀ : E)
     (hbase : F a₀ = e₀) : IsCoveringMap F := by
@@ -316,13 +316,13 @@ universe u v w
 variable {X : Type v} [TopologicalSpace X] {x₀ : X}
 
 theorem existsUnique_map_fromSimplyConnected_core
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (U : BasedConnectedCover.{u, v} X x₀)
     (E : BasedConnectedCover.{w, v} X x₀)
     [SimplyConnectedSpace U.E] :
     ∃! F : C(U.E, E.E),
       F U.basepoint = E.basepoint ∧ E.proj ∘ F = U.proj := by
-  letI : LocPathConnectedSpace U.E :=
+  letI : LocallyPathConnectedSpace U.E :=
     Hatcher.Covering.locPathConnectedSpace_total U.isCoveringMap
   let pU : C(U.E, X) := ⟨U.proj, U.isCoveringMap.continuous⟩
   have he : E.proj E.basepoint = pU U.basepoint :=
@@ -345,7 +345,7 @@ theorem existsUnique_map_fromSimplyConnected_core
 /-- A simply-connected pointed cover admits a unique pointed map to every
 pointed connected cover, and this comparison map is itself a covering map. -/
 theorem existsUnique_map_fromSimplyConnected
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (U : BasedConnectedCover.{u, v} X x₀)
     (E : BasedConnectedCover.{w, v} X x₀)
     [SimplyConnectedSpace U.E] :
@@ -360,7 +360,7 @@ theorem existsUnique_map_fromSimplyConnected
 
 /-- Any two pointed simply-connected covers are isomorphic over the base. -/
 theorem nonempty_iso_of_simplyConnected
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (U : BasedConnectedCover.{u, v} X x₀)
     (E : BasedConnectedCover.{w, v} X x₀)
     [SimplyConnectedSpace U.E] [SimplyConnectedSpace E.E] :
@@ -394,4 +394,3 @@ theorem nonempty_iso_of_simplyConnected
     map_basepoint := hF.1 }⟩
 
 end Hatcher.BasedConnectedCover
-

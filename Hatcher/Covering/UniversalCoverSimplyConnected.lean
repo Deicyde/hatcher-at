@@ -13,8 +13,9 @@ universe u
 
 variable {X : Type u} [TopologicalSpace X] {x₀ : X}
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem projected_path_eq_coordinate
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X]
     {y : X} (q : Path.Homotopic.Quotient x₀ y)
     (γ : Path (basepoint (X := X) (x₀ := x₀)) ⟨y, q⟩) :
@@ -36,7 +37,7 @@ private theorem projected_path_eq_coordinate
   exact hq.symm
 
 private theorem projected_path_eq_coordinate'
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X]
     (q : UniversalCover X x₀)
     (γ : Path (basepoint (X := X) (x₀ := x₀)) q) :
@@ -46,7 +47,7 @@ private theorem projected_path_eq_coordinate'
   exact projected_path_eq_coordinate q γ
 
 private theorem projected_loop_eq_refl
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X]
     (e : UniversalCover X x₀) (γ : Path e e) :
     Path.Homotopic.Quotient.mk
@@ -78,7 +79,7 @@ private theorem projected_loop_eq_refl
 
 /-- The path-class universal cover is simply connected. -/
 theorem simplyConnectedSpace
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X] :
     SimplyConnectedSpace (UniversalCover X x₀) := by
   rw [simply_connected_iff_loops_nullhomotopic]

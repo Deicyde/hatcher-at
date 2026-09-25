@@ -40,7 +40,7 @@ lemma ι_chainAugmentation (R : C) (X : TopCat.{w})
     (TopCat.toSSet.obj X).ιChainComplex x ≫ chainAugmentation R X = 𝟙 R := by
   change Sigma.ι (fun _ : (TopCat.toSSet.obj X) _⦋0⦌ ↦ R) x ≫
     Sigma.desc (fun _ ↦ 𝟙 R) = 𝟙 R
-  rw [Sigma.ι_desc]
+  rw [Sigma.ι_comp_desc]
 
 /-- The degree-one singular boundary is killed by the augmentation. -/
 lemma d_chainAugmentation (R : C) (X : TopCat.{w}) :
@@ -50,8 +50,9 @@ lemma d_chainAugmentation (R : C) (X : TopCat.{w}) :
     chainAugmentation R X = 0
   apply (TopCat.toSSet.obj X).chainComplex_hom_ext
   intro x
+  dsimp [chainAugmentation]
   rw [← Category.assoc, SSet.ιChainComplex_d]
-  simp
+  simp [SSet.ιChainComplex]
 
 /-- Naturality of the singular-chain augmentation in the space. -/
 lemma chainMap_f_zero_chainAugmentation
@@ -63,9 +64,10 @@ lemma chainMap_f_zero_chainAugmentation
       chainAugmentation R Y = chainAugmentation R X
   apply (TopCat.toSSet.obj X).chainComplex_hom_ext
   intro x
+  dsimp [chainAugmentation]
   rw [← Category.assoc]
   rw [SSet.ι_chainComplexMap_f]
-  simp
+  simp [SSet.ιChainComplex]
 
 /-- A continuous map induces a map of augmented singular chain complexes. -/
 noncomputable def augmentedMap

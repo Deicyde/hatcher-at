@@ -36,16 +36,28 @@ private theorem exists_ambientHomeomorph (n : ℕ) :
   obtain ⟨h, _hi, hc, hf⟩ :=
     exists_homeomorph_image_interior_closure_frontier_eq_unitBall hsconv hsne hsb
   refine ⟨Lh.trans h, ?_, ?_⟩
-  · simp only [Homeomorph.trans_apply]
-    rw [← image_image]
-    have hLs : Lh '' closedBall (0 : SupSpace n) 1 = closure s := by
+  · have hLs : Lh '' closedBall (0 : SupSpace n) 1 = closure s := by
       rw [← closure_ball (0 : SupSpace n) one_ne_zero, Lh.image_closure]
-    rw [hLs, hc]
-  · simp only [Homeomorph.trans_apply]
-    rw [← image_image]
-    have hLs : Lh '' sphere (0 : SupSpace n) 1 = frontier s := by
+    calc
+      (Lh.trans h) '' closedBall (0 : SupSpace n) 1 =
+          (fun x ↦ h (Lh x)) '' closedBall 0 1 := by
+            apply congrArg (fun g : SupSpace n → L2Space n ↦
+              g '' closedBall (0 : SupSpace n) 1)
+            funext x
+            exact Homeomorph.trans_apply Lh h x
+      _ = h '' (Lh '' closedBall 0 1) := (image_image h Lh _).symm
+      _ = closedBall 0 1 := by rw [hLs, hc]
+  · have hLs : Lh '' sphere (0 : SupSpace n) 1 = frontier s := by
       rw [← frontier_ball (0 : SupSpace n) one_ne_zero, Lh.image_frontier]
-    rw [hLs, hf]
+    calc
+      (Lh.trans h) '' sphere (0 : SupSpace n) 1 =
+          (fun x ↦ h (Lh x)) '' sphere 0 1 := by
+            apply congrArg (fun g : SupSpace n → L2Space n ↦
+              g '' sphere (0 : SupSpace n) 1)
+            funext x
+            exact Homeomorph.trans_apply Lh h x
+      _ = h '' (Lh '' sphere 0 1) := (image_image h Lh _).symm
+      _ = sphere 0 1 := by rw [hLs, hf]
 
 private noncomputable def ambientHomeomorph (n : ℕ) : SupSpace n ≃ₜ L2Space n :=
   (exists_ambientHomeomorph n).choose

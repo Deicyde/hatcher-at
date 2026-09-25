@@ -2,7 +2,7 @@
 Hatcher, *Algebraic Topology*, §1.3 (page 63).
 -/
 import Mathlib.Topology.Covering.Basic
-import Mathlib.Topology.Connected.LocPathConnected
+import Mathlib.Topology.Connected.LocallyPathConnected
 
 open Filter Function Set Topology
 
@@ -13,12 +13,12 @@ variable {E X : Type*} [TopologicalSpace E] [TopologicalSpace X] {p : E → X}
 /-- Local path-connectedness ascends from the base of a covering map to its
 total space. -/
 theorem locPathConnectedSpace_total (hp : IsCoveringMap p)
-    [LocPathConnectedSpace X] : LocPathConnectedSpace E := by
+    [LocallyPathConnectedSpace X] : LocallyPathConnectedSpace E := by
   refine ⟨fun x ↦ ?_⟩
   obtain ⟨e, hx, _⟩ := hp.isLocalHomeomorph x
   let x' : e.source := ⟨x, hx⟩
-  letI : LocPathConnectedSpace e.source :=
-    e.isOpenEmbedding_restrict.locPathConnectedSpace
+  letI : LocallyPathConnectedSpace e.source :=
+    e.isOpenEmbedding_restrict.locallyPathConnectedSpace
   have hb := (path_connected_basis x').map ((↑) : e.source → E)
   rw [e.open_source.isOpenEmbedding_subtypeVal.map_nhds_eq x'] at hb
   refine hb.to_hasBasis ?_ ?_

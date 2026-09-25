@@ -47,10 +47,10 @@ private theorem continuous_quotientLift_prod
     exact (hsummand i).comp continuous_swap
   have hpaths : @Continuous (Hatcher.PointedWedge X x₀) C(I, Y)
       (instTopologicalSpace x₀) _ (Quotient.lift paths hpaths_rel) := by
-    change @Continuous (Hatcher.PointedWedge X x₀) C(I, Y)
+    change @Continuous (Quotient (setoid X x₀)) C(I, Y)
       (TopologicalSpace.coinduced
         (Quotient.mk (setoid X x₀) :
-          Option (Σ i, X i) → Hatcher.PointedWedge X x₀)
+          Option (Σ i, X i) → Quotient (setoid X x₀))
         (TopologicalSpace.coinduced
             (fun z : Σ i, X i => some z) inferInstance ⊔
           TopologicalSpace.coinduced

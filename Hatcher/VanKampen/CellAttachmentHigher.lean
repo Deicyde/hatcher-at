@@ -60,6 +60,7 @@ private theorem fundamentalGroup_map_pathChange
   exact (FundamentalGroupoid.map F).map_conj
     ((Groupoid.isoEquivHom _ _).symm ⟦p⟧) g
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem simplyConnectedSpace_attachmentOverlap
     {n : ℕ} {X Y : TopCat.{u}} {f : X ⟶ Y}
     (c : AttachCells.{u} (TopCat.RelativeCWComplex.basicCell.{u} n) f)
@@ -133,6 +134,7 @@ private noncomputable def higherCellCover
   Nonempty.some (exists_cellAttachmentCover c (by omega) x₀
     (higherCellBoundaryPoint n hn) (higherCellPathFamily c hn x₀))
 
+set_option backward.isDefEq.respectTransparency false in
 private noncomputable def higherCellBinaryEquiv
     {n : ℕ} {X Y : TopCat.{u}} {f : X ⟶ Y}
     [PathConnectedSpace X]
@@ -157,6 +159,7 @@ private noncomputable def higherCellBinaryEquiv
     cover.binaryCoverOpen cover.binaryCoverCovers
     cover.binaryCoverPathConnected cover.binaryIntersectionPathConnected hz₀
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem higherCellBinaryEquiv_apply
     {n : ℕ} {X Y : TopCat.{u}} {f : X ⟶ Y}
     [PathConnectedSpace X]
@@ -208,6 +211,7 @@ private theorem higherCellBinaryEquiv_apply
     (higherCellCover c hn x₀).binaryIntersectionPathConnected
     (higherCellCover c hn x₀).overlapBasepointMem g
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem baseFundamentalGroupEquiv_symm_apply
     {n : ℕ} {X Y : TopCat.{u}} {f : X ⟶ Y}
     (c : AttachCells.{u} (TopCat.RelativeCWComplex.basicCell.{u} n) f)
@@ -254,6 +258,7 @@ private theorem baseFundamentalGroupEquiv_symm_apply
         exact MulEquiv.apply_symm_apply _ _]
     _ = cover.baseFundamentalGroupEquiv.toMonoidHom w := hformula.symm
 
+set_option backward.isDefEq.respectTransparency false in
 private noncomputable def higherCellEquivOfNonempty
     {n : ℕ} {X Y : TopCat.{u}} {f : X ⟶ Y}
     [PathConnectedSpace X]
@@ -282,6 +287,7 @@ private noncomputable def higherCellEquivOfNonempty
     (FundamentalGroup.fundamentalGroupMulEquivOfPath spinePath) |>.trans
     attachmentEquiv.symm |>.trans modelEquiv.symm
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem higherCellEquivOfNonempty_apply
     {n : ℕ} {X Y : TopCat.{u}} {f : X ⟶ Y}
     [PathConnectedSpace X]
@@ -383,6 +389,7 @@ noncomputable def fundamentalGroupEquiv_of_attachCells_of_two_lt
       (TopCat.homeoOfIso
         (VanKampen.CellAttachment.targetIsoOfIsEmpty c).symm).toHomotopyEquiv x₀
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The higher-cell equivalence is exactly the homomorphism induced by the
 attachment map. -/
 @[simp]

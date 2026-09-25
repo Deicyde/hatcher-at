@@ -1,6 +1,6 @@
 import Hatcher.Covering.SemilocallySimplyConnected
 import Mathlib.Topology.Bases
-import Mathlib.Topology.Connected.LocPathConnected
+import Mathlib.Topology.Connected.LocallyPathConnected
 
 noncomputable section
 
@@ -26,7 +26,7 @@ private theorem trivial_fundamentalGroupMap_of_subset
 /-- The path-connected open sets whose inclusions kill fundamental groups form
 a basis in a locally path-connected, semilocally simply connected space. -/
 theorem isTopologicalBasis_nullhomotopicOpens
-    {X : Type*} [TopologicalSpace X] [LocPathConnectedSpace X]
+    {X : Type*} [TopologicalSpace X] [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X] :
     IsTopologicalBasis {U : Set X | IsNullhomotopicOpen U} := by
   apply isTopologicalBasis_of_isOpen_of_nhds

@@ -125,7 +125,7 @@ theorem windingNumberFun_mul (γ δ : FundamentalGroup _root_.Circle 1) :
 noncomputable def windingNumber :
     FundamentalGroup _root_.Circle 1 →* Multiplicative ℤ where
   toFun γ := Multiplicative.ofAdd (windingNumberFun γ)
-  map_one' := by simp
+  map_one' := windingNumberFun_one
   map_mul' γ δ := by
     simp only [windingNumberFun_mul]
     rfl

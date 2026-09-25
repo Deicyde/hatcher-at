@@ -40,7 +40,7 @@ def rebase (C : Hatcher.BasedConnectedCover.{u, v} X x₀) (e : C.proj ⁻¹' {x
 /-- A fiber point is the image of the chosen point under a unique deck
 transformation exactly when rebasing there preserves the image subgroup. -/
 theorem existsUnique_deck_apply_basepoint_iff_range_eq
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀) (e₁ : C.proj ⁻¹' {x₀}) :
     (∃! h : deck C.proj, h • C.basepoint = e₁.1) ↔
       C.fundamentalGroupRange = (C.rebase e₁).fundamentalGroupRange := by

@@ -176,6 +176,7 @@ noncomputable def diskBoundaryTwoFundamentalGroupEquivInt :
     Hatcher.diskBoundaryTwoHomeomorphCircle_basepoint.{u}).trans
       Hatcher.Circle.fundamentalGroupEquivInt
 
+set_option backward.isDefEq.respectTransparency false in
 @[simp] theorem diskBoundaryTwoFundamentalGroupEquivInt_generator :
     diskBoundaryTwoFundamentalGroupEquivInt.{u}
         diskBoundaryTwoGenerator.{u} =
@@ -196,6 +197,11 @@ noncomputable def diskBoundaryTwoFundamentalGroupEquivInt :
           Hatcher.diskBoundaryTwoHomeomorphCircle.{u}.toHomotopyEquiv.toFun.continuous).cast
         hbase.symm hbase.symm = Hatcher.Circle.loopOfInt 1 := by
     exact Hatcher.diskBoundaryTwoHomeomorphCircle_map_loop.{u}
+  change Hatcher.Circle.fundamentalGroupEquivInt
+      (Path.Homotopic.Quotient.mk
+        ((Hatcher.diskBoundaryTwoLoop.{u}.map
+          Hatcher.diskBoundaryTwoHomeomorphCircle.{u}.toHomotopyEquiv.toFun.continuous).cast
+            hbase.symm hbase.symm)) = Multiplicative.ofAdd 1
   rw [hp]
   rw [Hatcher.Circle.fundamentalGroupEquivInt_apply]
   exact congrArg Multiplicative.ofAdd

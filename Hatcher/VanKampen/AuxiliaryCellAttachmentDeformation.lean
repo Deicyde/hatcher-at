@@ -395,6 +395,7 @@ private theorem continuous_deformationMap :
   rintro ⟨u, z⟩
   exact (deformationMap_quotientMk f s₀ x₀ γ u z).symm
 
+set_option backward.isDefEq.respectTransparency false in
 @[simp] private theorem deformationMap_zero
     (z : Hatcher.VanKampen.AuxiliaryCellAttachment f s₀ x₀ γ) :
     deformationMap f s₀ x₀ γ (0, z) = z := by

@@ -208,7 +208,7 @@ private theorem finite_cellsMeeting_of_isCompact
     obtain ⟨e, rfl⟩ := hA hxA
     exact ⟨e, hxclosed, rfl⟩
   have hpDiscrete : IsDiscrete (Set.range p) := by
-    rw [isDiscrete_iff_forall_exists_isOpen]
+    rw [isDiscrete_iff_forall_mem_exists_isOpen]
     intro x hx
     refine ⟨(Set.range p \ {x})ᶜ, (hclosed _ Set.sdiff_subset).isOpen_compl, ?_⟩
     ext y

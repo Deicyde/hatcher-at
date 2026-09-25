@@ -106,6 +106,7 @@ private theorem pathConnectedSpace_boundary {n : ℕ} (hn : 1 < n) :
     (ULift.{u} (Metric.sphere (0 : EuclideanSpace ℝ (Fin n)) 1))
   exact ULift.up_surjective.pathConnectedSpace continuous_uliftUp
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem pathConnectedSpace_overlap
     {n : ℕ} {X Y : TopCat.{u}} {f : X ⟶ Y}
     (c : AttachCells.{u} (TopCat.RelativeCWComplex.basicCell.{u} n) f)
@@ -132,6 +133,7 @@ private theorem pathConnectedSpace_overlap
         (attachingFamily c) (boundaryPointFamily c s₀) x₀ gamma i i
   exact (hpiece.joinedIn z₀ hz₀i z hi).mono (Set.subset_univ _)
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem isPathConnected_binaryCover
     {n : ℕ} {X Y : TopCat.{u}} {f : X ⟶ Y}
     (c : AttachCells.{u} (TopCat.RelativeCWComplex.basicCell.{u} n) f)
@@ -152,6 +154,7 @@ private theorem isPathConnected_binaryCover
         (attachingFamily c) (boundaryPointFamily c s₀) x₀ gamma
     infer_instance
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem isPathConnected_binaryIntersection
     {n : ℕ} {X Y : TopCat.{u}} {f : X ⟶ Y}
     (c : AttachCells.{u} (TopCat.RelativeCWComplex.basicCell.{u} n) f)
@@ -167,6 +170,7 @@ private theorem isPathConnected_binaryIntersection
 
 end CellAttachmentCover
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The complete auxiliary-cover package associated to a nonempty family of
 standard cells.  Its fields use the canonical constructions, so no transport
 between competing quotient models is needed downstream. -/

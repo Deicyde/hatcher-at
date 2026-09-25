@@ -23,7 +23,7 @@ group of the orbit space modulo the image of the total-space fundamental group i
 acting group. -/
 noncomputable def orbitQuotientFundamentalGroupEquiv
     (h : Hatcher.IsCoveringSpaceAction G Y) [PathConnectedSpace Y]
-    [LocPathConnectedSpace Y] (y₀ : Y) :
+    [LocallyPathConnectedSpace Y] (y₀ : Y) :
     let q : Y → Quotient (MulAction.orbitRel G Y) := Quotient.mk _
     let hq := h.isQuotientCoveringMap_orbitQuotient
     let C : Hatcher.BasedConnectedCover
@@ -68,4 +68,3 @@ noncomputable def orbitQuotientFundamentalGroupEquiv
       (actionEquivDeck h).symm)
 
 end Hatcher.Covering
-

@@ -119,6 +119,7 @@ private noncomputable def twoCellCover
   Nonempty.some (exists_cellAttachmentCover c (by omega) x₀
     Hatcher.diskBoundaryTwoBasepoint γ)
 
+set_option backward.isDefEq.respectTransparency false in
 private abbrev twoCellOverlapRelationSubgroup
     {X Y : TopCat.{u}} {f : X ⟶ Y}
     (c : AttachCells.{u} (TopCat.RelativeCWComplex.basicCell.{u} 2) f)
@@ -163,6 +164,7 @@ private abbrev twoCellBaseFundamentalGroupEquiv
       Hatcher.diskBoundaryTwoBasepoint) x₀ γ
     (CellAttachment.continuous_attachingMap c)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Including one member of the overlap-piece cover into the binary
 intersection and then into the base-side cover is the canonical direct
 inclusion of that piece into the base-side cover. -/
@@ -215,6 +217,7 @@ private theorem overlapPieceCoverMap_to_baseCover
       rw [FundamentalGroup.mapOfEq_apply]
       rfl
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem twoCellOverlapRelationSubgroup_map_eq
     {X Y : TopCat.{u}} {f : X ⟶ Y} [PathConnectedSpace X]
     (c : AttachCells.{u} (TopCat.RelativeCWComplex.basicCell.{u} 2) f)
@@ -325,6 +328,7 @@ private theorem fundamentalGroup_map_pathChange
   exact (FundamentalGroupoid.map F).map_conj
     ((Groupoid.isoEquivHom _ _).symm ⟦p⟧) g
 
+set_option backward.isDefEq.respectTransparency false in
 private noncomputable def twoCellAuxiliaryQuotientEquiv
     {X Y : TopCat.{u}} {f : X ⟶ Y} [PathConnectedSpace X]
     (c : AttachCells.{u} (TopCat.RelativeCWComplex.basicCell.{u} 2) f)
@@ -369,6 +373,7 @@ private noncomputable def twoCellAuxiliaryQuotientEquiv
     (FundamentalGroup.fundamentalGroupMulEquivOfPath ambientSpinePath) |>.trans
     attachmentEquiv.symm |>.trans modelEquiv.symm
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem twoCellAuxiliaryQuotientEquiv_mk
     {X Y : TopCat.{u}} {f : X ⟶ Y} [PathConnectedSpace X]
     (c : AttachCells.{u} (TopCat.RelativeCWComplex.basicCell.{u} 2) f)
@@ -503,6 +508,7 @@ private theorem fundamentalGroup_map_attachTwoCells_surjective_of_nonempty
   refine ⟨E g, ?_⟩
   exact (twoCellAuxiliaryQuotientEquiv_mk c x₀ γ cover g).symm
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem fundamentalGroup_map_attachTwoCells_ker_of_nonempty
     {X Y : TopCat.{u}} {f : X ⟶ Y} [PathConnectedSpace X]
     (c : AttachCells.{u} (TopCat.RelativeCWComplex.basicCell.{u} 2) f)

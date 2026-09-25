@@ -43,6 +43,7 @@ private def twoSkeletonToSkeleton
     (C := C) (Nat.cast_le.mpr hm) x.2⟩
   continuous_toFun := continuous_subtype_val.subtype_mk _
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem twoSkeletonMap_surjective
     {X : Type u} [TopologicalSpace X] [T2Space X]
     (C : Set X) [CWComplex C] [PathConnectedSpace C]

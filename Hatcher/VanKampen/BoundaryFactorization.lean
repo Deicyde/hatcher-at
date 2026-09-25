@@ -501,6 +501,7 @@ theorem concatenatedPath_concatSubdivisionPoint
     F.concatenatedPath (concatSubdivisionPoint F.n j) = x₀ :=
   concat_apply_concatSubdivisionPoint x₀ F.n F.ambientFactor j
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The canonical boundary of a factorization uses constant connector paths,
 because every subdivision vertex maps to the common basepoint. -/
 def canonicalBoundaryConnectors (F : Factorization U x₀ hx₀ γ) :

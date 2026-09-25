@@ -20,13 +20,13 @@ private theorem map_symm
     rfl
 
 theorem isOpen_basicOpen
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     {U : Set X} (hU : IsNullhomotopicOpen U) {x : X} (hx : x ∈ U)
     (γ : Path.Homotopic.Quotient x₀ x) : IsOpen (basicOpen U hx γ) :=
   isTopologicalBasis_basicOpen.isOpen ⟨U, hU, x, hx, γ, rfl⟩
 
 theorem continuous_proj
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X] :
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X] :
     Continuous (proj : UniversalCover X x₀ → X) := by
   rw [Hatcher.isTopologicalBasis_nullhomotopicOpens.continuous_iff]
   intro U hU
@@ -38,7 +38,7 @@ theorem continuous_proj
   exact (bijOn_proj_basicOpen hU hqU q.2).mapsTo hr
 
 private theorem isOpen_iff_preimage_inter_basicOpen
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     {U W : Set X} (hU : IsNullhomotopicOpen U) (hWU : W ⊆ U)
     {x : X} (hx : x ∈ U) (γ : Path.Homotopic.Quotient x₀ x) :
     IsOpen W ↔ IsOpen (proj ⁻¹' W ∩ basicOpen U hx γ) := by
@@ -67,7 +67,7 @@ private theorem isOpen_iff_preimage_inter_basicOpen
     exact hrproj ▸ hr'.1
 
 theorem discreteTopology_fiber_proj
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X] (x : X) :
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X] (x : X) :
     DiscreteTopology ((proj : UniversalCover X x₀ → X) ⁻¹' ({x} : Set X)) := by
   rw [discreteTopology_iff_isOpen_singleton]
   rintro ⟨⟨y, eγ⟩, hey⟩
@@ -110,7 +110,7 @@ private def sheet {x : X} (U : Set X) (hx : x ∈ U)
   basicOpen U (fiberEndpointMem hx e) e.1.2
 
 private theorem pairwise_disjoint_sheet
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     {x : X} {U : Set X} (hU : IsNullhomotopicOpen U) (hx : x ∈ U) :
     Pairwise fun e e' :
         (proj : UniversalCover X x₀ → X) ⁻¹' ({x} : Set X) ↦
@@ -135,7 +135,7 @@ private theorem pairwise_disjoint_sheet
   exact e.2.trans e'.2.symm
 
 private theorem preimage_subset_iUnion_sheet
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X]
     {x : X} {U : Set X} (hU : IsNullhomotopicOpen U) (hx : x ∈ U) :
     (proj : UniversalCover X x₀ → X) ⁻¹' U ⊆
       ⋃ e : (proj : UniversalCover X x₀ → X) ⁻¹' ({x} : Set X),
@@ -162,7 +162,7 @@ theorem surjective_proj [PathConnectedSpace X] :
 
 /-- The endpoint projection from Hatcher's path-class space is a covering map. -/
 theorem isCoveringMap_proj
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X] :
     IsCoveringMap (proj : UniversalCover X x₀ → X) := by
   intro x
@@ -185,6 +185,7 @@ theorem isCoveringMap_proj
       (pairwise_disjoint_sheet hU hx)
       (preimage_subset_iUnion_sheet hU hx)
   apply IsEvenlyCovered.of_trivialization (t := t)
-  simpa [t] using hx
+  change x ∈ U
+  exact hx
 
 end Hatcher.UniversalCover

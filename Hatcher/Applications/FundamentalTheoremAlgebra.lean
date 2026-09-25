@@ -44,6 +44,7 @@ noncomputable def polynomialLoop (p : ℂ[X]) (hp : ∀ z, p.eval z ≠ 0) (R : 
   Circle.normalizedLoop (polynomialCircleMap p R) (fun s => hp _)
     (by simp)
 
+set_option backward.isDefEq.respectTransparency false in
 @[simp]
 theorem coe_polynomialLoop (p : ℂ[X]) (hp : ∀ z, p.eval z ≠ 0) (R : ℝ) (s : I) :
     ((polynomialLoop p hp R s : _root_.Circle) : ℂ) =

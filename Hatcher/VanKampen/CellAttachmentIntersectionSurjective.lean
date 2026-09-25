@@ -17,6 +17,7 @@ namespace Hatcher.VanKampen
 
 universe u
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The fundamental groups of the individual attaching-sphere pieces jointly
 generate the fundamental group of the overlap in Hatcher's auxiliary cover. -/
 theorem attachmentIntersection_coverMap_surjective

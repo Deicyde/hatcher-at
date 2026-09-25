@@ -52,6 +52,7 @@ def toMetricSphere : Circle ≃ₜ Metric.sphere (0 : ℂ) 1 where
   continuous_toFun := by fun_prop
   continuous_invFun := by fun_prop
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The standard basepoint of the circle has a strongly contractible open
 neighborhood. -/
 theorem wellPointedAt_one : WellPointedAt (1 : Circle) := by

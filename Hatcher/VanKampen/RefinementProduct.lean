@@ -191,6 +191,7 @@ private theorem closeEdgeInSet_eq {X : Type u} [TopologicalSpace X]
       rw [Path.symm_apply, Path.symm_apply]
       exact hcb _
 
+set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
 /-- Subdividing a segment inside one set does not change its connector-closed
 fundamental-group class. -/

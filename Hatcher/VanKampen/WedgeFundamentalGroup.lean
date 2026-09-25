@@ -241,6 +241,7 @@ namespace VanKampen
 
 variable {ι : Type u} {Z : Type v} [TopologicalSpace Z]
 
+set_option backward.isDefEq.respectTransparency false in
 /-- If every off-diagonal overlap has trivial fundamental group, all van
 Kampen overlap relations are trivial. -/
 theorem relationSubgroup_eq_bot_of_overlap_subsingleton
@@ -257,7 +258,11 @@ theorem relationSubgroup_eq_bot_of_overlap_subsingleton
       simp [overlapRelation, overlapToLeft, overlapToRight]
     · letI := htrivial i j hij
       rw [Subsingleton.elim ω 1]
-      simp [overlapRelation]
+      change Monoid.CoprodI.of
+          ((overlapToLeft U z₀ hz₀ i j) (1 : OverlapGroup U z₀ hz₀ i j)) *
+        (Monoid.CoprodI.of
+          ((overlapToRight U z₀ hz₀ i j) (1 : OverlapGroup U z₀ hz₀ i j)))⁻¹ = 1
+      simp only [map_one, inv_one, mul_one]
   · exact bot_le
 
 /-- Van Kampen reduces to the unquotiented cover free product when every

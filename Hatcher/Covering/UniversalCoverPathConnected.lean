@@ -61,7 +61,7 @@ private theorem range_subpath_subset_of_mem_ordConnectedComponent
   exact (Set.mem_ordConnectedComponent.mp hs) hr
 
 /-- The family of initial path segments is continuous in Hatcher's basic-open topology. -/
-theorem continuous_initialSegment [LocPathConnectedSpace X]
+theorem continuous_initialSegment [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X] (γ : Path x₀ x) :
     Continuous (initialSegment γ) := by
   rw [(isTopologicalBasis_basicOpen (X := X) (x₀ := x₀)).continuous_iff]
@@ -85,7 +85,7 @@ theorem continuous_initialSegment [LocPathConnectedSpace X]
   exact initialSegment_trans_subpath U γ t s htU hsU hγ
 
 /-- The path in the path-class space obtained from the initial segments of `γ`. -/
-def initialSegmentPath [LocPathConnectedSpace X]
+def initialSegmentPath [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X] (γ : Path x₀ x) :
     Path (basepoint (X := X) (x₀ := x₀))
       ⟨x, Path.Homotopic.Quotient.mk γ⟩ where
@@ -102,7 +102,7 @@ def initialSegmentPath [LocPathConnectedSpace X]
     intro t
     simp [initialPath]
 
-private theorem joined_basepoint [LocPathConnectedSpace X]
+private theorem joined_basepoint [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X] (q : UniversalCover X x₀) :
     Joined (basepoint (X := X) (x₀ := x₀)) q := by
   rcases q with ⟨y, q⟩
@@ -110,7 +110,7 @@ private theorem joined_basepoint [LocPathConnectedSpace X]
   | mk γ => exact ⟨initialSegmentPath γ⟩
 
 /-- The universal-cover path-class space is path-connected. -/
-instance pathConnectedSpace [PathConnectedSpace X] [LocPathConnectedSpace X]
+instance pathConnectedSpace [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [SemilocallySimplyConnectedSpace X] :
     PathConnectedSpace (UniversalCover X x₀) where
   nonempty := ⟨basepoint (X := X) (x₀ := x₀)⟩

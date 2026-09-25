@@ -11,7 +11,7 @@ variable {E X A : Type*} [TopologicalSpace E] [TopologicalSpace X]
 through a covering map exactly when its induced fundamental-group image lies
 in the covering subgroup. This is Hatcher, Proposition 1.33. -/
 theorem exists_lift_iff_range_le (cov : IsCoveringMap p)
-    [PathConnectedSpace A] [LocPathConnectedSpace A]
+    [PathConnectedSpace A] [LocallyPathConnectedSpace A]
     (f : C(A, X)) (a₀ : A) (e₀ : E) (he : p e₀ = f a₀) :
     (∃ F : C(A, E), F a₀ = e₀ ∧ p ∘ F = f) ↔
       (FundamentalGroup.map f a₀).range ≤

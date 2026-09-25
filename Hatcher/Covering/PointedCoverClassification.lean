@@ -15,7 +15,7 @@ abbrev IsomorphismClasses (X : Type u) [TopologicalSpace X] (x₀ : X) :=
   Quotient (@isomorphicSetoid.{u, u} X _ x₀)
 
 /-- The canonical pointed connected cover realizing a subgroup. -/
-abbrev ofSubgroup [PathConnectedSpace X] [LocPathConnectedSpace X]
+abbrev ofSubgroup [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [Hatcher.SemilocallySimplyConnectedSpace X]
     (H : Subgroup (FundamentalGroup X x₀)) :
     BasedConnectedCover.{u, u} X x₀ where
@@ -34,9 +34,10 @@ private theorem mapOfEq_rfl {A B : Type*}
   change (CategoryTheory.Iso.refl _).conj ((FundamentalGroup.map f a) γ) = _
   rw [CategoryTheory.Iso.refl_conj]
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The canonical subgroup cover has the requested image subgroup. -/
 theorem fundamentalGroupRange_ofSubgroup
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [Hatcher.SemilocallySimplyConnectedSpace X]
     (H : Subgroup (FundamentalGroup X x₀)) :
     (ofSubgroup H).fundamentalGroupRange = H := by
@@ -60,7 +61,7 @@ theorem fundamentalGroupRange_ofSubgroup
 /-- Every pointed connected cover, in any universe, is represented by the
 canonical small subgroup cover attached to its image subgroup. -/
 theorem isomorphic_ofSubgroup_fundamentalGroupRange
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [Hatcher.SemilocallySimplyConnectedSpace X]
     (C : BasedConnectedCover.{w, u} X x₀) :
     Isomorphic C (ofSubgroup C.fundamentalGroupRange) :=
@@ -70,14 +71,14 @@ theorem isomorphic_ofSubgroup_fundamentalGroupRange
 
 /-- The image subgroup descends to pointed-cover isomorphism classes. -/
 def fundamentalGroupRangeClass
-    [PathConnectedSpace X] [LocPathConnectedSpace X] :
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X] :
     IsomorphismClasses X x₀ → Subgroup (FundamentalGroup X x₀) :=
   Quotient.lift fundamentalGroupRange fun C D h =>
     (nonempty_iso_iff_range_eq C D).mp
       (show Isomorphic C D from h)
 
 private noncomputable def classificationEquiv_of_subgroupCover_range
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [Hatcher.SemilocallySimplyConnectedSpace X]
     (hrealize : ∀ H : Subgroup (FundamentalGroup X x₀),
       (ofSubgroup H).fundamentalGroupRange = H) :
@@ -97,7 +98,7 @@ private noncomputable def classificationEquiv_of_subgroupCover_range
 the fundamental group. Every cover in another universe is represented by a
 canonical cover in this universe via `isomorphic_ofSubgroup_fundamentalGroupRange`. -/
 noncomputable def classificationEquiv
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     [Hatcher.SemilocallySimplyConnectedSpace X] :
     IsomorphismClasses X x₀ ≃ Subgroup (FundamentalGroup X x₀) :=
   classificationEquiv_of_subgroupCover_range fundamentalGroupRange_ofSubgroup

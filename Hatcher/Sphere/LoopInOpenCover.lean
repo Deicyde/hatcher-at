@@ -51,6 +51,7 @@ private theorem exists_path_range_of_isPathConnected_inter
   use γ
   exact range_subset_iff.mpr hγ
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Cancelling the connecting paths in a concatenation leaves the original subdivided path. -/
 lemma concat_trans_trans_symm {n : ℕ} (p q : Fin (n + 1) → X)
     (F : ∀ k : Fin n, Path (p k.castSucc) (p k.succ))
@@ -108,13 +109,15 @@ theorem loop_homotopic_prod_of_isOpenCover (hc₁ : ∀ i, IsOpen (c i))
   have hG'₁ : G' (last (n + 1)) = (Path.refl a).cast rfl (ht₁ ▸ γ.target) :=
     snoc_last _ _
   have hG'_range₀ k : range (G' k.castSucc) ⊆ c (τ k) := by
-    unfold G'
-    rw [snoc_castSucc]
     cases k using Fin.cases with
     | zero =>
-      rw [cons_zero, Path.cast_coe, Path.refl_range, singleton_subset_iff]
+      have hidx : (0 : Fin (n + 1)).castSucc = (0 : Fin (n + 2)) := Fin.ext rfl
+      rw [hidx, hG'₀, Path.cast_coe, Path.refl_range, singleton_subset_iff]
       exact ha _
-    | succ j => exact (subset_inter_iff.mp (hG j)).right
+    | succ j =>
+      unfold G'
+      rw [snoc_castSucc]
+      exact (subset_inter_iff.mp (hG j)).right
   have hG'_range₁ k : range (G' k.succ) ⊆ c (τ k) := by
     unfold G'
     cases k using Fin.lastCases with

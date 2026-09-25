@@ -152,6 +152,7 @@ basepoint path, with its canonical reparameterization. -/
   baseCoverStrongDeformationRetract_retract_strip_top
     f s₀ x₀ γ hf j a
 
+set_option backward.isDefEq.respectTransparency false in
 @[simp] theorem baseCoverRetraction_basepointPath_apply
     (hf : ∀ j, Continuous (f j)) (t : I) :
     baseCoverRetraction f s₀ x₀ γ hf (basepointPath f s₀ x₀ γ t) = x₀ := by

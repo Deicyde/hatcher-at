@@ -178,11 +178,15 @@ private theorem memberDeformationMap_zero
       | some p =>
           rcases p with ⟨j, x⟩
           by_cases hji : j = i
-          · simp [memberDeformationMap, memberDeformationPoint,
-              memberDeformationPre, hji]
+          · change Quotient.mk (setoid X x₀)
+                (memberDeformationPre x₀ hwell i 0 (some ⟨j, x⟩)) =
+              Quotient.mk (setoid X x₀) (some ⟨j, x⟩)
+            simp [memberDeformationPre, hji]
           · have hx : x ∈ (hwell j).neighborhood := hza.resolve_left hji
-            simp [memberDeformationMap, memberDeformationPoint,
-              memberDeformationPre, hji, hx]
+            change Quotient.mk (setoid X x₀)
+                (memberDeformationPre x₀ hwell i 0 (some ⟨j, x⟩)) =
+              Quotient.mk (setoid X x₀) (some ⟨j, x⟩)
+            simp [memberDeformationPre, hji, hx]
 
 private theorem memberDeformationMap_fixed
     (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι) (t : I) (x : X i) :
@@ -190,9 +194,10 @@ private theorem memberDeformationMap_fixed
         (vanKampenCoverInclusion x₀ hwell i x) =
       vanKampenCoverInclusion x₀ hwell i x := by
   apply Subtype.ext
-  simp [memberDeformationMap, memberDeformationPoint,
-    memberDeformationPre, vanKampenCoverInclusion,
-    inclusionToSubset, inclusion]
+  change Quotient.mk (setoid X x₀)
+      (memberDeformationPre x₀ hwell i t (some ⟨i, x⟩)) =
+    Quotient.mk (setoid X x₀) (some ⟨i, x⟩)
+  simp [memberDeformationPre]
 
 private theorem memberDeformationMap_one
     (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι)
@@ -221,21 +226,21 @@ private theorem memberDeformationMap_one
           rcases p with ⟨j, x⟩
           by_cases hji : j = i
           · subst j
-            simp [memberDeformationMap, memberDeformationPoint,
-              memberDeformationPre, vanKampenCoverInclusion,
-              inclusionToSubset, vanKampenCoverRetraction,
-              inclusion]
-            change inclusion x₀ i x =
-              inclusion x₀ i (memberProjection x₀ i (inclusion x₀ i x))
+            change Quotient.mk (setoid X x₀)
+                (memberDeformationPre x₀ hwell i 1 (some ⟨i, x⟩)) =
+              Quotient.mk (setoid X x₀)
+                (some ⟨i, memberProjection x₀ i (inclusion x₀ i x)⟩)
             rw [memberProjection_inclusion_self]
+            simp [memberDeformationPre]
           · have hx : x ∈ (hwell j).neighborhood := hza.resolve_left hji
-            simp [memberDeformationMap, memberDeformationPoint,
-              memberDeformationPre, hji, hx,
-              vanKampenCoverInclusion, inclusionToSubset,
-              vanKampenCoverRetraction, inclusion]
-            change inclusion x₀ j (x₀ j) =
-              inclusion x₀ i (memberProjection x₀ i (inclusion x₀ j x))
+            change Quotient.mk (setoid X x₀)
+                (memberDeformationPre x₀ hwell i 1 (some ⟨j, x⟩)) =
+              Quotient.mk (setoid X x₀)
+                (some ⟨i, memberProjection x₀ i (inclusion x₀ j x)⟩)
             rw [memberProjection_inclusion_of_ne x₀ hji]
+            simp only [memberDeformationPre, hji, hx, ↓reduceDIte]
+            rw [WellPointedAt.contraction_one]
+            change inclusion x₀ j (x₀ j) = inclusion x₀ i (x₀ i)
             exact (inclusion_basepoint x₀ j).trans
               (inclusion_basepoint x₀ i).symm
 
@@ -624,14 +629,24 @@ private theorem memberDeformationMap_coverFiberQuotientMap
       by_cases hji : p.1 = i
       · simp [memberDeformationMap, memberDeformationPoint,
           coe_coverFiberQuotientMap, coverFiberPreimageInclusion,
-          memberDeformationPre, coverFiberDeformationPre, hji]
-        rfl
+          coverFiberDeformationPre, hji]
+        change Quotient.mk (setoid X x₀)
+            (memberDeformationPre x₀ hwell i t
+              (some ⟨p.1, p.2.1⟩)) =
+          Quotient.mk (setoid X x₀) (some ⟨p.1, p.2.1⟩)
+        simp [memberDeformationPre, hji]
       · have hx : p.2.1 ∈ (hwell p.1).neighborhood :=
           p.2.2.resolve_left hji
         simp [memberDeformationMap, memberDeformationPoint,
           coe_coverFiberQuotientMap, coverFiberPreimageInclusion,
-          memberDeformationPre, coverFiberDeformationPre, hji, hx]
-        rfl
+          coverFiberDeformationPre, hji]
+        change Quotient.mk (setoid X x₀)
+            (memberDeformationPre x₀ hwell i t
+              (some ⟨p.1, p.2.1⟩)) =
+          Quotient.mk (setoid X x₀)
+            (some ⟨p.1, ((hwell p.1).contraction
+              (t, ⟨p.2.1, hx⟩) : X p.1)⟩)
+        simp [memberDeformationPre, hji, hx]
 
 private theorem continuous_memberDeformationMap
     (hwell : ∀ i, WellPointedAt (x₀ i)) (i : ι) :

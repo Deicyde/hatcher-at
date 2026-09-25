@@ -11,7 +11,7 @@ variable {X : Type v} [TopologicalSpace X] {x₀ : X}
 /-- A loop class lies in the normalizer exactly when inverse monodromy at the
 chosen point is realized by a deck transformation. -/
 theorem exists_deck_smul_eq_monodromy_inv_iff_mem_normalizer
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀)
     (g : FundamentalGroup X x₀) :
     (∃ d : deck C.proj,
@@ -46,7 +46,7 @@ theorem exists_deck_smul_eq_monodromy_inv_iff_mem_normalizer
 /-- The normalizer map is onto the deck group, and its kernel is the covering
 subgroup viewed inside its normalizer. -/
 theorem normalizerToDeck_ker_and_surjective
-    [PathConnectedSpace X] [LocPathConnectedSpace X]
+    [PathConnectedSpace X] [LocallyPathConnectedSpace X]
     (C : Hatcher.BasedConnectedCover.{u, v} X x₀) :
     C.normalizerToDeck.ker =
         C.fundamentalGroupRange.subgroupOf

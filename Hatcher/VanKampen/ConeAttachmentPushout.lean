@@ -87,14 +87,14 @@ theorem continuous_coneMap {X S : Type u} [TopologicalSpace X]
   apply (isQuotientMap_quotientMk (id : S → S)).continuous_iff.mpr
   rw [continuous_sum_dom]
   constructor
-  · simpa [coneMap, coneRaw, quotientMk, Function.comp_def] using
-      (continuous_base f).comp hf
+  · change Continuous (fun s : S ↦ base f (f s))
+    exact (continuous_base f).comp hf
   · rw [continuous_sum_dom]
     constructor
-    · simpa [coneMap, coneRaw, quotientMk, Function.comp_def] using
-        (continuous_const : Continuous (fun _ : Unit ↦ apex f))
-    · simpa [coneMap, coneRaw, quotientMk, Function.comp_def] using
-        continuous_cylinder f
+    · change Continuous (fun _ : Unit ↦ apex f)
+      exact continuous_const
+    · change Continuous (fun p : S × I ↦ cylinder f p.1 p.2)
+      exact continuous_cylinder f
 
 private def descRaw {X S Z : Type u} (h : X → Z)
     (k : Hatcher.VanKampen.ConeAttachment (id : S → S) → Z) :
@@ -164,13 +164,14 @@ theorem continuous_desc {X S Z : Type u} [TopologicalSpace X]
   apply (isQuotientMap_quotientMk f).continuous_iff.mpr
   rw [continuous_sum_dom]
   constructor
-  · simpa [desc, descRaw, quotientMk, Function.comp_def] using hh
+  · change Continuous h
+    exact hh
   · rw [continuous_sum_dom]
     constructor
-    · simpa [desc, descRaw, quotientMk, Function.comp_def] using
-        (continuous_const : Continuous (fun _ : Unit ↦ k (apex id)))
-    · simpa [desc, descRaw, quotientMk, Function.comp_def] using
-        hk.comp (continuous_cylinder (id : S → S))
+    · change Continuous (fun _ : Unit ↦ k (apex id))
+      exact continuous_const
+    · change Continuous (fun p : S × I ↦ k (cylinder id p.1 p.2))
+      exact hk.comp (continuous_cylinder (id : S → S))
 
 /-- The attaching map as a morphism of topological spaces. -/
 def attachingHom {X S : Type u} [TopologicalSpace X] [TopologicalSpace S]

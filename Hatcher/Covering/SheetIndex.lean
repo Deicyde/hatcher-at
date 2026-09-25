@@ -49,7 +49,7 @@ noncomputable def fiberEquivQuotientRange (cov : IsCoveringMap p)
     rw [MulAction.mem_stabilizer_iff]
     exact (mem_range_map_iff_monodromy_fixed cov e₀ γ).symm
   exact ((Equiv.Set.univ (p ⁻¹' {p e₀})).symm.trans
-      (Equiv.setCongr (MulAction.orbit_eq_univ (FundamentalGroup X (p e₀)) base).symm)).trans
+      (Set.equivOfEq (MulAction.orbit_eq_univ (FundamentalGroup X (p e₀)) base).symm)).trans
     ((MulAction.orbitEquivQuotientStabilizer (FundamentalGroup X (p e₀)) base).trans
       (Subgroup.quotientEquivOfEq hstab))
 

@@ -90,11 +90,11 @@ theorem basicOpen_subset_of_mem_of_subset
   change Path.Homotopic.Quotient (⟨x, hx⟩ : U) ⟨y, hqU⟩ at δ
   change qγ = γ.trans
     (δ.map (⟨Subtype.val, continuous_subtype_val⟩ : C(U, X))) at hqeq
-  have hqU_eq : hqU = hVU hqV := Subsingleton.elim _ _
-  subst hqU
-  let ηU := η.map (inclusionOfSubset hVU)
+  let ηU : Path.Homotopic.Quotient (⟨y, hqU⟩ : U) ⟨z, hVU hrV⟩ :=
+    η.map (inclusionOfSubset hVU)
   refine ⟨hVU hrV, δ.trans ηU, ?_⟩
-  rw [hr, hqeq, map_trans]
+  rw [hr, hqeq]
+  rw [map_trans (⟨Subtype.val, continuous_subtype_val⟩ : C(U, X)) δ ηU]
   dsimp only [ηU]
   have hη := map_inclusionOfSubset (X := X) hVU hqV hrV η
   calc
@@ -130,7 +130,7 @@ theorem basicOpen_eq_of_mem
 
 /-- Hatcher's basic sets form a basis for the path-class topology. -/
 theorem isTopologicalBasis_basicOpen
-    [LocPathConnectedSpace X] [SemilocallySimplyConnectedSpace X] :
+    [LocallyPathConnectedSpace X] [SemilocallySimplyConnectedSpace X] :
     IsTopologicalBasis {s | ∃ (U : Set X) (_ : IsNullhomotopicOpen U)
       (x : X) (hx : x ∈ U) (γ : Path.Homotopic.Quotient x₀ x),
       s = basicOpen U hx γ} := by

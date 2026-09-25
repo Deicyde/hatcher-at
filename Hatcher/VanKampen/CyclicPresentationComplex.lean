@@ -110,6 +110,7 @@ private noncomputable def diskBoundaryTwoContinuousMap :
   ⟨diskBoundaryTwoHomeomorphCircle,
     diskBoundaryTwoHomeomorphCircle.continuous⟩
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem diskBoundaryTwoContinuousMap_generator :
     FundamentalGroup.mapOfEq diskBoundaryTwoContinuousMap
         diskBoundaryTwoHomeomorphCircle_basepoint

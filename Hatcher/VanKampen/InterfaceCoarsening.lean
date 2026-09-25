@@ -134,6 +134,7 @@ def lowerCoarseConnectorPath
     (G.lowerCoarseVertex r j)).cast rfl <| by
       exact congrArg (G.interfacePath r) (G.lowerCoarseVertex_spec r j).symm
 
+set_option backward.isDefEq.respectTransparency false in
 def lowerCoarseConnectors
     (G : StaggeredCoverGrid U H bottom top)
     (hx₀ : ∀ i, x₀ ∈ U i)

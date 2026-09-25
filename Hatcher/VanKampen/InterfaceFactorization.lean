@@ -329,6 +329,7 @@ noncomputable def interfaceVertexConnector
   exact G.interfaceConnector hx₀ hone htwo hthree r
     ((G.interfaceSubdivision r).point j)
 
+set_option backward.isDefEq.respectTransparency false in
 theorem interfaceVertexConnector_range
     (G : StaggeredCoverGrid U H bottom top)
     (hx₀ : ∀ i, x₀ ∈ U i)
@@ -348,6 +349,7 @@ theorem interfaceVertexConnector_range
       exact hx₀ i
     · exact G.interfaceConnector_range hx₀ hone htwo hthree r _ hi
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Connectors for the lower labeling of an interface. -/
 def lowerInterfaceConnectors
     (G : StaggeredCoverGrid U H bottom top)
@@ -392,6 +394,7 @@ def lowerInterfaceConnectors
     exact ⟨((G.lowerInterfaceBoundary r).subdivision.strictMono
       Fin.castSucc_lt_succ).le, le_rfl⟩
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Connectors for the upper labeling of an interface. -/
 def upperInterfaceConnectors
     (G : StaggeredCoverGrid U H bottom top)
