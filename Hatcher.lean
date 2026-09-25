@@ -45,6 +45,7 @@ import Hatcher.Euclidean.Dimension
 import Hatcher.Singular.Homology
 import Hatcher.Singular.Reduced
 import Hatcher.Singular.Relative
+import Hatcher.Singular.RelativeHomotopy
 import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected
 import Hatcher.Sphere.BorsukUlam

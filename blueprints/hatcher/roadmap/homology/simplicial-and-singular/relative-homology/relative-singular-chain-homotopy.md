@@ -3,6 +3,9 @@ article_id: af_6cab8eafd3aeafc53888d4dd
 source_units: [hatcher-2-1-relative-homology-les]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.chainHomotopyOfPairHomotopy
 ---
 
 # A homotopy of pairs gives a relative chain homotopy
@@ -12,10 +15,12 @@ homotopies on the ambient spaces and subspaces through the relative-chain
 cokernels. The result is a chain homotopy between the induced maps on relative
 singular chain complexes.
 
-The main artifact should be
-`Hatcher.Relative.chainHomotopyOfPairHomotopy`. Compatibility of the ambient
-and subspace homotopies is essential: an unrelated pair of absolute chain
-homotopies does not define a map on the quotient complex.
+`Hatcher.Relative.chainHomotopyOfPairHomotopy` carries this out degreewise by
+the cokernel universal property. It first proves that the ambient and subspace
+singular-chain homotopies commute with the inclusions, then descends the
+ambient homotopy to the relative quotient. This compatibility is essential:
+an unrelated pair of absolute chain homotopies does not define a map on the
+quotient complex.
 
 ## Depends on
 
