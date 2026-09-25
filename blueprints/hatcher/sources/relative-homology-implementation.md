@@ -54,12 +54,13 @@ subspace, and `P.map : P.snd ⟶ P.fst` is an embedding. Apply
 ordering: `SSetPair.left` is the subobject and `SSetPair.right` is the ambient
 object.
 
-At the current Mathlib `v4.34.1` pin, the next implementation node is
-`Hatcher.Relative.singularPairFunctor : TopPair ⟶ SSetPair`; then obtain the
-relative singular chain-complex and homology functors by composing it with
-`SSetPair.chainComplexFunctor` and `SSetPair.homologyFunctor`. These are the
-quotient chains `Cₙ(X; R) / Cₙ(A; R)` from pages 115–116. Maps of pairs are
-handled by functoriality rather than by a second ad hoc map construction.
+At the current Mathlib `v4.34.1` pin,
+`Hatcher.Relative.singularPairFunctor : TopPair ⥤ SSetPair` is formalized.
+The next implementation node obtains the relative singular chain-complex and
+homology functors by composing it with `SSetPair.chainComplexFunctor` and
+`SSetPair.homologyFunctor`. These are the quotient chains
+`Cₙ(X; R) / Cₙ(A; R)` from pages 115–116. Maps of pairs are handled by
+functoriality rather than by a second ad hoc map construction.
 
 ## Exactness and naturality
 
@@ -106,7 +107,7 @@ and is included at the repository's current stable Mathlib `v4.34.1` pin. It
 provides `SSetPair`, `SSetPair.chainComplex`, `SSetPair.homologyFunctor`,
 `SSetPair.homologyδ`, and `SSetPair.homology_exact₁/₂/₃`. The simplicial-pair
 foundation is therefore exact Mathlib coverage, and `singular-pair-functor` is
-next ready.
+formalized locally. `relative-singular-homology` is next ready.
 
 Andrew Yang's PR
 [#37659](https://github.com/leanprover-community/mathlib4/pull/37659) is an
@@ -123,6 +124,6 @@ triple sequence remains open and paused pending excision.
 ## Readiness status
 
 The Mathlib gate is satisfied: the simplicial-pair foundation is complete at
-`v4.34.1`, and `singular-pair-functor` is the next ready node. Six of the
-fifteen relative-homology leaves are complete, with nine downstream leaves
-incomplete.
+`v4.34.1`, and `singular-pair-functor` is formalized locally. Seven of the
+fifteen relative-homology leaves are complete, with eight downstream leaves
+incomplete; `relative-singular-homology` is next ready.

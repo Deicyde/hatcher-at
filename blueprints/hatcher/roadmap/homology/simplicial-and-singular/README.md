@@ -8,7 +8,7 @@ Hatcher §2.1 (pages 102–133). The completed first slice covers singular
 homology, its low-degree checks, functoriality, and homotopy invariance through
 Corollary 2.11 and Proposition 2.12. A second selected slice decomposes reduced
 and relative homology, exact sequences, naturality, and relative homotopy
-invariance; six of its fifteen leaves are complete.
+invariance; seven of its fifteen leaves are complete.
 
 Simplicial homology takes a Δ-complex structure and forms the chain complex of
 its simplices; it is finite and computable but depends on the chosen structure.
@@ -24,9 +24,9 @@ source-facing consequences are formalized locally in
 `Hatcher/Singular/Homology.lean`. It also contains the generic algebraic long
 exact sequence and, at the current `v4.34.1` pin, the `SSetPair` relative-
 homology foundation from PR #41285. The four reduced-homology leaves, generic
-algebraic exact-sequence leaf, and simplicial-pair foundation are complete.
-`singular-pair-functor` is the next ready node; nine downstream leaves remain
-incomplete.
+algebraic exact-sequence leaf, simplicial-pair foundation, and singular-pair
+functor are complete. `relative-singular-homology` is the next ready node;
+eight downstream leaves remain incomplete.
 
 ## Singular chains and low degrees
 
@@ -61,8 +61,9 @@ Relative homology for simplicial-set pairs merged in Mathlib PR
 [#41285](https://github.com/leanprover-community/mathlib4/pull/41285) and is
 present at the repository's `v4.34.1` pin. The simplicial-pair foundation is
 therefore complete, and
-[the singular-pair functor](relative-homology/singular-pair-functor.md) is next
-ready. Excision remains active upstream work.
+[the singular-pair functor](relative-homology/singular-pair-functor.md) is now
+formalized. [Relative singular homology](relative-homology/relative-singular-homology.md)
+is next ready. Excision remains active upstream work.
 
 ## Sources
 

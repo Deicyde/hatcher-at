@@ -21,8 +21,10 @@ definition `SSetPair.homologyFunctor` in
 API includes `SSetPair.chainComplex`, `homologyπ`, `homologyδ`, and
 `homology_exact₁/₂/₃`.
 
-Mathlib `v4.34.1` contains PR #41285, so this foundational node is complete and
-[the singular-pair functor](singular-pair-functor.md) is the next ready node.
+Mathlib `v4.34.1` contains PR #41285, so this foundational node is complete.
+[The singular-pair functor](singular-pair-functor.md) is now formalized, and
+[relative singular homology](relative-singular-homology.md) is the next ready
+node.
 
 ## Depends on
 

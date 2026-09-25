@@ -14,9 +14,11 @@ fixed separately in the
 [project-authored implementation specification](../../../../sources/relative-homology-implementation.md).
 The four-node reduced-homology branch and the generic algebraic exact-sequence
 node are complete. The `SSetPair` relative-homology foundation is also complete
-because the current Mathlib `v4.34.1` pin contains PR #41285. Thus six of the
-fifteen leaves are complete, [the singular-pair functor](singular-pair-functor.md)
-is next ready, and nine downstream leaves remain incomplete.
+because the current Mathlib `v4.34.1` pin contains PR #41285, and
+[the singular-pair functor](singular-pair-functor.md) is formalized locally.
+Thus seven of the fifteen leaves are complete,
+[relative singular homology](relative-singular-homology.md) is next ready, and
+eight downstream leaves remain incomplete.
 
 ## Reduced homology
 

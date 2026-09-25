@@ -3,6 +3,9 @@ article_id: af_0a7e9a54781df8354811b9b7
 source_units: [hatcher-2-1-relative-homology-les]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.singularPairFunctor
 ---
 
 # The singular set of a topological pair
@@ -12,9 +15,10 @@ For a topological pair `P`, apply `TopCat.toSSet` to the embedding
 monomorphism. This defines a functor from topological pairs to simplicial-set
 pairs while preserving maps of pairs.
 
-The main artifact should be
-`Hatcher.Relative.singularPairFunctor : TopPair ⟶ SSetPair`. The direction
-must respect the two APIs: `TopPair.fst` is the ambient space and
+Formalized as
+`Hatcher.Relative.singularPairFunctor : TopPair ⥤ SSetPair` in
+`Hatcher/Singular/Relative.lean`. The direction respects the two APIs:
+`TopPair.fst` is the ambient space and
 `SSetPair.right` is the ambient simplicial set. Joël Riou's excision prototype
 contains a compatible `TopPair.toSSetPair`, but it is implementation prior art,
 not a pinned dependency.
