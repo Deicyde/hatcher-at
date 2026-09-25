@@ -3,6 +3,8 @@ article_id: af_7da35d562938b0efe2922263
 source_units: [hatcher-2-1-relative-homology-les]
 declaration: def
 origin: cited
+lean: Hatcher.Reduced.homologyIsoOfPositiveDegree
+statement: formalized
 ---
 
 # Reduced and ordinary homology agree in positive degrees

@@ -115,6 +115,46 @@ noncomputable def homologyFunctor (R : C) (n : ℕ) : TopCat.{w} ⥤ C :=
   augmentedSingularChainComplexFunctor R ⋙
     HomologicalComplex.homologyFunctor C (ComplexShape.down ℕ) (n + 1)
 
+private noncomputable def positiveShortComplexIso (R : C) (k : ℕ) :
+    augmentedSingularChainComplexFunctor R ⋙
+        HomologicalComplex.shortComplexFunctor' C (ComplexShape.down ℕ)
+          (k + 3) (k + 2) (k + 1) ≅
+      (singularChainComplexFunctor C).obj R ⋙
+        HomologicalComplex.shortComplexFunctor' C (ComplexShape.down ℕ)
+          (k + 2) (k + 1) k :=
+  NatIso.ofComponents (fun _ => Iso.refl _) (by
+    intro X Y f
+    ext
+    · change (augmentedMap R f).f (k + 3) ≫ 𝟙 _ =
+          𝟙 _ ≫ (((singularChainComplexFunctor C).obj R).map f).f (k + 2)
+      rw [Category.comp_id, Category.id_comp]
+      rfl
+    · change (augmentedMap R f).f (k + 2) ≫ 𝟙 _ =
+          𝟙 _ ≫ (((singularChainComplexFunctor C).obj R).map f).f (k + 1)
+      rw [Category.comp_id, Category.id_comp]
+      rfl
+    · change (augmentedMap R f).f (k + 1) ≫ 𝟙 _ =
+          𝟙 _ ≫ (((singularChainComplexFunctor C).obj R).map f).f k
+      rw [Category.comp_id, Category.id_comp]
+      rfl)
+
+/-- **Hatcher, §2.1 (page 110).** Reduced and ordinary singular homology are
+naturally isomorphic in every positive degree. -/
+noncomputable def homologyIsoOfPositiveDegree (R : C) (n : ℕ) (hn : 0 < n) :
+    homologyFunctor R n ≅ (singularHomologyFunctor C n).obj R := by
+  cases n with
+  | zero => simp at hn
+  | succ k =>
+      exact
+        Functor.isoWhiskerLeft (augmentedSingularChainComplexFunctor R)
+            (HomologicalComplex.homologyFunctorIso' C (ComplexShape.down ℕ)
+              (k + 3) (k + 2) (k + 1) (by simp) (by simp)) ≪≫
+          Functor.isoWhiskerRight (positiveShortComplexIso R k)
+            (ShortComplex.homologyFunctor C) ≪≫
+          (Functor.isoWhiskerLeft ((singularChainComplexFunctor C).obj R)
+            (HomologicalComplex.homologyFunctorIso' C (ComplexShape.down ℕ)
+              (k + 2) (k + 1) k (by simp) (by simp))).symm
+
 end Homology
 
 end Hatcher.Reduced
