@@ -20,10 +20,9 @@ because the current Mathlib `v4.34.1` pin contains PR #41285, and
 formalized, as is [the pair long exact sequence](pair-long-exact-sequence.md),
 including its connecting-map formula and naturality. The compatible relative
 chain homotopy and induced homology-map equality complete the relative homotopy
-branch and Proposition 2.19. The reduced pair sequence is also formalized.
-Thus thirteen of the fifteen leaves are complete and two downstream leaves
-remain. Autoform exposes two statements: the pointed comparison and
-reduced-pair-sequence naturality.
+branch and Proposition 2.19. The reduced pair sequence and its naturality are
+also formalized. Thus fourteen of the fifteen leaves are complete and one
+downstream leaf remains. Autoform exposes the pointed comparison.
 
 ## Reduced homology
 

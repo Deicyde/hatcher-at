@@ -6,7 +6,7 @@ article_id: af_9da1e6c5697d0bac0b2a1624
 
 Hatcher's Chapter 2 (pages 97–184). Two selected §2.1 slices are decomposed:
 the completed singular-homology functoriality spine and a reduced- and
-relative-homology exact-sequence spine with thirteen of fifteen leaves complete.
+relative-homology exact-sequence spine with fourteen of fifteen leaves complete.
 The rest of the chapter remains mapped or explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
@@ -26,10 +26,9 @@ homology leaves, generic algebraic exact-sequence leaf, simplicial-pair
 foundation, singular-pair functor, relative-homology functor, and pair long
 exact sequence with its connecting-map formula and naturality are complete.
 The relative homotopy branch through Proposition 2.19 and the reduced pair
-sequence are complete as well. Mathlib `v4.34.1` contains PR #41285. Two
-downstream leaves remain incomplete: the pointed comparison and
-reduced-pair-sequence naturality, both ready to state. The Δ-complex and
-excision branches remain deferred.
+sequence with its naturality are complete as well. Mathlib `v4.34.1` contains
+PR #41285. One downstream leaf remains incomplete: the pointed comparison,
+which is ready to state. The Δ-complex and excision branches remain deferred.
 
 [Computations and applications](computations-and-applications/README.md) turns
 that machinery into results: the degree of a map `Sⁿ → Sⁿ`, cellular homology

@@ -3,6 +3,9 @@ article_id: af_d988056a42cddea384f57669
 source_units: [hatcher-2-1-relative-homology-les]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.reducedPairConnecting_naturality
 ---
 
 # The reduced pair long exact sequence is natural
@@ -11,11 +14,12 @@ origin: cited
 subspaces induces a morphism between their reduced long exact homology
 sequences, commuting in particular with the connecting homomorphisms.
 
-The main artifact should be
-`Hatcher.Relative.reducedPairConnecting_naturality`. Its proof must use the
-natural augmented-chain construction directly. It must not transport
-naturality through a chosen-point splitting of zeroth homology, since that
-splitting is not natural for unpointed spaces.
+`Hatcher.Relative.reducedPairSequenceMap` packages the induced morphism between
+six consecutive terms. The main theorem
+`Hatcher.Relative.reducedPairConnecting_naturality` proves the connecting
+square directly from the natural augmented-chain construction, including in
+degree zero. It does not transport naturality through a chosen-point splitting
+of zeroth homology, since that splitting is not natural for unpointed spaces.
 
 ## Depends on
 

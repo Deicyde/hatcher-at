@@ -77,8 +77,9 @@ class of `∂α`, as on page 117, after specializing to ordinary integral
 homology. This pair sequence and representative formula are formalized locally.
 Its naturality for maps of pairs is also formalized. The reduced pair sequence
 is formalized using the augmented pair sequence, including its degree-zero
-endpoint. Its naturality is now ready to state; the triple sequence and the
-quotient sequence for Theorem 2.13 are not part of this slice.
+endpoint. Its naturality is formalized directly from the natural augmented
+sequence; the triple sequence and the quotient sequence for Theorem 2.13 are
+not part of this slice.
 
 ## Relative homotopy invariance
 
@@ -136,7 +137,6 @@ triple sequence remains open and paused pending excision.
 The Mathlib gate is satisfied: the simplicial-pair foundation is complete at
 `v4.34.1`, and the singular-pair and relative-homology functors, pair long exact
 sequence, pair-sequence naturality, reduced pair sequence, and relative
-homotopy branch through Proposition 2.19 are formalized locally. Thirteen of
-the fifteen relative-homology leaves are complete, with two downstream leaves
-incomplete. The pointed comparison and reduced-pair-sequence naturality are
-both ready to state.
+homotopy branch through Proposition 2.19 are formalized locally. Fourteen of
+the fifteen relative-homology leaves are complete, with one downstream leaf
+incomplete. The pointed comparison is ready to state.
