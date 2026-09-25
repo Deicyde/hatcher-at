@@ -47,6 +47,7 @@ import Hatcher.Singular.Reduced
 import Hatcher.Singular.Relative
 import Hatcher.Singular.RelativeHomotopy
 import Hatcher.Singular.ReducedRelative
+import Hatcher.Singular.PointedRelative
 import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected
 import Hatcher.Sphere.BorsukUlam

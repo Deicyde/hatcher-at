@@ -3,6 +3,8 @@ article_id: af_0d5b949221c2653c9284c81a
 source_units: [hatcher-2-1-relative-homology-les]
 declaration: def
 origin: cited
+statement: formalized
+lean: Hatcher.Relative.pointedPairHomologyIso
 ---
 
 # Relative homology at a basepoint is reduced homology
@@ -11,10 +13,9 @@ origin: cited
 construct an isomorphism
 `Hₙ(X,{x₀};R) ≅ H̃ₙ(X;R)` for every degree `n`.
 
-The main artifact should be `Hatcher.Relative.pointedPairHomologyIso`. The
-proof uses the reduced long exact sequence and the vanishing of reduced
-homology of a point. It must include degree zero rather than proving only the
-positive-degree case.
+`Hatcher.Relative.pointedPairHomologyIso` constructs this comparison from the
+reduced long exact sequence and the vanishing of reduced homology of a point.
+It includes degree zero rather than only the positive-degree case.
 
 ## Depends on
 

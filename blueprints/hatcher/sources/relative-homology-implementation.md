@@ -93,11 +93,10 @@ are formalized, completing the relative homotopy branch and Proposition 2.19.
 
 ## The pointed-pair comparison
 
-For a point `x₀ : X`, use the pair `(X,{x₀})`. Combine the reduced pair
-sequence with the homology calculation of a point to construct
-`Hₙ(X,{x₀};R) ≅ H̃ₙ(X;R)` in every degree. The degree-zero case is
-part of the theorem and must not be dropped or inferred from the
-positive-degree comparison.
+For a point `x₀ : X`, use the pair `(X,{x₀})`. The definition
+`Hatcher.Relative.pointedPairHomologyIso` combines the reduced pair sequence
+with the homology calculation of a point to construct
+`Hₙ(X,{x₀};R) ≅ H̃ₙ(X;R)` in every degree, including degree zero.
 
 ## Dependency status and prior art
 
@@ -115,10 +114,11 @@ foundation is therefore exact Mathlib coverage, and `singular-pair-functor` is
 formalized locally. The relative chain-complex and homology functors are also
 formalized locally by composition with this API. The pair long exact sequence,
 including its connecting-map formula and naturality, is formalized from the
-associated short exact sequence. The reduced pair sequence and its explicit
-degree-zero augmentation endpoint are also formalized. Compatible relative
-chain homotopies and their induced homology-map equalities are formalized by
-descent through its cokernel.
+associated short exact sequence. The reduced pair sequence, its naturality,
+and its explicit degree-zero augmentation endpoint are also formalized.
+Compatible relative chain homotopies and their induced homology-map equalities
+are formalized by descent through its cokernel. The pointed-pair comparison is
+formalized in every degree.
 
 Andrew Yang's PR
 [#37659](https://github.com/leanprover-community/mathlib4/pull/37659) is an
@@ -132,11 +132,10 @@ unreleased work-in-progress and is not a dependency or a source of
 [#41318](https://github.com/leanprover-community/mathlib4/pull/41318) for the
 triple sequence remains open and paused pending excision.
 
-## Readiness status
+## Selected-slice status
 
 The Mathlib gate is satisfied: the simplicial-pair foundation is complete at
 `v4.34.1`, and the singular-pair and relative-homology functors, pair long exact
-sequence, pair-sequence naturality, reduced pair sequence, and relative
-homotopy branch through Proposition 2.19 are formalized locally. Fourteen of
-the fifteen relative-homology leaves are complete, with one downstream leaf
-incomplete. The pointed comparison is ready to state.
+sequence, pair-sequence naturality, reduced pair sequence, pointed comparison,
+and relative homotopy branch through Proposition 2.19 are formalized locally.
+All fifteen relative-homology leaves are complete.

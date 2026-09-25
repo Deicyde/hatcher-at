@@ -78,13 +78,12 @@ definition and functoriality of reduced homology, relative chains and homology,
 Theorem 2.16, the long exact sequence of a pair and its naturality, Example
 2.18, and Proposition 2.19. Its representation is fixed in the
 [relative-homology implementation specification](relative-homology-implementation.md).
-Fourteen of these fifteen leaves are complete. The simplicial-pair foundation is
+All fifteen of these leaves are complete. The simplicial-pair foundation is
 available at the current pin, and the singular-pair and relative-homology
 functors, pair long exact sequence, and pair-sequence naturality are formalized
 locally. The pair sequence includes the integral connecting-map formula, and
-the relative homotopy branch through Proposition 2.19 and the reduced pair
-sequence with its naturality are complete. One downstream leaf remains
-incomplete: the pointed comparison, which is ready to state.
+the relative homotopy branch through Proposition 2.19, the reduced pair
+sequence with its naturality, and the pointed comparison are complete.
 
 Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
 component decomposition. Lemma 2.1, Examples 2.2–2.5, Theorem 2.13, Example

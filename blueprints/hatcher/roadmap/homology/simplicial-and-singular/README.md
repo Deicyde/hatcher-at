@@ -8,7 +8,7 @@ Hatcher §2.1 (pages 102–133). The completed first slice covers singular
 homology, its low-degree checks, functoriality, and homotopy invariance through
 Corollary 2.11 and Proposition 2.12. A second selected slice decomposes reduced
 and relative homology, exact sequences, naturality, and relative homotopy
-invariance; fourteen of its fifteen leaves are complete.
+invariance; all fifteen of its leaves are complete.
 
 Simplicial homology takes a Δ-complex structure and forms the chain complex of
 its simplices; it is finite and computable but depends on the chosen structure.
@@ -27,9 +27,8 @@ homology foundation from PR #41285. The four reduced-homology leaves, generic
 algebraic exact-sequence leaf, simplicial-pair foundation, singular-pair
 functor, relative-homology functor, pair long exact sequence, and pair-sequence
 naturality are complete. The pair sequence includes the integral connecting-map
-formula, and the relative homotopy branch through Proposition 2.19 and the
-reduced pair sequence with its naturality are complete. One downstream leaf
-remains incomplete: the pointed comparison, which is ready to state.
+formula, and the relative homotopy branch through Proposition 2.19, the reduced
+pair sequence with its naturality, and the pointed comparison are complete.
 
 ## Singular chains and low degrees
 
@@ -71,9 +70,8 @@ are now formalized. The
 including its connecting-map formula, is also formalized. Pair-sequence
 naturality is now formalized. The compatible relative chain homotopy and its
 induced homology-map equality complete the relative homotopy branch and
-Proposition 2.19. The reduced pair sequence and its naturality are now
-formalized. The pointed comparison is ready to state. Excision remains active
-upstream work.
+Proposition 2.19. The reduced pair sequence, its naturality, and the pointed
+comparison are now formalized. Excision remains active upstream work.
 
 ## Sources
 
