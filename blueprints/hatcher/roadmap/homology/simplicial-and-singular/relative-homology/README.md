@@ -12,9 +12,10 @@ naturality.
 The mathematical source is Hatcher. The representation against Mathlib is
 fixed separately in the
 [project-authored implementation specification](../../../../sources/relative-homology-implementation.md).
-The pair branch is gated on a stable Mathlib pin containing the `SSetPair`
-relative-homology API merged in PR #41285; the reduced branch and the generic
-long exact sequence can be implemented against the current pin.
+The four-node reduced-homology branch and the generic algebraic exact-sequence
+node are complete. The remaining ten nodes are blocked by the pair branch's
+readiness gate: a stable Mathlib pin containing the `SSetPair`
+relative-homology API merged in PR #41285.
 
 ## Reduced homology
 

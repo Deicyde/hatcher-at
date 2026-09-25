@@ -20,7 +20,6 @@ claimed to be natural for unpointed spaces.
 ## Depends on
 
 - [Reduced singular homology](reduced-singular-homology.md)
-- [Zeroth homology is free on path components](../zeroth-homology-components.md)
 
 ## Sources
 

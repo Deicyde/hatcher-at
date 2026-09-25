@@ -13,15 +13,16 @@ complexes, and singular homology in degree zero. What it lacks is the book's
 spine of computations, starting with `π₁(S¹) ≅ ℤ`. The roadmap therefore maps
 the whole book but decomposes it from that point.
 
-Chapters follow Hatcher's own order. The 133 leaves in the pre-existing
-selected §1.1, §1.2, §1.3, §2.1, and Appendix A.1 slices are complete: 119
-local declarations and 14 pinned Mathlib declarations. The §1.3 spine extends
-through Proposition 1.40. A second fifteen-leaf §2.1 slice now decomposes
-reduced and relative homology, long exact sequences, naturality, and relative
-homotopy invariance; its simplicial-pair foundation is gated on a Mathlib pin
-update and the new branch is not claimed complete. The remaining source is
-mapped for navigation and explicitly deferred so the book reads end to end
-and later work has somewhere to land. The
+Chapters follow Hatcher's own order. The selected scope contains 148
+formalizable leaves. Of these, 138 are complete: 123 local declarations and 15
+pinned Mathlib declarations. This includes all 133 leaves in the previously
+completed §1.1, §1.2, §1.3, §2.1 functoriality, and Appendix A.1 slices; the
+§1.3 spine extends through Proposition 1.40. A fifteen-leaf §2.1 slice also
+decomposes reduced and relative homology, long exact sequences, naturality, and
+relative homotopy invariance. Five of its leaves are complete, while the
+remaining ten are blocked by its simplicial-pair foundation's Mathlib
+pin-update gate. The remaining source is mapped for navigation and explicitly
+deferred so the book reads end to end and later work has somewhere to land. The
 [coverage contract](../coverage/README.md) says which is which, and
 [the source notes](../sources/hatcher.md) fix the citation scheme.
 

@@ -8,7 +8,7 @@ Hatcher §2.1 (pages 102–133). The completed first slice covers singular
 homology, its low-degree checks, functoriality, and homotopy invariance through
 Corollary 2.11 and Proposition 2.12. A second selected slice decomposes reduced
 and relative homology, exact sequences, naturality, and relative homotopy
-invariance.
+invariance; five of its fifteen leaves are complete.
 
 Simplicial homology takes a Δ-complex structure and forms the chain complex of
 its simplices; it is finite and computable but depends on the chosen structure.
@@ -22,8 +22,10 @@ The pinned Mathlib has exact categorical versions of most of the first slice.
 The roadmap makes those upstream results explicit, and the two thin
 source-facing consequences are formalized locally in
 `Hatcher/Singular/Homology.lean`. It also contains the generic algebraic long
-exact sequence. The second slice's `SSetPair` foundation is available only
-after the current pin and is therefore an explicit readiness gate.
+exact sequence. The four reduced-homology leaves and the generic algebraic
+exact-sequence leaf are complete. The second slice's remaining ten leaves
+depend on an `SSetPair` foundation available only after the current pin, so it
+remains an explicit readiness gate.
 
 ## Singular chains and low degrees
 
