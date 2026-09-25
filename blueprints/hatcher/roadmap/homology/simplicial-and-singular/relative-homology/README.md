@@ -19,11 +19,11 @@ because the current Mathlib `v4.34.1` pin contains PR #41285, and
 [Relative singular homology](relative-singular-homology.md) is also
 formalized, as is [the pair long exact sequence](pair-long-exact-sequence.md),
 including its connecting-map formula and naturality. The compatible relative
-chain homotopy is formalized as well. Thus eleven of the fifteen leaves are
-complete and four downstream leaves remain. Autoform exposes three statements:
-the reduced pair sequence, the pointed comparison, and relative-homology
-invariance, which is next in the homotopy branch. Reduced-pair-sequence
-naturality remains blocked only on the reduced pair sequence.
+chain homotopy and induced homology-map equality complete the relative homotopy
+branch and Proposition 2.19. Thus twelve of the fifteen leaves are complete and
+three downstream leaves remain. Autoform exposes two statements: the reduced
+pair sequence and the pointed comparison. Reduced-pair-sequence naturality
+remains blocked only on the reduced pair sequence.
 
 ## Reduced homology
 

@@ -196,4 +196,14 @@ noncomputable def chainHomotopyOfPairHomotopy
         rw [← Preadditive.add_comp, ← Preadditive.add_comp]
         rw [← (ambientChainHomotopy H R).comm i] }
 
+/-- **Hatcher, Proposition 2.19 (page 118).** Homotopic maps of topological
+pairs induce the same map on relative singular homology. -/
+theorem congr_homologyMap
+    {C : Type u} [Category.{v} C] [HasCoproducts.{w} C] [Preadditive C]
+    [CategoryWithHomology C]
+    {X Y : TopPair.{w}} {f g : X ⟶ Y}
+    (H : TopPair.Homotopy f g) (R : C) (n : ℕ) :
+    (homologyFunctor R n).map f = (homologyFunctor R n).map g :=
+  (chainHomotopyOfPairHomotopy H R).homologyMap_eq n
+
 end Hatcher.Relative

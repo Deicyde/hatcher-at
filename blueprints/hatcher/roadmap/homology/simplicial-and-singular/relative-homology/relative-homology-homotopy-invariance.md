@@ -3,6 +3,9 @@ article_id: af_53042df9d43d42059a2311d5
 source_units: [hatcher-2-1-relative-homology-les]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.congr_homologyMap
 ---
 
 # Homotopic maps of pairs induce the same relative-homology map
@@ -11,10 +14,12 @@ origin: cited
 `f,g : (X,A) ⟶ (Y,B)` are homotopic through maps of pairs, then they induce
 the same map `Hₙ(X,A;R) ⟶ Hₙ(Y,B;R)` in every degree.
 
-The main artifact should be `Hatcher.Relative.congr_homologyMap`. Apply
-chain-homotopy invariance only after constructing the compatible relative
-chain homotopy; the `HomologyPretheory.IsHomotopyInvariant` class is an
-interface, not a proof of this result.
+`Hatcher.Relative.congr_homologyMap` applies chain-homotopy invariance to the
+compatible relative chain homotopy constructed by
+`Hatcher.Relative.chainHomotopyOfPairHomotopy`. The proof therefore descends
+the explicit ambient and subspace homotopies to relative chains before passing
+to homology; it does not treat the `HomologyPretheory.IsHomotopyInvariant`
+interface as a proof of the result.
 
 ## Depends on
 
