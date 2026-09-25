@@ -375,6 +375,17 @@ noncomputable def tripleSequence
     (tripleChainComplexShortComplex_shortExact T R)
     n m (by simpa)
 
+/-- A map of topological triples induces a morphism between six consecutive
+terms of their long exact relative-homology sequences. -/
+noncomputable def tripleSequenceMap {P Q : TopTriple.{w}} (f : P ⟶ Q)
+    (R : C) (n m : ℕ) (h : m + 1 = n) :
+    tripleSequence P R n m h ⟶ tripleSequence Q R n m h :=
+  HomologicalComplex.HomologySequence.mapComposableArrows₅
+    (tripleChainComplexShortComplexMap f R)
+    (tripleChainComplexShortComplex_shortExact P R)
+    (tripleChainComplexShortComplex_shortExact Q R)
+    n m (by simpa)
+
 /-- **Hatcher, §2.1 (pages 118–119).** Six consecutive terms in the
 relative-homology sequence of a topological triple are exact. -/
 theorem tripleSequence_exact
@@ -395,6 +406,22 @@ theorem tripleHomologyMapXBToXA_zero_epi (T : TopTriple.{w}) (R : C) :
   change Epi (HomologicalComplex.homologyMap
     (tripleChainComplexMapXBToXA T R) 0)
   exact HomologicalComplex.epi_homologyMap_of_epi_of_not_rel _ _ (by simp)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **Hatcher, §2.1 (page 128).** The connecting morphism in the long exact
+sequence of a triple is natural with respect to maps of topological triples. -/
+@[reassoc]
+lemma tripleConnecting_naturality {P Q : TopTriple.{w}} (f : P ⟶ Q)
+    (R : C) (n m : ℕ) (h : m + 1 = n) :
+    tripleConnecting P R n m h ≫
+        (homologyFunctor R m).map (TopTriple.pairAB.map f) =
+      (homologyFunctor R n).map (TopTriple.pairXA.map f) ≫
+        tripleConnecting Q R n m h := by
+  exact HomologicalComplex.HomologySequence.δ_naturality
+    (tripleChainComplexShortComplexMap f R)
+    (tripleChainComplexShortComplex_shortExact P R)
+    (tripleChainComplexShortComplex_shortExact Q R)
+    n m (by simpa)
 
 end TripleChains
 
