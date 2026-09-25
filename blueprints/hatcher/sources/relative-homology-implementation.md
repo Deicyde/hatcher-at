@@ -14,11 +14,12 @@ homology (pages 115–117), Theorem 2.16 and its application to a pair (page 117
 Example 2.18 and Proposition 2.19 (page 118), and naturality of the pair and
 reduced-pair long exact sequences (pages 127–128).
 
-Theorem 2.13, Example 2.17, the triple sequence, excision, small chains,
-good-pair quotient comparison, sphere applications, invariance of dimension,
-and the simplicial–singular comparison remain deferred. This prevents
-Theorem 2.13 from being placed before the excision and quotient results used in
-its proof.
+The triple sequence is now specified separately in the
+[triple-homology implementation specification](triple-homology-implementation.md).
+Theorem 2.13, Example 2.17, excision, small chains, good-pair quotient
+comparison, sphere applications, invariance of dimension, and the
+simplicial–singular comparison remain deferred. This prevents Theorem 2.13 from
+being placed before the excision and quotient results used in its proof.
 
 ## Coefficients and indexing
 
@@ -78,8 +79,8 @@ homology. This pair sequence and representative formula are formalized locally.
 Its naturality for maps of pairs is also formalized. The reduced pair sequence
 is formalized using the augmented pair sequence, including its degree-zero
 endpoint. Its naturality is formalized directly from the natural augmented
-sequence; the triple sequence and the quotient sequence for Theorem 2.13 are
-not part of this slice.
+sequence; the triple sequence has its own selected slice, while the quotient
+sequence for Theorem 2.13 remains outside this slice.
 
 ## Relative homotopy invariance
 

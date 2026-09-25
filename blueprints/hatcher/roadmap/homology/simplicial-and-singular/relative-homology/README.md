@@ -4,10 +4,10 @@ article_id: af_a43e897716ffaf6560f50495
 
 # Relative homology and exact sequences
 
-Hatcher §2.1 (pages 110, 113–118, and 127–128). This selected slice introduces
+Hatcher §2.1 (pages 110, 113–119, and 127–128). The selected slices introduce
 reduced homology from the augmented singular complex, relative homology of a
-topological pair, the long exact sequence of a pair, homotopy invariance, and
-naturality.
+topological pair, pair and triple long exact sequences, homotopy invariance,
+and naturality.
 
 The mathematical source is Hatcher. The representation against Mathlib is
 fixed separately in the
@@ -21,7 +21,9 @@ formalized, as is [the pair long exact sequence](pair-long-exact-sequence.md),
 including its connecting-map formula and naturality. The compatible relative
 chain homotopy and induced homology-map equality complete the relative homotopy
 branch and Proposition 2.19. The reduced pair sequence, its naturality, and the
-pointed comparison are also formalized. Thus all fifteen leaves are complete.
+pointed comparison are also formalized. Thus all fifteen leaves in the
+reduced- and relative-pair slice are complete. A four-leaf triple-sequence
+slice is now decomposed for implementation.
 
 ## Reduced homology
 
@@ -47,13 +49,21 @@ pointed comparison are also formalized. Thus all fifteen leaves are complete.
 - [The reduced pair long exact sequence is natural](reduced-pair-long-exact-sequence-naturality.md)
 - [Relative homology at a basepoint is reduced homology](pointed-relative-reduced-homology.md)
 
+## Triple exact sequence
+
+- [Topological triples and their maps](topological-triple.md)
+- [Relative chains of a triple form a short exact sequence](triple-chain-short-exact-sequence.md)
+- [The long exact sequence of a triple](triple-long-exact-sequence.md)
+- [The triple long exact sequence is natural](triple-long-exact-sequence-naturality.md)
+
 ## Deferred boundary
 
-Theorem 2.13, Example 2.17, the triple sequence, excision and small chains,
-good-pair quotient comparison, sphere applications, invariance of dimension,
-and the simplicial–singular comparison remain deferred.
+Theorem 2.13, Example 2.17, excision and small chains, good-pair quotient
+comparison, sphere applications, invariance of dimension, and the
+simplicial–singular comparison remain deferred.
 
 ## Sources
 
 - [Hatcher §2.1](../../../../sources/hatcher-2-1.md)
 - [Relative-homology implementation specification](../../../../sources/relative-homology-implementation.md)
+- [Triple-homology implementation specification](../../../../sources/triple-homology-implementation.md)

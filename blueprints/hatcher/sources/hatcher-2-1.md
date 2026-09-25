@@ -67,10 +67,10 @@ excision are developed, but its proof uses Theorem 2.20 and Proposition 2.22.
 It must not be planned as an early independent theorem.
 
 On pages 127–128 Hatcher records naturality of the long exact sequence of a
-pair and of its reduced variant. Those two naturality statements are selected.
-The triple sequence and the quotient sequence used with Theorem 2.13 are not.
+pair, its reduced variant, and the triple sequence. All three naturality
+statements are selected. The quotient sequence used with Theorem 2.13 is not.
 
-## Selected slice
+## Selected slices
 
 The first selected slice decomposes the singular-homology definitions and
 Propositions 2.7–2.12. A second fifteen-leaf slice covers the augmented
@@ -85,11 +85,17 @@ locally. The pair sequence includes the integral connecting-map formula, and
 the relative homotopy branch through Proposition 2.19, the reduced pair
 sequence with its naturality, and the pointed comparison are complete.
 
+A third four-leaf slice covers the topological-triple interface, the short
+exact sequence
+`0 → C_*(A,B) → C_*(X,B) → C_*(X,A) → 0`, its long exact homology sequence
+including the degree-zero endpoint, and naturality for maps of triples. Its
+representation is fixed in the
+[triple-homology implementation specification](triple-homology-implementation.md).
+
 Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
 component decomposition. Lemma 2.1, Examples 2.2–2.5, Theorem 2.13, Example
-2.17, the triple sequence, excision and quotient-pair comparison, the remaining
-sphere applications, invariance of dimension, and the Δ-complex comparison
-are later milestones.
+2.17, excision and quotient-pair comparison, the remaining sphere applications,
+invariance of dimension, and the Δ-complex comparison are later milestones.
 
 For roadmap notation, write
 `Hₙ(X; R) := ((AlgebraicTopology.singularHomologyFunctor C n).obj R).obj X`.
@@ -144,7 +150,9 @@ excision, and Δ-complex homology with its comparison theorem.
   superseded in design by the merged simplicial-set-pair API.
 - Mathlib PR
   [#41318](https://github.com/leanprover-community/mathlib4/pull/41318), for
-  the long exact sequence of a triple, is open and paused pending excision.
+  the long exact sequence of a triple, is open and paused pending excision. Its
+  simplicial triple construction is implementation prior art for the selected
+  local slice, but it is not present at this repository's pin.
 - Joël Riou's
   [`excision`](https://github.com/joelriou/excision/tree/8b56cd0c8e5f39a7c2f36418c80b298e469596a6)
   development contains the active subdivision, small-chain, pair, and excision
@@ -152,9 +160,9 @@ excision, and Δ-complex homology with its comparison theorem.
 
 ## Decisions taken
 
-- **Selected boundaries.** Keep the completed 2.7–2.12 spine and add the
-  reduced/relative exact-sequence slice described above. Leave the
-  excision-dependent and Δ-complex results deferred.
+- **Selected boundaries.** Keep the completed 2.7–2.12 and reduced/relative
+  exact-sequence slices, and add the four-leaf triple exact-sequence slice
+  described above. Leave the excision-dependent and Δ-complex results deferred.
 - **Coefficients.** State exact Mathlib nodes with their coefficient-general
   categorical API. Treat Hatcher's integral theory as its abelian-group
   specialization.
@@ -170,3 +178,7 @@ excision, and Δ-complex homology with its comparison theorem.
   through Proposition 2.19 are formalized locally, including the connecting-map
   formula. Use the upstream cokernel and exact-sequence APIs for the remaining
   nodes; do not copy a competing cokernel API into the project.
+- **Triple theory.** Bundle composable topological embeddings `B ↪ A ↪ X`,
+  reuse the three induced relative pairs, and prove chain-level short exactness
+  through Mathlib's pinned kernel–cokernel sequence. Keep the interface thin so
+  it can later delegate to the unmerged upstream triple construction.

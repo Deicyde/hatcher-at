@@ -17,6 +17,9 @@ The project formalizes results from a single reference.
 - [Relative-homology implementation specification](relative-homology-implementation.md)
   fixes the project representation, dependency gate, and prior-art boundary
   for the second §2.1 slice.
+- [Triple-homology implementation specification](triple-homology-implementation.md)
+  fixes the representation, exact-sequence boundary, and upstream prior-art
+  policy for the selected triple slice.
 
 <!-- AUTHORING NOTES — these comments are not published.
 

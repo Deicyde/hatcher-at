@@ -8,7 +8,8 @@ Hatcher §2.1 (pages 102–133). The completed first slice covers singular
 homology, its low-degree checks, functoriality, and homotopy invariance through
 Corollary 2.11 and Proposition 2.12. A second selected slice decomposes reduced
 and relative homology, exact sequences, naturality, and relative homotopy
-invariance; all fifteen of its leaves are complete.
+invariance; all fifteen of its leaves are complete. A third four-leaf slice
+decomposes the long exact sequence of a triple and its naturality.
 
 Simplicial homology takes a Δ-complex structure and forms the chain complex of
 its simplices; it is finite and computable but depends on the chosen structure.
@@ -28,7 +29,9 @@ algebraic exact-sequence leaf, simplicial-pair foundation, singular-pair
 functor, relative-homology functor, pair long exact sequence, and pair-sequence
 naturality are complete. The pair sequence includes the integral connecting-map
 formula, and the relative homotopy branch through Proposition 2.19, the reduced
-pair sequence with its naturality, and the pointed comparison are complete.
+pair sequence with its naturality, and the pointed comparison are complete. The
+triple slice is planned as a topological-triple interface, a chain-level short
+exact sequence, the induced long exact sequence, and naturality.
 
 ## Singular chains and low degrees
 
@@ -55,9 +58,8 @@ pair sequence with its naturality, and the pointed comparison are complete.
 Lemma 2.1 and Examples 2.2–2.5 need a source-faithful Δ-complex chain model.
 Proposition 2.6 needs additivity over all path components in every degree;
 Mathlib `v4.34.1` contains only its degree-zero case. Theorem 2.13, Example
-2.17, the triple sequence, excision and quotient-pair comparison, the remaining
-sphere applications, invariance of dimension, and the Δ-complex comparison
-also remain deferred.
+2.17, excision and quotient-pair comparison, the remaining sphere applications,
+invariance of dimension, and the Δ-complex comparison remain deferred.
 
 Relative homology for simplicial-set pairs merged in Mathlib PR
 [#41285](https://github.com/leanprover-community/mathlib4/pull/41285) and is
@@ -71,7 +73,8 @@ including its connecting-map formula, is also formalized. Pair-sequence
 naturality is now formalized. The compatible relative chain homotopy and its
 induced homology-map equality complete the relative homotopy branch and
 Proposition 2.19. The reduced pair sequence, its naturality, and the pointed
-comparison are now formalized. Excision remains active upstream work.
+comparison are now formalized. The triple long exact sequence is decomposed
+into four local roadmap leaves. Excision remains active upstream work.
 
 ## Sources
 
