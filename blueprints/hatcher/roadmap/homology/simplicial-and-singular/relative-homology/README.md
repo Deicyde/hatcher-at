@@ -13,9 +13,10 @@ The mathematical source is Hatcher. The representation against Mathlib is
 fixed separately in the
 [project-authored implementation specification](../../../../sources/relative-homology-implementation.md).
 The four-node reduced-homology branch and the generic algebraic exact-sequence
-node are complete. The remaining ten nodes are blocked by the pair branch's
-readiness gate: a stable Mathlib pin containing the `SSetPair`
-relative-homology API merged in PR #41285.
+node are complete. The `SSetPair` relative-homology foundation is also complete
+because the current Mathlib `v4.34.1` pin contains PR #41285. Thus six of the
+fifteen leaves are complete, [the singular-pair functor](singular-pair-functor.md)
+is next ready, and nine downstream leaves remain incomplete.
 
 ## Reduced homology
 

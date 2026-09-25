@@ -8,12 +8,12 @@ Hatcher's Propositions 1.39 and 1.40 identify the deck group of a connected
 cover from its fundamental-group subgroup, then recover this calculation for
 orbit quotients by covering-space actions.
 
-The pinned Mathlib has the quotient-covering machinery but no deck group.
-Code from Mathlib PR
-[#40135](https://github.com/leanprover-community/mathlib4/pull/40135)
-landed on Mathlib master after the pin and supplies useful API prior art. This
-roadmap keeps the required compatibility layer local and does not mark that
-post-pin code as present in the build.
+Mathlib v4.34.1 contains both the quotient-covering machinery and the basic
+`deck` group API in `Mathlib/Topology/Covering/Deck.lean`. Mathlib PR
+[#40135](https://github.com/leanprover-community/mathlib4/pull/40135) is its
+historical provenance. The local modules retain the fiber action, normal-cover
+predicate, normalizer calculation, and Hatcher-specific quotient-action
+consequences.
 
 - [Deck transformations and normal covers](deck-transformation-group.md)
 - [A deck transformation is determined by one lifted point](deck-realization.md)

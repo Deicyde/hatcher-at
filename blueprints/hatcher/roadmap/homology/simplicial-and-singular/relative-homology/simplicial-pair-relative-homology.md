@@ -3,7 +3,9 @@ article_id: af_2a09c48fe99a73a2e9df0d1a
 source_units: [hatcher-2-1-relative-homology-les]
 declaration: def
 origin: bridged
-not_ready: true
+mathlib: true
+mathlib_declaration: SSetPair.homologyFunctor
+mathlib_file: Mathlib/AlgebraicTopology/SimplicialSet/Homology/Relative.lean
 ---
 
 # Relative homology of a simplicial-set pair
@@ -13,15 +15,14 @@ complex `Cₙ(X;R) / Cₙ(A;R)`, its homology functor, the quotient map from
 absolute chains, and the connecting morphisms and exactness results relating
 the homology of `A`, `X`, and `(X,A)`.
 
-After a Mathlib pin update, the main artifact is the upstream definition
-`SSetPair.homologyFunctor` in
+At the current Mathlib `v4.34.1` pin, the main artifact is the upstream
+definition `SSetPair.homologyFunctor` in
 `Mathlib/AlgebraicTopology/SimplicialSet/Homology/Relative.lean`; its supporting
 API includes `SSetPair.chainComplex`, `homologyπ`, `homologyδ`, and
 `homology_exact₁/₂/₃`.
 
-This node is not ready at the current `v4.31.0` pin. It may be marked as exact
-Mathlib coverage only after Setup moves the project to a stable release
-containing PR #41285 and Autoform verifies the declaration and module.
+Mathlib `v4.34.1` contains PR #41285, so this foundational node is complete and
+[the singular-pair functor](singular-pair-functor.md) is the next ready node.
 
 ## Depends on
 

@@ -77,10 +77,10 @@ Example 1.35, the permutation classification on pages 68–70, and Examples
 1.41–1.48 are deferred. They require specific geometric models or a general
 reconstruction from permutation actions.
 
-## Prior art in the pinned Mathlib
+## Upstream support in the current Mathlib pin
 
-Checked against Mathlib `v4.31.0` at
-`fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`.
+Checked against Mathlib `v4.34.1` at
+`d13f23b723b8a846827a245b89c10fc7d3f11612`.
 
 Available ingredients:
 
@@ -91,8 +91,9 @@ Available ingredients:
   `Mathlib/Topology/Homotopy/Lifting.lean` contain Proposition 1.30.
 - `IsCoveringMap.injective_path_homotopic_map` is the first clause of
   Proposition 1.31 in a stronger fundamental-groupoid form.
-- `IsCoveringMap.monodromy`, `monodromy_trans_apply`,
-  `monodromyFunctor`, and `monodromy_bijective` supply transport on fibers.
+- `IsCoveringMap.monodromy`, `monodromy_trans_apply`, `monodromyFunctor`,
+  `monodromy_bijective`, `fundamentalGroupMulAction`, and `monodromyPerm`
+  supply transport and the based fundamental-group action on fibers.
 - `IsCoveringMap.existsUnique_continuousMap_lifts_of_range_le` contains the
   hard direction and uniqueness in Proposition 1.33. Only the converse and
   source-facing `↔` wrapper are missing.
@@ -109,17 +110,22 @@ Available ingredients:
   compact-set finiteness condition, not Hatcher's condition `(*)`. The pinned
   theorem deriving local disjointness from it additionally assumes local
   compactness and Hausdorffness.
+- `deck` and its basic action API in `Mathlib/Topology/Covering/Deck.lean`
+  provide the upstream deck-transformation group. The fiber restriction,
+  normal-cover predicate, and normalizer and quotient calculations used here
+  remain project extensions.
 
 The pinned revision has no semilocally simply-connected API, universal-cover
 construction, arbitrary-subgroup cover, covering-isomorphism bundle,
-classification theorem, or deck-transformation group.
+or classification theorem.
 
-## Active upstream work
+## Historical upstream provenance and active work
 
 - [Mathlib PR #33108](https://github.com/leanprover-community/mathlib4/pull/33108)
-  merged four days after the pin. It packages the based fundamental-group
-  action on a fiber and related quotient-cover results. It is useful prior art
-  but is not available to this build.
+  landed after the former v4.31.0 pin. It packages the based fundamental-group
+  action on a fiber and related quotient-cover results; its monodromy API is
+  included in the current v4.34.1 build. The local monodromy module retains
+  Hatcher's fixed-point consequence.
 - [Mathlib PR #38292](https://github.com/leanprover-community/mathlib4/pull/38292)
   is an open, CI-green universal-cover development at head `54865ee`. It adds
   semilocal simple connectivity, based paths, tube neighborhoods, the
@@ -127,12 +133,14 @@ classification theorem, or deck-transformation group.
   requested that the large change be split. This roadmap uses it as design
   prior art while retaining Hatcher's direct `U[γ]` topology.
 - [Mathlib PR #40135](https://github.com/leanprover-community/mathlib4/pull/40135)
-  supplied the deck-transformation subgroup code that landed on Mathlib master
-  after the pin in Bors commit `1b878ee`, chiefly as
-  `Mathlib/Topology/Covering/Deck.lean`. It is the compatibility-layer prior
-  art for Propositions 1.39–1.40, not part of the pinned build.
+  supplied the deck-transformation subgroup code, chiefly as
+  `Mathlib/Topology/Covering/Deck.lean`. It landed after the former pin and is
+  included in v4.34.1. Local modules retain the additional fiber-action,
+  normality, normalizer, and quotient-action consequences needed for
+  Propositions 1.39–1.40.
 
-None of this post-pin work receives `mathlib: true`.
+The `monodromyPerm` and `deck` roadmap nodes therefore receive `mathlib: true`.
+The universal-cover development based on PR #38292 remains project-local.
 
 ## Decisions taken
 
@@ -143,8 +151,8 @@ None of this post-pin work receives `mathlib: true`.
   1.31, and 1.33 where the pinned library contains the hard theorem but not the
   exact conjunction or equivalence stated by Hatcher. Proposition 1.34 is an
   exact pinned declaration.
-- **Monodromy orientation.** Define the based action by direct endpoint
-  transport, matching Mathlib PR #33108. Mathlib's `FundamentalGroup`
+- **Monodromy orientation.** Use the upstream based action by direct endpoint
+  transport, historically introduced by Mathlib PR #33108. Mathlib's `FundamentalGroup`
   multiplication already reverses categorical path composition, so inserting
   another inverse would produce an antihomomorphism. State Proposition 1.32
   first as an equivalence with Mathlib's ordinary quotient `π₁(X,x₀) ⧸ H`;
@@ -163,11 +171,12 @@ None of this post-pin work receives `mathlib: true`.
   separate theorem
   `Hatcher.BasedConnectedCover.isomorphic_ofSubgroup_fundamentalGroupRange`
   supplies the cross-universe comparison.
-- **Deck groups and normality.** Backport the exact basic `deck` API from
-  post-pin PR #40135, while keeping the new classification results in the
-  project namespace. Define a normal cover to be surjective with a transitive
-  deck action on every fiber. This prevents the empty covering from satisfying
-  normality vacuously under Mathlib's covering-map convention.
+- **Deck groups and normality.** Use the basic `deck` API now present in
+  Mathlib v4.34.1, historically introduced by PR #40135, while keeping the
+  fiber action and classification consequences in the project namespace.
+  Define a normal cover to be surjective with a transitive deck action on every
+  fiber. This prevents the empty covering from satisfying normality vacuously
+  under Mathlib's covering-map convention.
 - **Normalizer orientation.** The homomorphism from `normalizer H` sends `g`
   to the deck transformation whose value at the chosen point is
   `monodromyPerm g⁻¹ e₀`. Direct monodromy is already multiplicative; this

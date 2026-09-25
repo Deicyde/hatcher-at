@@ -127,11 +127,11 @@ formalized.
 adds a fifteen-leaf second slice: the augmented definition of reduced
 homology, relative chains and homology, Theorem 2.16 and the long exact
 sequence of a pair, pair- and reduced-pair-sequence naturality, Example 2.18,
-and Proposition 2.19. Five of the fifteen leaves are complete: the four-node
-reduced-homology branch is formalized locally, and the generic algebraic
-exact-sequence theorem is present in the pinned Mathlib. The remaining ten
-leaves are blocked by the simplicial-pair foundation's explicit readiness gate
-until Setup upgrades to a stable Mathlib revision containing PR #41285.
+and Proposition 2.19. Six of the fifteen leaves are complete: the four-node
+reduced-homology branch is formalized locally, while the generic algebraic
+exact-sequence theorem and simplicial-pair foundation are present in the
+pinned Mathlib. Nine downstream leaves remain, with the singular-pair functor
+ready next.
 
 ## Deferred roadmap expansion
 

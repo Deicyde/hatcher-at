@@ -53,10 +53,12 @@ so every cell has dimension at most two.
 This direct construction uses Mathlib's abstract categorical CW API and does
 not rely on the unresolved comparison with its classical skeleton API.
 
-## Pinned implementation interfaces
+## Historical implementation-interface snapshot
 
-The specification targets Mathlib `v4.31.0` at
-`fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`:
+The initial specification targeted Mathlib `v4.31.0` at
+`fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`. The project now builds against
+`v4.34.1`; the immutable links below preserve the interface snapshot used for
+the original implementation:
 
 - [`HomotopicalAlgebra.AttachCells`](https://github.com/leanprover-community/mathlib4/blob/fabf563a7c95a166b8d7b6efca11c8b4dc9d911f/Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean)
   records each pushout attachment.

@@ -50,10 +50,12 @@ The no-retraction argument used for Theorem 1.9 is on page 32 and works
 directly with a nullhomotopy of a loop. Proposition 1.17 revisits the same
 obstruction on page 36 in induced-homomorphism language.
 
-## Prior art in the pinned Mathlib
+## Historical Mathlib audit snapshot
 
-Checked against the Mathlib revision this project pins (`v4.31.0`,
-`fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`).
+The following availability audit was recorded against Mathlib `v4.31.0`
+(`fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`) before the project upgraded to
+`v4.34.1`. Status language and immutable links in this subsection describe
+that historical snapshot.
 
 Available and reusable:
 

@@ -61,10 +61,12 @@ Examples 1.22–1.25 and Corollary 1.27 are deferred. Their main cost is graph,
 knot-complement, wild-space, or surface infrastructure rather than the van
 Kampen theorem itself.
 
-## Prior art in the pinned Mathlib
+## Historical Mathlib audit snapshot
 
-Checked against Mathlib `v4.31.0` at
-`fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`.
+The following availability audit was recorded against Mathlib `v4.31.0` at
+`fabf563a7c95a166b8d7b6efca11c8b4dc9d911f` before the project upgraded to
+`v4.34.1`. Status language in this subsection describes that historical
+snapshot.
 
 Available ingredients:
 

@@ -8,7 +8,7 @@ Hatcher §2.1 (pages 102–133). The completed first slice covers singular
 homology, its low-degree checks, functoriality, and homotopy invariance through
 Corollary 2.11 and Proposition 2.12. A second selected slice decomposes reduced
 and relative homology, exact sequences, naturality, and relative homotopy
-invariance; five of its fifteen leaves are complete.
+invariance; six of its fifteen leaves are complete.
 
 Simplicial homology takes a Δ-complex structure and forms the chain complex of
 its simplices; it is finite and computable but depends on the chosen structure.
@@ -22,10 +22,11 @@ The pinned Mathlib has exact categorical versions of most of the first slice.
 The roadmap makes those upstream results explicit, and the two thin
 source-facing consequences are formalized locally in
 `Hatcher/Singular/Homology.lean`. It also contains the generic algebraic long
-exact sequence. The four reduced-homology leaves and the generic algebraic
-exact-sequence leaf are complete. The second slice's remaining ten leaves
-depend on an `SSetPair` foundation available only after the current pin, so it
-remains an explicit readiness gate.
+exact sequence and, at the current `v4.34.1` pin, the `SSetPair` relative-
+homology foundation from PR #41285. The four reduced-homology leaves, generic
+algebraic exact-sequence leaf, and simplicial-pair foundation are complete.
+`singular-pair-functor` is the next ready node; nine downstream leaves remain
+incomplete.
 
 ## Singular chains and low degrees
 
@@ -50,17 +51,18 @@ remains an explicit readiness gate.
 ## Deferred within §2.1
 
 Lemma 2.1 and Examples 2.2–2.5 need a source-faithful Δ-complex chain model.
-Proposition 2.6 needs additivity over all path components in every degree; the
-pin contains only its degree-zero case. Theorem 2.13, Example 2.17, the triple
-sequence, excision and quotient-pair comparison, the remaining sphere
-applications, invariance of dimension, and the Δ-complex comparison also
-remain deferred.
+Proposition 2.6 needs additivity over all path components in every degree;
+Mathlib `v4.34.1` contains only its degree-zero case. Theorem 2.13, Example
+2.17, the triple sequence, excision and quotient-pair comparison, the remaining
+sphere applications, invariance of dimension, and the Δ-complex comparison
+also remain deferred.
 
-Relative homology for simplicial-set pairs merged after the repository's
-Mathlib pin in PR
-[#41285](https://github.com/leanprover-community/mathlib4/pull/41285) and is in
-stable `v4.34.1`. Setup must validate a pin upgrade before the gated node is
-claimed ready. Excision remains active upstream work.
+Relative homology for simplicial-set pairs merged in Mathlib PR
+[#41285](https://github.com/leanprover-community/mathlib4/pull/41285) and is
+present at the repository's `v4.34.1` pin. The simplicial-pair foundation is
+therefore complete, and
+[the singular-pair functor](relative-homology/singular-pair-functor.md) is next
+ready. Excision remains active upstream work.
 
 ## Sources
 

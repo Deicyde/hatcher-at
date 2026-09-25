@@ -23,7 +23,7 @@ taking all singular simplices as generators.
 
 The reduced groups immediately following Proposition 2.8 are defined from the
 augmented singular chain complex. They are part of the selected second slice;
-their roadmap representation is local because the pinned Mathlib has no
+their roadmap representation is local because Mathlib `v4.34.1` has no
 packaged reduced singular homology.
 
 ## Functoriality and homotopy invariance (110–113)
@@ -78,6 +78,9 @@ definition and functoriality of reduced homology, relative chains and homology,
 Theorem 2.16, the long exact sequence of a pair and its naturality, Example
 2.18, and Proposition 2.19. Its representation is fixed in the
 [relative-homology implementation specification](relative-homology-implementation.md).
+Six of these fifteen leaves are complete. With the simplicial-pair foundation
+available at the current pin, `singular-pair-functor` is next ready and nine
+downstream leaves remain incomplete.
 
 Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
 component decomposition. Lemma 2.1, Examples 2.2–2.5, Theorem 2.13, Example
@@ -90,9 +93,9 @@ For roadmap notation, write
 Hatcher's integral group `Hₙ(X)` is the specialization to the category of
 abelian groups with coefficient object `ℤ`.
 
-## Prior art in the pinned Mathlib
+## Historical Mathlib `v4.31.0` audit
 
-Checked against Mathlib `v4.31.0` at
+The original roadmap audit was checked against Mathlib `v4.31.0` at
 `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`.
 
 Available exactly:
@@ -119,19 +122,19 @@ The proof of topological homotopy invariance passes through the singular
 simplicial set. It proves Hatcher's theorem, but it does not formalize the
 book's explicit prism formula.
 
-Absent from the pin are general path-component additivity, packaged reduced
-singular homology, relative singular homology, singular excision, and
-Δ-complex homology with its comparison theorem.
+Absent from that historical pin were general path-component additivity,
+packaged reduced singular homology, relative singular homology, singular
+excision, and Δ-complex homology with its comparison theorem.
 
-## Post-pin work
+## Current pin and later work
 
 - Mathlib PR
   [#41285](https://github.com/leanprover-community/mathlib4/pull/41285),
   merged as commit
   [`dbd0e3c605be1c1ac468d358d0815b9183566a8a`](https://github.com/leanprover-community/mathlib4/commit/dbd0e3c605be1c1ac468d358d0815b9183566a8a),
   adds relative homology for simplicial-set pairs and the associated
-  exact-sequence API. It is included in stable Mathlib `v4.34.1`, but not at
-  this repository's pin.
+  exact-sequence API. It is included at this repository's current stable
+  Mathlib `v4.34.1` pin.
 - Mathlib PR
   [#37659](https://github.com/leanprover-community/mathlib4/pull/37659), an
   older direct relative singular-homology proposal, remains open and is
@@ -157,6 +160,7 @@ singular homology, relative singular homology, singular excision, and
 - **Reduced theory.** Define reduced homology from Hatcher's augmented complex,
   shifted through `ChainComplex.augment`; do not define it as homology relative
   to a basepoint, since that is Example 2.18.
-- **Relative theory.** Target the merged `SSetPair` design. Keep its foundation
-  `not_ready` until Setup upgrades the pin and validates the existing project;
-  do not copy an unpinned competing cokernel API into the project.
+- **Relative theory.** Use the merged `SSetPair` design. Its foundational node
+  is exact Mathlib coverage at the current `v4.34.1` pin, and
+  `singular-pair-functor` is next ready. Do not copy a competing cokernel API
+  into the project.

@@ -8,10 +8,11 @@ Hatcher §1.3 (pages 56–82). The selected slice follows the classification and
 deck-transformation spine from lifting properties through Proposition 1.40.
 Permutation reconstruction and geometric examples remain deferred.
 
-The pinned Mathlib already contains most of the hard lifting theory. The
-roadmap separates exact upstream declarations from the thin source-facing
-wrappers Hatcher's statements require. Universal covers and the classification
-itself are absent from the pin.
+Mathlib v4.34.1 contains most of the hard lifting theory together with the
+based monodromy action and the basic deck-transformation group. The roadmap
+separates exact upstream declarations from the thin source-facing wrappers
+and project-specific consequences Hatcher's statements require. Universal
+covers and the classification itself remain project-local.
 
 ## Lifting and monodromy
 
@@ -20,10 +21,10 @@ homotopy and its uniqueness characterization.
 
 - [Homotopies lift uniquely through a covering map](homotopy-lifting.md)
 
-The next nodes package the based monodromy action, identify the induced
-subgroup, and derive Hatcher's sheet-index calculation. The primary statement
-for Proposition 1.32 is a fiber-to-coset equivalence, since Mathlib's
-natural-number subgroup index encodes infinite index as zero.
+The based monodromy action is now supplied by Mathlib. The next local nodes
+identify the induced subgroup and derive Hatcher's sheet-index calculation.
+The primary statement for Proposition 1.32 is a fiber-to-coset equivalence,
+since Mathlib's natural-number subgroup index encodes infinite index as zero.
 
 - [The fundamental group acts on a covering fiber](monodromy-action.md)
 - [Covering maps inject path-homotopy classes](covering-injective-path-classes.md)
@@ -100,8 +101,9 @@ condition.
 ## Deferred within §1.3
 
 Example 1.35, the reconstruction of arbitrary covers from permutation actions,
-and Examples 1.41–1.48 are deferred. Code from post-pin Mathlib PR #40135
-supplies useful deck-group prior art, but it is not part of this build.
+and Examples 1.41–1.48 are deferred. Mathlib PR #40135 is the historical
+source of the basic deck-group API now included in v4.34.1; the normalizer,
+normal-cover, and quotient-action consequences in this roadmap remain local.
 
 ## Sources
 

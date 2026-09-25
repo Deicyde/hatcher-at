@@ -5,13 +5,14 @@ A Lean 4 formalization of results from Allen Hatcher's *Algebraic Topology*
 redistributed here; source notes cite it by chapter and section.
 
 Every chapter and numbered section of the book is mapped. The selected scope
-contains 148 formalizable leaves, of which 138 are complete: 123 local
-declarations and 15 pinned Mathlib declarations. These comprise all 133 nodes
+contains 148 formalizable leaves, of which 139 are complete: 121 local
+declarations and 18 pinned Mathlib declarations. These comprise all 133 nodes
 in the previously completed §1.1, §1.2, §1.3, §2.1 functoriality, and Appendix
-A.1 slices, plus five nodes in a fifteen-leaf §2.1 reduced- and
+A.1 slices, plus six nodes in a fifteen-leaf §2.1 reduced- and
 relative-homology branch. Its four-node reduced-homology branch and generic
-exact-sequence theorem are complete; the remaining ten nodes are blocked by
-the simplicial-pair foundation's Mathlib pin-update gate. The coverage contract
+exact-sequence theorem are complete, and Mathlib now supplies the
+simplicial-pair foundation. Nine downstream nodes remain, with the
+singular-pair functor ready next. The coverage contract
 explicitly defers the remaining main-line source areas; decomposition alone is
 not a claim of formalization progress.
 

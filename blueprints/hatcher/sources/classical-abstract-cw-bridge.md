@@ -88,10 +88,12 @@ Exercise 3 states the stronger fact that a CW complex is path-connected exactly
 when its 1-skeleton is; it is prior art here, not an expansion of the project's
 exercise scope.
 
-## Pinned implementation interfaces
+## Historical implementation-interface snapshot
 
-The specification targets Mathlib `v4.31.0` at
-`fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`:
+The initial specification targeted Mathlib `v4.31.0` at
+`fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`. The project now builds against
+`v4.34.1`; the immutable links below preserve the interface snapshot used for
+the original implementation:
 
 - [`Topology.CWComplex`](https://github.com/leanprover-community/mathlib4/blob/fabf563a7c95a166b8d7b6efca11c8b4dc9d911f/Mathlib/Topology/CWComplex/Classical/Basic.lean)
   provides characteristic maps, skeleta, the successor-stage set identity,

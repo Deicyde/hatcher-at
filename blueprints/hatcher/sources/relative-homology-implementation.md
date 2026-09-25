@@ -54,8 +54,8 @@ subspace, and `P.map : P.snd ⟶ P.fst` is an embedding. Apply
 ordering: `SSetPair.left` is the subobject and `SSetPair.right` is the ambient
 object.
 
-After the dependency update described below, define
-`Hatcher.Relative.singularPairFunctor : TopPair ⟶ SSetPair`, then obtain the
+At the current Mathlib `v4.34.1` pin, the next implementation node is
+`Hatcher.Relative.singularPairFunctor : TopPair ⟶ SSetPair`; then obtain the
 relative singular chain-complex and homology functors by composing it with
 `SSetPair.chainComplexFunctor` and `SSetPair.homologyFunctor`. These are the
 quotient chains `Cₙ(X; R) / Cₙ(A; R)` from pages 115–116. Maps of pairs are
@@ -93,20 +93,20 @@ sequence with the homology calculation of a point to construct
 part of the theorem and must not be dropped or inferred from the
 positive-degree comparison.
 
-## Dependency gate and prior art
+## Dependency status and prior art
 
-The repository is pinned to Mathlib `v4.31.0` at
-`fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`. It has the generic homology
-sequence and `TopPair`, but it does not have `SSetPair` relative homology.
+The original roadmap audit used Mathlib `v4.31.0` at
+`fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`. That historical pin had the
+generic homology sequence and `TopPair`, but not `SSetPair` relative homology.
 
 Mathlib PR [#41285](https://github.com/leanprover-community/mathlib4/pull/41285)
 was merged as commit
 [`dbd0e3c605be1c1ac468d358d0815b9183566a8a`](https://github.com/leanprover-community/mathlib4/commit/dbd0e3c605be1c1ac468d358d0815b9183566a8a)
-and is included in stable Mathlib `v4.34.1`. It provides `SSetPair`,
-`SSetPair.chainComplex`, `SSetPair.homologyFunctor`, `SSetPair.homologyδ`, and
-`SSetPair.homology_exact₁/₂/₃`. The roadmap must not mark these as pinned
-Mathlib facts until Setup updates the repository and the declarations pass the
-local provenance check.
+and is included at the repository's current stable Mathlib `v4.34.1` pin. It
+provides `SSetPair`, `SSetPair.chainComplex`, `SSetPair.homologyFunctor`,
+`SSetPair.homologyδ`, and `SSetPair.homology_exact₁/₂/₃`. The simplicial-pair
+foundation is therefore exact Mathlib coverage, and `singular-pair-functor` is
+next ready.
 
 Andrew Yang's PR
 [#37659](https://github.com/leanprover-community/mathlib4/pull/37659) is an
@@ -120,9 +120,9 @@ unreleased work-in-progress and is not a dependency or a source of
 [#41318](https://github.com/leanprover-community/mathlib4/pull/41318) for the
 triple sequence remains open and paused pending excision.
 
-## Readiness rule
+## Readiness status
 
-The simplicial-pair foundation stays `not_ready: true` until the project uses
-a stable Mathlib revision containing #41285 and all existing project code
-builds against it. The reduced-homology branch and the already-pinned generic
-long exact sequence do not depend on that upgrade.
+The Mathlib gate is satisfied: the simplicial-pair foundation is complete at
+`v4.34.1`, and `singular-pair-functor` is the next ready node. Six of the
+fifteen relative-homology leaves are complete, with nine downstream leaves
+incomplete.
