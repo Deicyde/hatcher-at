@@ -43,6 +43,7 @@ import Hatcher.Disc.NoRetraction
 import Hatcher.Disc.Brouwer
 import Hatcher.Euclidean.Dimension
 import Hatcher.Excision.AffineSubdivision
+import Hatcher.Excision.Devissage
 import Hatcher.Singular.Homology
 import Hatcher.Singular.Reduced
 import Hatcher.Singular.Relative
