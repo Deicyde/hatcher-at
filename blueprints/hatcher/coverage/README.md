@@ -139,9 +139,9 @@ the pinned Mathlib.
 The same milestone now has a four-leaf triple-sequence slice: a project-authored
 topological-triple interface, the short exact sequence of relative chain
 complexes, its long exact homology sequence including the degree-zero endpoint,
-and naturality. These leaves are planned against the pinned pair and generic
-homology-sequence APIs; open Mathlib PR #41318 is prior art rather than an
-upstream dependency.
+and naturality. All four leaves are formalized locally using the pinned pair and
+generic homology-sequence APIs; open Mathlib PR #41318 is prior art rather than
+an upstream dependency.
 
 ## Deferred roadmap expansion
 

@@ -9,7 +9,8 @@ homology, its low-degree checks, functoriality, and homotopy invariance through
 Corollary 2.11 and Proposition 2.12. A second selected slice decomposes reduced
 and relative homology, exact sequences, naturality, and relative homotopy
 invariance; all fifteen of its leaves are complete. A third four-leaf slice
-decomposes the long exact sequence of a triple and its naturality.
+covers the long exact sequence of a triple and its naturality; all four leaves
+are complete.
 
 Simplicial homology takes a Δ-complex structure and forms the chain complex of
 its simplices; it is finite and computable but depends on the chosen structure.
@@ -30,8 +31,8 @@ functor, relative-homology functor, pair long exact sequence, and pair-sequence
 naturality are complete. The pair sequence includes the integral connecting-map
 formula, and the relative homotopy branch through Proposition 2.19, the reduced
 pair sequence with its naturality, and the pointed comparison are complete. The
-triple slice is planned as a topological-triple interface, a chain-level short
-exact sequence, the induced long exact sequence, and naturality.
+topological-triple interface, chain-level short exact sequence, induced long
+exact sequence with its degree-zero endpoint, and naturality are also complete.
 
 ## Singular chains and low degrees
 
@@ -73,8 +74,8 @@ including its connecting-map formula, is also formalized. Pair-sequence
 naturality is now formalized. The compatible relative chain homotopy and its
 induced homology-map equality complete the relative homotopy branch and
 Proposition 2.19. The reduced pair sequence, its naturality, and the pointed
-comparison are now formalized. The triple long exact sequence is decomposed
-into four local roadmap leaves. Excision remains active upstream work.
+comparison are now formalized. All four local triple-sequence leaves are now
+formalized. Excision remains active upstream work.
 
 ## Sources
 

@@ -91,6 +91,7 @@ exact sequence
 including the degree-zero endpoint, and naturality for maps of triples. Its
 representation is fixed in the
 [triple-homology implementation specification](triple-homology-implementation.md).
+All four leaves are complete.
 
 Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
 component decomposition. Lemma 2.1, Examples 2.2–2.5, Theorem 2.13, Example

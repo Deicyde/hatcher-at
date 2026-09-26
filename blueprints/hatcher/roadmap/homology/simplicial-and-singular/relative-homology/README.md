@@ -22,8 +22,8 @@ including its connecting-map formula and naturality. The compatible relative
 chain homotopy and induced homology-map equality complete the relative homotopy
 branch and Proposition 2.19. The reduced pair sequence, its naturality, and the
 pointed comparison are also formalized. Thus all fifteen leaves in the
-reduced- and relative-pair slice are complete. A four-leaf triple-sequence
-slice is now decomposed for implementation.
+reduced- and relative-pair slice are complete. All four leaves in the
+triple-sequence slice are formalized locally as well.
 
 ## Reduced homology
 
