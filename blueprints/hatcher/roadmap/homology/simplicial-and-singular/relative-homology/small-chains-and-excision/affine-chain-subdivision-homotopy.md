@@ -3,6 +3,9 @@ article_id: af_79821bb097f7e681e401770f
 source_units: [hatcher-2-1-small-chains-excision]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Excision.affineChainHomotopyIdSubdivision
 ---
 
 # Affine-chain subdivision is homotopic to the identity
