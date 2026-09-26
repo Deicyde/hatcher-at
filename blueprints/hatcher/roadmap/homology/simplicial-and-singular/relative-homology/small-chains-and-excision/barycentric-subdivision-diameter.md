@@ -14,7 +14,7 @@ For an affine `n`-simplex `s` in a real normed space and any choice `σ` of
 `k` successive barycentric subsimplices, the main theorem, intended as
 `Hatcher.Excision.affineSubdivisionIter_diameter_le`, gives the bound
 
-`diam (sdIter s σ) ≤ (n / (n + 1))^k · diam s`.
+`diam (affineSubdivisionIter s σ) ≤ (n / (n + 1))^k · diam s`.
 
 In particular, when `n > 0`, repeated subdivision makes every resulting
 simplex arbitrarily small. The proof packages Hatcher's estimate from the
