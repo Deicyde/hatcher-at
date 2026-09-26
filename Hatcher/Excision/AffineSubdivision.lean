@@ -161,6 +161,7 @@ def affineFace
     ConvexSpace.AffineMap K (StdSimplex K (Fin (n + 1))) Y :=
   f.comp (StdSimplex.affineMap i.succAbove)
 
+omit [CharZero K] in
 @[simp]
 lemma affineFace_single
     (f : ConvexSpace.AffineMap K (StdSimplex K (Fin (n + 2))) Y)

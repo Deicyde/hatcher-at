@@ -23,7 +23,7 @@ single-step face identity and the permutation/sign bookkeeping later needed to
 prove that subdivision commutes with the chain boundary.
 
 These definitions are local compatibility scaffolding for Hatcher's geometric
-construction, not a claim that the affine-simplex API is present at the pinned
+construction; the geometric affine-subdivision API is absent from the pinned
 Mathlib version.
 
 ## Depends on
