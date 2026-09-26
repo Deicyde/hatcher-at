@@ -3,6 +3,9 @@ article_id: af_5d0836e3e923b63dbb7abb27
 source_units: [hatcher-2-1-small-chains-excision]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Excision.affineSubdivisionIter_face
 ---
 
 # Affine barycentric subdivision is compatible with faces
