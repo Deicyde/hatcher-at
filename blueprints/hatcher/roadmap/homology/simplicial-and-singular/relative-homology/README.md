@@ -7,8 +7,8 @@ article_id: af_a43e897716ffaf6560f50495
 Hatcher §2.1 (pages 110, 113–124, and 127–128). The selected slices introduce
 reduced homology from the augmented singular complex, relative homology of a
 topological pair, pair and triple long exact sequences, homotopy invariance,
-and naturality. A coarse mapped milestone continues through small chains and
-excision.
+and naturality. A fourth milestone continues through small chains and excision
+and is decomposed into ten formalizable leaves.
 
 The mathematical source is Hatcher. The representation against Mathlib is
 fixed separately in the
@@ -59,14 +59,15 @@ triple-sequence slice are formalized locally as well.
 
 ## Small chains and excision
 
-- [Coarse milestone: Proposition 2.21 and Theorem 2.20](small-chains-and-excision/README.md)
+- [Proposition 2.21 and Theorem 2.20](small-chains-and-excision/README.md)
 
-## Mapped and deferred boundary
+## Decomposed and deferred boundary
 
-Theorem 2.20 and its Proposition 2.21 small-chain machinery are mapped in the
-coarse milestone above. Theorem 2.13, Example 2.17, Proposition 2.22 and the
-good-pair quotient comparison, sphere applications, invariance of dimension,
-and the simplicial–singular comparison remain deferred.
+Theorem 2.20 and its Proposition 2.21 small-chain machinery are decomposed in
+the milestone above, with no formalization status asserted. Theorem 2.13,
+Example 2.17, Proposition 2.22 and the good-pair quotient comparison, sphere
+applications, invariance of dimension, and the simplicial–singular comparison
+remain deferred.
 
 ## Sources
 

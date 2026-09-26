@@ -43,17 +43,26 @@ proof follows Hatcher: construct geometric barycentric subdivision, a chain
 homotopy from the identity to subdivision, and the iterated subdivision
 operator; use compactness of the standard simplex and a Lebesgue-number
 argument to show that every singular simplex becomes small after sufficiently
-many subdivisions. Package Proposition 2.21 as a chain-homotopy equivalence.
+many subdivisions. The depth depends on the simplex: choose the least
+`m(σ)`, prove `m(face σ) ≤ m(σ)`, form the variable-depth homotopy `D`, and
+define the corrected retraction `ρ = 1 - ∂D - D∂`. The construction must show
+that `ρ` lands in small chains, that `ρ ∘ ι = id`, and that `ι ∘ ρ` is
+homotopic to the identity. Uniform iteration alone does not prove Proposition
+2.21.
 
-For a binary cover, identify the relative quotient of the sum of the small
-chain complexes with the relative chains of `(B, A ∩ B)`, then transport the
-small-chain equivalence to the canonical map into the relative chains of
-`(X, A)`. The homology theorem should follow by applying the existing homology
-functor to that chain-level homotopy equivalence.
+For a binary cover, all subdivision, homotopy, and retraction maps must
+preserve chains in `A` so that they descend through the relative quotient.
+Identify the exact chain-level comparison
+
+`C_*(B;R) / C_*(A ∩ B;R) ≅ C_*^{A+B}(X;R) / C_*(A;R)`,
+
+then transport the descended small-chain equivalence to the canonical map into
+`C_*(X;R) / C_*(A;R)`. The homology theorem should follow by applying the
+existing homology machinery to that chain-level homotopy equivalence.
 
 ## Intended public contract
 
-The fine roadmap should expose, at minimum:
+The fine roadmap exposes:
 
 1. a coefficient-general chain-homotopy equivalence between small singular
    chains for a general cover and all singular chains;
@@ -63,18 +72,19 @@ The fine roadmap should expose, at minimum:
 4. an `IsIso` instance for the canonical relative-homology map in the
    deleted-subset form.
 
-Use the weakest practical category, preadditive, and coproduct hypotheses
-supported by the existing singular-chain API at chain level, adding
-`CategoryWithHomology` only for the homology endpoints. Hatcher's integral
-theorem is the specialization to `AddCommGrpCat.of ℤ`. Naturality should be
-inherited from the canonical functorial maps; this milestone does not require
-a separate naturality theorem.
+For universes `w`, `v`, and `u`, use an ambient category `C : Type u` with
+`[Category.{v} C] [Preadditive C] [HasCoproducts.{w} C]` and a coefficient
+object `R : C` at chain level. Add `[CategoryWithHomology C]` exactly at the
+homology endpoints. Hatcher's integral theorem is the specialization to
+`AddCommGrpCat.of ℤ`; this coefficient-general formulation is a project
+generalization. The endpoint is the canonical functorial map and therefore has
+ordinary functoriality, but this milestone does not assert a separate
+naturality theorem for morphisms of cover data.
 
-## Coarse implementation phases
+## Implementation phases
 
-This specification deliberately fixes only four phases. Fine theorem leaves
-and their dependency edges will be added only after the coarse contract is
-approved.
+The approved fine roadmap refines these four phases into ten formalization
+leaves.
 
 1. affine-simplex and singular-subdivision foundations;
 2. the small-simplices chain equivalence of Proposition 2.21;
@@ -111,7 +121,9 @@ implementation prior art. Its relevant interfaces include
 `TopPair.homotopyEquivalences_of_excision`.
 
 This repository snapshot is neither the mathematical source nor pinned
-Mathlib coverage.
+Mathlib coverage. It was developed against Joël Riou's Mathlib fork at
+`810b3888d0aa94294b18587c453466bc86c1f0fc`, not this project's stable pin, so
+its interfaces must be ported and checked rather than copied blindly.
 The affine-map cone support from Mathlib PR
 [#43524](https://github.com/leanprover-community/mathlib4/pull/43524) merged to
 master after the `v4.34` stable branch point and is therefore absent from this
@@ -127,20 +139,24 @@ comparison, Theorem 2.13, sphere applications, Mayer–Vietoris, the
 simplicial–singular comparison, or any result from §2.2. Those are downstream
 milestones even when excision is one of their prerequisites.
 
-## Choices to resolve during fine decomposition
+## Fine-decomposition decisions
 
-- Prefer a general-family small-simplices engine over a binary-only duplicate,
-  while keeping the public excision theorem binary.
-- Choose collision-resistant local declaration names until upstream naming is
-  stable.
-- Decide whether to backport the post-pin affine cone helpers or express the
-  same construction using only the pinned API.
-- Fix the subset-inclusion constructors so the public excision morphisms are
-  definitionally the maps produced by the existing relative-homology functor.
-- Confirm the weakest usable coefficient hypotheses before fixing leaf
-  statements.
-- Expose the chain-homotopy-equivalence property publicly, while keeping
-  subdivision retractions and auxiliary homotopies private unless downstream
-  reuse justifies separate declarations.
+- Use a general-family small-simplices engine while keeping the public excision
+  theorem binary.
+- Put new declarations under the collision-resistant `Hatcher.Excision`
+  namespace. Adapt only the post-pin affine helpers needed by the construction
+  rather than adding declarations to Mathlib namespaces.
+- Use canonical subset-inclusion constructors so the public excision
+  morphisms are definitionally the maps produced by the existing
+  relative-homology functor.
+- Use `{C : Type u}`, `[Category.{v} C]`, `[Preadditive C]`,
+  `[HasCoproducts.{w} C]`, and `R : C` at chain level, and add
+  `[CategoryWithHomology C]` only at the homology boundary.
+- Expose the chain-homotopy-equivalence property publicly. Keep the chosen
+  retraction and auxiliary homotopies internal unless downstream reuse
+  justifies promoting them.
+- Keep the public deleted-subset endpoint about subset pairs. The prior-art
+  theorem for arbitrary embedded maps may be internal transport scaffolding,
+  not a stronger replacement for Hatcher's statement.
 - Keep the local layer replaceable by future Mathlib excision APIs; prior-art
   alignment is not permission to claim upstream provenance.

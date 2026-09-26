@@ -16,7 +16,7 @@ reduced-pair long exact sequences (pages 127–128).
 
 The triple sequence is now specified separately in the
 [triple-homology implementation specification](triple-homology-implementation.md).
-Small chains and excision are mapped separately in the
+Small chains and excision are decomposed separately under the
 [singular excision implementation specification](excision-implementation.md).
 Theorem 2.13, Example 2.17, Proposition 2.22 and the good-pair quotient
 comparison, sphere applications, invariance of dimension, and the

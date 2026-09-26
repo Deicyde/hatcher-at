@@ -1,25 +1,37 @@
 ---
-not_ready: true
+article_id: af_f9e6461f1fd2da41329de777
 ---
 
 # Small chains and excision
 
-Hatcher §2.1 (pages 119–124), Proposition 2.21 and Theorem 2.20. This is a
-coarse mapped milestone, not a formalizable theorem leaf. Fine declarations
-and dependency edges will be added only after the source and implementation
-contract is approved.
+Hatcher §2.1 (pages 119–124), Proposition 2.21 and Theorem 2.20. The approved
+scope is decomposed into ten formalizable leaves. This page remains a
+non-dispatchable container; the linked leaves, rather than this overview, are
+the proof units.
 
 The target first proves that singular chains subordinate to a family of
 subsets whose interiors cover a space include into all singular chains by a
 chain-homotopy equivalence. It then derives excision for a binary cover and the
 equivalent deleted-subset formulation using the canonical maps of pairs.
 
-## Coarse phases
+## Affine geometry
 
-1. Affine-simplex and singular-subdivision foundations.
-2. The small-simplices chain equivalence of Proposition 2.21.
-3. Relative quotient dévissage and binary excision at chain level.
-4. The cover and deleted-subset homology forms of Theorem 2.20.
+- [Affine barycentric subdivision is compatible with faces](affine-barycentric-subdivision.md)
+- [Barycentric subdivision contracts simplex diameter](barycentric-subdivision-diameter.md)
+
+## Subdivision and small chains
+
+- [Affine-chain subdivision is homotopic to the identity](affine-chain-subdivision-homotopy.md)
+- [Singular-chain subdivision is naturally homotopic to the identity](singular-chain-subdivision-homotopy.md)
+- [Iterated subdivision eventually makes every singular simplex small](eventually-small-singular-simplices.md)
+- [Small singular chains include by a chain-homotopy equivalence](small-chain-inclusion-homotopy-equivalence.md)
+
+## Relative excision
+
+- [Relative excision reduces to the union subcomplex](relative-chain-union-devissage.md)
+- [The binary-cover excision chain map is a homotopy equivalence](binary-cover-excision-chain-equivalence.md)
+- [Binary-cover excision induces homology isomorphisms](binary-cover-excision-homology-isomorphism.md)
+- [Deleted-subset excision induces homology isomorphisms](deleted-subset-excision-homology-isomorphism.md)
 
 ## Boundary
 

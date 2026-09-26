@@ -93,11 +93,11 @@ representation is fixed in the
 [triple-homology implementation specification](triple-homology-implementation.md).
 All four leaves are complete.
 
-A fourth source unit maps Proposition 2.21 and Theorem 2.20 as one bounded
-small-chains/excision milestone. Its mathematical and implementation boundary
-is fixed in the
+A fourth source unit decomposes Proposition 2.21 and Theorem 2.20 into a
+ten-leaf small-chains/excision milestone. Its mathematical and implementation
+boundary is fixed in the
 [singular excision implementation specification](excision-implementation.md),
-but it is not yet decomposed into formalizable leaves.
+and none of its leaves is yet marked formalized.
 
 Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
 component decomposition. Lemma 2.1, Examples 2.2–2.5, Theorem 2.13, Example
@@ -170,9 +170,9 @@ excision, and Δ-complex homology with its comparison theorem.
 
 - **Selected boundaries.** Keep the completed 2.7–2.12 and reduced/relative
   exact-sequence slices, and add the four-leaf triple exact-sequence slice
-  described above. Map Theorem 2.20 and Proposition 2.21 as a distinct
-  small-chains/excision unit. Leave downstream excision-dependent applications
-  and Δ-complex results deferred.
+  described above. Decompose Theorem 2.20 and Proposition 2.21 as a distinct
+  ten-leaf small-chains/excision unit. Leave downstream excision-dependent
+  applications and Δ-complex results deferred.
 - **Coefficients.** State exact Mathlib nodes with their coefficient-general
   categorical API. Treat Hatcher's integral theory as its abelian-group
   specialization.

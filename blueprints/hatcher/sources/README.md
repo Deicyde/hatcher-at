@@ -21,8 +21,8 @@ The project formalizes results from a single reference.
   fixes the representation, exact-sequence boundary, and upstream prior-art
   policy for the selected triple slice.
 - [Singular excision implementation specification](excision-implementation.md)
-  fixes the scope, representation, upstream boundary, and unresolved choices
-  for the mapped small-chains/excision unit.
+  fixes the scope, representation, upstream boundary, and decomposition choices
+  for the decomposed small-chains/excision unit.
 
 <!-- AUTHORING NOTES — these comments are not published.
 

@@ -10,7 +10,8 @@ Corollary 2.11 and Proposition 2.12. A second selected slice decomposes reduced
 and relative homology, exact sequences, naturality, and relative homotopy
 invariance; all fifteen of its leaves are complete. A third four-leaf slice
 covers the long exact sequence of a triple and its naturality; all four leaves
-are complete.
+are complete. A fourth ten-leaf slice decomposes small chains and excision; its
+formalization has not started.
 
 Simplicial homology takes a Δ-complex structure and forms the chain complex of
 its simplices; it is finite and computable but depends on the chosen structure.
@@ -54,11 +55,11 @@ exact sequence with its degree-zero endpoint, and naturality are also complete.
 
 - [Relative homology and exact sequences](relative-homology/README.md)
 
-## Mapped and deferred within §2.1
+## Small chains, excision, and the deferred remainder
 
 [Small chains and excision](relative-homology/small-chains-and-excision/README.md),
-covering Proposition 2.21 and Theorem 2.20, are mapped as a bounded milestone
-but not yet decomposed into formalizable leaves.
+covering Proposition 2.21 and Theorem 2.20, are decomposed into ten
+formalizable leaves. None is yet marked formalized.
 
 Lemma 2.1 and Examples 2.2–2.5 need a source-faithful Δ-complex chain model.
 Proposition 2.6 needs additivity over all path components in every degree;
@@ -80,7 +81,7 @@ naturality is now formalized. The compatible relative chain homotopy and its
 induced homology-map equality complete the relative homotopy branch and
 Proposition 2.19. The reduced pair sequence, its naturality, and the pointed
 comparison are now formalized. All four local triple-sequence leaves are now
-formalized. The excision source target is now mapped locally; its
+formalized. The excision target is now decomposed locally; Riou's independent
 implementation remains active upstream prior art.
 
 ## Sources

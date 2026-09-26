@@ -4,11 +4,12 @@ article_id: af_9da1e6c5697d0bac0b2a1624
 
 # Homology
 
-Hatcher's Chapter 2 (pages 97–184). Three selected §2.1 slices are decomposed:
+Hatcher's Chapter 2 (pages 97–184). Four selected §2.1 slices are decomposed:
 the completed singular-homology functoriality spine, a reduced- and
 relative-homology exact-sequence spine with all fifteen leaves complete, and a
-completed four-leaf triple-sequence slice. The rest of the
-chapter remains mapped or explicitly deferred.
+completed four-leaf triple-sequence slice, followed by a ten-leaf
+small-chains/excision DAG awaiting formalization. The rest of the chapter
+remains mapped or explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -32,7 +33,7 @@ The completed third slice adds the chain-level short exact sequence of a
 triple, its long exact sequence, degree-zero endpoint, and naturality. Mathlib `v4.34.1`
 contains PR #41285 but not the open triple PR #41318. The
 [small-chains/excision branch](simplicial-and-singular/relative-homology/small-chains-and-excision/README.md)
-is mapped but not yet decomposed; the Δ-complex branch remains deferred.
+is decomposed into ten planned leaves; the Δ-complex branch remains deferred.
 
 [Computations and applications](computations-and-applications/README.md) turns
 that machinery into results: the degree of a map `Sⁿ → Sⁿ`, cellular homology
