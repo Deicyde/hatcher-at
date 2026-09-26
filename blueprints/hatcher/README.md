@@ -17,8 +17,9 @@ naturality, are also complete. The relative homotopy branch through Proposition
 2.19, the reduced pair sequence with its naturality, and the pointed comparison
 are complete, finishing that selected §2.1 slice. The four additional leaves
 for the long exact sequence of a triple and its naturality are also complete.
-The coverage contract explicitly defers the remaining main-line source areas;
-decomposition alone is not a claim of formalization progress.
+The coverage contract maps small chains and excision as a bounded future unit
+and explicitly defers the other remaining main-line source areas; mapping is
+not a claim of formalization progress.
 
 - [Roadmap](roadmap/README.md) — the book: chapters, statements, and their
   dependencies.

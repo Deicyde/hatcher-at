@@ -19,9 +19,10 @@ relative homotopy branch through Proposition 2.19, the reduced pair sequence
 with its naturality, and the pointed comparison are also complete. The four
 additional leaves for topological triples, their chain-level short exact
 sequence, the induced long exact sequence with its degree-zero endpoint, and
-naturality are complete as well.
-Thirteen other source units are explicitly deferred; lettered additional
-topics and exercises remain out of scope.
+naturality are complete as well. One additional §2.1 source unit—small chains
+and excision—is mapped for later decomposition; thirteen other source units
+are explicitly deferred. Lettered additional topics and exercises remain out
+of scope.
 
 [Browse the published formalization blueprint](https://deicyde.github.io/hatcher-at/)
 or [inspect its Markdown source](blueprints/hatcher/README.md).

@@ -20,6 +20,9 @@ The project formalizes results from a single reference.
 - [Triple-homology implementation specification](triple-homology-implementation.md)
   fixes the representation, exact-sequence boundary, and upstream prior-art
   policy for the selected triple slice.
+- [Singular excision implementation specification](excision-implementation.md)
+  fixes the scope, representation, upstream boundary, and unresolved choices
+  for the mapped small-chains/excision unit.
 
 <!-- AUTHORING NOTES — these comments are not published.
 

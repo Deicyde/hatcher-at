@@ -4,10 +4,11 @@ article_id: af_a43e897716ffaf6560f50495
 
 # Relative homology and exact sequences
 
-Hatcher §2.1 (pages 110, 113–119, and 127–128). The selected slices introduce
+Hatcher §2.1 (pages 110, 113–124, and 127–128). The selected slices introduce
 reduced homology from the augmented singular complex, relative homology of a
 topological pair, pair and triple long exact sequences, homotopy invariance,
-and naturality.
+and naturality. A coarse mapped milestone continues through small chains and
+excision.
 
 The mathematical source is Hatcher. The representation against Mathlib is
 fixed separately in the
@@ -56,14 +57,20 @@ triple-sequence slice are formalized locally as well.
 - [The long exact sequence of a triple](triple-long-exact-sequence.md)
 - [The triple long exact sequence is natural](triple-long-exact-sequence-naturality.md)
 
-## Deferred boundary
+## Small chains and excision
 
-Theorem 2.13, Example 2.17, excision and small chains, good-pair quotient
-comparison, sphere applications, invariance of dimension, and the
-simplicial–singular comparison remain deferred.
+- [Coarse milestone: Proposition 2.21 and Theorem 2.20](small-chains-and-excision/README.md)
+
+## Mapped and deferred boundary
+
+Theorem 2.20 and its Proposition 2.21 small-chain machinery are mapped in the
+coarse milestone above. Theorem 2.13, Example 2.17, Proposition 2.22 and the
+good-pair quotient comparison, sphere applications, invariance of dimension,
+and the simplicial–singular comparison remain deferred.
 
 ## Sources
 
 - [Hatcher §2.1](../../../../sources/hatcher-2-1.md)
 - [Relative-homology implementation specification](../../../../sources/relative-homology-implementation.md)
 - [Triple-homology implementation specification](../../../../sources/triple-homology-implementation.md)
+- [Singular excision implementation specification](../../../../sources/excision-implementation.md)

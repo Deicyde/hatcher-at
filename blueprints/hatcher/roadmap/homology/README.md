@@ -30,8 +30,9 @@ The relative homotopy branch through Proposition 2.19, the reduced pair
 sequence with its naturality, and the pointed comparison are complete as well.
 The completed third slice adds the chain-level short exact sequence of a
 triple, its long exact sequence, degree-zero endpoint, and naturality. Mathlib `v4.34.1`
-contains PR #41285 but not the open triple PR #41318. The Δ-complex and
-excision branches remain deferred.
+contains PR #41285 but not the open triple PR #41318. The
+[small-chains/excision branch](simplicial-and-singular/relative-homology/small-chains-and-excision/README.md)
+is mapped but not yet decomposed; the Δ-complex branch remains deferred.
 
 [Computations and applications](computations-and-applications/README.md) turns
 that machinery into results: the degree of a map `Sⁿ → Sⁿ`, cellular homology

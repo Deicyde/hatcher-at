@@ -93,10 +93,17 @@ representation is fixed in the
 [triple-homology implementation specification](triple-homology-implementation.md).
 All four leaves are complete.
 
+A fourth source unit maps Proposition 2.21 and Theorem 2.20 as one bounded
+small-chains/excision milestone. Its mathematical and implementation boundary
+is fixed in the
+[singular excision implementation specification](excision-implementation.md),
+but it is not yet decomposed into formalizable leaves.
+
 Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
 component decomposition. Lemma 2.1, Examples 2.2–2.5, Theorem 2.13, Example
-2.17, excision and quotient-pair comparison, the remaining sphere applications,
-invariance of dimension, and the Δ-complex comparison are later milestones.
+2.17, Proposition 2.22 and quotient-pair comparison, the remaining sphere
+applications, invariance of dimension, and the Δ-complex comparison are later
+milestones.
 
 For roadmap notation, write
 `Hₙ(X; R) := ((AlgebraicTopology.singularHomologyFunctor C n).obj R).obj X`.
@@ -163,7 +170,9 @@ excision, and Δ-complex homology with its comparison theorem.
 
 - **Selected boundaries.** Keep the completed 2.7–2.12 and reduced/relative
   exact-sequence slices, and add the four-leaf triple exact-sequence slice
-  described above. Leave the excision-dependent and Δ-complex results deferred.
+  described above. Map Theorem 2.20 and Proposition 2.21 as a distinct
+  small-chains/excision unit. Leave downstream excision-dependent applications
+  and Δ-complex results deferred.
 - **Coefficients.** State exact Mathlib nodes with their coefficient-general
   categorical API. Treat Hatcher's integral theory as its abelian-group
   specialization.

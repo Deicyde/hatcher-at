@@ -21,8 +21,8 @@ completed §1.1, §1.2, §1.3, §2.1 functoriality, and Appendix A.1 slices; the
 decomposes reduced and relative homology, long exact sequences, naturality, and
 relative homotopy invariance, and all fifteen of its leaves are complete. The
 four leaves in the §2.1 triple exact-sequence slice are complete as well.
-The remaining source is mapped for navigation and explicitly deferred so the
-book reads end to end and later work has somewhere to land. The
+Small chains and excision are mapped as a bounded future §2.1 unit; the rest
+of the unselected source remains explicitly deferred. The
 [coverage contract](../coverage/README.md) says which is which, and
 [the source notes](../sources/hatcher.md) fix the citation scheme.
 

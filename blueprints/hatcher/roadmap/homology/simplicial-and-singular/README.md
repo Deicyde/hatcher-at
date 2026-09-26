@@ -54,13 +54,18 @@ exact sequence with its degree-zero endpoint, and naturality are also complete.
 
 - [Relative homology and exact sequences](relative-homology/README.md)
 
-## Deferred within §2.1
+## Mapped and deferred within §2.1
+
+[Small chains and excision](relative-homology/small-chains-and-excision/README.md),
+covering Proposition 2.21 and Theorem 2.20, are mapped as a bounded milestone
+but not yet decomposed into formalizable leaves.
 
 Lemma 2.1 and Examples 2.2–2.5 need a source-faithful Δ-complex chain model.
 Proposition 2.6 needs additivity over all path components in every degree;
 Mathlib `v4.34.1` contains only its degree-zero case. Theorem 2.13, Example
-2.17, excision and quotient-pair comparison, the remaining sphere applications,
-invariance of dimension, and the Δ-complex comparison remain deferred.
+2.17, Proposition 2.22 and quotient-pair comparison, the remaining sphere
+applications, invariance of dimension, and the Δ-complex comparison remain
+deferred.
 
 Relative homology for simplicial-set pairs merged in Mathlib PR
 [#41285](https://github.com/leanprover-community/mathlib4/pull/41285) and is
@@ -75,7 +80,8 @@ naturality is now formalized. The compatible relative chain homotopy and its
 induced homology-map equality complete the relative homotopy branch and
 Proposition 2.19. The reduced pair sequence, its naturality, and the pointed
 comparison are now formalized. All four local triple-sequence leaves are now
-formalized. Excision remains active upstream work.
+formalized. The excision source target is now mapped locally; its
+implementation remains active upstream prior art.
 
 ## Sources
 

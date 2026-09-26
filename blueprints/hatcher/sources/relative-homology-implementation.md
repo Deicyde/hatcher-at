@@ -16,10 +16,12 @@ reduced-pair long exact sequences (pages 127–128).
 
 The triple sequence is now specified separately in the
 [triple-homology implementation specification](triple-homology-implementation.md).
-Theorem 2.13, Example 2.17, excision, small chains, good-pair quotient
+Small chains and excision are mapped separately in the
+[singular excision implementation specification](excision-implementation.md).
+Theorem 2.13, Example 2.17, Proposition 2.22 and the good-pair quotient
 comparison, sphere applications, invariance of dimension, and the
-simplicial–singular comparison remain deferred. This prevents Theorem 2.13 from
-being placed before the excision and quotient results used in its proof.
+simplicial–singular comparison remain deferred. This prevents Theorem 2.13
+from being placed before the excision and quotient results used in its proof.
 
 ## Coefficients and indexing
 
