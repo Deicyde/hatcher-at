@@ -216,17 +216,22 @@ lemma affineSubBarycenter_mk_comp_of_injective
   aesop
 
 /-- Recursive cone data underlying the chain homotopy from the identity to
-barycentric subdivision. -/
-def affineSubdivisionHomotopyAux (R : C) : ∀ n : ℕ,
+barycentric subdivision.  Writing the primitive recursion explicitly keeps
+the kernel definition noncomputable without asking the equation compiler for
+an unsafe executable implementation. -/
+noncomputable def affineSubdivisionHomotopyAux (R : C) (n : ℕ) :
     ((affineSimplexSSet Y).chainComplex R).X n ⟶
-      ((affineSimplexSSet Y).chainComplex R).X (n + 1)
-  | 0 => 0
-  | n + 1 =>
+      ((affineSimplexSSet Y).chainComplex R).X (n + 1) :=
+  Nat.rec (motive := fun n ↦
+      ((affineSimplexSSet Y).chainComplex R).X n ⟶
+        ((affineSimplexSSet Y).chainComplex R).X (n + 1))
+    0
+    (fun n h ↦
       Sigma.desc (fun s ↦
         (SSet.ιChainComplex _ s - SSet.ιChainComplex _ s ≫
-          ((affineSimplexSSet Y).chainComplex R).d (n + 1) n ≫
-            affineSubdivisionHomotopyAux R n) ≫
-          affineChainCone Y (affineBarycenter Y s) R (n + 1))
+          ((affineSimplexSSet Y).chainComplex R).d (n + 1) n ≫ h) ≫
+          affineChainCone Y (affineBarycenter Y s) R (n + 1)))
+    n
 
 @[simp]
 lemma affineSubdivisionHomotopyAux_zero (R : C) :
