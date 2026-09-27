@@ -3,6 +3,9 @@ article_id: af_40ecfa37c3493430859955e2
 source_units: [hatcher-2-1-small-chains-excision]
 declaration: theorem
 origin: bridged
+lean: Hatcher.Excision.coverChainMap_homotopyEquivalence
+statement: formalized
+proof: formalized
 ---
 
 # The binary-cover excision chain map is a homotopy equivalence
