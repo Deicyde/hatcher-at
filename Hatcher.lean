@@ -46,6 +46,7 @@ import Hatcher.Excision.AffineSubdivision
 import Hatcher.Excision.AffineChains
 import Hatcher.Excision.SingularSubdivision
 import Hatcher.Excision.SmallSimplices
+import Hatcher.Excision.SmallChainEquivalence
 import Hatcher.Excision.SubdivisionDiameter
 import Hatcher.Excision.Devissage
 import Hatcher.Singular.Homology
