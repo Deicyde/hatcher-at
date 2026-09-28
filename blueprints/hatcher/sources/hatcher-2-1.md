@@ -55,7 +55,7 @@ dimension, and compares Δ-complex homology with singular homology.
 | **Theorem 2.16** | 117 | A short exact sequence of chain complexes gives a long exact sequence in homology. |
 | Examples 2.17–2.18 | 117–118 | Compute disk-pair homology and identify `Hₙ(X,x₀)` with reduced homology. |
 | **Proposition 2.19** | 118 | Homotopic maps of pairs induce equal maps on relative homology. |
-| **Theorem 2.20** | 119–124 | Excision holds when the closure of the excised set lies in the interior of the subspace. |
+| **Theorem 2.20** | 119–124 | Excision holds when the closure of the excised set lies in the interior of the subspace. Equivalently, if the interiors of `A` and `B` cover `X`, inclusion `(B, A ∩ B) → (X, A)` induces an isomorphism; taking `B = X ∖ Z` recovers the deleted-subset form. |
 | **Proposition 2.21** | 119–124 | If the interiors of a family of subsets cover `X`, chains subordinate to that family include by a chain-homotopy equivalence. |
 | **Proposition 2.22** | 124–125 | For a good pair, quotienting the pair compares relative homology with reduced homology of the quotient. |
 | Example 2.23 and Corollaries 2.24–2.25 | 125–126 | Apply excision and exact sequences to spheres, unions of subcomplexes, and wedge sums. |
@@ -97,7 +97,8 @@ A fourth source unit decomposes Proposition 2.21 and Theorem 2.20 into a
 ten-leaf small-chains/excision milestone. Its mathematical and implementation
 boundary is fixed in the
 [singular excision implementation specification](excision-implementation.md),
-and none of its leaves is yet marked formalized.
+and eight leaves are formalized. Only the binary-cover and deleted-subset
+homology endpoints remain.
 
 Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
 component decomposition. Lemma 2.1, Examples 2.2–2.5, Theorem 2.13, Example

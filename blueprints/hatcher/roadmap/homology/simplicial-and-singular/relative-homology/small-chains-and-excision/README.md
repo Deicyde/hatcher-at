@@ -9,6 +9,9 @@ scope is decomposed into ten formalizable leaves. This page remains a
 non-dispatchable container; the linked leaves, rather than this overview, are
 the proof units.
 
+Eight of the ten leaves are complete. The remaining work is confined to the
+binary-cover and deleted-subset `IsIso` endpoints on relative homology.
+
 The target first proves that singular chains subordinate to a family of
 subsets whose interiors cover a space include into all singular chains by a
 chain-homotopy equivalence. It then derives excision for a binary cover and the

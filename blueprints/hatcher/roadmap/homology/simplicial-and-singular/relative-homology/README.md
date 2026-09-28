@@ -8,7 +8,7 @@ Hatcher §2.1 (pages 110, 113–124, and 127–128). The selected slices introdu
 reduced homology from the augmented singular complex, relative homology of a
 topological pair, pair and triple long exact sequences, homotopy invariance,
 and naturality. A fourth milestone continues through small chains and excision
-and is decomposed into ten formalizable leaves.
+and is decomposed into ten formalizable leaves, eight of which are complete.
 
 The mathematical source is Hatcher. The representation against Mathlib is
 fixed separately in the
@@ -64,7 +64,8 @@ triple-sequence slice are formalized locally as well.
 ## Decomposed and deferred boundary
 
 Theorem 2.20 and its Proposition 2.21 small-chain machinery are decomposed in
-the milestone above, with no formalization status asserted. Theorem 2.13,
+the milestone above. The chain-level machinery and binary-cover comparison are
+complete; only the two homology endpoints remain. Theorem 2.13,
 Example 2.17, Proposition 2.22 and the good-pair quotient comparison, sphere
 applications, invariance of dimension, and the simplicial–singular comparison
 remain deferred.

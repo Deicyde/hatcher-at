@@ -1,7 +1,7 @@
 ---
 article_id: af_1f0213e0638fc4d49b7907ba
 source_units: [hatcher-2-1-small-chains-excision]
-declaration: theorem
+declaration: instance
 origin: cited
 ---
 
@@ -36,7 +36,7 @@ an unspecified isomorphism.
 
 ## Proof depends on
 
-- [A chain map induces a map on homology](../../chain-map-homology.md)
+- [Chain-homotopic maps induce the same homology map](../../chain-homotopy-invariance.md)
 
 ## Sources
 

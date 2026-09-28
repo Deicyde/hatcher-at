@@ -11,7 +11,8 @@ and relative homology, exact sequences, naturality, and relative homotopy
 invariance; all fifteen of its leaves are complete. A third four-leaf slice
 covers the long exact sequence of a triple and its naturality; all four leaves
 are complete. A fourth ten-leaf slice decomposes small chains and excision; its
-formalization has not started.
+first eight leaves are complete, leaving the two homology-level excision
+endpoints.
 
 Simplicial homology takes a Δ-complex structure and forms the chain complex of
 its simplices; it is finite and computable but depends on the chosen structure.
@@ -59,7 +60,8 @@ exact sequence with its degree-zero endpoint, and naturality are also complete.
 
 [Small chains and excision](relative-homology/small-chains-and-excision/README.md),
 covering Proposition 2.21 and Theorem 2.20, are decomposed into ten
-formalizable leaves. None is yet marked formalized.
+formalizable leaves. Eight are formalized; the binary-cover and deleted-subset
+homology endpoints remain.
 
 Lemma 2.1 and Examples 2.2–2.5 need a source-faithful Δ-complex chain model.
 Proposition 2.6 needs additivity over all path components in every degree;
