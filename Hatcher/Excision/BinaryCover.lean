@@ -100,4 +100,16 @@ theorem coverChainMap_homotopyEquivalence
     exact Subtype.ext_iff.2 hxy
   · exact smallSubcomplexOfSet_inter A B
 
+/-- **Hatcher, Theorem 2.20 (binary-cover homology form).** The canonical map
+on relative homology induced by `(B, A ∩ B) → (X, A)` is an isomorphism
+whenever the interiors of `A` and `B` cover `X`. -/
+instance coverHomologyMap_isIso [CategoryWithHomology C]
+    (h : CoverCondition A B) (R : C) (n : ℕ) :
+    IsIso ((Hatcher.Relative.homologyFunctor R n).map (coverPairHom h)) := by
+  change IsIso (HomologicalComplex.homologyMap
+    ((Hatcher.Relative.chainComplexFunctor R).map (coverPairHom h)) n)
+  obtain ⟨e, he⟩ := coverChainMap_homotopyEquivalence h R
+  rw [← he]
+  exact (e.toHomologyIso n).isIso_hom
+
 end Hatcher.Excision
