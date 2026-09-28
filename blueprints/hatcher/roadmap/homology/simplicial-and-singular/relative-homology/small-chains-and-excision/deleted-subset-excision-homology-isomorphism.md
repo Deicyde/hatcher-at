@@ -3,6 +3,9 @@ article_id: af_647c3193fb9509bf31577ca0
 source_units: [hatcher-2-1-small-chains-excision]
 declaration: instance
 origin: cited
+lean: Hatcher.Excision.deletedSubsetHomologyMap_isIso
+statement: formalized
+proof: formalized
 ---
 
 # Deleted-subset excision induces homology isomorphisms
@@ -24,6 +27,11 @@ the exact morphism
 
 `(Hatcher.Relative.homologyFunctor R n).map`
 `  (Hatcher.Excision.deletedSubsetPairHom A Z)`.
+
+Since this canonical morphism is proof-independent, the named instance takes
+the hypothesis as `[Fact (closure Z ⊆ interior A)]`. The companion theorem
+`Hatcher.Excision.deletedSubsetHomologyMap_isIso_of_closure_subset_interior`
+accepts the same hypothesis as an ordinary explicit argument.
 
 The proof specializes binary-cover excision to `B = Zᶜ`. It must record a
 definitional equality or named equality between `deletedSubsetPairHom A Z`

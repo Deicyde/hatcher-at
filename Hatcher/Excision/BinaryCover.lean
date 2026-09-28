@@ -112,4 +112,64 @@ instance coverHomologyMap_isIso [CategoryWithHomology C]
   rw [← he]
   exact (e.toHomologyIso n).isIso_hom
 
+variable (A Z : Set X)
+
+/-- The canonical inclusion of topological pairs
+`(X \ Z, A \ Z) → (X, A)`. This map does not depend on a proof of the
+excision hypothesis. -/
+def deletedSubsetPairHom :
+    TopPair.of
+        (TopCat.ofHom
+          (ContinuousMap.inclusion
+            (Set.inter_subset_right : A \ Z ⊆ Zᶜ)))
+        (IsEmbedding.inclusion
+          (Set.inter_subset_right : A \ Z ⊆ Zᶜ)) ⟶
+      TopPair.ofSubset A :=
+  TopPair.ofHom
+    (TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩)
+    (TopCat.ofHom
+      (ContinuousMap.inclusion
+        (Set.inter_subset_left : A \ Z ⊆ A)))
+    rfl
+
+/-- The deleted-subset pair map is definitionally the binary-cover pair map
+for the complement of the deleted subset. Here `A \ Z` is `A ∩ Zᶜ`. -/
+lemma deletedSubsetPairHom_eq_coverPairHom
+    (h : CoverCondition A Zᶜ) :
+    deletedSubsetPairHom A Z = coverPairHom h := rfl
+
+/-- If the closure of `Z` lies in the interior of `A`, then the interiors of
+`A` and `Zᶜ` cover the ambient space. This uses
+`interior (Zᶜ) = (closure Z)ᶜ`. -/
+theorem deletedSubsetCoverCondition
+    (h : closure Z ⊆ interior A) :
+    CoverCondition A Zᶜ where
+  union_interior := by
+    ext x
+    simp only [Set.mem_union, Set.mem_univ, iff_true, interior_compl,
+      Set.mem_compl_iff]
+    by_cases hx : x ∈ interior A
+    · exact Or.inl hx
+    · exact Or.inr (fun hxZ ↦ hx (h hxZ))
+
+/-- **Hatcher, Theorem 2.20 (deleted-subset homology form).** If the closure
+of `Z` lies in the interior of `A`, then the canonical inclusion
+`(X \ Z, A \ Z) → (X, A)` induces an isomorphism on relative homology. -/
+theorem deletedSubsetHomologyMap_isIso_of_closure_subset_interior
+    [CategoryWithHomology C] (h : closure Z ⊆ interior A)
+    (R : C) (n : ℕ) :
+    IsIso ((Hatcher.Relative.homologyFunctor R n).map
+      (deletedSubsetPairHom A Z)) := by
+  rw [deletedSubsetPairHom_eq_coverPairHom A Z
+    (deletedSubsetCoverCondition A Z h)]
+  infer_instance
+
+/-- The `IsIso` instance for deleted-subset excision. The excision hypothesis
+is packaged as a `Fact` because the canonical map itself is proof-independent. -/
+instance deletedSubsetHomologyMap_isIso [CategoryWithHomology C]
+    [h : Fact (closure Z ⊆ interior A)] (R : C) (n : ℕ) :
+    IsIso ((Hatcher.Relative.homologyFunctor R n).map
+      (deletedSubsetPairHom A Z)) :=
+  deletedSubsetHomologyMap_isIso_of_closure_subset_interior A Z h.out R n
+
 end Hatcher.Excision
