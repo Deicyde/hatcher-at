@@ -4,11 +4,11 @@ A Lean 4 formalization of results from Allen Hatcher's *Algebraic Topology*
 (Cambridge University Press, 2002), built on Mathlib. The book's text is not
 redistributed here; source notes cite it by chapter and section.
 
-Every chapter and numbered section of the book is mapped. The selected scope
-contains 162 formalizable leaves, of which 160 are complete: 142 are
-formalized locally and 18 are pinned Mathlib declarations. These comprise all
-133 nodes in the previously completed §1.1, §1.2, §1.3, §2.1 functoriality,
-and Appendix A.1 slices, plus all fifteen nodes in the §2.1 reduced- and
+Every chapter and numbered section of the book is mapped. All 162 formalizable
+leaves in the selected scope are complete: 144 are formalized locally and 18
+are pinned Mathlib declarations. These comprise all 133 nodes in the previously
+completed §1.1, §1.2, §1.3, §2.1 functoriality, and Appendix A.1 slices, plus
+all fifteen nodes in the §2.1 reduced- and
 relative-homology branch. Its four-node reduced-homology branch and generic
 exact-sequence theorem are complete, and Mathlib now supplies the
 simplicial-pair foundation. The singular-pair and relative-homology functors
@@ -18,10 +18,9 @@ naturality, are also complete. The relative homotopy branch through Proposition
 are complete, finishing that selected §2.1 slice. The four additional leaves
 for the long exact sequence of a triple and its naturality are also complete.
 The approved small-chains/excision milestone is decomposed into ten additional
-formalization leaves. Eight are complete; only the binary-cover and
-deleted-subset homology endpoints remain. The coverage contract explicitly
-defers the other remaining main-line source areas, and decomposition alone is
-not a claim of formalization progress.
+formalization leaves, all complete. The coverage contract explicitly defers
+the other remaining main-line source areas, and decomposition alone is not a
+claim of formalization progress.
 
 - [Roadmap](roadmap/README.md) — the book: chapters, statements, and their
   dependencies.

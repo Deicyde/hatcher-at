@@ -4,9 +4,9 @@ A Lean 4 formalization of results from Allen Hatcher's *Algebraic Topology*,
 built on Mathlib. The book's text is not redistributed here.
 
 The whole book's numbered sections are mapped in the roadmap and coverage
-contract. The selected scope contains 162 formalizable leaves, of which 160
-are complete: 142 are formalized locally and 18 are pinned Mathlib
-declarations. This comprises all 133 nodes in the previously completed
+contract. All 162 formalizable leaves in the selected scope are complete: 144
+are formalized locally and 18 are pinned Mathlib declarations. This comprises
+all 133 nodes in the previously completed
 slices—twenty-two nodes in
 [§1.1](blueprints/hatcher/roadmap/fundamental-group/basic-constructions/README.md),
 the selected 67-node §1.2 spine, the selected 32-node §1.3 classification and
@@ -20,11 +20,10 @@ relative homotopy branch through Proposition 2.19, the reduced pair sequence
 with its naturality, and the pointed comparison are also complete. The four
 additional leaves for topological triples, their chain-level short exact
 sequence, the induced long exact sequence with its degree-zero endpoint, and
-naturality are complete as well. Eight of the ten leaves in the §2.1
-small-chains/excision unit are complete; only its binary-cover and
-deleted-subset homology endpoints remain. Thirteen other source units are
-explicitly deferred; lettered additional topics and exercises remain out of
-scope.
+naturality are complete as well. All ten leaves in the §2.1
+small-chains/excision unit are complete, including its binary-cover and
+deleted-subset homology endpoints. Thirteen other source units are explicitly
+deferred; lettered additional topics and exercises remain out of scope.
 
 [Browse the published formalization blueprint](https://deicyde.github.io/hatcher-at/)
 or [inspect its Markdown source](blueprints/hatcher/README.md).

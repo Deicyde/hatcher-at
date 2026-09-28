@@ -144,10 +144,10 @@ and naturality. All four leaves are formalized locally using the pinned pair and
 generic homology-sequence APIs; open Mathlib PR #41318 is prior art rather than
 an upstream dependency.
 
-The ten-leaf small-chains/excision slice has eight complete leaves. Its
-subdivision, small-chain equivalence, relative dévissage, and binary-cover
-chain-level comparison are formalized; the two homology-level excision
-endpoints remain.
+All ten leaves in the small-chains/excision slice are complete. Its
+subdivision, small-chain equivalence, relative dévissage, binary-cover
+chain-level comparison, and both homology-level excision endpoints are
+formalized locally.
 
 ## Deferred roadmap expansion
 

@@ -97,8 +97,7 @@ A fourth source unit decomposes Proposition 2.21 and Theorem 2.20 into a
 ten-leaf small-chains/excision milestone. Its mathematical and implementation
 boundary is fixed in the
 [singular excision implementation specification](excision-implementation.md),
-and eight leaves are formalized. Only the binary-cover and deleted-subset
-homology endpoints remain.
+and all ten leaves are formalized locally.
 
 Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
 component decomposition. Lemma 2.1, Examples 2.2–2.5, Theorem 2.13, Example
