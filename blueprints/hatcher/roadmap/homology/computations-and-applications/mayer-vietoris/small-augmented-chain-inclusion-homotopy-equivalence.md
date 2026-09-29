@@ -3,6 +3,8 @@ article_id: af_f11bd43beef6f83e595364c2
 source_units: [hatcher-2-2-mayer-vietoris]
 declaration: def
 origin: bridged
+lean: Hatcher.Excision.smallAugmentedChainInclusionHomotopyEquiv
+statement: formalized
 ---
 
 # Small augmented chains include by a chain-homotopy equivalence
