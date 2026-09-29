@@ -5,8 +5,9 @@ article_id: af_3a2b37424915dda0dbd5d97b
 # Computations and applications
 
 Hatcher §2.2 (pages 134–159). The binary interior-cover Mayer–Vietoris
-sequence is decomposed into six formalizable leaves. The remainder of the
-section stays explicitly deferred.
+sequence is complete in six formalizable leaves. A thirteen-leaf continuation
+now covers neighborhood-retract transport, Example 2.46, and reduced sphere
+homology. The remainder of the section stays explicitly deferred.
 
 Given excision and the long exact sequence, homology becomes computable. From
 `Hₙ(Sⁿ) ≅ ℤ` comes the degree of a map `Sⁿ → Sⁿ`, with its local formula as a
@@ -22,8 +23,9 @@ here, generalizing the two-dimensional cases proved from `π₁(S¹)` in
 
 The [Mayer–Vietoris milestone](mayer-vietoris/README.md) constructs the
 ordinary and reduced exact sequences directly from the completed small-chain
-equivalence. It stops before the neighborhood-retract extension and the
-computational examples.
+equivalence. The [sphere-homology milestone](sphere-homology/README.md) adds
+the conditional neighborhood-retract extension and applies it to the
+hemispheres of a sphere.
 
 Nothing in this selected slice is present in the pinned Mathlib. Mathlib has CW complexes
 (`Topology/CWComplex/Classical/`) but no cellular homology, no degree theory,
@@ -35,11 +37,13 @@ Mathlib coverage nor a project dependency.
 ## Mayer–Vietoris
 
 - [Binary-cover Mayer–Vietoris sequences](mayer-vietoris/README.md)
+- [Mayer–Vietoris transport and sphere homology](sphere-homology/README.md)
 
-Degree, cellular homology, the Mayer–Vietoris applications, and homology with
-general coefficient groups as a separate source topic remain deferred.
+Degree, cellular homology, the later Mayer–Vietoris applications, and homology
+with general coefficient groups as a separate source topic remain deferred.
 
 ## Sources
 
 - [Hatcher §2.2](../../../sources/hatcher.md)
 - [Hatcher §2.2 Mayer–Vietoris source note](../../../sources/hatcher-2-2.md)
+- [Sphere-homology implementation specification](../../../sources/sphere-homology-implementation.md)

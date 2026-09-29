@@ -8,7 +8,9 @@ Hatcher's Chapter 2 (pages 97–184). Four selected §2.1 slices are complete: t
 singular-homology functoriality spine, a fifteen-leaf reduced- and
 relative-homology exact-sequence spine, a four-leaf triple-sequence slice, and
 a ten-leaf small-chains/excision DAG. The six-leaf §2.2 Mayer–Vietoris slice is
-also complete. The rest of the chapter remains mapped or explicitly deferred.
+also complete. A thirteen-leaf milestone now decomposes the
+neighborhood-retract extension, Example 2.46, and reduced sphere homology. The
+rest of the chapter remains mapped or explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -34,11 +36,13 @@ contains PR #41285 but not the open triple PR #41318. The
 [small-chains/excision branch](simplicial-and-singular/relative-homology/small-chains-and-excision/README.md)
 is decomposed into ten complete leaves; the Δ-complex branch remains deferred.
 
-[Computations and applications](computations-and-applications/README.md) now
-decomposes the ordinary and reduced binary-cover Mayer–Vietoris sequences into
-six formalizable leaves. Degree, cellular homology, the Mayer–Vietoris examples
-and neighborhood extension, homology with coefficients, Brouwer in all
-dimensions, and invariance of domain remain deferred.
+[Computations and applications](computations-and-applications/README.md)
+contains the six complete ordinary and reduced binary-cover Mayer–Vietoris
+leaves and the new sphere-homology milestone. The latter adds conditional
+neighborhood transport, the hemisphere recurrence, and the full reduced
+homology calculation. Degree, cellular homology, the later Mayer–Vietoris
+examples, homology with coefficients, Brouwer in all dimensions, and
+invariance of domain remain deferred.
 
 [The formal viewpoint](formal-viewpoint/README.md) axiomatizes what was built,
 as the Eilenberg–Steenrod axioms, and introduces the categorical language.
@@ -48,7 +52,8 @@ invariance and `H₀`, contains the generic algebraic long exact sequence, and
 contains relative simplicial-set homology from PR #41285. Singular excision,
 Mayer–Vietoris, `Hₙ(Sⁿ)`, degree, and cellular homology remain outside the
 pinned library. The completed local excision milestone supplies the main input
-used by the now-complete Mayer–Vietoris branch.
+used by the Mayer–Vietoris branches; sphere homology is now decomposed as local
+work rather than claimed as upstream coverage.
 
 ## Sections
 

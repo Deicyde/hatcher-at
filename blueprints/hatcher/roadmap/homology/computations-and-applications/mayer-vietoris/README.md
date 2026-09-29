@@ -29,10 +29,13 @@ the same short exact sequence.
 
 ## Boundary
 
-This milestone ends with exact ordinary and reduced binary interior-cover
-sequences. It excludes the neighborhood-retract extension, the sphere and
-Klein-bottle examples, naturality for a new category of cover maps, degree,
-and cellular homology.
+This core milestone ends with exact ordinary and reduced binary interior-cover
+sequences. The separate
+[sphere-homology milestone](../sphere-homology/README.md) now covers the
+conditional neighborhood-retract extension and Example 2.46. The general
+CW-neighborhood construction, the Klein-bottle and mapping-torus examples,
+naturality for a new category of cover maps, degree, and cellular homology
+remain excluded here.
 
 ## Sources
 

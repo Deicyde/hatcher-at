@@ -12,11 +12,11 @@ The project formalizes results from a single reference.
 - [Hatcher §1.3, Covering Spaces](hatcher-1-3.md) — lifting, universal-cover,
   and classification targets with pinned and post-pin Mathlib prior art.
 - [Hatcher §2.1, Simplicial and Singular Homology](hatcher-2-1.md) records the
-  selected functoriality and relative-homology slices, deferred results, and
-  current Mathlib boundary.
+  selected functoriality, relative-homology, excision, and sphere-homology
+  foundations, deferred results, and current Mathlib boundary.
 - [Hatcher §2.2, Computations and Applications](hatcher-2-2.md) records the
-  selected ordinary and reduced Mayer–Vietoris sequences and the explicitly
-  deferred remainder of the section.
+  selected ordinary and reduced Mayer–Vietoris sequences, their conditional
+  neighborhood extension, Example 2.46, and the explicitly deferred remainder.
 - [Relative-homology implementation specification](relative-homology-implementation.md)
   fixes the project representation, dependency gate, and prior-art boundary
   for the second §2.1 slice.
@@ -29,6 +29,9 @@ The project formalizes results from a single reference.
 - [Mayer–Vietoris implementation specification](mayer-vietoris-implementation.md)
   fixes the binary-cover chain models, exact-sequence boundary, and reuse of
   the completed excision and reduced-homology APIs.
+- [Sphere-homology implementation specification](sphere-homology-implementation.md)
+  fixes the neighborhood data, canonical sphere model, coefficient policy,
+  recurrence, and base-case boundary for the selected sphere calculation.
 
 <!-- AUTHORING NOTES — these comments are not published.
 

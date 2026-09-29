@@ -40,6 +40,12 @@ homotopies.
 | **Corollary 2.11** | 111 | A homotopy equivalence induces homology isomorphisms in every degree. |
 | **Proposition 2.12** | 113 | Chain-homotopic chain maps induce equal maps on homology. |
 
+Immediately after Corollary 2.11, Hatcher notes that a contractible space has
+zero reduced homology in every degree. After Proposition 2.12 he states that
+induced maps and all the preceding functoriality and homotopy-invariance
+properties apply equally to reduced homology. These statements are part of the
+selected sphere-homology foundation.
+
 ## Exact sequences, excision, and comparison (113–133)
 
 The rest of the section defines relative homology, obtains long exact
@@ -99,11 +105,19 @@ boundary is fixed in the
 [singular excision implementation specification](excision-implementation.md),
 and all ten leaves are formalized locally.
 
+A fifth source unit selects the reduced-homology consequences of homotopy
+invariance on pages 111 and 113, the `S⁰` base case supported by Propositions
+2.6–2.8, and Corollary 2.14. Its proof of the sphere calculation follows
+Hatcher's alternative Mayer–Vietoris argument in Example 2.46 rather than the
+still-deferred good-pair quotient sequence of Theorem 2.13. The representation
+and proof boundary are fixed in the
+[sphere-homology implementation specification](sphere-homology-implementation.md).
+
 Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
 component decomposition. Lemma 2.1, Examples 2.2–2.5, Theorem 2.13, Example
-2.17, Proposition 2.22 and quotient-pair comparison, the remaining sphere
-applications, invariance of dimension, and the Δ-complex comparison are later
-milestones.
+2.17, Proposition 2.22 and quotient-pair comparison, Corollary 2.15 and the
+remaining sphere applications beyond Corollary 2.14, invariance of dimension,
+and the Δ-complex comparison are later milestones.
 
 For roadmap notation, write
 `Hₙ(X; R) := ((AlgebraicTopology.singularHomologyFunctor C n).obj R).obj X`.
@@ -168,12 +182,13 @@ excision, and Δ-complex homology with its comparison theorem.
 
 ## Decisions taken
 
-- **Selected boundaries.** Keep the completed 2.7–2.12 and reduced/relative
-  exact-sequence slices, and add the four-leaf triple exact-sequence slice
-  described above. Decompose Theorem 2.20 and Proposition 2.21 as a distinct
-  ten-leaf small-chains/excision unit. Leave the remaining §2.1 applications
-  and Δ-complex results deferred; the separately selected §2.2
-  Mayer–Vietoris slice is recorded in [its own source note](hatcher-2-2.md).
+- **Selected boundaries.** Keep the completed 2.7–2.12, reduced/relative
+  exact-sequence, triple, and small-chains/excision slices. Add the reduced
+  homotopy-invariance consequences, `S⁰` base case, and Corollary 2.14 through
+  the alternative Mayer–Vietoris proof. Leave the good-pair quotient route,
+  Corollary 2.15, remaining applications, and Δ-complex results deferred; the
+  selected §2.2 material is recorded in
+  [its own source note](hatcher-2-2.md).
 - **Coefficients.** State exact Mathlib nodes with their coefficient-general
   categorical API. Treat Hatcher's integral theory as its abelian-group
   specialization.

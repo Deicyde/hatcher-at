@@ -64,9 +64,9 @@ formalizable leaves, all formalized locally.
 Lemma 2.1 and Examples 2.2–2.5 need a source-faithful Δ-complex chain model.
 Proposition 2.6 needs additivity over all path components in every degree;
 Mathlib `v4.34.1` contains only its degree-zero case. Theorem 2.13, Example
-2.17, Proposition 2.22 and quotient-pair comparison, the remaining sphere
-applications, invariance of dimension, and the Δ-complex comparison remain
-deferred.
+2.17, Proposition 2.22 and quotient-pair comparison, Corollary 2.15 and the
+sphere applications beyond the separately decomposed Corollary 2.14,
+invariance of dimension, and the Δ-complex comparison remain deferred.
 
 Relative homology for simplicial-set pairs merged in Mathlib PR
 [#41285](https://github.com/leanprover-community/mathlib4/pull/41285) and is
