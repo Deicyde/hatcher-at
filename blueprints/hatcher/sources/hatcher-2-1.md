@@ -171,8 +171,9 @@ excision, and Δ-complex homology with its comparison theorem.
 - **Selected boundaries.** Keep the completed 2.7–2.12 and reduced/relative
   exact-sequence slices, and add the four-leaf triple exact-sequence slice
   described above. Decompose Theorem 2.20 and Proposition 2.21 as a distinct
-  ten-leaf small-chains/excision unit. Leave downstream excision-dependent
-  applications and Δ-complex results deferred.
+  ten-leaf small-chains/excision unit. Leave the remaining §2.1 applications
+  and Δ-complex results deferred; the separately selected §2.2
+  Mayer–Vietoris slice is recorded in [its own source note](hatcher-2-2.md).
 - **Coefficients.** State exact Mathlib nodes with their coefficient-general
   categorical API. Treat Hatcher's integral theory as its abelian-group
   specialization.

@@ -4,12 +4,12 @@ article_id: af_9da1e6c5697d0bac0b2a1624
 
 # Homology
 
-Hatcher's Chapter 2 (pages 97–184). Four selected §2.1 slices are decomposed:
-the completed singular-homology functoriality spine, a reduced- and
-relative-homology exact-sequence spine with all fifteen leaves complete, and a
-completed four-leaf triple-sequence slice, followed by a completed ten-leaf
-small-chains/excision DAG. The rest of the chapter remains mapped or explicitly
-deferred.
+Hatcher's Chapter 2 (pages 97–184). Four selected §2.1 slices are complete: the
+singular-homology functoriality spine, a fifteen-leaf reduced- and
+relative-homology exact-sequence spine, a four-leaf triple-sequence slice, and
+a ten-leaf small-chains/excision DAG. A six-leaf §2.2 Mayer–Vietoris slice is
+newly decomposed and not yet formalized. The rest of the chapter remains mapped
+or explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -35,10 +35,11 @@ contains PR #41285 but not the open triple PR #41318. The
 [small-chains/excision branch](simplicial-and-singular/relative-homology/small-chains-and-excision/README.md)
 is decomposed into ten complete leaves; the Δ-complex branch remains deferred.
 
-[Computations and applications](computations-and-applications/README.md) turns
-that machinery into results: the degree of a map `Sⁿ → Sⁿ`, cellular homology
-for CW complexes, Mayer–Vietoris, and homology with coefficients. Brouwer in
-all dimensions and invariance of domain land here.
+[Computations and applications](computations-and-applications/README.md) now
+decomposes the ordinary and reduced binary-cover Mayer–Vietoris sequences into
+six formalizable leaves. Degree, cellular homology, the Mayer–Vietoris examples
+and neighborhood extension, homology with coefficients, Brouwer in all
+dimensions, and invariance of domain remain deferred.
 
 [The formal viewpoint](formal-viewpoint/README.md) axiomatizes what was built,
 as the Eilenberg–Steenrod axioms, and introduces the categorical language.
@@ -47,7 +48,8 @@ The pinned Mathlib `v4.34.1` defines singular homology, proves homotopy
 invariance and `H₀`, contains the generic algebraic long exact sequence, and
 contains relative simplicial-set homology from PR #41285. Singular excision,
 Mayer–Vietoris, `Hₙ(Sⁿ)`, degree, and cellular homology remain outside the
-pinned library. Excision is the main prerequisite for the rest.
+pinned library. The completed local excision milestone supplies the main input
+for the newly planned Mayer–Vietoris branch.
 
 ## Sections
 

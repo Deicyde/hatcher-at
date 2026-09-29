@@ -1,12 +1,12 @@
 ---
 schema: autoform-coverage/v2
 artifact: sources/hatcher-execution-scope.txt
-artifact_sha256: 8cda67fc54d1185e48708ee07dbf3a3d803b040c184b3a7cbfb8ad341c9f47c0
+artifact_sha256: cd461e3da1cbb2c62af5b30091aca7ca691961817b624e8125e3f3a820687c5c
 ---
 
 # Coverage contract
 
-This project formalizes selected results from [Hatcher's *Algebraic Topology*](../sources/hatcher.md); it does not claim to formalize the whole book. The canonical artifact is a project-authored, citation-only execution ledger rather than redistributed book text. Its twenty-three lines record eight decomposed source areas, thirteen explicitly deferred areas, and two areas outside scope. Every decomposed row links directly to its formalizable roadmap leaves.
+This project formalizes selected results from [Hatcher's *Algebraic Topology*](../sources/hatcher.md); it does not claim to formalize the whole book. The canonical artifact is a project-authored, citation-only execution ledger rather than redistributed book text. Its twenty-four lines record nine decomposed source areas, thirteen explicitly deferred areas, and two areas outside scope. Every decomposed row links directly to its formalizable roadmap leaves.
 
 | Unit | Area | Lines | Locator | Unit SHA-256 | Coverage | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -21,18 +21,19 @@ This project formalizes selected results from [Hatcher's *Algebraic Topology*](.
 | hatcher-2-1-triple-les | §2.1 long exact sequence of a triple | 9-9 | Hatcher §2.1, pages 118–119 and 127–128 | cb575d45059f9973a268de41e1af526317b0554fa0930939db003c004314535e | DECOMPOSED | The selected triple exact-sequence slice is decomposed into four formalizable leaves. [Topological triples and their maps](../roadmap/homology/simplicial-and-singular/relative-homology/topological-triple.md), [Relative chains of a triple form a short exact sequence](../roadmap/homology/simplicial-and-singular/relative-homology/triple-chain-short-exact-sequence.md), [The long exact sequence of a triple](../roadmap/homology/simplicial-and-singular/relative-homology/triple-long-exact-sequence.md), [The triple long exact sequence is natural](../roadmap/homology/simplicial-and-singular/relative-homology/triple-long-exact-sequence-naturality.md) |
 | hatcher-2-1-small-chains-excision | §2.1 small chains and excision | 10-10 | Hatcher §2.1, pages 119–124 | 7131f31c731e5c0878b31b29a7e40792e5a02b758b5da1ebb31e0c65f38f604a | DECOMPOSED | The unit is decomposed into ten formalizable leaves. [Affine barycentric subdivision](../roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/affine-barycentric-subdivision.md), [diameter contraction](../roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/barycentric-subdivision-diameter.md), [affine-chain subdivision homotopy](../roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/affine-chain-subdivision-homotopy.md), [singular-chain subdivision homotopy](../roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/singular-chain-subdivision-homotopy.md), [eventual smallness](../roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/eventually-small-singular-simplices.md), [the small-chain equivalence](../roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/small-chain-inclusion-homotopy-equivalence.md), [relative dévissage](../roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/relative-chain-union-devissage.md), [chain-level binary excision](../roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/binary-cover-excision-chain-equivalence.md), [binary-cover homology excision](../roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/binary-cover-excision-homology-isomorphism.md), and [deleted-subset homology excision](../roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/deleted-subset-excision-homology-isomorphism.md). |
 | hatcher-2-1-deferred-remainder | §2.1 remaining deferred results | 11-11 | Hatcher §2.1, pages 102–133 | cbd747c05245925c46ad6abb9e49e445ae621bc0465eddf66994c76455dbdaa1 | DEFERRED | Proposition 2.6, Δ-complex homology, Theorem 2.13, Example 2.17, quotient-pair comparison, remaining sphere applications, invariance of dimension, and the Δ-complex comparison theorem remain reserved for later milestones. |
-| hatcher-2-2-computations-applications | §2.2 Computations and applications | 12-12 | Hatcher §2.2, pages 134–159 | f02ccfbe89d7abc56b787b447540b12bd88abaac20aa4838a119d63092ef6d8d | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
-| hatcher-2-3-formal-viewpoint | §2.3 Formal viewpoint | 13-13 | Hatcher §2.3, pages 160–165 | d1104663ca164b82f33fd006b55060c996c602330693bfec4e61eba22530d4d7 | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
-| hatcher-3-1-cohomology-groups | §3.1 Cohomology groups | 14-14 | Hatcher §3.1, pages 190–205 | 2b86cf2a2b961dd0eb7abaad041fb0b2323aa483988ebad9cf4934d250aca917 | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
-| hatcher-3-2-cup-product | §3.2 Cup product | 15-15 | Hatcher §3.2, pages 206–229 | 9a816e99214134d16abfbabaa5b144b63f86513a80c9d0360be23121723f684f | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
-| hatcher-3-3-poincare-duality | §3.3 Poincaré duality | 16-16 | Hatcher §3.3, pages 230–260 | c9730782969b87332484c53febccb30ff3cc5dac191a40e4ff66a1ceb386d552 | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
-| hatcher-4-1-homotopy-groups | §4.1 Homotopy groups | 17-17 | Hatcher §4.1, pages 339–359 | fec386b117eff960f6af60f3ce0b6f7ba78bc098b450ae4cef69248167cc6fcb | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
-| hatcher-4-2-elementary-methods | §4.2 Elementary methods | 18-18 | Hatcher §4.2, pages 360–392 | e4e973e0c9d493c2f6ca59f1837bde6b4953e69df966a1d2f2d6fccd9f47aa53 | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
-| hatcher-4-3-connections-cohomology | §4.3 Connections with cohomology | 19-19 | Hatcher §4.3, pages 393–420 | 3ff5e03e3ad165c3bad3234eb9670b1626ba3ab281f9f475f46cc494b052d134 | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
-| appendix-proposition-a-1 | Appendix Proposition A.1 | 20-20 | Hatcher Appendix, Proposition A.1 | 974df7bb29f1375f810ff98cbde04e99fb81f1615e1a1637cf9cd987783030fa | DECOMPOSED | The compact-subspace theorem and its bounded-skeleton corollary are explicit leaves. [Compact subsets lie in finite subcomplexes](../roadmap/appendix/compact-subspace-finite-subcomplex.md), [Compact subsets lie in a bounded skeleton](../roadmap/appendix/classical-cw-bridge/compact-subset-bounded-skeleton.md) |
-| appendix-remainder | Appendix remainder | 21-21 | Hatcher Appendix after Proposition A.1 | 1116cfc2204f9412dabc447a0b5c48a1e17c72a1b8c96f521bb5698e5120482d | DEFERRED | Deferred to a future roadmap milestone; the current appendix page is an informational map. |
-| lettered-additional-topics | Lettered additional topics | 22-22 | Hatcher §§1.A–4.L | 16905334d7dfc5520f9f89e337877212520b3800f320ecd22099601478df6a02 | OUT | Supplementary lettered sections are outside this project's main-line scope. |
-| exercises | Exercises | 23-23 | Exercise sets throughout Hatcher | 6b62bc779713d6145d530fd369f5e6dfa8c241f508a7a4138ad3874d520a0fe7 | OUT | Exercise sets are not source targets for this project. |
+| hatcher-2-2-mayer-vietoris | §2.2 ordinary and reduced Mayer–Vietoris sequences | 12-12 | Hatcher §2.2, pages 149–150 | 15860684ed973c25411a01b97634ee5c0f0b5fe9d587d2009876cd5876011dea | DECOMPOSED | The core binary-cover construction is decomposed into six formalizable leaves. [The binary-cover Mayer–Vietoris chain complex](../roadmap/homology/computations-and-applications/mayer-vietoris/binary-cover-chain-complex.md), [binary-cover chains form a short exact sequence](../roadmap/homology/computations-and-applications/mayer-vietoris/binary-cover-chain-short-exact-sequence.md), [the binary-cover Mayer–Vietoris sequence](../roadmap/homology/computations-and-applications/mayer-vietoris/binary-cover-mayer-vietoris-sequence.md), [small augmented chains include by a chain-homotopy equivalence](../roadmap/homology/computations-and-applications/mayer-vietoris/small-augmented-chain-inclusion-homotopy-equivalence.md), [augmented binary-cover chains form a short exact sequence](../roadmap/homology/computations-and-applications/mayer-vietoris/augmented-binary-cover-chain-short-exact-sequence.md), and [the reduced binary-cover Mayer–Vietoris sequence](../roadmap/homology/computations-and-applications/mayer-vietoris/reduced-binary-cover-mayer-vietoris-sequence.md). |
+| hatcher-2-2-computations-applications | §2.2 results outside the selected Mayer–Vietoris slice | 13-13 | Hatcher §2.2, pages 134–159 except the core sequences on pages 149–150 | 12e53b5bffcf5669e5c5d579436be9076682c55df59692c1163813b579cb3ef5 | DEFERRED | Degree, cellular homology, Euler characteristic, homology of groups, Mayer–Vietoris examples and neighborhood extensions, mapping-torus sequences, and homology with coefficients remain reserved for later milestones. |
+| hatcher-2-3-formal-viewpoint | §2.3 Formal viewpoint | 14-14 | Hatcher §2.3, pages 160–165 | d1104663ca164b82f33fd006b55060c996c602330693bfec4e61eba22530d4d7 | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
+| hatcher-3-1-cohomology-groups | §3.1 Cohomology groups | 15-15 | Hatcher §3.1, pages 190–205 | 2b86cf2a2b961dd0eb7abaad041fb0b2323aa483988ebad9cf4934d250aca917 | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
+| hatcher-3-2-cup-product | §3.2 Cup product | 16-16 | Hatcher §3.2, pages 206–229 | 9a816e99214134d16abfbabaa5b144b63f86513a80c9d0360be23121723f684f | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
+| hatcher-3-3-poincare-duality | §3.3 Poincaré duality | 17-17 | Hatcher §3.3, pages 230–260 | c9730782969b87332484c53febccb30ff3cc5dac191a40e4ff66a1ceb386d552 | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
+| hatcher-4-1-homotopy-groups | §4.1 Homotopy groups | 18-18 | Hatcher §4.1, pages 339–359 | fec386b117eff960f6af60f3ce0b6f7ba78bc098b450ae4cef69248167cc6fcb | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
+| hatcher-4-2-elementary-methods | §4.2 Elementary methods | 19-19 | Hatcher §4.2, pages 360–392 | e4e973e0c9d493c2f6ca59f1837bde6b4953e69df966a1d2f2d6fccd9f47aa53 | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
+| hatcher-4-3-connections-cohomology | §4.3 Connections with cohomology | 20-20 | Hatcher §4.3, pages 393–420 | 3ff5e03e3ad165c3bad3234eb9670b1626ba3ab281f9f475f46cc494b052d134 | DEFERRED | Deferred to a future roadmap milestone; the current section page is an informational map. |
+| appendix-proposition-a-1 | Appendix Proposition A.1 | 21-21 | Hatcher Appendix, Proposition A.1 | 974df7bb29f1375f810ff98cbde04e99fb81f1615e1a1637cf9cd987783030fa | DECOMPOSED | The compact-subspace theorem and its bounded-skeleton corollary are explicit leaves. [Compact subsets lie in finite subcomplexes](../roadmap/appendix/compact-subspace-finite-subcomplex.md), [Compact subsets lie in a bounded skeleton](../roadmap/appendix/classical-cw-bridge/compact-subset-bounded-skeleton.md) |
+| appendix-remainder | Appendix remainder | 22-22 | Hatcher Appendix after Proposition A.1 | 1116cfc2204f9412dabc447a0b5c48a1e17c72a1b8c96f521bb5698e5120482d | DEFERRED | Deferred to a future roadmap milestone; the current appendix page is an informational map. |
+| lettered-additional-topics | Lettered additional topics | 23-23 | Hatcher §§1.A–4.L | 16905334d7dfc5520f9f89e337877212520b3800f320ecd22099601478df6a02 | OUT | Supplementary lettered sections are outside this project's main-line scope. |
+| exercises | Exercises | 24-24 | Exercise sets throughout Hatcher | 6b62bc779713d6145d530fd369f5e6dfa8c241f508a7a4138ad3874d520a0fe7 | OUT | Exercise sets are not source targets for this project. |
 
 ## In scope
 
@@ -149,13 +150,28 @@ subdivision, small-chain equivalence, relative dévissage, binary-cover
 chain-level comparison, and both homology-level excision endpoints are
 formalized locally.
 
+### §2.2 selected Mayer–Vietoris slice
+
+[Mayer–Vietoris sequences](../roadmap/homology/computations-and-applications/mayer-vietoris/README.md)
+are decomposed into six formalizable leaves. The selected slice constructs the
+binary-cover chain complex, proves its short exact sequence, transports its
+homology to ordinary singular homology, and packages the ordinary and reduced
+long exact sequences through their degree-zero endpoints. These leaves are
+planned formalization work rather than completed results.
+
+The slice is limited to Hatcher's core construction on pages 149–150. The
+neighborhood-retract and CW-subcomplex extensions and Examples 2.46–2.48 remain
+deferred together with the rest of §2.2.
+
 ## Deferred roadmap expansion
 
-The remaining high-level section maps are explicitly deferred to future roadmap runs.
-These pages carry exposition and prior-art notes, and no formalization nodes:
+The remaining high-level section maps and retained source-unit remainders are
+explicitly deferred to future roadmap runs. Wholly deferred pages carry
+exposition and prior-art notes rather than formalization nodes:
 
 - Chapter 0, [Some underlying geometric notions](../roadmap/underlying-geometric-notions/README.md)
-- Chapter 2, [Homology](../roadmap/homology/README.md), §§2.2–2.3
+- Chapter 2, [Homology](../roadmap/homology/README.md), §2.3 and the remainder
+  of §2.2 outside the selected Mayer–Vietoris slice
 - Chapter 3, [Cohomology](../roadmap/cohomology/README.md), all three sections
 - Chapter 4, [Homotopy theory](../roadmap/homotopy-theory/README.md), all three sections
 - The remainder of the [Appendix](../roadmap/appendix/README.md)
@@ -167,6 +183,10 @@ machinery are [decomposed into ten formalizable leaves](../roadmap/homology/simp
 Lemma 2.1 and Examples 2.2–2.5, Proposition 2.6, Theorem 2.13, Example 2.17,
 Proposition 2.22 and quotient-pair comparison, the remaining sphere
 applications, invariance of dimension, and Theorem 2.27 remain deferred.
+Within §2.2, degree, cellular homology, Euler characteristic, homology of
+groups, the neighborhood-retract and CW-subcomplex extensions of
+Mayer–Vietoris, Examples 2.46–2.48, mapping-torus sequences, and homology with
+coefficients remain deferred.
 
 ## Out of scope
 

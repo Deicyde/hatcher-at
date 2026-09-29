@@ -14,6 +14,9 @@ The project formalizes results from a single reference.
 - [Hatcher §2.1, Simplicial and Singular Homology](hatcher-2-1.md) records the
   selected functoriality and relative-homology slices, deferred results, and
   current Mathlib boundary.
+- [Hatcher §2.2, Computations and Applications](hatcher-2-2.md) records the
+  selected ordinary and reduced Mayer–Vietoris sequences and the explicitly
+  deferred remainder of the section.
 - [Relative-homology implementation specification](relative-homology-implementation.md)
   fixes the project representation, dependency gate, and prior-art boundary
   for the second §2.1 slice.
@@ -23,6 +26,9 @@ The project formalizes results from a single reference.
 - [Singular excision implementation specification](excision-implementation.md)
   fixes the scope, representation, upstream boundary, and decomposition choices
   for the decomposed small-chains/excision unit.
+- [Mayer–Vietoris implementation specification](mayer-vietoris-implementation.md)
+  fixes the binary-cover chain models, exact-sequence boundary, and reuse of
+  the completed excision and reduced-homology APIs.
 
 <!-- AUTHORING NOTES — these comments are not published.
 
