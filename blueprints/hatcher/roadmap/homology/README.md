@@ -7,9 +7,8 @@ article_id: af_9da1e6c5697d0bac0b2a1624
 Hatcher's Chapter 2 (pages 97–184). Four selected §2.1 slices are complete: the
 singular-homology functoriality spine, a fifteen-leaf reduced- and
 relative-homology exact-sequence spine, a four-leaf triple-sequence slice, and
-a ten-leaf small-chains/excision DAG. A six-leaf §2.2 Mayer–Vietoris slice is
-newly decomposed and not yet formalized. The rest of the chapter remains mapped
-or explicitly deferred.
+a ten-leaf small-chains/excision DAG. The six-leaf §2.2 Mayer–Vietoris slice is
+also complete. The rest of the chapter remains mapped or explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -49,7 +48,7 @@ invariance and `H₀`, contains the generic algebraic long exact sequence, and
 contains relative simplicial-set homology from PR #41285. Singular excision,
 Mayer–Vietoris, `Hₙ(Sⁿ)`, degree, and cellular homology remain outside the
 pinned library. The completed local excision milestone supplies the main input
-for the newly planned Mayer–Vietoris branch.
+used by the now-complete Mayer–Vietoris branch.
 
 ## Sections
 

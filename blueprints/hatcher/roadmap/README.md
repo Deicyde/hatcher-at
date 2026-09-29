@@ -13,17 +13,17 @@ complexes, and singular homology in degree zero. What it lacks is the book's
 spine of computations, starting with `π₁(S¹) ≅ ℤ`. The roadmap therefore maps
 the whole book but decomposes it from that point.
 
-Chapters follow Hatcher's own order. The selected scope now contains 168
-formalizable leaves. The prior 162 are complete: 144 are formalized locally
-and 18 are pinned Mathlib declarations. This includes all 133 leaves in the
+Chapters follow Hatcher's own order. The selected scope contains 168
+formalizable leaves, all complete: 150 are formalized locally and 18 are pinned
+Mathlib declarations. Autoform derives 0 ready and 0 blocked leaves. This
+includes all 133 leaves in the
 previously completed §1.1, §1.2, §1.3, §2.1 functoriality, and Appendix A.1
 slices; the §1.3 spine extends through Proposition 1.40. A fifteen-leaf §2.1 slice also
 decomposes reduced and relative homology, long exact sequences, naturality, and
 relative homotopy invariance, and all fifteen of its leaves are complete. The
 four leaves in the §2.1 triple exact-sequence slice are complete as well. All
-ten leaves in the §2.1 small-chains/excision DAG are complete. Six new §2.2
-leaves decompose the ordinary and reduced binary-cover Mayer–Vietoris
-sequences; they are not yet formalized. The rest of the unselected source
+ten leaves in the §2.1 small-chains/excision DAG are complete. All six §2.2
+Mayer–Vietoris leaves are complete. The rest of the unselected source
 remains explicitly deferred. The
 [coverage contract](../coverage/README.md) says which is which, and
 [the source notes](../sources/hatcher.md) fix the citation scheme.

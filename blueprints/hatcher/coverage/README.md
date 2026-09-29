@@ -156,8 +156,8 @@ formalized locally.
 are decomposed into six formalizable leaves. The selected slice constructs the
 binary-cover chain complex, proves its short exact sequence, transports its
 homology to ordinary singular homology, and packages the ordinary and reduced
-long exact sequences through their degree-zero endpoints. These leaves are
-planned formalization work rather than completed results.
+long exact sequences through their degree-zero endpoints. All six leaves are
+formalized locally and complete.
 
 The slice is limited to Hatcher's core construction on pages 149–150. The
 neighborhood-retract and CW-subcomplex extensions and Examples 2.46–2.48 remain
