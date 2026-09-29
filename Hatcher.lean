@@ -50,6 +50,8 @@ import Hatcher.Excision.SmallChainEquivalence
 import Hatcher.Excision.SubdivisionDiameter
 import Hatcher.Excision.Devissage
 import Hatcher.Excision.BinaryCover
+import Hatcher.Excision.AugmentedSmallChains
+import Hatcher.MayerVietoris.ChainComplex
 import Hatcher.Singular.Homology
 import Hatcher.Singular.Reduced
 import Hatcher.Singular.Relative
