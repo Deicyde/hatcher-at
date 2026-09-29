@@ -40,7 +40,9 @@ namespace CoverCondition
 
 variable {A B}
 
-private lemma smallSimplicesCondition (h : CoverCondition A B) :
+/-- A binary interior-cover condition is the corresponding small-simplices
+condition for the `Bool`-indexed family. -/
+lemma smallSimplicesCondition (h : CoverCondition A B) :
     SmallSimplicesCondition (Bool.rec A B) where
   iUnion_interior := by
     rw [← h.union_interior]

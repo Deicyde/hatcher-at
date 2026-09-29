@@ -3,6 +3,9 @@ article_id: af_e0f7b901ba3a7f5ceb5ea0d6
 source_units: [hatcher-2-2-mayer-vietoris]
 declaration: theorem
 origin: cited
+lean: Hatcher.MayerVietoris.sequence_exact
+statement: formalized
+proof: formalized
 ---
 
 # The binary-cover Mayer–Vietoris sequence
@@ -30,6 +33,16 @@ of a class is written `z = x+y`, with `x` supported in `A` and `y` supported
 in `B`, then its image under the connecting map is represented by
 `∂x=-∂y` in `A ∩ B`. A coefficient-general generalized-element formulation,
 parallel to `Hatcher.Relative.pairConnecting_eq`, is acceptable.
+
+The implementation first identifies the range subcomplexes in the canonical
+chain-level short exact sequence with the singular chains of the actual
+subspaces. It then transports the generic six-term homology sequence through
+the additive homology functor's biproduct comparison and the small-chain
+homotopy equivalence. The public maps retain Hatcher's signs. The theorem
+`connecting_eq` uses a generalized element `xy` of the two-summand chain
+object: its hypotheses say that `xy` represents the small cycle and that its
+boundary is the signed image of a cycle in the intersection, which is the
+coefficient-general form of `∂x = -∂y`.
 
 ## Depends on
 
