@@ -3,6 +3,8 @@ article_id: af_d14323e64adefa9370c7e101
 source_units: [hatcher-2-2-mayer-vietoris]
 declaration: def
 origin: cited
+lean: Hatcher.MayerVietoris.chainComplexShortComplex
+statement: formalized
 ---
 
 # The binary-cover Mayer–Vietoris chain complex
