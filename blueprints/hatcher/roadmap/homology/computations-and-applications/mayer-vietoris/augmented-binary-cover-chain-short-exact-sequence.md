@@ -3,6 +3,9 @@ article_id: af_f479ae58dad58fcf6864ebc2
 source_units: [hatcher-2-2-mayer-vietoris]
 declaration: theorem
 origin: cited
+lean: Hatcher.MayerVietoris.augmentedChainComplexShortComplex_shortExact
+statement: formalized
+proof: formalized
 ---
 
 # Augmented binary-cover chains form a short exact sequence
@@ -18,10 +21,24 @@ of augmented chain complexes is short exact.
 
 The main theorem is
 `Hatcher.MayerVietoris.augmentedChainComplexShortComplex_shortExact`.
-Supporting declarations should name the augmented intersection and union
-maps and `augmentedChainComplexShortComplex`. Prove short exactness
-degreewise: use the explicit split sequence above in degree zero and the
-ordinary binary-cover splitting in every successor degree.
+The supporting declarations `augmentedChainComplexIntersectionMap` and
+`augmentedChainComplexUnionMap` have the displayed signed and codiagonal
+components in degree zero and reuse the ordinary maps in every successor
+degree. They form `augmentedChainComplexShortComplex`.
+
+The middle complex augments the ordinary biproduct of the two member chain
+complexes by their componentwise augmentations. Short exactness is proved
+degreewise: the inserted coefficient sequence has the explicit splitting
+with retraction `biprod.fst` and section `biprod.inr`, while each successor
+degree is the corresponding evaluation of the ordinary short exact
+Mayer–Vietoris chain complex.
+
+For later passage to reduced homology,
+`Hatcher.MayerVietoris.augmentedSubspaceChainIso` identifies the augmented
+singular chains of a subspace with the corresponding supported-chain
+complex, naturally for subset inclusions, and
+`Hatcher.MayerVietoris.augmentedMiddleChainsIso` identifies the custom middle
+term with the biproduct of the two singly augmented member complexes.
 
 ## Depends on
 

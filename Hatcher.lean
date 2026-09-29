@@ -53,6 +53,7 @@ import Hatcher.Excision.BinaryCover
 import Hatcher.Excision.AugmentedSmallChains
 import Hatcher.MayerVietoris.ChainComplex
 import Hatcher.MayerVietoris.ShortExact
+import Hatcher.MayerVietoris.AugmentedChainComplex
 import Hatcher.Singular.Homology
 import Hatcher.Singular.Reduced
 import Hatcher.Singular.Relative
