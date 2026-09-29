@@ -3,6 +3,9 @@ article_id: af_c930cb570baa902b5242a221
 source_units: [hatcher-2-2-mayer-vietoris]
 declaration: theorem
 origin: cited
+lean: Hatcher.MayerVietoris.chainComplexShortComplex_shortExact
+statement: formalized
+proof: formalized
 ---
 
 # Binary-cover chains form a short exact sequence
@@ -14,11 +17,12 @@ short exact:
 `→ C_*^{A+B}(X;R) → 0`.
 
 The main theorem is
-`Hatcher.MayerVietoris.chainComplexShortComplex_shortExact`. Prove it by
-applying `HomologicalComplex.shortExact_of_degreewise_shortExact` to an
-explicit splitting on the coproduct bases. A small singular simplex is sent
-to the `A` summand when it lies in `A`, and otherwise to the `B` summand. The
-retraction and section must preserve the source signs from the preceding
+`Hatcher.MayerVietoris.chainComplexShortComplex_shortExact`. Its proof maps
+the simplicial-set pushout square for the binary small-cover subcomplex
+through the singular-chain functor. Pushout exactness supplies exactness and
+epimorphy, while projection onto the `A` component proves that the signed
+intersection map is monic. This categorical argument is the coproduct-basis
+splitting in invariant form and preserves the source signs from the preceding
 node.
 
 Use a coefficient-general abelian category with the coproducts required by
