@@ -3,6 +3,9 @@ article_id: af_aaaedd2fdc35d4e3dfcabaae
 source_units: [hatcher-2-1-sphere-homology]
 declaration: theorem
 origin: cited
+lean: Hatcher.Reduced.homologyMap_eq_of_homotopy
+statement: formalized
+proof: formalized
 ---
 
 # Homotopic maps induce the same reduced-homology map
