@@ -5,6 +5,7 @@ Authors: Jack McCarthy
 -/
 import Hatcher.Singular.Homology
 import Hatcher.Singular.ReducedRelative
+import Mathlib.Topology.Homotopy.Contractible
 
 /-!
 # Relative homology at a basepoint
@@ -69,6 +70,17 @@ lemma isZero_pointHomology (R : C) (n : ℕ) :
           C (k + 1) R (TopCat.of PUnit) (by omega)).of_iso
         ((homologyIsoOfPositiveDegree R (k + 1) (by omega)).app
           (TopCat.of PUnit))
+
+/-- **Hatcher, Corollary 2.11 and the following remark (page 111).** Reduced
+homology of a contractible space vanishes in every nonnegative degree. -/
+lemma isZero_homology_of_contractible
+    {X : Type w} [TopologicalSpace X] [ContractibleSpace X]
+    (R : C) (n : ℕ) :
+    IsZero ((homologyFunctor R n).obj (TopCat.of X)) := by
+  let e : ContinuousMap.HomotopyEquiv X PUnit.{w + 1} :=
+    (ContractibleSpace.hequiv X PUnit).some
+  exact (isZero_pointHomology R n).of_iso
+    (homologyIsoOfHomotopyEquiv e R n)
 
 end Hatcher.Reduced
 
