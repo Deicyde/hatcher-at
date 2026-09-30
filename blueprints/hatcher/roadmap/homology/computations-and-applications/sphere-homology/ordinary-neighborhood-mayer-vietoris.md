@@ -3,6 +3,9 @@ article_id: af_07d3736d22868453762d05f0
 source_units: [hatcher-2-2-mv-transport-sphere-recurrence]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.MayerVietoris.neighborhoodSequence_exact
 ---
 
 # The ordinary neighborhood-retract Mayer–Vietoris sequence
