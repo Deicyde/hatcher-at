@@ -8,6 +8,7 @@ import Mathlib.AlgebraicTopology.SimplicialSet.TopAdj
 import Mathlib.AlgebraicTopology.SingularHomology.Basic
 import Mathlib.AlgebraicTopology.SingularHomology.HomotopyInvariance
 import Mathlib.CategoryTheory.Preadditive.Biproducts
+import Mathlib.Topology.Homotopy.Equiv
 
 /-!
 # Reduced singular chains
@@ -135,6 +136,38 @@ theorem homologyMap_eq_of_homotopy
       (chainAugmentation R Y) (d_chainAugmentation R Y)
       (H.singularChainComplexFunctorObjMap R) rfl
       (fun _ ↦ rfl) (fun _ ↦ rfl)).homologyMap_eq (n + 1)
+
+/-- **Hatcher, Corollary 2.11 and §2.1 (pages 111 and 113).** A homotopy
+equivalence induces an isomorphism on reduced singular homology in every
+degree. -/
+noncomputable def homologyIsoOfHomotopyEquiv
+    {X Y : Type w} [TopologicalSpace X] [TopologicalSpace Y]
+    (e : ContinuousMap.HomotopyEquiv X Y) (R : C) (n : ℕ) :
+    (homologyFunctor R n).obj (TopCat.of X) ≅
+      (homologyFunctor R n).obj (TopCat.of Y) where
+  hom := (homologyFunctor R n).map (TopCat.ofHom e.toFun)
+  inv := (homologyFunctor R n).map (TopCat.ofHom e.invFun)
+  hom_inv_id := by
+    rw [← Functor.map_comp]
+    calc
+      _ = (homologyFunctor R n).map (𝟙 (TopCat.of X)) :=
+        homologyMap_eq_of_homotopy e.left_inv.some R n
+      _ = 𝟙 _ := by simp
+  inv_hom_id := by
+    rw [← Functor.map_comp]
+    calc
+      _ = (homologyFunctor R n).map (𝟙 (TopCat.of Y)) :=
+        homologyMap_eq_of_homotopy e.right_inv.some R n
+      _ = 𝟙 _ := by simp
+
+/-- The forward morphism is the reduced-homology map induced by the given
+homotopy equivalence. -/
+@[simp]
+lemma homologyIsoOfHomotopyEquiv_hom
+    {X Y : Type w} [TopologicalSpace X] [TopologicalSpace Y]
+    (e : ContinuousMap.HomotopyEquiv X Y) (R : C) (n : ℕ) :
+    (homologyIsoOfHomotopyEquiv e R n).hom =
+      (homologyFunctor R n).map (TopCat.ofHom e.toFun) := rfl
 
 private noncomputable def positiveShortComplexIso (R : C) (k : ℕ) :
     augmentedSingularChainComplexFunctor R ⋙
