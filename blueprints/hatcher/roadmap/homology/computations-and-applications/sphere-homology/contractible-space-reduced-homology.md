@@ -3,6 +3,9 @@ article_id: af_8bce459d247605e450eef75c
 source_units: [hatcher-2-1-sphere-homology]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Reduced.isZero_homology_of_contractible
 ---
 
 # Reduced homology of a contractible space vanishes
