@@ -68,6 +68,7 @@ import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected
 import Hatcher.Sphere.BorsukUlam
 import Hatcher.Sphere.AntipodalCover
+import Hatcher.Sphere.ZeroSphere
 import Hatcher.VanKampen.CoverGroupPresentation
 import Hatcher.VanKampen.CoverFactorization
 import Hatcher.VanKampen.BoundaryFactorization
