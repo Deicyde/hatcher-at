@@ -56,6 +56,7 @@ import Hatcher.MayerVietoris.ChainComplex
 import Hatcher.MayerVietoris.ShortExact
 import Hatcher.MayerVietoris.AugmentedChainComplex
 import Hatcher.MayerVietoris.Sequence
+import Hatcher.MayerVietoris.Neighborhood
 import Hatcher.MayerVietoris.ReducedSequence
 import Hatcher.Singular.Homology
 import Hatcher.Singular.Reduced
@@ -69,6 +70,7 @@ import Hatcher.Sphere.SimplyConnected
 import Hatcher.Sphere.BorsukUlam
 import Hatcher.Sphere.AntipodalCover
 import Hatcher.Sphere.ZeroSphere
+import Hatcher.Topology.StrongDeformationRetract
 import Hatcher.VanKampen.CoverGroupPresentation
 import Hatcher.VanKampen.CoverFactorization
 import Hatcher.VanKampen.BoundaryFactorization
