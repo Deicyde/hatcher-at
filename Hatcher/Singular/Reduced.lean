@@ -3,9 +3,10 @@ Copyright (c) 2026 Jack McCarthy. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSES/Apache-2.0.txt.
 Authors: Jack McCarthy
 -/
-import Mathlib.Algebra.Homology.Augment
+import Hatcher.Algebra.Homology.Augment
 import Mathlib.AlgebraicTopology.SimplicialSet.TopAdj
 import Mathlib.AlgebraicTopology.SingularHomology.Basic
+import Mathlib.AlgebraicTopology.SingularHomology.HomotopyInvariance
 import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-!
@@ -118,6 +119,22 @@ complex. This is functorial in the space. -/
 noncomputable def homologyFunctor (R : C) (n : ℕ) : TopCat.{w} ⥤ C :=
   augmentedSingularChainComplexFunctor R ⋙
     HomologicalComplex.homologyFunctor C (ComplexShape.down ℕ) (n + 1)
+
+/-- **Hatcher, §2.1 (pages 111 and 113).** Homotopic maps induce the same
+map on reduced singular homology in every degree. -/
+theorem homologyMap_eq_of_homotopy
+    {X Y : TopCat.{w}} {f g : X ⟶ Y} (H : TopCat.Homotopy f g)
+    (R : C) (n : ℕ) :
+    (homologyFunctor R n).map f = (homologyFunctor R n).map g := by
+  change HomologicalComplex.homologyMap (augmentedMap R f) (n + 1) =
+    HomologicalComplex.homologyMap (augmentedMap R g) (n + 1)
+  exact
+    (ChainComplex.augmentHomotopy
+      (F := augmentedMap R f) (G := augmentedMap R g)
+      (chainAugmentation R X) (d_chainAugmentation R X)
+      (chainAugmentation R Y) (d_chainAugmentation R Y)
+      (H.singularChainComplexFunctorObjMap R) rfl
+      (fun _ ↦ rfl) (fun _ ↦ rfl)).homologyMap_eq (n + 1)
 
 private noncomputable def positiveShortComplexIso (R : C) (k : ℕ) :
     augmentedSingularChainComplexFunctor R ⋙
