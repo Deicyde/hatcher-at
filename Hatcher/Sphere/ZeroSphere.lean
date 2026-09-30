@@ -22,6 +22,8 @@ open CategoryTheory
 
 namespace Hatcher.Sphere
 
+universe w
+
 private abbrev RawZeroSphere :=
   Metric.sphere (0 : EuclideanSpace ℝ (Fin 1)) 1
 
@@ -76,7 +78,7 @@ private noncomputable def rawZeroSphereHomeomorphBool :
       continuous_toFun := continuous_of_discreteTopology
       continuous_invFun := continuous_of_discreteTopology }
 
-private noncomputable def zeroSphereHomeomorphTwoPoint.{w} :
+private noncomputable def zeroSphereHomeomorphTwoPoint :
     TopCat.sphere.{w} 0 ≃ₜ ULift.{w} Bool := by
   change ULift.{w} RawZeroSphere ≃ₜ ULift.{w} Bool
   exact Homeomorph.ulift.trans
@@ -84,29 +86,29 @@ private noncomputable def zeroSphereHomeomorphTwoPoint.{w} :
 
 /-- The point of the zero-sphere with coordinate `-1` when `b = false` and
 coordinate `1` when `b = true`. -/
-noncomputable def zeroSpherePoint.{w} (b : Bool) :
+noncomputable def zeroSpherePoint (b : Bool) :
     TopCat.sphere.{w} 0 :=
   ⟨rawZeroSpherePoint b⟩
 
 /-- The zero-sphere is explicitly the lifted two-point space. -/
-noncomputable def zeroSphereIsoTwoPoint.{w} :
+noncomputable def zeroSphereIsoTwoPoint :
     TopCat.sphere.{w} 0 ≅ TopCat.of (ULift.{w} Bool) :=
   TopCat.isoOfHomeo zeroSphereHomeomorphTwoPoint.{w}
 
 @[simp]
-theorem zeroSphereIsoTwoPoint_inv_apply.{w} (b : ULift.{w} Bool) :
+theorem zeroSphereIsoTwoPoint_inv_apply (b : ULift.{w} Bool) :
     zeroSphereIsoTwoPoint.{w}.inv b = zeroSpherePoint.{w} b.down := by
   cases b
   rfl
 
 @[simp]
-theorem zeroSphereIsoTwoPoint_hom_point.{w} (b : Bool) :
+theorem zeroSphereIsoTwoPoint_hom_point (b : Bool) :
     zeroSphereIsoTwoPoint.{w}.hom (zeroSpherePoint.{w} b) =
       ULift.up b := by
   rw [← zeroSphereIsoTwoPoint_inv_apply (b := ULift.up b)]
   simp
 
-theorem zeroSpherePoint_false_ne_true.{w} :
+theorem zeroSpherePoint_false_ne_true :
     zeroSpherePoint.{w} false ≠ zeroSpherePoint.{w} true := by
   intro h
   have hcoord := congrArg
