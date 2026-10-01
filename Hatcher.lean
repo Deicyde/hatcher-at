@@ -72,6 +72,7 @@ import Hatcher.Sphere.AntipodalCover
 import Hatcher.Sphere.HemisphereCharts
 import Hatcher.Sphere.RadialDeformationRetract
 import Hatcher.Sphere.ZeroSphere
+import Hatcher.Sphere.ZeroSphereHomology
 import Hatcher.Topology.StrongDeformationRetract
 import Hatcher.VanKampen.CoverGroupPresentation
 import Hatcher.VanKampen.CoverFactorization
