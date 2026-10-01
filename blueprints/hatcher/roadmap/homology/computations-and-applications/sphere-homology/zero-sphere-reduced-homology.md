@@ -3,6 +3,9 @@ article_id: af_7721073fdde0911573d95b14
 source_units: [hatcher-2-1-sphere-homology]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.reducedHomology_sphere_zero
 ---
 
 # Reduced homology of the zero-sphere
