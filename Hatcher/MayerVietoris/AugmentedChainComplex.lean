@@ -635,6 +635,369 @@ lemma augmentedChainComplexUnionMap_f_succ
     (augmentedChainComplexUnionMap A B R).f (n + 1) =
       (chainComplexUnionMap A B R).f n := rfl
 
+/-- The canonical map from augmented chains supported in `A` to the
+ambient augmented singular chains. -/
+noncomputable def augmentedSubsetChainsToAmbient
+    (A : Set X) (R : C) :
+    augmentedSubsetChains A R ⟶
+      (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj X :=
+  augmentMap
+    (subcomplexChainAugmentation
+      (Hatcher.Excision.smallSubcomplexOfSet A) R)
+    (subcomplexChainAugmentation_condition
+      (Hatcher.Excision.smallSubcomplexOfSet A) R)
+    (Hatcher.Reduced.chainAugmentation R X)
+    (Hatcher.Reduced.d_chainAugmentation R X)
+    (SSet.chainComplexMap
+      (Hatcher.Excision.smallSubcomplexOfSet A).ι R)
+    rfl
+
+@[simp]
+lemma augmentedSubsetChainsToAmbient_f_zero
+    (A : Set X) (R : C) :
+    (augmentedSubsetChainsToAmbient A R).f 0 = 𝟙 R := rfl
+
+@[simp]
+lemma augmentedSubsetChainsToAmbient_f_succ
+    (A : Set X) (R : C) (n : ℕ) :
+    (augmentedSubsetChainsToAmbient A R).f (n + 1) =
+      (SSet.chainComplexMap
+        (Hatcher.Excision.smallSubcomplexOfSet A).ι R).f n := rfl
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Identifying supported chains with the chains of the actual subspace
+takes the direct supported-chain inclusion to the map induced by the
+subspace inclusion. -/
+@[reassoc]
+lemma augmentedSubspaceChainIso_hom_comp_subsetChainsToAmbient
+    (A : Set X) (R : C) :
+    (augmentedSubspaceChainIso A R).hom ≫
+        augmentedSubsetChainsToAmbient A R =
+      Hatcher.Reduced.augmentedMap R (subspaceInclusion A) := by
+  ext (_ | n)
+  · change 𝟙 R ≫ 𝟙 R = 𝟙 R
+    simp
+  · simp only [HomologicalComplex.comp_f,
+      augmentedSubspaceChainIso_hom_f_succ,
+      augmentedSubsetChainsToAmbient_f_succ]
+    change
+      (SSet.chainComplexMap (subspaceToSubsetSSetMap A) R).f n ≫
+          (SSet.chainComplexMap
+            (Hatcher.Excision.smallSubcomplexOfSet A).ι R).f n =
+        (SSet.chainComplexMap
+          (TopCat.toSSet.map (subspaceInclusion A)) R).f n
+    rw [← HomologicalComplex.comp_f, ← Functor.map_comp,
+      SSet.Subcomplex.toRange_ι]
+
+/-- The biproduct of the two augmented supported-chain complexes. -/
+noncomputable abbrev augmentedSubsetChainsBiprod
+    (A B : Set X) (R : C) : ChainComplex C ℕ :=
+  augmentedSubsetChains A R ⊞ augmentedSubsetChains B R
+
+/-- The augmented binary small-cover chain complex, with all endpoints
+fixed for downstream composition. -/
+noncomputable abbrev augmentedSmallCoverChains
+    (A B : Set X) (R : C) : ChainComplex C ℕ :=
+  Hatcher.Excision.smallAugmentedChainComplex
+    (X := X) (C := C) (Bool.rec A B : Bool → Set X) R
+
+/-- The augmented middle complex mapped to the augmented small-cover
+complex. -/
+noncomputable def augmentedMiddleToSmallCover
+    (A B : Set X) (R : C) :
+    augmentedSubsetChainsBiprod A B R ⟶
+      augmentedSmallCoverChains A B R :=
+  (augmentedMiddleChainsIso A B R).inv ≫
+    augmentedChainComplexUnionMap A B R
+
+@[simp]
+lemma augmentedMiddleToSmallCover_f
+    (A B : Set X) (R : C) (n : ℕ) :
+    (augmentedMiddleToSmallCover A B R).f n =
+      (augmentedMiddleChainsIso A B R).inv.f n ≫
+        (augmentedChainComplexUnionMap A B R).f n := rfl
+
+/-- The canonical inclusion from augmented binary-cover chains to ambient
+augmented singular chains. -/
+noncomputable abbrev smallCoverAugmentedInclusion
+    (A B : Set X) (R : C) :=
+  Hatcher.Excision.smallAugmentedChainInclusion
+    (X := X) (C := C) (Bool.rec A B : Bool → Set X) R
+
+/-- The augmented middle complex mapped to ambient augmented singular
+chains through the small-cover inclusion. -/
+noncomputable def augmentedMiddleToAmbient
+    (A B : Set X) (R : C) :
+    augmentedSubsetChainsBiprod A B R ⟶
+      (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj X :=
+  { f := fun n =>
+      (augmentedMiddleToSmallCover A B R).f n ≫
+        (smallCoverAugmentedInclusion A B R).f n }
+
+@[simp]
+lemma augmentedMiddleToAmbient_f
+    (A B : Set X) (R : C) (n : ℕ) :
+    (augmentedMiddleToAmbient A B R).f n =
+      (augmentedMiddleToSmallCover A B R).f n ≫
+        (smallCoverAugmentedInclusion A B R).f n := rfl
+
+private lemma biprodXIso_inv_comp_fst
+    (K L : ChainComplex C ℕ) (n : ℕ) :
+    (HomologicalComplex.biprodXIso K L n).inv ≫
+        (biprod.fst : K ⊞ L ⟶ K).f n = biprod.fst := by
+  calc
+    _ = (HomologicalComplex.biprodXIso K L n).inv ≫
+        ((HomologicalComplex.biprodXIso K L n).hom ≫ biprod.fst) := by
+      rw [HomologicalComplex.biprodXIso_hom_fst]
+    _ = ((HomologicalComplex.biprodXIso K L n).inv ≫
+        (HomologicalComplex.biprodXIso K L n).hom) ≫ biprod.fst := by
+      rw [Category.assoc]
+    _ = biprod.fst := by rw [Iso.inv_hom_id, Category.id_comp]
+
+private lemma biprodXIso_inv_comp_snd
+    (K L : ChainComplex C ℕ) (n : ℕ) :
+    (HomologicalComplex.biprodXIso K L n).inv ≫
+        (biprod.snd : K ⊞ L ⟶ L).f n = biprod.snd := by
+  calc
+    _ = (HomologicalComplex.biprodXIso K L n).inv ≫
+        ((HomologicalComplex.biprodXIso K L n).hom ≫ biprod.snd) := by
+      rw [HomologicalComplex.biprodXIso_hom_snd]
+    _ = ((HomologicalComplex.biprodXIso K L n).inv ≫
+        (HomologicalComplex.biprodXIso K L n).hom) ≫ biprod.snd := by
+      rw [Category.assoc]
+    _ = biprod.snd := by rw [Iso.inv_hom_id, Category.id_comp]
+
+@[reassoc]
+private lemma biprod_inl_f_comp_biprodXIso_hom
+    (K L : ChainComplex C ℕ) (n : ℕ) :
+    (biprod.inl : K ⟶ K ⊞ L).f n ≫
+        (HomologicalComplex.biprodXIso K L n).hom = biprod.inl := by
+  calc
+    _ = (biprod.inl ≫ (HomologicalComplex.biprodXIso K L n).inv) ≫
+        (HomologicalComplex.biprodXIso K L n).hom := by
+      rw [HomologicalComplex.inl_biprodXIso_inv]
+    _ = biprod.inl ≫ ((HomologicalComplex.biprodXIso K L n).inv ≫
+        (HomologicalComplex.biprodXIso K L n).hom) := by
+      rw [Category.assoc]
+    _ = biprod.inl := by rw [Iso.inv_hom_id, Category.comp_id]
+
+@[reassoc]
+private lemma biprod_inr_f_comp_biprodXIso_hom
+    (K L : ChainComplex C ℕ) (n : ℕ) :
+    (biprod.inr : L ⟶ K ⊞ L).f n ≫
+        (HomologicalComplex.biprodXIso K L n).hom = biprod.inr := by
+  calc
+    _ = (biprod.inr ≫ (HomologicalComplex.biprodXIso K L n).inv) ≫
+        (HomologicalComplex.biprodXIso K L n).hom := by
+      rw [HomologicalComplex.inr_biprodXIso_inv]
+    _ = biprod.inr ≫ ((HomologicalComplex.biprodXIso K L n).inv ≫
+        (HomologicalComplex.biprodXIso K L n).hom) := by
+      rw [Category.assoc]
+    _ = biprod.inr := by rw [Iso.inv_hom_id, Category.comp_id]
+
+@[reassoc]
+private lemma biprod_inl_f_comp_augmentedMiddleChainsIso_inv_f_zero
+    (A B : Set X) (R : C) :
+    (biprod.inl : augmentedSubsetChains A R ⟶
+        augmentedSubsetChains A R ⊞ augmentedSubsetChains B R).f 0 ≫
+      (augmentedMiddleChainsIso A B R).inv.f 0 =
+        (biprod.inl : R ⟶ R ⊞ R) := by
+  rw [augmentedMiddleChainsIso_inv_f_zero]
+  dsimp only [augmentedSubsetChains, augmentedMiddleChains,
+    ChainComplex.augment]
+  rw [biprod_inl_f_comp_biprodXIso_hom]
+
+@[reassoc]
+private lemma biprod_inr_f_comp_augmentedMiddleChainsIso_inv_f_zero
+    (A B : Set X) (R : C) :
+    (biprod.inr : augmentedSubsetChains B R ⟶
+        augmentedSubsetChains A R ⊞ augmentedSubsetChains B R).f 0 ≫
+      (augmentedMiddleChainsIso A B R).inv.f 0 =
+        (biprod.inr : R ⟶ R ⊞ R) := by
+  rw [augmentedMiddleChainsIso_inv_f_zero]
+  dsimp only [augmentedSubsetChains, augmentedMiddleChains,
+    ChainComplex.augment]
+  rw [biprod_inr_f_comp_biprodXIso_hom]
+
+@[reassoc]
+private lemma biprod_inl_f_comp_augmentedMiddleChainsIso_inv_f_succ
+    (A B : Set X) (R : C) (n : ℕ) :
+    (biprod.inl : augmentedSubsetChains A R ⟶
+        augmentedSubsetChains A R ⊞ augmentedSubsetChains B R).f (n + 1) ≫
+      (augmentedMiddleChainsIso A B R).inv.f (n + 1) =
+        (biprod.inl : subsetChains A R ⟶
+          subsetChains A R ⊞ subsetChains B R).f n := by
+  rw [augmentedMiddleChainsIso_inv_f_succ]
+  dsimp only [augmentedSubsetChains, augmentedMiddleChains,
+    ChainComplex.augment]
+  rw [← Category.assoc, biprod_inl_f_comp_biprodXIso_hom]
+  change
+    (biprod.inl : (subsetChains A R).X n ⟶
+        (subsetChains A R).X n ⊞ (subsetChains B R).X n) ≫
+      (HomologicalComplex.biprodXIso
+        (subsetChains A R) (subsetChains B R) n).inv =
+        (biprod.inl : subsetChains A R ⟶
+          subsetChains A R ⊞ subsetChains B R).f n
+  rw [HomologicalComplex.inl_biprodXIso_inv]
+
+@[reassoc]
+private lemma biprod_inr_f_comp_augmentedMiddleChainsIso_inv_f_succ
+    (A B : Set X) (R : C) (n : ℕ) :
+    (biprod.inr : augmentedSubsetChains B R ⟶
+        augmentedSubsetChains A R ⊞ augmentedSubsetChains B R).f (n + 1) ≫
+      (augmentedMiddleChainsIso A B R).inv.f (n + 1) =
+        (biprod.inr : subsetChains B R ⟶
+          subsetChains A R ⊞ subsetChains B R).f n := by
+  rw [augmentedMiddleChainsIso_inv_f_succ]
+  dsimp only [augmentedSubsetChains, augmentedMiddleChains,
+    ChainComplex.augment]
+  rw [← Category.assoc, biprod_inr_f_comp_biprodXIso_hom]
+  change
+    (biprod.inr : (subsetChains B R).X n ⟶
+        (subsetChains A R).X n ⊞ (subsetChains B R).X n) ≫
+      (HomologicalComplex.biprodXIso
+        (subsetChains A R) (subsetChains B R) n).inv =
+        (biprod.inr : subsetChains B R ⟶
+          subsetChains A R ⊞ subsetChains B R).f n
+  rw [HomologicalComplex.inr_biprodXIso_inv]
+
+set_option backward.isDefEq.respectTransparency false in
+/-- After identifying the custom augmented middle complex with the
+biproduct, the augmented intersection map is the signed lift of the two
+canonical subset maps. -/
+@[reassoc]
+lemma augmentedChainComplexIntersectionMap_comp_middleIso
+    (A B : Set X) (R : C) :
+    augmentedChainComplexIntersectionMap A B R ≫
+        (augmentedMiddleChainsIso A B R).hom =
+      biprod.lift
+        (augmentedSubsetChainsMap Set.inter_subset_left R)
+        (-augmentedSubsetChainsMap Set.inter_subset_right R) := by
+  apply biprod.hom_ext
+  · ext (_ | n)
+    · simp only [HomologicalComplex.comp_f,
+        augmentedChainComplexIntersectionMap_f_zero,
+        augmentedMiddleChainsIso_hom_f_zero,
+        HomologicalComplex.biprod_lift_fst_f,
+        augmentedSubsetChainsMap_f_zero, Category.assoc,
+        biprodXIso_inv_comp_fst]
+      exact biprod.lift_fst (𝟙 R) (-𝟙 R)
+    · simp only [HomologicalComplex.comp_f,
+        augmentedChainComplexIntersectionMap_f_succ,
+        augmentedMiddleChainsIso_hom_f_succ,
+        HomologicalComplex.biprod_lift_fst_f,
+        augmentedSubsetChainsMap_f_succ, Category.assoc,
+        biprodXIso_inv_comp_fst]
+      change
+        (chainComplexIntersectionMap A B R).f n ≫
+            ((HomologicalComplex.biprodXIso
+              ((Hatcher.Excision.smallSubcomplexOfSet A : SSet.{w}).chainComplex R)
+              ((Hatcher.Excision.smallSubcomplexOfSet B : SSet.{w}).chainComplex R)
+              n).hom ≫ biprod.fst) =
+          (intersectionToLeftChainMap A B R).f n
+      rw [HomologicalComplex.biprodXIso_hom_fst
+        ((Hatcher.Excision.smallSubcomplexOfSet A : SSet.{w}).chainComplex R)
+        ((Hatcher.Excision.smallSubcomplexOfSet B : SSet.{w}).chainComplex R)
+        n]
+      rw [chainComplexIntersectionMap,
+        HomologicalComplex.biprod_lift_fst_f]
+  · ext (_ | n)
+    · simp only [HomologicalComplex.comp_f,
+        augmentedChainComplexIntersectionMap_f_zero,
+        augmentedMiddleChainsIso_hom_f_zero,
+        HomologicalComplex.biprod_lift_snd_f,
+        augmentedSubsetChainsMap_f_zero, Category.assoc,
+        biprodXIso_inv_comp_snd]
+      exact biprod.lift_snd (𝟙 R) (-𝟙 R)
+    · simp only [HomologicalComplex.comp_f,
+        augmentedChainComplexIntersectionMap_f_succ,
+        augmentedMiddleChainsIso_hom_f_succ,
+        HomologicalComplex.biprod_lift_snd_f,
+        augmentedSubsetChainsMap_f_succ, Category.assoc,
+        biprodXIso_inv_comp_snd]
+      change
+        (chainComplexIntersectionMap A B R).f n ≫
+            ((HomologicalComplex.biprodXIso
+              ((Hatcher.Excision.smallSubcomplexOfSet A : SSet.{w}).chainComplex R)
+              ((Hatcher.Excision.smallSubcomplexOfSet B : SSet.{w}).chainComplex R)
+              n).hom ≫ biprod.snd) =
+          (-intersectionToRightChainMap A B R).f n
+      rw [HomologicalComplex.biprodXIso_hom_snd
+        ((Hatcher.Excision.smallSubcomplexOfSet A : SSet.{w}).chainComplex R)
+        ((Hatcher.Excision.smallSubcomplexOfSet B : SSet.{w}).chainComplex R)
+        n]
+      rw [chainComplexIntersectionMap,
+        HomologicalComplex.biprod_lift_snd_f]
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The augmented union map followed by the small-chain inclusion is the
+codiagonal of the two canonical maps from supported chains to ambient
+augmented singular chains. -/
+lemma augmentedMiddleToAmbient_eq
+    (A B : Set X) (R : C) :
+    augmentedMiddleToAmbient A B R =
+      biprod.desc
+        (augmentedSubsetChainsToAmbient A R)
+        (augmentedSubsetChainsToAmbient B R) := by
+  apply biprod.hom_ext'
+    (X := augmentedSubsetChains A R)
+    (Y := augmentedSubsetChains B R)
+    (Z := (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj X)
+  · rw [biprod.inl_desc]
+    ext (_ | n)
+    · simp only [HomologicalComplex.comp_f,
+        augmentedMiddleToAmbient_f,
+        augmentedMiddleToSmallCover_f,
+        augmentedChainComplexUnionMap_f_zero,
+        smallCoverAugmentedInclusion,
+        Hatcher.Excision.smallAugmentedChainInclusion_f_zero,
+        augmentedSubsetChainsToAmbient_f_zero, Category.assoc,
+        biprod_inl_f_comp_augmentedMiddleChainsIso_inv_f_zero_assoc,
+        biprod.inl_desc_assoc]
+      dsimp only [augmentedSubsetChains, augmentedSmallCoverChains,
+        Hatcher.Excision.smallAugmentedChainComplex, ChainComplex.augment]
+      rw [Category.id_comp]
+    · simp only [HomologicalComplex.comp_f,
+        augmentedMiddleToAmbient_f,
+        augmentedMiddleToSmallCover_f,
+        augmentedChainComplexUnionMap_f_succ,
+        smallCoverAugmentedInclusion,
+        Hatcher.Excision.smallAugmentedChainInclusion_f_succ,
+        augmentedSubsetChainsToAmbient_f_succ, Category.assoc,
+        biprod_inl_f_comp_augmentedMiddleChainsIso_inv_f_succ_assoc,
+        chainComplexUnionMap,
+        HomologicalComplex.biprod_inl_desc_f_assoc]
+      dsimp only [leftToSmallCoverChainMap]
+      rw [← HomologicalComplex.comp_f, ← Functor.map_comp,
+        SSet.Subcomplex.homOfLE_ι]
+  · rw [biprod.inr_desc]
+    ext (_ | n)
+    · simp only [HomologicalComplex.comp_f,
+        augmentedMiddleToAmbient_f,
+        augmentedMiddleToSmallCover_f,
+        augmentedChainComplexUnionMap_f_zero,
+        smallCoverAugmentedInclusion,
+        Hatcher.Excision.smallAugmentedChainInclusion_f_zero,
+        augmentedSubsetChainsToAmbient_f_zero, Category.assoc,
+        biprod_inr_f_comp_augmentedMiddleChainsIso_inv_f_zero_assoc,
+        biprod.inr_desc_assoc]
+      dsimp only [augmentedSubsetChains, augmentedSmallCoverChains,
+        Hatcher.Excision.smallAugmentedChainComplex, ChainComplex.augment]
+      rw [Category.id_comp]
+    · simp only [HomologicalComplex.comp_f,
+        augmentedMiddleToAmbient_f,
+        augmentedMiddleToSmallCover_f,
+        augmentedChainComplexUnionMap_f_succ,
+        smallCoverAugmentedInclusion,
+        Hatcher.Excision.smallAugmentedChainInclusion_f_succ,
+        augmentedSubsetChainsToAmbient_f_succ, Category.assoc,
+        biprod_inr_f_comp_augmentedMiddleChainsIso_inv_f_succ_assoc,
+        chainComplexUnionMap,
+        HomologicalComplex.biprod_inr_desc_f_assoc]
+      dsimp only [rightToSmallCoverChainMap]
+      rw [← HomologicalComplex.comp_f, ← Functor.map_comp,
+        SSet.Subcomplex.homOfLE_ι]
+
 @[reassoc (attr := simp)]
 lemma augmentedChainComplexIntersectionMap_comp_unionMap
     (A B : Set X) (R : C) :

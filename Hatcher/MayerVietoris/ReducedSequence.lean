@@ -69,9 +69,123 @@ subspaces to the small-cover complex. -/
 private noncomputable def augmentedSubspaceUnionMap
     (A B : Set X) (R : C) :
     augmentedSubspaceChains A R ⊞ augmentedSubspaceChains B R ⟶
-      Hatcher.Excision.smallAugmentedChainComplex (Bool.rec A B) R :=
+      augmentedSmallCoverChains A B R :=
   (augmentedSubspaceBiprodChainIso A B R).hom ≫
     augmentedChainComplexUnionMap A B R
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma augmentedSubspaceIntersectionMap_eq
+    (A B : Set X) (R : C) :
+    augmentedSubspaceIntersectionMap A B R =
+      biprod.lift
+        (Hatcher.Reduced.augmentedMap R
+          (subspaceInclusionOfLE Set.inter_subset_left))
+        (-Hatcher.Reduced.augmentedMap R
+          (subspaceInclusionOfLE Set.inter_subset_right)) := by
+  rw [augmentedSubspaceIntersectionMap,
+    augmentedSubspaceBiprodChainIso, Iso.trans_inv, Iso.symm_inv]
+  simp only [augmentedChainComplexIntersectionMap_comp_middleIso_assoc]
+  apply biprod.hom_ext
+  · simp only [Category.assoc, biprod.mapIso_inv, biprod.map_fst,
+      biprod.lift_fst_assoc]
+    rw [← Category.assoc,
+      augmentedSubspaceChainIso_hom_naturality]
+    have hcancel :
+        (augmentedSubspaceChainIso A R).hom ≫
+            (augmentedSubspaceChainIso A R).inv =
+          𝟙 ((Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj
+            (TopCat.of A)) :=
+      (augmentedSubspaceChainIso A R).hom_inv_id
+    let fA :
+        (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj
+            (TopCat.of ↥(A ∩ B)) ⟶
+          (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj
+            (TopCat.of A) :=
+      Hatcher.Reduced.augmentedMap R
+        (subspaceInclusionOfLE (X := X) (A := A ∩ B) (B := A)
+          Set.inter_subset_left)
+    let fB :
+        (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj
+            (TopCat.of ↥(A ∩ B)) ⟶
+          (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj
+            (TopCat.of B) :=
+      Hatcher.Reduced.augmentedMap R
+        (subspaceInclusionOfLE (X := X) (A := A ∩ B) (B := B)
+          Set.inter_subset_right)
+    change (fA ≫ (augmentedSubspaceChainIso A R).hom) ≫
+        (augmentedSubspaceChainIso A R).inv =
+      biprod.lift fA (-fB) ≫ biprod.fst
+    rw [biprod.lift_fst]
+    rw [Category.assoc, hcancel, Category.comp_id]
+  · simp only [Category.assoc, biprod.mapIso_inv, biprod.map_snd,
+      biprod.lift_snd_assoc, Preadditive.comp_neg,
+      Preadditive.neg_comp]
+    rw [← Category.assoc,
+      augmentedSubspaceChainIso_hom_naturality]
+    have hcancel :
+        (augmentedSubspaceChainIso B R).hom ≫
+            (augmentedSubspaceChainIso B R).inv =
+          𝟙 ((Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj
+            (TopCat.of B)) :=
+      (augmentedSubspaceChainIso B R).hom_inv_id
+    rw [Category.assoc, hcancel]
+    dsimp only [augmentedSubspaceChains,
+      Hatcher.Reduced.augmentedSingularChainComplexFunctor]
+    rw [Category.comp_id, biprod.lift_snd]
+
+private lemma augmentedSubspaceUnionMap_comp_inclusion
+    (A B : Set X) (R : C) :
+    augmentedSubspaceUnionMap A B R ≫
+        smallCoverAugmentedInclusion A B R =
+      biprod.desc
+        (Hatcher.Reduced.augmentedMap R (subspaceInclusion A))
+        (Hatcher.Reduced.augmentedMap R (subspaceInclusion B)) := by
+  rw [augmentedSubspaceUnionMap, augmentedSubspaceBiprodChainIso,
+    Iso.trans_hom, Iso.symm_hom]
+  have hMiddle :
+      (augmentedMiddleChainsIso A B R).inv ≫
+          (augmentedChainComplexUnionMap A B R ≫
+            smallCoverAugmentedInclusion A B R) =
+        augmentedMiddleToAmbient A B R := by
+    apply HomologicalComplex.hom_ext
+    intro k
+    simp only [HomologicalComplex.comp_f, augmentedMiddleToAmbient_f,
+      augmentedMiddleToSmallCover_f, Category.assoc]
+  simp only [Category.assoc]
+  rw [hMiddle, augmentedMiddleToAmbient_eq]
+  let KA : ChainComplex C ℕ :=
+    (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj
+      (TopCat.of A)
+  let KB : ChainComplex C ℕ :=
+    (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj
+      (TopCat.of B)
+  let KX : ChainComplex C ℕ :=
+    (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj X
+  let f : KA ⟶ KX := Hatcher.Reduced.augmentedMap R
+    (subspaceInclusion (X := X) A)
+  let g : KB ⟶ KX := Hatcher.Reduced.augmentedMap R
+    (subspaceInclusion (X := X) B)
+  apply biprod.hom_ext'
+  · change
+      (biprod.inl : KA ⟶ KA ⊞ KB) ≫
+            (biprod.mapIso (augmentedSubspaceChainIso A R)
+              (augmentedSubspaceChainIso B R)).hom ≫
+              biprod.desc (augmentedSubsetChainsToAmbient A R)
+                (augmentedSubsetChainsToAmbient B R) =
+        (biprod.inl : KA ⟶ KA ⊞ KB) ≫ biprod.desc f g
+    simpa only [Category.assoc, biprod.mapIso_hom,
+      biprod.inl_map_assoc, biprod.inl_desc_assoc, biprod.inl_desc] using
+      augmentedSubspaceChainIso_hom_comp_subsetChainsToAmbient A R
+  · change
+      (biprod.inr : KB ⟶ KA ⊞ KB) ≫
+            (biprod.mapIso (augmentedSubspaceChainIso A R)
+              (augmentedSubspaceChainIso B R)).hom ≫
+              biprod.desc (augmentedSubsetChainsToAmbient A R)
+                (augmentedSubsetChainsToAmbient B R) =
+        (biprod.inr : KB ⟶ KA ⊞ KB) ≫ biprod.desc f g
+    simpa only [Category.assoc, biprod.mapIso_hom,
+      biprod.inr_map_assoc, biprod.inr_desc_assoc, biprod.inr_desc] using
+      augmentedSubspaceChainIso_hom_comp_subsetChainsToAmbient B R
 
 @[reassoc (attr := simp)]
 private lemma augmentedSubspaceIntersectionMap_comp_unionMap
@@ -150,8 +264,113 @@ noncomputable def reducedUnionMap
     HomologicalComplex.homologyMap
       (augmentedSubspaceUnionMap A B R) (n + 1) ≫
     HomologicalComplex.homologyMap
-      (Hatcher.Excision.smallAugmentedChainInclusion
-        (Bool.rec A B) R) (n + 1)
+      (smallCoverAugmentedInclusion A B R) (n + 1)
+
+/-- The reduced-homology map induced by a canonical inclusion of
+subspaces. -/
+noncomputable def reducedHomologyMapOfSubset {A B : Set X}
+    (h : A ⊆ B) (R : C) (n : ℕ) :
+    (Hatcher.Reduced.homologyFunctor R n).obj (TopCat.of A) ⟶
+      (Hatcher.Reduced.homologyFunctor R n).obj (TopCat.of B) :=
+  (Hatcher.Reduced.homologyFunctor R n).map (subspaceInclusionOfLE h)
+
+/-- The reduced-homology map induced by the canonical inclusion of a
+subspace into its ambient space. -/
+noncomputable def reducedHomologyMapToAmbient
+    (A : Set X) (R : C) (n : ℕ) :
+    (Hatcher.Reduced.homologyFunctor R n).obj (TopCat.of A) ⟶
+      (Hatcher.Reduced.homologyFunctor R n).obj X :=
+  (Hatcher.Reduced.homologyFunctor R n).map (subspaceInclusion A)
+
+@[reassoc]
+theorem reducedHomologyMapOfSubset_comp {A B D : Set X}
+    (hAB : A ⊆ B) (hBD : B ⊆ D) (R : C) (n : ℕ) :
+    reducedHomologyMapOfSubset hAB R n ≫
+        reducedHomologyMapOfSubset hBD R n =
+      reducedHomologyMapOfSubset (hAB.trans hBD) R n := by
+  rw [reducedHomologyMapOfSubset, reducedHomologyMapOfSubset,
+    reducedHomologyMapOfSubset, ← Functor.map_comp]
+  congr 1
+
+@[reassoc]
+theorem reducedHomologyMapOfSubset_comp_toAmbient {A B : Set X}
+    (hAB : A ⊆ B) (R : C) (n : ℕ) :
+    reducedHomologyMapOfSubset hAB R n ≫
+        reducedHomologyMapToAmbient B R n =
+      reducedHomologyMapToAmbient A R n := by
+  rw [reducedHomologyMapOfSubset, reducedHomologyMapToAmbient,
+    reducedHomologyMapToAmbient, ← Functor.map_comp]
+  congr 1
+
+/-- The reduced intersection map is the signed lift of the two maps induced
+by the actual subspace inclusions. -/
+theorem reducedIntersectionMap_eq (A B : Set X) (R : C) (n : ℕ) :
+    reducedIntersectionMap A B R n =
+      biprod.lift
+        (reducedHomologyMapOfSubset Set.inter_subset_left R n)
+        (-reducedHomologyMapOfSubset Set.inter_subset_right R n) := by
+  rw [reducedIntersectionMap, augmentedSubspaceIntersectionMap_eq]
+  let F : ChainComplex C ℕ ⥤ C :=
+    HomologicalComplex.homologyFunctor C (ComplexShape.down ℕ) (n + 1)
+  let KA : ChainComplex C ℕ :=
+    (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj
+      (TopCat.of A)
+  let KB : ChainComplex C ℕ :=
+    (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj
+      (TopCat.of B)
+  let KAB : ChainComplex C ℕ :=
+    (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj
+      (TopCat.of ↥(A ∩ B))
+  let f : KAB ⟶ KA := Hatcher.Reduced.augmentedMap R
+    (subspaceInclusionOfLE (X := X) (A := A ∩ B) (B := A)
+      Set.inter_subset_left)
+  let g : KAB ⟶ KB := Hatcher.Reduced.augmentedMap R
+    (subspaceInclusionOfLE (X := X) (A := A ∩ B) (B := B)
+      Set.inter_subset_right)
+  change
+    F.map (biprod.lift f (-g)) ≫ (F.mapBiprod KA KB).hom =
+      biprod.lift (F.map f) (-F.map g)
+  rw [biprod.map_lift_mapBiprod, Functor.map_neg]
+
+/-- The reduced union map is the codiagonal of the two maps induced by the
+actual inclusions into the ambient space. -/
+theorem reducedUnionMap_eq (A B : Set X) (R : C) (n : ℕ) :
+    reducedUnionMap A B R n =
+      biprod.desc (reducedHomologyMapToAmbient A R n)
+        (reducedHomologyMapToAmbient B R n) := by
+  let F : ChainComplex C ℕ ⥤ C :=
+    HomologicalComplex.homologyFunctor C (ComplexShape.down ℕ) (n + 1)
+  let KA : ChainComplex C ℕ :=
+    (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj
+      (TopCat.of A)
+  let KB : ChainComplex C ℕ :=
+    (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj
+      (TopCat.of B)
+  let KX : ChainComplex C ℕ :=
+    (Hatcher.Reduced.augmentedSingularChainComplexFunctor R).obj X
+  let f : KA ⟶ KX := Hatcher.Reduced.augmentedMap R
+    (subspaceInclusion (X := X) A)
+  let g : KB ⟶ KX := Hatcher.Reduced.augmentedMap R
+    (subspaceInclusion (X := X) B)
+  let u : KA ⊞ KB ⟶ augmentedSmallCoverChains A B R :=
+    augmentedSubspaceUnionMap A B R
+  let i : augmentedSmallCoverChains A B R ⟶ KX :=
+    smallCoverAugmentedInclusion A B R
+  change
+    (F.mapBiprod KA KB).inv ≫ F.map u ≫ F.map i =
+      biprod.desc (F.map f) (F.map g)
+  rw [← Category.assoc]
+  calc
+    ((F.mapBiprod KA KB).inv ≫ F.map u) ≫ F.map i =
+        (F.mapBiprod KA KB).inv ≫ F.map (u ≫ i) := by
+      simp only [Functor.map_comp, Category.assoc]
+    _ = (F.mapBiprod KA KB).inv ≫
+        F.map (biprod.desc f g) := by
+      dsimp only [u, i, f, g]
+      rw [augmentedSubspaceUnionMap_comp_inclusion]
+      rfl
+    _ = biprod.desc (F.map f) (F.map g) :=
+      biprod.mapBiprod_inv_map_desc F KA KB f g
 
 private lemma homologyMap_augmentedSubspaceIntersectionMap
     (A B : Set X) (R : C) (n : ℕ) :
