@@ -70,6 +70,7 @@ import Hatcher.Sphere.SimplyConnected
 import Hatcher.Sphere.BorsukUlam
 import Hatcher.Sphere.AntipodalCover
 import Hatcher.Sphere.HemisphereCharts
+import Hatcher.Sphere.HemisphereNeighborhoodCover
 import Hatcher.Sphere.RadialDeformationRetract
 import Hatcher.Sphere.ZeroSphere
 import Hatcher.Sphere.ZeroSphereHomology
