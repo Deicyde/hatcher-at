@@ -3,6 +3,9 @@ article_id: af_ef8d3aebf368209450a69077
 source_units: [hatcher-2-2-mv-transport-sphere-recurrence]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.spherePuncturedStrongDeformationRetract
 ---
 
 # A sphere strongly deformation retracts from punctured Euclidean space
