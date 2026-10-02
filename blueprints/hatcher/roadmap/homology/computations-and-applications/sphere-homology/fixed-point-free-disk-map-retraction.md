@@ -3,6 +3,9 @@ article_id: af_d07b06943e65422125e14267
 source_units: [hatcher-2-1-corollary-2-15]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Disc.exists_diskBoundary_retraction_of_fixedPointFree
 ---
 
 # A fixed-point-free disk map produces a boundary retraction
