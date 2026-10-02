@@ -23,12 +23,12 @@ open Metric Set Topology
 
 namespace Hatcher.Sphere
 
-universe u
+universe u v
 
 /-- Transport a strong deformation retract across homeomorphisms when the
 square formed by the two inclusions commutes. -/
 private def strongDeformationRetractOfHomeomorphSquare
-    {A Y B Z : Type u}
+    {A Y : Type u} {B Z : Type v}
     [TopologicalSpace A] [TopologicalSpace Y]
     [TopologicalSpace B] [TopologicalSpace Z]
     (i : C(A, Y)) (j : C(B, Z))
@@ -78,7 +78,7 @@ private def strongDeformationRetractOfHomeomorphSquare
 private noncomputable def northHemisphereStrongDeformationRetract (n : ℕ) :
     Hatcher.StrongDeformationRetract
       (Hatcher.MayerVietoris.inclusionOfSubset
-        ((northHemisphere_subset_interior_northNeighborhood n).trans
+        ((northHemisphere_subset_interior_northNeighborhood.{u} n).trans
           interior_subset)) :=
   strongDeformationRetractOfHomeomorphSquare
     (Hatcher.MayerVietoris.inclusionOfSubset
@@ -96,7 +96,7 @@ private noncomputable def northHemisphereStrongDeformationRetract (n : ℕ) :
 private noncomputable def southHemisphereStrongDeformationRetract (n : ℕ) :
     Hatcher.StrongDeformationRetract
       (Hatcher.MayerVietoris.inclusionOfSubset
-        ((southHemisphere_subset_interior_southNeighborhood n).trans
+        ((southHemisphere_subset_interior_southNeighborhood.{u} n).trans
           interior_subset)) :=
   strongDeformationRetractOfHomeomorphSquare
     (Hatcher.MayerVietoris.inclusionOfSubset
@@ -114,7 +114,7 @@ private noncomputable def southHemisphereStrongDeformationRetract (n : ℕ) :
 private noncomputable def equatorStrongDeformationRetract (n : ℕ) :
     Hatcher.StrongDeformationRetract
       (Hatcher.MayerVietoris.inclusionOfSubset
-        (equator_subset_overlap n)) :=
+        (equator_subset_overlap.{u} n)) :=
   strongDeformationRetractOfHomeomorphSquare
     (Hatcher.MayerVietoris.inclusionOfSubset (equator_subset_overlap n))
     (spherePuncturedInclusion
@@ -135,9 +135,9 @@ private noncomputable def
     Hatcher.StrongDeformationRetract
       (Hatcher.MayerVietoris.inclusionOfSubset
         (Hatcher.MayerVietoris.intersectionSubset
-          ((northHemisphere_subset_interior_northNeighborhood n).trans
+          ((northHemisphere_subset_interior_northNeighborhood.{u} n).trans
             interior_subset)
-          ((southHemisphere_subset_interior_southNeighborhood n).trans
+          ((southHemisphere_subset_interior_southNeighborhood.{u} n).trans
             interior_subset))) := by
   exact strongDeformationRetractOfHomeomorphSquare
     (Hatcher.MayerVietoris.inclusionOfSubset
@@ -159,7 +159,7 @@ opposite-pole neighborhoods and the three compatible strong deformation
 retractions required by neighborhood Mayer--Vietoris. -/
 noncomputable def hemisphereNeighborhoodCover (n : ℕ) :
     Hatcher.MayerVietoris.NeighborhoodCover
-      (northHemisphere n) (southHemisphere n) where
+      (northHemisphere.{u} n) (southHemisphere.{u} n) where
   U := northNeighborhood n
   V := southNeighborhood n
   union_eq_univ := hemisphere_union n
