@@ -11,7 +11,8 @@ and relative homology, exact sequences, naturality, and relative homotopy
 invariance; all fifteen of its leaves are complete. A third four-leaf slice
 covers the long exact sequence of a triple and its naturality; all four leaves
 are complete. A fourth ten-leaf slice decomposes small chains and excision; all
-ten leaves are complete.
+ten leaves are complete. The separately placed sphere branch now continues
+through the three-leaf Corollary 2.15 milestone.
 
 Simplicial homology takes a Δ-complex structure and forms the chain complex of
 its simplices; it is finite and computable but depends on the chosen structure.
@@ -64,9 +65,11 @@ formalizable leaves, all formalized locally.
 Lemma 2.1 and Examples 2.2–2.5 need a source-faithful Δ-complex chain model.
 Proposition 2.6 needs additivity over all path components in every degree;
 Mathlib `v4.34.1` contains only its degree-zero case. Theorem 2.13, Example
-2.17, Proposition 2.22 and quotient-pair comparison, Corollary 2.15 and the
-sphere applications beyond the separately decomposed Corollary 2.14,
-invariance of dimension, and the Δ-complex comparison remain deferred.
+2.17, Proposition 2.22 and quotient-pair comparison, Example 2.23 and
+Corollaries 2.24–2.25, invariance of dimension, and the Δ-complex comparison
+remain deferred. Corollary 2.15 is decomposed in
+the [sphere-homology and Brouwer
+milestone](../computations-and-applications/sphere-homology/README.md).
 
 Relative homology for simplicial-set pairs merged in Mathlib PR
 [#41285](https://github.com/leanprover-community/mathlib4/pull/41285) and is

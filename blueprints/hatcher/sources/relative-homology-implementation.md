@@ -19,10 +19,12 @@ The triple sequence is now specified separately in the
 Small chains and excision are decomposed separately under the
 [singular excision implementation specification](excision-implementation.md).
 Theorem 2.13, Example 2.17, Proposition 2.22 and the good-pair quotient
-comparison, Corollary 2.15 and the sphere applications beyond the separately
-selected Corollary 2.14, invariance of dimension, and the simplicial–singular
-comparison remain deferred. This prevents Theorem 2.13 from being placed
-before the excision and quotient results used in its proof.
+comparison, Example 2.23 and Corollaries 2.24–2.25, invariance of dimension,
+and the simplicial–singular comparison remain deferred. Corollary 2.15 is
+selected separately under the
+[Corollary 2.15 implementation specification](corollary-2-15-implementation.md).
+This prevents Theorem 2.13 from being placed before the excision and quotient
+results used in its proof.
 
 ## Coefficients and indexing
 

@@ -32,6 +32,9 @@ The project formalizes results from a single reference.
 - [Sphere-homology implementation specification](sphere-homology-implementation.md)
   fixes the neighborhood data, canonical sphere model, coefficient policy,
   recurrence, and base-case boundary for the selected sphere calculation.
+- [Corollary 2.15 implementation specification](corollary-2-15-implementation.md)
+  fixes the disk model, integral homology obstruction, boundary-ray bridge,
+  and exclusions for no-retraction and Brouwer.
 
 <!-- AUTHORING NOTES — these comments are not published.
 

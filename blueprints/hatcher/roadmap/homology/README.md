@@ -9,8 +9,10 @@ singular-homology functoriality spine, a fifteen-leaf reduced- and
 relative-homology exact-sequence spine, a four-leaf triple-sequence slice, and
 a ten-leaf small-chains/excision DAG. The six-leaf §2.2 Mayer–Vietoris slice is
 also complete. The thirteen-leaf neighborhood-retract, Example 2.46, and
-reduced sphere-homology milestone is complete as well. The rest of the chapter
-remains mapped or explicitly deferred.
+reduced sphere-homology milestone is complete as well. A three-leaf
+Corollary 2.15 continuation now plans the homological no-retraction theorem,
+the boundary-ray bridge, and Brouwer's theorem. The rest of the chapter remains
+mapped or explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -38,11 +40,12 @@ is decomposed into ten complete leaves; the Δ-complex branch remains deferred.
 
 [Computations and applications](computations-and-applications/README.md)
 contains the six complete ordinary and reduced binary-cover Mayer–Vietoris
-leaves and the completed sphere-homology milestone. The latter adds conditional
-neighborhood transport, the hemisphere recurrence, and the full reduced
-homology calculation. Degree, cellular homology, the later Mayer–Vietoris
-examples, homology with coefficients, Brouwer in all dimensions, and
-invariance of domain remain deferred.
+leaves, the completed sphere-homology milestone, and the planned Corollary 2.15
+continuation. The completed branch adds conditional neighborhood transport,
+the hemisphere recurrence, and the full reduced homology calculation; the new
+branch applies it to no-retraction and Brouwer. Degree, cellular homology, the
+later Mayer–Vietoris examples, and homology with coefficients remain deferred.
+Invariance of domain belongs to out-of-scope Additional Topic §2.B.
 
 [The formal viewpoint](formal-viewpoint/README.md) axiomatizes what was built,
 as the Eilenberg–Steenrod axioms, and introduces the categorical language.

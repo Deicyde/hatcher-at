@@ -181,9 +181,10 @@ No new node is marked `mathlib: true`.
 
 ## Explicit exclusions
 
-This milestone excludes Theorem 2.13 and Proposition 2.22, the general CW
-`Nε(A)` construction from Appendix Proposition A.5, Corollary 2.15 and
-Brouwer's theorem, Mayer–Vietoris naturality as a separate API, Examples
-2.47–2.48, relative Mayer–Vietoris, mapping cylinders and tori, degree and
-orientation theory, cellular homology, and homology with general coefficient
-groups as a separate source topic.
+This sphere-calculation slice excludes Theorem 2.13 and Proposition 2.22, the
+general CW `Nε(A)` construction from Appendix Proposition A.5,
+Mayer–Vietoris naturality as a separate API, Examples 2.47–2.48, relative
+Mayer–Vietoris, mapping cylinders and tori, degree and orientation theory,
+cellular homology, and homology with general coefficient groups as a separate
+source topic. Corollary 2.15 and Brouwer's theorem are selected separately in
+the [Corollary 2.15 implementation specification](corollary-2-15-implementation.md).

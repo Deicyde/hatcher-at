@@ -25,8 +25,8 @@ already discharged by the [no-retraction](no-retraction-disc.md) node.
 
 Brouwer's fixed point theorem is not in the pinned Mathlib in any dimension.
 The general case comes from homology in
-[Chapter 2](../../homology/computations-and-applications/README.md); this node
-is only the two-dimensional case Hatcher proves from `π₁`.
+[Corollary 2.15](../../homology/computations-and-applications/sphere-homology/brouwer-fixed-point-disk.md);
+this node is only the two-dimensional case Hatcher proves from `π₁`.
 
 Formalized in `Hatcher/Disc/Brouwer.lean` as
 `Hatcher.Disc.exists_fixed_point`.

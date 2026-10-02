@@ -113,11 +113,18 @@ still-deferred good-pair quotient sequence of Theorem 2.13. The representation
 and proof boundary are fixed in the
 [sphere-homology implementation specification](sphere-homology-implementation.md).
 
+A sixth source unit selects both clauses of Corollary 2.15. It separates the
+homological obstruction to a disk-boundary retraction from the generalized ray
+construction that turns a fixed-point-free disk map into such a retraction;
+Brouwer's theorem then joins the two branches. Its representation and proof
+boundary are fixed in the
+[Corollary 2.15 implementation specification](corollary-2-15-implementation.md).
+
 Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
 component decomposition. Lemma 2.1, Examples 2.2–2.5, Theorem 2.13, Example
-2.17, Proposition 2.22 and quotient-pair comparison, Corollary 2.15 and the
-remaining sphere applications beyond Corollary 2.14, invariance of dimension,
-and the Δ-complex comparison are later milestones.
+2.17, Proposition 2.22 and quotient-pair comparison, Example 2.23 and
+Corollaries 2.24–2.25, invariance of dimension, and the Δ-complex comparison
+are later milestones.
 
 For roadmap notation, write
 `Hₙ(X; R) := ((AlgebraicTopology.singularHomologyFunctor C n).obj R).obj X`.
@@ -183,11 +190,12 @@ excision, and Δ-complex homology with its comparison theorem.
 ## Decisions taken
 
 - **Selected boundaries.** Keep the completed 2.7–2.12, reduced/relative
-  exact-sequence, triple, and small-chains/excision slices. Add the reduced
-  homotopy-invariance consequences, `S⁰` base case, and Corollary 2.14 through
-  the alternative Mayer–Vietoris proof. Leave the good-pair quotient route,
-  Corollary 2.15, remaining applications, and Δ-complex results deferred; the
-  selected §2.2 material is recorded in
+  exact-sequence, triple, small-chains/excision, and sphere-homology slices.
+  Add both clauses of Corollary 2.15 through the homological no-retraction
+  argument and the dimension-general boundary-ray construction. Leave the
+  good-pair quotient route, Example 2.23 and Corollaries 2.24–2.25, degree
+  theory, invariance of dimension, and Δ-complex results deferred; the selected
+  §2.2 material is recorded in
   [its own source note](hatcher-2-2.md).
 - **Coefficients.** State exact Mathlib nodes with their coefficient-general
   categorical API. Treat Hatcher's integral theory as its abelian-group
