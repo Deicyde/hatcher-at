@@ -44,6 +44,7 @@ import Hatcher.Disc.NoRetraction
 import Hatcher.Disc.NoRetractionHomology
 import Hatcher.Disc.Brouwer
 import Hatcher.Disc.BrouwerGeneral
+import Hatcher.Disc.BrouwerFixedPoint
 import Hatcher.Euclidean.Dimension
 import Hatcher.Excision.AffineSubdivision
 import Hatcher.Excision.AffineChains
