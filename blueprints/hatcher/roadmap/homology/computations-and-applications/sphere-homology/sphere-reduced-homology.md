@@ -3,6 +3,9 @@ article_id: af_fc6563b922b5d53422e79281
 source_units: [hatcher-2-1-sphere-homology, hatcher-2-2-mv-transport-sphere-recurrence]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.reducedHomology_sphere
 ---
 
 # Reduced homology of spheres
