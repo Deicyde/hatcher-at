@@ -36,15 +36,14 @@ may be defined by this transport. Since
 retract, construct each inclusion-induced homology isomorphism from
 `sdr.toHomotopyEquiv.symm`.
 
-This node also owns moving `Hatcher.StrongDeformationRetract` and its elementary
-lemmas from the Van Kampen implementation into a neutral topology module while
-preserving their public names. The relocation prevents downstream homology and
-sphere files from importing an unrelated high-level theorem file.
+This node uses the neutral `Hatcher.StrongDeformationRetract` interface, whose
+existing declaration now has a dedicated background roadmap article.
 
 ## Depends on
 
 - [The binary-cover Mayer–Vietoris sequence](../mayer-vietoris/binary-cover-mayer-vietoris-sequence.md)
 - [The standard cover of a well-pointed wedge](../../../fundamental-group/van-kampen/well-pointed-wedge-cover.md)
+- [Strong deformation retracts](../../simplicial-and-singular/relative-homology/good-pair-quotient/strong-deformation-retract.md)
 
 ## Proof depends on
 

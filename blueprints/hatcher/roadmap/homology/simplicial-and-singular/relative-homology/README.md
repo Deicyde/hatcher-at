@@ -8,7 +8,9 @@ Hatcher §2.1 (pages 110, 113–124, and 127–128). The selected slices introdu
 reduced homology from the augmented singular complex, relative homology of a
 topological pair, pair and triple long exact sequences, homotopy invariance,
 and naturality. A fourth milestone continues through small chains and excision
-and is decomposed into ten formalizable leaves, all complete.
+and is decomposed into ten formalizable leaves, all complete. A fifth,
+fifteen-leaf milestone now decomposes good pairs, Proposition 2.22, Theorem
+2.13, and the quotient sequence's naturality.
 
 The mathematical source is Hatcher. The representation against Mathlib is
 fixed separately in the
@@ -61,13 +63,18 @@ triple-sequence slice are formalized locally as well.
 
 - [Proposition 2.21 and Theorem 2.20](small-chains-and-excision/README.md)
 
+## Good pairs and quotient exact sequences
+
+- [Proposition 2.22 and Theorem 2.13](good-pair-quotient/README.md)
+
 ## Decomposed and deferred boundary
 
 Theorem 2.20 and its Proposition 2.21 small-chain machinery are decomposed in
 the milestone above, and all ten leaves are complete. Theorem 2.13,
-Example 2.17, Proposition 2.22 and the good-pair quotient comparison, sphere
-applications, invariance of dimension, and the simplicial–singular comparison
-remain deferred.
+Proposition 2.22, and their naturality are now decomposed in the good-pair
+milestone. Example 2.17, Example 2.23 and Corollaries 2.24–2.25, the
+arbitrary-pair mapping-cone comparison, invariance of dimension, and the
+simplicial–singular comparison remain deferred.
 
 ## Sources
 
@@ -75,3 +82,4 @@ remain deferred.
 - [Relative-homology implementation specification](../../../../sources/relative-homology-implementation.md)
 - [Triple-homology implementation specification](../../../../sources/triple-homology-implementation.md)
 - [Singular excision implementation specification](../../../../sources/excision-implementation.md)
+- [Good-pair quotient implementation specification](../../../../sources/good-pair-quotient-implementation.md)

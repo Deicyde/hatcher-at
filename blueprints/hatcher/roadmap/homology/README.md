@@ -9,10 +9,10 @@ singular-homology functoriality spine, a fifteen-leaf reduced- and
 relative-homology exact-sequence spine, a four-leaf triple-sequence slice, and
 a ten-leaf small-chains/excision DAG. The six-leaf §2.2 Mayer–Vietoris slice is
 also complete. The thirteen-leaf neighborhood-retract, Example 2.46, and
-reduced sphere-homology milestone is complete as well. A three-leaf
-Corollary 2.15 continuation now plans the homological no-retraction theorem,
-the boundary-ray bridge, and Brouwer's theorem. The rest of the chapter remains
-mapped or explicitly deferred.
+reduced sphere-homology milestone is complete as well, as is its three-leaf
+Corollary 2.15 continuation through Brouwer's theorem. A fifteen-leaf
+good-pair quotient milestone now plans Proposition 2.22, Theorem 2.13, and
+naturality. The rest of the chapter remains explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -37,13 +37,16 @@ triple, its long exact sequence, degree-zero endpoint, and naturality. Mathlib `
 contains PR #41285 but not the open triple PR #41318. The
 [small-chains/excision branch](simplicial-and-singular/relative-homology/small-chains-and-excision/README.md)
 is decomposed into ten complete leaves; the Δ-complex branch remains deferred.
+The new
+[good-pair quotient branch](simplicial-and-singular/relative-homology/good-pair-quotient/README.md)
+adds the functorial point quotient and the canonical quotient exact sequence.
 
 [Computations and applications](computations-and-applications/README.md)
 contains the six complete ordinary and reduced binary-cover Mayer–Vietoris
-leaves, the completed sphere-homology milestone, and the planned Corollary 2.15
-continuation. The completed branch adds conditional neighborhood transport,
-the hemisphere recurrence, and the full reduced homology calculation; the new
-branch applies it to no-retraction and Brouwer. Degree, cellular homology, the
+leaves, the completed sphere-homology milestone, and the completed Corollary
+2.15 continuation. The branch adds conditional neighborhood transport, the
+hemisphere recurrence, the full reduced homology calculation, no-retraction,
+and Brouwer. Degree, cellular homology, the
 later Mayer–Vietoris examples, and homology with coefficients remain deferred.
 Invariance of domain belongs to out-of-scope Additional Topic §2.B.
 

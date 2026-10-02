@@ -18,10 +18,12 @@ The triple sequence is now specified separately in the
 [triple-homology implementation specification](triple-homology-implementation.md).
 Small chains and excision are decomposed separately under the
 [singular excision implementation specification](excision-implementation.md).
-Theorem 2.13, Example 2.17, Proposition 2.22 and the good-pair quotient
-comparison, Example 2.23 and Corollaries 2.24–2.25, invariance of dimension,
-and the simplicial–singular comparison remain deferred. Corollary 2.15 is
+Theorem 2.13, Proposition 2.22, and the good-pair quotient comparison are now
 selected separately under the
+[good-pair quotient implementation specification](good-pair-quotient-implementation.md).
+Example 2.17, the arbitrary-pair mapping-cone comparison, Example 2.23 and
+Corollaries 2.24–2.25, invariance of dimension, and the simplicial–singular
+comparison remain deferred. Corollary 2.15 is selected separately under the
 [Corollary 2.15 implementation specification](corollary-2-15-implementation.md).
 This prevents Theorem 2.13 from being placed before the excision and quotient
 results used in its proof.
@@ -84,8 +86,8 @@ homology. This pair sequence and representative formula are formalized locally.
 Its naturality for maps of pairs is also formalized. The reduced pair sequence
 is formalized using the augmented pair sequence, including its degree-zero
 endpoint. Its naturality is formalized directly from the natural augmented
-sequence; the triple sequence has its own selected slice, while the quotient
-sequence for Theorem 2.13 remains outside this slice.
+sequence; the triple and good-pair quotient sequences have their own selected
+slices.
 
 ## Relative homotopy invariance
 

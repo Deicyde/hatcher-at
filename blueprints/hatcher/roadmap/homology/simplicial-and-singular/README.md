@@ -11,8 +11,10 @@ and relative homology, exact sequences, naturality, and relative homotopy
 invariance; all fifteen of its leaves are complete. A third four-leaf slice
 covers the long exact sequence of a triple and its naturality; all four leaves
 are complete. A fourth ten-leaf slice decomposes small chains and excision; all
-ten leaves are complete. The separately placed sphere branch now continues
-through the three-leaf Corollary 2.15 milestone.
+ten leaves are complete. A fifth fifteen-leaf slice now decomposes the
+good-pair quotient comparison, quotient exact sequence, and naturality. The
+separately placed sphere branch is complete through the three-leaf Corollary
+2.15 milestone.
 
 Simplicial homology takes a Δ-complex structure and forms the chain complex of
 its simplices; it is finite and computable but depends on the chosen structure.
@@ -56,18 +58,22 @@ exact sequence with its degree-zero endpoint, and naturality are also complete.
 
 - [Relative homology and exact sequences](relative-homology/README.md)
 
-## Small chains, excision, and the deferred remainder
+## Small chains, good-pair quotients, and the deferred remainder
 
 [Small chains and excision](relative-homology/small-chains-and-excision/README.md),
 covering Proposition 2.21 and Theorem 2.20, are decomposed into ten
 formalizable leaves, all formalized locally.
 
+[Good pairs and quotient exact sequences](relative-homology/good-pair-quotient/README.md)
+now decompose Proposition 2.22, Theorem 2.13, their canonical point-quotient
+maps, and naturality into fifteen formalizable leaves.
+
 Lemma 2.1 and Examples 2.2–2.5 need a source-faithful Δ-complex chain model.
 Proposition 2.6 needs additivity over all path components in every degree;
-Mathlib `v4.34.1` contains only its degree-zero case. Theorem 2.13, Example
-2.17, Proposition 2.22 and quotient-pair comparison, Example 2.23 and
-Corollaries 2.24–2.25, invariance of dimension, and the Δ-complex comparison
-remain deferred. Corollary 2.15 is decomposed in
+Mathlib `v4.34.1` contains only its degree-zero case. Example 2.17, the
+arbitrary-pair mapping-cone comparison, Example 2.23 and Corollaries
+2.24–2.25, invariance of dimension, and the Δ-complex comparison remain
+deferred. Corollary 2.15 is complete in
 the [sphere-homology and Brouwer
 milestone](../computations-and-applications/sphere-homology/README.md).
 
@@ -85,7 +91,9 @@ induced homology-map equality complete the relative homotopy branch and
 Proposition 2.19. The reduced pair sequence, its naturality, and the pointed
 comparison are now formalized. All four local triple-sequence leaves are now
 formalized. The excision target is now decomposed locally; Riou's independent
-implementation remains active upstream prior art.
+implementation remains active upstream prior art. The new good-pair milestone
+uses a functorial TopCat pushout model for `X/A`; no exact endpoint is present
+in pinned Mathlib.
 
 ## Sources
 

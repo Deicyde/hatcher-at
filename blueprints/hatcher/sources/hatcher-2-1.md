@@ -63,7 +63,7 @@ dimension, and compares Δ-complex homology with singular homology.
 | **Proposition 2.19** | 118 | Homotopic maps of pairs induce equal maps on relative homology. |
 | **Theorem 2.20** | 119–124 | Excision holds when the closure of the excised set lies in the interior of the subspace. Equivalently, if the interiors of `A` and `B` cover `X`, inclusion `(B, A ∩ B) → (X, A)` induces an isomorphism; taking `B = X ∖ Z` recovers the deleted-subset form. |
 | **Proposition 2.21** | 119–124 | If the interiors of a family of subsets cover `X`, chains subordinate to that family include by a chain-homotopy equivalence. |
-| **Proposition 2.22** | 124–125 | For a good pair, quotienting the pair compares relative homology with reduced homology of the quotient. |
+| **Proposition 2.22** | 124 | For a good pair, quotienting the pair compares relative homology with reduced homology of the quotient. |
 | Example 2.23 and Corollaries 2.24–2.25 | 125–126 | Apply excision and exact sequences to spheres, unions of subcomplexes, and wedge sums. |
 | **Theorem 2.26** | 126 | Nonempty open subsets of Euclidean spaces can be homeomorphic only in the same dimension. |
 | **Theorem 2.27** | 128–130 | The natural map from Δ-complex homology to singular homology is an isomorphism, also for pairs. |
@@ -74,7 +74,8 @@ It must not be planned as an early independent theorem.
 
 On pages 127–128 Hatcher records naturality of the long exact sequence of a
 pair, its reduced variant, and the triple sequence. All three naturality
-statements are selected. The quotient sequence used with Theorem 2.13 is not.
+statements are selected. The naturality of the quotient sequence in Theorem
+2.13 on page 128 is selected in the good-pair milestone.
 
 ## Selected slices
 
@@ -109,7 +110,7 @@ A fifth source unit selects the reduced-homology consequences of homotopy
 invariance on pages 111 and 113, the `S⁰` base case supported by Propositions
 2.6–2.8, and Corollary 2.14. Its proof of the sphere calculation follows
 Hatcher's alternative Mayer–Vietoris argument in Example 2.46 rather than the
-still-deferred good-pair quotient sequence of Theorem 2.13. The representation
+separately selected good-pair quotient sequence of Theorem 2.13. The representation
 and proof boundary are fixed in the
 [sphere-homology implementation specification](sphere-homology-implementation.md).
 
@@ -120,11 +121,18 @@ Brouwer's theorem then joins the two branches. Its representation and proof
 boundary are fixed in the
 [Corollary 2.15 implementation specification](corollary-2-15-implementation.md).
 
+A seventh source unit selects Hatcher's definition of good pairs, Proposition
+2.22, Theorem 2.13, and the theorem's naturality on page 128. It uses the
+completed relative, triple, excision, and reduced-pair APIs, and represents
+`X/A` functorially as the TopCat pushout `X ⊔_A PUnit`. Its source-exact
+neighborhood witness and fifteen-leaf proof boundary are fixed in the
+[good-pair quotient implementation specification](good-pair-quotient-implementation.md).
+
 Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
-component decomposition. Lemma 2.1, Examples 2.2–2.5, Theorem 2.13, Example
-2.17, Proposition 2.22 and quotient-pair comparison, Example 2.23 and
-Corollaries 2.24–2.25, invariance of dimension, and the Δ-complex comparison
-are later milestones.
+component decomposition. Lemma 2.1, Examples 2.2–2.5, Example 2.17, the
+arbitrary-pair mapping-cone comparison, Example 2.23 and Corollaries
+2.24–2.25, invariance of dimension, and the Δ-complex comparison are later
+milestones.
 
 For roadmap notation, write
 `Hₙ(X; R) := ((AlgebraicTopology.singularHomologyFunctor C n).obj R).obj X`.
@@ -186,16 +194,23 @@ excision, and Δ-complex homology with its comparison theorem.
   [`excision`](https://github.com/joelriou/excision/tree/8b56cd0c8e5f39a7c2f36418c80b298e469596a6)
   development contains the active subdivision, small-chain, pair, and excision
   design. It is unreleased implementation prior art, not a project dependency.
+- `fairinternal/formal-math` commit
+  `c05951e057a5974564d67b91c9c7ec3c9a415fac` contains an independent
+  sorry-free point-quotient/good-pair design against the same Mathlib pin. It
+  is private implementation prior art, not a dependency or source of
+  `mathlib: true` claims; the project independently specifies and proves the
+  narrow topology bridge it needs.
 
 ## Decisions taken
 
 - **Selected boundaries.** Keep the completed 2.7–2.12, reduced/relative
   exact-sequence, triple, small-chains/excision, and sphere-homology slices.
   Add both clauses of Corollary 2.15 through the homological no-retraction
-  argument and the dimension-general boundary-ray construction. Leave the
-  good-pair quotient route, Example 2.23 and Corollaries 2.24–2.25, degree
-  theory, invariance of dimension, and Δ-complex results deferred; the selected
-  §2.2 material is recorded in
+  argument and the dimension-general boundary-ray construction. Add the
+  good-pair quotient route through Proposition 2.22, Theorem 2.13, and its
+  naturality. Leave Example 2.17, the arbitrary-pair mapping-cone comparison,
+  Example 2.23 and Corollaries 2.24–2.25, degree theory, invariance of
+  dimension, and Δ-complex results deferred; the selected §2.2 material is recorded in
   [its own source note](hatcher-2-2.md).
 - **Coefficients.** State exact Mathlib nodes with their coefficient-general
   categorical API. Treat Hatcher's integral theory as its abelian-group

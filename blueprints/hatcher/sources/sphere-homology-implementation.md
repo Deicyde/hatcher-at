@@ -76,12 +76,11 @@ its morphism. The reduced transport node also owns public signed-lift and
 `reducedUnionMap`, whose current implementations pass through private
 augmented-chain helpers.
 
-`Hatcher.StrongDeformationRetract` currently lives in the Van Kampen
-development. The ordinary neighborhood-transport node owns moving its
-declaration and elementary consequences to a neutral topology module without
-changing the public name. That refactor is implementation plumbing rather than
-a separate mathematical target, and the radial geometry nodes depend on that
-owner to avoid parallel edits to the same declaration.
+`Hatcher.StrongDeformationRetract` and its elementary consequences live in the
+neutral module `Hatcher/Topology/StrongDeformationRetract.lean`. The existing
+declaration now has a promoted, complete background roadmap owner shared by
+the neighborhood-transport and good-pair branches; the ordinary transport node
+no longer owns that declaration.
 
 ## Sphere model and geometry
 
@@ -159,7 +158,9 @@ simp lemmas kept in the same review unit as the result they serve:
 13. `Hatcher.Sphere.reducedHomology_sphere`, with an integral specialization.
 
 Exact helper names may follow the surrounding namespace conventions, but these
-thirteen semantic completion targets and their separation are fixed.
+thirteen semantic completion targets and their separation are fixed. The
+promoted strong-deformation-retract background article is not a fourteenth
+source-facing sphere target.
 
 ## Pinned API and prior art
 

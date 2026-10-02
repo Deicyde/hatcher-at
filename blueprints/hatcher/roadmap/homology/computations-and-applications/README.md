@@ -8,7 +8,7 @@ Hatcher §2.2 (pages 134–159), together with the selected sphere applications
 from §2.1. The binary interior-cover Mayer–Vietoris sequence is complete in six
 formalizable leaves. The thirteen-leaf continuation covering
 neighborhood-retract transport, Example 2.46, and reduced sphere homology is
-also complete. A three-leaf Corollary 2.15 application is planned. The
+also complete. The three-leaf Corollary 2.15 application is complete. The
 remainder of §2.2 stays explicitly deferred.
 
 Given excision and the long exact sequence, homology becomes computable. From
@@ -30,7 +30,7 @@ the ordinary and reduced exact sequences directly from the completed
 small-chain equivalence. The completed
 [sphere-homology milestone](sphere-homology/README.md) adds the conditional
 neighborhood-retract extension, applies it to the hemispheres of a sphere, and
-now continues to the planned no-retraction and Brouwer applications.
+continues through the completed no-retraction and Brouwer applications.
 
 The pinned Mathlib supplies the standard disk, boundary, and inclusion models,
 but not the selected no-retraction, Brouwer, sphere-homology, or

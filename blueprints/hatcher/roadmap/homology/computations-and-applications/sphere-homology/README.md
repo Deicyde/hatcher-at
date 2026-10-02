@@ -12,8 +12,8 @@ sphere. Its final branch applies that calculation to Corollary 2.15.
 
 The public result uses Mathlib's `TopCat.sphere` and remains general in the
 coefficient object. Hatcher's integral Corollary 2.14 is an explicit
-specialization. The recurrence follows Example 2.46 rather than the deferred
-good-pair quotient proof that originally precedes Corollary 2.14.
+specialization. The recurrence follows Example 2.46 rather than the separately
+decomposed good-pair quotient proof that originally precedes Corollary 2.14.
 
 For Corollary 2.15, Mathlib's `TopCat.disk`, `TopCat.diskBoundary`, and
 `TopCat.diskBoundaryInclusion` give the exact standard pair. The homological
@@ -56,9 +56,12 @@ independent branches; Brouwer's theorem joins them.
 This milestone assumes the neighborhoods and deformation retractions in the
 general transport theorem, and constructs only the sphere-specific witnesses
 needed for Example 2.46. It excludes Hatcher's general CW-subcomplex
-`Nε(A)` construction, Theorem 2.13 and Proposition 2.22, degree and orientation
-theory, invariance of dimension, cellular homology, Examples 2.47–2.48, mapping
-tori, relative Mayer–Vietoris, and coefficients as a separate source topic.
+`Nε(A)` construction and does not use Theorem 2.13 or Proposition 2.22; those
+two results are decomposed separately in the
+[good-pair quotient milestone](../../simplicial-and-singular/relative-homology/good-pair-quotient/README.md).
+It also excludes degree and orientation theory, invariance of dimension,
+cellular homology, Examples 2.47–2.48, mapping tori, relative Mayer–Vietoris,
+and coefficients as a separate source topic.
 
 ## Sources
 
