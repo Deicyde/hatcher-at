@@ -29,10 +29,10 @@ universe w v u
 variable {C : Type u} [Category.{v} C] [Abelian C]
   [HasCoproducts.{w} C]
 
-local instance : HasFiniteCoproducts C :=
+local instance sphereRecurrenceHasFiniteCoproducts : HasFiniteCoproducts C :=
   hasFiniteCoproducts_of_hasCoproducts C
 
-local instance : HasBinaryBiproducts C :=
+local instance sphereRecurrenceHasBinaryBiproducts : HasBinaryBiproducts C :=
   HasBinaryBiproducts.of_hasBinaryCoproducts
 
 /-- The literal intersection of the two closed hemispheres is the preceding
