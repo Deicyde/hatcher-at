@@ -41,6 +41,7 @@ import Hatcher.FundamentalGroup.Foundations
 import Hatcher.FundamentalGroup.Product
 import Hatcher.Applications.FundamentalTheoremAlgebra
 import Hatcher.Disc.NoRetraction
+import Hatcher.Disc.NoRetractionHomology
 import Hatcher.Disc.Brouwer
 import Hatcher.Euclidean.Dimension
 import Hatcher.Excision.AffineSubdivision

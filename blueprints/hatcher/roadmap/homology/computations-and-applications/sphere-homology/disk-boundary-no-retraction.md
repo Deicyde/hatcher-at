@@ -3,6 +3,9 @@ article_id: af_a6eb442378369693c34b1c50
 source_units: [hatcher-2-1-corollary-2-15]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Disc.not_exists_diskBoundary_retraction
 ---
 
 # The boundary sphere is not a retract of the disk
