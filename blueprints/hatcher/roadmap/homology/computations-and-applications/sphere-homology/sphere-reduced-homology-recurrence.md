@@ -3,6 +3,9 @@ article_id: af_0f89993a3608e24f605cc5a8
 source_units: [hatcher-2-2-mv-transport-sphere-recurrence]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.reducedHomology_sphereSucc
 ---
 
 # The reduced homology of spheres satisfies the suspension recurrence
