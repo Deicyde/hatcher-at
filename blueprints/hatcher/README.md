@@ -5,10 +5,9 @@ A Lean 4 formalization of results from Allen Hatcher's *Algebraic Topology*
 redistributed here; source notes cite it by chapter and section.
 
 Every chapter and numbered section of the book is mapped. The selected scope
-now contains 181 formalizable leaves. The prior 168 are complete: 150 are
-formalized locally and 18 are pinned Mathlib declarations. These comprise all
-133 nodes in the previously
-completed §1.1, §1.2, §1.3, §2.1 functoriality, and Appendix A.1 slices, plus
+contains 181 formalizable leaves, all complete: 163 are formalized locally and
+18 are pinned Mathlib declarations. These comprise all 133 nodes in the
+previously completed §1.1, §1.2, §1.3, §2.1 functoriality, and Appendix A.1 slices, plus
 all fifteen nodes in the §2.1 reduced- and
 relative-homology branch. Its four-node reduced-homology branch and generic
 exact-sequence theorem are complete, and Mathlib now supplies the
@@ -20,9 +19,9 @@ are complete, finishing that selected §2.1 slice. The four additional leaves
 for the long exact sequence of a triple and its naturality are also complete.
 The approved small-chains/excision milestone is decomposed into ten additional
 formalization leaves, all complete. The six-leaf §2.2 Mayer–Vietoris milestone
-is formalized locally and complete. A new thirteen-leaf milestone decomposes
-the neighborhood-retract extension, Example 2.46, and reduced sphere homology;
-these leaves are not yet formalized. The coverage contract explicitly defers
+is formalized locally and complete. The thirteen-leaf neighborhood-retract,
+Example 2.46, and reduced sphere-homology milestone is also formalized locally
+and complete. The coverage contract explicitly defers
 the other remaining main-line source areas, and decomposition alone is not a
 claim of formalization progress.
 

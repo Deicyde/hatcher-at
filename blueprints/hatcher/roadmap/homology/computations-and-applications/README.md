@@ -5,9 +5,10 @@ article_id: af_3a2b37424915dda0dbd5d97b
 # Computations and applications
 
 Hatcher §2.2 (pages 134–159). The binary interior-cover Mayer–Vietoris
-sequence is complete in six formalizable leaves. A thirteen-leaf continuation
-now covers neighborhood-retract transport, Example 2.46, and reduced sphere
-homology. The remainder of the section stays explicitly deferred.
+sequence is complete in six formalizable leaves. The thirteen-leaf continuation
+covering neighborhood-retract transport, Example 2.46, and reduced sphere
+homology is also complete. The remainder of the section stays explicitly
+deferred.
 
 Given excision and the long exact sequence, homology becomes computable. From
 `Hₙ(Sⁿ) ≅ ℤ` comes the degree of a map `Sⁿ → Sⁿ`, with its local formula as a
@@ -21,11 +22,11 @@ Brouwer's fixed point theorem in all dimensions and invariance of domain follow
 here, generalizing the two-dimensional cases proved from `π₁(S¹)` in
 [basic constructions](../../fundamental-group/basic-constructions/README.md).
 
-The [Mayer–Vietoris milestone](mayer-vietoris/README.md) constructs the
-ordinary and reduced exact sequences directly from the completed small-chain
-equivalence. The [sphere-homology milestone](sphere-homology/README.md) adds
-the conditional neighborhood-retract extension and applies it to the
-hemispheres of a sphere.
+The completed [Mayer–Vietoris milestone](mayer-vietoris/README.md) constructs
+the ordinary and reduced exact sequences directly from the completed
+small-chain equivalence. The completed
+[sphere-homology milestone](sphere-homology/README.md) adds the conditional
+neighborhood-retract extension and applies it to the hemispheres of a sphere.
 
 Nothing in this selected slice is present in the pinned Mathlib. Mathlib has CW complexes
 (`Topology/CWComplex/Classical/`) but no cellular homology, no degree theory,

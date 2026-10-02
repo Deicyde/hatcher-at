@@ -166,8 +166,7 @@ adds thirteen formalizable leaves. They cover reduced homotopy invariance and
 contractible vanishing, ordinary and reduced neighborhood-retract transport,
 the sphere-specific radial and stereographic geometry, Example 2.46's
 recurrence, the `S⁰` base case, and the full reduced sphere calculation of
-Corollary 2.14. These leaves are planned formalization work rather than
-completed results.
+Corollary 2.14. All thirteen leaves are formalized locally and complete.
 
 Corollary 2.15 remains deferred in §2.1. The general CW-subcomplex neighborhood
 construction and Examples 2.47–2.48 remain deferred with the rest of §2.2.
