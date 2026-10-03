@@ -3,6 +3,9 @@ article_id: af_1259fc0c85b68b0d2f27a1bc
 source_units: [hatcher-2-1-good-pair-quotient]
 declaration: instance
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.GoodPairData.neighborhoodPairHom_homologyMap_isIso
 ---
 
 # Enlarging to the chosen neighborhood preserves relative homology

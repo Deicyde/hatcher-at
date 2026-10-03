@@ -67,6 +67,7 @@ import Hatcher.Singular.Reduced
 import Hatcher.Singular.Relative
 import Hatcher.Singular.RelativeIsomorphism
 import Hatcher.Singular.GoodPair
+import Hatcher.Singular.GoodPairNeighborhoodHomology
 import Hatcher.Singular.RelativeHomotopy
 import Hatcher.Singular.ReducedRelative
 import Hatcher.Singular.PointedRelative
