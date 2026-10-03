@@ -3,6 +3,9 @@ article_id: af_90639a13c044152fff528cfe
 source_units: [hatcher-2-1-good-pair-quotient]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.pointedPairHomologyIso_naturality
 ---
 
 # The pointed relative-to-reduced comparison is natural

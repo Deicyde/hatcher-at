@@ -69,6 +69,7 @@ import Hatcher.Singular.GoodPair
 import Hatcher.Singular.RelativeHomotopy
 import Hatcher.Singular.ReducedRelative
 import Hatcher.Singular.PointedRelative
+import Hatcher.Singular.PointedRelativeNaturality
 import Hatcher.Singular.TripleChains
 import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected
