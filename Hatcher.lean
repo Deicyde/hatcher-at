@@ -75,6 +75,7 @@ import Hatcher.Singular.PointedRelativeNaturality
 import Hatcher.Singular.PointQuotient
 import Hatcher.Singular.PointQuotientTopology
 import Hatcher.Singular.GoodPairNeighborhoodQuotient
+import Hatcher.Singular.PointQuotientNeighborhoodContraction
 import Hatcher.Singular.TripleChains
 import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected
