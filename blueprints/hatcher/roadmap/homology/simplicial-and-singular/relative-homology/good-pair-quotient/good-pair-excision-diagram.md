@@ -3,6 +3,9 @@ article_id: af_9ac7fe6f41815e0f139260e2
 source_units: [hatcher-2-1-good-pair-quotient]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.GoodPairData.pointQuotientExcisionDiagram
 ---
 
 # The complementary excision diagram
@@ -15,6 +18,21 @@ Define the pair map induced by the complement homeomorphism and prove both
 canonical squares commute, including the neighborhood comparison identity
 used in the final diagram chase. The intended main artifact is
 `Hatcher.Relative.GoodPairData.pointQuotientExcisionDiagram`.
+
+Formalized in `Hatcher/Singular/GoodPairExcisionDiagram.lean`. The source and
+target complement pairs are packaged explicitly, and
+`pointQuotientComplementPairIso` is induced by the canonical homeomorphism
+off the collapsed subspace together with its restriction to the deleted
+neighborhoods. The theorem `neighborhood_pointQuotientComparison` proves the
+left square
+
+`neighborhoodPairHom ≫ neighborhoodPairToPointQuotientNeighborhoodPair =`
+`pointQuotientComparison.app P ≫ pointQuotientPairToNeighborhoodPair`,
+
+while `pointQuotientComplement_excisionSquare` proves the right square with
+the two canonical `deletedSubsetPairHom` maps. The main artifact packages
+these two identities and the exact complement-pair isomorphism; no homology
+isomorphism or diagram chase is asserted in this node.
 
 ## Depends on
 
