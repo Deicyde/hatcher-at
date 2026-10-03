@@ -20,6 +20,7 @@ used in the final diagram chase. The intended main artifact is
 
 - [Topology of the point-quotient projection](point-quotient-projection-topology.md)
 - [Restricting the quotient to a good-pair neighborhood](good-pair-neighborhood-quotient.md)
+- [Enlarging to the chosen neighborhood preserves relative homology](good-pair-neighborhood-relative-homology.md)
 - [Deleted-subset excision induces homology isomorphisms](../small-chains-and-excision/deleted-subset-excision-homology-isomorphism.md)
 
 ## Sources
