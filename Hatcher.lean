@@ -70,6 +70,7 @@ import Hatcher.Singular.RelativeHomotopy
 import Hatcher.Singular.ReducedRelative
 import Hatcher.Singular.PointedRelative
 import Hatcher.Singular.PointedRelativeNaturality
+import Hatcher.Singular.PointQuotient
 import Hatcher.Singular.TripleChains
 import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected
