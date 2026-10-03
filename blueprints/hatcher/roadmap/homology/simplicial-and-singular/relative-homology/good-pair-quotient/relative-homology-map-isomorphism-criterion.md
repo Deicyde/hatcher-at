@@ -3,6 +3,9 @@ article_id: af_d047fabeff7641326468fef6
 source_units: [hatcher-2-1-good-pair-quotient]
 declaration: theorem
 origin: background
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.homologyMap_isIso_of_components
 ---
 
 # Componentwise isomorphisms imply a relative isomorphism
