@@ -65,6 +65,7 @@ import Hatcher.MayerVietoris.ReducedNeighborhood
 import Hatcher.Singular.Homology
 import Hatcher.Singular.Reduced
 import Hatcher.Singular.Relative
+import Hatcher.Singular.GoodPair
 import Hatcher.Singular.RelativeHomotopy
 import Hatcher.Singular.ReducedRelative
 import Hatcher.Singular.PointedRelative
