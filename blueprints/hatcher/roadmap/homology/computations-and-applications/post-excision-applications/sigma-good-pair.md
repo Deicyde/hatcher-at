@@ -20,11 +20,11 @@ theorem Hatcher.Relative.sigmaPointedPair_isGoodPair
     IsGoodPair (sigmaPointedPair x₀)
 ```
 
-Assemble the chosen neighborhoods fiberwise. Prove their sigma is open,
-prove the sigma of the closed basepoint images is closed, and assemble the
-pointwise strong deformation retractions into one sigma deformation. The
-nonempty-index assumption supplies the nonempty subspace required by
-`GoodPairData`.
+Assemble the chosen neighborhoods fiberwise. Prove the basepoint sigma range
+lies in the interior of the assembled sigma neighborhood, prove the sigma of
+the closed basepoint images is closed, and assemble the pointwise strong
+deformation retractions into one sigma deformation. The nonempty-index
+assumption supplies the nonempty subspace required by `GoodPairData`.
 
 Keep the empty-index case out of this theorem. It is handled directly by the
 contractibility of the project's empty pointed wedge in Corollary 2.25.
