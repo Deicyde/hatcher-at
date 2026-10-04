@@ -80,6 +80,7 @@ import Hatcher.Singular.ContractibleAmbientRelative
 import Hatcher.Singular.SigmaPointedPair
 import Hatcher.Singular.SigmaGoodPair
 import Hatcher.Singular.SigmaRelativeChains
+import Hatcher.Singular.SigmaRelativeHomology
 import Hatcher.Singular.StandardSimplexBoundaryHorn
 import Hatcher.Singular.StandardSimplexZeroHorn
 import Hatcher.Singular.StandardSimplexGoodPairs
