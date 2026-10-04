@@ -28,7 +28,7 @@ not represented by a nonexistent negative sphere.
 
 ## Depends on
 
-None beyond the Euclidean-space and relative-homology objects named above.
+- [Local homology is unchanged on an open neighborhood](local-homology-open-neighborhood.md)
 
 ## Proof depends on
 
