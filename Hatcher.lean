@@ -47,6 +47,7 @@ import Hatcher.Disc.Brouwer
 import Hatcher.Disc.BrouwerGeneral
 import Hatcher.Disc.BrouwerFixedPoint
 import Hatcher.Euclidean.Dimension
+import Hatcher.Euclidean.LocalHomology
 import Hatcher.Excision.AffineSubdivision
 import Hatcher.Excision.AffineChains
 import Hatcher.Excision.SingularSubdivision

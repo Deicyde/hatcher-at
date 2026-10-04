@@ -3,6 +3,9 @@ article_id: af_1174b6b1a3e283fe5bfe011c
 source_units: [hatcher-2-1-post-excision-applications]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Euclidean.localHomology
 ---
 
 # Local homology of positive-dimensional Euclidean space
