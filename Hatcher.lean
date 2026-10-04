@@ -91,6 +91,7 @@ import Hatcher.Singular.GoodPairExcisionDiagram
 import Hatcher.Singular.PointQuotientNeighborhoodExcision
 import Hatcher.Singular.GoodPairPointQuotientHomology
 import Hatcher.Singular.GoodPairPointQuotientNaturality
+import Hatcher.Singular.StandardSimplexZeroFaceHomology
 import Hatcher.Singular.GoodPairPointQuotientExactSequence
 import Hatcher.Singular.GoodPairPointQuotientSequenceNaturality
 import Hatcher.Singular.MappingCone

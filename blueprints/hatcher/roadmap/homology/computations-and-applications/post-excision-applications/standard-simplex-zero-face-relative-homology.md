@@ -3,6 +3,9 @@ article_id: af_8d17f4be9605a1e8324a99fb
 source_units: [hatcher-2-1-post-excision-applications]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Simplex.zeroFacePair_homologyMap_isIso
 ---
 
 # The zero face induces an isomorphism in relative homology
@@ -18,6 +21,18 @@ the good-pair comparisons and the exact point-quotient isomorphism. Handle
 `n = 0` directly: the source boundary is empty, so Proposition 2.22's local
 `GoodPairData` interface does not apply. The direct branch must still prove
 that the canonical map, rather than an arbitrary conjugate, is an isomorphism.
+
+Formalized in `Hatcher/Singular/StandardSimplexZeroFaceHomology.lean` for an
+arbitrary coefficient object in an abelian category with the required
+coproducts, and for every simplex dimension and homological degree. In positive
+simplex dimensions, naturality of the good-pair quotient comparison conjugates
+the canonical relative-homology map to the reduced-homology map induced by
+`zeroFacePointQuotientIso`; the theorem identifying that isomorphism's forward
+map ensures this is the exact zero-face map. In dimension zero, the two endpoint
+subspaces form an open binary cover of `∂Δ[1]`. The canonical pair map factors
+as a source pair isomorphism, the binary-cover excision map, and a target pair
+isomorphism, so this exceptional branch also proves that exact map is an
+isomorphism.
 
 ## Depends on
 
