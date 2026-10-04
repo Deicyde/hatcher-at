@@ -82,6 +82,7 @@ import Hatcher.Singular.SigmaGoodPair
 import Hatcher.Singular.PointedWedgePointQuotient
 import Hatcher.Singular.SigmaRelativeChains
 import Hatcher.Singular.SigmaRelativeHomology
+import Hatcher.Singular.PointedWedgeHomology
 import Hatcher.Singular.StandardSimplexBoundaryHorn
 import Hatcher.Singular.StandardSimplexZeroHorn
 import Hatcher.Singular.StandardSimplexGoodPairs

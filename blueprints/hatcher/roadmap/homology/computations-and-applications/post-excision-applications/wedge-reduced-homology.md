@@ -3,6 +3,9 @@ article_id: af_c8461d2db3fb08c9bd7f4e52
 source_units: [hatcher-2-1-post-excision-applications]
 declaration: corollary
 origin: cited
+lean: Hatcher.PointedWedge.reducedHomologyCoproductMap_isIso
+statement: formalized
+proof: formalized
 ---
 
 # Reduced homology of a wedge is the direct sum of the summands
