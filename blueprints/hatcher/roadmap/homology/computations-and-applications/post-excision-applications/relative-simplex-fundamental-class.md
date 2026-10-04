@@ -3,6 +3,9 @@ article_id: af_3a3deb51fb0d65763cad34d9
 source_units: [hatcher-2-1-post-excision-applications]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Simplex.relativeSimplexFundamentalClass_isIso
 ---
 
 # The identity simplex generates relative simplex homology
@@ -29,6 +32,14 @@ surviving term of the alternating boundary has coefficient `+1`; no hidden
 orientation sign may be absorbed into an arbitrary isomorphism. The integral
 specialization says that the identity simplex represents a generator of the
 infinite cyclic relative group.
+
+Formalized in `Hatcher/Singular/RelativeSimplexFundamentalClass.lean` for an
+arbitrary coefficient object in an abelian category with the required
+coproducts. The degree-zero case identifies the unique simplex chain and the
+empty-boundary quotient directly. The successor step applies the triple
+connecting map to the identity simplex; every positive-index face vanishes in
+the zero-horn quotient, while face zero survives with coefficient `+1` and is
+the canonical zero-face image of the lower-dimensional identity class.
 
 ## Depends on
 
