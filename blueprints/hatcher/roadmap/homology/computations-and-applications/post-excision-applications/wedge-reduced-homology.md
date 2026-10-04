@@ -14,7 +14,7 @@ proof: formalized
 spaces `(X i,x₀ i)`, define the canonical morphism
 
 ```lean
-Hatcher.PointedWedge.reducedHomologyCoproductMap R n :
+Hatcher.PointedWedge.reducedHomologyCoproductMap X x₀ R n :
   (∐ i, H̃_n(X i;R)) ⟶ H̃_n(PointedWedge X x₀;R)
 ```
 
@@ -47,6 +47,7 @@ Hatcher's direct sum of abelian groups.
 - [The pointed relative-to-reduced comparison is natural](../../simplicial-and-singular/relative-homology/good-pair-quotient/pointed-relative-reduced-homology-naturality.md)
 - [The good-pair quotient comparison is natural](../../simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-quotient-comparison-naturality.md)
 - [Reduced homology of a contractible space vanishes](../sphere-homology/contractible-space-reduced-homology.md)
+- [The standard cover of a well-pointed wedge](../../../fundamental-group/van-kampen/well-pointed-wedge-cover.md)
 
 ## Sources
 
