@@ -92,6 +92,7 @@ import Hatcher.Singular.GoodPairPointQuotientSequenceNaturality
 import Hatcher.Singular.MappingCone
 import Hatcher.Singular.MappingConeCoverHomology
 import Hatcher.Singular.MappingConeHomology
+import Hatcher.Singular.LocalHomology
 import Hatcher.Singular.TripleChains
 import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected
