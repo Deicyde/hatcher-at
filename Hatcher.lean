@@ -79,6 +79,7 @@ import Hatcher.Singular.PointQuotientNeighborhoodContraction
 import Hatcher.Singular.PointQuotientNeighborhoodHomology
 import Hatcher.Singular.GoodPairExcisionDiagram
 import Hatcher.Singular.PointQuotientNeighborhoodExcision
+import Hatcher.Singular.GoodPairPointQuotientHomology
 import Hatcher.Singular.TripleChains
 import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected
