@@ -77,6 +77,7 @@ import Hatcher.Singular.PointedRelativeNaturality
 import Hatcher.Singular.ContractibleSubspaceRelative
 import Hatcher.Singular.ContractibleAmbientRelative
 import Hatcher.Singular.SigmaPointedPair
+import Hatcher.Singular.SigmaRelativeChains
 import Hatcher.Singular.StandardSimplexBoundaryHorn
 import Hatcher.Singular.StandardSimplexZeroHorn
 import Hatcher.Singular.StandardSimplexGoodPairs
