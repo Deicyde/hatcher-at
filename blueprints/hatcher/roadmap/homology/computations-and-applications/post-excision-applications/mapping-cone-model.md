@@ -46,6 +46,7 @@ claim is part of this node.
 ## Depends on
 
 - [A single cone attachment has a two-set open cover](../../../fundamental-group/van-kampen/cell-attachment-support/single-cone-open-cover.md)
+- [Binary-cover excision is a chain-homotopy equivalence](../../simplicial-and-singular/relative-homology/small-chains-and-excision/binary-cover-excision-chain-equivalence.md)
 
 ## Proof depends on
 
