@@ -3,6 +3,9 @@ article_id: af_a60a7ada9a033af784c579a4
 source_units: [hatcher-2-1-post-excision-applications]
 declaration: theorem
 origin: bridged
+lean: Hatcher.Relative.sigmaPointedPair_isGoodPair
+statement: formalized
+proof: formalized
 ---
 
 # A nonempty coproduct of pointed good pairs is good
