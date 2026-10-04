@@ -32,6 +32,10 @@ pair and the project's empty wedge are both one-point spaces.
 - [The pointed wedge of a family of spaces](../../../fundamental-group/van-kampen/pointed-wedge.md)
 - [Functorial point quotients of topological pairs](../../simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-functor.md)
 
+## Proof depends on
+
+- [Continuous maps out of a pointed wedge](../../../fundamental-group/van-kampen/presentation-complex/pointed-wedge-universal-property.md)
+
 ## Sources
 
 - [Hatcher §2.1, quotient proof of Corollary 2.25, printed page 126](../../../../sources/hatcher-2-1.md)

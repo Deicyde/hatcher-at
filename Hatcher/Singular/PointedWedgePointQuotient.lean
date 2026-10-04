@@ -24,7 +24,7 @@ open CategoryTheory Limits
 
 namespace Hatcher.Relative
 
-universe u v
+universe u v w
 
 variable {ι : Type u} {X : ι → TopCat.{max u v}}
 
@@ -75,7 +75,15 @@ def pointedWedgePointInclusion (x₀ : ∀ i, X i) :
 
 @[simp]
 theorem pointedWedgePointInclusion_apply (x₀ : ∀ i, X i) (z : PUnit) :
-    pointedWedgePointInclusion x₀ z = Hatcher.PointedWedge.basepoint x₀ :=
+    (pointedWedgePointInclusion x₀).hom z =
+      Hatcher.PointedWedge.basepoint x₀ :=
+  rfl
+
+/-- Controlled unfolding of the distinguished point of a point quotient.
+This formulation lets callers expose the point inclusion without unfolding
+the pushout itself. -/
+theorem pointQuotientPoint_eq_pointQuotientPointInclusion (P : TopPair.{w}) :
+    pointQuotientPoint P = pointQuotientPointInclusion P PUnit.unit :=
   rfl
 
 /-- The sigma of the spaces and the common point exhibit the pointed wedge as
@@ -163,24 +171,35 @@ theorem pointQuotientPointInclusion_pointQuotientSigmaPointedPairIsoPointedWedge
   unfold pointQuotientSigmaPointedPairIsoPointedWedge
   apply IsPushout.inr_isoIsPushout_hom
 
-/-- Under the canonical isomorphism, the collapsed point is the wedge
-basepoint. -/
-@[simp]
-theorem pointQuotientSigmaPointedPairIsoPointedWedge_hom_point
+/-- The distinguished representative of the point summand maps to the wedge
+basepoint.  This Unit-specialized post-simp rule supports clients that expose
+the collapsed point through its point inclusion. -/
+@[simp↓]
+theorem pointQuotientSigmaPointedPairIsoPointedWedge_hom_pointInclusion_unit
     (x₀ : ∀ i, X i) :
-    (pointQuotientSigmaPointedPairIsoPointedWedge x₀).hom
-        (pointQuotientPoint (sigmaPointedPair x₀)) =
+    ((pointQuotientSigmaPointedPairIsoPointedWedge x₀).hom).hom
+        (ConcreteCategory.hom
+          (pointQuotientPointInclusion (sigmaPointedPair x₀)) PUnit.unit) =
       Hatcher.PointedWedge.basepoint x₀ := by
-  change (pointQuotientSigmaPointedPairIsoPointedWedge x₀).hom
-      (pointQuotientPointInclusion (sigmaPointedPair x₀) PUnit.unit) =
-    Hatcher.PointedWedge.basepoint x₀
   have h := ConcreteCategory.congr_hom
     (pointQuotientPointInclusion_pointQuotientSigmaPointedPairIsoPointedWedge_hom
       x₀) PUnit.unit
-  change (pointQuotientSigmaPointedPairIsoPointedWedge x₀).hom
-      (pointQuotientPointInclusion (sigmaPointedPair x₀) PUnit.unit) =
+  change ((pointQuotientSigmaPointedPairIsoPointedWedge x₀).hom).hom
+      (ConcreteCategory.hom
+        (pointQuotientPointInclusion (sigmaPointedPair x₀)) PUnit.unit) =
     Hatcher.PointedWedge.basepoint x₀ at h
   exact h
+
+/-- Under the canonical isomorphism, the collapsed point is the wedge
+basepoint. -/
+@[simp↓]
+theorem pointQuotientSigmaPointedPairIsoPointedWedge_hom_point
+    (x₀ : ∀ i, X i) :
+    ((pointQuotientSigmaPointedPairIsoPointedWedge x₀).hom).hom
+        (pointQuotientPoint (sigmaPointedPair x₀)) =
+      Hatcher.PointedWedge.basepoint x₀ := by
+  rw [pointQuotientPoint_eq_pointQuotientPointInclusion]
+  exact pointQuotientSigmaPointedPairIsoPointedWedge_hom_pointInclusion_unit x₀
 
 /-- Restricting the quotient projection to a summand gives its canonical
 inclusion in the pointed wedge. -/
