@@ -73,6 +73,7 @@ import Hatcher.Singular.RelativeHomotopy
 import Hatcher.Singular.ReducedRelative
 import Hatcher.Singular.PointedRelative
 import Hatcher.Singular.PointedRelativeNaturality
+import Hatcher.Singular.ContractibleSubspaceRelative
 import Hatcher.Singular.SigmaPointedPair
 import Hatcher.Singular.PointQuotient
 import Hatcher.Singular.PointQuotientTopology

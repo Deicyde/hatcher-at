@@ -3,6 +3,9 @@ article_id: af_5af80c1672a496d005d3afa3
 source_units: [hatcher-2-1-post-excision-applications]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.contractibleSubspaceHomologyIso
 ---
 
 # A contractible subspace identifies reduced and relative homology
