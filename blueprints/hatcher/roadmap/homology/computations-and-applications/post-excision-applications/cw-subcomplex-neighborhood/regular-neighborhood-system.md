@@ -3,6 +3,9 @@ article_id: af_5f0a0a354967820017e486a7
 source_units: [appendix-proposition-a-5]
 declaration: structure
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.RegularNeighborhoodSystem
 ---
 
 # A common regular-neighborhood system for subcomplexes
