@@ -1,6 +1,7 @@
 -- Hatcher AT formalization. Target modules are imported here for project builds.
 import Hatcher.Algebra.Homology.Augment
 import Hatcher.Appendix.CompactSubspaceFiniteSubcomplex
+import Hatcher.Appendix.SubcomplexIntersection
 import Hatcher.Appendix.ClassicalCellArrowIso
 import Hatcher.Appendix.SuccessorSkeletonQuotient
 import Hatcher.Appendix.ClassicalSkeletonCellAttachment
