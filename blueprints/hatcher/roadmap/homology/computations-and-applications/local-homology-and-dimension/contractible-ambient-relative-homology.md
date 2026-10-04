@@ -1,8 +1,10 @@
 ---
 article_id: af_eb5fb984d257557c4e2ad751
 source_units: [hatcher-2-1-post-excision-applications]
-declaration: theorem
+declaration: def
 origin: bridged
+statement: formalized
+lean: Hatcher.Relative.contractibleAmbientRelativeHomologyIso
 ---
 
 # Relative homology in a contractible ambient space

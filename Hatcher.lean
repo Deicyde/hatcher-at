@@ -74,6 +74,7 @@ import Hatcher.Singular.ReducedRelative
 import Hatcher.Singular.PointedRelative
 import Hatcher.Singular.PointedRelativeNaturality
 import Hatcher.Singular.ContractibleSubspaceRelative
+import Hatcher.Singular.ContractibleAmbientRelative
 import Hatcher.Singular.SigmaPointedPair
 import Hatcher.Singular.StandardSimplexBoundaryHorn
 import Hatcher.Singular.StandardSimplexZeroHorn
