@@ -3,6 +3,9 @@ article_id: af_f470c42e2b74bf78b5a5d459
 source_units: [hatcher-2-1-post-excision-applications]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Simplex.boundaryZeroHornGoodPairData
 ---
 
 # Standard-simplex boundary and horn pairs are good
