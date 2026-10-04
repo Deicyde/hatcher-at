@@ -80,6 +80,7 @@ import Hatcher.Singular.StandardSimplexBoundaryHorn
 import Hatcher.Singular.StandardSimplexZeroHorn
 import Hatcher.Singular.StandardSimplexGoodPairs
 import Hatcher.Singular.PointQuotient
+import Hatcher.Singular.StandardSimplexZeroFaceQuotient
 import Hatcher.Singular.PointQuotientTopology
 import Hatcher.Singular.GoodPairNeighborhoodQuotient
 import Hatcher.Singular.PointQuotientNeighborhoodContraction

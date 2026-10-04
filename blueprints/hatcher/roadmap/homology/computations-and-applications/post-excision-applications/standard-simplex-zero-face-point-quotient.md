@@ -3,6 +3,9 @@ article_id: af_e92b61d61380699a545407f8
 source_units: [hatcher-2-1-post-excision-applications]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Simplex.zeroFacePointQuotientIso
 ---
 
 # The zero face identifies the two simplex point quotients
