@@ -4,15 +4,16 @@ article_id: af_9da1e6c5697d0bac0b2a1624
 
 # Homology
 
-Hatcher's Chapter 2 (pages 97–184). Four selected §2.1 slices are complete: the
+Hatcher's Chapter 2 (pages 97–184). Five selected §2.1 slices are complete: the
 singular-homology functoriality spine, a fifteen-leaf reduced- and
 relative-homology exact-sequence spine, a four-leaf triple-sequence slice, and
-a ten-leaf small-chains/excision DAG. The six-leaf §2.2 Mayer–Vietoris slice is
+a ten-leaf small-chains/excision DAG, together with the fifteen-leaf good-pair
+quotient milestone. The six-leaf §2.2 Mayer–Vietoris slice is
 also complete. The thirteen-leaf neighborhood-retract, Example 2.46, and
 reduced sphere-homology milestone is complete as well, as is its three-leaf
-Corollary 2.15 continuation through Brouwer's theorem. A fifteen-leaf
-good-pair quotient milestone now plans Proposition 2.22, Theorem 2.13, and
-naturality. The rest of the chapter remains explicitly deferred.
+Corollary 2.15 continuation through Brouwer's theorem. The good-pair quotient
+milestone formalizes Proposition 2.22, Theorem 2.13, and naturality. The rest
+of the chapter remains explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -37,7 +38,7 @@ triple, its long exact sequence, degree-zero endpoint, and naturality. Mathlib `
 contains PR #41285 but not the open triple PR #41318. The
 [small-chains/excision branch](simplicial-and-singular/relative-homology/small-chains-and-excision/README.md)
 is decomposed into ten complete leaves; the Δ-complex branch remains deferred.
-The new
+The completed
 [good-pair quotient branch](simplicial-and-singular/relative-homology/good-pair-quotient/README.md)
 adds the functorial point quotient and the canonical quotient exact sequence.
 

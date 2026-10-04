@@ -13,9 +13,9 @@ complexes, and singular homology in degree zero. What it lacks is the book's
 spine of computations, starting with `π₁(S¹) ≅ ℤ`. The roadmap therefore maps
 the whole book but decomposes it from that point.
 
-Chapters follow Hatcher's own order. The selected scope contains 200
-formalizable leaves. Of these, 185 are complete: 167 are formalized locally and
-18 are pinned Mathlib declarations. This includes all 133 leaves in the
+Chapters follow Hatcher's own order. All 200 formalizable leaves in the selected
+scope are complete: 182 are formalized locally and 18 are pinned Mathlib
+declarations. This includes all 133 leaves in the
 previously completed §1.1, §1.2, §1.3, §2.1 functoriality, and Appendix A.1
 slices; the §1.3 spine extends through Proposition 1.40. A fifteen-leaf §2.1 slice also
 decomposes reduced and relative homology, long exact sequences, naturality, and
@@ -26,9 +26,9 @@ Mayer–Vietoris leaves are complete. The thirteen leaves for the
 neighborhood-retract extension, Example 2.46, and reduced sphere homology are
 also formalized locally and complete. The three Corollary 2.15 leaves through
 Brouwer's theorem are complete. The promoted strong-deformation-retract
-background leaf is also complete. Fifteen planned leaves now decompose the
-good-pair quotient comparison, Theorem 2.13, and naturality. The
-rest of the unselected source remains explicitly deferred. The
+background leaf is also complete. All fifteen leaves for the good-pair quotient
+comparison, Theorem 2.13, and naturality are formalized locally and complete.
+The rest of the unselected source remains explicitly deferred. The
 [coverage contract](../coverage/README.md) says which is which, and
 [the source notes](../sources/hatcher.md) fix the citation scheme.
 

@@ -4,8 +4,8 @@ A Lean 4 formalization of results from Allen Hatcher's *Algebraic Topology*,
 built on Mathlib. The book's text is not redistributed here.
 
 The whole book's numbered sections are mapped in the roadmap and coverage
-contract. The selected scope contains 200 formalizable leaves. Of these, 185
-are complete: 167 are formalized locally and 18 are pinned Mathlib
+contract. All 200 formalizable leaves in the selected scope are complete: 182
+are formalized locally and 18 are pinned Mathlib
 declarations. This comprises all 133 nodes in the previously completed
 slices—twenty-two nodes in
 [§1.1](blueprints/hatcher/roadmap/fundamental-group/basic-constructions/README.md),
@@ -28,8 +28,9 @@ are complete. The thirteen leaves for neighborhood-retract transport, Example
 The three Corollary 2.15 leaves for the homological no-retraction argument,
 fixed-point-free boundary-ray construction, and Brouwer's fixed-point theorem
 are complete. The promoted strong-deformation-retract background leaf is also
-complete. Fifteen new leaves decompose the good-pair point quotient,
-Proposition 2.22, Theorem 2.13, and naturality. Thirteen other source
+complete. All fifteen leaves for the good-pair point quotient, Proposition
+2.22, Theorem 2.13, and naturality are formalized locally and complete.
+Thirteen other source
 units are explicitly deferred; lettered additional topics and exercises remain
 out of scope.
 

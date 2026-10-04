@@ -10,6 +10,10 @@ homology with reduced homology of `X/A`. Transporting the reduced pair sequence
 through this comparison gives the quotient long exact sequence, naturally in
 maps of good pairs.
 
+All fifteen leaves in the good-pair source unit are formalized locally and
+complete. The shared strong-deformation-retract background leaf listed below
+is also complete.
+
 The point quotient is represented functorially as the TopCat pushout
 `X ⊔_A PUnit`. The good-pair witness keeps Hatcher's exact neighborhood
 hypothesis `A ⊆ interior V`; it does not assume that the chosen `V` is open.

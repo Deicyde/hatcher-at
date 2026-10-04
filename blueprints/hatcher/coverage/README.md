@@ -184,9 +184,9 @@ CW-subcomplex neighborhood construction and Examples 2.47–2.48 remain deferred
 with the rest of §2.2.
 
 The [good-pair quotient milestone](../roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/README.md)
-decomposes Proposition 2.22, Theorem 2.13, and naturality into fifteen planned
-formalization leaves. Its promoted strong-deformation-retract background leaf
-is already formalized locally and complete.
+decomposes Proposition 2.22, Theorem 2.13, and naturality into fifteen
+formalization leaves, all formalized locally and complete. Its shared
+strong-deformation-retract background leaf is also complete.
 
 ## Deferred roadmap expansion
 
@@ -207,8 +207,8 @@ remain deferred. Within §2.1, Theorem 2.20 and Proposition 2.21 are already
 [decomposed into ten formalizable leaves](../roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/README.md),
 and Corollary 2.14 is now part of the sphere milestone. Corollary 2.15 is
 decomposed into three complete formalizable leaves. Theorem 2.13 and
-Proposition 2.22 are decomposed in the good-pair milestone. Lemma 2.1 and
-Examples 2.2–2.5, Proposition 2.6 beyond the selected `S⁰` support, Example
+Proposition 2.22 are decomposed and complete in the good-pair milestone. Lemma
+2.1 and Examples 2.2–2.5, Proposition 2.6 beyond the selected `S⁰` support, Example
 2.17, the arbitrary-pair mapping-cone comparison, Example 2.23 and Corollaries
 2.24–2.25, invariance of dimension, and Theorem 2.27 remain deferred. Within
 §2.2, degree, cellular homology, Euler
