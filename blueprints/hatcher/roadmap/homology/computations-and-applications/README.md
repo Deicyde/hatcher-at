@@ -9,7 +9,9 @@ from §2.1. The binary interior-cover Mayer–Vietoris sequence is complete in s
 formalizable leaves. The thirteen-leaf continuation covering
 neighborhood-retract transport, Example 2.46, and reduced sphere homology is
 also complete. The three-leaf Corollary 2.15 application is complete. The
-remainder of §2.2 stays explicitly deferred.
+new dependency-ordered branches decompose the §2.1 post-excision applications
+through Theorem 2.26 into twenty-seven leaves, supported by five Appendix A.5
+regular-neighborhood leaves. The remainder of §2.2 stays explicitly deferred.
 
 Given excision and the long exact sequence, homology becomes computable. From
 `Hₙ(Sⁿ) ≅ ℤ` comes the degree of a map `Sⁿ → Sⁿ`, with its local formula as a
@@ -32,6 +34,13 @@ small-chain equivalence. The completed
 neighborhood-retract extension, applies it to the hemispheres of a sphere, and
 continues through the completed no-retraction and Brouwer applications.
 
+The [post-excision applications](post-excision-applications/README.md) branch
+continues from Proposition 2.22 through mapping cones, explicit fundamental
+cycles, CW-subcomplex excision, and wedge additivity. The separate
+[local-homology branch](local-homology-and-dimension/README.md) culminates in
+Theorem 2.26. These pages retain their §2.1 source binding but are placed here
+so their sphere-homology prerequisites remain dependency-ordered.
+
 The pinned Mathlib supplies the standard disk, boundary, and inclusion models,
 but not the selected no-retraction, Brouwer, sphere-homology, or
 Mayer–Vietoris results. It has CW complexes but no cellular homology or degree
@@ -43,13 +52,17 @@ pinned Mathlib coverage nor a project dependency.
 
 - [Binary-cover Mayer–Vietoris sequences](mayer-vietoris/README.md)
 - [Mayer–Vietoris transport, sphere homology, and Brouwer](sphere-homology/README.md)
+- [Post-excision applications](post-excision-applications/README.md)
+- [Local homology and invariance of dimension](local-homology-and-dimension/README.md)
 
 Degree, cellular homology, the later Mayer–Vietoris applications, and homology
 with general coefficient groups as a separate source topic remain deferred.
 
 ## Sources
 
+- [Hatcher §2.1](../../../sources/hatcher-2-1.md)
 - [Hatcher §2.2](../../../sources/hatcher.md)
 - [Hatcher §2.2 Mayer–Vietoris source note](../../../sources/hatcher-2-2.md)
 - [Sphere-homology implementation specification](../../../sources/sphere-homology-implementation.md)
 - [Corollary 2.15 implementation specification](../../../sources/corollary-2-15-implementation.md)
+- [Post-excision applications implementation specification](../../../sources/post-excision-applications-implementation.md)

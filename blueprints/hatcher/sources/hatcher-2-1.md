@@ -128,11 +128,18 @@ completed relative, triple, excision, and reduced-pair APIs, and represents
 neighborhood witness and fifteen-leaf proof boundary are fixed in the
 [good-pair quotient implementation specification](good-pair-quotient-implementation.md).
 
+An eighth source unit selects the arbitrary-pair mapping-cone comparison,
+Example 2.23, Corollaries 2.24–2.25, and Theorem 2.26 on printed pages
+125–126. It stops before the simplicial–singular comparison in Theorem 2.27.
+Its mapping-cone, explicit-orientation, CW-excision, wedge-additivity, and
+local-homology representations are fixed in the
+[post-excision applications implementation specification](post-excision-applications-implementation.md).
+The supporting form of Appendix Proposition A.5 is fixed separately in the
+[CW-subcomplex neighborhood specification](cw-subcomplex-neighborhood-implementation.md).
+
 Proposition 2.6 is deferred because the pinned Mathlib has only the degree-zero
 component decomposition. Lemma 2.1, Examples 2.2–2.5, Example 2.17, the
-arbitrary-pair mapping-cone comparison, Example 2.23 and Corollaries
-2.24–2.25, invariance of dimension, and the Δ-complex comparison are later
-milestones.
+Δ-complex comparison, and Theorem 2.27 remain later milestones.
 
 For roadmap notation, write
 `Hₙ(X; R) := ((AlgebraicTopology.singularHomologyFunctor C n).obj R).obj X`.
@@ -208,9 +215,10 @@ excision, and Δ-complex homology with its comparison theorem.
   Add both clauses of Corollary 2.15 through the homological no-retraction
   argument and the dimension-general boundary-ray construction. Add the
   good-pair quotient route through Proposition 2.22, Theorem 2.13, and its
-  naturality. Leave Example 2.17, the arbitrary-pair mapping-cone comparison,
-  Example 2.23 and Corollaries 2.24–2.25, degree theory, invariance of
-  dimension, and Δ-complex results deferred; the selected §2.2 material is recorded in
+  naturality. Add the post-excision applications on pages 125–126 through
+  Theorem 2.26, supported by Appendix Proposition A.5. Leave Example 2.17,
+  degree theory, Theorem 2.27, and the remaining Δ-complex results deferred;
+  the selected §2.2 material is recorded in
   [its own source note](hatcher-2-2.md).
 - **Coefficients.** State exact Mathlib nodes with their coefficient-general
   categorical API. Treat Hatcher's integral theory as its abelian-group

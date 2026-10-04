@@ -13,9 +13,11 @@ covers the long exact sequence of a triple and its naturality; all four leaves
 are complete. A fourth ten-leaf slice decomposes small chains and excision; all
 ten leaves are complete. A fifth fifteen-leaf slice covers the good-pair
 quotient comparison, quotient exact sequence, and naturality; all fifteen
-leaves are formalized locally and complete. The
-separately placed sphere branch is complete through the three-leaf Corollary
-2.15 milestone.
+leaves are formalized locally and complete. A sixth selected slice now
+decomposes the post-excision applications through Theorem 2.26 into
+twenty-seven leaves, with five supporting Appendix A.5 leaves. The separately
+placed sphere branch is complete through the three-leaf Corollary 2.15
+milestone.
 
 Simplicial homology takes a Δ-complex structure and forms the chain complex of
 its simplices; it is finite and computable but depends on the chosen structure.
@@ -59,7 +61,7 @@ exact sequence with its degree-zero endpoint, and naturality are also complete.
 
 - [Relative homology and exact sequences](relative-homology/README.md)
 
-## Small chains, good-pair quotients, and the deferred remainder
+## Small chains, good-pair quotients, and post-excision applications
 
 [Small chains and excision](relative-homology/small-chains-and-excision/README.md),
 covering Proposition 2.21 and Theorem 2.20, are decomposed into ten
@@ -70,12 +72,15 @@ decompose Proposition 2.22, Theorem 2.13, their canonical point-quotient maps,
 and naturality into fifteen formalizable leaves, all formalized locally and
 complete.
 
+[Post-excision applications](../computations-and-applications/post-excision-applications/README.md)
+decompose the arbitrary-pair mapping-cone comparison, Example 2.23,
+Corollaries 2.24–2.25, and Theorem 2.26. The branch is placed after the sphere
+calculation in dependency order while retaining its §2.1 source binding.
+
 Lemma 2.1 and Examples 2.2–2.5 need a source-faithful Δ-complex chain model.
 Proposition 2.6 needs additivity over all path components in every degree;
 Mathlib `v4.34.1` contains only its degree-zero case. Example 2.17, the
-arbitrary-pair mapping-cone comparison, Example 2.23 and Corollaries
-2.24–2.25, invariance of dimension, and the Δ-complex comparison remain
-deferred. Corollary 2.15 is complete in
+remaining Δ-complex work, and Theorem 2.27 remain deferred. Corollary 2.15 is complete in
 the [sphere-homology and Brouwer
 milestone](../computations-and-applications/sphere-homology/README.md).
 

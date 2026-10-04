@@ -68,14 +68,19 @@ triple-sequence slice are formalized locally as well.
 
 - [Proposition 2.22 and Theorem 2.13](good-pair-quotient/README.md)
 
+## Post-excision applications
+
+- [Mapping cones through invariance of dimension](../../computations-and-applications/post-excision-applications/README.md)
+
 ## Decomposed and deferred boundary
 
 Theorem 2.20 and its Proposition 2.21 small-chain machinery are decomposed in
 the milestone above, and all ten leaves are complete. Theorem 2.13,
 Proposition 2.22, and their naturality are formalized locally and complete in
-the good-pair milestone. Example 2.17, Example 2.23 and Corollaries 2.24–2.25,
-the arbitrary-pair mapping-cone comparison, invariance of dimension, and the
-simplicial–singular comparison remain deferred.
+the good-pair milestone. The arbitrary-pair mapping-cone comparison, Example
+2.23, Corollaries 2.24–2.25, and invariance of dimension are now decomposed in
+the post-excision milestone. Example 2.17 and the simplicial–singular
+comparison remain deferred.
 
 ## Sources
 
@@ -84,3 +89,4 @@ simplicial–singular comparison remain deferred.
 - [Triple-homology implementation specification](../../../../sources/triple-homology-implementation.md)
 - [Singular excision implementation specification](../../../../sources/excision-implementation.md)
 - [Good-pair quotient implementation specification](../../../../sources/good-pair-quotient-implementation.md)
+- [Post-excision applications implementation specification](../../../../sources/post-excision-applications-implementation.md)

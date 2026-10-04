@@ -17,6 +17,9 @@ The project formalizes results from a single reference.
 - [Hatcher §2.2, Computations and Applications](hatcher-2-2.md) records the
   selected ordinary and reduced Mayer–Vietoris sequences, their conditional
   neighborhood extension, Example 2.46, and the explicitly deferred remainder.
+- [Hatcher Appendix Proposition A.5](hatcher-appendix-a5.md) records the
+  regular-neighborhood deformation retraction and intersection identity used
+  by CW-subcomplex excision.
 - [Relative-homology implementation specification](relative-homology-implementation.md)
   fixes the project representation, dependency gate, and prior-art boundary
   for the second §2.1 slice.
@@ -35,6 +38,14 @@ The project formalizes results from a single reference.
 - [Corollary 2.15 implementation specification](corollary-2-15-implementation.md)
   fixes the disk model, integral homology obstruction, boundary-ray bridge,
   and exclusions for no-retraction and Brouwer.
+- [Good-pair quotient implementation specification](good-pair-quotient-implementation.md)
+  fixes the point-quotient model and the source-facing comparison, exact
+  sequence, and naturality results.
+- [Post-excision applications implementation specification](post-excision-applications-implementation.md)
+  fixes the mapping-cone, explicit-cycle, CW-excision, wedge-additivity, and
+  local-homology architecture through Theorem 2.26.
+- [CW-subcomplex neighborhood implementation specification](cw-subcomplex-neighborhood-implementation.md)
+  fixes the selected Appendix A.5 regular-neighborhood construction.
 
 <!-- AUTHORING NOTES — these comments are not published.
 

@@ -7,7 +7,8 @@ article_id: af_247873c85c1da470b0a52dce
 Hatcher's appendix (pages 519–539). Most of the appendix remains mapped and
 explicitly deferred. The Proposition A.1 prerequisite used by §1.2 and the
 bounded successor-stage bridge between Mathlib's two CW-complex APIs are
-formalized.
+formalized. Proposition A.5 is now decomposed into five regular-neighborhood
+leaves supporting Corollary 2.24.
 
 The point-set facts the main text uses without proving: the topology of cell
 complexes, including that CW complexes are normal, locally contractible, and
@@ -29,7 +30,9 @@ main chapters have a home rather than being invented inline.
 - [Compact subsets lie in a bounded skeleton](classical-cw-bridge/compact-subset-bounded-skeleton.md)
 - [Classical CW bridge support](classical-cw-bridge/README.md)
 - [Classical skeleton inclusions are abstract cell attachments](classical-skeleton-cell-attachment.md)
+- [CW-subcomplex regular neighborhoods](../homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/README.md)
 
 ## Sources
 
 - [Hatcher, Appendix](../../sources/hatcher.md)
+- [Hatcher Appendix Proposition A.5](../../sources/hatcher-appendix-a5.md)

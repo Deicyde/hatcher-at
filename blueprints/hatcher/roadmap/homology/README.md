@@ -13,7 +13,9 @@ also complete. The thirteen-leaf neighborhood-retract, Example 2.46, and
 reduced sphere-homology milestone is complete as well, as is its three-leaf
 Corollary 2.15 continuation through Brouwer's theorem. The good-pair quotient
 milestone formalizes Proposition 2.22, Theorem 2.13, and naturality. The rest
-of the chapter remains explicitly deferred.
+of the selected §2.1 post-excision applications are now decomposed into
+twenty-seven leaves, with five supporting Appendix A.5 leaves. The rest of the
+chapter remains explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -45,9 +47,10 @@ adds the functorial point quotient and the canonical quotient exact sequence.
 [Computations and applications](computations-and-applications/README.md)
 contains the six complete ordinary and reduced binary-cover Mayer–Vietoris
 leaves, the completed sphere-homology milestone, and the completed Corollary
-2.15 continuation. The branch adds conditional neighborhood transport, the
-hemisphere recurrence, the full reduced homology calculation, no-retraction,
-and Brouwer. Degree, cellular homology, the
+2.15 continuation. It also contains the dependency-ordered post-excision and
+local-homology branches through Theorem 2.26. The completed work adds
+conditional neighborhood transport, the hemisphere recurrence, the full
+reduced homology calculation, no-retraction, and Brouwer. Degree, cellular homology, the
 later Mayer–Vietoris examples, and homology with coefficients remain deferred.
 Invariance of domain belongs to out-of-scope Additional Topic §2.B.
 
