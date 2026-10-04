@@ -83,6 +83,7 @@ import Hatcher.Singular.GoodPairPointQuotientHomology
 import Hatcher.Singular.GoodPairPointQuotientNaturality
 import Hatcher.Singular.GoodPairPointQuotientExactSequence
 import Hatcher.Singular.GoodPairPointQuotientSequenceNaturality
+import Hatcher.Singular.MappingCone
 import Hatcher.Singular.TripleChains
 import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected
