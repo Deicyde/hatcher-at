@@ -3,6 +3,9 @@ article_id: af_1681cfca508c6b0f47bd1569
 source_units: [hatcher-2-1-good-pair-quotient]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.goodPairPointQuotientConnecting_naturality
 ---
 
 # Naturality of the good-pair quotient sequence
@@ -15,6 +18,21 @@ square, overlap compatibility, and the degree-zero endpoint.
 The induced map `X/A → Y/B` comes from the point-quotient functor. The theorem
 must not require the map of pairs to preserve chosen neighborhood or
 deformation-retraction witnesses.
+
+Formalized in
+`Hatcher/Singular/GoodPairPointQuotientSequenceNaturality.lean`. The main
+theorem `Hatcher.Relative.goodPairPointQuotientConnecting_naturality`
+transports reduced-pair connecting naturality through the Proposition 2.22
+natural isomorphism. The definitions
+`Hatcher.Relative.goodPairPointQuotientSequenceMap` and
+`Hatcher.Relative.goodPairPointQuotientZeroSequenceMap` package the six-term
+and terminal degree-zero sequence maps. Their quotient components are exactly
+the reduced-homology maps induced by `pointQuotientMap f.hom`; the module also
+records both quotient squares, compatibility on all three terms shared by
+successive windows, the final square to zero, and compatibility of the
+terminal sequence with the degree-one/degree-zero window. All declarations
+take an ordinary morphism in the full good-pair subcategory and use no chosen
+good-pair witness data.
 
 ## Depends on
 
