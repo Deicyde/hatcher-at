@@ -3,6 +3,9 @@ article_id: af_88908032037e3aad0cb5e672
 source_units: [hatcher-2-1-post-excision-applications]
 declaration: instance
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.mappingConeCoverRetraction_homologyMap_isIso
 ---
 
 # The mapping-cone cover has the relative homology of the original pair

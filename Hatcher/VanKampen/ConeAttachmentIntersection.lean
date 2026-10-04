@@ -122,6 +122,17 @@ noncomputable def interiorCylinderHomeomorphCoverIntersection (f : S → X) :
   (interiorPreimageHomeomorph f).trans
     (preimageHomeomorphCoverIntersection f)
 
+/-- Under the explicit interior-cylinder chart, a pair `(s,t)` is represented
+by the corresponding cone-cylinder point. -/
+@[simp]
+theorem interiorCylinderHomeomorphCoverIntersection_coe
+    (f : S → X) (p : S × Set.Ioo (0 : I) 1) :
+    ((interiorCylinderHomeomorphCoverIntersection f p :
+        ↥(lowerCover f ∩ upperCover f)) :
+      Hatcher.VanKampen.ConeAttachment f) =
+      cylinder f p.1 p.2 :=
+  rfl
+
 private def unitIntervalInteriorHomeomorphReal :
     Set.Ioo (0 : I) 1 ≃ₜ Set.Ioo (0 : ℝ) 1 where
   toFun t := ⟨t.1.1, t.2⟩

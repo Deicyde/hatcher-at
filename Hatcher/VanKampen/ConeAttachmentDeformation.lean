@@ -450,6 +450,34 @@ theorem lowerRetraction_apply_base (f : C(S, X)) (x : X) :
   rw [← ha, lowerRetractionMap_quotientMap]
   rfl
 
+/-- The lower-cover retraction sends a positive-height cylinder point to its
+attaching point in the base. -/
+@[simp]
+theorem lowerRetraction_apply_cylinder (f : C(S, X)) (s : S) (t : I)
+    (ht : 0 < t) :
+    lowerRetraction f
+        ⟨cylinder f s t, by
+          change Sum.inr (Sum.inr (s, t)) ∈
+            quotientMk f ⁻¹' lowerCover f
+          rw [quotientMk_preimage_lowerCover]
+          exact ht⟩ =
+      f s := by
+  let a : quotientMk f ⁻¹' lowerCover f :=
+    ⟨Sum.inr (Sum.inr (s, t)), by
+      rw [quotientMk_preimage_lowerCover]
+      exact ht⟩
+  have ha : (lowerCover f).restrictPreimage (quotientMk f) a =
+      ⟨cylinder f s t, by
+        change Sum.inr (Sum.inr (s, t)) ∈
+          quotientMk f ⁻¹' lowerCover f
+        rw [quotientMk_preimage_lowerCover]
+        exact ht⟩ := by
+    apply Subtype.ext
+    rfl
+  change lowerRetractionMap f _ = f s
+  rw [← ha, lowerRetractionMap_quotientMap]
+  rfl
+
 theorem lowerRetraction_comp_inclusion (f : C(S, X)) :
     (lowerRetraction f).comp (lowerBaseInclusion f) = ContinuousMap.id X := by
   ext x
