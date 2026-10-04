@@ -76,6 +76,7 @@ import Hatcher.Singular.PointedRelativeNaturality
 import Hatcher.Singular.ContractibleSubspaceRelative
 import Hatcher.Singular.SigmaPointedPair
 import Hatcher.Singular.StandardSimplexBoundaryHorn
+import Hatcher.Singular.StandardSimplexZeroHorn
 import Hatcher.Singular.PointQuotient
 import Hatcher.Singular.PointQuotientTopology
 import Hatcher.Singular.GoodPairNeighborhoodQuotient
