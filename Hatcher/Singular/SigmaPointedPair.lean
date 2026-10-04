@@ -1,4 +1,4 @@
-import Hatcher.Singular.PointedRelativeNaturality
+import Hatcher.Singular.PointedRelative
 import Mathlib.Topology.Category.TopCat.Limits.Products
 
 /-!

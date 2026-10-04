@@ -25,7 +25,7 @@ subspace of the sigma pair are empty.
 
 ## Depends on
 
-None beyond the existing topological-pair and coproduct APIs.
+- [Relative homology at a chosen basepoint is reduced homology](../../simplicial-and-singular/relative-homology/pointed-relative-reduced-homology.md)
 
 ## Sources
 
