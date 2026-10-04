@@ -21,8 +21,7 @@ namespace Hatcher.ClassicalCW.Subcomplex
 
 universe u
 
-variable {X : Type u} [TopologicalSpace X] {C : Set X}
-  [T2Space X] [CWComplex C]
+variable {X : Type u} [TopologicalSpace X] {C : Set X} [CWComplex C]
 
 /-- The intersection of two classical CW subcomplexes. -/
 def inter (A B : CWComplex.Subcomplex C) : CWComplex.Subcomplex C where
@@ -35,8 +34,11 @@ def inter (A B : CWComplex.Subcomplex C) : CWComplex.Subcomplex C where
     constructor
     · intro hx
       obtain ⟨n, j, hxj⟩ := Set.mem_iUnion₂.mp hx
-      exact ⟨A.openCell_subset_of_mem j.2.1 hxj,
-        B.openCell_subset_of_mem j.2.2 hxj⟩
+      constructor
+      · rw [← Topology.CWComplex.Subcomplex.union (E := A)]
+        exact Set.mem_iUnion₂.mpr ⟨n, ⟨j.1, j.2.1⟩, hxj⟩
+      · rw [← Topology.CWComplex.Subcomplex.union (E := B)]
+        exact Set.mem_iUnion₂.mpr ⟨n, ⟨j.1, j.2.2⟩, hxj⟩
     · rintro ⟨hxA, hxB⟩
       have hxA' := hxA
       have hxB' := hxB

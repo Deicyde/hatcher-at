@@ -13,7 +13,8 @@ For two `CWComplex.Subcomplex C` objects, construct the subcomplex whose cells
 are those belonging to both inputs and whose carrier is their set-theoretic
 intersection. Expose the coercion formula
 
-`↑(A.inter B) = (A : Set X) ∩ (B : Set X)`
+`↑(Hatcher.ClassicalCW.Subcomplex.inter A B) =`
+`  (A : Set X) ∩ (B : Set X)`
 
 and the corresponding cell-index formula. The main artifact is
 `Hatcher.ClassicalCW.Subcomplex.inter`.
