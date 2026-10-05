@@ -3,6 +3,9 @@ article_id: af_c25aace6019fc7573293d3ca
 source_units: [hatcher-2-2-degree-foundations]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.degree_eq_one_or_neg_one_of_homotopyEquiv
 ---
 
 # The formal properties of degree
@@ -21,6 +24,13 @@ integer multiplier rather than an unspecified automorphism of homology.
 
 Do not formalize the converse “equal degree implies homotopic”; Hatcher
 postpones it to Corollary 4.25.
+
+The supporting API records `degree_id`, `degree_comp`, and
+`degree_eq_of_homotopy`, together with their conjugated-endomorphism forms.
+For a self-homotopy-equivalence, the degrees of the forward and inverse maps
+multiply to one, yielding `isUnit_degree_of_homotopyEquiv` and the displayed
+main theorem. Homeomorphism specializations are also exposed for the later
+reflection and group-action calculations.
 
 ## Depends on
 
