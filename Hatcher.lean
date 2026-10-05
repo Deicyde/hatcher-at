@@ -133,6 +133,7 @@ import Hatcher.Sphere.NonsurjectiveDegree
 import Hatcher.Sphere.OddTangentField
 import Hatcher.Sphere.PuncturedStereographic
 import Hatcher.Sphere.RadialDeformationRetract
+import Hatcher.Sphere.ReflectionDegree
 import Hatcher.Sphere.TangentVectorField
 import Hatcher.Sphere.ZeroSphere
 import Hatcher.Sphere.ZeroSphereHomology
