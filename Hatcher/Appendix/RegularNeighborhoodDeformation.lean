@@ -1084,10 +1084,11 @@ private def regularNeighborhoodStageDeformationSucc
 
 private def regularNeighborhoodStageDeformation
     (A : CWComplex.Subcomplex C) :
-    (n : ℕ) → RegularNeighborhoodStageDeformation C A n
-  | 0 => regularNeighborhoodStageDeformationZero C A
-  | n + 1 => regularNeighborhoodStageDeformationSucc C A n
-      (regularNeighborhoodStageDeformation A n)
+    (n : ℕ) → RegularNeighborhoodStageDeformation C A n :=
+  fun n => Nat.rec
+    (motive := fun n => RegularNeighborhoodStageDeformation C A n)
+    (regularNeighborhoodStageDeformationZero C A)
+    (fun n d => regularNeighborhoodStageDeformationSucc C A n d) n
 
 private theorem regularNeighborhoodStageDeformation_succ_old
     (A : CWComplex.Subcomplex C) (n : ℕ) (t : I)

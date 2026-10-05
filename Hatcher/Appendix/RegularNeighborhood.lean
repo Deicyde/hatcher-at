@@ -36,18 +36,17 @@ private abbrev CellModel (n : ℕ) := Fin n → ℝ
 
 /-- The part of the regular neighborhood constructed through the cells of
 dimension strictly less than `n`. -/
-def regularNeighborhoodStage (A : CWComplex.Subcomplex C) : ℕ → Set X
-  | 0 => ∅
-  | n + 1 =>
-      regularNeighborhoodStage A n ∪
+def regularNeighborhoodStage (A : CWComplex.Subcomplex C) : ℕ → Set X :=
+  fun n => Nat.rec (motive := fun _ => Set X) ∅ (fun n stage =>
+      stage ∪
         ⋃ i : Topology.CWComplex.cell C n,
           Topology.CWComplex.map n i ''
             {z : CellModel n |
               z ∈ ball 0 1 ∧
                 if (1 / 2 : ℝ) < ‖z‖ then
                   Topology.CWComplex.map n i (NormedSpace.normalize z) ∈
-                    regularNeighborhoodStage A n
-                else i ∈ A.I n}
+                    stage
+                else i ∈ A.I n}) n
 
 /-- Hatcher's fixed-width regular neighborhood, as a subset of the ambient
 space.  It is contained in `C` and open in the subspace topology on `C`. -/
