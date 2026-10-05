@@ -129,6 +129,7 @@ import Hatcher.Sphere.DegreeOrientation
 import Hatcher.Sphere.Degree
 import Hatcher.Sphere.DegreeProperties
 import Hatcher.Sphere.ActionDegree
+import Hatcher.Sphere.AntipodalDegree
 import Hatcher.Sphere.HomologyRecurrence
 import Hatcher.Sphere.NonsurjectiveDegree
 import Hatcher.Sphere.OddTangentField

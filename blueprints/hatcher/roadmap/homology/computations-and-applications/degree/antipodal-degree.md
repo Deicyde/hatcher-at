@@ -3,6 +3,9 @@ article_id: af_48c015e1354062483f49ed29
 source_units: [hatcher-2-2-degree-foundations]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.degree_antipodal
 ---
 
 # The antipodal map has degree determined by dimension
@@ -18,6 +21,13 @@ theorem Hatcher.Sphere.degree_antipodal ... :
 The factorization must be an equality of the explicit coordinate sign-change
 maps, so multiplicativity of degree applies without an unspecified homotopic
 replacement.
+
+`Hatcher.Sphere.coordinateReflectionComposite` composes a concrete ordered
+list of coordinate reflections, with the head reflection applied first. For a
+duplicate-free list it equals the sign change on exactly the listed
+coordinates. The theorem `coordinateReflectionComposite_finRange` therefore
+identifies the list of all `n+1` coordinates with `antipodalIso n` before the
+degree calculation is performed.
 
 ## Depends on
 
