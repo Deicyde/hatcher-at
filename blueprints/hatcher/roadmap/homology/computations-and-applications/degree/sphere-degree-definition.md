@@ -3,6 +3,9 @@ article_id: af_a3e5e85d8bde5ed4ffd0a743
 source_units: [hatcher-2-2-degree-foundations]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.integralSphereFundamentalClass_map
 ---
 
 # Degree is the multiplier of the ordered sphere class
@@ -30,6 +33,14 @@ theorem Hatcher.Sphere.integralSphereFundamentalClass_map ... :
 
 together with the equivalent characterization of the conjugated
 endomorphism. This fixes the sign convention used by every later node.
+
+The implementation first defines
+`Hatcher.Sphere.degreeEndomorphism` in the order
+`ℤ → Hₙ(Sⁿ;ℤ) → Hₙ(Sⁿ;ℤ) → ℤ`, then defines
+`Hatcher.Sphere.degree` by evaluating it at `1`. The theorem
+`Hatcher.Sphere.degreeEndomorphism_eq_asHom` identifies this endomorphism with
+multiplication by the degree, and the main theorem rewrites the same fact on
+the ordered fundamental class.
 
 ## Depends on
 
