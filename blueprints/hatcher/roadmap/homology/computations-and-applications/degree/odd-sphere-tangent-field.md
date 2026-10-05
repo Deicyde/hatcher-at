@@ -3,6 +3,9 @@ article_id: af_82daa470562d75a3f2a999dd
 source_units: [hatcher-2-2-degree-foundations]
 declaration: def
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.nonvanishingTangentVectorFieldOfOdd
 ---
 
 # Odd spheres have a nonvanishing tangent field
@@ -22,6 +25,12 @@ noncomputable def Hatcher.Sphere.nonvanishingTangentVectorFieldOfOdd ... :
 and prove that it has unit norm, hence is nowhere zero. The construction must
 handle the coordinate reindexing explicitly and retain continuity as part of
 the bundled field.
+
+Formalized in `Hatcher/Sphere/OddTangentField.lean`. The public
+`oddSphereCoordinateEquiv` and paired-coordinate equations expose the literal
+quarter-turn formula, while
+`nonvanishingTangentVectorFieldOfOdd_nonvanishing` proves the resulting field
+is nowhere zero.
 
 ## Depends on
 
