@@ -3,6 +3,8 @@ article_id: af_1e83c364583b4ef47b8b0570
 source_units: [hatcher-2-2-degree-foundations]
 declaration: structure
 origin: bridged
+statement: formalized
+lean: Hatcher.Sphere.TangentVectorField
 ---
 
 # Tangent vector fields and normalization
@@ -15,6 +17,11 @@ For a nonvanishing field, construct its normalized field and prove continuity,
 orthogonality, unit norm, and equality of its zero set with that of the
 original field. The representation must match Hatcher's ambient formula and
 must not introduce a tangent-bundle dependency.
+
+Formalized in `Hatcher/Sphere/TangentVectorField.lean`. The public API also
+records the continuous ambient-point map, its unit norm, pointwise
+nonvanishing, and preservation of both the zero set and nonvanishing under
+normalization.
 
 ## Depends on
 

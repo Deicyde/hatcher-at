@@ -126,6 +126,7 @@ import Hatcher.Sphere.Homology
 import Hatcher.Sphere.DegreeOrientation
 import Hatcher.Sphere.HomologyRecurrence
 import Hatcher.Sphere.RadialDeformationRetract
+import Hatcher.Sphere.TangentVectorField
 import Hatcher.Sphere.ZeroSphere
 import Hatcher.Sphere.ZeroSphereHomology
 import Hatcher.Topology.StrongDeformationRetract
