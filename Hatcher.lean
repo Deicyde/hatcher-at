@@ -106,6 +106,7 @@ import Hatcher.Singular.StandardSimplexZeroFaceHomology
 import Hatcher.Singular.DoubleSimplexRelative
 import Hatcher.Singular.RelativeSimplexFundamentalClass
 import Hatcher.Singular.DoubleSimplexFundamentalClass
+import Hatcher.Singular.DoubleSimplexSwap
 import Hatcher.Singular.DoubleSimplexSphere
 import Hatcher.Singular.GoodPairPointQuotientExactSequence
 import Hatcher.Singular.GoodPairPointQuotientSequenceNaturality

@@ -3,6 +3,9 @@ article_id: af_e6003b902922b5db4aeeda3f
 source_units: [hatcher-2-2-degree-foundations]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Simplex.doubleSimplexFundamentalClass_map_swap
 ---
 
 # Swapping the double simplex negates its fundamental class
@@ -24,6 +27,12 @@ theorem Hatcher.Simplex.doubleSimplexFundamentalClass_map_swap ... :
 ```
 
 with integral coefficients as the source-facing specialization.
+
+The formalization constructs the pushout involution explicitly, proves its
+action on both canonical singular simplices, and establishes the negation
+formula first for the augmented chain cycle and then for its reduced-homology
+class. The result is coefficient-general in every abelian target category with
+the required coproducts.
 
 ## Depends on
 
