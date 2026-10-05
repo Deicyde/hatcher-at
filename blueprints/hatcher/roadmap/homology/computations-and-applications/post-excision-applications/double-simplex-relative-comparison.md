@@ -34,6 +34,7 @@ subspace is empty and hence is not accepted by the project's `GoodPairData`.
 
 - [Standard-simplex boundary and horn pairs are good](standard-simplex-boundary-good-pairs.md)
 - [The zero face identifies the two simplex point quotients](standard-simplex-zero-face-point-quotient.md)
+- [The zero face is a relative-homology equivalence](standard-simplex-zero-face-relative-homology.md)
 - [Good-pair relative homology is reduced quotient homology](../../simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-point-quotient-relative-homology.md)
 - [The good-pair quotient comparison is natural](../../simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-quotient-comparison-naturality.md)
 
