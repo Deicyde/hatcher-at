@@ -3,6 +3,9 @@ article_id: af_0b7faad59136939d2ec0734b
 source_units: [hatcher-2-1-post-excision-applications]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Simplex.doubleSimplexFundamentalClass_isIso
 ---
 
 # The double-simplex difference generates reduced homology
@@ -22,6 +25,14 @@ difference cycle maps to the identity simplex: the second summand vanishes in
 the relative quotient and the first remains. The integral specialization
 therefore says that `Δ₁^n - Δ₂^n`, with the common vertex ordering, is a
 generator rather than merely that the group is abstractly cyclic.
+
+Formalized in `Hatcher/Singular/DoubleSimplexFundamentalClass.lean`. The
+definition lifts the literal ordered difference cycle to augmented homology.
+Its canonical projection relative to the second simplex is proved, at chain
+level, to be the image of the identity simplex from the first summand; the
+relative-simplex generator theorem and both canonical comparison isomorphisms
+then prove the named class is an isomorphism in every dimension, including
+dimension zero.
 
 ## Depends on
 
