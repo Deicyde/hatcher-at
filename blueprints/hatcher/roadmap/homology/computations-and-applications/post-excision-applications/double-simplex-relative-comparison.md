@@ -3,6 +3,9 @@ article_id: af_34760c1b3ece607058533faf
 source_units: [hatcher-2-1-post-excision-applications]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Simplex.doubleSimplexFirstPair_homologyMap_isIso
 ---
 
 # The first simplex computes homology relative to the second

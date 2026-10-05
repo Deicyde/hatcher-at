@@ -101,6 +101,7 @@ import Hatcher.Singular.PointQuotientNeighborhoodExcision
 import Hatcher.Singular.GoodPairPointQuotientHomology
 import Hatcher.Singular.GoodPairPointQuotientNaturality
 import Hatcher.Singular.StandardSimplexZeroFaceHomology
+import Hatcher.Singular.DoubleSimplexRelative
 import Hatcher.Singular.RelativeSimplexFundamentalClass
 import Hatcher.Singular.GoodPairPointQuotientExactSequence
 import Hatcher.Singular.GoodPairPointQuotientSequenceNaturality
