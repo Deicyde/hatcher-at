@@ -3,6 +3,9 @@ article_id: af_a5d8f1242fb4422fcba20d43
 source_units: [hatcher-2-2-degree-foundations]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.degree_eq_zero_of_not_surjective
 ---
 
 # A nonsurjective sphere map has degree zero
@@ -19,6 +22,12 @@ Choose a point outside the image, factor `f` through the punctured sphere,
 and use its contractibility to show that the induced top-dimensional homology
 map vanishes. The proof must identify the actual degree multiplier; merely
 showing that some abstract endomorphism is zero is not the final statement.
+
+Formalized in `Hatcher/Sphere/NonsurjectiveDegree.lean`. The chosen missed
+point gives an explicit `TopCat` factorization through its complement. The
+published contractibility instance and positive-degree reduced-to-ordinary
+comparison make the intermediate ordinary homology object zero, so the
+conjugated integer endomorphism defining degree is literally the zero map.
 
 ## Depends on
 
