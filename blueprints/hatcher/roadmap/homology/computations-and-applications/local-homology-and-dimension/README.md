@@ -10,6 +10,8 @@ because its proof consumes the completed punctured-Euclidean retraction and
 sphere-homology calculation, while remaining part of the selected §2.1 source
 unit.
 
+All four formalization leaves are complete.
+
 - [Local homology is unchanged on an open neighborhood](local-homology-open-neighborhood.md)
 - [Relative homology in a contractible ambient space](contractible-ambient-relative-homology.md)
 - [Local homology of positive-dimensional Euclidean space](punctured-euclidean-local-homology.md)

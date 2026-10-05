@@ -7,8 +7,8 @@ article_id: af_247873c85c1da470b0a52dce
 Hatcher's appendix (pages 519–539). Most of the appendix remains mapped and
 explicitly deferred. The Proposition A.1 prerequisite used by §1.2 and the
 bounded successor-stage bridge between Mathlib's two CW-complex APIs are
-formalized. Proposition A.5 is now decomposed into five regular-neighborhood
-leaves supporting Corollary 2.24.
+formalized. Proposition A.5 is formalized in five complete
+regular-neighborhood leaves supporting Corollary 2.24.
 
 The point-set facts the main text uses without proving: the topology of cell
 complexes, including that CW complexes are normal, locally contractible, and

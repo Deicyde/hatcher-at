@@ -4,9 +4,9 @@ A Lean 4 formalization of results from Allen Hatcher's *Algebraic Topology*
 (Cambridge University Press, 2002), built on Mathlib. The book's text is not
 redistributed here; source notes cite it by chapter and section.
 
-Every chapter and numbered section of the book is mapped. The selected scope
-contains 232 formalizable leaves. Of these, 200 are complete: 182 are
-formalized locally and 18 are pinned Mathlib declarations. These comprise all
+Every chapter and numbered section of the book is mapped. All 232 formalizable
+leaves in the selected scope are complete: 214 are formalized locally and 18
+are pinned Mathlib declarations. These comprise all
 133 nodes in
 the previously completed §1.1, §1.2, §1.3, §2.1 functoriality, and Appendix A.1
 slices, plus all fifteen nodes in the §2.1 reduced- and relative-homology
@@ -27,9 +27,10 @@ argument, boundary-ray bridge, and Brouwer's fixed-point theorem are complete.
 The promoted strong-deformation-retract background leaf is also complete. All
 fifteen leaves for good pairs, Proposition 2.22, Theorem 2.13, and
 quotient-sequence naturality are formalized locally and complete. The coverage
-contract now decomposes twenty-seven post-excision application leaves through
-Theorem 2.26 and five Appendix A.5 regular-neighborhood leaves. The other
-remaining main-line source areas are explicitly deferred.
+contract decomposes twenty-seven post-excision application leaves through
+Theorem 2.26 and five Appendix A.5 regular-neighborhood leaves; all thirty-two
+are formalized locally and complete. The other remaining main-line source
+areas are explicitly deferred.
 
 - [Roadmap](roadmap/README.md) — the book: chapters, statements, and their
   dependencies.

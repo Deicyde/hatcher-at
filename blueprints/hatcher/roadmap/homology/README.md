@@ -13,9 +13,9 @@ also complete. The thirteen-leaf neighborhood-retract, Example 2.46, and
 reduced sphere-homology milestone is complete as well, as is its three-leaf
 Corollary 2.15 continuation through Brouwer's theorem. The good-pair quotient
 milestone formalizes Proposition 2.22, Theorem 2.13, and naturality. The rest
-of the selected §2.1 post-excision applications are now decomposed into
-twenty-seven leaves, with five supporting Appendix A.5 leaves. The rest of the
-chapter remains explicitly deferred.
+of the selected §2.1 post-excision applications are formalized in twenty-seven
+leaves, with five supporting Appendix A.5 leaves; all thirty-two are complete.
+The rest of the chapter remains explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian

@@ -9,9 +9,10 @@ from §2.1. The binary interior-cover Mayer–Vietoris sequence is complete in s
 formalizable leaves. The thirteen-leaf continuation covering
 neighborhood-retract transport, Example 2.46, and reduced sphere homology is
 also complete. The three-leaf Corollary 2.15 application is complete. The
-new dependency-ordered branches decompose the §2.1 post-excision applications
-through Theorem 2.26 into twenty-seven leaves, supported by five Appendix A.5
-regular-neighborhood leaves. The remainder of §2.2 stays explicitly deferred.
+dependency-ordered branches formalize the §2.1 post-excision applications
+through Theorem 2.26 in twenty-seven leaves, supported by five Appendix A.5
+regular-neighborhood leaves. All thirty-two are complete. The remainder of
+§2.2 stays explicitly deferred.
 
 Given excision and the long exact sequence, homology becomes computable. From
 `Hₙ(Sⁿ) ≅ ℤ` comes the degree of a map `Sⁿ → Sⁿ`, with its local formula as a

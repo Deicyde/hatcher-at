@@ -194,8 +194,8 @@ The [post-excision applications milestone](../roadmap/homology/computations-and-
 decomposes the arbitrary-pair mapping-cone comparison, Example 2.23,
 Corollaries 2.24–2.25, and Theorem 2.26 into twenty-seven formalization leaves.
 Its [Appendix A.5 branch](../roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/README.md)
-adds five regular-neighborhood leaves. These thirty-two new leaves are planned;
-decomposition is not a claim that they are formalized.
+adds five regular-neighborhood leaves. All thirty-two leaves are formalized
+locally and complete.
 
 ## Deferred roadmap expansion
 

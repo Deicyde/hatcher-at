@@ -10,6 +10,8 @@ neighborhood onto the subcomplex. The construction here is deliberately
 narrow: it fixes one common collar width for every cell and retains the
 intersection identity needed for Corollary 2.24.
 
+All five formalization leaves are complete.
+
 - [Intersections of CW subcomplexes](subcomplex-intersection.md)
 - [The radial collar of a cell boundary](cell-boundary-collar.md)
 - [A common regular-neighborhood system for subcomplexes](regular-neighborhood-system.md)

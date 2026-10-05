@@ -78,8 +78,8 @@ Theorem 2.20 and its Proposition 2.21 small-chain machinery are decomposed in
 the milestone above, and all ten leaves are complete. Theorem 2.13,
 Proposition 2.22, and their naturality are formalized locally and complete in
 the good-pair milestone. The arbitrary-pair mapping-cone comparison, Example
-2.23, Corollaries 2.24–2.25, and invariance of dimension are now decomposed in
-the post-excision milestone. Example 2.17 and the simplicial–singular
+2.23, Corollaries 2.24–2.25, and invariance of dimension are formalized and
+complete in the post-excision milestone. Example 2.17 and the simplicial–singular
 comparison remain deferred.
 
 ## Sources

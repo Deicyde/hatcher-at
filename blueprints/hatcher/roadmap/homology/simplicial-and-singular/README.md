@@ -13,9 +13,9 @@ covers the long exact sequence of a triple and its naturality; all four leaves
 are complete. A fourth ten-leaf slice decomposes small chains and excision; all
 ten leaves are complete. A fifth fifteen-leaf slice covers the good-pair
 quotient comparison, quotient exact sequence, and naturality; all fifteen
-leaves are formalized locally and complete. A sixth selected slice now
-decomposes the post-excision applications through Theorem 2.26 into
-twenty-seven leaves, with five supporting Appendix A.5 leaves. The separately
+leaves are formalized locally and complete. A sixth selected slice formalizes
+the post-excision applications through Theorem 2.26 in twenty-seven leaves,
+with five supporting Appendix A.5 leaves; all thirty-two are complete. The separately
 placed sphere branch is complete through the three-leaf Corollary 2.15
 milestone.
 
@@ -73,8 +73,8 @@ and naturality into fifteen formalizable leaves, all formalized locally and
 complete.
 
 [Post-excision applications](../computations-and-applications/post-excision-applications/README.md)
-decompose the arbitrary-pair mapping-cone comparison, Example 2.23,
-Corollaries 2.24–2.25, and Theorem 2.26. The branch is placed after the sphere
+formalize the arbitrary-pair mapping-cone comparison, Example 2.23,
+Corollaries 2.24–2.25, and Theorem 2.26. The complete branch is placed after the sphere
 calculation in dependency order while retaining its §2.1 source binding.
 
 Lemma 2.1 and Examples 2.2–2.5 need a source-faithful Δ-complex chain model.

@@ -13,6 +13,7 @@ dimension in Theorem 2.26.
 
 The milestone has twenty-seven §2.1 leaves. Five separate Appendix leaves
 construct the Proposition A.5 regular neighborhoods needed by Corollary 2.24.
+All thirty-two leaves are formalized locally and complete.
 Theorem 2.27, degree, cellular homology, and homology with coefficients remain
 outside this boundary.
 
