@@ -123,6 +123,7 @@ import Hatcher.Sphere.AntipodalCover
 import Hatcher.Sphere.HemisphereCharts
 import Hatcher.Sphere.HemisphereNeighborhoodCover
 import Hatcher.Sphere.Homology
+import Hatcher.Sphere.DegreeOrientation
 import Hatcher.Sphere.HomologyRecurrence
 import Hatcher.Sphere.RadialDeformationRetract
 import Hatcher.Sphere.ZeroSphere

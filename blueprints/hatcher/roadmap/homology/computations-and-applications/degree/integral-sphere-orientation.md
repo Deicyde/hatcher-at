@@ -3,6 +3,9 @@ article_id: af_ce0cbfdf3fed16c8fe605273
 source_units: [hatcher-2-2-degree-foundations]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.integralSphereHomologyIso
 ---
 
 # The ordered class orients ordinary sphere homology
@@ -22,6 +25,14 @@ Its inverse is the ordinary fundamental class obtained from
 positive-degree comparison between reduced and ordinary homology. Record the
 class and prove that it is an isomorphism. The orientation must therefore be
 the completed ordered double-simplex orientation, not an arbitrary choice.
+
+The named class is
+`Hatcher.Sphere.integralSphereFundamentalClass`. The theorem
+`Hatcher.Sphere.integralSphereHomologyIso_inv` identifies it exactly with the
+inverse of the displayed isomorphism, while
+`Hatcher.Sphere.integralSphereFundamentalClass_isIso` records that it is a
+generator. Thus the ordinary orientation retains the order of the two
+simplex summands used in Example 2.23.
 
 ## Depends on
 
