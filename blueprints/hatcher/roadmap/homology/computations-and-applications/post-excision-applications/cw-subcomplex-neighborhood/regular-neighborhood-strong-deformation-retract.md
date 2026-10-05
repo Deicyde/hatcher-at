@@ -1,8 +1,11 @@
 ---
 article_id: af_3397bfd09838597452912b09
 source_units: [appendix-proposition-a-5]
-declaration: theorem
+declaration: def
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.regularNeighborhoodStrongDeformationRetract
 ---
 
 # A regular neighborhood strongly deformation retracts onto its subcomplex
@@ -12,7 +15,7 @@ subcomplex `A` of a classical CW complex, the canonical inclusion of `A` into
 its fixed-width regular neighborhood is a strong deformation retract:
 
 ```lean
-theorem Hatcher.ClassicalCW.regularNeighborhoodStrongDeformationRetract
+def Hatcher.ClassicalCW.regularNeighborhoodStrongDeformationRetract
     (A : CWComplex.Subcomplex C) :
     Hatcher.StrongDeformationRetract
       (regularNeighborhoodInclusion A)

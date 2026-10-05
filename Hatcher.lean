@@ -3,6 +3,7 @@ import Hatcher.Algebra.Homology.Augment
 import Hatcher.Appendix.CellBoundaryCollar
 import Hatcher.Appendix.CompactSubspaceFiniteSubcomplex
 import Hatcher.Appendix.RegularNeighborhood
+import Hatcher.Appendix.RegularNeighborhoodDeformation
 import Hatcher.Appendix.SubcomplexIntersection
 import Hatcher.Appendix.ClassicalCellArrowIso
 import Hatcher.Appendix.SuccessorSkeletonQuotient
