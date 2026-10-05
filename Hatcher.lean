@@ -5,6 +5,7 @@ import Hatcher.Appendix.CompactSubspaceFiniteSubcomplex
 import Hatcher.Appendix.RegularNeighborhood
 import Hatcher.Appendix.RegularNeighborhoodDeformation
 import Hatcher.Appendix.SubcomplexIntersection
+import Hatcher.Appendix.SubcomplexNeighborhoodCover
 import Hatcher.Appendix.ClassicalCellArrowIso
 import Hatcher.Appendix.SuccessorSkeletonQuotient
 import Hatcher.Appendix.ClassicalSkeletonCellAttachment
