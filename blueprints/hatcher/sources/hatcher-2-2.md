@@ -1,10 +1,11 @@
 # Hatcher §2.2, Mayer–Vietoris sequences
 
-Selected material from Hatcher, *Algebraic Topology*, §2.2, printed pages
-149–150 (PDF pages 158–159). It comprises the core Mayer–Vietoris sequences,
-their neighborhood-deformation-retract extension, and Example 2.46.
-Statements below are paraphrased; consult the official PDF for the source text
-and diagrams.
+Selected material from Hatcher, *Algebraic Topology*, §2.2. This note records
+the core Mayer–Vietoris sequences on printed pages 149–150 (PDF pages
+158–159), their neighborhood-deformation-retract extension, and Example 2.46.
+The newly selected degree foundations on printed pages 134–135 have their own
+[source note](hatcher-2-2-degree.md). Statements below are paraphrased;
+consult the official PDF for the source text and diagrams.
 
 ## Binary interior-cover sequence
 
@@ -87,10 +88,14 @@ original good-pair quotient proof.
 The first selected source unit contains the ordinary and reduced binary-cover
 Mayer–Vietoris sequences and their chain-level construction. A second selected
 unit contains the conditional neighborhood-deformation-retract extension and
-Example 2.46. The general CW-subcomplex neighborhood construction, Examples
-2.47–2.48, Mayer–Vietoris naturality as a separate API, relative
-Mayer–Vietoris, degree, cellular homology, and homology with general
-coefficient groups as a separate source topic remain excluded.
+Example 2.46. A third unit contains degree and properties (a)–(g), Theorem
+2.28, and Proposition 2.29, with its exact boundary recorded separately.
+
+The general CW-subcomplex neighborhood construction, Examples 2.47–2.48,
+Mayer–Vietoris naturality as a separate API, relative Mayer–Vietoris, local
+degree, degree-realization examples, suspension invariance, cellular homology,
+and homology with general coefficient groups as a separate source topic remain
+excluded.
 
 The local formalization may use a general abelian target category and a
 coefficient object `R`; Hatcher's displayed groups are the integral

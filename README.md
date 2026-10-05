@@ -4,9 +4,10 @@ A Lean 4 formalization of results from Allen Hatcher's *Algebraic Topology*,
 built on Mathlib. The book's text is not redistributed here.
 
 The whole book's numbered sections are mapped in the roadmap and coverage
-contract. All 232 formalizable leaves in the selected scope are complete: 214
-are formalized locally and 18 are pinned Mathlib
-declarations. This comprises all 133 nodes in the previously completed
+contract. The selected scope has 248 formalizable leaves: 232 are complete,
+with 214 formalized locally and 18 pinned Mathlib declarations, and sixteen
+new degree-foundations leaves are planned. The completed work comprises all
+133 nodes in the previously completed
 slices—twenty-two nodes in
 [§1.1](blueprints/hatcher/roadmap/fundamental-group/basic-constructions/README.md),
 the selected 67-node §1.2 spine, the selected 32-node §1.3 classification and
@@ -32,7 +33,9 @@ complete. All fifteen leaves for the good-pair point quotient, Proposition
 2.22, Theorem 2.13, and naturality are formalized locally and complete.
 All thirty-two leaves for the post-excision applications through Theorem 2.26
 and their Appendix A.5 regular-neighborhood prerequisite are formalized
-locally and complete.
+locally and complete. The new degree milestone covers properties (a)–(g),
+Theorem 2.28, and Proposition 2.29 through sixteen dependency-ordered leaves;
+none is yet claimed complete.
 Thirteen other source units are explicitly deferred; lettered additional
 topics and exercises remain out of scope.
 

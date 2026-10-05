@@ -16,7 +16,10 @@ The project formalizes results from a single reference.
   foundations, deferred results, and current Mathlib boundary.
 - [Hatcher §2.2, Computations and Applications](hatcher-2-2.md) records the
   selected ordinary and reduced Mayer–Vietoris sequences, their conditional
-  neighborhood extension, Example 2.46, and the explicitly deferred remainder.
+  neighborhood extension, Example 2.46, the selected degree milestone, and
+  the explicitly deferred remainder.
+- [Hatcher §2.2, Degree foundations](hatcher-2-2-degree.md) records the degree
+  definition and properties (a)–(g), Theorem 2.28, and Proposition 2.29.
 - [Hatcher Appendix Proposition A.5](hatcher-appendix-a5.md) records the
   regular-neighborhood deformation retraction and intersection identity used
   by CW-subcomplex excision.
@@ -44,6 +47,9 @@ The project formalizes results from a single reference.
 - [Post-excision applications implementation specification](post-excision-applications-implementation.md)
   fixes the mapping-cone, explicit-cycle, CW-excision, wedge-additivity, and
   local-homology architecture through Theorem 2.26.
+- [Degree-foundations implementation specification](degree-theory-implementation.md)
+  fixes the ordered orientation, degree API, reflection calculation, tangent
+  fields, and free-action boundary through Proposition 2.29.
 - [CW-subcomplex neighborhood implementation specification](cw-subcomplex-neighborhood-implementation.md)
   fixes the selected Appendix A.5 regular-neighborhood construction.
 

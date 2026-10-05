@@ -15,7 +15,8 @@ Corollary 2.15 continuation through Brouwer's theorem. The good-pair quotient
 milestone formalizes Proposition 2.22, Theorem 2.13, and naturality. The rest
 of the selected §2.1 post-excision applications are formalized in twenty-seven
 leaves, with five supporting Appendix A.5 leaves; all thirty-two are complete.
-The rest of the chapter remains explicitly deferred.
+The degree foundations through Proposition 2.29 are decomposed into sixteen
+additional leaves. The rest of the chapter remains explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -50,8 +51,11 @@ leaves, the completed sphere-homology milestone, and the completed Corollary
 2.15 continuation. It also contains the dependency-ordered post-excision and
 local-homology branches through Theorem 2.26. The completed work adds
 conditional neighborhood transport, the hemisphere recurrence, the full
-reduced homology calculation, no-retraction, and Brouwer. Degree, cellular homology, the
-later Mayer–Vietoris examples, and homology with coefficients remain deferred.
+reduced homology calculation, no-retraction, and Brouwer. Its new
+[degree-foundations branch](computations-and-applications/degree/README.md)
+covers properties (a)–(g), Theorem 2.28, and Proposition 2.29 in sixteen
+planned leaves. Local degree, cellular homology, the later Mayer–Vietoris
+examples, and homology with coefficients remain deferred.
 Invariance of domain belongs to out-of-scope Additional Topic §2.B.
 
 [The formal viewpoint](formal-viewpoint/README.md) axiomatizes what was built,
@@ -62,8 +66,8 @@ invariance and `H₀`, contains the generic algebraic long exact sequence, and
 contains relative simplicial-set homology from PR #41285. Singular excision,
 Mayer–Vietoris, `Hₙ(Sⁿ)`, degree, and cellular homology remain outside the
 pinned library. The completed local excision milestone supplies the main input
-used by the Mayer–Vietoris branches; sphere homology is formalized locally
-rather than claimed as upstream coverage.
+used by the Mayer–Vietoris branches; sphere homology is formalized locally and
+degree is planned locally rather than claimed as upstream coverage.
 
 ## Sections
 
