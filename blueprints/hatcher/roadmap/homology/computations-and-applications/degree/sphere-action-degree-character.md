@@ -3,6 +3,9 @@ article_id: af_1d16b68f4d8e27f80da30d75
 source_units: [hatcher-2-2-degree-foundations]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.sphereActionDegreeHom
 ---
 
 # Degree gives a character of a sphere action
@@ -25,6 +28,13 @@ noncomputable def Hatcher.Sphere.sphereActionDegreeHom ... : G →* ℤˣ
 
 Prove that its underlying integer at `g` is the degree of `ρ g`. Also record
 an explicit multiplicative equivalence `ℤˣ ≃* Multiplicative (ZMod 2)`.
+
+`Hatcher.Sphere.SphereAction.IsFree` records the fixed-point condition without
+adding a separate topological-action layer. The theorem
+`Hatcher.Sphere.sphereActionDegreeHom_coe` identifies the chosen unit with the
+integer degree. The explicit inverse equivalence
+`Hatcher.Sphere.intUnitsMulEquivZModTwo` is built from the homomorphism
+`z ↦ (-1)^z`, with `1 ↦ 0` and `-1 ↦ 1` recorded for downstream use.
 
 ## Depends on
 
