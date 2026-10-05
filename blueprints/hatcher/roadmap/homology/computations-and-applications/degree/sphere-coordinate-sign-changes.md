@@ -3,6 +3,9 @@ article_id: af_973242ed62dcdeb1142aae93
 source_units: [hatcher-2-2-degree-foundations]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.doubleSimplexSwap_isoSphere
 ---
 
 # Coordinate sign changes on the sphere
@@ -24,6 +27,14 @@ theorem Hatcher.Sphere.doubleSimplexSwap_isoSphere ... :
     (Hatcher.Simplex.doubleSimplexIsoSphere n).hom ≫
       (coordinateReflectionIso n (Fin.last n)).hom
 ```
+
+Formalized in `Hatcher/Sphere/CoordinateSignChanges.lean` and
+`Hatcher/Singular/DoubleSimplexSphere.lean`. Coordinate sign changes are
+restrictions of a coordinatewise linear isometry of Euclidean space, so their
+homeomorphism, composition, reflection, and antipodal laws share one model.
+The last-coordinate calculation is performed on the two explicit hemisphere
+parametrizations defining `doubleSimplexIsoSphere`, which proves the displayed
+compatibility as an equality of the actual `TopCat` morphisms.
 
 ## Depends on
 

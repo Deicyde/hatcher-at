@@ -121,6 +121,7 @@ import Hatcher.Sphere.LoopInOpenCover
 import Hatcher.Sphere.SimplyConnected
 import Hatcher.Sphere.BorsukUlam
 import Hatcher.Sphere.AntipodalCover
+import Hatcher.Sphere.CoordinateSignChanges
 import Hatcher.Sphere.HemisphereCharts
 import Hatcher.Sphere.HemisphereNeighborhoodCover
 import Hatcher.Sphere.Homology

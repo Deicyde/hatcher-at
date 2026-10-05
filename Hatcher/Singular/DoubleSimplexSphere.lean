@@ -5,7 +5,9 @@ Authors: Jack McCarthy
 -/
 
 import Hatcher.Singular.DoubleSimplexFundamentalClass
+import Hatcher.Singular.DoubleSimplexSwap
 import Hatcher.Singular.StandardSimplexDisk
+import Hatcher.Sphere.CoordinateSignChanges
 import Hatcher.Sphere.HemisphereCharts
 import Mathlib.Topology.Homeomorph.Lemmas
 
@@ -411,13 +413,18 @@ private noncomputable def diskDoubleHomeomorphSphere (n : ℕ) :
         diskDoubleToSphere_injective n,
         diskDoubleToSphere_surjective n⟩
 
+/-- The ambient component of the standard-simplex-to-disk pair isomorphism. -/
+private noncomputable def standardSimplexDiskMap (n : ℕ) :
+    TopCat.of (StandardSimplex n) ⟶ TopCat.disk.{0} n :=
+  TopPair.Hom.fst (standardSimplexPairIsoDiskPair n).hom
+
 /-- The pair homeomorphism from the ordered simplex and its boundary to the
 standard disk and its boundary induces an isomorphism of their doubles. -/
 private noncomputable def doubleSimplexIsoDiskDouble (n : ℕ) :
     doubleSimplex n ≅ diskDouble n := by
   let e := standardSimplexPairIsoDiskPair n
   let a : TopCat.of (StandardSimplex n) ⟶ TopCat.disk.{0} n :=
-    TopPair.Hom.fst e.hom
+    standardSimplexDiskMap n
   let a_inv : TopCat.disk.{0} n ⟶ TopCat.of (StandardSimplex n) :=
     TopPair.Hom.fst e.inv
   let b : TopCat.of (standardSimplexBoundary n) ⟶
@@ -518,6 +525,109 @@ noncomputable def doubleSimplexHomeomorphSphere (n : ℕ) :
     ((doubleSimplex n : TopCat.{0}) : Type) ≃ₜ
       ((TopCat.sphere.{0} n : TopCat.{0}) : Type) :=
   TopCat.homeoOfIso (doubleSimplexIsoSphere n)
+
+private theorem diskHemispherePoint_true_reflection (n : ℕ)
+    (x : ((TopCat.disk.{0} n : TopCat.{0}) : Type)) :
+    (Hatcher.Sphere.coordinateReflectionIso n (Fin.last n)).hom
+        (diskHemispherePoint n true x) =
+      diskHemispherePoint n false x := by
+  apply (Hatcher.Sphere.sphereULiftHomeomorph n).injective
+  apply Subtype.ext
+  apply PiLp.ext
+  intro i
+  refine Fin.lastCases ?_ (fun j ↦ ?_) i
+  · simp [diskHemispherePoint, rawDiskHemispherePoint]
+  · simp [diskHemispherePoint, rawDiskHemispherePoint]
+
+private theorem diskHemispherePoint_false_reflection (n : ℕ)
+    (x : ((TopCat.disk.{0} n : TopCat.{0}) : Type)) :
+    (Hatcher.Sphere.coordinateReflectionIso n (Fin.last n)).hom
+        (diskHemispherePoint n false x) =
+      diskHemispherePoint n true x := by
+  apply (Hatcher.Sphere.sphereULiftHomeomorph n).injective
+  apply Subtype.ext
+  apply PiLp.ext
+  intro i
+  refine Fin.lastCases ?_ (fun j ↦ ?_) i
+  · simp [diskHemispherePoint, rawDiskHemispherePoint]
+  · simp [diskHemispherePoint, rawDiskHemispherePoint]
+
+private theorem diskHemisphereMap_true_reflection (n : ℕ) :
+    diskHemisphereMap n true ≫
+        (Hatcher.Sphere.coordinateReflectionIso n (Fin.last n)).hom =
+      diskHemisphereMap n false := by
+  ext x
+  exact diskHemispherePoint_true_reflection n x
+
+private theorem diskHemisphereMap_false_reflection (n : ℕ) :
+    diskHemisphereMap n false ≫
+        (Hatcher.Sphere.coordinateReflectionIso n (Fin.last n)).hom =
+      diskHemisphereMap n true := by
+  ext x
+  exact diskHemispherePoint_false_reflection n x
+
+private theorem doubleSimplexFirstInclusion_isoDiskDouble (n : ℕ) :
+    doubleSimplexFirstInclusion n ≫ (doubleSimplexIsoDiskDouble n).hom =
+      standardSimplexDiskMap n ≫
+        pushout.inl (TopCat.diskBoundaryInclusion.{0} n)
+          (TopCat.diskBoundaryInclusion.{0} n) := by
+  apply pushout.inl_desc
+
+private theorem doubleSimplexSecondInclusion_isoDiskDouble (n : ℕ) :
+    doubleSimplexSecondInclusion n ≫ (doubleSimplexIsoDiskDouble n).hom =
+      standardSimplexDiskMap n ≫
+        pushout.inr (TopCat.diskBoundaryInclusion.{0} n)
+          (TopCat.diskBoundaryInclusion.{0} n) := by
+  apply pushout.inr_desc
+
+private theorem diskDoubleHomeomorphSphere_hom (n : ℕ) :
+    (TopCat.isoOfHomeo (diskDoubleHomeomorphSphere n)).hom =
+      diskDoubleToSphere n := by
+  rfl
+
+private theorem doubleSimplexFirstInclusion_isoSphere (n : ℕ) :
+    doubleSimplexFirstInclusion n ≫ (doubleSimplexIsoSphere n).hom =
+      standardSimplexDiskMap n ≫
+        diskHemisphereMap n true := by
+  change doubleSimplexFirstInclusion n ≫
+      ((doubleSimplexIsoDiskDouble n).hom ≫
+        (TopCat.isoOfHomeo (diskDoubleHomeomorphSphere n)).hom) = _
+  rw [← Category.assoc, doubleSimplexFirstInclusion_isoDiskDouble,
+    Category.assoc, diskDoubleHomeomorphSphere_hom,
+    diskDoubleToSphere_inl]
+
+private theorem doubleSimplexSecondInclusion_isoSphere (n : ℕ) :
+    doubleSimplexSecondInclusion n ≫ (doubleSimplexIsoSphere n).hom =
+      standardSimplexDiskMap n ≫
+        diskHemisphereMap n false := by
+  change doubleSimplexSecondInclusion n ≫
+      ((doubleSimplexIsoDiskDouble n).hom ≫
+        (TopCat.isoOfHomeo (diskDoubleHomeomorphSphere n)).hom) = _
+  rw [← Category.assoc, doubleSimplexSecondInclusion_isoDiskDouble,
+    Category.assoc, diskDoubleHomeomorphSphere_hom,
+    diskDoubleToSphere_inr]
+
+/-- The explicit last-coordinate reflection agrees with the summand swap under
+the ordered double-simplex model of the sphere. -/
+theorem _root_.Hatcher.Sphere.doubleSimplexSwap_isoSphere (n : ℕ) :
+    (doubleSimplexSwapIso n).hom ≫ (doubleSimplexIsoSphere n).hom =
+      (doubleSimplexIsoSphere n).hom ≫
+        (Hatcher.Sphere.coordinateReflectionIso n (Fin.last n)).hom := by
+  apply pushout.hom_ext
+  · rw [← Category.assoc, doubleSimplexSwapIso_hom,
+      doubleSimplexFirstInclusion_swapMap,
+      doubleSimplexSecondInclusion_isoSphere,
+      ← Category.assoc,
+      doubleSimplexFirstInclusion_isoSphere,
+      Category.assoc,
+      diskHemisphereMap_true_reflection]
+  · rw [← Category.assoc, doubleSimplexSwapIso_hom,
+      doubleSimplexSecondInclusion_swapMap,
+      doubleSimplexFirstInclusion_isoSphere,
+      ← Category.assoc,
+      doubleSimplexSecondInclusion_isoSphere,
+      Category.assoc,
+      diskHemisphereMap_false_reflection]
 
 universe v u
 
