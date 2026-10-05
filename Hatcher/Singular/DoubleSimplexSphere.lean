@@ -609,7 +609,7 @@ private theorem doubleSimplexSecondInclusion_isoSphere (n : ℕ) :
 
 /-- The explicit last-coordinate reflection agrees with the summand swap under
 the ordered double-simplex model of the sphere. -/
-theorem _root_.Hatcher.Sphere.doubleSimplexSwap_isoSphere (n : ℕ) :
+private theorem doubleSimplexSwap_isoSphere_aux (n : ℕ) :
     (doubleSimplexSwapIso n).hom ≫ (doubleSimplexIsoSphere n).hom =
       (doubleSimplexIsoSphere n).hom ≫
         (Hatcher.Sphere.coordinateReflectionIso n (Fin.last n)).hom := by
@@ -681,3 +681,16 @@ theorem doubleSimplexSphereFundamentalClass_comp_homologyIso (R : C)
   simp
 
 end Hatcher.Simplex
+
+namespace Hatcher.Sphere
+
+/-- The explicit last-coordinate reflection agrees with the summand swap under
+the ordered double-simplex model of the sphere. -/
+theorem doubleSimplexSwap_isoSphere (n : ℕ) :
+    (Hatcher.Simplex.doubleSimplexSwapIso n).hom ≫
+        (Hatcher.Simplex.doubleSimplexIsoSphere n).hom =
+      (Hatcher.Simplex.doubleSimplexIsoSphere n).hom ≫
+        (coordinateReflectionIso n (Fin.last n)).hom :=
+  Hatcher.Simplex.doubleSimplexSwap_isoSphere_aux n
+
+end Hatcher.Sphere
