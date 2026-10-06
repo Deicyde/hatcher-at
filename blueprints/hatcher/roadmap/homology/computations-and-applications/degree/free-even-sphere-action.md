@@ -3,6 +3,9 @@ article_id: af_abbd1071b7feae6c88eb97da
 source_units: [hatcher-2-2-degree-foundations]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.exists_freeSphereAction_iff_mulEquiv_zmodTwo
 ---
 
 # Only the antipodal group acts freely on an even sphere
@@ -22,6 +25,14 @@ its image with the two integer units. For the reverse implication, transport
 the explicit free antipodal `ℤ/2` action across the group equivalence. Include
 that action and its freeness as supporting declarations. Do not assume `G` is
 finite.
+
+The supporting theorem
+`Hatcher.Sphere.sphereActionDegreeHom_injective_of_free_even` proves the
+character injective directly from freeness. The implementation also publishes
+`Hatcher.Sphere.antipodalZModTwoAction` and
+`Hatcher.Sphere.antipodalZModTwoAction_isFree`; the reverse implication of the
+main theorem transports this literal action through the supplied group
+equivalence.
 
 ## Depends on
 
