@@ -200,8 +200,8 @@ locally and complete.
 
 The [degree-foundations milestone](../roadmap/homology/computations-and-applications/degree/README.md)
 decomposes Hatcher's degree properties (a)–(g), Theorem 2.28, and Proposition
-2.29 into sixteen formalizable leaves. These leaves are planned but are not
-yet claimed to be formalized.
+2.29 into sixteen formalizable leaves. All sixteen are formalized locally and
+complete.
 
 ## Deferred roadmap expansion
 

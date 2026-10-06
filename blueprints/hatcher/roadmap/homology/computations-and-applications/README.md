@@ -13,8 +13,8 @@ dependency-ordered branches formalize the §2.1 post-excision applications
 through Theorem 2.26 in twenty-seven leaves, supported by five Appendix A.5
 regular-neighborhood leaves. All thirty-two are complete. The remainder of
 §2.2 now also has a sixteen-leaf degree-foundations milestone through
-Proposition 2.29. Those new leaves are planned; the later material stays
-explicitly deferred.
+Proposition 2.29. All sixteen leaves are formalized locally and complete; the
+later material stays explicitly deferred.
 
 Given excision and the long exact sequence, homology becomes computable. From
 `Hₙ(Sⁿ) ≅ ℤ` comes the degree of a map `Sⁿ → Sⁿ`, with its local formula as a

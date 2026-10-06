@@ -14,6 +14,8 @@ orientation from Example 2.23. Reflections are computed by exchanging those
 two simplices, so the roadmap does not depend on the deferred
 simplicial–singular comparison theorem.
 
+All sixteen formalization leaves are formalized locally and complete.
+
 ## Homological degree
 
 - [The ordered class orients ordinary sphere homology](integral-sphere-orientation.md)

@@ -16,7 +16,8 @@ milestone formalizes Proposition 2.22, Theorem 2.13, and naturality. The rest
 of the selected §2.1 post-excision applications are formalized in twenty-seven
 leaves, with five supporting Appendix A.5 leaves; all thirty-two are complete.
 The degree foundations through Proposition 2.29 are decomposed into sixteen
-additional leaves. The rest of the chapter remains explicitly deferred.
+additional leaves, all formalized locally and complete. The rest of the
+chapter remains explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -54,7 +55,7 @@ conditional neighborhood transport, the hemisphere recurrence, the full
 reduced homology calculation, no-retraction, and Brouwer. Its new
 [degree-foundations branch](computations-and-applications/degree/README.md)
 covers properties (a)–(g), Theorem 2.28, and Proposition 2.29 in sixteen
-planned leaves. Local degree, cellular homology, the later Mayer–Vietoris
+complete leaves. Local degree, cellular homology, the later Mayer–Vietoris
 examples, and homology with coefficients remain deferred.
 Invariance of domain belongs to out-of-scope Additional Topic §2.B.
 
