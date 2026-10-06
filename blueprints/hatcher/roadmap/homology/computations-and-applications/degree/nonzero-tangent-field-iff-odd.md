@@ -3,6 +3,9 @@ article_id: af_f60a411fd48e65a2b5a72805
 source_units: [hatcher-2-2-degree-foundations]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.exists_nonvanishingTangentVectorField_iff_odd
 ---
 
 # A sphere has a nonvanishing tangent field exactly in odd dimension
@@ -17,6 +20,10 @@ theorem Hatcher.Sphere.exists_nonvanishingTangentVectorField_iff_odd ... :
 The forward direction must use the identity-to-antipodal homotopy and the
 oriented degree calculation. The reverse direction must return the explicit
 paired-coordinate field, not merely a classical existence proof.
+
+Formalized in `Hatcher/Sphere/TangentFieldParity.lean` by assembling the
+completed degree obstruction with
+`nonvanishingTangentVectorFieldOfOdd` and its pointwise nonvanishing theorem.
 
 ## Depends on
 

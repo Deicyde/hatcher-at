@@ -139,6 +139,7 @@ import Hatcher.Sphere.RadialDeformationRetract
 import Hatcher.Sphere.ReflectionDegree
 import Hatcher.Sphere.TangentVectorField
 import Hatcher.Sphere.TangentFieldObstruction
+import Hatcher.Sphere.TangentFieldParity
 import Hatcher.Sphere.ZeroSphere
 import Hatcher.Sphere.ZeroSphereHomology
 import Hatcher.Topology.StrongDeformationRetract
