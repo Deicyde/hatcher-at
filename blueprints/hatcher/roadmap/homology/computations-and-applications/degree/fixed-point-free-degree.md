@@ -3,6 +3,9 @@ article_id: af_c2fff585a63bdde52a391759
 source_units: [hatcher-2-2-degree-foundations]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.degree_eq_neg_one_pow_of_fixedPointFree
 ---
 
 # A fixed-point-free sphere map has antipodal degree
@@ -20,6 +23,13 @@ The main source-facing conclusion is
 theorem Hatcher.Sphere.degree_eq_neg_one_pow_of_fixedPointFree ... :
   degree n hn f = (-1 : ℤ) ^ (n + 1)
 ```
+
+Formalized in `Hatcher/Sphere/FixedPointFreeDegree.lean`. Taking norms of a
+hypothetical zero of the unnormalized segment forces its two coefficients to
+agree and be nonzero, so scalar cancellation would make `f(x)=x`. This proves
+normalization is continuous on the whole cylinder. Its endpoints are the
+original map and the completed explicit antipodal isomorphism, and homotopy
+invariance transports the antipodal degree formula to `f`.
 
 ## Depends on
 
