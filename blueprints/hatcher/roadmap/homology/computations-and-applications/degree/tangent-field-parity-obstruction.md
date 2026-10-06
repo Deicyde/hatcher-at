@@ -3,6 +3,9 @@ article_id: af_530dad8cebc4444a6d3714d4
 source_units: [hatcher-2-2-degree-foundations]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.odd_of_nonvanishingTangentVectorField
 ---
 
 # A nonvanishing tangent field forces odd dimension
@@ -19,6 +22,12 @@ then yields the main result
 ```lean
 theorem Hatcher.Sphere.odd_of_nonvanishingTangentVectorField ... : Odd n
 ```
+
+Formalized in `Hatcher/Sphere/TangentFieldObstruction.lean`. The supporting
+declaration
+`identityHomotopyAntipodalOfNonvanishingTangentVectorField` is the explicit
+cosine--sine homotopy; its norm calculation uses the normalized field's unit
+norm and its orthogonality to the ambient sphere point.
 
 ## Depends on
 
