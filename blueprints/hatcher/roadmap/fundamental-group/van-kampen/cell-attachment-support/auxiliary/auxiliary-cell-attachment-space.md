@@ -13,14 +13,14 @@ For attaching maps `f j : S j → X`, chosen boundary points `s₀ j`, a common
 basepoint `x₀ : X`, and paths `γ j : Path x₀ (f j (s₀ j))`, construct
 Hatcher's auxiliary space `Z`.
 
-Give `Z` as an
-explicit quotient containing the indexed cone attachment, a common interval
-spine, and one square `I × I` per cell. Glue each square's bottom edge along
-`γ j`, its left edge to the common spine, and its right edge to a fixed
-truncated radial segment in the `j`-th cone; leave the top edge free. Expose
-continuous maps for the attachment, base, spine, and strips, together with the
-four boundary equations. The radial segment must avoid the cone apex so that
-the apex can serve as Hatcher's removed point in the later cover.
+Give `Z` as an explicit quotient containing the indexed cone attachment, a
+common interval spine, and one square `I × I` per cell. Glue each square's
+bottom edge along `γ j`, its left edge to the common spine, and its right edge
+to a fixed truncated radial segment in the `j`-th cone; leave the top edge
+free. Expose continuous maps for the attachment, base, spine, and strips,
+together with the four boundary equations. The radial segment must avoid the
+cone apex so that the apex can serve as Hatcher's removed point in the later
+cover.
 
 ## Depends on
 

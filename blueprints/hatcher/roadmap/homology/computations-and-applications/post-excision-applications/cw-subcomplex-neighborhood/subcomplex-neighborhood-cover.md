@@ -18,9 +18,8 @@ Let `A` and `B` be subcomplexes whose carriers cover a classical CW complex
 - `U ∩ V = N (A ∩ B)`; and
 - the induced strong deformation retraction `U ∩ V ↘ A ∩ B`.
 
-Keep this structure in a
-topology-neutral module so Corollary 2.24 can consume it without depending on
-the later Mayer–Vietoris development.
+Keep this structure in a topology-neutral module so Corollary 2.24 can
+consume it without depending on the later Mayer–Vietoris development.
 
 The statement includes the empty-intersection case. When `A ∩ B` is empty,
 the common neighborhood and its deformation data are empty as well.

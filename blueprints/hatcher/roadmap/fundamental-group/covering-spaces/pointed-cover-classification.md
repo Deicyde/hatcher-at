@@ -16,8 +16,7 @@ subgroup to a pointed connected cover gives a bijection from
 basepoint-preserving isomorphism classes of covers to subgroups of
 `π₁(X,x₀)`.
 
-The
-classification uses the quotient of pointed connected covers whose total
+The classification uses the quotient of pointed connected covers whose total
 spaces live in the same universe as `X`. This fixed-universe quotient is
 equivalent to the subgroups of `π₁(X,x₀)`. A separate cross-universe theorem,
 `Hatcher.BasedConnectedCover.isomorphic_ofSubgroup_fundamentalGroupRange`,

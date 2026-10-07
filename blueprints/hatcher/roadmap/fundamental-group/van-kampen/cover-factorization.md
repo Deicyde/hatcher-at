@@ -15,19 +15,18 @@ sequence of cover indices, based loops whose ranges lie in the corresponding
 sets, and a path homotopy from their concatenation to the original loop. Its
 evaluation is the associated word in the indexed free product.
 
-Keeping the
-factorization data explicit makes the elementary moves and the homotopy-grid
-argument reviewable without hiding them behind choice functions.
+Keeping the factorization data explicit makes the elementary moves and the
+homotopy-grid argument reviewable without hiding them behind choice
+functions.
 
-Each factor is a
-loop in the relevant cover-member subtype, so its support condition is encoded
-in its type. `Hatcher.VanKampen.Factorization.word` evaluates the finite list
-of factors in the indexed free product.
-The list is multiplied in reverse order, matching Mathlib's composition
-convention for `FundamentalGroup`.
-The theorem `Hatcher.VanKampen.Factorization.exists_of_word` proves the
-converse algebraic fact needed by the kernel calculation: every word in the
-indexed free product is represented by some cover factorization.
+Each factor is a loop in the relevant cover-member subtype, so its support
+condition is encoded in its type. `Hatcher.VanKampen.Factorization.word`
+evaluates the finite list of factors in the indexed free product. The list is
+multiplied in reverse order, matching Mathlib's composition convention for
+`FundamentalGroup`. The theorem
+`Hatcher.VanKampen.Factorization.exists_of_word` proves the converse algebraic
+fact needed by the kernel calculation: every word in the indexed free product
+is represented by some cover factorization.
 `Hatcher.VanKampen.Factorization.boundaryHomotopy` chooses the endpoint-fixed
 homotopy between the ambient concatenations of two factorizations representing
 homotopic loops; this is the square decomposed by the later sweep argument.

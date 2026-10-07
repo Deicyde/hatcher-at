@@ -24,15 +24,15 @@ Compose it with `Hatcher.Relative.pointedPairHomologyIso` to define
 Its forward map must be definitionally or propositionally identified with the
 quotient-induced relative map followed by the pointed comparison.
 
-Applying
-relative homology to the canonical neighborhood square identifies the desired
-quotient map followed by the quotient-neighborhood comparison with the
-composite of the original-neighborhood and neighborhood-quotient comparisons.
-The three latter maps are isomorphisms, so categorical cancellation proves
-that the exact map induced by `pointQuotientComparison.app P` is an
-isomorphism in every degree, including degree zero. The proof is first given
-for `GoodPairData` and then descends through `IsGoodPair`, without requiring
-maps of pairs to preserve a chosen neighborhood witness.
+Applying relative homology to the canonical neighborhood square identifies
+the desired quotient map followed by the quotient-neighborhood comparison
+with the composite of the original-neighborhood and neighborhood-quotient
+comparisons. The three latter maps are isomorphisms, so categorical
+cancellation proves that the exact map induced by
+`pointQuotientComparison.app P` is an isomorphism in every degree, including
+degree zero. The proof is first given for `GoodPairData` and then descends
+through `IsGoodPair`, without requiring maps of pairs to preserve a chosen
+neighborhood witness.
 
 The definition
 `Hatcher.Relative.goodPairRelativeHomologyIsoReducedPointQuotient` composes

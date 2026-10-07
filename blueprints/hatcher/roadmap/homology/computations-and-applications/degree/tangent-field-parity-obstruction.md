@@ -23,8 +23,7 @@ then yields the main result
 theorem Hatcher.Sphere.odd_of_nonvanishingTangentVectorField ... : Odd n
 ```
 
-The supporting
-declaration
+The supporting declaration
 `identityHomotopyAntipodalOfNonvanishingTangentVectorField` is the explicit
 cosine--sine homotopy; its norm calculation uses the normalized field's unit
 norm and its orthogonality to the ambient sphere point.

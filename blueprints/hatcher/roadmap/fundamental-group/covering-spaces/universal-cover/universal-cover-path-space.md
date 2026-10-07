@@ -23,9 +23,8 @@ The main artifact is `Hatcher.UniversalCover`; supporting artifacts should be
 `Hatcher.UniversalCover.basicOpen`, `Hatcher.UniversalCover.proj`, and
 `Hatcher.UniversalCover.basepoint`.
 
-Its topology is
-generated directly by the path-extension sets attached to
-`Hatcher.IsNullhomotopicOpen` neighborhoods.
+Its topology is generated directly by the path-extension sets attached
+to `Hatcher.IsNullhomotopicOpen` neighborhoods.
 
 ## Depends on
 

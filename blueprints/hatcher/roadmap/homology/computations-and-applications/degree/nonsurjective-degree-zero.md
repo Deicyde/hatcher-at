@@ -23,11 +23,11 @@ and use its contractibility to show that the induced top-dimensional homology
 map vanishes. The proof must identify the actual degree multiplier; merely
 showing that some abstract endomorphism is zero is not the final statement.
 
-The chosen missed
-point gives an explicit `TopCat` factorization through its complement. The
-published contractibility instance and positive-degree reduced-to-ordinary
-comparison make the intermediate ordinary homology object zero, so the
-conjugated integer endomorphism defining degree is literally the zero map.
+The chosen missed point gives an explicit `TopCat` factorization through
+its complement. The published contractibility instance and positive-degree
+reduced-to-ordinary comparison make the intermediate ordinary homology
+object zero, so the conjugated integer endomorphism defining degree is
+literally the zero map.
 
 ## Depends on
 

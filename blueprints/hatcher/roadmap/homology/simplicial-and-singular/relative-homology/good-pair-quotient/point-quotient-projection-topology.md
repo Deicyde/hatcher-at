@@ -23,12 +23,11 @@ The intended completion target is
 `Hatcher.Relative.pointQuotientComplementHomeomorph`, with the quotient-map
 and fibre theorems as supporting results in the same review unit.
 
-For nonempty
-`P.snd`, `pointQuotientProjection_isQuotientMap` proves that the ambient
-projection is a quotient map, and `pointQuotientProjection_preimage_point`
-identifies its collapsed fibre with `Set.range P.map`.
-`pointQuotientPoint_isClosed` transfers closedness of this range to the
-collapsed point. Under the same closedness hypothesis,
+For nonempty `P.snd`, `pointQuotientProjection_isQuotientMap` proves that the
+ambient projection is a quotient map, and
+`pointQuotientProjection_preimage_point` identifies its collapsed fibre with
+`Set.range P.map`. `pointQuotientPoint_isClosed` transfers closedness of this
+range to the collapsed point. Under the same closedness hypothesis,
 `pointQuotientComplementHomeomorph` restricts the canonical projection to the
 displayed homeomorphism; its simp lemma records that the forward map is
 literally the quotient projection.

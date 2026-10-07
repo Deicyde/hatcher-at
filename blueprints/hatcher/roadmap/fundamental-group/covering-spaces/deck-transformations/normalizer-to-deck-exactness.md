@@ -26,8 +26,8 @@ normalizer action formula. For surjectivity, join `e₀` to the image of `e₀`
 under an arbitrary deck transformation, project this path to a loop, and use
 deck extensionality after matching the endpoint.
 
-The same file
-exports `Hatcher.BasedConnectedCover.exists_deck_smul_eq_monodromy_inv_iff_mem_normalizer`
+The same file exports
+`Hatcher.BasedConnectedCover.exists_deck_smul_eq_monodromy_inv_iff_mem_normalizer`
 as the representative endpoint calculation.
 
 ## Depends on

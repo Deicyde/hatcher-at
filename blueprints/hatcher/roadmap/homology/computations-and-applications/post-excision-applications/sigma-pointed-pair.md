@@ -14,9 +14,9 @@ For a family of pointed spaces `(X i, x₀ i)`, define the topological pair
 
 `(Σ i, X i ; Σ i, {x₀ i})`
 
-whose structure map sends `⟨i, unit⟩` to `⟨i, x₀ i⟩`. For every index `i`, expose the canonical
-map from `pointedPair (X i) (x₀ i)` to the sigma pair and prove its component
-formulas.
+whose structure map sends `⟨i, unit⟩` to `⟨i, x₀ i⟩`. For every index `i`,
+expose the canonical map from `pointedPair (X i) (x₀ i)` to the sigma pair
+and prove its component formulas.
 
 The construction uses the ordinary topological sigma type, which is the
 coproduct in `TopCat`. It includes the empty family: then both the ambient and

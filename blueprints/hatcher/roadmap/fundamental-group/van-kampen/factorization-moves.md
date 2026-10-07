@@ -24,10 +24,10 @@ The move toolkit is closed under arbitrary list contexts, combines or splits
 same-cover blocks in reverse-product order, and performs lists of
 overlap-certified cover changes pointwise.
 
-Elementary moves
-act on the geometric-order list of indexed factor classes. Combining adjacent
-factors uses the reversed multiplication convention of `FundamentalGroup`,
-while changing a cover label is killed by the corresponding overlap relator.
+Elementary moves act on the geometric-order list of indexed factor classes.
+Combining adjacent factors uses the reversed multiplication convention of
+`FundamentalGroup`, while changing a cover label is killed by the
+corresponding overlap relator.
 
 ## Depends on
 

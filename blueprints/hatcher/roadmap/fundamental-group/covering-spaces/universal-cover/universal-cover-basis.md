@@ -19,9 +19,9 @@ bijection from `U[γ]` to `U`.
 This node uses Hatcher's direct basis argument. It does not require the
 compact-open tube-neighborhood API from PR #38292.
 
-The same file proves
-`basicOpen_eq_of_mem` and `bijOn_proj_basicOpen`, covering the equality and
-endpoint-bijection clauses of the source statement.
+The same file proves `basicOpen_eq_of_mem` and `bijOn_proj_basicOpen`,
+covering the equality and endpoint-bijection clauses of the source
+statement.
 
 ## Depends on
 

@@ -21,16 +21,15 @@ of pairs, and the natural comparison
 `Hatcher.Relative.pointQuotientComparison : 𝟭 TopPair ⟶ pointQuotientPairFunctor`.
 Identify each target canonically with the existing `pointedPair` construction.
 
-The supporting API exposes
-`pointQuotientCollapse`, `pointQuotient`, `pointQuotientProjection`,
-`pointQuotientPointInclusion`, `pointQuotientPoint`, `pointQuotientPair`, and
-`pointQuotientMap`. The target pair is defined using `pointedPair`, and
-`pointQuotientPair_map` identifies its structure map with the pushout point
-inclusion. The functor acts on every morphism of topological pairs, without a
-good-pair hypothesis, and `pointQuotientComparison` is the natural map from a
-pair to its pointed quotient. This node uses only the pushout universal
-property; quotient-map, fibre, and complement topology remain in the next
-node.
+The supporting API exposes `pointQuotientCollapse`, `pointQuotient`,
+`pointQuotientProjection`, `pointQuotientPointInclusion`,
+`pointQuotientPoint`, `pointQuotientPair`, and `pointQuotientMap`. The target
+pair is defined using `pointedPair`, and `pointQuotientPair_map` identifies
+its structure map with the pushout point inclusion. The functor acts on every
+morphism of topological pairs, without a good-pair hypothesis, and
+`pointQuotientComparison` is the natural map from a pair to its pointed
+quotient. This node uses only the pushout universal property; quotient-map,
+fibre, and complement topology remain in the next node.
 
 ## Depends on
 

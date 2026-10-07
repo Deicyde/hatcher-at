@@ -14,11 +14,10 @@ cover. Construct the canonical path in the base-side member from `z₀` to the
 image of `x₀`, and prove that the base-side retraction sends its endpoint to
 `x₀` and its path class to the corresponding basepoint-change isomorphism.
 
-The same module must
-expose the endpoint, retraction, and induced fundamental-group equations needed
-to compare the binary-cover calculation at `z₀` with
-`FundamentalGroup X x₀`. This records Hatcher's path `h` explicitly rather than
-requiring the two basepoints to be definitionally equal.
+The same module must expose the endpoint, retraction, and induced
+fundamental-group equations needed to compare the binary-cover calculation at
+`z₀` with `FundamentalGroup X x₀`. This records Hatcher's path `h` explicitly
+rather than requiring the two basepoints to be definitionally equal.
 
 ## Depends on
 

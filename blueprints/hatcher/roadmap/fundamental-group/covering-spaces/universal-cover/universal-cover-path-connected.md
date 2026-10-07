@@ -18,9 +18,8 @@ path-connected. A point represented by `γ` is joined to the constant-path basep
 The same file must first prove continuity of the initial-segment family in the
 `U[γ]` basis; the path construction is not merely set-level.
 
-The file
-exports the initial-segment family, its continuity theorem, and the resulting
-path before installing the path-connected-space instance.
+The file exports the initial-segment family, its continuity theorem, and the
+resulting path before installing the path-connected-space instance.
 
 ## Depends on
 

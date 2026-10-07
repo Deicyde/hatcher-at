@@ -19,9 +19,8 @@ lemmas. This convention makes the wedge of an empty family a one-point space.
 This project-authored representation follows Hatcher's Chapter 0 definition.
 Mathlib has no topological wedge construction in the pinned revision.
 
-The file also exports the
-common basepoint, the canonical summand inclusions, their continuity, and the
-basepoint-identification simp lemma.
+The file also exports the common basepoint, the canonical summand inclusions,
+their continuity, and the basepoint-identification simp lemma.
 
 ## Depends on
 

@@ -15,10 +15,10 @@ contractible, their intersection is simply connected, and the first member
 strongly deformation retracts onto the image of a space `A`. Then inclusion
 induces an equivalence `π₁(A) ≃* π₁(Y)`.
 
-The same module proves the
-underlying algebraic fact that a binary group pushout with trivial
-amalgamating group and trivial second factor is equivalent to its first
-factor, and records that the resulting equivalence is induced by inclusion.
+The same module proves the underlying algebraic fact that a binary group
+pushout with trivial amalgamating group and trivial second factor is
+equivalent to its first factor, and records that the resulting equivalence
+is induced by inclusion.
 
 This is the algebraic endgame of the higher-cell attachment argument. The
 point-set construction of Hatcher's auxiliary cover and the proof that its

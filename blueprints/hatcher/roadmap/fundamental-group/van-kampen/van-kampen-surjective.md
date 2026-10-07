@@ -23,10 +23,9 @@ The proof should reuse the completed Lemma 1.15 node: split a loop into a
 finite concatenation of loops lying in cover members, then take the
 corresponding finite word in `Monoid.CoprodI`.
 
-The proof represents
-each factor loop in its cover member and inducts over the finite concatenation,
-accounting for the reversed multiplication convention in the fundamental
-group.
+The proof represents each factor loop in its cover member and inducts over the
+finite concatenation, accounting for the reversed multiplication convention in
+the fundamental group.
 
 ## Depends on
 
