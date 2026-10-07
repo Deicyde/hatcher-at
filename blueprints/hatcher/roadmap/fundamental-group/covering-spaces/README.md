@@ -16,24 +16,12 @@ covers and the classification itself remain project-local.
 
 ## Lifting and monodromy
 
-Proposition 1.30 is a source-facing wrapper around Mathlib's existing lifted
-homotopy and its uniqueness characterization.
-
 - [Homotopies lift uniquely through a covering map](homotopy-lifting.md)
-
-The based monodromy action is now supplied by Mathlib. The next local nodes
-identify the induced subgroup and derive Hatcher's sheet-index calculation.
-The primary statement for Proposition 1.32 is a fiber-to-coset equivalence,
-since Mathlib's natural-number subgroup index encodes infinite index as zero.
 
 - [The fundamental group acts on a covering fiber](monodromy-action.md)
 - [Covering maps inject path-homotopy classes](covering-injective-path-classes.md)
 - [The induced subgroup consists of loops with closed lifts](closed-lift-image.md)
 - [Sheets are cosets of the induced subgroup](sheet-index.md)
-
-The lifting criterion already exists in its difficult direction; the local
-node supplies Hatcher's exact equivalence. Proposition 1.34 is an exact pinned
-declaration.
 
 - [A map lifts exactly when its fundamental group lands in the covering subgroup](lifting-criterion.md)
 - [A lift is determined by one point](unique-lifting.md)
@@ -43,10 +31,7 @@ declaration.
 
 Hatcher's construction needs a local nullhomotopy condition, a basis of small
 path-connected opens, and topology on endpoint-preserving path classes. This
-roadmap uses Hatcher's `U[γ]` basis directly. Open Mathlib PR
-[#38292](https://github.com/leanprover-community/mathlib4/pull/38292)
-contains implementation prior art for based paths and universal covers, but its
-compact-open quotient topology is not silently mixed with the direct basis.
+roadmap uses Hatcher's `U[γ]` basis directly.
 
 - [The path-class universal cover](universal-cover/README.md)
 - [Semilocally simply-connected spaces](universal-cover/semilocally-simply-connected.md)
@@ -66,12 +51,6 @@ same-endpoint relation and calculate the image subgroup. This is Proposition
 - [The covering space associated to a subgroup](subgroup-cover-space.md)
 - [The subgroup projection is a path-connected covering](subgroup-cover-is-covering.md)
 - [The subgroup cover realizes the chosen subgroup](subgroup-cover-image.md)
-
-The classification is phrased through a small project-local bundle of pointed
-connected covers. Realization and rigidity do not need a category of all
-objects over `X`. The formalized classification uses a fixed-universe quotient
-of covers by isomorphism, while a separate cross-universe theorem identifies
-every pointed connected cover with its canonical subgroup-cover representative.
 
 - [Pointed connected covering spaces](based-connected-cover.md)
 - [Equal image subgroups characterize pointed cover isomorphism](pointed-cover-rigidity.md)
@@ -101,9 +80,7 @@ condition.
 ## Deferred within §1.3
 
 Example 1.35, the reconstruction of arbitrary covers from permutation actions,
-and Examples 1.41–1.48 are deferred. Mathlib PR #40135 is the historical
-source of the basic deck-group API now included in v4.34.1; the normalizer,
-normal-cover, and quotient-action consequences in this roadmap remain local.
+and Examples 1.41–1.48 are deferred.
 
 ## Sources
 
