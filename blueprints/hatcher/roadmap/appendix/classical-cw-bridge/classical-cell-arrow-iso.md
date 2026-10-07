@@ -14,14 +14,6 @@ Compare the sup-norm disk-boundary inclusion used by Mathlib's classical
 characteristic maps with the `ULift`ed L2 disk-boundary inclusion used by
 `TopCat.RelativeCWComplex.basicCell`.
 
-Intended main artifact:
-
-```lean
-noncomputable def Hatcher.ClassicalCW.classicalCellArrowIso (n : ℕ) :
-    Arrow.mk (Hatcher.ClassicalCW.classicalDiskBoundaryInclusion.{u} n) ≅
-      Arrow.mk (TopCat.RelativeCWComplex.basicCell.{u} n ())
-```
-
 Define the universe-lifted classical disk, boundary, and inclusion as
 supporting interfaces. Use `WithLp.linearEquiv` for the ambient topological
 linear equivalence and

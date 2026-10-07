@@ -14,8 +14,7 @@ lean: Hatcher.torusFundamentalGroupEquiv
 `S¹ × S¹` is isomorphic to `ℤ × ℤ`. Under this isomorphism, `(m, n)`
 corresponds to the loop `ωₘₙ(s) = (ωₘ(s), ωₙ(s))`.
 
-Formalized as `Hatcher.torusFundamentalGroupEquiv` in
-`Hatcher/FundamentalGroup/Product.lean`. The companion theorems
+The companion theorems
 `torusFundamentalGroupEquiv_prod_loopOfInt` and
 `torusFundamentalGroupEquiv_symm_apply` record both directions of Hatcher's
 loop formula.

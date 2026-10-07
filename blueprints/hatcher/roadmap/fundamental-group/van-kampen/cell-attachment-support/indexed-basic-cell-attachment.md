@@ -15,8 +15,6 @@ Fix a dimension `n`. For a family of continuous maps from
 indexed cone quotient with a `HomotopicalAlgebra.AttachCells` structure for
 Mathlib's exact family `TopCat.RelativeCWComplex.basicCell n`.
 
-Intended artifact:
-`Hatcher.VanKampen.IndexedConeAttachment.attachCells_basicCell`.
 It should first package the indexed pushout with one retained cone per index,
 then transport every cell arrow through the already formalized cone-to-disk
 homeomorphism. The initial interface uses `AttachCells.{u}` with the cell index

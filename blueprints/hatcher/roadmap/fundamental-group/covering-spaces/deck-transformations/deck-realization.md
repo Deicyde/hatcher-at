@@ -15,9 +15,7 @@ path-connected space `(X,x₀)`, and let `e₁` lie over `x₀`. There is exactl
 deck transformation carrying the chosen point `e₀` to `e₁` if and only if the
 image subgroups obtained by basing the cover at `e₀` and `e₁` are equal.
 
-Formalized as
-`Hatcher.BasedConnectedCover.existsUnique_deck_apply_basepoint_iff_range_eq`
-in `Hatcher/Covering/DeckRealization.lean`. The supporting theorem
+The supporting theorem
 `deck.ext_of_eq_at` supplies uniqueness from agreement at one point.
 
 Existence is Proposition 1.37 applied to the same cover with two choices of

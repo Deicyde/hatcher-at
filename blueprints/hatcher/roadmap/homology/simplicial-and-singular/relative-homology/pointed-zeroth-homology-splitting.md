@@ -13,7 +13,7 @@ statement: formalized
 coefficient object `R`, split the augmentation to obtain
 `H₀(X;R) ≅ H̃₀(X;R) ⊞ R`.
 
-The main artifact should be `Hatcher.Reduced.homologyZeroIso`. The chosen
+The chosen
 point supplies a section of the augmentation. The result is deliberately not
 claimed to be natural for unpointed spaces.
 

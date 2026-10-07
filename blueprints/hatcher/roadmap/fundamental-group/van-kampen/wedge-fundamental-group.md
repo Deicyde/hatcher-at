@@ -16,8 +16,6 @@ neighborhoods, the inclusions of the summands induce an isomorphism from the
 indexed free product of their fundamental groups to the fundamental group of
 their wedge.
 
-Intended artifact: `Hatcher.fundamentalGroupEquivPointedWedge`.
-
 Do not restrict the family to a finite index type. The well-pointed hypothesis
 is part of Hatcher's statement and makes the standard open cover of the wedge
 available to van Kampen.

@@ -31,8 +31,6 @@ summand inclusion. For `i ≠ j`, prove that `W i ∩ W j` deformation retracts 
 the wedge point. Deduce the member, pairwise-intersection, and
 triple-intersection path-connectivity hypotheses required by van Kampen.
 
-Intended artifact: `Hatcher.PointedWedge.exists_vanKampenCover`.
-
 The same development should handle the empty-family boundary case separately by
 showing that `Hatcher.PointedWedge X x₀` is a one-point, hence contractible,
 space when the index type is empty. The cover theorem itself is scoped to a

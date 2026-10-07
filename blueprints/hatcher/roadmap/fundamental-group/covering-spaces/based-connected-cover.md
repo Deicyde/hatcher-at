@@ -22,7 +22,7 @@ The same file should define basepoint-preserving covering isomorphisms as
 homeomorphisms commuting with projection, unpointed connected covers, and the
 corresponding isomorphism relations.
 
-Formalized in `Hatcher/Covering/ConnectedCover.lean`. Cover isomorphisms may
+Cover isomorphisms may
 relate total spaces in different universes, while the named setoid instances
 remain fixed at one total-space universe for later classification quotients.
 

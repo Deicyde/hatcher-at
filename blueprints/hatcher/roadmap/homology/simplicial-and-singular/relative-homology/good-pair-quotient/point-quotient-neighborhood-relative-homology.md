@@ -18,8 +18,7 @@ is an isomorphism in every degree. The quotient-neighborhood contraction gives
 the required component homotopy equivalence; apply the componentwise
 relative-homology criterion and retain the canonical functorial map.
 
-Formalized in
-`Hatcher/Singular/PointQuotientNeighborhoodHomology.lean`. The ambient
+The ambient
 component of `pointQuotientPairToNeighborhoodPair` is the identity on `X/A`,
 while its subspace component is definitionally the forward map of
 `pointQuotientNeighborhoodHomotopyEquiv`. Ordinary homology therefore sends

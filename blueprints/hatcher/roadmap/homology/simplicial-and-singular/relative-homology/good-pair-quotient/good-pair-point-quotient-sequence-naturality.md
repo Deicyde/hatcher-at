@@ -19,8 +19,7 @@ The induced map `X/A → Y/B` comes from the point-quotient functor. The theorem
 must not require the map of pairs to preserve chosen neighborhood or
 deformation-retraction witnesses.
 
-Formalized in
-`Hatcher/Singular/GoodPairPointQuotientSequenceNaturality.lean`. The main
+The main
 theorem `Hatcher.Relative.goodPairPointQuotientConnecting_naturality`
 transports reduced-pair connecting naturality through the Proposition 2.22
 natural isomorphism. The definitions

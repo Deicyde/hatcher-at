@@ -19,8 +19,7 @@ is trivial. The definition should use the subtype basepoint explicitly and
 include a lemma transporting the property between basepoints inside a
 path-connected `U`.
 
-Formalized as `Hatcher.SemilocallySimplyConnectedSpace` in
-`Hatcher/Covering/SemilocallySimplyConnected.lean`. The accompanying theorem
+The accompanying theorem
 `Hatcher.trivial_fundamentalGroupMap_of_isPathConnected` proves the requested
 basepoint independence inside a path-connected subspace.
 

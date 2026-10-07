@@ -15,8 +15,6 @@ path-connected space `X` by attaching an arbitrary family of 2-cells, then
 attaching loops, transported to the common basepoint. Hence `π₁(Y)` is the
 corresponding quotient of `π₁(X)`.
 
-Intended artifact: `Hatcher.fundamentalGroup_quotient_of_attachTwoCells`.
-
 The statement must expose the chosen basepoint paths but prove that the normal
 subgroup is independent of those choices, as Hatcher notes after the
 proposition.

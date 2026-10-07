@@ -20,8 +20,7 @@ the zero horn, and the full boundary is a pushout in `TopCat`:
 `Λ⁰[n+1] → ∂Δ[n+1]`.
 
 Use pushout pasting to construct the resulting isomorphism between point
-quotients. The main artifact is
-`Hatcher.Simplex.zeroFacePointQuotientIso`. Its forward map must be the
+quotients. Its forward map must be the
 functorial `pointQuotientMap` induced by the canonical zero-face morphism of
 pairs.
 

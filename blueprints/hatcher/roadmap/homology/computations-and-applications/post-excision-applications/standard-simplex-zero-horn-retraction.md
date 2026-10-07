@@ -16,8 +16,7 @@ positive index, transfer the removed mass to coordinate zero, and interpolate
 linearly from the identity. Prove continuity, preservation of the simplex,
 the endpoint formula, and pointwise fixation of the horn.
 
-The main artifact is
-`Hatcher.Simplex.zeroHornStrongDeformationRetract`. It supplies the vanishing
+It supplies the vanishing
 of `H_*(Δ[n+1], Λ⁰[n+1];R)` used in the triple-sequence induction of Example
 2.23.
 

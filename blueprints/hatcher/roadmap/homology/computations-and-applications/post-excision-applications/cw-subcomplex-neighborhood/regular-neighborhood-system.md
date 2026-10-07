@@ -17,8 +17,7 @@ assignment `N` for all `CWComplex.Subcomplex C`. Package the facts that
 - the carrier of `A` lies in `N A`, hence in its interior; and
 - `N (A.inter B) = N A ∩ N B`.
 
-The main artifact is
-`Hatcher.ClassicalCW.RegularNeighborhoodSystem`. It uses the same collar
+It uses the same collar
 width, chosen once with `0 < ε < 1`, in every occurrence of `N`; independently
 chosen neighborhoods would not support the required intersection identity.
 

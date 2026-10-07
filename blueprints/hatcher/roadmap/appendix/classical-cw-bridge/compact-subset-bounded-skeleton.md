@@ -14,16 +14,6 @@ Derive the finite-dimensional form of Hatcher's Appendix Proposition A.1:
 every compact subset of a classical CW complex is contained in one finite
 skeleton.
 
-Intended main artifact:
-
-```lean
-theorem Hatcher.compact_subset_skeleton
-    {X : Type u} [TopologicalSpace X] [T2Space X]
-    {C K : Set X} [Topology.CWComplex C]
-    (hK : IsCompact K) (hKC : K ⊆ C) :
-    ∃ n : ℕ, K ⊆ Topology.CWComplex.skeleton C n
-```
-
 Apply `Hatcher.compact_subset_finite_subcomplex`, then extract a dimension
 bound from `CWComplex.FiniteDimensional.eventually_isEmpty_cell`. Use the
 subcomplex cell correspondence to show that its underlying set lies in the

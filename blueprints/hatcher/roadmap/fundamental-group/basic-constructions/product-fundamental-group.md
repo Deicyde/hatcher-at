@@ -14,8 +14,7 @@ lean: Hatcher.fundamentalGroupProdEquiv
 isomorphism
 `π₁(X × Y, (x, y)) ≃* π₁(X, x) × π₁(Y, y)`.
 
-Formalized as `Hatcher.fundamentalGroupProdEquiv` in
-`Hatcher/FundamentalGroup/Product.lean`. Its forward map takes a product loop
+Its forward map takes a product loop
 to its two coordinate loops, and its inverse forms the pointwise product of
 two loops. The Lean statement does not require path-connectedness because it
 works at fixed basepoints and is therefore slightly stronger than Hatcher's

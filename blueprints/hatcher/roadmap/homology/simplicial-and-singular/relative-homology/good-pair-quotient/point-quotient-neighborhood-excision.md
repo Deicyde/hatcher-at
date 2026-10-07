@@ -19,7 +19,7 @@ homeomorphism induced by the quotient map on complements. The intended main
 declaration is an `IsIso` instance for the exact vertical map in the
 complementary excision diagram.
 
-Formalized in `Hatcher/Singular/PointQuotientNeighborhoodExcision.lean`. The
+The
 instance applies relative homology to the proved complementary-excision square.
 Both canonical deleted-subset maps and the complement-pair homeomorphism induce
 isomorphisms, so categorical cancellation proves that the exact map induced by

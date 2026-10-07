@@ -14,8 +14,7 @@ For a continuous map `f : S → X`, the explicit single-cone attachment is the
 pushout in `TopCat` of `f` and the retained-boundary inclusion
 `S → ConeAttachment id`.
 
-Formalized as
-`Hatcher.VanKampen.ConeAttachment.isPushout_coneAttachment`. The proof builds
+The proof builds
 the universal map out of the quotient and proves uniqueness on the base, apex,
 and cylinder representatives.
 

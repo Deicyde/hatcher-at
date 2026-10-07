@@ -15,9 +15,7 @@ contractible, their intersection is simply connected, and the first member
 strongly deformation retracts onto the image of a space `A`. Then inclusion
 induces an equivalence `π₁(A) ≃* π₁(Y)`.
 
-Formalized as
-`Hatcher.VanKampen.fundamentalGroupEquivOfBinaryCoverRetraction` in
-`Hatcher/VanKampen/CellAttachmentAlgebra.lean`. The same module proves the
+The same module proves the
 underlying algebraic fact that a binary group pushout with trivial
 amalgamating group and trivial second factor is equivalent to its first
 factor, and records that the resulting equivalence is induced by inclusion.

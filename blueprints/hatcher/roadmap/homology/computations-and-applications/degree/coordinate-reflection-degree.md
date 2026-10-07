@@ -25,7 +25,7 @@ change of coordinates carries an arbitrary unit normal to the last coordinate,
 then use conjugacy and multiplicativity of degree. Record every coordinate
 reflection as a specialization for the antipodal factorization.
 
-Formalized in `Hatcher/Sphere/ReflectionDegree.lean`. The reflection is the
+The reflection is the
 restriction of Mathlib's orthogonal reflection in the complement of the normal
 line. It fixes the defined equator and exchanges its closed hemispheres. A
 Householder reflection carries an arbitrary unit normal to the final coordinate;

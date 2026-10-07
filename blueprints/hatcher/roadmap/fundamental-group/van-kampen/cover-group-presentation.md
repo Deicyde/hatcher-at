@@ -30,7 +30,7 @@ This is the algebraic object occurring in Hatcher's Theorem 1.20. The general
 cover cannot be represented by `Monoid.PushoutI`, which has only one common
 amalgamating group.
 
-Formalized in `Hatcher/VanKampen/CoverGroupPresentation.lean`. The same file
+The same file
 exports `Hatcher.VanKampen.coverMap`, the two overlap homomorphisms, and the
 explicit overlap relators before taking their normal closure.
 

@@ -13,17 +13,6 @@ lean: Hatcher.ClassicalCW.skeletonLTInclusion_attachCells
 For a classical Mathlib CW complex, package the inclusion from one strict
 skeleton to the next as a standard categorical cell attachment.
 
-Intended main artifact:
-
-```lean
-noncomputable def Hatcher.ClassicalCW.skeletonLTInclusion_attachCells
-    {X : Type u} [TopologicalSpace X] [T2Space X]
-    (C : Set X) {D : Set X} [Topology.RelCWComplex C D] (n : ℕ) :
-    HomotopicalAlgebra.AttachCells.{u}
-      (TopCat.RelativeCWComplex.basicCell.{u} n)
-      (Hatcher.ClassicalCW.skeletonLTInclusion C n)
-```
-
 First turn the successor-stage quotient theorem into a `TopCat` pushout for
 the coproduct of classical sup-norm cells. Then transport the cell family
 along `classicalCellArrowIso` with `AttachCells.reindexCellTypes`. Also expose

@@ -21,8 +21,7 @@ with the source convention `x ↦ (x,-x)`. The second is the biproduct descent
 of the two canonical maps into the small-cover complex, so it acts as
 `(x,y) ↦ x+y`. Their composite is zero.
 
-The main artifact is
-`Hatcher.MayerVietoris.chainComplexShortComplex`. Supporting declarations
+Supporting declarations
 should expose `smallCoverChains` and the canonical maps from the intersection
 to each member and from each member to the small-cover complex. The
 construction is defined for arbitrary `A` and `B`; the interior-cover

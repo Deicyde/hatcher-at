@@ -15,9 +15,6 @@ first collapses the added strips toward their attached bottom edges and then
 pushes all positive-height cone points to their attaching points, while fixing
 `X` throughout.
 
-Intended artifact:
-`Hatcher.VanKampen.AuxiliaryCellAttachment.baseCoverStrongDeformationRetract`.
-
 ## Depends on
 
 - [Hatcher's binary cover of the strip enlargement](auxiliary-cell-attachment-open-cover.md)

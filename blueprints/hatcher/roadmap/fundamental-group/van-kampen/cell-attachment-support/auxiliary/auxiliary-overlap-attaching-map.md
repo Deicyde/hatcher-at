@@ -17,8 +17,6 @@ the induced element of `FundamentalGroup X x₀` is the attaching map applied to
 the standard generator of `TopCat.diskBoundary 2` and conjugated along the
 chosen path `γ j`.
 
-Intended artifact:
-`Hatcher.VanKampen.AuxiliaryCellAttachment.intersectionMeridian_eq_attachingLoop`.
 State the equality with all basepoint transports visible. The result must be
 strong enough to identify the normal closure of the overlap image with the
 normal closure of Hatcher's transported attaching loops.

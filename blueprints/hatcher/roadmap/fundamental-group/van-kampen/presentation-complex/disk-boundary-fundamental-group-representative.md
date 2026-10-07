@@ -15,15 +15,6 @@ For a pointed topological space `(X, x₀)` and
 the standard two-disk to `X`, preserving the chosen basepoints and sending the
 standard positively oriented boundary loop to `g`.
 
-Intended main artifact:
-
-```lean
-noncomputable def Hatcher.diskBoundaryMapOfFundamentalGroup
-    {X : Type u} [TopologicalSpace X] {x₀ : X}
-    (g : FundamentalGroup X x₀) :
-    C(((TopCat.diskBoundary.{u} 2 : TopCat.{u}) : Type u), X)
-```
-
 The public API must include the basepoint simp lemma and:
 
 ```lean

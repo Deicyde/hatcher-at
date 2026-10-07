@@ -13,7 +13,7 @@ For attaching maps `f j : S j → X`, chosen boundary points `s₀ j`, a common
 basepoint `x₀ : X`, and paths `γ j : Path x₀ (f j (s₀ j))`, construct
 Hatcher's auxiliary space `Z`.
 
-Intended artifact: `Hatcher.VanKampen.AuxiliaryCellAttachment`. Give `Z` as an
+Give `Z` as an
 explicit quotient containing the indexed cone attachment, a common interval
 spine, and one square `I × I` per cell. Glue each square's bottom edge along
 `γ j`, its left edge to the common spine, and its right edge to a fixed

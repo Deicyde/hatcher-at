@@ -13,8 +13,7 @@ lean: Hatcher.not_nonempty_homeomorph_euclideanTwo
 **Hatcher, Corollary 1.16 (page 36).** Euclidean two-space is not
 homeomorphic to Euclidean `n`-space when `n ≠ 2`.
 
-Formalized as `Hatcher.not_nonempty_homeomorph_euclideanTwo` in
-`Hatcher/Euclidean/Dimension.lean`. A hypothetical homeomorphism is translated
+A hypothetical homeomorphism is translated
 to fix the origin and then restricted to the punctured spaces. For dimensions
 at least three, radial decomposition retracts the punctured spaces onto their
 unit spheres; the two-dimensional sphere is a circle with nontrivial

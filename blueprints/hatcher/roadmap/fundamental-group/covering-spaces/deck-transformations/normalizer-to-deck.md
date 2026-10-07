@@ -30,7 +30,7 @@ multiplicative for Mathlib's fundamental-group law, while the deck
 transformation selected by an endpoint composes in the opposite order unless
 the normalizer argument is inverted.
 
-Formalized in `Hatcher/Covering/NormalizerToDeck.lean`. The same file proves
+The same file proves
 the displayed formula as
 `Hatcher.BasedConnectedCover.normalizerToDeck_smul_basepoint` and exports
 `deck.smul_monodromy` and `deck.smul_monodromyPerm` for the commutation

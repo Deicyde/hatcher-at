@@ -14,7 +14,7 @@ Construct a homeomorphism
 
 `Hatcher.Simplex.doubleSimplex n ≅ TopCat.sphere n`.
 
-The main artifact is `Hatcher.Simplex.doubleSimplexIsoSphere`. First carry
+First carry
 each standard simplex to a closed disk by the simplex-pair homeomorphism, then
 identify the double of the disk along its boundary with the standard unit
 sphere. The two disk maps must agree on the common boundary so that the
