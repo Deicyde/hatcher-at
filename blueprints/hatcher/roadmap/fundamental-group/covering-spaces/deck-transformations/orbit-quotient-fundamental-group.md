@@ -26,10 +26,9 @@ displayed fundamental-group quotient, and Proposition 1.40(b) identifies the
 same deck group with `G`. Form the quotient only after obtaining the
 normal-subgroup instance from normality of the orbit cover.
 
-The proof
-explicitly identifies the direct `FundamentalGroup.map` range with the
-`mapOfEq` range stored by the pointed-cover structure before transporting the
-quotient equivalence.
+The proof explicitly identifies the direct `FundamentalGroup.map` range with
+the `mapOfEq` range stored by the pointed-cover structure before transporting
+the quotient equivalence.
 
 ## Depends on
 

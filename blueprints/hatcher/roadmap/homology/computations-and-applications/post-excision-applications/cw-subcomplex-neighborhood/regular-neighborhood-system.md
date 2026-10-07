@@ -17,9 +17,9 @@ assignment `N` for all `CWComplex.Subcomplex C`. Package the facts that
 - the carrier of `A` lies in `N A`, hence in its interior; and
 - `N (A.inter B) = N A ∩ N B`.
 
-It uses the same collar
-width, chosen once with `0 < ε < 1`, in every occurrence of `N`; independently
-chosen neighborhoods would not support the required intersection identity.
+It uses the same collar width, chosen once with `0 < ε < 1`, in every
+occurrence of `N`; independently chosen neighborhoods would not support the
+required intersection identity.
 
 This node constructs the neighborhoods and their point-set identities. The
 global deformation retraction is the next node.

@@ -14,10 +14,9 @@ For a natural number `n`, quotient `π₁(S¹, 1)` by the normal closure of the
 class of the degree-`n` loop. The resulting group is isomorphic to
 `Multiplicative (ZMod n)`.
 
-The definition
-`Hatcher.Circle.degreeLoopClass` names the relator, and the companion
-application theorems record that the quotient equivalence is winding number
-reduced modulo `n`.
+The definition `Hatcher.Circle.degreeLoopClass` names the relator, and the
+companion application theorems record that the quotient equivalence is
+winding number reduced modulo `n`.
 
 This is the complete algebraic endgame of Hatcher's cyclic presentation
 complex calculation. It does not construct the topological adjunction space

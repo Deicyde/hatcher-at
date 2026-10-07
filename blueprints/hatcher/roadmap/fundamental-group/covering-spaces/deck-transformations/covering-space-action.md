@@ -43,10 +43,9 @@ that class to a quotient covering additionally assumes `LocallyCompactSpace`
 and `T2Space`, which would strengthen this result. No connectedness,
 Hausdorffness, or local compactness is needed for this node.
 
-The file also
-defines `Hatcher.Covering.actionToDeck`, proves the pairwise-disjoint-translates
-characterization, and shows that the deck action of a covering with
-path-connected total space is a covering-space action.
+The file also defines `Hatcher.Covering.actionToDeck`, proves the
+pairwise-disjoint-translates characterization, and shows that the deck action of
+a covering with path-connected total space is a covering-space action.
 
 ## Depends on
 

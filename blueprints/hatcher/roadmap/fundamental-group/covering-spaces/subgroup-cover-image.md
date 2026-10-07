@@ -19,9 +19,8 @@ A loop in `X` lifts from the constant-path class to the class represented by
 that loop, and this endpoint is the basepoint of the quotient precisely when
 the loop class belongs to `H`.
 
-The proof computes
-the monodromy endpoint using the initial-segment lift and reduces equality with
-the quotient basepoint to the defining subgroup relation.
+The proof computes the monodromy endpoint using the initial-segment lift and
+reduces equality with the quotient basepoint to the defining subgroup relation.
 
 ## Depends on
 

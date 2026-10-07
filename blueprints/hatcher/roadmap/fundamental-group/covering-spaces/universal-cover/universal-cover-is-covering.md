@@ -21,9 +21,9 @@ preimage of `U`, and projection restricts to a homeomorphism on every part.
 Hatcher's general definition permits empty fibers, but this endpoint map is
 surjective because `X` is path-connected.
 
-The file also
-exports continuity and surjectivity of the endpoint map, discreteness of its
-fibers, and openness of the basic sheets used in the covering trivializations.
+The file also exports continuity and surjectivity of the endpoint map,
+discreteness of its fibers, and openness of the basic sheets used in the
+covering trivializations.
 
 ## Depends on
 

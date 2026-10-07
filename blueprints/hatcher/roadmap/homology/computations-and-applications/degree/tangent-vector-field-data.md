@@ -18,10 +18,9 @@ orthogonality, unit norm, and equality of its zero set with that of the
 original field. The representation must match Hatcher's ambient formula and
 must not introduce a tangent-bundle dependency.
 
-The public API also
-records the continuous ambient-point map, its unit norm, pointwise
-nonvanishing, and preservation of both the zero set and nonvanishing under
-normalization.
+The public API also records the continuous ambient-point map, its unit
+norm, pointwise nonvanishing, and preservation of both the zero set and
+nonvanishing under normalization.
 
 ## Depends on
 

@@ -18,9 +18,9 @@ Follow Hatcher's proof. The endpoint projection injects fundamental groups,
 and a base loop in the image has a closed lift in the path-class cover only
 when its original homotopy class is trivial.
 
-The proof
-identifies projected paths with their endpoint coordinates by lift uniqueness,
-cancels a projected loop, and applies covering-map injectivity on path classes.
+The proof identifies projected paths with their endpoint coordinates by lift
+uniqueness, cancels a projected loop, and applies covering-map injectivity on
+path classes.
 
 ## Depends on
 

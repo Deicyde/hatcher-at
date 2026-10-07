@@ -25,10 +25,9 @@ class of `f` is determined by its winding number.
 This is the project's main target. Nothing in the pinned Mathlib computes
 `π₁` of the circle, although every ingredient above is present.
 
-The node's named
-declaration is `Hatcher.Circle.isCyclic_fundamentalGroup`, which asserts
-Hatcher's actual proposition, that the group is cyclic; the companion
-`infinite_fundamentalGroup` supplies "infinite". Both are read off
+The node's named declaration is `Hatcher.Circle.isCyclic_fundamentalGroup`,
+which asserts Hatcher's actual proposition, that the group is cyclic; the
+companion `infinite_fundamentalGroup` supplies "infinite". Both are read off
 `Hatcher.Circle.fundamentalGroupEquivInt`, the `MulEquiv` from
 `FundamentalGroup Circle 1` onto `Multiplicative ℤ`, which is the data
 witnessing the theorem. Hatcher's generator is `Hatcher.Circle.loopOfInt 1`,

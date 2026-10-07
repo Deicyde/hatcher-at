@@ -18,11 +18,10 @@ homotopy equivalence.
 Continuity must follow from the quotient property proved for the source-exact,
 not-necessarily-open neighborhood.
 
-The chosen
-deformation of `V` preserves the fibers of the restricted quotient: it fixes
-all representatives in the collapsed subspace, while equality of two
-noncollapsed representatives follows from the complement homeomorphism.
-Joint continuity of the descended homotopy follows from
+The chosen deformation of `V` preserves the fibers of the restricted quotient:
+it fixes all representatives in the collapsed subspace, while equality of two
+noncollapsed representatives follows from the complement homeomorphism. Joint
+continuity of the descended homotopy follows from
 `pointQuotientNeighborhoodProjection_isQuotientMap.continuous_lift_prod_right`;
 no openness assumption is made on `V`. The resulting strong deformation
 retraction is relative to the canonical collapsed-point inclusion, and

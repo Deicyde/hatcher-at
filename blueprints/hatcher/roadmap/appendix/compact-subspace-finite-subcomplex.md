@@ -19,10 +19,9 @@ compact subset `K` of a CW complex, produce a `CWComplex.Subcomplex` containing
 space is assumed Hausdorff (`T2Space`), as required by Mathlib's classical
 subcomplex and closed-cell API.
 
-The
-proof first shows that a compact subset meets only finitely many open cells,
-then closes this finite family under cell frontiers and constructs the
-resulting finite subcomplex.
+The proof first shows that a compact subset meets only finitely many open
+cells, then closes this finite family under cell frontiers and constructs
+the resulting finite subcomplex.
 
 The §1.2 proof that the 2-skeleton determines `π₁` uses this twice. The
 separate [bounded-skeleton corollary](classical-cw-bridge/compact-subset-bounded-skeleton.md)

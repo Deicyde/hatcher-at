@@ -14,10 +14,9 @@ lean: Hatcher.fundamentalGroupMap_injective_of_retraction
 the inclusion-induced homomorphism `π₁(A, a) →* π₁(X, a)` is injective. If
 `A` is a deformation retract of `X`, that homomorphism is an isomorphism.
 
-The theorem
-`Hatcher.fundamentalGroupMap_injective_of_retraction` proves the first clause
-from continuous maps `A → X` and `X → A` whose composite on `A` is the
-identity. The definition
+The theorem `Hatcher.fundamentalGroupMap_injective_of_retraction` proves the
+first clause from continuous maps `A → X` and `X → A` whose composite on `A`
+is the identity. The definition
 `Hatcher.fundamentalGroupMulEquivOfDeformationRetract` adds a homotopy from
 the identity on `X` to the inclusion followed by the retraction and produces
 the equivalence in the second clause. Its companion application theorem

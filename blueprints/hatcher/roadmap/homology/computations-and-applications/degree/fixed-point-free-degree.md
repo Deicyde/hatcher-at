@@ -24,12 +24,12 @@ theorem Hatcher.Sphere.degree_eq_neg_one_pow_of_fixedPointFree ... :
   degree n hn f = (-1 : ℤ) ^ (n + 1)
 ```
 
-Taking norms of a
-hypothetical zero of the unnormalized segment forces its two coefficients to
-agree and be nonzero, so scalar cancellation would make `f(x)=x`. This proves
-normalization is continuous on the whole cylinder. Its endpoints are the
-original map and the completed explicit antipodal isomorphism, and homotopy
-invariance transports the antipodal degree formula to `f`.
+Taking norms of a hypothetical zero of the unnormalized segment forces its
+two coefficients to agree and be nonzero, so scalar cancellation would make
+`f(x)=x`. This proves normalization is continuous on the whole cylinder. Its
+endpoints are the original map and the completed explicit antipodal
+isomorphism, and homotopy invariance transports the antipodal degree formula
+to `f`.
 
 ## Depends on
 

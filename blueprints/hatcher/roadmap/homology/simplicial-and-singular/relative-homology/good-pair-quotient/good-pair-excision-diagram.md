@@ -18,8 +18,7 @@ Define the pair map induced by the complement homeomorphism and prove both
 canonical squares commute, including the neighborhood comparison identity
 used in the final diagram chase.
 
-The source and
-target complement pairs are packaged explicitly, and
+The source and target complement pairs are packaged explicitly, and
 `pointQuotientComplementPairIso` is induced by the canonical homeomorphism
 off the collapsed subspace together with its restriction to the deleted
 neighborhoods. The theorem `neighborhood_pointQuotientComparison` proves the

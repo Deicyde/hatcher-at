@@ -34,9 +34,8 @@ a second proof, not new coverage, and the
 is deliberately not set because this node promises Hatcher's proof rather than
 an alias to the existing Mathlib theorem.
 
-The support module
-`Hatcher/Circle/Normalize.lean` packages radial projection and based-loop
-homotopies for nonvanishing complex families.
+The support module `Hatcher/Circle/Normalize.lean` packages radial
+projection and based-loop homotopies for nonvanishing complex families.
 
 ## Depends on
 

@@ -26,13 +26,12 @@ the relative quotient and the first remains. The integral specialization
 therefore says that `Δ₁^n - Δ₂^n`, with the common vertex ordering, is a
 generator rather than merely that the group is abstractly cyclic.
 
-The
-definition lifts the literal ordered difference cycle to augmented homology.
-Its canonical projection relative to the second simplex is proved, at chain
-level, to be the image of the identity simplex from the first summand; the
-relative-simplex generator theorem and both canonical comparison isomorphisms
-then prove the named class is an isomorphism in every dimension, including
-dimension zero.
+The definition lifts the literal ordered difference cycle to augmented
+homology. Its canonical projection relative to the second simplex is proved,
+at chain level, to be the image of the identity simplex from the first
+summand; the relative-simplex generator theorem and both canonical comparison
+isomorphisms then prove the named class is an isomorphism in every dimension,
+including dimension zero.
 
 ## Depends on
 

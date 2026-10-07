@@ -17,8 +17,8 @@ pointed pairs used for wedge sums:
 
 `∐ i, C_*(X_i,{x_i};R) ≅ C_*(Σ i, X_i; Σ i,{x_i};R)`.
 
-Its component on every
-summand must be the chain map induced by the canonical sigma inclusion.
+Its component on every summand must be the chain map induced by the
+canonical sigma inclusion.
 
 Use `ContinuousMap.sigmaCodHomeomorph`: the topological standard simplex is
 connected, so every singular simplex in a disjoint union lands in one unique

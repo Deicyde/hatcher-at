@@ -29,10 +29,9 @@ lift must satisfy `η̃(s + 1/2) = η̃(s) + (2k+1)/2`.
 
 Borsuk–Ulam is not in the pinned Mathlib in any dimension.
 
-The implementation replaces the coordinate
-equator by an arbitrary path from `x` to `-x` followed by its antipodal image;
-this avoids coordinate bookkeeping while preserving Hatcher's odd-winding
-obstruction.
+The implementation replaces the coordinate equator by an arbitrary path from
+`x` to `-x` followed by its antipodal image; this avoids coordinate
+bookkeeping while preserving Hatcher's odd-winding obstruction.
 
 ## Depends on
 
