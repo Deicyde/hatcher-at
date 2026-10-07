@@ -31,7 +31,7 @@ jobs:
 
       - name: Validate the theorem DAG
         run: >-
-          uvx --from https://github.com/facebookresearch/autoform-bot/archive/1cf2ca825fec5e6d3303e24374e218bf3e8ab5c1.tar.gz
+          uvx --from https://github.com/facebookresearch/autoform-bot/archive/960629c0b800ce7d0e0616c899682adf3a29fec9.tar.gz
           autoform workspace check . --lean-root .
 
       - name: Install elan
