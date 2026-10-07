@@ -31,9 +31,6 @@ documented as Hatcher's Lemma 1.15. The local proof is adapted from that open
 PR for the pinned Mathlib revision and keeps the PR's copyright and Apache 2.0
 license notice.
 
-Formalized in `Hatcher/Sphere/LoopInOpenCover.lean` as
-`Hatcher.loop_homotopic_prod_of_isOpenCover`.
-
 ## Depends on
 
 No roadmap prerequisites. Rests on Mathlib's path algebra and its subdivision

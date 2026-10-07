@@ -13,8 +13,6 @@ lean: Hatcher.exists_twoDimensionalCWComplex_fundamentalGroupEquiv
 **Hatcher, Corollary 1.28 (page 52).** For every group `G`, there is a
 two-dimensional cell complex `X_G` with `π₁(X_G) ≃* G`.
 
-Intended artifact: `Hatcher.exists_twoDimensionalCWComplex_fundamentalGroupEquiv`.
-
 The source-facing Lean statement should be equivalent to:
 
 ```lean

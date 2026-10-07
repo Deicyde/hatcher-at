@@ -14,8 +14,6 @@ lean: Hatcher.fundamentalGroupEquiv_twoSkeleton
 complex `X`, inclusion of the 2-skeleton induces an isomorphism
 `π₁(X², x₀) ≃* π₁(X, x₀)`.
 
-Intended artifact: `Hatcher.fundamentalGroupEquiv_twoSkeleton`.
-
 State this using Mathlib's classical `Topology.CWComplex` and
 `CWComplex.skeleton`. The induced homomorphism is an isomorphism because it is
 both surjective and injective. For surjectivity, put the compact image of a

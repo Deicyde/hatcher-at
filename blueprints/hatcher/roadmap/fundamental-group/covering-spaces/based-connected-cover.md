@@ -22,9 +22,9 @@ The same file should define basepoint-preserving covering isomorphisms as
 homeomorphisms commuting with projection, unpointed connected covers, and the
 corresponding isomorphism relations.
 
-Formalized in `Hatcher/Covering/ConnectedCover.lean`. Cover isomorphisms may
-relate total spaces in different universes, while the named setoid instances
-remain fixed at one total-space universe for later classification quotients.
+Cover isomorphisms may relate total spaces in different universes, while the
+named setoid instances remain fixed at one total-space universe for later
+classification quotients.
 
 This direct record is deliberately smaller than a category inside
 `TopCat.Over X`. Fix the total-space universe as an explicit parameter so the

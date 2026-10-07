@@ -15,14 +15,11 @@ simply-connected. The total space `Hatcher.UniversalCover X x₀` is
 path-connected. A point represented by `γ` is joined to the constant-path basepoint by the path
 `t ↦ [γₜ]`, where `γₜ` follows `γ` up to time `t` and is then stationary.
 
-Intended artifact: `Hatcher.UniversalCover.pathConnectedSpace`.
-
 The same file must first prove continuity of the initial-segment family in the
 `U[γ]` basis; the path construction is not merely set-level.
 
-Formalized in `Hatcher/Covering/UniversalCoverPathConnected.lean`. The file
-exports the initial-segment family, its continuity theorem, and the resulting
-path before installing the path-connected-space instance.
+The file exports the initial-segment family, its continuity theorem, and the
+resulting path before installing the path-connected-space instance.
 
 ## Depends on
 

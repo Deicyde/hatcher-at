@@ -41,14 +41,14 @@ jobs:
       # declaration that is not in the sources.
       - name: Validate the theorem DAG and its declarations
         run: >-
-          uvx --from https://github.com/facebookresearch/autoform-bot/archive/1cf2ca825fec5e6d3303e24374e218bf3e8ab5c1.tar.gz
+          uvx --from https://github.com/facebookresearch/autoform-bot/archive/960629c0b800ce7d0e0616c899682adf3a29fec9.tar.gz
           autoform workspace check . --lean-root .
 
       # Writes site-src/: statement boxes, derived statuses, the Mermaid graph,
       # and permalinks into the Lean code at this exact commit.
       - name: Render the blueprint
         run: >-
-          uvx --from https://github.com/facebookresearch/autoform-bot/archive/1cf2ca825fec5e6d3303e24374e218bf3e8ab5c1.tar.gz
+          uvx --from https://github.com/facebookresearch/autoform-bot/archive/960629c0b800ce7d0e0616c899682adf3a29fec9.tar.gz
           autoform render .
           --project hatcher
           --output site-src

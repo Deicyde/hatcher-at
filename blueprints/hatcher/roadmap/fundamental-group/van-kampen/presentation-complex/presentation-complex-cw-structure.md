@@ -14,14 +14,6 @@ Equip the concrete presentation complex with Mathlib's abstract CW-complex
 structure by assembling its zero-, one-, and two-cell attachments and an
 empty constant tail.
 
-Intended main artifact:
-
-```lean
-noncomputable def Hatcher.presentationComplexCWComplex
-    {S : Type u} (rels : Set (FreeGroup S)) :
-    TopCat.CWComplex (TopCat.of (Hatcher.presentationComplex rels))
-```
-
 Also expose the source-facing dimension bound:
 
 ```lean

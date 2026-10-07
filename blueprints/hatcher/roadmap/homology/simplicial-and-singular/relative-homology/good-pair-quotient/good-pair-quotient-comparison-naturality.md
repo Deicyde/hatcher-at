@@ -20,7 +20,6 @@ neighborhood witnesses. Prove the canonical identity saying that reduced-pair
 projection followed by the comparison is exactly the map on reduced homology
 induced by the ambient quotient `q : X → X/A`.
 
-Formalized in `Hatcher/Singular/GoodPairPointQuotientNaturality.lean`.
 Relative homology and reduced homology of the functorial point quotient are
 restricted to the full subcategory `Hatcher.Relative.GoodPair`. The component
 at a good pair is exactly

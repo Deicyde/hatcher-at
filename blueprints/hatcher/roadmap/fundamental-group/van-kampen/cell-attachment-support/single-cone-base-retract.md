@@ -14,11 +14,10 @@ For a continuous attaching map `f : S → X`, the open member consisting of the
 canonical image of `X` together with the positive-height cone points strongly
 deformation-retracts onto `X`.
 
-Formalized as
-`Hatcher.VanKampen.ConeAttachment.lowerStrongDeformationRetract`. The homotopy
-pushes every positive cylinder height linearly toward one, where the boundary
-is glued to `X`, and fixes the image of `X` throughout. The module also exposes
-the inclusion and retraction maps and proves their composite is the identity.
+The homotopy pushes every positive cylinder height linearly toward one, where
+the boundary is glued to `X`, and fixes the image of `X` throughout. The module
+also exposes the inclusion and retraction maps and proves their composite is
+the identity.
 
 ## Depends on
 

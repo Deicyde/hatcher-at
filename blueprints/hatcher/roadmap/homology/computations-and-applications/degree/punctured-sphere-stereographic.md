@@ -22,11 +22,11 @@ and publish the resulting contractibility of the punctured sphere. Reuse
 Mathlib's `stereographic'` and the project's existing sphere chart
 conventions; do not create a competing public sphere model.
 
-Formalized in `Hatcher/Sphere/PuncturedStereographic.lean`. The construction
-uses the existing `sphereULiftHomeomorph` once, restricts it to the complements
-of the selected point and its raw-sphere image, and then applies Mathlib's
-stereographic chart. The public `puncturedSphereContractibleSpace` instance is
-transported across this exact homeomorphism.
+The construction uses the existing `sphereULiftHomeomorph` once, restricts it
+to the complements of the selected point and its raw-sphere image, and then
+applies Mathlib's stereographic chart. The public
+`puncturedSphereContractibleSpace` instance is transported across this exact
+homeomorphism.
 
 ## Depends on
 

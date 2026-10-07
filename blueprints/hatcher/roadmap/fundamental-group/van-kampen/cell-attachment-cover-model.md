@@ -16,8 +16,6 @@ cell-index type is nonempty, and `1 < n`. For a basepoint `x₀ : X`, a chosen
 point `s₀ : TopCat.diskBoundary n`, and paths from `x₀` to every attaching
 point, construct Hatcher's auxiliary cover package for `c`.
 
-Intended artifact: `Hatcher.VanKampen.exists_cellAttachmentCover`.
-
 The result returns `Nonempty (CellAttachmentCover c x₀ s₀ γ)`. This package
 contains the strip-enlarged space `Z`, its strong deformation retraction onto
 the indexed model of the target, the open cover `A ∪ B`, the strong deformation

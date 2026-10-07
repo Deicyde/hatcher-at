@@ -20,8 +20,7 @@ The proof must use `Set.range P.map ⊆ interior h.V`; it may not assume
 the Proposition 2.22 diagram, together with the two deleted-subset-excision
 closure hypotheses.
 
-Formalized in `Hatcher/Singular/GoodPairNeighborhoodQuotient.lean`. The set
-`pointQuotientNeighborhood` is the image of `h.V`, and
+The set `pointQuotientNeighborhood` is the image of `h.V`, and
 `pointQuotientProjection_preimage_neighborhood` proves its inverse image is
 exactly `h.V`. The restricted continuous map
 `pointQuotientNeighborhoodProjection` is surjective and a quotient map. Its

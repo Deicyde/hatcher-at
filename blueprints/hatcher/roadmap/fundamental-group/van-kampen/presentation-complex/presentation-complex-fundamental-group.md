@@ -14,16 +14,6 @@ Compute the fundamental group of the concrete presentation complex by the
 two-cell attachment theorem and transport the attaching normal closure through
 the free-group equivalence for the wedge of circles.
 
-Intended main artifact:
-
-```lean
-noncomputable def Hatcher.presentationComplexFundamentalGroupEquiv
-    {S : Type u} (rels : Set (FreeGroup S)) :
-    PresentedGroup rels ≃*
-      FundamentalGroup (Hatcher.presentationComplex rels)
-        (Hatcher.presentationComplexBasepoint rels)
-```
-
 Prove explicitly that mapping the normal closure of the attaching loops along
 `Hatcher.fundamentalGroupEquivWedgeCircles` gives
 `Subgroup.normalClosure rels`, then use `QuotientGroup.congr`. The result must

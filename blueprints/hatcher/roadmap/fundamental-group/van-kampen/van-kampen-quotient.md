@@ -18,8 +18,6 @@ canonical map induces an isomorphism
 with the orientation chosen consistently in Lean. Here `N` is the normal
 closure of the overlap relations.
 
-Intended artifact: `Hatcher.VanKampen.quotientEquivFundamentalGroup`.
-
 The final proof is the group first isomorphism theorem after surjectivity and
 the kernel calculation. The public statement remains Hatcher's based-group
 theorem even if groupoid machinery is useful internally.

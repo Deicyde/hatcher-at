@@ -36,8 +36,7 @@ equivalent to transitivity on every fiber. The normalizer endpoint criterion
 then identifies chosen-fiber transitivity with `normalizer H = ⊤`; finish with
 `Subgroup.normalizer_eq_top_iff`.
 
-Formalized in `Hatcher/Covering/DeckGroupCalculation.lean`. Besides the main
-equivalence, the file exports
+Besides the main equivalence, the file exports
 `Hatcher.BasedConnectedCover.proj_surjective`,
 `Hatcher.BasedConnectedCover.isNormal_iff_range_normal`, and the normal-cover
 corollary `Hatcher.BasedConnectedCover.fundamentalGroupQuotientEquivDeck`.

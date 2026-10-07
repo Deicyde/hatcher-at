@@ -16,8 +16,6 @@ through the shared spine and strip to the selected boundary point; after that
 whisker is collapsed, the remaining punctured cell retracts radially onto its
 boundary sphere.
 
-Intended artifact:
-`Hatcher.VanKampen.AuxiliaryCellAttachment.intersectionPieceHomotopyEquivBoundary`.
 This equivalence supplies the higher-dimensional triviality argument. Its
 compatibility with the original attaching maps is a separate two-dimensional
 node.

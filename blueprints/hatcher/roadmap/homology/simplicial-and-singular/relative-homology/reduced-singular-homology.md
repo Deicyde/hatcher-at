@@ -14,11 +14,10 @@ statement: formalized
 complex. Continuous maps induce maps on these groups, giving a functor in the
 space.
 
-The main artifact should be `Hatcher.Reduced.homologyFunctor`. It must use the
-augmented complex rather than define reduced homology through a chosen
-basepoint; the latter is a theorem in Example 2.18. Defining the functor on the
-empty space is harmless in the displayed nonnegative degrees and is recorded
-as an extension of Hatcher's nonempty-space convention.
+It must use the augmented complex rather than define reduced homology through a
+chosen basepoint; the latter is a theorem in Example 2.18. Defining the functor
+on the empty space is harmless in the displayed nonnegative degrees and is
+recorded as an extension of Hatcher's nonempty-space convention.
 
 ## Depends on
 

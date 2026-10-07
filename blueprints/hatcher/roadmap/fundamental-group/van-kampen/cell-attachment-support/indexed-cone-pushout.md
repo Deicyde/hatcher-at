@@ -15,8 +15,6 @@ from the topological coproduct `Σ j, S j` to `X` and to the coproduct of the
 retained cones `Σ j, ConeAttachment (id : S j → S j)`. The explicit indexed
 cone quotient is their pushout in `TopCat`.
 
-Intended artifact:
-`Hatcher.VanKampen.IndexedConeAttachment.isPushout_indexedConeAttachment`.
 The same module should expose the four maps in this square and the resulting
 `HomotopicalAlgebra.AttachCells` structure for the indexed retained-cone cell
 family. Use `TopCat.sigmaCofan` and `TopCat.sigmaCofanIsColimit`, and keep the

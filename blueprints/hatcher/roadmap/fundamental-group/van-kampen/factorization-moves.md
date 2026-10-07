@@ -15,8 +15,6 @@ cover member, or reinterpret a factor lying in `U i ∩ U j` through the other
 inclusion. Prove that each move preserves the image of the factorization word
 in the quotient by the overlap-relation subgroup.
 
-Intended artifact: `Hatcher.VanKampen.factorization_quotient_eq_of_move`.
-
 The reflexive-transitive closure is packaged as
 `Hatcher.VanKampen.Factorization.Sweep`; the theorem
 `Hatcher.VanKampen.factorization_quotient_eq_of_sweep` proves quotient
@@ -26,10 +24,10 @@ The move toolkit is closed under arbitrary list contexts, combines or splits
 same-cover blocks in reverse-product order, and performs lists of
 overlap-certified cover changes pointwise.
 
-Formalized in `Hatcher/VanKampen/FactorizationMoves.lean`. Elementary moves
-act on the geometric-order list of indexed factor classes. Combining adjacent
-factors uses the reversed multiplication convention of `FundamentalGroup`,
-while changing a cover label is killed by the corresponding overlap relator.
+Elementary moves act on the geometric-order list of indexed factor classes.
+Combining adjacent factors uses the reversed multiplication convention of
+`FundamentalGroup`, while changing a cover label is killed by the
+corresponding overlap relator.
 
 ## Depends on
 

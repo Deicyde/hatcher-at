@@ -27,8 +27,6 @@ invariance for the two inverse laws. Mathlib's generic
 `HomotopyEquiv.toHomologyIso` is additional chain-complex-level prior art, but
 there is no pinned topological theorem with this interface.
 
-Formalized in `Hatcher/Singular/Homology.lean`.
-
 ## Depends on
 
 - [Singular homology](singular-homology.md)

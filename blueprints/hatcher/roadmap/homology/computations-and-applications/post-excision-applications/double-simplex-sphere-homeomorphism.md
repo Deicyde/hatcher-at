@@ -14,11 +14,10 @@ Construct a homeomorphism
 
 `Hatcher.Simplex.doubleSimplex n ≅ TopCat.sphere n`.
 
-The main artifact is `Hatcher.Simplex.doubleSimplexIsoSphere`. First carry
-each standard simplex to a closed disk by the simplex-pair homeomorphism, then
-identify the double of the disk along its boundary with the standard unit
-sphere. The two disk maps must agree on the common boundary so that the
-homeomorphism descends from the pushout.
+First carry each standard simplex to a closed disk by the simplex-pair
+homeomorphism, then identify the double of the disk along its boundary with
+the standard unit sphere. The two disk maps must agree on the common boundary
+so that the homeomorphism descends from the pushout.
 
 The formalization uses the explicit hemisphere parametrizations
 `x ↦ (x, ±√(1 - ‖x‖²))`. Their first coordinates recover `x`, their final
