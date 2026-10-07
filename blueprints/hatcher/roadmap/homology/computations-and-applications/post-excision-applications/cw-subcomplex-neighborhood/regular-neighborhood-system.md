@@ -34,8 +34,3 @@ global deformation retraction is the next node.
 
 - [Hatcher, construction of `Nε(A)` and Appendix Proposition A.5, printed pages 522–523](../../../../../sources/hatcher-appendix-a5.md)
 - [CW-subcomplex neighborhood implementation specification](../../../../../sources/cw-subcomplex-neighborhood-implementation.md)
-
-## Prior art
-
-The completed successor-skeleton quotient bridge records compatible quotient
-topology techniques, but it is not an authored mathematical prerequisite.

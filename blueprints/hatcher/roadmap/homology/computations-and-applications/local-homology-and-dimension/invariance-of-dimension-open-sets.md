@@ -41,12 +41,3 @@ None beyond the Euclidean open-set and homeomorphism data in the statement.
 
 - [Hatcher §2.1, Theorem 2.26, page 126](../../../../sources/hatcher-2-1.md)
 - [Post-excision applications implementation specification](../../../../sources/post-excision-applications-implementation.md)
-
-## Prior art
-
-Open Mathlib PR
-[#36770](https://github.com/leanprover-community/mathlib4/pull/36770)
-uses Brouwer's fixed-point theorem to prove invariance of domain and a
-conditional dimension theorem for whole finite-dimensional spaces. It is not
-present at the project pin and does not state this open-subset homological
-theorem.

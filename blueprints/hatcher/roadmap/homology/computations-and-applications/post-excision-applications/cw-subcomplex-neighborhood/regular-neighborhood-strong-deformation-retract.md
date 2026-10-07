@@ -36,9 +36,3 @@ interval gluing step.
 
 - [Hatcher, Appendix Proposition A.5, printed page 523](../../../../../sources/hatcher-appendix-a5.md)
 - [CW-subcomplex neighborhood implementation specification](../../../../../sources/cw-subcomplex-neighborhood-implementation.md)
-
-## Prior art
-
-The completed compact-subset and classical-skeleton bridge modules may guide
-the closed-cell-times-interval continuity argument, but they are not authored
-mathematical prerequisites of this result.
