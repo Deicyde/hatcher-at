@@ -13,15 +13,6 @@ lean: Hatcher.VanKampen.pointAttachCells
 Equip the unique map from the initial topological space to a point with one
 standard zero-cell attachment.
 
-Intended artifact:
-
-```lean
-noncomputable def Hatcher.VanKampen.pointAttachCells :
-    HomotopicalAlgebra.AttachCells.{u}
-      (TopCat.RelativeCWComplex.basicCell.{u} 0)
-      (CategoryTheory.Limits.initial.to (TopCat.of PUnit.{u + 1}))
-```
-
 The cell index must be definitionally `PUnit`, or accompanied by a specified
 equivalence with `PUnit`. Identify `TopCat.diskBoundary 0` with the empty
 space and `TopCat.disk 0` with a point, then transport the one-index cone

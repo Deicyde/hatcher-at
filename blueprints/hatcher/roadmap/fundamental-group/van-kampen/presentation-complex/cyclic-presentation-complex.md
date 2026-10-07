@@ -13,8 +13,6 @@ lean: Hatcher.fundamentalGroupEquiv_cyclicPresentationComplex
 natural number `n`, attach a 2-cell to `S¹` along the degree-`n` map. The
 resulting presentation complex has fundamental group isomorphic to `ℤ/nℤ`.
 
-Intended artifact: `Hatcher.fundamentalGroupEquiv_cyclicPresentationComplex`.
-
 Define `cyclicPresentationComplex n` as the singleton indexed cone attachment
 to `Circle`, using the boundary-of-the-two-disk homeomorphism followed by
 `Circle.degreeMap n` as attaching map, and use the image of `1` as basepoint.

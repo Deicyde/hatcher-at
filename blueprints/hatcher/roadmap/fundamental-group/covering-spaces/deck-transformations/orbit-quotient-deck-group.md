@@ -18,7 +18,7 @@ covering-space action, the orbit projection
 is a normal covering. If `Y` is path-connected, the canonical homomorphism
 from `G` to `deck q` is an isomorphism.
 
-The main artifact is `Hatcher.Covering.actionEquivDeck`. The same file should
+The same file should
 export the normality theorem without adding connectedness when it is not
 needed. Fiber transitivity comes from
 `IsQuotientCoveringMap.mulActionFiber_isPretransitive`, transported along
@@ -27,7 +27,7 @@ quotient-covering structure. To prove every deck transformation arises from
 `G`, match it at one point and apply unique lifting on the path-connected total
 space.
 
-Formalized in `Hatcher/Covering/OrbitQuotientDeckGroup.lean`. The file also
+The file also
 exports `Hatcher.Covering.isNormal_orbitQuotient`, whose statement does not
 require path-connectedness.
 

@@ -26,7 +26,7 @@ and prove that it has unit norm, hence is nowhere zero. The construction must
 handle the coordinate reindexing explicitly and retain continuity as part of
 the bundled field.
 
-Formalized in `Hatcher/Sphere/OddTangentField.lean`. The public
+The public
 `oddSphereCoordinateEquiv` and paired-coordinate equations expose the literal
 quarter-turn formula, while
 `nonvanishingTangentVectorFieldOfOdd_nonvanishing` proves the resulting field

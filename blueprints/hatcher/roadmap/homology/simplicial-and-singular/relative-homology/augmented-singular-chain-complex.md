@@ -13,8 +13,7 @@ statement: formalized
 augment the singular chain complex by the map from degree-zero chains to `R`
 that sends every singular zero-simplex to the identity of `R`.
 
-The main artifact should be
-`Hatcher.Reduced.augmentedSingularChainComplexFunctor`. Mathlib's
+Mathlib's
 `ChainComplex.augment` shifts the ordinary singular complex up one degree, so
 degree zero is `R` and degree `n + 1` is `Cₙ(X;R)`. Supporting declarations
 construct the natural chain-level augmentation and prove that the degree-one

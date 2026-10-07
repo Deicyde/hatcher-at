@@ -25,7 +25,7 @@ This is the formal-algebra inclusion in the kernel calculation. It should use
 the universal properties of `Monoid.CoprodI`, `Subgroup.normalClosure`, and
 `QuotientGroup`, without topological subdivision arguments.
 
-Formalized in `Hatcher/VanKampen/CoverMapRelations.lean`. The file also proves
+The file also proves
 the individual relator calculation and exports the descended homomorphism
 `Hatcher.VanKampen.quotientCoverMap`.
 

@@ -23,7 +23,7 @@ The intended completion target is
 `Hatcher.Relative.pointQuotientComplementHomeomorph`, with the quotient-map
 and fibre theorems as supporting results in the same review unit.
 
-Formalized in `Hatcher/Singular/PointQuotientTopology.lean`. For nonempty
+For nonempty
 `P.snd`, `pointQuotientProjection_isQuotientMap` proves that the ambient
 projection is a quotient map, and `pointQuotientProjection_preimage_point`
 identifies its collapsed fibre with `Set.range P.map`.

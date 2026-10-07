@@ -13,17 +13,6 @@ lean: Hatcher.joined_iff_of_attachCells_of_one_lt
 Attaching an arbitrary family of cells of one fixed dimension greater than one
 does not merge path components of the source.
 
-Intended main artifact:
-
-```lean
-theorem Hatcher.joined_iff_of_attachCells_of_one_lt
-    {n : ℕ} {X Y : TopCat.{u}} {f : X ⟶ Y}
-    (c : HomotopicalAlgebra.AttachCells.{u}
-      (TopCat.RelativeCWComplex.basicCell.{u} n) f)
-    (hn : 1 < n) (x y : X) :
-    Joined (f x) (f y) ↔ Joined x y
-```
-
 Also provide `Hatcher.pathConnectedSpace_of_attachCells_of_two_lt`: if `X` is
 path-connected and `2 < n`, then `Y` is path-connected. No finiteness
 assumption on the cell index is allowed.

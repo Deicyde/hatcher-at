@@ -15,8 +15,6 @@ basepoint, and have path-connected members, pairwise intersections, and triple
 intersections. If two cover factorizations represent homotopic based loops,
 then their words have the same class modulo the overlap-relation subgroup.
 
-Intended artifact: `Hatcher.VanKampen.factorization_quotient_eq_of_homotopic`.
-
 Follow Hatcher's sweep argument using a cover-subordinate decomposition in
 which at most three regions meet at each vertex. Choose connector paths at
 vertices in the resulting double or triple intersections, then compare

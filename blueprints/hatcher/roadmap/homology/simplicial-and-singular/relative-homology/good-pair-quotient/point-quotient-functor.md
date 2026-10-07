@@ -21,7 +21,7 @@ of pairs, and the natural comparison
 `Hatcher.Relative.pointQuotientComparison : 𝟭 TopPair ⟶ pointQuotientPairFunctor`.
 Identify each target canonically with the existing `pointedPair` construction.
 
-Formalized in `Hatcher/Singular/PointQuotient.lean`. The supporting API exposes
+The supporting API exposes
 `pointQuotientCollapse`, `pointQuotient`, `pointQuotientProjection`,
 `pointQuotientPointInclusion`, `pointQuotientPoint`, `pointQuotientPair`, and
 `pointQuotientMap`. The target pair is defined using `pointedPair`, and

@@ -15,7 +15,7 @@ canonical inclusion of `X` into the cone quotient carries a one-cell
 `HomotopicalAlgebra.AttachCells` structure for Mathlib's exact
 `TopCat.RelativeCWComplex.basicCell n` family.
 
-Formalized as `Hatcher.VanKampen.ConeAttachment.attachCells_basicCell`. The
+The
 proof first identifies the retained cone with `TopCat.disk n`, including its
 boundary map, then transports the explicit cone pushout along that arrow
 isomorphism using Mathlib's `AttachCells.reindexCellTypes`.

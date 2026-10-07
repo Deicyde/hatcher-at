@@ -13,7 +13,6 @@ For `c : HomotopicalAlgebra.AttachCells.{u}
 (TopCat.RelativeCWComplex.basicCell n) f` with an empty cell-index type, show
 that the attachment map `f` is an isomorphism in `TopCat`.
 
-Intended artifact: `Hatcher.VanKampen.CellAttachment.targetIsoOfIsEmpty`.
 Compose the abstract-to-indexed model isomorphism with the homeomorphism from
 an empty indexed cone attachment to its base. This is the degenerate branch of
 Proposition 1.26; it must not be handled by adding a dummy apex to Hatcher's

@@ -16,9 +16,6 @@ pointed lift through `p : (E,e₀) → (X,x₀)` if and only if
 
 `range(f∗) ≤ range(p∗)`.
 
-Formalized as `Hatcher.Covering.exists_lift_iff_range_le` in
-`Hatcher/Covering/LiftingCriterion.lean`.
-
 The pinned theorem
 `IsCoveringMap.existsUnique_continuousMap_lifts_of_range_le` proves the hard
 direction and uniqueness. The reverse implication uses the supplied lift and

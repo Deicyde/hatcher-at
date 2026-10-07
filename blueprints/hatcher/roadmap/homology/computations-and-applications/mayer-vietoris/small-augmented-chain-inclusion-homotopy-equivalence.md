@@ -14,8 +14,7 @@ restricting the ordinary singular-chain augmentation. When the interiors of
 the family cover `X`, the canonical inclusion into the augmented singular
 chain complex of `X` is a chain-homotopy equivalence.
 
-The main artifact is
-`Hatcher.Excision.smallAugmentedChainInclusionHomotopyEquiv`. Supporting
+Supporting
 declarations should expose `smallAugmentedChainComplex` and its canonical
 inclusion without a cover hypothesis. Under `SmallSimplicesCondition`, shift
 the existing small-chain homotopy equivalence through `ChainComplex.augment`,

@@ -14,8 +14,6 @@ onto the canonical copy of the indexed cone attachment. On every added square,
 collapse the square onto its bottom and right edges while fixing those edges;
 fix the indexed attachment throughout.
 
-Intended artifact:
-`Hatcher.VanKampen.AuxiliaryCellAttachment.attachmentStrongDeformationRetract`.
 The module must also record that the inclusion of `X` through the indexed
 attachment agrees with the direct base map into `Z`.
 

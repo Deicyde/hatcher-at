@@ -21,8 +21,6 @@ Mathlib's theorem for totally disconnected spaces. For Hatcher's statement,
 specialize the coefficient category to `AddCommGrpCat` and `R` to
 `AddCommGrpCat.of ℤ`.
 
-Formalized in `Hatcher/Singular/Homology.lean`.
-
 ## Depends on
 
 - [Singular homology](singular-homology.md)

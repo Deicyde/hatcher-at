@@ -15,9 +15,7 @@ trivial fundamental group. Then `π₁(X)` is the quotient of the first member's
 fundamental group by the normal closure of the image of the intersection
 group.
 
-Formalized as
-`Hatcher.VanKampen.binaryCoverLeftQuotientEquivFundamentalGroupOfSubsingleton`
-in `Hatcher/VanKampen/CellAttachmentAlgebra.lean`. Its companion formulas show
+Its companion formulas show
 that the quotient map followed by this equivalence is exactly the homomorphism
 induced by inclusion of the first cover member.
 

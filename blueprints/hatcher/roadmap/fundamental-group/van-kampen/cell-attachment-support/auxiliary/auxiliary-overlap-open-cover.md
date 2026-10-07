@@ -17,8 +17,6 @@ Prove that these sets are open in the overlap, cover it, contain the chosen
 basepoint, and have the path-connected pairwise intersections required for the
 surjective clause of van Kampen.
 
-Intended artifact:
-`Hatcher.VanKampen.AuxiliaryCellAttachment.isOpenCover_intersectionPieces`.
 The statement assumes a nonempty cell-index type and carries the exact
 basepoint membership and path-connectedness witnesses consumed by
 `Hatcher.VanKampen.coverMap_surjective`.

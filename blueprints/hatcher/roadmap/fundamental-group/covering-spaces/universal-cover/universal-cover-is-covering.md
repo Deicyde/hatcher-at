@@ -18,12 +18,10 @@ simply-connected. For the path-class space, the endpoint projection
 is a covering map. For each small open `U`, the sets `U[γ]` partition the
 preimage of `U`, and projection restricts to a homeomorphism on every part.
 
-Intended artifact: `Hatcher.UniversalCover.isCoveringMap_proj`.
-
 Hatcher's general definition permits empty fibers, but this endpoint map is
 surjective because `X` is path-connected.
 
-Formalized in `Hatcher/Covering/UniversalCoverIsCovering.lean`. The file also
+The file also
 exports continuity and surjectivity of the endpoint map, discreteness of its
 fibers, and openness of the basic sheets used in the covering trivializations.
 

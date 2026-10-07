@@ -17,8 +17,7 @@ stationary on the boundary and respect the radial coordinate. In the global
 time schedule it is the identity before its assigned interval and remains
 constant at its retracted endpoint after that interval.
 
-The main artifact is
-`Hatcher.ClassicalCW.cellBoundaryCollarDeformation`. Supporting declarations
+Supporting declarations
 record the collar set, its openness relative to the closed cell, its radial
 retraction, and endpoint and boundary-fixing formulas.
 

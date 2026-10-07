@@ -13,7 +13,6 @@ statement: formalized
 and positive degree `n`, construct the natural isomorphism
 `Ḥₙ(X;R) ≅ Hₙ(X;R)`.
 
-The main artifact should be `Hatcher.Reduced.homologyIsoOfPositiveDegree`.
 It is induced by the degree shift in `ChainComplex.augment`, not by choosing a
 basepoint.
 

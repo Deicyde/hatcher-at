@@ -23,7 +23,7 @@ then yields the main result
 theorem Hatcher.Sphere.odd_of_nonvanishingTangentVectorField ... : Odd n
 ```
 
-Formalized in `Hatcher/Sphere/TangentFieldObstruction.lean`. The supporting
+The supporting
 declaration
 `identityHomotopyAntipodalOfNonvanishingTangentVectorField` is the explicit
 cosine--sine homotopy; its norm calculation uses the normalized field's unit

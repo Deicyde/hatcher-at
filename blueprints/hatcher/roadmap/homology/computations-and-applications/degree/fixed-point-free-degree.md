@@ -24,7 +24,7 @@ theorem Hatcher.Sphere.degree_eq_neg_one_pow_of_fixedPointFree ... :
   degree n hn f = (-1 : ℤ) ^ (n + 1)
 ```
 
-Formalized in `Hatcher/Sphere/FixedPointFreeDegree.lean`. Taking norms of a
+Taking norms of a
 hypothetical zero of the unnormalized segment forces its two coefficients to
 agree and be nonzero, so scalar cancellation would make `f(x)=x`. This proves
 normalization is continuous on the whole cylinder. Its endpoints are the

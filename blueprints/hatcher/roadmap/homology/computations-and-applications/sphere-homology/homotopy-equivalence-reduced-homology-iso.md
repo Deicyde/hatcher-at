@@ -16,8 +16,7 @@ homology. For a homotopy equivalence `e : X ≃ₕ Y`, a coefficient object
 
 `H̃_n(X;R) ≅ H̃_n(Y;R)`.
 
-The main artifact is
-`Hatcher.Reduced.homologyIsoOfHomotopyEquiv`. Its forward morphism must be the
+Its forward morphism must be the
 map induced by `e.toFun`, with a public simplification lemma parallel to the
 ordinary singular-homology API. Construct the inverse from `e.invFun` and use
 reduced homotopy invariance for the inverse laws.

@@ -16,8 +16,7 @@ intersection. Expose the coercion formula
 `↑(Hatcher.ClassicalCW.Subcomplex.inter A B) =`
 `  (A : Set X) ∩ (B : Set X)`
 
-and the corresponding cell-index formula. The main artifact is
-`Hatcher.ClassicalCW.Subcomplex.inter`.
+and the corresponding cell-index formula.
 
 This is topology-neutral infrastructure for the identity
 `N(A) ∩ N(B) = N(A ∩ B)` following Hatcher's Proposition A.5. The pinned

@@ -14,7 +14,7 @@ lean: Hatcher.fundamentalGroupMap_injective_of_retraction
 the inclusion-induced homomorphism `π₁(A, a) →* π₁(X, a)` is injective. If
 `A` is a deformation retract of `X`, that homomorphism is an isomorphism.
 
-Formalized in `Hatcher/VanKampen/WedgeFundamentalGroup.lean`. The theorem
+The theorem
 `Hatcher.fundamentalGroupMap_injective_of_retraction` proves the first clause
 from continuous maps `A → X` and `X → A` whose composite on `A` is the
 identity. The definition

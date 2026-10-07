@@ -28,9 +28,6 @@ The general case comes from homology in
 [Corollary 2.15](../../homology/computations-and-applications/sphere-homology/brouwer-fixed-point-disk.md);
 this node is only the two-dimensional case Hatcher proves from `π₁`.
 
-Formalized in `Hatcher/Disc/Brouwer.lean` as
-`Hatcher.Disc.exists_fixed_point`.
-
 ## Depends on
 
 - [The circle is not a retract of the disc](no-retraction-disc.md)

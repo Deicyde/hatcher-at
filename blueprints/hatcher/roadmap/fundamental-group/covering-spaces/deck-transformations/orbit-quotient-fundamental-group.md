@@ -16,9 +16,6 @@ orbit projection, and choose `y₀ : Y`. Then there is a group isomorphism
 
 `π₁(Y/G, q(y₀)) ⧸ range(π₁(q)) ≃* G`.
 
-Intended artifact:
-`Hatcher.Covering.orbitQuotientFundamentalGroupEquiv`.
-
 Use the path-connected and locally path-connected structures inherited by the
 orbit quotient, namely `Quotient.instPathConnectedSpace` and
 `Quotient.locPathConnectedSpace`. The subgroup is the range of
@@ -29,7 +26,7 @@ displayed fundamental-group quotient, and Proposition 1.40(b) identifies the
 same deck group with `G`. Form the quotient only after obtaining the
 normal-subgroup instance from normality of the orbit cover.
 
-Formalized in `Hatcher/Covering/OrbitQuotientFundamentalGroup.lean`. The proof
+The proof
 explicitly identifies the direct `FundamentalGroup.map` range with the
 `mapOfEq` range stored by the pointed-cover structure before transporting the
 quotient equivalence.

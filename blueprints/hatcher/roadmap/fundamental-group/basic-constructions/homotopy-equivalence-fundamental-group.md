@@ -14,8 +14,7 @@ lean: Hatcher.fundamentalGroupMulEquivOfHomotopyEquiv
 `e : X ≃ₕ Y` induces an isomorphism
 `π₁(X, x) ≃* π₁(Y, e(x))` at every basepoint `x`.
 
-Formalized as `Hatcher.fundamentalGroupMulEquivOfHomotopyEquiv` in
-`Hatcher/VanKampen/WedgeFundamentalGroup.lean`. It is obtained from Mathlib's
+It is obtained from Mathlib's
 equivalence of fundamental groupoids and records that the forward map is
 exactly the homomorphism induced by `e.toFun`.
 

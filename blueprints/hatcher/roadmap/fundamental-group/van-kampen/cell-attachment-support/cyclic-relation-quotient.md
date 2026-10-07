@@ -14,8 +14,7 @@ For a natural number `n`, quotient `π₁(S¹, 1)` by the normal closure of the
 class of the degree-`n` loop. The resulting group is isomorphic to
 `Multiplicative (ZMod n)`.
 
-Formalized as `Hatcher.cyclicPresentationQuotientEquiv` in
-`Hatcher/VanKampen/CyclicPresentationAlgebra.lean`. The definition
+The definition
 `Hatcher.Circle.degreeLoopClass` names the relator, and the companion
 application theorems record that the quotient equivalence is winding number
 reduced modulo `n`.

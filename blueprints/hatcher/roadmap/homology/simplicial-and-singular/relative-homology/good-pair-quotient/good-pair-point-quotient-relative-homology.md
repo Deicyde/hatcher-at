@@ -24,7 +24,7 @@ Compose it with `Hatcher.Relative.pointedPairHomologyIso` to define
 Its forward map must be definitionally or propositionally identified with the
 quotient-induced relative map followed by the pointed comparison.
 
-Formalized in `Hatcher/Singular/GoodPairPointQuotientHomology.lean`. Applying
+Applying
 relative homology to the canonical neighborhood square identifies the desired
 quotient map followed by the quotient-neighborhood comparison with the
 composite of the original-neighborhood and neighborhood-quotient comparisons.

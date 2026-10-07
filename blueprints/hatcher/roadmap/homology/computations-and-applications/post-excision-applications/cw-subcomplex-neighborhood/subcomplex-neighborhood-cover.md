@@ -18,8 +18,7 @@ Let `A` and `B` be subcomplexes whose carriers cover a classical CW complex
 - `U ∩ V = N (A ∩ B)`; and
 - the induced strong deformation retraction `U ∩ V ↘ A ∩ B`.
 
-The main artifact is
-`Hatcher.ClassicalCW.subcomplexNeighborhoodCover`. Keep this structure in a
+Keep this structure in a
 topology-neutral module so Corollary 2.24 can consume it without depending on
 the later Mayer–Vietoris development.
 
