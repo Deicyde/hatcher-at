@@ -17,9 +17,6 @@ chosen overlap basepoint. The construction must remain continuous for an
 arbitrary index type and must not identify the distinct cone apices in the
 ambient attachment.
 
-Intended artifact:
-`Hatcher.VanKampen.AuxiliaryCellAttachment.contractibleSpace_upperCover`.
-
 ## Depends on
 
 - [Hatcher's binary cover of the strip enlargement](auxiliary-cell-attachment-open-cover.md)

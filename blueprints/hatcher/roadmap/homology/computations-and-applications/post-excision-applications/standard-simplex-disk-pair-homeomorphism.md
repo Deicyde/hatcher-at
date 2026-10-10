@@ -15,8 +15,7 @@ simplex and Mathlib's standard disk:
 
 `(Δ[n], ∂Δ[n]) ≅ (TopCat.disk n, TopCat.diskBoundary n)`.
 
-The main artifact is `Hatcher.Simplex.standardSimplexPairIsoDiskPair`. Build
-it from an explicit affine-hyperplane model followed by radial gauge
+Build it from an explicit affine-hyperplane model followed by radial gauge
 rescaling, and prove that the boundary is carried to the unit sphere. Cover
 `n = 0`, where both boundaries are empty.
 

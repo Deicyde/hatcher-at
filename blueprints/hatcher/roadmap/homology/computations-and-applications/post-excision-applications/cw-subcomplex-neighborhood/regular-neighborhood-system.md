@@ -17,10 +17,9 @@ assignment `N` for all `CWComplex.Subcomplex C`. Package the facts that
 - the carrier of `A` lies in `N A`, hence in its interior; and
 - `N (A.inter B) = N A ∩ N B`.
 
-The main artifact is
-`Hatcher.ClassicalCW.RegularNeighborhoodSystem`. It uses the same collar
-width, chosen once with `0 < ε < 1`, in every occurrence of `N`; independently
-chosen neighborhoods would not support the required intersection identity.
+It uses the same collar width, chosen once with `0 < ε < 1`, in every
+occurrence of `N`; independently chosen neighborhoods would not support the
+required intersection identity.
 
 This node constructs the neighborhoods and their point-set identities. The
 global deformation retraction is the next node.
@@ -34,8 +33,3 @@ global deformation retraction is the next node.
 
 - [Hatcher, construction of `Nε(A)` and Appendix Proposition A.5, printed pages 522–523](../../../../../sources/hatcher-appendix-a5.md)
 - [CW-subcomplex neighborhood implementation specification](../../../../../sources/cw-subcomplex-neighborhood-implementation.md)
-
-## Prior art
-
-The completed successor-skeleton quotient bridge records compatible quotient
-topology techniques, but it is not an authored mathematical prerequisite.

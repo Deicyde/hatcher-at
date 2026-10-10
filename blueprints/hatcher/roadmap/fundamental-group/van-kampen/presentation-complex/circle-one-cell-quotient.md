@@ -14,15 +14,6 @@ Attach the cone on `TopCat.diskBoundary 1` to a point by the unique map and
 identify the resulting quotient with the circle, with the image of the point
 corresponding to `1`.
 
-Intended artifact:
-
-```lean
-noncomputable def Hatcher.VanKampen.circleOneCellHomeomorph :
-    Hatcher.VanKampen.ConeAttachment
-      (fun _ : ((TopCat.diskBoundary.{u} 1 : TopCat.{u}) : Type u) =>
-        PUnit.unit) ≃ₜ ULift.{u} _root_.Circle
-```
-
 Also prove the simp lemma sending the cone-attachment basepoint to
 `ULift.up (1 : Circle)`. Use the standard homeomorphisms from the one-disk to
 a closed interval, from the interval quotient to `AddCircle`, and from

@@ -13,10 +13,9 @@ lean: Hatcher.VanKampen.ConeAttachment.diskHomeomorph
 The single-cone quotient attached to Mathlib's exact `TopCat.diskBoundary n`
 by the identity map is homeomorphic to `TopCat.disk n`.
 
-Formalized as `Hatcher.VanKampen.ConeAttachment.diskHomeomorph`. The proof
-uses the radial map: retained boundary points have radius one, the cone apex
-maps to the origin, and a cylinder point `(x,t)` maps to `t • x`. Its kernel is
-exactly the cone-attachment relation.
+The proof uses the radial map: retained boundary points have radius one, the
+cone apex maps to the origin, and a cylinder point `(x,t)` maps to `t • x`. Its
+kernel is exactly the cone-attachment relation.
 
 The companion theorem
 `Hatcher.VanKampen.ConeAttachment.diskHomeomorph_base_eq_diskBoundaryInclusion`

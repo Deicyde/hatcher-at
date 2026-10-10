@@ -15,9 +15,6 @@ homotopy `H : I × A → X`, and a continuous lift `f₀ : A → E` of the time-
 map, there exists a unique continuous homotopy `H̃ : I × A → E` that lifts `H`
 and begins at `f₀`.
 
-Formalized as `Hatcher.Covering.existsUnique_liftHomotopy` in
-`Hatcher/Covering/HomotopyLifting.lean`.
-
 This is a thin source-facing wrapper around
 `IsCoveringMap.liftHomotopy`, `liftHomotopy_lifts`,
 `liftHomotopy_zero`, and `eq_liftHomotopy_iff'`. No new subdivision proof

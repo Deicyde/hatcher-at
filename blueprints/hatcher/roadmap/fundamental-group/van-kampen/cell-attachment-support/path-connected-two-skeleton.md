@@ -13,15 +13,6 @@ lean: Hatcher.ClassicalCW.pathConnectedSpace_twoSkeleton
 Supply the path-connectedness instance required before iterating the
 higher-cell fundamental-group theorem from the classical 2-skeleton.
 
-Intended main artifact:
-
-```lean
-theorem Hatcher.ClassicalCW.pathConnectedSpace_twoSkeleton
-    {X : Type u} [TopologicalSpace X] [T2Space X]
-    (C : Set X) [Topology.CWComplex C] [PathConnectedSpace C] :
-    PathConnectedSpace (Topology.CWComplex.skeleton C (2 : ℕ∞))
-```
-
 For two points of the 2-skeleton, choose a path between them in `C`. Its image
 is compact, hence lies in a bounded skeleton. Work downward through the
 finitely many higher dimensions. At each step, use the classical attachment

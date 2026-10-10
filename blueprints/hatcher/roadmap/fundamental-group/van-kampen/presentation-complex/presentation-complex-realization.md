@@ -16,9 +16,6 @@ generator, and one 2-cell for each relator. Prove that it is an abstract
 two-dimensional CW complex and that its fundamental group is the corresponding
 `PresentedGroup`.
 
-Intended artifact:
-`Hatcher.exists_presentationComplex_fundamentalGroupEquiv`.
-
 The source-facing Lean statement should be equivalent to:
 
 ```lean

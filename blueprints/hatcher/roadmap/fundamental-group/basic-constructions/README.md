@@ -33,9 +33,7 @@ only that this map is a covering.
 
 Every loop then lifts to a path in `ℝ` starting at `0` and ending at an
 integer, and that integer is unchanged by path homotopy because homotopies lift
-too. Mathlib supplies both lifting facts as `IsCoveringMap.liftPath` and
-`IsCoveringMap.liftHomotopy` with `monodromy_theorem`, so the invariant can be
-defined directly.
+too.
 
 - [Winding number of a loop in the circle](winding-number.md)
 
@@ -44,9 +42,6 @@ arbitrary lift with the linear path `s ↦ ns` shows the winding number is
 faithful. That is the theorem.
 
 - [The fundamental group of the circle](fundamental-group-circle.md)
-
-Mathlib's product construction for fundamental groupoids, together with the
-circle computation above, supplies Proposition 1.12 and Example 1.13.
 
 ## Consequences
 

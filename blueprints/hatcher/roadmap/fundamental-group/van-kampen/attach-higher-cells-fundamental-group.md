@@ -13,8 +13,6 @@ lean: Hatcher.fundamentalGroupEquiv_of_attachCells_of_two_lt
 path-connected space `X` by attaching cells of one fixed dimension `n > 2`,
 then inclusion induces an isomorphism `π₁(X, x₀) ≃* π₁(Y, x₀)`.
 
-Intended artifact: `Hatcher.fundamentalGroupEquiv_of_attachCells_of_two_lt`.
-
 The same two-set model as in part (a) applies. The cover pieces of its
 intersection now deformation retract onto `(n-1)`-spheres, whose fundamental
 groups are trivial.

@@ -17,8 +17,7 @@ isomorphism
 `∐ i, H_n(P_i;R) ≅ H_n(Σ P_i;R)`
 
 whose forward map restricts on each coproduct summand to the relative-homology
-map induced by the corresponding sigma inclusion. The main artifact is
-`Hatcher.Relative.relativeHomologySigmaIso`.
+map induced by the corresponding sigma inclusion.
 
 Derive the result from `relativeChainComplexSigmaIso` and exactness of the
 coproduct functor. Do not state this under only `[Abelian C]` and

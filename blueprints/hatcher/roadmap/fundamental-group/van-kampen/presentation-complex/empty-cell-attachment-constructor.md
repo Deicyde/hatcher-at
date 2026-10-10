@@ -13,15 +13,6 @@ lean: Hatcher.VanKampen.CellAttachment.attachCellsId
 For every dimension and topological space, equip the identity map with a
 standard cell-attachment structure whose cell index is `PEmpty`.
 
-Intended artifact:
-
-```lean
-noncomputable def Hatcher.VanKampen.CellAttachment.attachCellsId
-    (n : ℕ) (X : TopCat.{u}) :
-    HomotopicalAlgebra.AttachCells.{u}
-      (TopCat.RelativeCWComplex.basicCell.{u} n) (𝟙 X)
-```
-
 Construct both indexed coproducts as initial objects and use the identity
 pushout square. The empty index must remain visible to the later dimension
 bound.
