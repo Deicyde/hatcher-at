@@ -19,6 +19,22 @@ The main artifact is
 `sigmaPairι` with the ordinary inclusion of `(U i,U i-{x i})` into the deleted
 union pair.
 
+Represent the target subspace as the preimage
+`Subtype.val ⁻¹' (Set.range x)ᶜ` inside `⋃ i, U i`, so it aligns with the later
+`deletedPairWithin` API. Name both the sigma punctured source pair and deleted
+union target pair. Construct the subspace homeomorphism without assuming that
+the punctured sets are open; no `T1Space X` hypothesis belongs here.
+
+Expose the direct local inclusion
+`Hatcher.Relative.puncturedNeighborhoodDeletedUnionPairHom`, ambient and
+proof-term-insensitive subspace component formulas, and the exact triangle
+
+`sigmaPairι i ≫ sigmaPuncturedPairIsoDeletedUnion.hom =`
+`  puncturedNeighborhoodDeletedUnionPairHom i`.
+
+The definitions require no `Nonempty ι` hypothesis and include the empty
+family.
+
 ## Depends on
 
 - [The coproduct of a family of topological pairs](sigma-topological-pair.md)
