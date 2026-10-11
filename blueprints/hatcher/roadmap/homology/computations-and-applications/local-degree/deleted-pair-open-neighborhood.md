@@ -8,15 +8,22 @@ origin: bridged
 # Deleted-pair homology is local on an open neighborhood
 
 For `F : Set X`, write `Hatcher.Relative.deletedPair X F` for
-`(X, X \ F)`. If `F` is closed, `W` is open, and `F ⊆ W`, define the canonical
-pair morphism from the deleted pair inside `W` to `deletedPair X F`.
+`(X, X \ F)` and define
+`Hatcher.Relative.deletedPairWithin F W` as the pair inside `W` obtained by
+deleting the preimage of `F`. If `F` is closed, `W` is open, and `F ⊆ W`,
+define the canonical morphism
+`Hatcher.Relative.deletedPairOpenNeighborhoodPairHom F W` and its induced
+homology map `Hatcher.Relative.deletedPairOpenNeighborhoodMap F W R n`.
 
 The main theorem
 `Hatcher.Relative.deletedPairOpenNeighborhoodMap_isIso` says that this map
 induces an isomorphism on relative homology in every degree. Include a
 `T1Space` specialization for finite `F`, using that finite sets are closed.
-For `F = {x}`, identify the map with the completed
-`localHomologyOpenNeighborhoodMap`.
+For `F = {x}`, construct the canonical source-pair isomorphism between
+`deletedPairWithin {x} W` and the punctured pair of `W`. Prove at pair and
+homology level that this isomorphism followed by the deleted-pair neighborhood
+map is the completed `localHomologyOpenNeighborhoodMap`; do not claim a
+generally ill-typed literal equality between their source objects.
 
 ## Depends on
 
@@ -25,7 +32,7 @@ For `F = {x}`, identify the map with the completed
 
 ## Proof depends on
 
-- [Deleted-subset homology excision](../../simplicial-and-singular/relative-homology/small-chains-and-excision/deleted-subset-excision-homology-isomorphism.md)
+- [Binary-cover excision induces a homology isomorphism](../../simplicial-and-singular/relative-homology/small-chains-and-excision/binary-cover-excision-homology-isomorphism.md)
 
 ## Sources
 
