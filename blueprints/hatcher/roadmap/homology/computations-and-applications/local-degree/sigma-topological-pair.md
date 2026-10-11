@@ -3,6 +3,9 @@ article_id: af_85e59358edc190186cfde9fb
 source_units: [hatcher-2-2-local-degree]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.sigmaPair
 ---
 
 # The coproduct of a family of topological pairs
@@ -22,6 +25,19 @@ pointed object and every summand inclusion; do not maintain two independent
 implementations or supply only an object isomorphism with no summand triangle.
 The construction requires no `Nonempty ι` hypothesis and includes the empty
 family.
+
+The canonical summand map is `Hatcher.Relative.sigmaPairι`. The structure-map
+and summand-component formulas are
+`Hatcher.Relative.sigmaPair_map_apply`,
+`Hatcher.Relative.sigmaPairι_fst`,
+`Hatcher.Relative.sigmaPairι_fst_apply`,
+`Hatcher.Relative.sigmaPairι_snd`, and
+`Hatcher.Relative.sigmaPairι_snd_apply`.
+
+The existing pointed constructions are definitional wrappers. Their named
+exact compatibility equalities are
+`Hatcher.Relative.sigmaPointedPair_eq_sigmaPair` and
+`Hatcher.Relative.sigmaPointedPairι_eq_sigmaPairι`.
 
 ## Depends on
 

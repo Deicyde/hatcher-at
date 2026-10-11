@@ -135,6 +135,7 @@ theorem sigmaPointedPair_pointedWedge_isPushout (x₀ : ∀ i, X i) :
     refine ⟨TopCat.ofHom d, ?_, ?_⟩
     · ext z
       rcases z with ⟨i, x⟩
+      change X i at x
       change d (Hatcher.PointedWedge.inclusion x₀ i x) = a ⟨i, x⟩
       simp [d, f]
     · ext z

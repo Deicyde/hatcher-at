@@ -81,6 +81,7 @@ import Hatcher.Singular.PointedRelative
 import Hatcher.Singular.PointedRelativeNaturality
 import Hatcher.Singular.ContractibleSubspaceRelative
 import Hatcher.Singular.ContractibleAmbientRelative
+import Hatcher.Singular.SigmaPair
 import Hatcher.Singular.SigmaPointedPair
 import Hatcher.Singular.SigmaGoodPair
 import Hatcher.Singular.PointedWedgePointQuotient

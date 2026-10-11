@@ -1,5 +1,5 @@
 import Hatcher.Singular.PointedRelative
-import Mathlib.Topology.Category.TopCat.Limits.Products
+import Hatcher.Singular.SigmaPair
 
 /-!
 # The sigma pair of a family of pointed spaces
@@ -19,29 +19,17 @@ universe u v
 
 variable {ι : Type u} {X : ι → TopCat.{max u v}}
 
-private def sigmaBasepointMap (x₀ : ∀ i, X i) :
-    (Σ _ : ι, PUnit.{max u v + 1}) → (Σ i, X i) :=
-  Sigma.map (fun i : ι ↦ i) fun i (_ : PUnit.{max u v + 1}) ↦ x₀ i
-
-private lemma continuous_sigmaBasepointMap (x₀ : ∀ i, X i) :
-    Continuous (sigmaBasepointMap x₀) := by
-  unfold sigmaBasepointMap
-  exact Continuous.sigma_map fun _ ↦ continuous_const
-
-private lemma isEmbedding_sigmaBasepointMap (x₀ : ∀ i, X i) :
-    Topology.IsEmbedding (sigmaBasepointMap x₀) := by
-  unfold sigmaBasepointMap
-  exact (Topology.isEmbedding_sigmaMap Function.injective_id).2 fun _ ↦
-    Topology.IsEmbedding.of_subsingleton _
-
 /-- The pair whose ambient space is the topological coproduct `Σ i, X i` and
 whose subspace contains the chosen basepoint in every summand. -/
 noncomputable def sigmaPointedPair (x₀ : ∀ i, X i) : TopPair.{max u v} :=
-  TopPair.of
-    (TopCat.ofHom
-      { toFun := sigmaBasepointMap x₀
-        continuous_toFun := continuous_sigmaBasepointMap x₀ })
-    (isEmbedding_sigmaBasepointMap x₀)
+  sigmaPair fun i ↦ pointedPair (X i) (x₀ i)
+
+/-- The pointed sigma pair is definitionally the generic sigma pair of the
+corresponding pointed pairs. -/
+theorem sigmaPointedPair_eq_sigmaPair (x₀ : ∀ i, X i) :
+    sigmaPointedPair x₀ =
+      sigmaPair (fun i ↦ pointedPair (X i) (x₀ i)) :=
+  rfl
 
 /-- The structure map of the sigma pointed pair sends the singleton in each
 summand to that summand's chosen basepoint. -/
@@ -55,13 +43,14 @@ lemma sigmaPointedPair_map_apply (x₀ : ∀ i, X i)
 pair. -/
 noncomputable def sigmaPointedPairι (x₀ : ∀ i, X i) (i : ι) :
     pointedPair (X i) (x₀ i) ⟶ sigmaPointedPair x₀ :=
-  TopPair.ofHom
-    (TopCat.sigmaι X i)
-    (TopCat.sigmaι (fun _ : ι ↦ TopCat.of PUnit.{max u v + 1}) i)
-    (by
-      ext z
-      rcases z with ⟨⟩
-      rfl)
+  sigmaPairι (fun j ↦ pointedPair (X j) (x₀ j)) i
+
+/-- The inclusion of a pointed summand is definitionally the corresponding
+generic sigma-pair inclusion. -/
+theorem sigmaPointedPairι_eq_sigmaPairι (x₀ : ∀ i, X i) (i : ι) :
+    sigmaPointedPairι x₀ i =
+      sigmaPairι (fun j ↦ pointedPair (X j) (x₀ j)) i :=
+  rfl
 
 /-- The ambient component of the canonical inclusion of a pointed summand is
 the standard sigma inclusion. -/
