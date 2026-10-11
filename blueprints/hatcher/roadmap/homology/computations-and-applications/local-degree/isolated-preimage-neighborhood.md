@@ -3,6 +3,9 @@ article_id: af_70b8f0060e881e7493096139
 source_units: [hatcher-2-2-local-degree]
 declaration: structure
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.LocalDegreeNeighborhood
 ---
 
 # An isolated preimage gives a map of punctured pairs
@@ -25,6 +28,14 @@ containing `x`, and show that every packaged neighborhood supplies an
 `IsolatedPreimage` witness. The generic morphism between nested punctured
 neighborhood pairs belongs to the local-orientation node and is not duplicated
 here.
+
+The isolation proposition, witness conversion, and restriction operation are
+`Hatcher.Sphere.IsolatedPreimage`,
+`Hatcher.Sphere.LocalDegreeNeighborhood.isolatedPreimage`, and
+`Hatcher.Sphere.LocalDegreeNeighborhood.restrict`. The pair-map component
+formulas are
+`Hatcher.Sphere.LocalDegreeNeighborhood.pairHom_fst_apply` and
+`Hatcher.Sphere.LocalDegreeNeighborhood.pairHom_snd_apply_coe`.
 
 ## Depends on
 
