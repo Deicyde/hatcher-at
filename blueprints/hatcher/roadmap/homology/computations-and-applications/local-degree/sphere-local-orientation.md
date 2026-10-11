@@ -11,20 +11,26 @@ For `0 < n` and `y : TopCat.sphere n`, define
 
 `Hatcher.Sphere.integralSphereLocalFundamentalClass n hn y`
 
-from `ℤ` to the degree-`n` relative homology of
-`puncturedPair (TopCat.sphere n) y`. It is the completed ordered reduced sphere
-class followed by `Hatcher.Relative.reducedPairProjection`.
+with type
+
+`AddCommGrpCat.of ℤ ⟶ H_n(puncturedPair (TopCat.sphere n) y; ℤ)`.
+
+It is the completed ordered reduced sphere class followed by
+`Hatcher.Relative.reducedPairProjection`.
 
 The main artifact is the associated isomorphism
-`Hatcher.Sphere.integralSphereLocalHomologyIso`, whose inverse is exactly this
-class. Prove that the class is an isomorphism because the punctured sphere is
-contractible. Pin the sign by proving that the ordinary ordered class followed
-by the inverse positive-degree reduced-to-ordinary comparison and then
+`Hatcher.Sphere.integralSphereLocalHomologyIso :`
+`  H_n(Sⁿ,Sⁿ-{y};ℤ) ≅ AddCommGrpCat.of ℤ`, whose inverse is exactly this
+class. Prove that both the ordered reduced sphere class and, by contractibility
+of the punctured sphere, `reducedPairProjection` are isomorphisms. Pin the sign
+by proving that the ordinary ordered class followed by the inverse
+positive-degree reduced-to-ordinary comparison and then
 `reducedPairProjection (puncturedPair Sⁿ y)` is exactly the local class.
 
 For every open neighborhood `U` of `x`, also define the transported source
-class in `H_n(U,U-{x};ℤ)` as the unique class whose image under the canonical
-open-neighborhood isomorphism is the global local class. Prove this transported
+class `localClass(U,x) : ℤ ⟶ H_n(U,U-{x};ℤ)` as the unique class whose image
+under the canonical open-neighborhood isomorphism is the global local class.
+Prove this transported
 class is an isomorphism. For nested open neighborhoods `V ⊆ U` containing
 `x`, define the canonical morphism of punctured neighborhood pairs, prove that
 it composes with the `U → Sⁿ` inclusion to the `V → Sⁿ` inclusion, and prove
