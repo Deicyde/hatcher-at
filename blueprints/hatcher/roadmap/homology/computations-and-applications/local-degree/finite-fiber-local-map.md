@@ -14,16 +14,24 @@ Use the canonical pair morphism
 defined with the finite-fiber data. For each fiber point, its composite with the inclusion of the
 chosen local punctured pair is the pair map used to define local degree.
 
+Work parametrically with arbitrary `D : FiniteFiberNeighborhoods f y` rather
+than hardwiring the noncomputable constructor. Name the exact pair triangle
+`Hatcher.Sphere.finitePuncturePairHomComponent_comp_finiteFiberPairMap`, using
+the direct inclusion `finitePunctureNeighborhoodPairHom D i`. The canonical
+isolation witness on the right is `(D.neighborhood i).isolatedPreimage`.
+
 The main theorem `Hatcher.Sphere.finiteFiberPairMap_localClass` states that
-the induced homology map sends the transported oriented class of the `x`th
-local summand to
+the full local-to-finite-to-target homology composite sends the transported
+oriented class of the `i`th local summand to
 
 `AddCommGrpCat.asHom (localDegree n hn f x y hx) ≫`
 `  integralSphereLocalFundamentalClass n hn y`.
 
 The local integer must be the neighborhood-independent public local degree,
 using `localDegree_eq_neighborhoodLocalDegree` for the neighborhoods supplied
-by `finiteFiberNeighborhoods`.
+by `D`. Mark both the pair triangle and class equation for reassociation. The
+proof must rewrite the actual pair composite; no new isomorphism or scalar
+cancellation is needed.
 
 ## Depends on
 
