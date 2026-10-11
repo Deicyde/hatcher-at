@@ -3,6 +3,9 @@ article_id: af_900f5d8974f03b1b5ecf96b7
 source_units: [hatcher-2-2-local-degree]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.localDegree_eq_neighborhoodLocalDegree
 ---
 
 # Local degree is independent of its neighborhood
@@ -28,6 +31,18 @@ The theorem must make local degree proof-irrelevant in the
 classical chosen witness may appear inside the definition, but no chosen
 neighborhood accessor or implementation choice appears in the public theorem
 signatures.
+
+The common refinement and its containment lemmas are
+`Hatcher.Sphere.LocalDegreeNeighborhood.inter`,
+`Hatcher.Sphere.LocalDegreeNeighborhood.inter_U_subset_left`, and
+`Hatcher.Sphere.LocalDegreeNeighborhood.inter_U_subset_right`. Arbitrary
+packaged neighborhoods are compared by
+`Hatcher.Sphere.neighborhoodLocalDegree_eq`. The public degree, comparison,
+proof-irrelevance, and choice-free class equation are
+`Hatcher.Sphere.localDegree`,
+`Hatcher.Sphere.localDegree_eq_neighborhoodLocalDegree`,
+`Hatcher.Sphere.localDegree_proof_irrel`, and
+`Hatcher.Sphere.localFundamentalClass_map_eq_localDegree`.
 
 ## Depends on
 
