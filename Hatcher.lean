@@ -133,6 +133,7 @@ import Hatcher.Sphere.FreeEvenAction
 import Hatcher.Sphere.ActionDegree
 import Hatcher.Sphere.AntipodalDegree
 import Hatcher.Sphere.HomologyRecurrence
+import Hatcher.Sphere.LocalOrientation
 import Hatcher.Sphere.NonsurjectiveDegree
 import Hatcher.Sphere.OddTangentField
 import Hatcher.Sphere.PuncturedStereographic

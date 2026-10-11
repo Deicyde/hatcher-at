@@ -3,6 +3,9 @@ article_id: af_dad2eb4f720152d1a39ca44e
 source_units: [hatcher-2-2-local-degree]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.integralSphereLocalFundamentalClass
 ---
 
 # The ordered sphere class orients local homology
@@ -37,6 +40,25 @@ it composes with the `U → Sⁿ` inclusion to the `V → Sⁿ` inclusion, and p
 the oriented restriction equation
 
 `localClass(V,x) ≫ H_n(V → U) = localClass(U,x)`.
+
+The ordered local class and its orientation isomorphism are formalized as
+`Hatcher.Sphere.integralSphereLocalFundamentalClass` and
+`Hatcher.Sphere.integralSphereLocalHomologyIso`; the inverse and sign
+compatibility equations are
+`Hatcher.Sphere.integralSphereLocalHomologyIso_inv` and
+`Hatcher.Sphere.integralSphereFundamentalClass_to_local`.
+
+The transported neighborhood class is
+`Hatcher.Sphere.integralSphereNeighborhoodFundamentalClass`. Its ambient-map,
+isomorphism, and restriction laws are
+`Hatcher.Sphere.integralSphereNeighborhoodFundamentalClass_map`,
+`Hatcher.Sphere.integralSphereNeighborhoodFundamentalClass_isIso`, and
+`Hatcher.Sphere.integralSphereNeighborhoodFundamentalClass_restrict`.
+The underlying canonical nested-neighborhood maps and their composition law
+are
+`Hatcher.Relative.localHomologyOpenNeighborhoodRestrictionPairHom`,
+`Hatcher.Relative.localHomologyOpenNeighborhoodRestrictionMap`, and
+`Hatcher.Relative.localHomologyOpenNeighborhoodRestrictionMap_comp`.
 
 ## Depends on
 

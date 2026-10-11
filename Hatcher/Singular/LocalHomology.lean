@@ -55,6 +55,64 @@ lemma localHomologyOpenNeighborhoodPairHom_fst_apply
     TopPair.Hom.fst (localHomologyOpenNeighborhoodPairHom x U hx) z = z.1 :=
   rfl
 
+private def puncturedNeighborhoodRestriction
+    {X : TopCat.{w}} (x : X) (V U : Set X) (hxV : x ∈ V) (hxU : x ∈ U)
+    (hVU : V ⊆ U) :
+    C(({⟨x, hxV⟩}ᶜ : Set V), ({⟨x, hxU⟩}ᶜ : Set U)) where
+  toFun z := ⟨⟨z.1.1, hVU z.1.2⟩, by
+    have hz : z.1 ≠ (⟨x, hxV⟩ : V) := by
+      simpa only [Set.mem_compl_iff, Set.mem_singleton_iff] using z.2
+    simpa only [Set.mem_compl_iff, Set.mem_singleton_iff] using
+      (fun h : (⟨z.1.1, hVU z.1.2⟩ : U) = ⟨x, hxU⟩ ↦
+        hz (Subtype.ext
+          (congrArg (fun u : U ↦ (u : X)) h)))⟩
+  continuous_toFun :=
+    ((continuous_subtype_val.comp continuous_subtype_val).subtype_mk _).subtype_mk _
+
+/-- The canonical morphism from the punctured pair of a smaller neighborhood
+`V` to the punctured pair of a larger neighborhood `U`. -/
+def localHomologyOpenNeighborhoodRestrictionPairHom
+    {X : TopCat.{w}} (x : X) (V U : Set X) (hxV : x ∈ V) (hxU : x ∈ U)
+    (hVU : V ⊆ U) :
+    puncturedPair (TopCat.of V) ⟨x, hxV⟩ ⟶
+      puncturedPair (TopCat.of U) ⟨x, hxU⟩ :=
+  TopPair.ofHom
+    (TopCat.ofHom (ContinuousMap.inclusion hVU))
+    (TopCat.ofHom (puncturedNeighborhoodRestriction x V U hxV hxU hVU))
+    (by
+      ext z
+      apply Subtype.ext
+      change z.1.1 = z.1.1
+      rfl)
+
+@[simp]
+lemma localHomologyOpenNeighborhoodRestrictionPairHom_fst_apply
+    {X : TopCat.{w}} (x : X) (V U : Set X) (hxV : x ∈ V) (hxU : x ∈ U)
+    (hVU : V ⊆ U) (z : V) :
+    TopPair.Hom.fst
+        (localHomologyOpenNeighborhoodRestrictionPairHom
+          x V U hxV hxU hVU) z =
+      ⟨z.1, hVU z.2⟩ :=
+  rfl
+
+/-- Restriction from `V` to `U`, followed by inclusion in the ambient space,
+is the direct inclusion from `V`. -/
+@[reassoc]
+lemma localHomologyOpenNeighborhoodRestrictionPairHom_comp
+    {X : TopCat.{w}} (x : X) (V U : Set X) (hxV : x ∈ V) (hxU : x ∈ U)
+    (hVU : V ⊆ U) :
+    localHomologyOpenNeighborhoodRestrictionPairHom x V U hxV hxU hVU ≫
+        localHomologyOpenNeighborhoodPairHom x U hxU =
+      localHomologyOpenNeighborhoodPairHom x V hxV := by
+  apply MorphismProperty.Arrow.Hom.ext
+  · ext z
+    apply Subtype.ext
+    change z.1.1 = z.1.1
+    rfl
+  · ext z
+    change z.1 = z.1
+    rfl
+
 /-- The map on local homology induced by including an open neighborhood in
 the ambient space. -/
 noncomputable def localHomologyOpenNeighborhoodMap
@@ -65,6 +123,38 @@ noncomputable def localHomologyOpenNeighborhoodMap
         (puncturedPair (TopCat.of U) ⟨x, hx⟩) ⟶
       (homologyFunctor R n).obj (puncturedPair X x) :=
   (homologyFunctor R n).map (localHomologyOpenNeighborhoodPairHom x U hx)
+
+/-- The map on local homology induced by the inclusion of a smaller open
+neighborhood `V` into a larger one `U`. -/
+noncomputable def localHomologyOpenNeighborhoodRestrictionMap
+    {X : TopCat.{w}} (x : X) (V U : Set X) (hxV : x ∈ V) (hxU : x ∈ U)
+    (hVU : V ⊆ U)
+    {C : Type u} [Category.{v} C] [Preadditive C] [HasCoproducts.{w} C]
+    [CategoryWithHomology C] (R : C) (n : ℕ) :
+    (homologyFunctor R n).obj
+        (puncturedPair (TopCat.of V) ⟨x, hxV⟩) ⟶
+      (homologyFunctor R n).obj
+        (puncturedPair (TopCat.of U) ⟨x, hxU⟩) :=
+  (homologyFunctor R n).map
+    (localHomologyOpenNeighborhoodRestrictionPairHom
+      x V U hxV hxU hVU)
+
+/-- The restriction map on local homology commutes with the canonical maps to
+ambient local homology. -/
+@[reassoc]
+lemma localHomologyOpenNeighborhoodRestrictionMap_comp
+    {X : TopCat.{w}} (x : X) (V U : Set X) (hxV : x ∈ V) (hxU : x ∈ U)
+    (hVU : V ⊆ U)
+    {C : Type u} [Category.{v} C] [Preadditive C] [HasCoproducts.{w} C]
+    [CategoryWithHomology C] (R : C) (n : ℕ) :
+    localHomologyOpenNeighborhoodRestrictionMap
+        x V U hxV hxU hVU R n ≫
+        localHomologyOpenNeighborhoodMap x U hxU R n =
+      localHomologyOpenNeighborhoodMap x V hxV R n := by
+  dsimp only [localHomologyOpenNeighborhoodRestrictionMap,
+    localHomologyOpenNeighborhoodMap]
+  rw [← Functor.map_comp,
+    localHomologyOpenNeighborhoodRestrictionPairHom_comp]
 
 private noncomputable def localPunctureHomeomorph
     {X : TopCat.{w}} (x : X) (U : Set X) (hx : x ∈ U) :
@@ -178,6 +268,22 @@ theorem localHomologyOpenNeighborhoodMap_isIso_of_t1
     (hU : IsOpen U) (R : C) (n : ℕ) :
     IsIso (localHomologyOpenNeighborhoodMap x U hx R n) :=
   localHomologyOpenNeighborhoodMap_isIso x U hx hU isClosed_singleton R n
+
+/-- In a `T1Space`, inclusion of one open neighborhood of `x` in another
+induces an isomorphism on local homology. -/
+theorem localHomologyOpenNeighborhoodRestrictionMap_isIso_of_t1
+    {X : TopCat.{w}} [T1Space X] (x : X)
+    (V U : Set X) (hxV : x ∈ V) (hxU : x ∈ U) (hVU : V ⊆ U)
+    (hV : IsOpen V) (hU : IsOpen U) (R : C) (n : ℕ) :
+    IsIso (localHomologyOpenNeighborhoodRestrictionMap
+      x V U hxV hxU hVU R n) := by
+  let _ : IsIso (localHomologyOpenNeighborhoodMap x U hxU R n) :=
+    localHomologyOpenNeighborhoodMap_isIso_of_t1 x U hxU hU R n
+  let _ : IsIso (localHomologyOpenNeighborhoodMap x V hxV R n) :=
+    localHomologyOpenNeighborhoodMap_isIso_of_t1 x V hxV hV R n
+  exact IsIso.of_isIso_fac_right
+    (localHomologyOpenNeighborhoodRestrictionMap_comp
+      x V U hxV hxU hVU R n)
 
 /-- A homeomorphism carrying `x` to `y` induces an isomorphism of punctured
 pairs. -/
