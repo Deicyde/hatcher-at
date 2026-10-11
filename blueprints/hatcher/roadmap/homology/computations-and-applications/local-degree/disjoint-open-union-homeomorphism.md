@@ -3,6 +3,9 @@ article_id: af_23c4db77f1f2f28686db47cb
 source_units: [hatcher-2-2-local-degree]
 declaration: def
 origin: background
+statement: formalized
+proof: formalized
+lean: Hatcher.Topology.sigmaSubtypeHomeomorphUnion
 ---
 
 # A disjoint open family is homeomorphic to its sigma type
@@ -15,6 +18,11 @@ homeomorphism
 which forgets the summand tag. The main artifact is
 `Hatcher.Topology.sigmaSubtypeHomeomorphUnion`. Its forward map and inverse on
 a point lying in `U i` must have explicit computation lemmas.
+
+The forward computation is
+`Hatcher.Topology.sigmaSubtypeHomeomorphUnion_apply_mk`, and the inverse
+computation is
+`Hatcher.Topology.sigmaSubtypeHomeomorphUnion_symm_apply_mk`.
 
 The proof may use openness to show that the inverse is continuous and
 pairwise disjointness to show the index is unique. Empty summands and an empty

@@ -143,6 +143,7 @@ import Hatcher.Sphere.TangentFieldObstruction
 import Hatcher.Sphere.TangentFieldParity
 import Hatcher.Sphere.ZeroSphere
 import Hatcher.Sphere.ZeroSphereHomology
+import Hatcher.Topology.DisjointOpenUnion
 import Hatcher.Topology.StrongDeformationRetract
 import Hatcher.VanKampen.CoverGroupPresentation
 import Hatcher.VanKampen.CoverFactorization
