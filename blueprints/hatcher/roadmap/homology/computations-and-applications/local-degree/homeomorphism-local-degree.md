@@ -11,10 +11,21 @@ Suppose a local-degree neighborhood `U` maps homeomorphically onto an open
 neighborhood `V` of `y`. The induced map of local relative groups is an
 isomorphism, so its integer multiplier is a unit.
 
+Package this hypothesis as
+`Hatcher.Sphere.LocalDegreeNeighborhood.LocalHomeomorphData N`, containing
+the open target neighborhood, a homeomorphism `N.U ≃ₜ V`, and the exact
+pointwise equation identifying that homeomorphism with the restriction of
+`f`. Define its punctured-pair isomorphism, prove that its forward map followed
+by inclusion of `V` into the target punctured sphere is exactly `N.pairHom`,
+and deduce that the actual homology map induced by `N.pairHom` is an
+isomorphism.
+
 The main theorem
 `Hatcher.Sphere.localDegree_eq_one_or_neg_one_of_localHomeomorph` says that
 the local degree is `1` or `-1`. As a source-facing specialization, for
-`e : Sⁿ ≃ₜ Sⁿ`, identify the unique local degree of its induced map with
+`e : Sⁿ ≃ₜ Sⁿ`, `x : Sⁿ`, and any isolation witness at `x` over `e x`, prove
+the ordered equality
+`Hatcher.Sphere.localDegree_homeomorph_eq_degree` with
 `Hatcher.Sphere.degree n hn (TopCat.isoOfHomeo e).hom`.
 
 The equality must respect the ordered orientation fixed by the completed
