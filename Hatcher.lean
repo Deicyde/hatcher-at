@@ -137,6 +137,7 @@ import Hatcher.Sphere.HomologyRecurrence
 import Hatcher.Sphere.LocalDegreeNeighborhood
 import Hatcher.Sphere.LocalOrientation
 import Hatcher.Sphere.NeighborhoodLocalDegree
+import Hatcher.Sphere.LocalDegreeShrinking
 import Hatcher.Sphere.NonsurjectiveDegree
 import Hatcher.Sphere.OddTangentField
 import Hatcher.Sphere.PuncturedStereographic

@@ -3,6 +3,9 @@ article_id: af_6ac8441d977814c7a46ab804
 source_units: [hatcher-2-2-local-degree]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.neighborhoodLocalDegree_eq_of_subset
 ---
 
 # Local degree is unchanged when the neighborhood shrinks
@@ -26,6 +29,13 @@ The main theorem `Hatcher.Sphere.neighborhoodLocalDegree_eq_of_subset` states
 
 Prove the equality from the two oriented class equations and the naturality of
 the open-neighborhood comparison, not by unfolding a choice of inverse.
+
+The pair and homology triangles are
+`Hatcher.Sphere.LocalDegreeNeighborhood.restrictionPairHom_comp_pairHom` and
+`Hatcher.Sphere.LocalDegreeNeighborhood.restrictionMap_comp_pairHom_map`.
+The sphere-specific isomorphism wrapper is
+`Hatcher.Sphere.LocalDegreeNeighborhood.restrictionMap_isIso`, and shrinking
+invariance is `Hatcher.Sphere.neighborhoodLocalDegree_eq_of_subset`.
 
 ## Depends on
 
