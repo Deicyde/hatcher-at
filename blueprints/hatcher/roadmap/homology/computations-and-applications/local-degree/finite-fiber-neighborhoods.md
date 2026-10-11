@@ -8,19 +8,24 @@ origin: bridged
 # A finite sphere-map fiber has disjoint isolated neighborhoods
 
 For `f : Sⁿ → Sⁿ`, `y : Sⁿ`, and a finite set-theoretic fiber
-`f ⁻¹' {y}`, give the fiber subtype a finite indexing type. Use
+`f ⁻¹' {y}`, define the named subtype set `Hatcher.Sphere.fiber f y`, its
+membership lemma, and a local-installation
+`Hatcher.Sphere.finiteFiberFintype hfinite`; do not install a global instance
+that hides the finiteness witness. Use
 `Set.Finite.t2_separation` to choose an open neighborhood of every fiber point
 so that the neighborhoods are pairwise disjoint.
 
 The main artifact `Hatcher.Sphere.finiteFiberNeighborhoods f y hfinite`
 packages these sets, their openness and center membership, pairwise
 disjointness, and the resulting `LocalDegreeNeighborhood` at every fiber
-point. Also prove that their union is open and contains the entire fiber.
+point. Expose named projections for the sets, openness, center membership, and
+pairwise disjointness. Also prove that their union is open, contains the entire
+fiber, and is empty when the fiber is empty.
 
 As neutral supporting data, define `Hatcher.Sphere.finiteFiberPairMap`, the
 canonical map `(Sⁿ,Sⁿ-fiber f y) ⟶ (Sⁿ,Sⁿ-{y})` induced by `f`, and record its
 ambient and subspace formulas. This definition is independent of the chosen
-separated neighborhoods.
+separated neighborhoods and of a finiteness proof.
 
 The construction is noncomputable but its stated properties may not depend on
 an enumeration or a decidable equality chosen by callers. It must also support

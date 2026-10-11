@@ -13,10 +13,23 @@ homology map induced by `N.pairHom`. Conjugate by the ordered target local
 orientation and evaluate at `1` to define
 `Hatcher.Sphere.neighborhoodLocalDegree n hn N : ℤ`.
 
+First define the conjugated endomorphism
+`Hatcher.Sphere.neighborhoodLocalDegreeEndomorphism n hn N : ℤ ⟶ ℤ` and prove
+that it is `AddCommGrpCat.asHom` of the local degree. The composition order is
+source neighborhood class, induced pair map, then the target local-homology
+orientation isomorphism. Do not assume that the induced pair map is an
+isomorphism.
+
 The main theorem
 `Hatcher.Sphere.localFundamentalClass_map_eq_neighborhoodLocalDegree` is the
 class equation saying that the induced local map sends the transported source
-class to the target class multiplied by `neighborhoodLocalDegree`.
+class to the target class multiplied by `neighborhoodLocalDegree`:
+
+`localClass(N) ≫ H_n(N.pairHom) =`
+`  AddCommGrpCat.asHom (neighborhoodLocalDegree n hn N) ≫ localClass(y)`.
+
+Mark this equation for reassociation so later finite-fiber compositions use
+the exact induced map without unfolding the conjugated endomorphism.
 
 ## Depends on
 
