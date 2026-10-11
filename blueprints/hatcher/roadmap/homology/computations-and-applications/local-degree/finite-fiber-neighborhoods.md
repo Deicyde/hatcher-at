@@ -3,6 +3,9 @@ article_id: af_8413c196d3f1b253bf582afb
 source_units: [hatcher-2-2-local-degree]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.finiteFiberNeighborhoods
 ---
 
 # A finite sphere-map fiber has disjoint isolated neighborhoods
@@ -30,6 +33,16 @@ separated neighborhoods and of a finiteness proof.
 The construction is noncomputable but its stated properties may not depend on
 an enumeration or a decidable equality chosen by callers. It must also support
 the empty fiber, with an empty family and empty union.
+
+The fiber API is `Hatcher.Sphere.fiber`, `Hatcher.Sphere.mem_fiber`, and
+`Hatcher.Sphere.finiteFiberFintype`. The chosen data has type
+`Hatcher.Sphere.FiniteFiberNeighborhoods`; its named set, openness, center,
+disjointness, union, containment, and empty-fiber declarations are in the
+namespace of that structure. The neutral pair map and its formulas are
+`Hatcher.Sphere.finiteFiberPairMap`,
+`Hatcher.Sphere.finiteFiberPairMap_fst`,
+`Hatcher.Sphere.finiteFiberPairMap_fst_apply`, and
+`Hatcher.Sphere.finiteFiberPairMap_snd_apply_coe`.
 
 ## Depends on
 

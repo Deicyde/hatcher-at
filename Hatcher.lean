@@ -139,6 +139,7 @@ import Hatcher.Sphere.LocalOrientation
 import Hatcher.Sphere.NeighborhoodLocalDegree
 import Hatcher.Sphere.LocalDegreeShrinking
 import Hatcher.Sphere.LocalDegree
+import Hatcher.Sphere.FiniteFiberNeighborhoods
 import Hatcher.Sphere.NonsurjectiveDegree
 import Hatcher.Sphere.OddTangentField
 import Hatcher.Sphere.PuncturedStereographic
