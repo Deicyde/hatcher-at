@@ -14,13 +14,18 @@ map applies `(P i).map` in the same summand. The main artifact is
 
 For every `i`, also expose the canonical morphism
 `Hatcher.Relative.sigmaPairι P i : P i ⟶ sigmaPair P` and prove formulas for
-its ambient and subspace components. Specializing to pointed pairs must recover
-the existing `sigmaPointedPair` construction up to a named pair isomorphism or
-an exact compatibility theorem.
+the structure map and its ambient and subspace components, both as morphisms
+and on elements. Make the generic construction the implementation core while
+preserving the existing `sigmaPointedPair` and `sigmaPointedPairι` names as
+definitional wrappers. Publish named exact compatibility equalities for the
+pointed object and every summand inclusion; do not maintain two independent
+implementations or supply only an object isomorphism with no summand triangle.
+The construction requires no `Nonempty ι` hypothesis and includes the empty
+family.
 
 ## Depends on
 
-None.
+- [The coproduct pair of a family of pointed spaces](../post-excision-applications/sigma-pointed-pair.md)
 
 ## Sources
 
