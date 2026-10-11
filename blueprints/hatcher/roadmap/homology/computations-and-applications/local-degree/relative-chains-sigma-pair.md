@@ -16,10 +16,16 @@ The main artifact is
 must restrict on each summand to the relative-chain map induced by
 `sigmaPairι P i`.
 
+Expose the underlying canonical map as
+`Hatcher.Relative.relativeChainComplexSigmaPairMap`, identify the isomorphism's
+forward morphism with it, and name the component equation
+`Hatcher.Relative.ι_relativeChainComplexSigmaPairIso_hom`.
+
 Refactor the completed singular-simplex sigma argument and the cokernel
 comparison used by `relativeChainComplexSigmaIso`; preserve that pointed
-declaration as a compatibility specialization rather than maintaining a
-second proof.
+declaration as an exact compatibility specialization rather than maintaining
+a second proof. Preserve every existing pointed declaration and component
+theorem for downstream consumers.
 
 ## Depends on
 

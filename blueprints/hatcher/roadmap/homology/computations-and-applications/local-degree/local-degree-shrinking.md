@@ -12,6 +12,14 @@ neighborhood whose open set is contained in that of `N`. The inclusion of the
 punctured pair of `M` into the punctured pair of `N` induces an isomorphism on
 relative homology and makes the two local pair maps commute.
 
+Name the pair-level triangle
+`Hatcher.Sphere.LocalDegreeNeighborhood.restrictionPairHom_comp_pairHom` and
+its induced homology equation
+`Hatcher.Sphere.LocalDegreeNeighborhood.restrictionMap_comp_pairHom_map`.
+Also expose a sphere-specific `IsIso` wrapper for the restriction map. The two
+neighborhoods are arbitrary witnesses for the same `f`, `x`, and `y`; `M` need
+not be definitionally produced by `N.restrict`.
+
 The main theorem `Hatcher.Sphere.neighborhoodLocalDegree_eq_of_subset` states
 
 `neighborhoodLocalDegree n hn M = neighborhoodLocalDegree n hn N`.
