@@ -3,6 +3,9 @@ article_id: af_3d24367a7abad40e88f4616d
 source_units: [hatcher-2-2-local-degree]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.localFundamentalClass_map_eq_neighborhoodLocalDegree
 ---
 
 # Local degree on a chosen isolated neighborhood
@@ -30,6 +33,13 @@ class to the target class multiplied by `neighborhoodLocalDegree`:
 
 Mark this equation for reassociation so later finite-fiber compositions use
 the exact induced map without unfolding the conjugated endomorphism.
+
+The conjugated endomorphism, its value at `1`, and its scalar characterization
+are `Hatcher.Sphere.neighborhoodLocalDegreeEndomorphism`,
+`Hatcher.Sphere.neighborhoodLocalDegree`, and
+`Hatcher.Sphere.neighborhoodLocalDegreeEndomorphism_eq_asHom`. The class
+equation is
+`Hatcher.Sphere.localFundamentalClass_map_eq_neighborhoodLocalDegree`.
 
 ## Depends on
 
