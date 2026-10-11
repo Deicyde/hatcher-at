@@ -3,6 +3,9 @@ article_id: af_01985c349aff3cf79987cf88
 source_units: [hatcher-2-2-local-degree]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.finiteFiberFundamentalClass_map
 ---
 
 # The finite-fiber pair map carries the global degree
@@ -26,6 +29,11 @@ positive-degree comparison between reduced and ordinary homology, using the
 morphism-level equation `finiteFiberPairMap_fst = f`. The theorem itself needs
 no fiber-finiteness hypothesis. The sign must therefore be the ordered global
 degree, not merely some integer with the same absolute value.
+
+The projected class and the signed lower-square equation are
+`Hatcher.Sphere.finitePunctureFundamentalClass` and
+`Hatcher.Sphere.finiteFiberFundamentalClass_map`. The latter is marked for
+reassociation and neither declaration depends on a fiber-finiteness witness.
 
 ## Depends on
 
