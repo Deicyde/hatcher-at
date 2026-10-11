@@ -14,7 +14,8 @@ through Theorem 2.26 in twenty-seven leaves, supported by five Appendix A.5
 regular-neighborhood leaves. All thirty-two are complete. The remainder of
 §2.2 now also has a sixteen-leaf degree-foundations milestone through
 Proposition 2.29. All sixteen leaves are formalized locally and complete; the
-later material stays explicitly deferred.
+local-degree continuation through Proposition 2.30 is decomposed into twenty
+planned leaves. The later material stays explicitly deferred.
 
 Given excision and the long exact sequence, homology becomes computable. From
 `Hₙ(Sⁿ) ≅ ℤ` comes the degree of a map `Sⁿ → Sⁿ`, with its local formula as a
@@ -47,7 +48,9 @@ so their sphere-homology prerequisites remain dependency-ordered.
 The [degree-foundations milestone](degree/README.md) uses the completed
 ordered sphere class to define degree, calculate reflections and the antipodal
 map, prove the fixed-point-free formula, and reach Theorem 2.28 and Proposition
-2.29. It stops before local degree.
+2.29. The [local-degree milestone](local-degree/README.md) then orients local
+homology, constructs the finite-puncture direct sum, and plans Proposition
+2.30.
 
 The pinned Mathlib supplies the standard disk, boundary, and inclusion models,
 but not the selected no-retraction, Brouwer, sphere-homology, degree, or
@@ -63,10 +66,11 @@ pinned Mathlib coverage nor a project dependency.
 - [Post-excision applications](post-excision-applications/README.md)
 - [Local homology and invariance of dimension](local-homology-and-dimension/README.md)
 - [Degree foundations and applications](degree/README.md)
+- [Local degree and the finite-fiber sum](local-degree/README.md)
 
-Local degree, degree-realization examples, suspension invariance, cellular
-homology, the later Mayer–Vietoris applications, and homology with general
-coefficient groups as a separate source topic remain deferred.
+Degree-realization examples, suspension invariance, cellular homology, the
+later Mayer–Vietoris applications, and homology with general coefficient
+groups as a separate source topic remain deferred.
 
 ## Sources
 
@@ -74,7 +78,9 @@ coefficient groups as a separate source topic remain deferred.
 - [Hatcher §2.2](../../../sources/hatcher.md)
 - [Hatcher §2.2 Mayer–Vietoris source note](../../../sources/hatcher-2-2.md)
 - [Hatcher §2.2 degree source note](../../../sources/hatcher-2-2-degree.md)
+- [Hatcher §2.2 local-degree source note](../../../sources/hatcher-2-2-local-degree.md)
 - [Sphere-homology implementation specification](../../../sources/sphere-homology-implementation.md)
 - [Corollary 2.15 implementation specification](../../../sources/corollary-2-15-implementation.md)
 - [Post-excision applications implementation specification](../../../sources/post-excision-applications-implementation.md)
 - [Degree-foundations implementation specification](../../../sources/degree-theory-implementation.md)
+- [Local-degree implementation specification](../../../sources/local-degree-implementation.md)

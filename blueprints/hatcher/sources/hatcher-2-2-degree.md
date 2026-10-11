@@ -54,9 +54,10 @@ This source unit contains the degree definition and properties (a)–(g),
 Theorem 2.28, and Proposition 2.29, and stops immediately before Hatcher
 introduces local degree at the bottom of printed page 135.
 
-Local degree, Proposition 2.30, Examples 2.31–2.32, suspension invariance in
-Proposition 2.33, cellular homology, the Hopf converse, and Theorem 2.27 are
-not part of this milestone.
+Local degree and Proposition 2.30 belong to the separate
+[local-degree source unit](hatcher-2-2-local-degree.md). Examples 2.31–2.32,
+suspension invariance in Proposition 2.33, cellular homology, the Hopf
+converse, and Theorem 2.27 are not part of this milestone.
 
 ## Existing prerequisites and pinned-library boundary
 
