@@ -17,9 +17,20 @@ forward map must satisfy the component formula
 
 `Sigma.ι _ i ≫ iso.hom = H_k(sigmaPairι P i)`.
 
-The existing pointed-pair isomorphism remains available as a specialization.
+Expose the underlying canonical map as
+`Hatcher.Relative.relativeHomologySigmaPairMap`, identify the isomorphism's
+forward morphism with it, and name the component theorem
+`Hatcher.Relative.ι_relativeHomologySigmaPairIso_hom`. Also provide
+`Hatcher.Relative.relativeIntegralHomologySigmaPairIso` for universe-zero
+integral pairs with no extra call-site hypotheses.
+
+Make every existing pointed map, isomorphism, component theorem, and integral
+isomorphism an exact compatibility specialization rather than a parallel
+proof.
 The integral finite-family instance used by Proposition 2.30 must require no
-additional hypotheses at call sites.
+additional hypotheses at call sites. Preserve the empty-index case and use the
+same universe for `ι` and the family of topological pairs, matching the chain
+API.
 
 ## Depends on
 

@@ -7,9 +7,8 @@ origin: cited
 
 # The finite-puncture class is the sum of the local classes
 
-Define the finite-puncture fundamental class by sending the completed ordered
-reduced sphere class through `reducedPairProjection` for
-`(Sⁿ,Sⁿ-fiber f y)`.
+Use `Hatcher.Sphere.finitePunctureFundamentalClass` from the global-degree
+fiber-square node; do not redefine the class.
 
 The main theorem `Hatcher.Sphere.finitePunctureFundamentalClass_eq_sum` says
 that this class is the image, under `finitePunctureHomologyIso`, of the finite
@@ -25,6 +24,7 @@ principle. This theorem is the formal version of Hatcher's equation
 
 - [The ordered sphere class orients local homology](sphere-local-orientation.md)
 - [Finite-puncture projections have the diagonal matrix](finite-puncture-projection-matrix.md)
+- [The finite-fiber pair map carries the global degree](global-degree-fiber-square.md)
 
 ## Sources
 

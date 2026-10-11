@@ -7,8 +7,10 @@ origin: bridged
 
 # The finite-fiber pair map carries the global degree
 
-Let the finite-puncture class be the ordered reduced sphere class followed by
-`reducedPairProjection` for `(Sⁿ,Sⁿ-fiber f y)`. The finite-fiber pair map
+Define `Hatcher.Sphere.finitePunctureFundamentalClass n f y` from `ℤ` to the
+degree-`n` relative homology of `(Sⁿ,Sⁿ-fiber f y)` as the ordered reduced
+sphere class followed by `reducedPairProjection`. This definition needs
+neither a positivity nor a finiteness witness. The finite-fiber pair map
 induced by `f` takes this class to the global-degree multiple of the target
 local class.
 
@@ -20,9 +22,10 @@ the multiplier exactly:
 `    integralSphereLocalFundamentalClass n hn y`.
 
 Prove the square by naturality of `reducedPairProjection` and the completed
-positive-degree comparison between reduced and ordinary homology. The sign
-must therefore be the ordered global degree, not merely some integer with the
-same absolute value.
+positive-degree comparison between reduced and ordinary homology, using the
+morphism-level equation `finiteFiberPairMap_fst = f`. The theorem itself needs
+no fiber-finiteness hypothesis. The sign must therefore be the ordered global
+degree, not merely some integer with the same absolute value.
 
 ## Depends on
 
