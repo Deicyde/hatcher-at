@@ -19,6 +19,20 @@ the forward isomorphism is the homology map induced by inclusion of the `x`th
 local punctured pair into the finite-puncture pair. Also expose the inverse
 component maps used to test equality of morphisms into the finite coproduct.
 
+Define `Hatcher.Sphere.finitePunctureHomologyIso D hfinite k` by composing
+`relativeIntegralHomologySigmaPairIso` for the named local-pair family with the
+isomorphism induced by `finitePuncturePairHom D`. Name the reassociated
+component theorem
+`Hatcher.Sphere.ι_finitePunctureHomologyIso_hom`.
+
+Expose
+`Hatcher.Sphere.finitePunctureHomologyProjection D hfinite k i` as the inverse
+isomorphism followed by the `i`th finite-biproduct projection, together with a
+hom-ext theorem for maps into finite-puncture homology. Install all `Fintype`,
+`DecidableEq`, and finite-biproduct instances internally from `hfinite`; none
+belongs in a public signature. The construction works in every degree and for
+an empty fiber without branching.
+
 ## Depends on
 
 - [Relative homology commutes with coproducts of arbitrary pairs](relative-homology-sigma-pair.md)
