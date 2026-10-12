@@ -117,6 +117,7 @@ import Hatcher.Singular.MappingConeHomology
 import Hatcher.Singular.CWSubcomplexExcision
 import Hatcher.Singular.LocalHomology
 import Hatcher.Singular.DeletedPair
+import Hatcher.Singular.DisjointPuncturedPair
 import Hatcher.Singular.TripleChains
 import Hatcher.Singular.TripleConnectingFormula
 import Hatcher.Sphere.LoopInOpenCover

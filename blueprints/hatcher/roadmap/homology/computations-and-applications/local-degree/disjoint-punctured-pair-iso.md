@@ -3,6 +3,9 @@ article_id: af_3482f234b914950daa685013
 source_units: [hatcher-2-2-local-degree]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.sigmaPuncturedPairIsoDeletedUnion
 ---
 
 # Disjoint punctured neighborhoods form the deleted union pair
@@ -34,6 +37,16 @@ proof-term-insensitive subspace component formulas, and the exact triangle
 
 The definitions require no `Nonempty ι` hypothesis and include the empty
 family.
+
+The named source and target are `Hatcher.Relative.sigmaPuncturedPair` and
+`Hatcher.Relative.deletedUnionPair`. The subspace homeomorphism is
+`Hatcher.Relative.sigmaPuncturedSubspaceHomeomorphDeletedUnion`, with a
+proof-term-insensitive forward formula. The main pair isomorphism exposes its
+ambient morphism and apply equations. The direct inclusion and its component
+formulas are `Hatcher.Relative.puncturedNeighborhoodDeletedUnionPairHom` and
+the associated `_fst_apply` and `_snd_apply_coe` theorems; the exact
+reassociated summand triangle is
+`Hatcher.Relative.sigmaPairι_comp_sigmaPuncturedPairIsoDeletedUnion_hom`.
 
 ## Depends on
 
