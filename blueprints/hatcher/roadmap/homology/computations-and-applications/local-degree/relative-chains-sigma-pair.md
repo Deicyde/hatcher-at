@@ -27,10 +27,17 @@ declaration as an exact compatibility specialization rather than maintaining
 a second proof. Preserve every existing pointed declaration and component
 theorem for downstream consumers.
 
+Keep the existing minimal assumptions: `{ι : Type w}`, `P : ι → TopPair.{w}`,
+an arbitrary preadditive coefficient category with `HasCoproducts.{w}`, and no
+`Abelian`, `AB4OfSize`, or `Nonempty ι` hypothesis.
+
 ## Depends on
 
 - [The coproduct of a family of topological pairs](sigma-topological-pair.md)
 - [Relative singular chains and homology](../../simplicial-and-singular/relative-homology/relative-singular-homology.md)
+
+## Proof depends on
+
 - [Relative singular chains commute with topological coproducts](../post-excision-applications/singular-relative-chains-coproduct.md)
 
 ## Sources

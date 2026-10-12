@@ -20,6 +20,12 @@ by inclusion of `V` into the target punctured sphere is exactly `N.pairHom`,
 and deduce that the actual homology map induced by `N.pairHom` is an
 isomorphism.
 
+Name `LocalHomeomorphData.pairIso`, its reassociated pair triangle, and
+`LocalHomeomorphData.pairHom_homologyMap_isIso`. First prove a
+chosen-neighborhood `±1` theorem from the isomorphism of the conjugated
+endomorphism, then state the public theorem for an arbitrary isolation witness
+and compare it with `N` via `localDegree_eq_neighborhoodLocalDegree`.
+
 The main theorem
 `Hatcher.Sphere.localDegree_eq_one_or_neg_one_of_localHomeomorph` says that
 the local degree is `1` or `-1`. As a source-facing specialization, for
@@ -27,6 +33,12 @@ the local degree is `1` or `-1`. As a source-facing specialization, for
 the ordered equality
 `Hatcher.Sphere.localDegree_homeomorph_eq_degree` with
 `Hatcher.Sphere.degree n hn (TopCat.isoOfHomeo e).hom`.
+
+Construct the canonical full-sphere neighborhood for `e`, prove its pair-map
+factorization through `puncturedPairIso e rfl`, and name the signed naturality
+equation sending the ordered local class at `x` to the global-degree multiple
+of the ordered local class at `e x`. The global equality must hold for every
+supplied isolation witness, not just the canonical one.
 
 The equality must respect the ordered orientation fixed by the completed
 degree development; an unsigned statement that only proves the local map is
