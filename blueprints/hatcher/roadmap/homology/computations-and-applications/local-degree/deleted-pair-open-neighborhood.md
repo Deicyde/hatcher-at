@@ -3,6 +3,9 @@ article_id: af_ea15ac26d6ba9e882549231f
 source_units: [hatcher-2-2-local-degree]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.deletedPairOpenNeighborhoodMap_isIso
 ---
 
 # Deleted-pair homology is local on an open neighborhood
@@ -31,6 +34,23 @@ isomorphism and prove at pair and homology level that its forward map followed
 by the deleted-pair neighborhood map is the completed
 `localHomologyOpenNeighborhoodMap`; do not claim a generally ill-typed literal
 equality between their source objects.
+
+The pair objects, canonical pair map, induced homology map, and component
+formulas are `Hatcher.Relative.deletedPair`,
+`Hatcher.Relative.deletedPairWithin`,
+`Hatcher.Relative.deletedPairOpenNeighborhoodPairHom`,
+`Hatcher.Relative.deletedPairOpenNeighborhoodMap`,
+`Hatcher.Relative.deletedPairOpenNeighborhoodPairHom_fst_apply`, and
+`Hatcher.Relative.deletedPairOpenNeighborhoodPairHom_snd_apply_coe`. The
+cover comparison is `Hatcher.Relative.deletedPairWithinCoverIso` with
+factorization `Hatcher.Relative.deletedPairWithinCoverIso_hom_comp`; the
+finite specialization is
+`Hatcher.Relative.deletedPairOpenNeighborhoodMap_isIso_of_finite`.
+
+The correctly directed singleton pair and homology isomorphisms are
+`Hatcher.Relative.puncturedPairIsoDeletedPairWithinSingleton` and
+`Hatcher.Relative.puncturedPairHomologyIsoDeletedPairWithinSingleton`, with
+their `_hom_comp` theorems recording the two commuting equations.
 
 ## Depends on
 
