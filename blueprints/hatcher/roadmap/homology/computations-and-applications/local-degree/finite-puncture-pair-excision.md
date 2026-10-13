@@ -3,6 +3,9 @@ article_id: af_89e2481cf4df5cf4ef419a56
 source_units: [hatcher-2-2-local-degree]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.finitePuncturePairHom_homology_isIso
 ---
 
 # The disjoint local pairs excise to the finite-puncture pair
