@@ -17,8 +17,9 @@ of the selected §2.1 post-excision applications are formalized in twenty-seven
 leaves, with five supporting Appendix A.5 leaves; all thirty-two are complete.
 The degree foundations through Proposition 2.29 are decomposed into sixteen
 additional leaves, all formalized locally and complete. The local-degree
-continuation through Proposition 2.30 is decomposed into twenty planned
-leaves. The rest of the chapter remains explicitly deferred.
+continuation through Proposition 2.30 is decomposed into twenty leaves;
+eleven are formalized locally and nine remain. The rest of the chapter
+remains explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -58,7 +59,8 @@ reduced homology calculation, no-retraction, and Brouwer. Its new
 covers properties (a)–(g), Theorem 2.28, and Proposition 2.29 in sixteen
 complete leaves. Its new
 [local-degree branch](computations-and-applications/local-degree/README.md)
-covers the construction and Proposition 2.30 in twenty planned leaves.
+covers the construction and Proposition 2.30 in twenty leaves, eleven complete
+and nine active.
 Cellular homology, the later degree and Mayer–Vietoris examples, and homology
 with coefficients remain deferred.
 Invariance of domain belongs to out-of-scope Additional Topic §2.B.
@@ -72,7 +74,7 @@ contains relative simplicial-set homology from PR #41285. Singular excision,
 Mayer–Vietoris, `Hₙ(Sⁿ)`, degree, and cellular homology remain outside the
 pinned library. The completed local excision milestone supplies the main input
 used by the Mayer–Vietoris branches; sphere homology is formalized locally and
-degree is formalized locally, while local degree is planned locally rather
+degree is formalized locally, while local degree is underway locally rather
 than claimed as upstream coverage.
 
 ## Sections
