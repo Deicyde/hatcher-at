@@ -142,6 +142,7 @@ import Hatcher.Sphere.NeighborhoodLocalDegree
 import Hatcher.Sphere.LocalDegreeShrinking
 import Hatcher.Sphere.LocalDegree
 import Hatcher.Sphere.FiniteFiberNeighborhoods
+import Hatcher.Sphere.FinitePunctureExcision
 import Hatcher.Sphere.FiniteFiberDegree
 import Hatcher.Sphere.NonsurjectiveDegree
 import Hatcher.Sphere.OddTangentField
