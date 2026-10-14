@@ -14,10 +14,10 @@ the direct sum of the local relative groups, disjoint open neighborhoods give
 the finite-puncture excision comparison, and naturality sends the oriented
 sphere class to the sum of its local classes.
 
-Eleven of the twenty formalization leaves below are formalized locally. Nine
+Twelve of the twenty formalization leaves below are formalized locally. Eight
 remain; the current ready frontier is
 [relative chains of sigma pairs](relative-chains-sigma-pair.md),
-[finite-puncture pair excision](finite-puncture-pair-excision.md), and the
+[the finite-fiber pair map on local classes](finite-fiber-local-map.md), and the
 [local-homeomorphism calculation](homeomorphism-local-degree.md).
 
 ## Coproduct and excision infrastructure
