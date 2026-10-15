@@ -141,6 +141,7 @@ import Hatcher.Sphere.LocalOrientation
 import Hatcher.Sphere.NeighborhoodLocalDegree
 import Hatcher.Sphere.LocalDegreeShrinking
 import Hatcher.Sphere.LocalDegree
+import Hatcher.Sphere.HomeomorphismLocalDegree
 import Hatcher.Sphere.FiniteFiberNeighborhoods
 import Hatcher.Sphere.FinitePunctureExcision
 import Hatcher.Sphere.FiniteFiberLocalMap

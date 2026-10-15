@@ -3,6 +3,9 @@ article_id: af_79a8181ed895e3e9b2e4e24e
 source_units: [hatcher-2-2-local-degree]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.localDegree_eq_one_or_neg_one_of_localHomeomorph Hatcher.Sphere.localDegree_homeomorph_eq_degree
 ---
 
 # A local homeomorphism has local degree plus or minus one
