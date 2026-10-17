@@ -3,6 +3,9 @@ article_id: af_e9f8e873d37465155412edda
 source_units: [hatcher-2-2-local-degree]
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Relative.relativeHomologySigmaPairIso
 ---
 
 # Relative homology commutes with coproducts of arbitrary pairs

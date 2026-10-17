@@ -211,23 +211,21 @@ private lemma ι_homologyCoproductIso_hom
 
 end HomologyCoproduct
 
-section RelativeHomology
+section RelativeHomologyCore
 
-variable {ι : Type w} (X : ι → TopCat.{w})
+variable {ι : Type w} (P : ι → TopPair.{w})
   {C : Type c} [Category.{d} C] [Abelian C]
   [HasCoproducts.{w} C] [AB4OfSize.{w} C]
-  (R : C) (x₀ : ∀ i, X i) (n : ℕ)
+  (R : C) (n : ℕ)
 
-/-- The canonical map from the coproduct of the relative homology objects of
-the pointed summands to the relative homology of their topological sigma. -/
-noncomputable def relativeHomologySigmaMap :
-    (∐ fun i ↦ (homologyFunctor R n).obj (pointedPair (X i) (x₀ i))) ⟶
-      (homologyFunctor R n).obj (sigmaPointedPair x₀) :=
-  Sigma.desc fun i ↦ (homologyFunctor R n).map (sigmaPointedPairι x₀ i)
+private noncomputable def sigmaHomologyCoreMap :
+    (∐ fun i ↦ (homologyFunctor R n).obj (P i)) ⟶
+      (homologyFunctor R n).obj (sigmaPair P) :=
+  Sigma.desc fun i ↦ (homologyFunctor R n).map (sigmaPairι P i)
 
-private noncomputable def relativeHomologyObjIso (P : TopPair.{w}) :
-    (homologyFunctor R n).obj P ≅
-      ((chainComplexFunctor R).obj P).homology n :=
+private noncomputable def relativeHomologyObjIso (Q : TopPair.{w}) :
+    (homologyFunctor R n).obj Q ≅
+      ((chainComplexFunctor R).obj Q).homology n :=
   Iso.refl _
 
 omit [AB4OfSize.{w} C] in
@@ -244,49 +242,124 @@ private lemma relativeHomologyObjIso_map {P Q : TopPair.{w}}
   rw [Category.id_comp, Category.comp_id]
   rfl
 
-private noncomputable def relativeHomologySigmaChainIso :
+private noncomputable def relativeHomologySigmaPairChainIso :
     (∐ fun i ↦
-      ((chainComplexFunctor R).obj
-        (pointedPair (X i) (x₀ i))).homology n) ≅
-      ((chainComplexFunctor R).obj (sigmaPointedPair x₀)).homology n :=
+      ((chainComplexFunctor R).obj (P i)).homology n) ≅
+      ((chainComplexFunctor R).obj (sigmaPair P)).homology n :=
   homologyCoproductIso
-      (fun i ↦ (chainComplexFunctor R).obj (pointedPair (X i) (x₀ i))) n ≪≫
+      (fun i ↦ (chainComplexFunctor R).obj (P i)) n ≪≫
     HomologicalComplex.homologyMapIso
-      (relativeChainComplexSigmaIso X R x₀) n
+      (relativeChainComplexSigmaPairIso P R) n
 
 @[reassoc]
-private lemma ι_relativeHomologySigmaChainIso_hom (i : ι) :
+private lemma ι_relativeHomologySigmaPairChainIso_hom (i : ι) :
     Sigma.ι
-        (fun i ↦ ((chainComplexFunctor R).obj
-          (pointedPair (X i) (x₀ i))).homology n) i ≫
-      (relativeHomologySigmaChainIso X R x₀ n).hom =
+        (fun i ↦ ((chainComplexFunctor R).obj (P i)).homology n) i ≫
+      (relativeHomologySigmaPairChainIso P R n).hom =
     HomologicalComplex.homologyMap
-      ((chainComplexFunctor R).map (sigmaPointedPairι x₀ i)) n := by
-  dsimp only [relativeHomologySigmaChainIso, Iso.trans_hom]
+      ((chainComplexFunctor R).map (sigmaPairι P i)) n := by
+  dsimp only [relativeHomologySigmaPairChainIso, Iso.trans_hom]
   rw [← Category.assoc, ι_homologyCoproductIso_hom]
   change
     HomologicalComplex.homologyMap
         (Sigma.ι
-          (fun i ↦ (chainComplexFunctor R).obj
-            (pointedPair (X i) (x₀ i))) i) n ≫
+          (fun i ↦ (chainComplexFunctor R).obj (P i)) i) n ≫
       HomologicalComplex.homologyMap
-        (relativeChainComplexSigmaIso X R x₀).hom n = _
+        (relativeChainComplexSigmaPairIso P R).hom n = _
   rw [← HomologicalComplex.homologyMap_comp,
-    ι_relativeChainComplexSigmaIso_hom]
+    ι_relativeChainComplexSigmaPairIso_hom]
 
-/-- Relative homology commutes with topological coproducts when coproducts in
-the coefficient category are exact. This statement includes an empty index
-type. -/
+private noncomputable def sigmaHomologyCoreIso :
+    (∐ fun i ↦ (homologyFunctor R n).obj (P i)) ≅
+      (homologyFunctor R n).obj (sigmaPair P) :=
+  Sigma.mapIso (fun i ↦
+      relativeHomologyObjIso R n (P i)) ≪≫
+    relativeHomologySigmaPairChainIso P R n ≪≫
+    (relativeHomologyObjIso R n (sigmaPair P)).symm
+
+@[reassoc (attr := simp)]
+private lemma ι_sigmaHomologyCoreIso_hom (i : ι) :
+    Sigma.ι
+        (fun i ↦ (homologyFunctor R n).obj (P i)) i ≫
+      (sigmaHomologyCoreIso P R n).hom =
+    (homologyFunctor R n).map (sigmaPairι P i) := by
+  dsimp only [sigmaHomologyCoreIso, Iso.trans_hom]
+  rw [← Category.assoc, Sigma.ι_mapIso_hom]
+  simp only [Category.assoc]
+  rw [ι_relativeHomologySigmaPairChainIso_hom_assoc]
+  simpa only [Iso.symm_hom] using
+    relativeHomologyObjIso_map R n (sigmaPairι P i)
+
+private lemma sigmaHomologyCoreIso_hom :
+    (sigmaHomologyCoreIso P R n).hom = sigmaHomologyCoreMap P R n := by
+  apply Sigma.hom_ext
+  intro i
+  simp [sigmaHomologyCoreMap]
+
+end RelativeHomologyCore
+
+section RelativeHomologyPair
+
+variable {ι : Type w} (P : ι → TopPair.{w})
+  {C : Type c} [Category.{d} C] [Abelian C]
+  [HasCoproducts.{w} C] [AB4OfSize.{w} C]
+  (R : C) (n : ℕ)
+
+/-- The canonical coproduct map induced by the sigma inclusions of an arbitrary
+family of topological pairs. -/
+noncomputable def relativeHomologySigmaPairMap :
+    (∐ fun i ↦ (homologyFunctor R n).obj (P i)) ⟶
+      (homologyFunctor R n).obj (sigmaPair P) :=
+  sigmaHomologyCoreMap P R n
+
+/-- Relative homology of arbitrary sigma pairs is the coproduct of the summands'
+relative homology when coproducts in the coefficient category are exact. The
+index type may be empty. -/
+noncomputable def relativeHomologySigmaPairIso :
+    (∐ fun i ↦ (homologyFunctor R n).obj (P i)) ≅
+      (homologyFunctor R n).obj (sigmaPair P) :=
+  sigmaHomologyCoreIso P R n
+
+/-- The generic forward isomorphism is exactly the canonical coproduct map. -/
+lemma relativeHomologySigmaPairIso_hom :
+    (relativeHomologySigmaPairIso P R n).hom =
+      relativeHomologySigmaPairMap P R n := by
+  exact sigmaHomologyCoreIso_hom P R n
+
+/-- On each summand, the generic forward isomorphism is the relative-homology
+map induced by the canonical sigma-pair inclusion. -/
+@[reassoc (attr := simp)]
+lemma ι_relativeHomologySigmaPairIso_hom (i : ι) :
+    Sigma.ι (fun i ↦ (homologyFunctor R n).obj (P i)) i ≫
+      (relativeHomologySigmaPairIso P R n).hom =
+    (homologyFunctor R n).map (sigmaPairι P i) := by
+  exact ι_sigmaHomologyCoreIso_hom P R n i
+
+end RelativeHomologyPair
+
+section RelativeHomology
+
+variable {ι : Type w} (X : ι → TopCat.{w})
+  {C : Type c} [Category.{d} C] [Abelian C]
+  [HasCoproducts.{w} C] [AB4OfSize.{w} C]
+  (R : C) (x₀ : ∀ i, X i) (n : ℕ)
+
+/-- The pointed canonical map is the exact specialization of the common
+arbitrary-pair implementation. -/
+noncomputable def relativeHomologySigmaMap :
+    (∐ fun i ↦ (homologyFunctor R n).obj (pointedPair (X i) (x₀ i))) ⟶
+      (homologyFunctor R n).obj (sigmaPointedPair x₀) :=
+  sigmaHomologyCoreMap (fun i ↦ pointedPair (X i) (x₀ i)) R n
+
+/-- The pointed comparison is the exact specialization of the arbitrary-pair
+core. The original public type and empty-index case are preserved. -/
 noncomputable def relativeHomologySigmaIso :
     (∐ fun i ↦ (homologyFunctor R n).obj (pointedPair (X i) (x₀ i))) ≅
       (homologyFunctor R n).obj (sigmaPointedPair x₀) :=
-  Sigma.mapIso (fun i ↦
-      relativeHomologyObjIso R n (pointedPair (X i) (x₀ i))) ≪≫
-    relativeHomologySigmaChainIso X R x₀ n ≪≫
-    (relativeHomologyObjIso R n (sigmaPointedPair x₀)).symm
+  sigmaHomologyCoreIso (fun i ↦ pointedPair (X i) (x₀ i)) R n
 
-/-- On each coproduct summand, the forward relative-homology comparison is
-the map induced by the canonical inclusion into the topological sigma. -/
+/-- The pointed forward comparison remains the map induced by each summand's
+canonical inclusion into the topological sigma. -/
 @[reassoc (attr := simp)]
 lemma ι_relativeHomologySigmaIso_hom (i : ι) :
     Sigma.ι
@@ -294,23 +367,31 @@ lemma ι_relativeHomologySigmaIso_hom (i : ι) :
           (pointedPair (X i) (x₀ i))) i ≫
       (relativeHomologySigmaIso X R x₀ n).hom =
     (homologyFunctor R n).map (sigmaPointedPairι x₀ i) := by
-  dsimp only [relativeHomologySigmaIso, Iso.trans_hom]
-  rw [← Category.assoc, Sigma.ι_mapIso_hom]
-  simp only [Category.assoc]
-  rw [ι_relativeHomologySigmaChainIso_hom_assoc]
-  simpa only [Iso.symm_hom] using
-    relativeHomologyObjIso_map R n (sigmaPointedPairι x₀ i)
+  simpa only [relativeHomologySigmaIso, sigmaPointedPair, sigmaPointedPairι] using
+    ι_sigmaHomologyCoreIso_hom (fun i ↦ pointedPair (X i) (x₀ i)) R n i
 
 /-- The forward map of `relativeHomologySigmaIso` is the canonical coproduct
 map induced by the summand inclusions. -/
 lemma relativeHomologySigmaIso_hom :
     (relativeHomologySigmaIso X R x₀ n).hom =
       relativeHomologySigmaMap X R x₀ n := by
-  apply Sigma.hom_ext
-  intro i
-  simp [relativeHomologySigmaMap]
+  simpa only [relativeHomologySigmaIso, relativeHomologySigmaMap, sigmaPointedPair] using
+    sigmaHomologyCoreIso_hom (fun i ↦ pointedPair (X i) (x₀ i)) R n
 
 end RelativeHomology
+
+section IntegralPair
+
+variable {ι : Type} (P : ι → TopPair.{0}) (n : ℕ)
+
+/-- The integral arbitrary-pair comparison uses Mathlib's exact coproducts of
+abelian groups and requires no additional call-site hypotheses. -/
+noncomputable def relativeIntegralHomologySigmaPairIso :
+    (∐ fun i ↦ (homologyFunctor (AddCommGrpCat.of ℤ) n).obj (P i)) ≅
+      (homologyFunctor (AddCommGrpCat.of ℤ) n).obj (sigmaPair P) :=
+  relativeHomologySigmaPairIso P (AddCommGrpCat.of ℤ) n
+
+end IntegralPair
 
 section Integral
 
