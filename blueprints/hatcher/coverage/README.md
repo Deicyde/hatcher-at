@@ -10,9 +10,11 @@ This project formalizes selected results from
 [Hatcher's *Algebraic Topology*](../sources/hatcher.md); it does not claim to
 formalize the whole book. The canonical artifact is a project-authored,
 citation-only execution ledger rather than redistributed book text. Its
-thirty-two lines record seventeen decomposed source areas, thirteen explicitly
-deferred areas, and two areas outside scope. Every decomposed row links
-directly to its formalizable roadmap leaves.
+thirty-two lines record seventeen decomposed source areas, thirteen queued
+areas recorded as `DEFERRED`, and two areas outside scope. Every decomposed row
+links directly to its formalizable roadmap leaves. The active adopted milestone
+ends at Proposition 2.30 on printed page 136; the queued areas are outside this
+planning pass, not asserted complete or externally blocked.
 
 | Unit | Area | Lines | Locator | Unit SHA-256 | Coverage | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -208,13 +210,19 @@ The [local-degree milestone](../roadmap/homology/computations-and-applications/l
 continues through Proposition 2.30 in twenty formalizable leaves. It plans the
 oriented local-homology class, neighborhood-independent local degree, the
 finite-puncture coproduct and projection calculation, and the sum of local
-degrees. These leaves are planned rather than asserted complete.
+degrees. Sixteen of its twenty leaves are formalized locally, including the
+generic sigma-pair chain and homology comparisons. The four remaining leaves
+are the finite-puncture homology coproduct, projection matrix, orientation sum,
+and Proposition 2.30. The sole current ready frontier is the
+[finite-puncture homology coproduct](../roadmap/homology/computations-and-applications/local-degree/finite-puncture-homology-coproduct.md).
 
-## Deferred roadmap expansion
+## Queued roadmap expansion outside the active milestone
 
 The remaining high-level section maps and retained source-unit remainders are
-explicitly deferred to future roadmap runs. Wholly deferred pages carry
-exposition and prior-art notes rather than formalization nodes:
+queued for future roadmap runs outside the currently adopted local-degree
+milestone. Their `DEFERRED` rows are not claims of proof completion, user
+exclusion, or concrete external blockers. These pages carry exposition and
+prior-art notes rather than formalization nodes:
 
 - Chapter 0, [Some underlying geometric notions](../roadmap/underlying-geometric-notions/README.md)
 - Chapter 2, [Homology](../roadmap/homology/README.md), §2.3 and the remainder

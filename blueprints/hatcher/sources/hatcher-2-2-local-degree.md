@@ -78,16 +78,20 @@ deferred.
 
 ## Existing prerequisites and pinned-library boundary
 
-The completed project already supplies integral sphere orientation and degree,
-relative homology, excision, local-homology invariance under restriction to an
-open neighborhood, and relative homology of a topological coproduct of pointed
-spaces. The new roadmap generalizes the last construction from pointed pairs
-to arbitrary topological pairs and adds the finite disjoint-neighborhood
-comparison required by Hatcher's proof.
+The completed project supplies integral sphere orientation and degree, relative
+homology, excision, local-homology invariance under restriction to an open
+neighborhood, and the canonical relative-chain and relative-homology comparisons
+for coproducts of arbitrary topological pairs. The pointed constructions remain
+exact compatibility specializations. Local degree at an isolated preimage,
+neighborhood independence, its homeomorphism calculation, finite disjoint
+neighborhoods, and the corresponding pair maps are also formalized locally.
+The remaining roadmap constructs the finite-puncture homology coproduct,
+projection matrix, and orientation sum needed for Proposition 2.30.
 
 Mathlib `v4.34.1`, pinned at
 `d13f23b723b8a846827a245b89c10fc7d3f11612`, supplies finite Hausdorff
 separation through `Set.Finite.t2_separation`, categorical finite sums, and the
-topological sigma type. Neither pinned Mathlib nor the project contains an
-exact local-degree definition or Proposition 2.30. No leaf in this source unit
-is marked `mathlib: true`.
+topological sigma type. The project contains the local-degree definition and
+its comparison laws; Proposition 2.30 remains a formalization target. Neither
+local degree nor Proposition 2.30 is supplied by pinned Mathlib. No leaf in this
+source unit is marked `mathlib: true`.

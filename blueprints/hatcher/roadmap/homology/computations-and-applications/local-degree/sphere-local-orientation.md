@@ -65,6 +65,7 @@ are
 - [The ordered class orients ordinary sphere homology](../degree/integral-sphere-orientation.md)
 - [A punctured sphere is Euclidean space](../degree/punctured-sphere-stereographic.md)
 - [A contractible subspace compares relative and reduced homology](../post-excision-applications/contractible-subspace-relative-reduced-homology.md)
+- [Local homology is unchanged on an open neighborhood](../local-homology-and-dimension/local-homology-open-neighborhood.md)
 
 ## Sources
 

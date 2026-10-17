@@ -16,25 +16,27 @@ sphere homeomorphism has local degree `1` or `-1`.
 The milestone does not construct maps of prescribed degree, compute circle
 power maps, prove suspension invariance, or begin cellular homology.
 
-## General coproducts of topological pairs
+## General coproducts of topological pairs (completed)
 
-Generalize the completed pointed-pair coproduct API. For a family
-`P : ι → TopPair`, define a pair whose ambient and subspace are the topological
+The completed generic API extends the pointed-pair coproduct construction.
+For a family `P : ι → TopPair`, its ambient and subspace are the topological
 sigma types of `P i`. The pair map applies each `P i` structure map within its
 own summand, and every summand has a canonical pair morphism into the sigma
 pair.
 
-Refactor the existing chain argument into an isomorphism
+The shared chain argument gives an isomorphism
 
 `∐ i, C_*(P i; R) ≅ C_*(sigmaPair P; R)`
 
-with the expected component formula. Derive
+with the expected component formula. The completed homology comparison gives
 
 `∐ i, H_k(P i; R) ≅ H_k(sigmaPair P; R)`
 
 under the same `AB4OfSize` exact-coproduct hypothesis used by the existing
-pointed result. Preserve the pointed declarations as compatibility wrappers;
-do not duplicate the long chain-level proof.
+pointed result. Both comparisons identify the canonical forward map and its
+summand components. The pointed declarations remain exact compatibility
+specializations of shared implementations and proofs; the empty index and
+universe-zero integral specializations are preserved.
 
 ## Deleted pairs and disjoint open unions
 
@@ -109,8 +111,9 @@ Reuse the following completed declarations and their naturality laws:
   `localHomologyOpenNeighborhoodMap_isIso_of_t1`;
 - `Hatcher.Relative.reducedPairProjection` and
   `reducedPairProjection_naturality`;
-- `Hatcher.Relative.relativeChainComplexSigmaIso` and
-  `relativeHomologySigmaIso` as the pointed special cases to generalize;
+- `Hatcher.Relative.relativeChainComplexSigmaPairIso` and
+  `relativeHomologySigmaPairIso`, with `relativeChainComplexSigmaIso` and
+  `relativeHomologySigmaIso` retained as their exact pointed special cases;
 - `Hatcher.Excision.coverHomologyMap_isIso` and the deleted-subset form of
   excision;
 - `Hatcher.Simplex.doubleSimplexSphereFundamentalClass` and

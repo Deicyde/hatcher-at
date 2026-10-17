@@ -15,8 +15,8 @@ regular-neighborhood leaves. All thirty-two are complete. The remainder of
 §2.2 now also has a sixteen-leaf degree-foundations milestone through
 Proposition 2.29. All sixteen leaves are formalized locally and complete; the
 local-degree continuation through Proposition 2.30 is decomposed into twenty
-leaves, fifteen formalized locally and five remaining. The later material stays
-explicitly deferred.
+leaves, sixteen formalized locally and four remaining. The later material stays
+queued outside this selected milestone.
 
 Given excision and the long exact sequence, homology becomes computable. From
 `Hₙ(Sⁿ) ≅ ℤ` comes the degree of a map `Sⁿ → Sⁿ`, with its local formula as a
@@ -51,7 +51,9 @@ ordered sphere class to define degree, calculate reflections and the antipodal
 map, prove the fixed-point-free formula, and reach Theorem 2.28 and Proposition
 2.29. The [local-degree milestone](local-degree/README.md) then orients local
 homology, constructs the finite-puncture direct sum, and continues toward
-Proposition 2.30; fifteen of its twenty leaves are complete.
+Proposition 2.30; sixteen of its twenty leaves are complete. The generic
+sigma-pair chain and homology comparisons are complete, and the next frontier
+is the finite-puncture homology coproduct.
 
 The pinned Mathlib supplies the standard disk, boundary, and inclusion models,
 but not the selected no-retraction, Brouwer, sphere-homology, degree, or

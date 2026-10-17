@@ -5,7 +5,7 @@ A Lean 4 formalization of results from Allen Hatcher's *Algebraic Topology*
 redistributed here; source notes cite it by chapter and section.
 
 Every chapter and numbered section of the book is mapped. The selected scope
-now has 268 formalizable leaves. Of these, 263 are complete: 245 are
+now has 268 formalizable leaves. Of these, 264 are complete: 246 are
 formalized locally and 18 are pinned Mathlib declarations. These comprise all
 133 nodes in
 the previously completed §1.1, §1.2, §1.3, §2.1 functoriality, and Appendix A.1
@@ -32,8 +32,10 @@ Theorem 2.26 and five Appendix A.5 regular-neighborhood leaves; all thirty-two
 are formalized locally and complete. The degree properties, Theorem 2.28, and
 Proposition 2.29 are formalized locally in sixteen additional complete leaves.
 The local-degree continuation through Proposition 2.30 is decomposed into
-twenty additional leaves; fifteen are formalized locally and five remain. The
-other remaining main-line source areas are explicitly deferred.
+twenty additional leaves; sixteen are formalized locally and four remain.
+The generic relative-chain and relative-homology sigma-pair comparisons are
+complete, leaving the finite-puncture homology coproduct as the next frontier.
+The other main-line source areas remain queued outside this selected milestone.
 
 - [Roadmap](roadmap/README.md) — the book: chapters, statements, and their
   dependencies.

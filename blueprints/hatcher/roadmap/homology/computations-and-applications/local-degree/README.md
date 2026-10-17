@@ -14,9 +14,12 @@ the direct sum of the local relative groups, disjoint open neighborhoods give
 the finite-puncture excision comparison, and naturality sends the oriented
 sphere class to the sum of its local classes.
 
-Fifteen of the twenty formalization leaves below are formalized locally. Five
-remain; the current ready frontier is
-[relative homology of sigma pairs](relative-homology-sigma-pair.md).
+Sixteen of the twenty formalization leaves below are formalized locally. The
+generic relative-chain and relative-homology comparisons for arbitrary sigma
+pairs are complete. Four leaves remain; the current ready frontier is
+[the finite-puncture homology coproduct](finite-puncture-homology-coproduct.md).
+It supplies the comparison needed by the projection matrix, the orientation
+sum, and finally Proposition 2.30.
 
 ## Coproduct and excision infrastructure
 
@@ -51,7 +54,7 @@ remain; the current ready frontier is
 
 This milestone stops after Proposition 2.30. Examples 2.31–2.32, suspension
 invariance in Proposition 2.33, cellular homology, the Hopf converse, and
-Theorem 2.27 remain deferred.
+Theorem 2.27 remain queued for later roadmap passes outside this milestone.
 
 ## Sources
 

@@ -4,8 +4,8 @@ A Lean 4 formalization of results from Allen Hatcher's *Algebraic Topology*,
 built on Mathlib. The book's text is not redistributed here.
 
 The whole book's numbered sections are mapped in the roadmap and coverage
-contract. The selected scope now has 268 formalizable leaves. Of these, 263
-are complete: 245 are formalized locally and 18 are pinned Mathlib
+contract. The selected scope now has 268 formalizable leaves. Of these, 264
+are complete: 246 are formalized locally and 18 are pinned Mathlib
 declarations. The completed work comprises all
 133 nodes in the previously completed
 slices—twenty-two nodes in
@@ -37,9 +37,12 @@ locally and complete. The new degree milestone covers properties (a)–(g),
 Theorem 2.28, and Proposition 2.29 through sixteen dependency-ordered leaves;
 all sixteen are formalized locally and complete.
 The local-degree continuation through Proposition 2.30 is decomposed into
-twenty dependency-ordered leaves; fifteen are formalized locally and the
-remaining five form the active milestone.
-Thirteen other source units are explicitly deferred; lettered additional
+twenty dependency-ordered leaves; sixteen are formalized locally and the
+remaining four form the active milestone. The generic relative-chain and
+relative-homology comparisons for arbitrary sigma pairs are complete; the
+next frontier is the finite-puncture homology coproduct.
+Thirteen other source units remain queued outside this selected milestone;
+lettered additional
 topics and exercises remain out of scope.
 
 [Browse the published formalization blueprint](https://deicyde.github.io/hatcher-at/)

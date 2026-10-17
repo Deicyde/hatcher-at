@@ -4,7 +4,7 @@ kind: graph
 
 # Dependency graph
 
-303 nodes · 565 dependencies. Arrows point from a prerequisite to what depends on it; a dashed
+303 nodes · 566 dependencies. Arrows point from a prerequisite to what depends on it; a dashed
 arrow marks a prerequisite that only the proof needs. Select a node to open it.
 
 ```mermaid
@@ -147,8 +147,8 @@ graph LR
   n135["The fundamental group of a wedge of circles"]:::fully_proved
   n136["The fundamental group of a wedge"]:::fully_proved
   n137("The standard cover of a well-pointed wedge"):::fully_proved
-  n138["Homology<br/><small>146 items · 10 in mathlib · 130 fully proved · 1 ready to state · 1 not ready · 4 planned</small>"]:::scope
-  n139["Computations and applications<br/><small>90 items · 85 fully proved · 1 ready to state · 4 planned</small>"]:::scope
+  n138["Homology<br/><small>146 items · 10 in mathlib · 131 fully proved · 1 ready to state · 1 not ready · 3 planned</small>"]:::scope
+  n139["Computations and applications<br/><small>90 items · 86 fully proved · 1 ready to state · 3 planned</small>"]:::scope
   n140["Degree foundations and applications<br/><small>16 items · 16 fully proved</small>"]:::scope_complete
   n141("The antipodal map has degree determined by dimension"):::fully_proved
   n142("The formal properties of degree"):::fully_proved
@@ -166,14 +166,14 @@ graph LR
   n154("Degree is the multiplier of the ordered sphere class"):::fully_proved
   n155("A nonvanishing tangent field forces odd dimension"):::fully_proved
   n156["Tangent vector fields and normalization"]:::fully_proved
-  n157["Local degree and the sum over a finite fiber<br/><small>20 items · 15 fully proved · 1 ready to state · 4 planned</small>"]:::scope
+  n157["Local degree and the sum over a finite fiber<br/><small>20 items · 16 fully proved · 1 ready to state · 3 planned</small>"]:::scope
   n158("Degree is the sum of the local degrees"):::planned
   n159("Deleted-pair homology is local on an open neighborhood"):::fully_proved
   n160["A disjoint open family is homeomorphic to its sigma type"]:::fully_proved
   n161["Disjoint punctured neighborhoods form the deleted union pair"]:::fully_proved
   n162("The finite-fiber pair map acts by the local degrees"):::fully_proved
   n163["A finite sphere-map fiber has disjoint isolated neighborhoods"]:::fully_proved
-  n164["Finite-puncture homology is the coproduct of the local groups"]:::planned
+  n164["Finite-puncture homology is the coproduct of the local groups"]:::can_state
   n165("The finite-puncture class is the sum of the local classes"):::planned
   n166("The disjoint local pairs excise to the finite-puncture pair"):::fully_proved
   n167("Finite-puncture projections have the diagonal matrix"):::planned
@@ -184,7 +184,7 @@ graph LR
   n172("Local degree is independent of its neighborhood"):::fully_proved
   n173("Local degree on a chosen isolated neighborhood"):::fully_proved
   n174["Relative chains commute with coproducts of arbitrary pairs"]:::fully_proved
-  n175["Relative homology commutes with coproducts of arbitrary pairs"]:::can_state
+  n175["Relative homology commutes with coproducts of arbitrary pairs"]:::fully_proved
   n176["The coproduct of a family of topological pairs"]:::fully_proved
   n177["The ordered sphere class orients local homology"]:::fully_proved
   n178["Local homology and invariance of dimension<br/><small>4 items · 4 fully proved</small>"]:::scope_complete
@@ -310,7 +310,7 @@ graph LR
   n298("Connections with cohomology"):::not_ready
   n299("Elementary methods of calculation"):::not_ready
   n300("Homotopy groups"):::not_ready
-  n301["Algebraic Topology (Hatcher) roadmap<br/><small>276 items · 18 in mathlib · 245 fully proved · 1 ready to state · 8 not ready · 4 planned</small>"]:::scope
+  n301["Algebraic Topology (Hatcher) roadmap<br/><small>276 items · 18 in mathlib · 246 fully proved · 1 ready to state · 8 not ready · 3 planned</small>"]:::scope
   n302("Some underlying geometric notions"):::not_ready
   n6 -.-> n3
   n2 --> n4
@@ -606,6 +606,7 @@ graph LR
   n147 --> n177
   n151 --> n177
   n191 --> n177
+  n181 --> n177
   n266 --> n179
   n223 -.-> n179
   n181 -.-> n180
@@ -1015,8 +1016,8 @@ graph LR
   click n135 "roadmap/fundamental-group/van-kampen/wedge-circles-free-group.md" "The fundamental group of a wedge of circles — fully proved"
   click n136 "roadmap/fundamental-group/van-kampen/wedge-fundamental-group.md" "The fundamental group of a wedge — fully proved"
   click n137 "roadmap/fundamental-group/van-kampen/well-pointed-wedge-cover.md" "The standard cover of a well-pointed wedge — fully proved"
-  click n138 "roadmap/homology/README.md" "Homology — 146 items · 10 in mathlib · 130 fully proved · 1 ready to state · 1 not ready · 4 planned"
-  click n139 "roadmap/homology/computations-and-applications/README.md" "Computations and applications — 90 items · 85 fully proved · 1 ready to state · 4 planned"
+  click n138 "roadmap/homology/README.md" "Homology — 146 items · 10 in mathlib · 131 fully proved · 1 ready to state · 1 not ready · 3 planned"
+  click n139 "roadmap/homology/computations-and-applications/README.md" "Computations and applications — 90 items · 86 fully proved · 1 ready to state · 3 planned"
   click n140 "roadmap/homology/computations-and-applications/degree/README.md" "Degree foundations and applications — 16 items · 16 fully proved"
   click n141 "roadmap/homology/computations-and-applications/degree/antipodal-degree.md" "The antipodal map has degree determined by dimension — fully proved"
   click n142 "roadmap/homology/computations-and-applications/degree/basic-degree-properties.md" "The formal properties of degree — fully proved"
@@ -1034,14 +1035,14 @@ graph LR
   click n154 "roadmap/homology/computations-and-applications/degree/sphere-degree-definition.md" "Degree is the multiplier of the ordered sphere class — fully proved"
   click n155 "roadmap/homology/computations-and-applications/degree/tangent-field-parity-obstruction.md" "A nonvanishing tangent field forces odd dimension — fully proved"
   click n156 "roadmap/homology/computations-and-applications/degree/tangent-vector-field-data.md" "Tangent vector fields and normalization — fully proved"
-  click n157 "roadmap/homology/computations-and-applications/local-degree/README.md" "Local degree and the sum over a finite fiber — 20 items · 15 fully proved · 1 ready to state · 4 planned"
+  click n157 "roadmap/homology/computations-and-applications/local-degree/README.md" "Local degree and the sum over a finite fiber — 20 items · 16 fully proved · 1 ready to state · 3 planned"
   click n158 "roadmap/homology/computations-and-applications/local-degree/degree-local-sum-formula.md" "Degree is the sum of the local degrees — planned"
   click n159 "roadmap/homology/computations-and-applications/local-degree/deleted-pair-open-neighborhood.md" "Deleted-pair homology is local on an open neighborhood — fully proved"
   click n160 "roadmap/homology/computations-and-applications/local-degree/disjoint-open-union-homeomorphism.md" "A disjoint open family is homeomorphic to its sigma type — fully proved"
   click n161 "roadmap/homology/computations-and-applications/local-degree/disjoint-punctured-pair-iso.md" "Disjoint punctured neighborhoods form the deleted union pair — fully proved"
   click n162 "roadmap/homology/computations-and-applications/local-degree/finite-fiber-local-map.md" "The finite-fiber pair map acts by the local degrees — fully proved"
   click n163 "roadmap/homology/computations-and-applications/local-degree/finite-fiber-neighborhoods.md" "A finite sphere-map fiber has disjoint isolated neighborhoods — fully proved"
-  click n164 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-homology-coproduct.md" "Finite-puncture homology is the coproduct of the local groups — planned"
+  click n164 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-homology-coproduct.md" "Finite-puncture homology is the coproduct of the local groups — ready to state"
   click n165 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-orientation-sum.md" "The finite-puncture class is the sum of the local classes — planned"
   click n166 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-pair-excision.md" "The disjoint local pairs excise to the finite-puncture pair — fully proved"
   click n167 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-projection-matrix.md" "Finite-puncture projections have the diagonal matrix — planned"
@@ -1052,7 +1053,7 @@ graph LR
   click n172 "roadmap/homology/computations-and-applications/local-degree/local-degree-well-defined.md" "Local degree is independent of its neighborhood — fully proved"
   click n173 "roadmap/homology/computations-and-applications/local-degree/neighborhood-local-degree.md" "Local degree on a chosen isolated neighborhood — fully proved"
   click n174 "roadmap/homology/computations-and-applications/local-degree/relative-chains-sigma-pair.md" "Relative chains commute with coproducts of arbitrary pairs — fully proved"
-  click n175 "roadmap/homology/computations-and-applications/local-degree/relative-homology-sigma-pair.md" "Relative homology commutes with coproducts of arbitrary pairs — ready to state"
+  click n175 "roadmap/homology/computations-and-applications/local-degree/relative-homology-sigma-pair.md" "Relative homology commutes with coproducts of arbitrary pairs — fully proved"
   click n176 "roadmap/homology/computations-and-applications/local-degree/sigma-topological-pair.md" "The coproduct of a family of topological pairs — fully proved"
   click n177 "roadmap/homology/computations-and-applications/local-degree/sphere-local-orientation.md" "The ordered sphere class orients local homology — fully proved"
   click n178 "roadmap/homology/computations-and-applications/local-homology-and-dimension/README.md" "Local homology and invariance of dimension — 4 items · 4 fully proved"
@@ -1178,7 +1179,7 @@ graph LR
   click n298 "roadmap/homotopy-theory/connections-with-cohomology/README.md" "Connections with cohomology — not ready"
   click n299 "roadmap/homotopy-theory/elementary-methods/README.md" "Elementary methods of calculation — not ready"
   click n300 "roadmap/homotopy-theory/homotopy-groups/README.md" "Homotopy groups — not ready"
-  click n301 "roadmap/README.md" "Algebraic Topology (Hatcher) roadmap — 276 items · 18 in mathlib · 245 fully proved · 1 ready to state · 8 not ready · 4 planned"
+  click n301 "roadmap/README.md" "Algebraic Topology (Hatcher) roadmap — 276 items · 18 in mathlib · 246 fully proved · 1 ready to state · 8 not ready · 3 planned"
   click n302 "roadmap/underlying-geometric-notions/README.md" "Some underlying geometric notions — not ready"
   classDef mathlib fill:#1C5C33,stroke:#134426,color:#FFFFFF,stroke-width:2px
   classDef fully_proved fill:#31A24C,stroke:#22773A,color:#FFFFFF,stroke-width:2px
@@ -1198,4 +1199,4 @@ graph LR
 
 ## Legend
 
-<div class="bp-legend-grid"><span class="bp-swatch bp-swatch-mathlib"></span><span class="bp-legend-label">in mathlib</span><span class="bp-legend-count">18</span><span class="bp-legend-meaning">Upstreamed into Mathlib.</span><span class="bp-swatch bp-swatch-fully_proved"></span><span class="bp-legend-label">fully proved</span><span class="bp-legend-count">245</span><span class="bp-legend-meaning">Proved, and every prerequisite is fully proved too.</span><span class="bp-swatch bp-swatch-can_state"></span><span class="bp-legend-label">ready to state</span><span class="bp-legend-count">1</span><span class="bp-legend-meaning">Nothing it needs is blocked, so the statement can be written in Lean.</span><span class="bp-swatch bp-swatch-not_ready"></span><span class="bp-legend-label">not ready</span><span class="bp-legend-count">8</span><span class="bp-legend-meaning">Needs more blueprint work before it can be attempted.</span><span class="bp-swatch bp-swatch-planned"></span><span class="bp-legend-label">planned</span><span class="bp-legend-count">4</span><span class="bp-legend-meaning">Described in the blueprint only.</span></div>
+<div class="bp-legend-grid"><span class="bp-swatch bp-swatch-mathlib"></span><span class="bp-legend-label">in mathlib</span><span class="bp-legend-count">18</span><span class="bp-legend-meaning">Upstreamed into Mathlib.</span><span class="bp-swatch bp-swatch-fully_proved"></span><span class="bp-legend-label">fully proved</span><span class="bp-legend-count">246</span><span class="bp-legend-meaning">Proved, and every prerequisite is fully proved too.</span><span class="bp-swatch bp-swatch-can_state"></span><span class="bp-legend-label">ready to state</span><span class="bp-legend-count">1</span><span class="bp-legend-meaning">Nothing it needs is blocked, so the statement can be written in Lean.</span><span class="bp-swatch bp-swatch-not_ready"></span><span class="bp-legend-label">not ready</span><span class="bp-legend-count">8</span><span class="bp-legend-meaning">Needs more blueprint work before it can be attempted.</span><span class="bp-swatch bp-swatch-planned"></span><span class="bp-legend-label">planned</span><span class="bp-legend-count">3</span><span class="bp-legend-meaning">Described in the blueprint only.</span></div>
