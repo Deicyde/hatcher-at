@@ -18,7 +18,7 @@ leaves, with five supporting Appendix A.5 leaves; all thirty-two are complete.
 The degree foundations through Proposition 2.29 are decomposed into sixteen
 additional leaves, all formalized locally and complete. The local-degree
 continuation through Proposition 2.30 is decomposed into twenty leaves;
-thirteen are formalized locally and seven remain. The rest of the chapter
+fourteen are formalized locally and six remain. The rest of the chapter
 remains explicitly deferred.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
@@ -59,8 +59,8 @@ reduced homology calculation, no-retraction, and Brouwer. Its new
 covers properties (a)–(g), Theorem 2.28, and Proposition 2.29 in sixteen
 complete leaves. Its new
 [local-degree branch](computations-and-applications/local-degree/README.md)
-covers the construction and Proposition 2.30 in twenty leaves, thirteen
-complete and seven active.
+covers the construction and Proposition 2.30 in twenty leaves, fourteen
+complete and six active.
 Cellular homology, the later degree and Mayer–Vietoris examples, and homology
 with coefficients remain deferred.
 Invariance of domain belongs to out-of-scope Additional Topic §2.B.

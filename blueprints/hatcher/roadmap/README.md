@@ -14,7 +14,7 @@ spine of computations, starting with `π₁(S¹) ≅ ℤ`. The roadmap therefore
 the whole book but decomposes it from that point.
 
 Chapters follow Hatcher's own order. The selected scope now has 268
-formalizable leaves. Of these, 261 are complete: 243 are formalized locally
+formalizable leaves. Of these, 262 are complete: 244 are formalized locally
 and 18 are pinned Mathlib declarations. This includes all 133 leaves in the
 previously completed §1.1, §1.2, §1.3, §2.1 functoriality, and Appendix A.1
 slices; the §1.3 spine extends through Proposition 1.40. A fifteen-leaf §2.1 slice also
@@ -33,7 +33,7 @@ and their Appendix A.5 regular-neighborhood prerequisite are formalized
 locally and complete. The degree properties (a)–(g), Theorem 2.28, and
 Proposition 2.29 are formalized locally in sixteen additional complete leaves.
 Local degree and Proposition 2.30 are decomposed into twenty additional
-leaves; thirteen are formalized locally and seven remain. The rest of the
+leaves; fourteen are formalized locally and six remain. The rest of the
 unselected source remains explicitly deferred.
 The [coverage contract](../coverage/README.md) says which is which, and
 [the source notes](../sources/hatcher.md) fix the citation scheme.

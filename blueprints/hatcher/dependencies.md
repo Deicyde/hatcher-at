@@ -147,8 +147,8 @@ graph LR
   n135["The fundamental group of a wedge of circles"]:::fully_proved
   n136["The fundamental group of a wedge"]:::fully_proved
   n137("The standard cover of a well-pointed wedge"):::fully_proved
-  n138["Homology<br/><small>146 items · 10 in mathlib · 128 fully proved · 2 ready to state · 1 not ready · 5 planned</small>"]:::scope
-  n139["Computations and applications<br/><small>90 items · 83 fully proved · 2 ready to state · 5 planned</small>"]:::scope
+  n138["Homology<br/><small>146 items · 10 in mathlib · 129 fully proved · 1 ready to state · 1 not ready · 5 planned</small>"]:::scope
+  n139["Computations and applications<br/><small>90 items · 84 fully proved · 1 ready to state · 5 planned</small>"]:::scope
   n140["Degree foundations and applications<br/><small>16 items · 16 fully proved</small>"]:::scope_complete
   n141("The antipodal map has degree determined by dimension"):::fully_proved
   n142("The formal properties of degree"):::fully_proved
@@ -166,7 +166,7 @@ graph LR
   n154("Degree is the multiplier of the ordered sphere class"):::fully_proved
   n155("A nonvanishing tangent field forces odd dimension"):::fully_proved
   n156["Tangent vector fields and normalization"]:::fully_proved
-  n157["Local degree and the sum over a finite fiber<br/><small>20 items · 13 fully proved · 2 ready to state · 5 planned</small>"]:::scope
+  n157["Local degree and the sum over a finite fiber<br/><small>20 items · 14 fully proved · 1 ready to state · 5 planned</small>"]:::scope
   n158("Degree is the sum of the local degrees"):::planned
   n159("Deleted-pair homology is local on an open neighborhood"):::fully_proved
   n160["A disjoint open family is homeomorphic to its sigma type"]:::fully_proved
@@ -178,7 +178,7 @@ graph LR
   n166("The disjoint local pairs excise to the finite-puncture pair"):::fully_proved
   n167("Finite-puncture projections have the diagonal matrix"):::planned
   n168("The finite-fiber pair map carries the global degree"):::fully_proved
-  n169("A local homeomorphism has local degree plus or minus one"):::can_state
+  n169("A local homeomorphism has local degree plus or minus one"):::fully_proved
   n170["An isolated preimage gives a map of punctured pairs"]:::fully_proved
   n171("Local degree is unchanged when the neighborhood shrinks"):::fully_proved
   n172("Local degree is independent of its neighborhood"):::fully_proved
@@ -310,7 +310,7 @@ graph LR
   n298("Connections with cohomology"):::not_ready
   n299("Elementary methods of calculation"):::not_ready
   n300("Homotopy groups"):::not_ready
-  n301["Algebraic Topology (Hatcher) roadmap<br/><small>276 items · 18 in mathlib · 243 fully proved · 2 ready to state · 8 not ready · 5 planned</small>"]:::scope
+  n301["Algebraic Topology (Hatcher) roadmap<br/><small>276 items · 18 in mathlib · 244 fully proved · 1 ready to state · 8 not ready · 5 planned</small>"]:::scope
   n302("Some underlying geometric notions"):::not_ready
   n6 -.-> n3
   n2 --> n4
@@ -1015,8 +1015,8 @@ graph LR
   click n135 "roadmap/fundamental-group/van-kampen/wedge-circles-free-group.md" "The fundamental group of a wedge of circles — fully proved"
   click n136 "roadmap/fundamental-group/van-kampen/wedge-fundamental-group.md" "The fundamental group of a wedge — fully proved"
   click n137 "roadmap/fundamental-group/van-kampen/well-pointed-wedge-cover.md" "The standard cover of a well-pointed wedge — fully proved"
-  click n138 "roadmap/homology/README.md" "Homology — 146 items · 10 in mathlib · 128 fully proved · 2 ready to state · 1 not ready · 5 planned"
-  click n139 "roadmap/homology/computations-and-applications/README.md" "Computations and applications — 90 items · 83 fully proved · 2 ready to state · 5 planned"
+  click n138 "roadmap/homology/README.md" "Homology — 146 items · 10 in mathlib · 129 fully proved · 1 ready to state · 1 not ready · 5 planned"
+  click n139 "roadmap/homology/computations-and-applications/README.md" "Computations and applications — 90 items · 84 fully proved · 1 ready to state · 5 planned"
   click n140 "roadmap/homology/computations-and-applications/degree/README.md" "Degree foundations and applications — 16 items · 16 fully proved"
   click n141 "roadmap/homology/computations-and-applications/degree/antipodal-degree.md" "The antipodal map has degree determined by dimension — fully proved"
   click n142 "roadmap/homology/computations-and-applications/degree/basic-degree-properties.md" "The formal properties of degree — fully proved"
@@ -1034,7 +1034,7 @@ graph LR
   click n154 "roadmap/homology/computations-and-applications/degree/sphere-degree-definition.md" "Degree is the multiplier of the ordered sphere class — fully proved"
   click n155 "roadmap/homology/computations-and-applications/degree/tangent-field-parity-obstruction.md" "A nonvanishing tangent field forces odd dimension — fully proved"
   click n156 "roadmap/homology/computations-and-applications/degree/tangent-vector-field-data.md" "Tangent vector fields and normalization — fully proved"
-  click n157 "roadmap/homology/computations-and-applications/local-degree/README.md" "Local degree and the sum over a finite fiber — 20 items · 13 fully proved · 2 ready to state · 5 planned"
+  click n157 "roadmap/homology/computations-and-applications/local-degree/README.md" "Local degree and the sum over a finite fiber — 20 items · 14 fully proved · 1 ready to state · 5 planned"
   click n158 "roadmap/homology/computations-and-applications/local-degree/degree-local-sum-formula.md" "Degree is the sum of the local degrees — planned"
   click n159 "roadmap/homology/computations-and-applications/local-degree/deleted-pair-open-neighborhood.md" "Deleted-pair homology is local on an open neighborhood — fully proved"
   click n160 "roadmap/homology/computations-and-applications/local-degree/disjoint-open-union-homeomorphism.md" "A disjoint open family is homeomorphic to its sigma type — fully proved"
@@ -1046,7 +1046,7 @@ graph LR
   click n166 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-pair-excision.md" "The disjoint local pairs excise to the finite-puncture pair — fully proved"
   click n167 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-projection-matrix.md" "Finite-puncture projections have the diagonal matrix — planned"
   click n168 "roadmap/homology/computations-and-applications/local-degree/global-degree-fiber-square.md" "The finite-fiber pair map carries the global degree — fully proved"
-  click n169 "roadmap/homology/computations-and-applications/local-degree/homeomorphism-local-degree.md" "A local homeomorphism has local degree plus or minus one — ready to state"
+  click n169 "roadmap/homology/computations-and-applications/local-degree/homeomorphism-local-degree.md" "A local homeomorphism has local degree plus or minus one — fully proved"
   click n170 "roadmap/homology/computations-and-applications/local-degree/isolated-preimage-neighborhood.md" "An isolated preimage gives a map of punctured pairs — fully proved"
   click n171 "roadmap/homology/computations-and-applications/local-degree/local-degree-shrinking.md" "Local degree is unchanged when the neighborhood shrinks — fully proved"
   click n172 "roadmap/homology/computations-and-applications/local-degree/local-degree-well-defined.md" "Local degree is independent of its neighborhood — fully proved"
@@ -1178,7 +1178,7 @@ graph LR
   click n298 "roadmap/homotopy-theory/connections-with-cohomology/README.md" "Connections with cohomology — not ready"
   click n299 "roadmap/homotopy-theory/elementary-methods/README.md" "Elementary methods of calculation — not ready"
   click n300 "roadmap/homotopy-theory/homotopy-groups/README.md" "Homotopy groups — not ready"
-  click n301 "roadmap/README.md" "Algebraic Topology (Hatcher) roadmap — 276 items · 18 in mathlib · 243 fully proved · 2 ready to state · 8 not ready · 5 planned"
+  click n301 "roadmap/README.md" "Algebraic Topology (Hatcher) roadmap — 276 items · 18 in mathlib · 244 fully proved · 1 ready to state · 8 not ready · 5 planned"
   click n302 "roadmap/underlying-geometric-notions/README.md" "Some underlying geometric notions — not ready"
   classDef mathlib fill:#1C5C33,stroke:#134426,color:#FFFFFF,stroke-width:2px
   classDef fully_proved fill:#31A24C,stroke:#22773A,color:#FFFFFF,stroke-width:2px
@@ -1198,4 +1198,4 @@ graph LR
 
 ## Legend
 
-<div class="bp-legend-grid"><span class="bp-swatch bp-swatch-mathlib"></span><span class="bp-legend-label">in mathlib</span><span class="bp-legend-count">18</span><span class="bp-legend-meaning">Upstreamed into Mathlib.</span><span class="bp-swatch bp-swatch-fully_proved"></span><span class="bp-legend-label">fully proved</span><span class="bp-legend-count">243</span><span class="bp-legend-meaning">Proved, and every prerequisite is fully proved too.</span><span class="bp-swatch bp-swatch-can_state"></span><span class="bp-legend-label">ready to state</span><span class="bp-legend-count">2</span><span class="bp-legend-meaning">Nothing it needs is blocked, so the statement can be written in Lean.</span><span class="bp-swatch bp-swatch-not_ready"></span><span class="bp-legend-label">not ready</span><span class="bp-legend-count">8</span><span class="bp-legend-meaning">Needs more blueprint work before it can be attempted.</span><span class="bp-swatch bp-swatch-planned"></span><span class="bp-legend-label">planned</span><span class="bp-legend-count">5</span><span class="bp-legend-meaning">Described in the blueprint only.</span></div>
+<div class="bp-legend-grid"><span class="bp-swatch bp-swatch-mathlib"></span><span class="bp-legend-label">in mathlib</span><span class="bp-legend-count">18</span><span class="bp-legend-meaning">Upstreamed into Mathlib.</span><span class="bp-swatch bp-swatch-fully_proved"></span><span class="bp-legend-label">fully proved</span><span class="bp-legend-count">244</span><span class="bp-legend-meaning">Proved, and every prerequisite is fully proved too.</span><span class="bp-swatch bp-swatch-can_state"></span><span class="bp-legend-label">ready to state</span><span class="bp-legend-count">1</span><span class="bp-legend-meaning">Nothing it needs is blocked, so the statement can be written in Lean.</span><span class="bp-swatch bp-swatch-not_ready"></span><span class="bp-legend-label">not ready</span><span class="bp-legend-count">8</span><span class="bp-legend-meaning">Needs more blueprint work before it can be attempted.</span><span class="bp-swatch bp-swatch-planned"></span><span class="bp-legend-label">planned</span><span class="bp-legend-count">5</span><span class="bp-legend-meaning">Described in the blueprint only.</span></div>
