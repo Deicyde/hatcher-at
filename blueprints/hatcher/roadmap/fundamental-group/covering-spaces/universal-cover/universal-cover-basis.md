@@ -16,14 +16,12 @@ let `U[γ]` consist of classes obtained by extending `γ` along a path inside
 Moreover, `U[γ] = U[γ']` whenever `[γ'] ∈ U[γ]`, and endpoint projection is a
 bijection from `U[γ]` to `U`.
 
-Intended artifact: `Hatcher.UniversalCover.isTopologicalBasis_basicOpen`.
-
 This node uses Hatcher's direct basis argument. It does not require the
 compact-open tube-neighborhood API from PR #38292.
 
-Formalized in `Hatcher/Covering/UniversalCoverBasis.lean`. The same file proves
-`basicOpen_eq_of_mem` and `bijOn_proj_basicOpen`, covering the equality and
-endpoint-bijection clauses of the source statement.
+The same file proves `basicOpen_eq_of_mem` and `bijOn_proj_basicOpen`,
+covering the equality and endpoint-bijection clauses of the source
+statement.
 
 ## Depends on
 

@@ -24,10 +24,8 @@ Both maps into quotient homology must literally be induced by the ambient
 quotient `q`. Define the connecting map by transporting the reduced-pair
 connecting morphism through the Proposition 2.22 comparison.
 
-Formalized in
-`Hatcher/Singular/GoodPairPointQuotientExactSequence.lean`. The definition
-`Hatcher.Relative.goodPairPointQuotientSequence` writes both maps into
-quotient homology literally as the maps induced by
+The definition `Hatcher.Relative.goodPairPointQuotientSequence` writes both
+maps into quotient homology literally as the maps induced by
 `pointQuotientProjection`. The connecting morphism is the inverse of the
 canonical Proposition 2.22 comparison followed by `reducedPairConnecting`.
 `Hatcher.Relative.goodPairPointQuotientSequence_exact` proves every six-term

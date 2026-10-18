@@ -16,9 +16,6 @@ piece deformation retracts onto the corresponding attaching
 `(n-1)`-sphere, and the maps from their fundamental groups jointly generate
 `π₁(A ∩ B)`.
 
-Intended artifact:
-`Hatcher.VanKampen.attachmentIntersection_coverMap_surjective`.
-
 The two attachment nodes specialize this surjectivity statement. For `n = 2`,
 they identify generators using the circle computation. For `n > 2`, they use
 Proposition 1.14 to show that every source group, and hence the intersection

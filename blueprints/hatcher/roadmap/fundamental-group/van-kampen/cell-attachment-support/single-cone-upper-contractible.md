@@ -13,10 +13,8 @@ lean: Hatcher.VanKampen.ConeAttachment.contractibleSpace_upperCover
 For a continuous attaching map `f : S → X`, the open member consisting of the
 cone apex and all subunit-height cylinder points is contractible.
 
-Formalized as
-`Hatcher.VanKampen.ConeAttachment.contractibleSpace_upperCover`. Its explicit
-pointed contraction pushes every cylinder height linearly to zero and fixes
-the cone apex throughout.
+Its explicit pointed contraction pushes every cylinder height linearly to
+zero and fixes the cone apex throughout.
 
 ## Depends on
 

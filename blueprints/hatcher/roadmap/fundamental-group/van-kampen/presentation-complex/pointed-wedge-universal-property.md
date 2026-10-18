@@ -14,16 +14,6 @@ Package the universal property of `Hatcher.PointedWedge`: a continuous map
 from the wedge is equivalent to a target point together with continuous maps
 from every summand that send its chosen basepoint to that target point.
 
-Intended main artifact:
-
-```lean
-def Hatcher.PointedWedge.continuousMapEquiv
-    {ι : Type u} {X : ι → Type v} [∀ i, TopologicalSpace (X i)]
-    (x₀ : ∀ i, X i) {Y : Type w} [TopologicalSpace Y] :
-    C(Hatcher.PointedWedge X x₀, Y) ≃
-      Σ y₀ : Y, {f : ∀ i, C(X i, Y) // ∀ i, f i (x₀ i) = y₀}
-```
-
 Also expose a constructor `desc`, simp lemmas for the wedge point and each
 inclusion, an extensionality theorem, and a homeomorphism constructor
 `Hatcher.PointedWedge.homeomorphCongr` for basepoint-preserving families of

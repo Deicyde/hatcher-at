@@ -15,11 +15,8 @@ path-connected, locally path-connected, semilocally simply-connected `X`,
 isomorphism classes of path-connected covers of `X` correspond bijectively to
 conjugacy classes of subgroups of `π₁(X,x₀)`.
 
-Intended artifact: `Hatcher.ConnectedCover.classificationEquivConjClasses`.
-
-Formalized in `Hatcher/Covering/UnpointedCoverClassification.lean`. The
-classification uses the quotient of connected covers whose total spaces live
-in the same universe as `X`, and the quotient of subgroups by Mathlib's
+The classification uses the quotient of connected covers whose total spaces
+live in the same universe as `X`, and the quotient of subgroups by Mathlib's
 conjugation-orbit relation. Changing the chosen point over `x₀` changes the
 image subgroup only by conjugacy, so the resulting class is independent of
 that choice.

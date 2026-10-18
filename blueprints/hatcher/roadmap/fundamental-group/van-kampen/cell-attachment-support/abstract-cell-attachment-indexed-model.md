@@ -15,7 +15,6 @@ Let `c : HomotopicalAlgebra.AttachCells.{u}
 Construct an isomorphism from the target of `f` to the explicit indexed cone
 attachment of these maps.
 
-Intended main artifact: `Hatcher.VanKampen.CellAttachment.modelIso`.
 The module must also prove that this isomorphism commutes with the base map and
 with every cell inclusion:
 

@@ -15,8 +15,6 @@ basepoint `x₀`, and have path-connected intersection. The two inclusion maps
 from `π₁(A ∩ B, x₀)` exhibit `π₁(X, x₀)` as the corresponding group pushout,
 represented by `Monoid.PushoutI` over a two-element index type.
 
-Intended artifact: `Hatcher.VanKampen.pushoutEquivFundamentalGroup`.
-
 This is the two-set specialization stated immediately after Example 1.22. Its
 proof identifies Mathlib's `Monoid.PushoutI` with the free-product quotient in
 Theorem 1.20. It is not the representation of the arbitrary-cover theorem,

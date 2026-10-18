@@ -15,12 +15,10 @@ to `g : X → Y`, and let `h(t) = H(t, x)` be the path traced by a basepoint
 `x`. Then the induced maps satisfy `f_* = β_h ∘ g_*`, where `β_h` changes
 basepoint from `g(x)` back to `f(x)`.
 
-Formalized as `Hatcher.fundamentalGroupMap_eq_basepointChange_comp` in
-`Hatcher/VanKampen/WedgeFundamentalGroup.lean`. The proof specializes
-Mathlib's natural isomorphism between the fundamental-groupoid functors of
-homotopic maps. The inverse path equivalence in the statement is intentional:
-Mathlib's path equivalence follows `h` from `f(x)` to `g(x)`, while Hatcher's
-`β_h` goes in the opposite direction.
+The proof specializes Mathlib's natural isomorphism between the
+fundamental-groupoid functors of homotopic maps. The inverse path equivalence
+in the statement is intentional: Mathlib's path equivalence follows `h` from
+`f(x)` to `g(x)`, while Hatcher's `β_h` goes in the opposite direction.
 
 ## Depends on
 

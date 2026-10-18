@@ -14,16 +14,6 @@ Assemble the inclusion of `skeletonLT C n` and the restricted characteristic
 maps of all classical `n`-cells into the joint map onto
 `skeletonLT C (n + 1)`.
 
-Intended main artifact:
-
-```lean
-theorem Hatcher.ClassicalCW.skeletonLTStepJointMap_isQuotient
-    {X : Type u} [TopologicalSpace X] [T2Space X]
-    (C : Set X) {D : Set X} [Topology.RelCWComplex C D] (n : ℕ) :
-    Topology.IsQuotientMap
-      (Hatcher.ClassicalCW.skeletonLTStepJointMap C n)
-```
-
 The domain is the sum of the old skeleton and the sigma type of closed
 sup-norm balls indexed by `Topology.RelCWComplex.cell C n`. Also expose the
 coproduct boundary and closed-cell cofans, their commuting square, and a

@@ -13,9 +13,6 @@ lean: Hatcher.Covering.locPathConnectedSpace_total
 If `p : E → X` is a covering map and `X` is locally path-connected, then `E`
 is locally path-connected.
 
-Formalized as `Hatcher.Covering.locPathConnectedSpace_total` in
-`Hatcher/Covering/LocalPathConnected.lean`.
-
 Hatcher uses this unnumbered fact before the classification theorem. It is a
 small local-homeomorphism argument, but it must be explicit before applying
 the lifting criterion with one covering space as the domain of a map to

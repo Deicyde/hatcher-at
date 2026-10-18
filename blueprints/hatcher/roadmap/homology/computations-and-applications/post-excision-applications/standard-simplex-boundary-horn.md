@@ -22,7 +22,6 @@ of pairs
 
 `(Δ[n], ∂Δ[n]) ⟶ (∂Δ[n+1], Λ⁰[n+1])`.
 
-The main artifact is `Hatcher.Simplex.standardSimplexBoundaryHornTriple`.
 Supporting definitions include the relative simplex pair and the identity
 singular simplex obtained from `TopCat.toSSetObjEquiv`.
 

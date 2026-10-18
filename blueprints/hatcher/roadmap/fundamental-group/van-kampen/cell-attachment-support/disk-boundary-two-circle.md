@@ -15,11 +15,10 @@ identification of two-dimensional Euclidean space with the complex plane. The
 distinguished boundary point is the `ULift` of the unit vector `(1, 0)`, and
 the homeomorphism must send it to `1 : Circle`.
 
-Intended artifact: `Hatcher.diskBoundaryTwoHomeomorphCircle`. The module should
-also expose the loop on `TopCat.diskBoundary 2` obtained by transporting
-Hatcher's standard once-around loop, so an attaching map has a canonical
-fundamental-group element with the orientation used by the existing winding
-number calculation.
+The module should also expose the loop on `TopCat.diskBoundary 2` obtained
+by transporting Hatcher's standard once-around loop, so an attaching map
+has a canonical fundamental-group element with the orientation used by the
+existing winding number calculation.
 
 ## Depends on
 

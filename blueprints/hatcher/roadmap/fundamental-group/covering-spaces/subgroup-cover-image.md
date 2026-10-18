@@ -15,15 +15,12 @@ locally path-connected, and semilocally simply-connected. For every subgroup
 `H ≤ π₁(X,x₀)`, the pointed projection from `SubgroupCover H` has induced
 fundamental-group image exactly `H`.
 
-Intended artifact: `Hatcher.SubgroupCover.range_map_eq`.
-
 A loop in `X` lifts from the constant-path class to the class represented by
 that loop, and this endpoint is the basepoint of the quotient precisely when
 the loop class belongs to `H`.
 
-Formalized in `Hatcher/Covering/SubgroupCoverImage.lean`. The proof computes
-the monodromy endpoint using the initial-segment lift and reduces equality with
-the quotient basepoint to the defining subgroup relation.
+The proof computes the monodromy endpoint using the initial-segment lift and
+reduces equality with the quotient basepoint to the defining subgroup relation.
 
 ## Depends on
 
