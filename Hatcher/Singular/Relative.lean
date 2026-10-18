@@ -128,6 +128,29 @@ coefficients in `R`, functorial in topological pairs. -/
 noncomputable def homologyFunctor (R : C) (n : ℕ) : TopPair.{w} ⥤ C :=
   singularPairFunctor ⋙ SSetPair.homologyFunctor R n
 
+/-- A pair map whose ambient component factors through the target subspace
+induces the zero map on relative homology in every degree. The quotient of
+chain complexes supplies the cancellation, including in degree zero. -/
+theorem homologyFunctor_map_eq_zero_of_factors_through_subspace
+    {P Q : TopPair.{w}} (φ : P ⟶ Q) (g : P.fst ⟶ Q.snd)
+    (hφ : TopPair.Hom.fst φ = g ≫ Q.map) (R : C) (k : ℕ) :
+    (homologyFunctor R k).map φ = 0 := by
+  have hchain : (chainComplexFunctor R).map φ = 0 := by
+    apply (cancel_epi ((chainComplexFunctorπ R).app P)).1
+    rw [← (chainComplexFunctorπ R).naturality φ, comp_zero]
+    let qQ : ((singularChainComplexFunctor C).obj R).obj Q.fst ⟶
+        (chainComplexFunctor R).obj Q := (chainComplexFunctorπ R).app Q
+    change
+      ((singularChainComplexFunctor C).obj R).map
+          (TopPair.Hom.fst φ) ≫ qQ = 0
+    rw [hφ, Functor.map_comp, Category.assoc]
+    have hQ : ((singularChainComplexFunctor C).obj R).map Q.map ≫ qQ = 0 :=
+      chainComplexFunctor_condition R Q
+    rw [hQ, comp_zero]
+  change HomologicalComplex.homologyMap
+    ((chainComplexFunctor R).map φ) k = 0
+  rw [hchain, HomologicalComplex.homologyMap_zero]
+
 end Homology
 
 section ExactSequence

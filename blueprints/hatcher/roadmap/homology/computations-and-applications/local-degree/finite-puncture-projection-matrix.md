@@ -3,6 +3,9 @@ article_id: af_2420d65a757f7dd87b503542
 source_units: [hatcher-2-2-local-degree]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.finitePunctureProjection_comp_summand
 ---
 
 # Finite-puncture projections have the diagonal matrix
