@@ -5,6 +5,7 @@ Authors: Jack McCarthy
 -/
 
 import Hatcher.Singular.DisjointPuncturedPair
+import Hatcher.Singular.SigmaRelativeHomology
 import Hatcher.Sphere.FiniteFiberNeighborhoods
 import Mathlib.Algebra.Category.Grp.AB
 
@@ -167,5 +168,99 @@ theorem finitePuncturePairHom_homology_isIso {n : ℕ}
     exact Hatcher.Relative.deletedPairOpenNeighborhoodMap_isIso_of_finite
       (fiber f y) D.union hfinite D.isOpen_union D.fiber_subset_union
         (AddCommGrpCat.of ℤ) k
+
+/-!
+## The canonical finite-puncture homology coproduct
+-/
+
+open CategoryTheory.Limits
+
+/-- **Hatcher, Proposition 2.30 (printed page 136), direct-sum step.**
+The canonical sigma-pair homology comparison followed by finite-puncture
+excision identifies the coproduct of the local groups with the deleted-fiber
+relative group in every degree, including an empty fiber. -/
+noncomputable def finitePunctureHomologyIso {n : ℕ}
+    {f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n}
+    {y : TopCat.sphere.{0} n} (D : FiniteFiberNeighborhoods f y)
+    (hfinite : (fiber f y).Finite) (k : ℕ) :
+    (∐ fun i : fiber f y ↦
+      (Hatcher.Relative.homologyFunctor (AddCommGrpCat.of ℤ) k).obj
+        (Hatcher.Relative.puncturedPair (TopCat.of (D.U i))
+          ⟨i.1, D.center_mem i⟩)) ≅
+      (Hatcher.Relative.homologyFunctor (AddCommGrpCat.of ℤ) k).obj
+        (Hatcher.Relative.deletedPair (TopCat.sphere.{0} n) (fiber f y)) := by
+  letI : IsIso ((Hatcher.Relative.homologyFunctor (AddCommGrpCat.of ℤ) k).map
+      (finitePuncturePairHom D)) :=
+    finitePuncturePairHom_homology_isIso D hfinite k
+  exact Hatcher.Relative.relativeIntegralHomologySigmaPairIso
+      (fun i : fiber f y ↦
+        Hatcher.Relative.puncturedPair (TopCat.of (D.U i))
+          ⟨i.1, D.center_mem i⟩) k ≪≫
+    asIso ((Hatcher.Relative.homologyFunctor (AddCommGrpCat.of ℤ) k).map
+      (finitePuncturePairHom D))
+
+/-- Each coproduct summand is carried by the actual inclusion of its local
+punctured pair into the sphere with the full fiber deleted. -/
+@[reassoc (attr := simp)]
+theorem ι_finitePunctureHomologyIso_hom {n : ℕ}
+    {f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n}
+    {y : TopCat.sphere.{0} n} (D : FiniteFiberNeighborhoods f y)
+    (hfinite : (fiber f y).Finite) (k : ℕ) (i : fiber f y) :
+    Sigma.ι (fun j : fiber f y ↦
+        (Hatcher.Relative.homologyFunctor (AddCommGrpCat.of ℤ) k).obj
+          (Hatcher.Relative.puncturedPair (TopCat.of (D.U j))
+            ⟨j.1, D.center_mem j⟩)) i ≫
+        (finitePunctureHomologyIso D hfinite k).hom =
+      (Hatcher.Relative.homologyFunctor (AddCommGrpCat.of ℤ) k).map
+        (finitePunctureNeighborhoodPairHom D i) := by
+  dsimp only [finitePunctureHomologyIso, Iso.trans_hom, asIso_hom,
+    Hatcher.Relative.relativeIntegralHomologySigmaPairIso]
+  rw [← Category.assoc,
+    Hatcher.Relative.ι_relativeHomologySigmaPairIso_hom]
+  rw [← Functor.map_comp, sigmaPairι_comp_finitePuncturePairHom]
+
+/-- The inverse finite-puncture comparison followed by a finite-biproduct
+projection. All indexing instances are installed from the finiteness proof. -/
+noncomputable def finitePunctureHomologyProjection {n : ℕ}
+    {f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n}
+    {y : TopCat.sphere.{0} n} (D : FiniteFiberNeighborhoods f y)
+    (hfinite : (fiber f y).Finite) (k : ℕ) (i : fiber f y) :
+    (Hatcher.Relative.homologyFunctor (AddCommGrpCat.of ℤ) k).obj
+        (Hatcher.Relative.deletedPair (TopCat.sphere.{0} n) (fiber f y)) ⟶
+      (Hatcher.Relative.homologyFunctor (AddCommGrpCat.of ℤ) k).obj
+        (Hatcher.Relative.puncturedPair (TopCat.of (D.U i))
+          ⟨i.1, D.center_mem i⟩) := by
+  classical
+  letI : Fintype (fiber f y) := finiteFiberFintype hfinite
+  let H (j : fiber f y) :=
+    (Hatcher.Relative.homologyFunctor (AddCommGrpCat.of ℤ) k).obj
+      (Hatcher.Relative.puncturedPair (TopCat.of (D.U j))
+        ⟨j.1, D.center_mem j⟩)
+  exact (finitePunctureHomologyIso D hfinite k).inv ≫
+    (biproduct.isoCoproduct H).inv ≫ biproduct.π H i
+
+/-- Morphisms into finite-puncture homology are determined by all their local
+components. The empty component family is handled by the same biproduct
+universal property. -/
+theorem finitePunctureHomology_hom_ext {n : ℕ}
+    {f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n}
+    {y : TopCat.sphere.{0} n} (D : FiniteFiberNeighborhoods f y)
+    (hfinite : (fiber f y).Finite) (k : ℕ) {A : AddCommGrpCat}
+    {a b : A ⟶ (Hatcher.Relative.homologyFunctor (AddCommGrpCat.of ℤ) k).obj
+      (Hatcher.Relative.deletedPair (TopCat.sphere.{0} n) (fiber f y))}
+    (h : ∀ i : fiber f y,
+      a ≫ finitePunctureHomologyProjection D hfinite k i =
+        b ≫ finitePunctureHomologyProjection D hfinite k i) : a = b := by
+  classical
+  let : Fintype (fiber f y) := finiteFiberFintype hfinite
+  let H (j : fiber f y) :=
+    (Hatcher.Relative.homologyFunctor (AddCommGrpCat.of ℤ) k).obj
+      (Hatcher.Relative.puncturedPair (TopCat.of (D.U j))
+        ⟨j.1, D.center_mem j⟩)
+  apply (cancel_mono (finitePunctureHomologyIso D hfinite k).inv).1
+  apply (cancel_mono (biproduct.isoCoproduct H).inv).1
+  apply biproduct.hom_ext
+  intro i
+  simpa only [H, finitePunctureHomologyProjection, Category.assoc] using h i
 
 end Hatcher.Sphere
