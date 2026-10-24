@@ -14,12 +14,11 @@ the direct sum of the local relative groups, disjoint open neighborhoods give
 the finite-puncture excision comparison, and naturality sends the oriented
 sphere class to the sum of its local classes.
 
-Sixteen of the twenty formalization leaves below are formalized locally. The
-generic relative-chain and relative-homology comparisons for arbitrary sigma
-pairs are complete. Four leaves remain; the current ready frontier is
-[the finite-puncture homology coproduct](finite-puncture-homology-coproduct.md).
-It supplies the comparison needed by the projection matrix, the orientation
-sum, and finally Proposition 2.30.
+All twenty formalization leaves below are formalized locally and complete.
+The generic relative-chain and relative-homology comparisons, finite-puncture
+homology coproduct, geometric projection matrix, and orientation sum culminate
+in the proved degree-sum formula of Proposition 2.30. The finite-fiber argument
+also includes the empty fiber without a separate case.
 
 ## Coproduct and excision infrastructure
 
@@ -52,9 +51,10 @@ sum, and finally Proposition 2.30.
 
 ## Boundary
 
-This milestone stops after Proposition 2.30. Examples 2.31–2.32, suspension
-invariance in Proposition 2.33, cellular homology, the Hopf converse, and
-Theorem 2.27 remain queued for later roadmap passes outside this milestone.
+This completed milestone stops after Proposition 2.30. The separate
+[degree-realization and suspension milestone](../degree-realization-suspension/README.md)
+decomposes Examples 2.31–2.32, Proposition 2.33, and the pole observation.
+Cellular homology, the Hopf converse, and Theorem 2.27 remain queued.
 
 ## Sources
 

@@ -21,7 +21,14 @@ The project formalizes results from a single reference.
 - [Hatcher §2.2, Degree foundations](hatcher-2-2-degree.md) records the degree
   definition and properties (a)–(g), Theorem 2.28, and Proposition 2.29.
 - [Hatcher §2.2, Local degree](hatcher-2-2-local-degree.md) records the
-  local-degree construction and Proposition 2.30 on printed pages 135–136.
+  completed local-degree construction and Proposition 2.30 on printed pages
+  135–136.
+- [Hatcher §2.2, Degree realization and suspension](hatcher-2-2-degree-applications.md)
+  records Examples 2.31–2.32, Proposition 2.33, and the pole local-degree
+  consequence on printed pages 136–137.
+- [Degree-realization and suspension specification](degree-applications-implementation.md)
+  fixes the genuine pinch, circle-power, cone-map, and local comparison
+  models of the next thirty-one-leaf milestone.
 - [Hatcher Appendix Proposition A.5](hatcher-appendix-a5.md) records the
   regular-neighborhood deformation retraction and intersection identity used
   by CW-subcomplex excision.

@@ -55,9 +55,11 @@ Theorem 2.28, and Proposition 2.29, and stops immediately before Hatcher
 introduces local degree at the bottom of printed page 135.
 
 Local degree and Proposition 2.30 belong to the separate
-[local-degree source unit](hatcher-2-2-local-degree.md). Examples 2.31–2.32,
-suspension invariance in Proposition 2.33, cellular homology, the Hopf
-converse, and Theorem 2.27 are not part of this milestone.
+[local-degree source unit](hatcher-2-2-local-degree.md), which is complete.
+Examples 2.31–2.32, Proposition 2.33, and its pole observation are decomposed
+in the [degree-realization and suspension unit](hatcher-2-2-degree-applications.md).
+Cellular homology, the Hopf converse, and Theorem 2.27 remain outside this
+milestone and queued for later planning.
 
 ## Existing prerequisites and pinned-library boundary
 

@@ -216,9 +216,11 @@ excision, and Δ-complex homology with its comparison theorem.
   argument and the dimension-general boundary-ray construction. Add the
   good-pair quotient route through Proposition 2.22, Theorem 2.13, and its
   naturality. Add the post-excision applications on pages 125–126 through
-  Theorem 2.26, supported by Appendix Proposition A.5. Leave Example 2.17,
-  degree theory, Theorem 2.27, and the remaining Δ-complex results deferred;
-  the selected §2.2 material is recorded in
+  Theorem 2.26, supported by Appendix Proposition A.5. The degree and
+  local-degree milestones through Proposition 2.30 are also complete, with
+  the next degree-realization and suspension unit decomposed through
+  Proposition 2.33. Leave Example 2.17, Theorem 2.27, and the remaining
+  Δ-complex results queued; the selected §2.2 material is recorded in
   [its own source note](hatcher-2-2.md).
 - **Coefficients.** State exact Mathlib nodes with their coefficient-general
   categorical API. Treat Hatcher's integral theory as its abelian-group

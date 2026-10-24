@@ -71,10 +71,10 @@ The theorem also permits an empty finite fiber. Hatcher does not discuss this
 case explicitly; it is a deliberate strengthening that recovers the completed
 nonsurjective-degree-zero theorem.
 
-It stops immediately before Example 2.31. Maps realizing arbitrary degrees,
-the circle power-map calculation in Example 2.32, suspension invariance in
-Proposition 2.33, cellular homology, the Hopf converse, and Theorem 2.27 remain
-deferred.
+It stops immediately before Example 2.31. The separate
+[degree-realization and suspension unit](hatcher-2-2-degree-applications.md)
+now decomposes Examples 2.31–2.32, Proposition 2.33, and the pole observation.
+Cellular homology, the Hopf converse, and Theorem 2.27 remain queued.
 
 ## Existing prerequisites and pinned-library boundary
 
@@ -85,13 +85,15 @@ for coproducts of arbitrary topological pairs. The pointed constructions remain
 exact compatibility specializations. Local degree at an isolated preimage,
 neighborhood independence, its homeomorphism calculation, finite disjoint
 neighborhoods, and the corresponding pair maps are also formalized locally.
-The remaining roadmap constructs the finite-puncture homology coproduct,
-projection matrix, and orientation sum needed for Proposition 2.30.
+The completed roadmap constructs the finite-puncture homology coproduct,
+geometric projection matrix, and orientation sum, then proves Proposition
+2.30 for every finite fiber, including the empty one. All twenty leaves of
+this source unit are formalized locally.
 
 Mathlib `v4.34.1`, pinned at
 `d13f23b723b8a846827a245b89c10fc7d3f11612`, supplies finite Hausdorff
 separation through `Set.Finite.t2_separation`, categorical finite sums, and the
-topological sigma type. The project contains the local-degree definition and
-its comparison laws; Proposition 2.30 remains a formalization target. Neither
-local degree nor Proposition 2.30 is supplied by pinned Mathlib. No leaf in this
-source unit is marked `mathlib: true`.
+topological sigma type. The project contains the local-degree definition, its
+comparison laws, and Proposition 2.30. Neither local degree nor Proposition
+2.30 is supplied by pinned Mathlib. No leaf in this source unit is marked
+`mathlib: true`.

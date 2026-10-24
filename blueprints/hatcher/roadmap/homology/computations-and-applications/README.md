@@ -14,9 +14,10 @@ through Theorem 2.26 in twenty-seven leaves, supported by five Appendix A.5
 regular-neighborhood leaves. All thirty-two are complete. The remainder of
 §2.2 now also has a sixteen-leaf degree-foundations milestone through
 Proposition 2.29. All sixteen leaves are formalized locally and complete; the
-local-degree continuation through Proposition 2.30 is decomposed into twenty
-leaves, sixteen formalized locally and four remaining. The later material stays
-queued outside this selected milestone.
+local-degree continuation through Proposition 2.30 is complete in twenty
+leaves. The new thirty-one-leaf degree-realization and suspension milestone
+continues through Proposition 2.33 and its pole observation. Those leaves are
+planned; Cellular Homology and the later material remain queued.
 
 Given excision and the long exact sequence, homology becomes computable. From
 `Hₙ(Sⁿ) ≅ ℤ` comes the degree of a map `Sⁿ → Sⁿ`, with its local formula as a
@@ -50,10 +51,13 @@ The [degree-foundations milestone](degree/README.md) uses the completed
 ordered sphere class to define degree, calculate reflections and the antipodal
 map, prove the fixed-point-free formula, and reach Theorem 2.28 and Proposition
 2.29. The [local-degree milestone](local-degree/README.md) then orients local
-homology, constructs the finite-puncture direct sum, and continues toward
-Proposition 2.30; sixteen of its twenty leaves are complete. The generic
-sigma-pair chain and homology comparisons are complete, and the next frontier
-is the finite-puncture homology coproduct.
+homology and constructs the finite-puncture direct sum through the proved
+Proposition 2.30; all twenty leaves are complete. The new
+[degree-realization and suspension milestone](degree-realization-suspension/README.md)
+uses these signed classes for the actual pinch-and-fold construction,
+integer circle powers, and the natural cone-boundary proof of Proposition
+2.33. Its singleton pole fibers then realize arbitrary local degrees in
+sphere dimension at least two.
 
 The pinned Mathlib supplies the standard disk, boundary, and inclusion models,
 but not the selected no-retraction, Brouwer, sphere-homology, degree, or
@@ -70,10 +74,11 @@ pinned Mathlib coverage nor a project dependency.
 - [Local homology and invariance of dimension](local-homology-and-dimension/README.md)
 - [Degree foundations and applications](degree/README.md)
 - [Local degree and the finite-fiber sum](local-degree/README.md)
+- [Prescribed degrees and suspension](degree-realization-suspension/README.md)
 
-Degree-realization examples, suspension invariance, cellular homology, the
-later Mayer–Vietoris applications, and homology with general coefficient
-groups as a separate source topic remain deferred.
+Cellular homology beginning with Lemma 2.34, the later Mayer–Vietoris
+applications, and homology with general coefficient groups remain queued.
+They are not user exclusions or externally blocked work.
 
 ## Sources
 
@@ -82,6 +87,8 @@ groups as a separate source topic remain deferred.
 - [Hatcher §2.2 Mayer–Vietoris source note](../../../sources/hatcher-2-2.md)
 - [Hatcher §2.2 degree source note](../../../sources/hatcher-2-2-degree.md)
 - [Hatcher §2.2 local-degree source note](../../../sources/hatcher-2-2-local-degree.md)
+- [Hatcher §2.2 degree realization and suspension](../../../sources/hatcher-2-2-degree-applications.md)
+- [Degree-realization and suspension specification](../../../sources/degree-applications-implementation.md)
 - [Sphere-homology implementation specification](../../../sources/sphere-homology-implementation.md)
 - [Corollary 2.15 implementation specification](../../../sources/corollary-2-15-implementation.md)
 - [Post-excision applications implementation specification](../../../sources/post-excision-applications-implementation.md)

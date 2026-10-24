@@ -4,7 +4,7 @@ kind: graph
 
 # Dependency graph
 
-303 nodes · 566 dependencies. Arrows point from a prerequisite to what depends on it; a dashed
+339 nodes · 685 dependencies. Arrows point from a prerequisite to what depends on it; a dashed
 arrow marks a prerequisite that only the proof needs. Select a node to open it.
 
 ```mermaid
@@ -147,171 +147,207 @@ graph LR
   n135["The fundamental group of a wedge of circles"]:::fully_proved
   n136["The fundamental group of a wedge"]:::fully_proved
   n137("The standard cover of a well-pointed wedge"):::fully_proved
-  n138["Homology<br/><small>146 items · 10 in mathlib · 131 fully proved · 1 ready to state · 1 not ready · 3 planned</small>"]:::scope
-  n139["Computations and applications<br/><small>90 items · 86 fully proved · 1 ready to state · 3 planned</small>"]:::scope
+  n138["Homology<br/><small>177 items · 10 in mathlib · 135 fully proved · 8 ready to state · 1 not ready · 23 planned</small>"]:::scope
+  n139["Computations and applications<br/><small>121 items · 90 fully proved · 8 ready to state · 23 planned</small>"]:::scope
   n140["Degree foundations and applications<br/><small>16 items · 16 fully proved</small>"]:::scope_complete
-  n141("The antipodal map has degree determined by dimension"):::fully_proved
-  n142("The formal properties of degree"):::fully_proved
-  n143("A sphere reflection has degree minus one"):::fully_proved
-  n144("Swapping the double simplex negates its fundamental class"):::fully_proved
-  n145("A fixed-point-free sphere map has antipodal degree"):::fully_proved
-  n146("Only the antipodal group acts freely on an even sphere"):::fully_proved
-  n147["The ordered class orients ordinary sphere homology"]:::fully_proved
-  n148("A nonsurjective sphere map has degree zero"):::fully_proved
-  n149("A sphere has a nonvanishing tangent field exactly in odd dimension"):::fully_proved
-  n150["Odd spheres have a nonvanishing tangent field"]:::fully_proved
-  n151["A punctured sphere is Euclidean space"]:::fully_proved
-  n152["Degree gives a character of a sphere action"]:::fully_proved
-  n153("Coordinate sign changes on the sphere"):::fully_proved
-  n154("Degree is the multiplier of the ordered sphere class"):::fully_proved
-  n155("A nonvanishing tangent field forces odd dimension"):::fully_proved
-  n156["Tangent vector fields and normalization"]:::fully_proved
-  n157["Local degree and the sum over a finite fiber<br/><small>20 items · 16 fully proved · 1 ready to state · 3 planned</small>"]:::scope
-  n158("Degree is the sum of the local degrees"):::planned
-  n159("Deleted-pair homology is local on an open neighborhood"):::fully_proved
-  n160["A disjoint open family is homeomorphic to its sigma type"]:::fully_proved
-  n161["Disjoint punctured neighborhoods form the deleted union pair"]:::fully_proved
-  n162("The finite-fiber pair map acts by the local degrees"):::fully_proved
-  n163["A finite sphere-map fiber has disjoint isolated neighborhoods"]:::fully_proved
-  n164["Finite-puncture homology is the coproduct of the local groups"]:::can_state
-  n165("The finite-puncture class is the sum of the local classes"):::planned
-  n166("The disjoint local pairs excise to the finite-puncture pair"):::fully_proved
-  n167("Finite-puncture projections have the diagonal matrix"):::planned
-  n168("The finite-fiber pair map carries the global degree"):::fully_proved
-  n169("A local homeomorphism has local degree plus or minus one"):::fully_proved
-  n170["An isolated preimage gives a map of punctured pairs"]:::fully_proved
-  n171("Local degree is unchanged when the neighborhood shrinks"):::fully_proved
-  n172("Local degree is independent of its neighborhood"):::fully_proved
-  n173("Local degree on a chosen isolated neighborhood"):::fully_proved
-  n174["Relative chains commute with coproducts of arbitrary pairs"]:::fully_proved
-  n175["Relative homology commutes with coproducts of arbitrary pairs"]:::fully_proved
-  n176["The coproduct of a family of topological pairs"]:::fully_proved
-  n177["The ordered sphere class orients local homology"]:::fully_proved
-  n178["Local homology and invariance of dimension<br/><small>4 items · 4 fully proved</small>"]:::scope_complete
-  n179["Relative homology in a contractible ambient space"]:::fully_proved
-  n180("Homeomorphic nonempty Euclidean open sets have equal dimension"):::fully_proved
-  n181("Local homology is unchanged on an open neighborhood"):::fully_proved
-  n182("Local homology of positive-dimensional Euclidean space"):::fully_proved
-  n183["Mayer–Vietoris sequences<br/><small>6 items · 6 fully proved</small>"]:::scope_complete
-  n184("Augmented binary-cover chains form a short exact sequence"):::fully_proved
-  n185["The binary-cover Mayer–Vietoris chain complex"]:::fully_proved
-  n186("Binary-cover chains form a short exact sequence"):::fully_proved
-  n187("The binary-cover Mayer–Vietoris sequence"):::fully_proved
-  n188("The reduced binary-cover Mayer–Vietoris sequence"):::fully_proved
-  n189["Small augmented chains include by a chain-homotopy equivalence"]:::fully_proved
-  n190["Post-excision applications<br/><small>28 items · 28 fully proved</small>"]:::scope_complete
-  n191["A contractible subspace identifies reduced and relative homology"]:::fully_proved
-  n192("Excision holds for a union of CW subcomplexes"):::fully_proved
-  n193["CW-subcomplex regular neighborhoods<br/><small>5 items · 5 fully proved</small>"]:::scope_complete
-  n194["The radial collar of a cell boundary"]:::fully_proved
-  n195["A regular neighborhood strongly deformation retracts onto its subcomplex"]:::fully_proved
-  n196["A common regular-neighborhood system for subcomplexes"]:::fully_proved
-  n197["Intersections of CW subcomplexes"]:::fully_proved
-  n198("Subcomplex decompositions admit compatible neighborhoods"):::fully_proved
-  n199("The double-simplex difference generates reduced homology"):::fully_proved
-  n200["The ordered difference of the two simplices is a cycle"]:::fully_proved
-  n201("The first simplex computes homology relative to the second"):::fully_proved
-  n202["The double simplex is a sphere"]:::fully_proved
-  n203["The mapping-cone cover has the relative homology of the original pair"]:::fully_proved
-  n204["The mapping cone of a topological pair"]:::fully_proved
-  n205["Relative homology is reduced homology of the mapping cone"]:::fully_proved
-  n206["The pointed wedge is the point quotient of the sigma pair"]:::fully_proved
-  n207["Relative homology commutes with exact coproducts"]:::fully_proved
-  n208("The identity simplex generates relative simplex homology"):::fully_proved
-  n209("A nonempty coproduct of pointed good pairs is good"):::fully_proved
-  n210["The coproduct pair of a family of pointed spaces"]:::fully_proved
-  n211["Relative singular chains commute with topological coproducts"]:::fully_proved
-  n212["Standard-simplex boundary and horn pairs are good"]:::fully_proved
-  n213["The boundary and zero horn of a standard topological simplex"]:::fully_proved
-  n214["The standard simplex pair is homeomorphic to the disk pair"]:::fully_proved
-  n215["The zero face identifies the two simplex point quotients"]:::fully_proved
-  n216("The zero face induces an isomorphism in relative homology"):::fully_proved
-  n217["A standard simplex strongly deformation retracts onto its zero horn"]:::fully_proved
-  n218("The triple connecting map sends a relative cycle to its boundary"):::fully_proved
-  n219("Reduced homology of a wedge is the direct sum of the summands"):::fully_proved
-  n220["Mayer–Vietoris transport, sphere homology, and Brouwer<br/><small>16 items · 16 fully proved</small>"]:::scope_complete
-  n221("Brouwer's fixed-point theorem for disks"):::fully_proved
-  n222["A closed ball strongly deformation retracts from Euclidean space"]:::fully_proved
-  n223("Reduced homology of a contractible space vanishes"):::fully_proved
-  n224("The boundary sphere is not a retract of the disk"):::fully_proved
-  n225("A fixed-point-free disk map produces a boundary retraction"):::fully_proved
-  n226["A homotopy equivalence induces reduced-homology isomorphisms"]:::fully_proved
-  n227("The ordinary neighborhood-retract Mayer–Vietoris sequence"):::fully_proved
-  n228["A sphere strongly deformation retracts from punctured Euclidean space"]:::fully_proved
-  n229("Homotopic maps induce the same reduced-homology map"):::fully_proved
-  n230("The reduced neighborhood-retract Mayer–Vietoris sequence"):::fully_proved
-  n231["The hemispheres have compatible neighborhood deformation retractions"]:::fully_proved
-  n232["Stereographic models for hemispheres and the equator"]:::fully_proved
-  n233("Reduced homology of spheres"):::fully_proved
-  n234("The reduced homology of spheres satisfies the suspension recurrence"):::fully_proved
-  n235("Reduced homology of the zero-sphere"):::fully_proved
-  n236["The zero-sphere is a two-point space"]:::fully_proved
-  n237("The formal viewpoint"):::not_ready
-  n238["Simplicial and singular homology<br/><small>55 items · 10 in mathlib · 45 fully proved</small>"]:::scope_complete
-  n239("Chain-homotopic maps induce the same homology map"):::mathlib
-  n240["A chain map induces a map on homology"]:::mathlib
-  n241["A homotopy equivalence induces homology isomorphisms"]:::fully_proved
-  n242("Homology of a point"):::fully_proved
-  n243["Relative homology and exact sequences<br/><small>45 items · 2 in mathlib · 43 fully proved</small>"]:::scope_complete
-  n244["The augmented singular chain complex"]:::fully_proved
-  n245["Good pairs and quotient exact sequences<br/><small>16 items · 16 fully proved</small>"]:::scope_complete
-  n246["Good pairs and neighborhood deformation retracts"]:::fully_proved
-  n247["The complementary excision diagram"]:::fully_proved
-  n248("Restricting the quotient to a good-pair neighborhood"):::fully_proved
-  n249["Enlarging to the chosen neighborhood preserves relative homology"]:::fully_proved
-  n250("The good-pair quotient exact sequence"):::fully_proved
-  n251("Good-pair relative homology is reduced quotient homology"):::fully_proved
-  n252("Naturality of the good-pair quotient sequence"):::fully_proved
-  n253["The good-pair quotient comparison is natural"]:::fully_proved
-  n254["Functorial point quotients of topological pairs"]:::fully_proved
-  n255["The quotient neighborhood contracts to its point"]:::fully_proved
-  n256["The neighborhood quotient map preserves relative homology"]:::fully_proved
-  n257["Enlarging the quotient point preserves relative homology"]:::fully_proved
-  n258["Topology of the point-quotient projection"]:::fully_proved
-  n259("The pointed relative-to-reduced comparison is natural"):::fully_proved
-  n260("Componentwise isomorphisms imply a relative isomorphism"):::fully_proved
-  n261["Strong deformation retracts"]:::fully_proved
-  n262("The long exact sequence of a pair"):::fully_proved
-  n263("The pair long exact sequence is natural"):::fully_proved
-  n264["Relative homology at a basepoint is reduced homology"]:::fully_proved
-  n265["Zeroth homology splits into reduced homology and the coefficient object"]:::fully_proved
-  n266("The reduced long exact sequence of a nonempty pair"):::fully_proved
-  n267("The reduced pair long exact sequence is natural"):::fully_proved
-  n268["Reduced and ordinary homology agree in positive degrees"]:::fully_proved
-  n269["Reduced singular homology"]:::fully_proved
-  n270("Homotopic maps of pairs induce the same relative-homology map"):::fully_proved
-  n271["A homotopy of pairs gives a relative chain homotopy"]:::fully_proved
-  n272["Relative singular chains and homology"]:::fully_proved
-  n273("A short exact sequence gives an exact homology sequence"):::mathlib
-  n274["Relative homology of a simplicial-set pair"]:::mathlib
-  n275["The singular set of a topological pair"]:::fully_proved
-  n276["Small chains and excision<br/><small>10 items · 10 fully proved</small>"]:::scope_complete
-  n277("Affine barycentric subdivision is compatible with faces"):::fully_proved
-  n278["Affine-chain subdivision is homotopic to the identity"]:::fully_proved
-  n279("Barycentric subdivision contracts simplex diameter"):::fully_proved
-  n280("The binary-cover excision chain map is a homotopy equivalence"):::fully_proved
-  n281["Binary-cover excision induces homology isomorphisms"]:::fully_proved
-  n282["Deleted-subset excision induces homology isomorphisms"]:::fully_proved
-  n283("Iterated subdivision eventually makes every singular simplex small"):::fully_proved
-  n284("Relative excision reduces to the union subcomplex"):::fully_proved
-  n285["Singular-chain subdivision is naturally homotopic to the identity"]:::fully_proved
-  n286["Small singular chains include by a chain-homotopy equivalence"]:::fully_proved
-  n287["Topological triples and their maps"]:::fully_proved
-  n288("Relative chains of a triple form a short exact sequence"):::fully_proved
-  n289("The long exact sequence of a triple"):::fully_proved
-  n290("The triple long exact sequence is natural"):::fully_proved
-  n291["The singular chain complex"]:::mathlib
-  n292["Singular homology"]:::mathlib
-  n293("Homotopic maps induce the same singular-homology map"):::mathlib
-  n294["A topological homotopy gives a singular-chain homotopy"]:::mathlib
-  n295("Higher homology vanishes for totally disconnected spaces"):::mathlib
-  n296["Zeroth homology is free on path components"]:::mathlib
-  n297["Homotopy theory<br/><small>3 items · 3 not ready</small>"]:::scope
-  n298("Connections with cohomology"):::not_ready
-  n299("Elementary methods of calculation"):::not_ready
-  n300("Homotopy groups"):::not_ready
-  n301["Algebraic Topology (Hatcher) roadmap<br/><small>276 items · 18 in mathlib · 246 fully proved · 1 ready to state · 8 not ready · 3 planned</small>"]:::scope
-  n302("Some underlying geometric notions"):::not_ready
+  n141["Prescribed degrees and suspension<br/><small>31 items · 8 ready to state · 23 planned</small>"]:::scope
+  n142["Integer circle powers<br/><small>9 items · 2 ready to state · 7 planned</small>"]:::scope
+  n143("Circle inversion is the standard coordinate reflection"):::planned
+  n144("Local positive stretching deforms to a rotation through punctured maps"):::planned
+  n145("Every circle rotation is homotopic to the identity"):::can_state
+  n146("The degree of an integer circle power is its exponent"):::planned
+  n147["Integer powers define continuous self-maps of the circle"]:::can_state
+  n148("Positive circle powers stretch local angular charts"):::planned
+  n149("A positive circle power has its exponent as degree"):::planned
+  n150("A positive circle power has exactly as many preimages as its exponent"):::planned
+  n151("Every local degree of a positive circle power is plus one"):::planned
+  n152["Disjoint balls and signed pinch maps<br/><small>10 items · 2 ready to state · 8 planned</small>"]:::scope
+  n153["Collapsing a compact complement gives a one-point compactification"]:::can_state
+  n154("A positive-dimensional sphere contains any finite number of disjoint balls"):::can_state
+  n155["Compactifying a finite disjoint union gives the pointed wedge"]:::planned
+  n156("The degree of a signed pinch map is the sum of its signs"):::planned
+  n157("Regular pinch fibers are indexed by the chosen balls"):::planned
+  n158("The signed pinch map has the prescribed local degrees"):::planned
+  n159["Reflections correct the signs of a sphere fold map"]:::planned
+  n160("Each ball-collapse map has degree plus or minus one"):::planned
+  n161["Collapsing the complement of disjoint sphere balls gives the pinch map"]:::planned
+  n162("Every integer is the degree of a sphere map"):::planned
+  n163["Shared local-degree comparisons<br/><small>3 items · 3 ready to state</small>"]:::scope
+  n164("Maps with the same germ have the same local degree"):::can_state
+  n165("A puncture-preserving local homotopy preserves local degree"):::can_state
+  n166("A singleton fiber has local degree equal to global degree"):::can_state
+  n167["Suspension and degree at its poles<br/><small>9 items · 1 ready to state · 8 planned</small>"]:::scope
+  n168("Every integer is a local degree in sphere dimension at least two"):::planned
+  n169("The cone over a sphere forms a contractible good pair"):::can_state
+  n170["A sphere map induces a self-map of its cone-base pair"]:::planned
+  n171["The cone-base quotient is the next sphere with its suspension poles"]:::planned
+  n172("The suspension boundary isomorphism intertwines the induced maps"):::planned
+  n173["A sphere map induces its genuine suspension map"]:::planned
+  n174("The suspension poles have singleton fibers"):::planned
+  n175("The local degree at a suspension pole is its global degree"):::planned
+  n176("Suspension preserves the signed degree of a sphere map"):::planned
+  n177("The antipodal map has degree determined by dimension"):::fully_proved
+  n178("The formal properties of degree"):::fully_proved
+  n179("A sphere reflection has degree minus one"):::fully_proved
+  n180("Swapping the double simplex negates its fundamental class"):::fully_proved
+  n181("A fixed-point-free sphere map has antipodal degree"):::fully_proved
+  n182("Only the antipodal group acts freely on an even sphere"):::fully_proved
+  n183["The ordered class orients ordinary sphere homology"]:::fully_proved
+  n184("A nonsurjective sphere map has degree zero"):::fully_proved
+  n185("A sphere has a nonvanishing tangent field exactly in odd dimension"):::fully_proved
+  n186["Odd spheres have a nonvanishing tangent field"]:::fully_proved
+  n187["A punctured sphere is Euclidean space"]:::fully_proved
+  n188["Degree gives a character of a sphere action"]:::fully_proved
+  n189("Coordinate sign changes on the sphere"):::fully_proved
+  n190("Degree is the multiplier of the ordered sphere class"):::fully_proved
+  n191("A nonvanishing tangent field forces odd dimension"):::fully_proved
+  n192["Tangent vector fields and normalization"]:::fully_proved
+  n193["Local degree and the sum over a finite fiber<br/><small>20 items · 20 fully proved</small>"]:::scope_complete
+  n194("Degree is the sum of the local degrees"):::fully_proved
+  n195("Deleted-pair homology is local on an open neighborhood"):::fully_proved
+  n196["A disjoint open family is homeomorphic to its sigma type"]:::fully_proved
+  n197["Disjoint punctured neighborhoods form the deleted union pair"]:::fully_proved
+  n198("The finite-fiber pair map acts by the local degrees"):::fully_proved
+  n199["A finite sphere-map fiber has disjoint isolated neighborhoods"]:::fully_proved
+  n200["Finite-puncture homology is the coproduct of the local groups"]:::fully_proved
+  n201("The finite-puncture class is the sum of the local classes"):::fully_proved
+  n202("The disjoint local pairs excise to the finite-puncture pair"):::fully_proved
+  n203("Finite-puncture projections have the diagonal matrix"):::fully_proved
+  n204("The finite-fiber pair map carries the global degree"):::fully_proved
+  n205("A local homeomorphism has local degree plus or minus one"):::fully_proved
+  n206["An isolated preimage gives a map of punctured pairs"]:::fully_proved
+  n207("Local degree is unchanged when the neighborhood shrinks"):::fully_proved
+  n208("Local degree is independent of its neighborhood"):::fully_proved
+  n209("Local degree on a chosen isolated neighborhood"):::fully_proved
+  n210["Relative chains commute with coproducts of arbitrary pairs"]:::fully_proved
+  n211["Relative homology commutes with coproducts of arbitrary pairs"]:::fully_proved
+  n212["The coproduct of a family of topological pairs"]:::fully_proved
+  n213["The ordered sphere class orients local homology"]:::fully_proved
+  n214["Local homology and invariance of dimension<br/><small>4 items · 4 fully proved</small>"]:::scope_complete
+  n215["Relative homology in a contractible ambient space"]:::fully_proved
+  n216("Homeomorphic nonempty Euclidean open sets have equal dimension"):::fully_proved
+  n217("Local homology is unchanged on an open neighborhood"):::fully_proved
+  n218("Local homology of positive-dimensional Euclidean space"):::fully_proved
+  n219["Mayer–Vietoris sequences<br/><small>6 items · 6 fully proved</small>"]:::scope_complete
+  n220("Augmented binary-cover chains form a short exact sequence"):::fully_proved
+  n221["The binary-cover Mayer–Vietoris chain complex"]:::fully_proved
+  n222("Binary-cover chains form a short exact sequence"):::fully_proved
+  n223("The binary-cover Mayer–Vietoris sequence"):::fully_proved
+  n224("The reduced binary-cover Mayer–Vietoris sequence"):::fully_proved
+  n225["Small augmented chains include by a chain-homotopy equivalence"]:::fully_proved
+  n226["Post-excision applications<br/><small>28 items · 28 fully proved</small>"]:::scope_complete
+  n227["A contractible subspace identifies reduced and relative homology"]:::fully_proved
+  n228("Excision holds for a union of CW subcomplexes"):::fully_proved
+  n229["CW-subcomplex regular neighborhoods<br/><small>5 items · 5 fully proved</small>"]:::scope_complete
+  n230["The radial collar of a cell boundary"]:::fully_proved
+  n231["A regular neighborhood strongly deformation retracts onto its subcomplex"]:::fully_proved
+  n232["A common regular-neighborhood system for subcomplexes"]:::fully_proved
+  n233["Intersections of CW subcomplexes"]:::fully_proved
+  n234("Subcomplex decompositions admit compatible neighborhoods"):::fully_proved
+  n235("The double-simplex difference generates reduced homology"):::fully_proved
+  n236["The ordered difference of the two simplices is a cycle"]:::fully_proved
+  n237("The first simplex computes homology relative to the second"):::fully_proved
+  n238["The double simplex is a sphere"]:::fully_proved
+  n239["The mapping-cone cover has the relative homology of the original pair"]:::fully_proved
+  n240["The mapping cone of a topological pair"]:::fully_proved
+  n241["Relative homology is reduced homology of the mapping cone"]:::fully_proved
+  n242["The pointed wedge is the point quotient of the sigma pair"]:::fully_proved
+  n243["Relative homology commutes with exact coproducts"]:::fully_proved
+  n244("The identity simplex generates relative simplex homology"):::fully_proved
+  n245("A nonempty coproduct of pointed good pairs is good"):::fully_proved
+  n246["The coproduct pair of a family of pointed spaces"]:::fully_proved
+  n247["Relative singular chains commute with topological coproducts"]:::fully_proved
+  n248["Standard-simplex boundary and horn pairs are good"]:::fully_proved
+  n249["The boundary and zero horn of a standard topological simplex"]:::fully_proved
+  n250["The standard simplex pair is homeomorphic to the disk pair"]:::fully_proved
+  n251["The zero face identifies the two simplex point quotients"]:::fully_proved
+  n252("The zero face induces an isomorphism in relative homology"):::fully_proved
+  n253["A standard simplex strongly deformation retracts onto its zero horn"]:::fully_proved
+  n254("The triple connecting map sends a relative cycle to its boundary"):::fully_proved
+  n255("Reduced homology of a wedge is the direct sum of the summands"):::fully_proved
+  n256["Mayer–Vietoris transport, sphere homology, and Brouwer<br/><small>16 items · 16 fully proved</small>"]:::scope_complete
+  n257("Brouwer's fixed-point theorem for disks"):::fully_proved
+  n258["A closed ball strongly deformation retracts from Euclidean space"]:::fully_proved
+  n259("Reduced homology of a contractible space vanishes"):::fully_proved
+  n260("The boundary sphere is not a retract of the disk"):::fully_proved
+  n261("A fixed-point-free disk map produces a boundary retraction"):::fully_proved
+  n262["A homotopy equivalence induces reduced-homology isomorphisms"]:::fully_proved
+  n263("The ordinary neighborhood-retract Mayer–Vietoris sequence"):::fully_proved
+  n264["A sphere strongly deformation retracts from punctured Euclidean space"]:::fully_proved
+  n265("Homotopic maps induce the same reduced-homology map"):::fully_proved
+  n266("The reduced neighborhood-retract Mayer–Vietoris sequence"):::fully_proved
+  n267["The hemispheres have compatible neighborhood deformation retractions"]:::fully_proved
+  n268["Stereographic models for hemispheres and the equator"]:::fully_proved
+  n269("Reduced homology of spheres"):::fully_proved
+  n270("The reduced homology of spheres satisfies the suspension recurrence"):::fully_proved
+  n271("Reduced homology of the zero-sphere"):::fully_proved
+  n272["The zero-sphere is a two-point space"]:::fully_proved
+  n273("The formal viewpoint"):::not_ready
+  n274["Simplicial and singular homology<br/><small>55 items · 10 in mathlib · 45 fully proved</small>"]:::scope_complete
+  n275("Chain-homotopic maps induce the same homology map"):::mathlib
+  n276["A chain map induces a map on homology"]:::mathlib
+  n277["A homotopy equivalence induces homology isomorphisms"]:::fully_proved
+  n278("Homology of a point"):::fully_proved
+  n279["Relative homology and exact sequences<br/><small>45 items · 2 in mathlib · 43 fully proved</small>"]:::scope_complete
+  n280["The augmented singular chain complex"]:::fully_proved
+  n281["Good pairs and quotient exact sequences<br/><small>16 items · 16 fully proved</small>"]:::scope_complete
+  n282["Good pairs and neighborhood deformation retracts"]:::fully_proved
+  n283["The complementary excision diagram"]:::fully_proved
+  n284("Restricting the quotient to a good-pair neighborhood"):::fully_proved
+  n285["Enlarging to the chosen neighborhood preserves relative homology"]:::fully_proved
+  n286("The good-pair quotient exact sequence"):::fully_proved
+  n287("Good-pair relative homology is reduced quotient homology"):::fully_proved
+  n288("Naturality of the good-pair quotient sequence"):::fully_proved
+  n289["The good-pair quotient comparison is natural"]:::fully_proved
+  n290["Functorial point quotients of topological pairs"]:::fully_proved
+  n291["The quotient neighborhood contracts to its point"]:::fully_proved
+  n292["The neighborhood quotient map preserves relative homology"]:::fully_proved
+  n293["Enlarging the quotient point preserves relative homology"]:::fully_proved
+  n294["Topology of the point-quotient projection"]:::fully_proved
+  n295("The pointed relative-to-reduced comparison is natural"):::fully_proved
+  n296("Componentwise isomorphisms imply a relative isomorphism"):::fully_proved
+  n297["Strong deformation retracts"]:::fully_proved
+  n298("The long exact sequence of a pair"):::fully_proved
+  n299("The pair long exact sequence is natural"):::fully_proved
+  n300["Relative homology at a basepoint is reduced homology"]:::fully_proved
+  n301["Zeroth homology splits into reduced homology and the coefficient object"]:::fully_proved
+  n302("The reduced long exact sequence of a nonempty pair"):::fully_proved
+  n303("The reduced pair long exact sequence is natural"):::fully_proved
+  n304["Reduced and ordinary homology agree in positive degrees"]:::fully_proved
+  n305["Reduced singular homology"]:::fully_proved
+  n306("Homotopic maps of pairs induce the same relative-homology map"):::fully_proved
+  n307["A homotopy of pairs gives a relative chain homotopy"]:::fully_proved
+  n308["Relative singular chains and homology"]:::fully_proved
+  n309("A short exact sequence gives an exact homology sequence"):::mathlib
+  n310["Relative homology of a simplicial-set pair"]:::mathlib
+  n311["The singular set of a topological pair"]:::fully_proved
+  n312["Small chains and excision<br/><small>10 items · 10 fully proved</small>"]:::scope_complete
+  n313("Affine barycentric subdivision is compatible with faces"):::fully_proved
+  n314["Affine-chain subdivision is homotopic to the identity"]:::fully_proved
+  n315("Barycentric subdivision contracts simplex diameter"):::fully_proved
+  n316("The binary-cover excision chain map is a homotopy equivalence"):::fully_proved
+  n317["Binary-cover excision induces homology isomorphisms"]:::fully_proved
+  n318["Deleted-subset excision induces homology isomorphisms"]:::fully_proved
+  n319("Iterated subdivision eventually makes every singular simplex small"):::fully_proved
+  n320("Relative excision reduces to the union subcomplex"):::fully_proved
+  n321["Singular-chain subdivision is naturally homotopic to the identity"]:::fully_proved
+  n322["Small singular chains include by a chain-homotopy equivalence"]:::fully_proved
+  n323["Topological triples and their maps"]:::fully_proved
+  n324("Relative chains of a triple form a short exact sequence"):::fully_proved
+  n325("The long exact sequence of a triple"):::fully_proved
+  n326("The triple long exact sequence is natural"):::fully_proved
+  n327["The singular chain complex"]:::mathlib
+  n328["Singular homology"]:::mathlib
+  n329("Homotopic maps induce the same singular-homology map"):::mathlib
+  n330["A topological homotopy gives a singular-chain homotopy"]:::mathlib
+  n331("Higher homology vanishes for totally disconnected spaces"):::mathlib
+  n332["Zeroth homology is free on path components"]:::mathlib
+  n333["Homotopy theory<br/><small>3 items · 3 not ready</small>"]:::scope
+  n334("Connections with cohomology"):::not_ready
+  n335("Elementary methods of calculation"):::not_ready
+  n336("Homotopy groups"):::not_ready
+  n337["Algebraic Topology (Hatcher) roadmap<br/><small>307 items · 18 in mathlib · 250 fully proved · 8 ready to state · 8 not ready · 23 planned</small>"]:::scope
+  n338("Some underlying geometric notions"):::not_ready
   n6 -.-> n3
   n2 --> n4
   n2 --> n5
@@ -534,350 +570,469 @@ graph LR
   n137 --> n136
   n133 -.-> n136
   n116 --> n137
-  n153 --> n141
-  n142 -.-> n141
-  n143 -.-> n141
-  n154 --> n142
-  n154 --> n143
-  n153 --> n143
-  n142 -.-> n143
-  n200 --> n144
-  n199 --> n144
-  n154 --> n145
-  n142 -.-> n145
-  n141 -.-> n145
-  n153 --> n146
-  n152 --> n146
-  n145 -.-> n146
-  n202 --> n147
-  n268 --> n147
-  n154 --> n148
-  n151 -.-> n148
-  n223 -.-> n148
-  n156 --> n149
-  n155 -.-> n149
+  n147 --> n143
+  n190 --> n143
+  n189 --> n143
+  n179 -.-> n143
+  n147 --> n144
+  n148 --> n144
+  n94 --> n145
+  n190 --> n145
+  n17 -.-> n145
+  n178 -.-> n145
+  n147 --> n146
+  n190 --> n146
+  n149 -.-> n146
+  n143 -.-> n146
+  n178 -.-> n146
+  n184 -.-> n146
+  n94 --> n147
+  n147 --> n148
+  n147 --> n149
+  n190 --> n149
   n150 -.-> n149
-  n156 --> n150
-  n232 -.-> n151
-  n142 --> n152
-  n144 --> n153
-  n202 --> n153
-  n147 --> n154
-  n156 --> n155
-  n142 -.-> n155
-  n141 -.-> n155
-  n165 --> n158
-  n162 --> n158
-  n168 --> n158
-  n272 --> n159
-  n181 --> n159
-  n281 -.-> n159
-  n176 --> n161
-  n160 --> n161
-  n181 --> n161
-  n172 --> n162
-  n166 --> n162
-  n170 --> n163
-  n175 --> n164
-  n166 --> n164
-  n177 --> n165
-  n167 --> n165
-  n168 --> n165
-  n159 --> n166
-  n161 --> n166
-  n163 --> n166
-  n164 --> n167
-  n177 --> n168
-  n163 --> n168
-  n154 --> n168
-  n172 --> n169
-  n142 --> n169
-  n181 --> n170
-  n173 --> n171
+  n151 -.-> n149
+  n194 -.-> n149
+  n147 --> n150
+  n147 --> n151
+  n208 --> n151
+  n145 -.-> n151
+  n148 -.-> n151
+  n144 -.-> n151
+  n165 -.-> n151
+  n205 -.-> n151
+  n290 --> n153
+  n294 -.-> n153
+  n187 --> n154
+  n116 --> n155
+  n125 --> n155
+  n153 -.-> n155
+  n242 -.-> n155
+  n159 --> n156
+  n190 --> n156
+  n157 -.-> n156
+  n158 -.-> n156
+  n194 -.-> n156
+  n159 --> n157
+  n161 -.-> n157
+  n159 --> n158
+  n157 --> n158
+  n208 --> n158
+  n164 -.-> n158
+  n166 -.-> n158
+  n161 --> n159
+  n160 --> n159
+  n190 --> n159
+  n189 --> n159
+  n116 --> n159
+  n178 -.-> n159
+  n179 -.-> n159
+  n125 -.-> n159
+  n161 --> n160
+  n190 --> n160
+  n166 -.-> n160
+  n205 -.-> n160
+  n154 --> n161
+  n290 --> n161
+  n116 --> n161
+  n153 -.-> n161
+  n155 -.-> n161
+  n196 -.-> n161
+  n187 -.-> n161
+  n190 --> n162
+  n154 -.-> n162
+  n159 -.-> n162
+  n156 -.-> n162
+  n208 --> n164
+  n209 -.-> n164
+  n208 --> n165
+  n306 -.-> n165
+  n209 -.-> n165
+  n190 --> n166
+  n208 --> n166
+  n194 -.-> n166
+  n208 --> n168
+  n268 --> n168
+  n162 -.-> n168
+  n176 -.-> n168
+  n174 -.-> n168
+  n175 -.-> n168
+  n104 --> n169
+  n282 --> n169
+  n92 -.-> n169
+  n102 -.-> n169
+  n169 --> n170
+  n169 --> n171
+  n290 --> n171
+  n268 --> n171
+  n294 -.-> n171
+  n169 --> n172
   n171 --> n172
-  n177 --> n173
+  n173 --> n172
+  n305 --> n172
+  n286 --> n172
+  n215 -.-> n172
+  n287 -.-> n172
+  n288 -.-> n172
   n170 --> n173
-  n176 --> n174
-  n272 --> n174
-  n211 -.-> n174
-  n174 --> n175
-  n207 --> n175
-  n210 --> n176
-  n147 --> n177
-  n151 --> n177
-  n191 --> n177
-  n181 --> n177
-  n266 --> n179
-  n223 -.-> n179
-  n181 -.-> n180
-  n182 -.-> n180
-  n272 --> n181
-  n282 -.-> n181
-  n181 --> n182
-  n179 -.-> n182
-  n228 -.-> n182
-  n226 -.-> n182
-  n233 -.-> n182
-  n185 --> n184
-  n189 --> n184
-  n244 --> n184
-  n186 -.-> n184
-  n291 --> n185
-  n283 --> n185
-  n185 --> n186
-  n186 --> n187
-  n280 --> n187
-  n286 -.-> n187
-  n273 -.-> n187
-  n184 --> n188
-  n269 --> n188
-  n189 -.-> n188
-  n273 -.-> n188
-  n244 --> n189
-  n286 --> n189
-  n272 --> n191
-  n269 --> n191
-  n259 --> n191
-  n266 -.-> n191
-  n223 -.-> n191
-  n272 --> n192
-  n198 -.-> n192
-  n281 -.-> n192
-  n260 -.-> n192
-  n241 -.-> n192
-  n196 --> n195
-  n261 --> n195
-  n197 --> n196
-  n194 --> n196
-  n197 --> n198
-  n196 --> n198
-  n195 --> n198
-  n200 --> n199
-  n208 -.-> n199
-  n201 -.-> n199
-  n191 -.-> n199
-  n259 -.-> n199
-  n213 --> n200
-  n269 --> n200
-  n200 --> n201
-  n212 -.-> n201
-  n215 -.-> n201
-  n216 -.-> n201
-  n251 -.-> n201
-  n253 -.-> n201
-  n214 --> n202
-  n200 --> n202
+  n171 --> n173
+  n290 --> n173
+  n173 --> n174
+  n171 -.-> n174
+  n173 --> n175
+  n208 --> n175
+  n190 --> n175
+  n174 -.-> n175
+  n166 -.-> n175
+  n173 --> n176
+  n190 --> n176
+  n172 -.-> n176
+  n304 -.-> n176
+  n183 -.-> n176
+  n189 --> n177
+  n178 -.-> n177
+  n179 -.-> n177
+  n190 --> n178
+  n190 --> n179
+  n189 --> n179
+  n178 -.-> n179
+  n236 --> n180
+  n235 --> n180
+  n190 --> n181
+  n178 -.-> n181
+  n177 -.-> n181
+  n189 --> n182
+  n188 --> n182
+  n181 -.-> n182
+  n238 --> n183
+  n304 --> n183
+  n190 --> n184
+  n187 -.-> n184
+  n259 -.-> n184
+  n192 --> n185
+  n191 -.-> n185
+  n186 -.-> n185
+  n192 --> n186
+  n268 -.-> n187
+  n178 --> n188
+  n180 --> n189
+  n238 --> n189
+  n183 --> n190
+  n192 --> n191
+  n178 -.-> n191
+  n177 -.-> n191
+  n201 --> n194
+  n198 --> n194
+  n204 --> n194
+  n308 --> n195
+  n217 --> n195
+  n317 -.-> n195
+  n212 --> n197
+  n196 --> n197
+  n217 --> n197
+  n208 --> n198
+  n202 --> n198
+  n206 --> n199
+  n211 --> n200
+  n202 --> n200
+  n213 --> n201
+  n203 --> n201
+  n204 --> n201
+  n195 --> n202
+  n197 --> n202
   n199 --> n202
-  n204 --> n203
-  n272 --> n203
-  n102 -.-> n203
-  n103 -.-> n203
-  n241 -.-> n203
-  n260 -.-> n203
-  n104 --> n204
-  n280 --> n204
-  n105 -.-> n204
-  n204 --> n205
-  n191 --> n205
-  n203 --> n205
-  n272 --> n205
-  n269 --> n205
-  n281 -.-> n205
-  n106 -.-> n205
-  n210 --> n206
-  n116 --> n206
-  n254 --> n206
-  n125 -.-> n206
-  n211 --> n207
-  n213 --> n208
-  n217 -.-> n208
-  n216 -.-> n208
-  n218 -.-> n208
-  n289 -.-> n208
-  n270 -.-> n208
-  n242 -.-> n208
-  n210 --> n209
-  n246 --> n209
-  n261 --> n209
-  n264 --> n210
+  n200 --> n203
+  n213 --> n204
+  n199 --> n204
+  n190 --> n204
+  n208 --> n205
+  n178 --> n205
+  n217 --> n206
+  n209 --> n207
+  n207 --> n208
+  n213 --> n209
+  n206 --> n209
+  n212 --> n210
+  n308 --> n210
+  n247 -.-> n210
   n210 --> n211
-  n272 --> n211
-  n213 --> n212
+  n243 --> n211
   n246 --> n212
-  n287 --> n213
-  n272 --> n213
-  n213 --> n214
-  n213 --> n215
-  n254 --> n215
-  n213 --> n216
-  n212 -.-> n216
-  n215 -.-> n216
-  n251 -.-> n216
-  n253 -.-> n216
-  n281 -.-> n216
-  n213 --> n217
-  n261 --> n217
-  n288 --> n218
-  n289 -.-> n218
-  n207 --> n219
-  n209 --> n219
-  n206 --> n219
-  n264 --> n219
-  n259 -.-> n219
-  n253 -.-> n219
-  n223 -.-> n219
-  n137 -.-> n219
-  n224 -.-> n221
-  n225 -.-> n221
-  n227 --> n222
-  n269 --> n223
-  n226 -.-> n223
-  n264 -.-> n223
-  n223 -.-> n224
-  n233 -.-> n224
-  n269 --> n226
-  n229 -.-> n226
-  n187 --> n227
-  n137 --> n227
-  n261 --> n227
-  n241 -.-> n227
-  n227 --> n228
-  n269 --> n229
-  n294 -.-> n229
-  n239 -.-> n229
-  n227 --> n230
-  n188 --> n230
-  n226 -.-> n230
-  n227 --> n231
+  n183 --> n213
+  n187 --> n213
+  n227 --> n213
+  n217 --> n213
+  n302 --> n215
+  n259 -.-> n215
+  n217 -.-> n216
+  n218 -.-> n216
+  n308 --> n217
+  n318 -.-> n217
+  n217 --> n218
+  n215 -.-> n218
+  n264 -.-> n218
+  n262 -.-> n218
+  n269 -.-> n218
+  n221 --> n220
+  n225 --> n220
+  n280 --> n220
+  n222 -.-> n220
+  n327 --> n221
+  n319 --> n221
+  n221 --> n222
+  n222 --> n223
+  n316 --> n223
+  n322 -.-> n223
+  n309 -.-> n223
+  n220 --> n224
+  n305 --> n224
+  n225 -.-> n224
+  n309 -.-> n224
+  n280 --> n225
+  n322 --> n225
+  n308 --> n227
+  n305 --> n227
+  n295 --> n227
+  n302 -.-> n227
+  n259 -.-> n227
+  n308 --> n228
+  n234 -.-> n228
+  n317 -.-> n228
+  n296 -.-> n228
+  n277 -.-> n228
   n232 --> n231
-  n222 -.-> n231
-  n228 -.-> n231
-  n269 --> n233
-  n234 -.-> n233
-  n235 -.-> n233
-  n269 --> n234
-  n223 -.-> n234
-  n230 -.-> n234
-  n232 -.-> n234
-  n231 -.-> n234
-  n269 --> n235
-  n236 -.-> n235
-  n296 -.-> n235
-  n265 -.-> n235
+  n297 --> n231
+  n233 --> n232
+  n230 --> n232
+  n233 --> n234
+  n232 --> n234
+  n231 --> n234
+  n236 --> n235
+  n244 -.-> n235
+  n237 -.-> n235
+  n227 -.-> n235
   n295 -.-> n235
-  n268 -.-> n235
+  n249 --> n236
+  n305 --> n236
+  n236 --> n237
+  n248 -.-> n237
+  n251 -.-> n237
+  n252 -.-> n237
+  n287 -.-> n237
+  n289 -.-> n237
+  n250 --> n238
+  n236 --> n238
+  n235 --> n238
   n240 --> n239
-  n292 --> n241
-  n240 -.-> n241
-  n293 -.-> n241
-  n292 --> n242
-  n296 -.-> n242
-  n295 -.-> n242
-  n291 --> n244
-  n261 --> n246
-  n258 --> n247
-  n248 --> n247
-  n249 --> n247
-  n282 --> n247
-  n246 --> n248
-  n258 --> n248
-  n246 --> n249
-  n260 -.-> n249
-  n241 -.-> n249
-  n253 --> n250
-  n266 --> n250
-  n246 --> n251
-  n254 --> n251
-  n264 --> n251
-  n247 -.-> n251
-  n249 -.-> n251
-  n257 -.-> n251
-  n256 -.-> n251
-  n250 --> n252
-  n259 -.-> n252
-  n253 -.-> n252
-  n267 -.-> n252
-  n246 --> n253
-  n254 --> n253
-  n251 --> n253
-  n259 --> n253
-  n248 --> n255
-  n247 --> n256
-  n282 -.-> n256
-  n248 --> n257
-  n255 -.-> n257
+  n308 --> n239
+  n102 -.-> n239
+  n103 -.-> n239
+  n277 -.-> n239
+  n296 -.-> n239
+  n104 --> n240
+  n316 --> n240
+  n105 -.-> n240
+  n240 --> n241
+  n227 --> n241
+  n239 --> n241
+  n308 --> n241
+  n305 --> n241
+  n317 -.-> n241
+  n106 -.-> n241
+  n246 --> n242
+  n116 --> n242
+  n290 --> n242
+  n125 -.-> n242
+  n247 --> n243
+  n249 --> n244
+  n253 -.-> n244
+  n252 -.-> n244
+  n254 -.-> n244
+  n325 -.-> n244
+  n306 -.-> n244
+  n278 -.-> n244
+  n246 --> n245
+  n282 --> n245
+  n297 --> n245
+  n300 --> n246
+  n246 --> n247
+  n308 --> n247
+  n249 --> n248
+  n282 --> n248
+  n323 --> n249
+  n308 --> n249
+  n249 --> n250
+  n249 --> n251
+  n290 --> n251
+  n249 --> n252
+  n248 -.-> n252
+  n251 -.-> n252
+  n287 -.-> n252
+  n289 -.-> n252
+  n317 -.-> n252
+  n249 --> n253
+  n297 --> n253
+  n324 --> n254
+  n325 -.-> n254
+  n243 --> n255
+  n245 --> n255
+  n242 --> n255
+  n300 --> n255
+  n295 -.-> n255
+  n289 -.-> n255
+  n259 -.-> n255
+  n137 -.-> n255
   n260 -.-> n257
-  n241 -.-> n257
-  n254 --> n258
-  n264 --> n259
-  n267 -.-> n259
-  n272 --> n260
-  n262 -.-> n260
-  n272 --> n262
-  n292 --> n262
-  n274 -.-> n262
-  n273 -.-> n262
-  n262 --> n263
-  n272 --> n263
-  n273 -.-> n263
-  n272 --> n264
-  n269 --> n264
-  n266 -.-> n264
-  n242 -.-> n264
-  n269 --> n265
-  n262 --> n266
-  n268 --> n266
-  n265 --> n266
-  n266 --> n267
-  n263 -.-> n267
-  n244 -.-> n267
-  n273 -.-> n267
-  n269 --> n268
-  n292 --> n268
-  n244 --> n269
-  n272 --> n270
-  n271 -.-> n270
-  n239 -.-> n270
-  n272 --> n271
-  n294 -.-> n271
-  n275 --> n272
-  n292 --> n272
-  n240 --> n273
-  n240 --> n274
-  n274 --> n275
-  n277 --> n278
-  n277 --> n279
-  n272 --> n280
-  n286 -.-> n280
-  n284 -.-> n280
-  n280 --> n281
-  n272 --> n281
-  n239 -.-> n281
-  n272 --> n282
-  n281 -.-> n282
+  n261 -.-> n257
+  n263 --> n258
+  n305 --> n259
+  n262 -.-> n259
+  n300 -.-> n259
+  n259 -.-> n260
+  n269 -.-> n260
+  n305 --> n262
+  n265 -.-> n262
+  n223 --> n263
+  n137 --> n263
+  n297 --> n263
+  n277 -.-> n263
+  n263 --> n264
+  n305 --> n265
+  n330 -.-> n265
+  n275 -.-> n265
+  n263 --> n266
+  n224 --> n266
+  n262 -.-> n266
+  n263 --> n267
+  n268 --> n267
+  n258 -.-> n267
+  n264 -.-> n267
+  n305 --> n269
+  n270 -.-> n269
+  n271 -.-> n269
+  n305 --> n270
+  n259 -.-> n270
+  n266 -.-> n270
+  n268 -.-> n270
+  n267 -.-> n270
+  n305 --> n271
+  n272 -.-> n271
+  n332 -.-> n271
+  n301 -.-> n271
+  n331 -.-> n271
+  n304 -.-> n271
+  n276 --> n275
+  n328 --> n277
+  n276 -.-> n277
+  n329 -.-> n277
+  n328 --> n278
+  n332 -.-> n278
+  n331 -.-> n278
+  n327 --> n280
+  n297 --> n282
+  n294 --> n283
+  n284 --> n283
   n285 --> n283
-  n279 -.-> n283
-  n274 --> n284
-  n291 --> n285
-  n277 --> n285
-  n278 -.-> n285
-  n283 --> n286
-  n285 -.-> n286
-  n287 --> n288
-  n272 --> n288
-  n274 -.-> n288
-  n288 --> n289
-  n273 -.-> n289
-  n289 --> n290
-  n273 -.-> n290
-  n291 --> n292
-  n291 --> n293
-  n240 --> n293
-  n239 -.-> n293
-  n294 -.-> n293
-  n291 --> n294
-  n292 --> n295
-  n292 --> n296
+  n318 --> n283
+  n282 --> n284
+  n294 --> n284
+  n282 --> n285
+  n296 -.-> n285
+  n277 -.-> n285
+  n289 --> n286
+  n302 --> n286
+  n282 --> n287
+  n290 --> n287
+  n300 --> n287
+  n283 -.-> n287
+  n285 -.-> n287
+  n293 -.-> n287
+  n292 -.-> n287
+  n286 --> n288
+  n295 -.-> n288
+  n289 -.-> n288
+  n303 -.-> n288
+  n282 --> n289
+  n290 --> n289
+  n287 --> n289
+  n295 --> n289
+  n284 --> n291
+  n283 --> n292
+  n318 -.-> n292
+  n284 --> n293
+  n291 -.-> n293
+  n296 -.-> n293
+  n277 -.-> n293
+  n290 --> n294
+  n300 --> n295
+  n303 -.-> n295
+  n308 --> n296
+  n298 -.-> n296
+  n308 --> n298
+  n328 --> n298
+  n310 -.-> n298
+  n309 -.-> n298
+  n298 --> n299
+  n308 --> n299
+  n309 -.-> n299
+  n308 --> n300
+  n305 --> n300
+  n302 -.-> n300
+  n278 -.-> n300
+  n305 --> n301
+  n298 --> n302
+  n304 --> n302
+  n301 --> n302
+  n302 --> n303
+  n299 -.-> n303
+  n280 -.-> n303
+  n309 -.-> n303
+  n305 --> n304
+  n328 --> n304
+  n280 --> n305
+  n308 --> n306
+  n307 -.-> n306
+  n275 -.-> n306
+  n308 --> n307
+  n330 -.-> n307
+  n311 --> n308
+  n328 --> n308
+  n276 --> n309
+  n276 --> n310
+  n310 --> n311
+  n313 --> n314
+  n313 --> n315
+  n308 --> n316
+  n322 -.-> n316
+  n320 -.-> n316
+  n316 --> n317
+  n308 --> n317
+  n275 -.-> n317
+  n308 --> n318
+  n317 -.-> n318
+  n321 --> n319
+  n315 -.-> n319
+  n310 --> n320
+  n327 --> n321
+  n313 --> n321
+  n314 -.-> n321
+  n319 --> n322
+  n321 -.-> n322
+  n323 --> n324
+  n308 --> n324
+  n310 -.-> n324
+  n324 --> n325
+  n309 -.-> n325
+  n325 --> n326
+  n309 -.-> n326
+  n327 --> n328
+  n327 --> n329
+  n276 --> n329
+  n275 -.-> n329
+  n330 -.-> n329
+  n327 --> n330
+  n328 --> n331
+  n328 --> n332
   click n0 "roadmap/appendix/README.md" "Appendix — 5 items · 5 fully proved"
   click n1 "roadmap/appendix/classical-cw-bridge/README.md" "Classical CW bridge support — 3 items · 3 fully proved"
   click n2 "roadmap/appendix/classical-cw-bridge/classical-cell-arrow-iso.md" "Classical and standard cells have isomorphic attaching arrows — fully proved"
@@ -1016,171 +1171,207 @@ graph LR
   click n135 "roadmap/fundamental-group/van-kampen/wedge-circles-free-group.md" "The fundamental group of a wedge of circles — fully proved"
   click n136 "roadmap/fundamental-group/van-kampen/wedge-fundamental-group.md" "The fundamental group of a wedge — fully proved"
   click n137 "roadmap/fundamental-group/van-kampen/well-pointed-wedge-cover.md" "The standard cover of a well-pointed wedge — fully proved"
-  click n138 "roadmap/homology/README.md" "Homology — 146 items · 10 in mathlib · 131 fully proved · 1 ready to state · 1 not ready · 3 planned"
-  click n139 "roadmap/homology/computations-and-applications/README.md" "Computations and applications — 90 items · 86 fully proved · 1 ready to state · 3 planned"
+  click n138 "roadmap/homology/README.md" "Homology — 177 items · 10 in mathlib · 135 fully proved · 8 ready to state · 1 not ready · 23 planned"
+  click n139 "roadmap/homology/computations-and-applications/README.md" "Computations and applications — 121 items · 90 fully proved · 8 ready to state · 23 planned"
   click n140 "roadmap/homology/computations-and-applications/degree/README.md" "Degree foundations and applications — 16 items · 16 fully proved"
-  click n141 "roadmap/homology/computations-and-applications/degree/antipodal-degree.md" "The antipodal map has degree determined by dimension — fully proved"
-  click n142 "roadmap/homology/computations-and-applications/degree/basic-degree-properties.md" "The formal properties of degree — fully proved"
-  click n143 "roadmap/homology/computations-and-applications/degree/coordinate-reflection-degree.md" "A sphere reflection has degree minus one — fully proved"
-  click n144 "roadmap/homology/computations-and-applications/degree/double-simplex-swap-class.md" "Swapping the double simplex negates its fundamental class — fully proved"
-  click n145 "roadmap/homology/computations-and-applications/degree/fixed-point-free-degree.md" "A fixed-point-free sphere map has antipodal degree — fully proved"
-  click n146 "roadmap/homology/computations-and-applications/degree/free-even-sphere-action.md" "Only the antipodal group acts freely on an even sphere — fully proved"
-  click n147 "roadmap/homology/computations-and-applications/degree/integral-sphere-orientation.md" "The ordered class orients ordinary sphere homology — fully proved"
-  click n148 "roadmap/homology/computations-and-applications/degree/nonsurjective-degree-zero.md" "A nonsurjective sphere map has degree zero — fully proved"
-  click n149 "roadmap/homology/computations-and-applications/degree/nonzero-tangent-field-iff-odd.md" "A sphere has a nonvanishing tangent field exactly in odd dimension — fully proved"
-  click n150 "roadmap/homology/computations-and-applications/degree/odd-sphere-tangent-field.md" "Odd spheres have a nonvanishing tangent field — fully proved"
-  click n151 "roadmap/homology/computations-and-applications/degree/punctured-sphere-stereographic.md" "A punctured sphere is Euclidean space — fully proved"
-  click n152 "roadmap/homology/computations-and-applications/degree/sphere-action-degree-character.md" "Degree gives a character of a sphere action — fully proved"
-  click n153 "roadmap/homology/computations-and-applications/degree/sphere-coordinate-sign-changes.md" "Coordinate sign changes on the sphere — fully proved"
-  click n154 "roadmap/homology/computations-and-applications/degree/sphere-degree-definition.md" "Degree is the multiplier of the ordered sphere class — fully proved"
-  click n155 "roadmap/homology/computations-and-applications/degree/tangent-field-parity-obstruction.md" "A nonvanishing tangent field forces odd dimension — fully proved"
-  click n156 "roadmap/homology/computations-and-applications/degree/tangent-vector-field-data.md" "Tangent vector fields and normalization — fully proved"
-  click n157 "roadmap/homology/computations-and-applications/local-degree/README.md" "Local degree and the sum over a finite fiber — 20 items · 16 fully proved · 1 ready to state · 3 planned"
-  click n158 "roadmap/homology/computations-and-applications/local-degree/degree-local-sum-formula.md" "Degree is the sum of the local degrees — planned"
-  click n159 "roadmap/homology/computations-and-applications/local-degree/deleted-pair-open-neighborhood.md" "Deleted-pair homology is local on an open neighborhood — fully proved"
-  click n160 "roadmap/homology/computations-and-applications/local-degree/disjoint-open-union-homeomorphism.md" "A disjoint open family is homeomorphic to its sigma type — fully proved"
-  click n161 "roadmap/homology/computations-and-applications/local-degree/disjoint-punctured-pair-iso.md" "Disjoint punctured neighborhoods form the deleted union pair — fully proved"
-  click n162 "roadmap/homology/computations-and-applications/local-degree/finite-fiber-local-map.md" "The finite-fiber pair map acts by the local degrees — fully proved"
-  click n163 "roadmap/homology/computations-and-applications/local-degree/finite-fiber-neighborhoods.md" "A finite sphere-map fiber has disjoint isolated neighborhoods — fully proved"
-  click n164 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-homology-coproduct.md" "Finite-puncture homology is the coproduct of the local groups — ready to state"
-  click n165 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-orientation-sum.md" "The finite-puncture class is the sum of the local classes — planned"
-  click n166 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-pair-excision.md" "The disjoint local pairs excise to the finite-puncture pair — fully proved"
-  click n167 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-projection-matrix.md" "Finite-puncture projections have the diagonal matrix — planned"
-  click n168 "roadmap/homology/computations-and-applications/local-degree/global-degree-fiber-square.md" "The finite-fiber pair map carries the global degree — fully proved"
-  click n169 "roadmap/homology/computations-and-applications/local-degree/homeomorphism-local-degree.md" "A local homeomorphism has local degree plus or minus one — fully proved"
-  click n170 "roadmap/homology/computations-and-applications/local-degree/isolated-preimage-neighborhood.md" "An isolated preimage gives a map of punctured pairs — fully proved"
-  click n171 "roadmap/homology/computations-and-applications/local-degree/local-degree-shrinking.md" "Local degree is unchanged when the neighborhood shrinks — fully proved"
-  click n172 "roadmap/homology/computations-and-applications/local-degree/local-degree-well-defined.md" "Local degree is independent of its neighborhood — fully proved"
-  click n173 "roadmap/homology/computations-and-applications/local-degree/neighborhood-local-degree.md" "Local degree on a chosen isolated neighborhood — fully proved"
-  click n174 "roadmap/homology/computations-and-applications/local-degree/relative-chains-sigma-pair.md" "Relative chains commute with coproducts of arbitrary pairs — fully proved"
-  click n175 "roadmap/homology/computations-and-applications/local-degree/relative-homology-sigma-pair.md" "Relative homology commutes with coproducts of arbitrary pairs — fully proved"
-  click n176 "roadmap/homology/computations-and-applications/local-degree/sigma-topological-pair.md" "The coproduct of a family of topological pairs — fully proved"
-  click n177 "roadmap/homology/computations-and-applications/local-degree/sphere-local-orientation.md" "The ordered sphere class orients local homology — fully proved"
-  click n178 "roadmap/homology/computations-and-applications/local-homology-and-dimension/README.md" "Local homology and invariance of dimension — 4 items · 4 fully proved"
-  click n179 "roadmap/homology/computations-and-applications/local-homology-and-dimension/contractible-ambient-relative-homology.md" "Relative homology in a contractible ambient space — fully proved"
-  click n180 "roadmap/homology/computations-and-applications/local-homology-and-dimension/invariance-of-dimension-open-sets.md" "Homeomorphic nonempty Euclidean open sets have equal dimension — fully proved"
-  click n181 "roadmap/homology/computations-and-applications/local-homology-and-dimension/local-homology-open-neighborhood.md" "Local homology is unchanged on an open neighborhood — fully proved"
-  click n182 "roadmap/homology/computations-and-applications/local-homology-and-dimension/punctured-euclidean-local-homology.md" "Local homology of positive-dimensional Euclidean space — fully proved"
-  click n183 "roadmap/homology/computations-and-applications/mayer-vietoris/README.md" "Mayer–Vietoris sequences — 6 items · 6 fully proved"
-  click n184 "roadmap/homology/computations-and-applications/mayer-vietoris/augmented-binary-cover-chain-short-exact-sequence.md" "Augmented binary-cover chains form a short exact sequence — fully proved"
-  click n185 "roadmap/homology/computations-and-applications/mayer-vietoris/binary-cover-chain-complex.md" "The binary-cover Mayer–Vietoris chain complex — fully proved"
-  click n186 "roadmap/homology/computations-and-applications/mayer-vietoris/binary-cover-chain-short-exact-sequence.md" "Binary-cover chains form a short exact sequence — fully proved"
-  click n187 "roadmap/homology/computations-and-applications/mayer-vietoris/binary-cover-mayer-vietoris-sequence.md" "The binary-cover Mayer–Vietoris sequence — fully proved"
-  click n188 "roadmap/homology/computations-and-applications/mayer-vietoris/reduced-binary-cover-mayer-vietoris-sequence.md" "The reduced binary-cover Mayer–Vietoris sequence — fully proved"
-  click n189 "roadmap/homology/computations-and-applications/mayer-vietoris/small-augmented-chain-inclusion-homotopy-equivalence.md" "Small augmented chains include by a chain-homotopy equivalence — fully proved"
-  click n190 "roadmap/homology/computations-and-applications/post-excision-applications/README.md" "Post-excision applications — 28 items · 28 fully proved"
-  click n191 "roadmap/homology/computations-and-applications/post-excision-applications/contractible-subspace-relative-reduced-homology.md" "A contractible subspace identifies reduced and relative homology — fully proved"
-  click n192 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-excision.md" "Excision holds for a union of CW subcomplexes — fully proved"
-  click n193 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/README.md" "CW-subcomplex regular neighborhoods — 5 items · 5 fully proved"
-  click n194 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/cell-boundary-collar.md" "The radial collar of a cell boundary — fully proved"
-  click n195 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/regular-neighborhood-strong-deformation-retract.md" "A regular neighborhood strongly deformation retracts onto its subcomplex — fully proved"
-  click n196 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/regular-neighborhood-system.md" "A common regular-neighborhood system for subcomplexes — fully proved"
-  click n197 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/subcomplex-intersection.md" "Intersections of CW subcomplexes — fully proved"
-  click n198 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/subcomplex-neighborhood-cover.md" "Subcomplex decompositions admit compatible neighborhoods — fully proved"
-  click n199 "roadmap/homology/computations-and-applications/post-excision-applications/double-simplex-fundamental-class.md" "The double-simplex difference generates reduced homology — fully proved"
-  click n200 "roadmap/homology/computations-and-applications/post-excision-applications/double-simplex-fundamental-cycle.md" "The ordered difference of the two simplices is a cycle — fully proved"
-  click n201 "roadmap/homology/computations-and-applications/post-excision-applications/double-simplex-relative-comparison.md" "The first simplex computes homology relative to the second — fully proved"
-  click n202 "roadmap/homology/computations-and-applications/post-excision-applications/double-simplex-sphere-homeomorphism.md" "The double simplex is a sphere — fully proved"
-  click n203 "roadmap/homology/computations-and-applications/post-excision-applications/mapping-cone-cover-relative-homology.md" "The mapping-cone cover has the relative homology of the original pair — fully proved"
-  click n204 "roadmap/homology/computations-and-applications/post-excision-applications/mapping-cone-model.md" "The mapping cone of a topological pair — fully proved"
-  click n205 "roadmap/homology/computations-and-applications/post-excision-applications/mapping-cone-relative-reduced-homology.md" "Relative homology is reduced homology of the mapping cone — fully proved"
-  click n206 "roadmap/homology/computations-and-applications/post-excision-applications/pointed-wedge-point-quotient.md" "The pointed wedge is the point quotient of the sigma pair — fully proved"
-  click n207 "roadmap/homology/computations-and-applications/post-excision-applications/relative-homology-coproduct.md" "Relative homology commutes with exact coproducts — fully proved"
-  click n208 "roadmap/homology/computations-and-applications/post-excision-applications/relative-simplex-fundamental-class.md" "The identity simplex generates relative simplex homology — fully proved"
-  click n209 "roadmap/homology/computations-and-applications/post-excision-applications/sigma-good-pair.md" "A nonempty coproduct of pointed good pairs is good — fully proved"
-  click n210 "roadmap/homology/computations-and-applications/post-excision-applications/sigma-pointed-pair.md" "The coproduct pair of a family of pointed spaces — fully proved"
-  click n211 "roadmap/homology/computations-and-applications/post-excision-applications/singular-relative-chains-coproduct.md" "Relative singular chains commute with topological coproducts — fully proved"
-  click n212 "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-boundary-good-pairs.md" "Standard-simplex boundary and horn pairs are good — fully proved"
-  click n213 "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-boundary-horn.md" "The boundary and zero horn of a standard topological simplex — fully proved"
-  click n214 "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-disk-pair-homeomorphism.md" "The standard simplex pair is homeomorphic to the disk pair — fully proved"
-  click n215 "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-zero-face-point-quotient.md" "The zero face identifies the two simplex point quotients — fully proved"
-  click n216 "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-zero-face-relative-homology.md" "The zero face induces an isomorphism in relative homology — fully proved"
-  click n217 "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-zero-horn-retraction.md" "A standard simplex strongly deformation retracts onto its zero horn — fully proved"
-  click n218 "roadmap/homology/computations-and-applications/post-excision-applications/triple-connecting-cycle-formula.md" "The triple connecting map sends a relative cycle to its boundary — fully proved"
-  click n219 "roadmap/homology/computations-and-applications/post-excision-applications/wedge-reduced-homology.md" "Reduced homology of a wedge is the direct sum of the summands — fully proved"
-  click n220 "roadmap/homology/computations-and-applications/sphere-homology/README.md" "Mayer–Vietoris transport, sphere homology, and Brouwer — 16 items · 16 fully proved"
-  click n221 "roadmap/homology/computations-and-applications/sphere-homology/brouwer-fixed-point-disk.md" "Brouwer's fixed-point theorem for disks — fully proved"
-  click n222 "roadmap/homology/computations-and-applications/sphere-homology/closed-ball-radial-deformation-retract.md" "A closed ball strongly deformation retracts from Euclidean space — fully proved"
-  click n223 "roadmap/homology/computations-and-applications/sphere-homology/contractible-space-reduced-homology.md" "Reduced homology of a contractible space vanishes — fully proved"
-  click n224 "roadmap/homology/computations-and-applications/sphere-homology/disk-boundary-no-retraction.md" "The boundary sphere is not a retract of the disk — fully proved"
-  click n225 "roadmap/homology/computations-and-applications/sphere-homology/fixed-point-free-disk-map-retraction.md" "A fixed-point-free disk map produces a boundary retraction — fully proved"
-  click n226 "roadmap/homology/computations-and-applications/sphere-homology/homotopy-equivalence-reduced-homology-iso.md" "A homotopy equivalence induces reduced-homology isomorphisms — fully proved"
-  click n227 "roadmap/homology/computations-and-applications/sphere-homology/ordinary-neighborhood-mayer-vietoris.md" "The ordinary neighborhood-retract Mayer–Vietoris sequence — fully proved"
-  click n228 "roadmap/homology/computations-and-applications/sphere-homology/punctured-space-radial-deformation-retract.md" "A sphere strongly deformation retracts from punctured Euclidean space — fully proved"
-  click n229 "roadmap/homology/computations-and-applications/sphere-homology/reduced-homology-homotopy-invariance.md" "Homotopic maps induce the same reduced-homology map — fully proved"
-  click n230 "roadmap/homology/computations-and-applications/sphere-homology/reduced-neighborhood-mayer-vietoris.md" "The reduced neighborhood-retract Mayer–Vietoris sequence — fully proved"
-  click n231 "roadmap/homology/computations-and-applications/sphere-homology/sphere-hemisphere-neighborhood-cover.md" "The hemispheres have compatible neighborhood deformation retractions — fully proved"
-  click n232 "roadmap/homology/computations-and-applications/sphere-homology/sphere-hemisphere-stereographic-models.md" "Stereographic models for hemispheres and the equator — fully proved"
-  click n233 "roadmap/homology/computations-and-applications/sphere-homology/sphere-reduced-homology.md" "Reduced homology of spheres — fully proved"
-  click n234 "roadmap/homology/computations-and-applications/sphere-homology/sphere-reduced-homology-recurrence.md" "The reduced homology of spheres satisfies the suspension recurrence — fully proved"
-  click n235 "roadmap/homology/computations-and-applications/sphere-homology/zero-sphere-reduced-homology.md" "Reduced homology of the zero-sphere — fully proved"
-  click n236 "roadmap/homology/computations-and-applications/sphere-homology/zero-sphere-two-point-homeomorphism.md" "The zero-sphere is a two-point space — fully proved"
-  click n237 "roadmap/homology/formal-viewpoint/README.md" "The formal viewpoint — not ready"
-  click n238 "roadmap/homology/simplicial-and-singular/README.md" "Simplicial and singular homology — 55 items · 10 in mathlib · 45 fully proved"
-  click n239 "roadmap/homology/simplicial-and-singular/chain-homotopy-invariance.md" "Chain-homotopic maps induce the same homology map — in mathlib"
-  click n240 "roadmap/homology/simplicial-and-singular/chain-map-homology.md" "A chain map induces a map on homology — in mathlib"
-  click n241 "roadmap/homology/simplicial-and-singular/homotopy-equivalence-homology-iso.md" "A homotopy equivalence induces homology isomorphisms — fully proved"
-  click n242 "roadmap/homology/simplicial-and-singular/point-homology.md" "Homology of a point — fully proved"
-  click n243 "roadmap/homology/simplicial-and-singular/relative-homology/README.md" "Relative homology and exact sequences — 45 items · 2 in mathlib · 43 fully proved"
-  click n244 "roadmap/homology/simplicial-and-singular/relative-homology/augmented-singular-chain-complex.md" "The augmented singular chain complex — fully proved"
-  click n245 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/README.md" "Good pairs and quotient exact sequences — 16 items · 16 fully proved"
-  click n246 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-data.md" "Good pairs and neighborhood deformation retracts — fully proved"
-  click n247 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-excision-diagram.md" "The complementary excision diagram — fully proved"
-  click n248 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-neighborhood-quotient.md" "Restricting the quotient to a good-pair neighborhood — fully proved"
-  click n249 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-neighborhood-relative-homology.md" "Enlarging to the chosen neighborhood preserves relative homology — fully proved"
-  click n250 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-point-quotient-exact-sequence.md" "The good-pair quotient exact sequence — fully proved"
-  click n251 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-point-quotient-relative-homology.md" "Good-pair relative homology is reduced quotient homology — fully proved"
-  click n252 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-point-quotient-sequence-naturality.md" "Naturality of the good-pair quotient sequence — fully proved"
-  click n253 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-quotient-comparison-naturality.md" "The good-pair quotient comparison is natural — fully proved"
-  click n254 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-functor.md" "Functorial point quotients of topological pairs — fully proved"
-  click n255 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-neighborhood-contraction.md" "The quotient neighborhood contracts to its point — fully proved"
-  click n256 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-neighborhood-excision.md" "The neighborhood quotient map preserves relative homology — fully proved"
-  click n257 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-neighborhood-relative-homology.md" "Enlarging the quotient point preserves relative homology — fully proved"
-  click n258 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-projection-topology.md" "Topology of the point-quotient projection — fully proved"
-  click n259 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/pointed-relative-reduced-homology-naturality.md" "The pointed relative-to-reduced comparison is natural — fully proved"
-  click n260 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/relative-homology-map-isomorphism-criterion.md" "Componentwise isomorphisms imply a relative isomorphism — fully proved"
-  click n261 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/strong-deformation-retract.md" "Strong deformation retracts — fully proved"
-  click n262 "roadmap/homology/simplicial-and-singular/relative-homology/pair-long-exact-sequence.md" "The long exact sequence of a pair — fully proved"
-  click n263 "roadmap/homology/simplicial-and-singular/relative-homology/pair-long-exact-sequence-naturality.md" "The pair long exact sequence is natural — fully proved"
-  click n264 "roadmap/homology/simplicial-and-singular/relative-homology/pointed-relative-reduced-homology.md" "Relative homology at a basepoint is reduced homology — fully proved"
-  click n265 "roadmap/homology/simplicial-and-singular/relative-homology/pointed-zeroth-homology-splitting.md" "Zeroth homology splits into reduced homology and the coefficient object — fully proved"
-  click n266 "roadmap/homology/simplicial-and-singular/relative-homology/reduced-pair-long-exact-sequence.md" "The reduced long exact sequence of a nonempty pair — fully proved"
-  click n267 "roadmap/homology/simplicial-and-singular/relative-homology/reduced-pair-long-exact-sequence-naturality.md" "The reduced pair long exact sequence is natural — fully proved"
-  click n268 "roadmap/homology/simplicial-and-singular/relative-homology/reduced-positive-degree-comparison.md" "Reduced and ordinary homology agree in positive degrees — fully proved"
-  click n269 "roadmap/homology/simplicial-and-singular/relative-homology/reduced-singular-homology.md" "Reduced singular homology — fully proved"
-  click n270 "roadmap/homology/simplicial-and-singular/relative-homology/relative-homology-homotopy-invariance.md" "Homotopic maps of pairs induce the same relative-homology map — fully proved"
-  click n271 "roadmap/homology/simplicial-and-singular/relative-homology/relative-singular-chain-homotopy.md" "A homotopy of pairs gives a relative chain homotopy — fully proved"
-  click n272 "roadmap/homology/simplicial-and-singular/relative-homology/relative-singular-homology.md" "Relative singular chains and homology — fully proved"
-  click n273 "roadmap/homology/simplicial-and-singular/relative-homology/short-exact-homology-sequence.md" "A short exact sequence gives an exact homology sequence — in mathlib"
-  click n274 "roadmap/homology/simplicial-and-singular/relative-homology/simplicial-pair-relative-homology.md" "Relative homology of a simplicial-set pair — in mathlib"
-  click n275 "roadmap/homology/simplicial-and-singular/relative-homology/singular-pair-functor.md" "The singular set of a topological pair — fully proved"
-  click n276 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/README.md" "Small chains and excision — 10 items · 10 fully proved"
-  click n277 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/affine-barycentric-subdivision.md" "Affine barycentric subdivision is compatible with faces — fully proved"
-  click n278 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/affine-chain-subdivision-homotopy.md" "Affine-chain subdivision is homotopic to the identity — fully proved"
-  click n279 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/barycentric-subdivision-diameter.md" "Barycentric subdivision contracts simplex diameter — fully proved"
-  click n280 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/binary-cover-excision-chain-equivalence.md" "The binary-cover excision chain map is a homotopy equivalence — fully proved"
-  click n281 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/binary-cover-excision-homology-isomorphism.md" "Binary-cover excision induces homology isomorphisms — fully proved"
-  click n282 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/deleted-subset-excision-homology-isomorphism.md" "Deleted-subset excision induces homology isomorphisms — fully proved"
-  click n283 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/eventually-small-singular-simplices.md" "Iterated subdivision eventually makes every singular simplex small — fully proved"
-  click n284 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/relative-chain-union-devissage.md" "Relative excision reduces to the union subcomplex — fully proved"
-  click n285 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/singular-chain-subdivision-homotopy.md" "Singular-chain subdivision is naturally homotopic to the identity — fully proved"
-  click n286 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/small-chain-inclusion-homotopy-equivalence.md" "Small singular chains include by a chain-homotopy equivalence — fully proved"
-  click n287 "roadmap/homology/simplicial-and-singular/relative-homology/topological-triple.md" "Topological triples and their maps — fully proved"
-  click n288 "roadmap/homology/simplicial-and-singular/relative-homology/triple-chain-short-exact-sequence.md" "Relative chains of a triple form a short exact sequence — fully proved"
-  click n289 "roadmap/homology/simplicial-and-singular/relative-homology/triple-long-exact-sequence.md" "The long exact sequence of a triple — fully proved"
-  click n290 "roadmap/homology/simplicial-and-singular/relative-homology/triple-long-exact-sequence-naturality.md" "The triple long exact sequence is natural — fully proved"
-  click n291 "roadmap/homology/simplicial-and-singular/singular-chain-complex.md" "The singular chain complex — in mathlib"
-  click n292 "roadmap/homology/simplicial-and-singular/singular-homology.md" "Singular homology — in mathlib"
-  click n293 "roadmap/homology/simplicial-and-singular/singular-homology-homotopy-invariance.md" "Homotopic maps induce the same singular-homology map — in mathlib"
-  click n294 "roadmap/homology/simplicial-and-singular/topological-homotopy-chain-homotopy.md" "A topological homotopy gives a singular-chain homotopy — in mathlib"
-  click n295 "roadmap/homology/simplicial-and-singular/totally-disconnected-higher-homology.md" "Higher homology vanishes for totally disconnected spaces — in mathlib"
-  click n296 "roadmap/homology/simplicial-and-singular/zeroth-homology-components.md" "Zeroth homology is free on path components — in mathlib"
-  click n297 "roadmap/homotopy-theory/README.md" "Homotopy theory — 3 items · 3 not ready"
-  click n298 "roadmap/homotopy-theory/connections-with-cohomology/README.md" "Connections with cohomology — not ready"
-  click n299 "roadmap/homotopy-theory/elementary-methods/README.md" "Elementary methods of calculation — not ready"
-  click n300 "roadmap/homotopy-theory/homotopy-groups/README.md" "Homotopy groups — not ready"
-  click n301 "roadmap/README.md" "Algebraic Topology (Hatcher) roadmap — 276 items · 18 in mathlib · 246 fully proved · 1 ready to state · 8 not ready · 3 planned"
-  click n302 "roadmap/underlying-geometric-notions/README.md" "Some underlying geometric notions — not ready"
+  click n141 "roadmap/homology/computations-and-applications/degree-realization-suspension/README.md" "Prescribed degrees and suspension — 31 items · 8 ready to state · 23 planned"
+  click n142 "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/README.md" "Integer circle powers — 9 items · 2 ready to state · 7 planned"
+  click n143 "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/circle-inversion-reflection.md" "Circle inversion is the standard coordinate reflection — planned"
+  click n144 "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/circle-power-local-stretch-deformation.md" "Local positive stretching deforms to a rotation through punctured maps — planned"
+  click n145 "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/circle-rotation-homotopy.md" "Every circle rotation is homotopic to the identity — ready to state"
+  click n146 "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/integer-circle-power-degree.md" "The degree of an integer circle power is its exponent — planned"
+  click n147 "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/integer-circle-power-map.md" "Integer powers define continuous self-maps of the circle — ready to state"
+  click n148 "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/positive-circle-power-arc-chart.md" "Positive circle powers stretch local angular charts — planned"
+  click n149 "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/positive-circle-power-degree.md" "A positive circle power has its exponent as degree — planned"
+  click n150 "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/positive-circle-power-fiber.md" "A positive circle power has exactly as many preimages as its exponent — planned"
+  click n151 "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/positive-circle-power-local-degree.md" "Every local degree of a positive circle power is plus one — planned"
+  click n152 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/README.md" "Disjoint balls and signed pinch maps — 10 items · 2 ready to state · 8 planned"
+  click n153 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/compact-complement-quotient-one-point.md" "Collapsing a compact complement gives a one-point compactification — ready to state"
+  click n154 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/finite-disjoint-sphere-balls.md" "A positive-dimensional sphere contains any finite number of disjoint balls — ready to state"
+  click n155 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/finite-one-point-sigma-wedge.md" "Compactifying a finite disjoint union gives the pointed wedge — planned"
+  click n156 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/signed-pinch-degree-sum.md" "The degree of a signed pinch map is the sum of its signs — planned"
+  click n157 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/signed-pinch-fiber.md" "Regular pinch fibers are indexed by the chosen balls — planned"
+  click n158 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/signed-pinch-local-degree.md" "The signed pinch map has the prescribed local degrees — planned"
+  click n159 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/signed-sphere-fold-map.md" "Reflections correct the signs of a sphere fold map — planned"
+  click n160 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/sphere-ball-collapse-degree-unit.md" "Each ball-collapse map has degree plus or minus one — planned"
+  click n161 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/sphere-ball-pinch-quotient.md" "Collapsing the complement of disjoint sphere balls gives the pinch map — planned"
+  click n162 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/sphere-degree-realization.md" "Every integer is the degree of a sphere map — planned"
+  click n163 "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/README.md" "Shared local-degree comparisons — 3 items · 3 ready to state"
+  click n164 "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/local-degree-germ-invariance.md" "Maps with the same germ have the same local degree — ready to state"
+  click n165 "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/local-degree-punctured-homotopy-invariance.md" "A puncture-preserving local homotopy preserves local degree — ready to state"
+  click n166 "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/local-degree-singleton-fiber.md" "A singleton fiber has local degree equal to global degree — ready to state"
+  click n167 "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/README.md" "Suspension and degree at its poles — 9 items · 1 ready to state · 8 planned"
+  click n168 "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/arbitrary-local-degree.md" "Every integer is a local degree in sphere dimension at least two — planned"
+  click n169 "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/sphere-cone-geometry.md" "The cone over a sphere forms a contractible good pair — ready to state"
+  click n170 "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/sphere-cone-map.md" "A sphere map induces a self-map of its cone-base pair — planned"
+  click n171 "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/sphere-cone-quotient-homeomorphism.md" "The cone-base quotient is the next sphere with its suspension poles — planned"
+  click n172 "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/sphere-suspension-boundary-naturality.md" "The suspension boundary isomorphism intertwines the induced maps — planned"
+  click n173 "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/sphere-suspension-map.md" "A sphere map induces its genuine suspension map — planned"
+  click n174 "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/suspension-pole-fibers.md" "The suspension poles have singleton fibers — planned"
+  click n175 "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/suspension-pole-local-degree.md" "The local degree at a suspension pole is its global degree — planned"
+  click n176 "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/suspension-preserves-degree.md" "Suspension preserves the signed degree of a sphere map — planned"
+  click n177 "roadmap/homology/computations-and-applications/degree/antipodal-degree.md" "The antipodal map has degree determined by dimension — fully proved"
+  click n178 "roadmap/homology/computations-and-applications/degree/basic-degree-properties.md" "The formal properties of degree — fully proved"
+  click n179 "roadmap/homology/computations-and-applications/degree/coordinate-reflection-degree.md" "A sphere reflection has degree minus one — fully proved"
+  click n180 "roadmap/homology/computations-and-applications/degree/double-simplex-swap-class.md" "Swapping the double simplex negates its fundamental class — fully proved"
+  click n181 "roadmap/homology/computations-and-applications/degree/fixed-point-free-degree.md" "A fixed-point-free sphere map has antipodal degree — fully proved"
+  click n182 "roadmap/homology/computations-and-applications/degree/free-even-sphere-action.md" "Only the antipodal group acts freely on an even sphere — fully proved"
+  click n183 "roadmap/homology/computations-and-applications/degree/integral-sphere-orientation.md" "The ordered class orients ordinary sphere homology — fully proved"
+  click n184 "roadmap/homology/computations-and-applications/degree/nonsurjective-degree-zero.md" "A nonsurjective sphere map has degree zero — fully proved"
+  click n185 "roadmap/homology/computations-and-applications/degree/nonzero-tangent-field-iff-odd.md" "A sphere has a nonvanishing tangent field exactly in odd dimension — fully proved"
+  click n186 "roadmap/homology/computations-and-applications/degree/odd-sphere-tangent-field.md" "Odd spheres have a nonvanishing tangent field — fully proved"
+  click n187 "roadmap/homology/computations-and-applications/degree/punctured-sphere-stereographic.md" "A punctured sphere is Euclidean space — fully proved"
+  click n188 "roadmap/homology/computations-and-applications/degree/sphere-action-degree-character.md" "Degree gives a character of a sphere action — fully proved"
+  click n189 "roadmap/homology/computations-and-applications/degree/sphere-coordinate-sign-changes.md" "Coordinate sign changes on the sphere — fully proved"
+  click n190 "roadmap/homology/computations-and-applications/degree/sphere-degree-definition.md" "Degree is the multiplier of the ordered sphere class — fully proved"
+  click n191 "roadmap/homology/computations-and-applications/degree/tangent-field-parity-obstruction.md" "A nonvanishing tangent field forces odd dimension — fully proved"
+  click n192 "roadmap/homology/computations-and-applications/degree/tangent-vector-field-data.md" "Tangent vector fields and normalization — fully proved"
+  click n193 "roadmap/homology/computations-and-applications/local-degree/README.md" "Local degree and the sum over a finite fiber — 20 items · 20 fully proved"
+  click n194 "roadmap/homology/computations-and-applications/local-degree/degree-local-sum-formula.md" "Degree is the sum of the local degrees — fully proved"
+  click n195 "roadmap/homology/computations-and-applications/local-degree/deleted-pair-open-neighborhood.md" "Deleted-pair homology is local on an open neighborhood — fully proved"
+  click n196 "roadmap/homology/computations-and-applications/local-degree/disjoint-open-union-homeomorphism.md" "A disjoint open family is homeomorphic to its sigma type — fully proved"
+  click n197 "roadmap/homology/computations-and-applications/local-degree/disjoint-punctured-pair-iso.md" "Disjoint punctured neighborhoods form the deleted union pair — fully proved"
+  click n198 "roadmap/homology/computations-and-applications/local-degree/finite-fiber-local-map.md" "The finite-fiber pair map acts by the local degrees — fully proved"
+  click n199 "roadmap/homology/computations-and-applications/local-degree/finite-fiber-neighborhoods.md" "A finite sphere-map fiber has disjoint isolated neighborhoods — fully proved"
+  click n200 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-homology-coproduct.md" "Finite-puncture homology is the coproduct of the local groups — fully proved"
+  click n201 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-orientation-sum.md" "The finite-puncture class is the sum of the local classes — fully proved"
+  click n202 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-pair-excision.md" "The disjoint local pairs excise to the finite-puncture pair — fully proved"
+  click n203 "roadmap/homology/computations-and-applications/local-degree/finite-puncture-projection-matrix.md" "Finite-puncture projections have the diagonal matrix — fully proved"
+  click n204 "roadmap/homology/computations-and-applications/local-degree/global-degree-fiber-square.md" "The finite-fiber pair map carries the global degree — fully proved"
+  click n205 "roadmap/homology/computations-and-applications/local-degree/homeomorphism-local-degree.md" "A local homeomorphism has local degree plus or minus one — fully proved"
+  click n206 "roadmap/homology/computations-and-applications/local-degree/isolated-preimage-neighborhood.md" "An isolated preimage gives a map of punctured pairs — fully proved"
+  click n207 "roadmap/homology/computations-and-applications/local-degree/local-degree-shrinking.md" "Local degree is unchanged when the neighborhood shrinks — fully proved"
+  click n208 "roadmap/homology/computations-and-applications/local-degree/local-degree-well-defined.md" "Local degree is independent of its neighborhood — fully proved"
+  click n209 "roadmap/homology/computations-and-applications/local-degree/neighborhood-local-degree.md" "Local degree on a chosen isolated neighborhood — fully proved"
+  click n210 "roadmap/homology/computations-and-applications/local-degree/relative-chains-sigma-pair.md" "Relative chains commute with coproducts of arbitrary pairs — fully proved"
+  click n211 "roadmap/homology/computations-and-applications/local-degree/relative-homology-sigma-pair.md" "Relative homology commutes with coproducts of arbitrary pairs — fully proved"
+  click n212 "roadmap/homology/computations-and-applications/local-degree/sigma-topological-pair.md" "The coproduct of a family of topological pairs — fully proved"
+  click n213 "roadmap/homology/computations-and-applications/local-degree/sphere-local-orientation.md" "The ordered sphere class orients local homology — fully proved"
+  click n214 "roadmap/homology/computations-and-applications/local-homology-and-dimension/README.md" "Local homology and invariance of dimension — 4 items · 4 fully proved"
+  click n215 "roadmap/homology/computations-and-applications/local-homology-and-dimension/contractible-ambient-relative-homology.md" "Relative homology in a contractible ambient space — fully proved"
+  click n216 "roadmap/homology/computations-and-applications/local-homology-and-dimension/invariance-of-dimension-open-sets.md" "Homeomorphic nonempty Euclidean open sets have equal dimension — fully proved"
+  click n217 "roadmap/homology/computations-and-applications/local-homology-and-dimension/local-homology-open-neighborhood.md" "Local homology is unchanged on an open neighborhood — fully proved"
+  click n218 "roadmap/homology/computations-and-applications/local-homology-and-dimension/punctured-euclidean-local-homology.md" "Local homology of positive-dimensional Euclidean space — fully proved"
+  click n219 "roadmap/homology/computations-and-applications/mayer-vietoris/README.md" "Mayer–Vietoris sequences — 6 items · 6 fully proved"
+  click n220 "roadmap/homology/computations-and-applications/mayer-vietoris/augmented-binary-cover-chain-short-exact-sequence.md" "Augmented binary-cover chains form a short exact sequence — fully proved"
+  click n221 "roadmap/homology/computations-and-applications/mayer-vietoris/binary-cover-chain-complex.md" "The binary-cover Mayer–Vietoris chain complex — fully proved"
+  click n222 "roadmap/homology/computations-and-applications/mayer-vietoris/binary-cover-chain-short-exact-sequence.md" "Binary-cover chains form a short exact sequence — fully proved"
+  click n223 "roadmap/homology/computations-and-applications/mayer-vietoris/binary-cover-mayer-vietoris-sequence.md" "The binary-cover Mayer–Vietoris sequence — fully proved"
+  click n224 "roadmap/homology/computations-and-applications/mayer-vietoris/reduced-binary-cover-mayer-vietoris-sequence.md" "The reduced binary-cover Mayer–Vietoris sequence — fully proved"
+  click n225 "roadmap/homology/computations-and-applications/mayer-vietoris/small-augmented-chain-inclusion-homotopy-equivalence.md" "Small augmented chains include by a chain-homotopy equivalence — fully proved"
+  click n226 "roadmap/homology/computations-and-applications/post-excision-applications/README.md" "Post-excision applications — 28 items · 28 fully proved"
+  click n227 "roadmap/homology/computations-and-applications/post-excision-applications/contractible-subspace-relative-reduced-homology.md" "A contractible subspace identifies reduced and relative homology — fully proved"
+  click n228 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-excision.md" "Excision holds for a union of CW subcomplexes — fully proved"
+  click n229 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/README.md" "CW-subcomplex regular neighborhoods — 5 items · 5 fully proved"
+  click n230 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/cell-boundary-collar.md" "The radial collar of a cell boundary — fully proved"
+  click n231 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/regular-neighborhood-strong-deformation-retract.md" "A regular neighborhood strongly deformation retracts onto its subcomplex — fully proved"
+  click n232 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/regular-neighborhood-system.md" "A common regular-neighborhood system for subcomplexes — fully proved"
+  click n233 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/subcomplex-intersection.md" "Intersections of CW subcomplexes — fully proved"
+  click n234 "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/subcomplex-neighborhood-cover.md" "Subcomplex decompositions admit compatible neighborhoods — fully proved"
+  click n235 "roadmap/homology/computations-and-applications/post-excision-applications/double-simplex-fundamental-class.md" "The double-simplex difference generates reduced homology — fully proved"
+  click n236 "roadmap/homology/computations-and-applications/post-excision-applications/double-simplex-fundamental-cycle.md" "The ordered difference of the two simplices is a cycle — fully proved"
+  click n237 "roadmap/homology/computations-and-applications/post-excision-applications/double-simplex-relative-comparison.md" "The first simplex computes homology relative to the second — fully proved"
+  click n238 "roadmap/homology/computations-and-applications/post-excision-applications/double-simplex-sphere-homeomorphism.md" "The double simplex is a sphere — fully proved"
+  click n239 "roadmap/homology/computations-and-applications/post-excision-applications/mapping-cone-cover-relative-homology.md" "The mapping-cone cover has the relative homology of the original pair — fully proved"
+  click n240 "roadmap/homology/computations-and-applications/post-excision-applications/mapping-cone-model.md" "The mapping cone of a topological pair — fully proved"
+  click n241 "roadmap/homology/computations-and-applications/post-excision-applications/mapping-cone-relative-reduced-homology.md" "Relative homology is reduced homology of the mapping cone — fully proved"
+  click n242 "roadmap/homology/computations-and-applications/post-excision-applications/pointed-wedge-point-quotient.md" "The pointed wedge is the point quotient of the sigma pair — fully proved"
+  click n243 "roadmap/homology/computations-and-applications/post-excision-applications/relative-homology-coproduct.md" "Relative homology commutes with exact coproducts — fully proved"
+  click n244 "roadmap/homology/computations-and-applications/post-excision-applications/relative-simplex-fundamental-class.md" "The identity simplex generates relative simplex homology — fully proved"
+  click n245 "roadmap/homology/computations-and-applications/post-excision-applications/sigma-good-pair.md" "A nonempty coproduct of pointed good pairs is good — fully proved"
+  click n246 "roadmap/homology/computations-and-applications/post-excision-applications/sigma-pointed-pair.md" "The coproduct pair of a family of pointed spaces — fully proved"
+  click n247 "roadmap/homology/computations-and-applications/post-excision-applications/singular-relative-chains-coproduct.md" "Relative singular chains commute with topological coproducts — fully proved"
+  click n248 "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-boundary-good-pairs.md" "Standard-simplex boundary and horn pairs are good — fully proved"
+  click n249 "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-boundary-horn.md" "The boundary and zero horn of a standard topological simplex — fully proved"
+  click n250 "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-disk-pair-homeomorphism.md" "The standard simplex pair is homeomorphic to the disk pair — fully proved"
+  click n251 "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-zero-face-point-quotient.md" "The zero face identifies the two simplex point quotients — fully proved"
+  click n252 "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-zero-face-relative-homology.md" "The zero face induces an isomorphism in relative homology — fully proved"
+  click n253 "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-zero-horn-retraction.md" "A standard simplex strongly deformation retracts onto its zero horn — fully proved"
+  click n254 "roadmap/homology/computations-and-applications/post-excision-applications/triple-connecting-cycle-formula.md" "The triple connecting map sends a relative cycle to its boundary — fully proved"
+  click n255 "roadmap/homology/computations-and-applications/post-excision-applications/wedge-reduced-homology.md" "Reduced homology of a wedge is the direct sum of the summands — fully proved"
+  click n256 "roadmap/homology/computations-and-applications/sphere-homology/README.md" "Mayer–Vietoris transport, sphere homology, and Brouwer — 16 items · 16 fully proved"
+  click n257 "roadmap/homology/computations-and-applications/sphere-homology/brouwer-fixed-point-disk.md" "Brouwer's fixed-point theorem for disks — fully proved"
+  click n258 "roadmap/homology/computations-and-applications/sphere-homology/closed-ball-radial-deformation-retract.md" "A closed ball strongly deformation retracts from Euclidean space — fully proved"
+  click n259 "roadmap/homology/computations-and-applications/sphere-homology/contractible-space-reduced-homology.md" "Reduced homology of a contractible space vanishes — fully proved"
+  click n260 "roadmap/homology/computations-and-applications/sphere-homology/disk-boundary-no-retraction.md" "The boundary sphere is not a retract of the disk — fully proved"
+  click n261 "roadmap/homology/computations-and-applications/sphere-homology/fixed-point-free-disk-map-retraction.md" "A fixed-point-free disk map produces a boundary retraction — fully proved"
+  click n262 "roadmap/homology/computations-and-applications/sphere-homology/homotopy-equivalence-reduced-homology-iso.md" "A homotopy equivalence induces reduced-homology isomorphisms — fully proved"
+  click n263 "roadmap/homology/computations-and-applications/sphere-homology/ordinary-neighborhood-mayer-vietoris.md" "The ordinary neighborhood-retract Mayer–Vietoris sequence — fully proved"
+  click n264 "roadmap/homology/computations-and-applications/sphere-homology/punctured-space-radial-deformation-retract.md" "A sphere strongly deformation retracts from punctured Euclidean space — fully proved"
+  click n265 "roadmap/homology/computations-and-applications/sphere-homology/reduced-homology-homotopy-invariance.md" "Homotopic maps induce the same reduced-homology map — fully proved"
+  click n266 "roadmap/homology/computations-and-applications/sphere-homology/reduced-neighborhood-mayer-vietoris.md" "The reduced neighborhood-retract Mayer–Vietoris sequence — fully proved"
+  click n267 "roadmap/homology/computations-and-applications/sphere-homology/sphere-hemisphere-neighborhood-cover.md" "The hemispheres have compatible neighborhood deformation retractions — fully proved"
+  click n268 "roadmap/homology/computations-and-applications/sphere-homology/sphere-hemisphere-stereographic-models.md" "Stereographic models for hemispheres and the equator — fully proved"
+  click n269 "roadmap/homology/computations-and-applications/sphere-homology/sphere-reduced-homology.md" "Reduced homology of spheres — fully proved"
+  click n270 "roadmap/homology/computations-and-applications/sphere-homology/sphere-reduced-homology-recurrence.md" "The reduced homology of spheres satisfies the suspension recurrence — fully proved"
+  click n271 "roadmap/homology/computations-and-applications/sphere-homology/zero-sphere-reduced-homology.md" "Reduced homology of the zero-sphere — fully proved"
+  click n272 "roadmap/homology/computations-and-applications/sphere-homology/zero-sphere-two-point-homeomorphism.md" "The zero-sphere is a two-point space — fully proved"
+  click n273 "roadmap/homology/formal-viewpoint/README.md" "The formal viewpoint — not ready"
+  click n274 "roadmap/homology/simplicial-and-singular/README.md" "Simplicial and singular homology — 55 items · 10 in mathlib · 45 fully proved"
+  click n275 "roadmap/homology/simplicial-and-singular/chain-homotopy-invariance.md" "Chain-homotopic maps induce the same homology map — in mathlib"
+  click n276 "roadmap/homology/simplicial-and-singular/chain-map-homology.md" "A chain map induces a map on homology — in mathlib"
+  click n277 "roadmap/homology/simplicial-and-singular/homotopy-equivalence-homology-iso.md" "A homotopy equivalence induces homology isomorphisms — fully proved"
+  click n278 "roadmap/homology/simplicial-and-singular/point-homology.md" "Homology of a point — fully proved"
+  click n279 "roadmap/homology/simplicial-and-singular/relative-homology/README.md" "Relative homology and exact sequences — 45 items · 2 in mathlib · 43 fully proved"
+  click n280 "roadmap/homology/simplicial-and-singular/relative-homology/augmented-singular-chain-complex.md" "The augmented singular chain complex — fully proved"
+  click n281 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/README.md" "Good pairs and quotient exact sequences — 16 items · 16 fully proved"
+  click n282 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-data.md" "Good pairs and neighborhood deformation retracts — fully proved"
+  click n283 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-excision-diagram.md" "The complementary excision diagram — fully proved"
+  click n284 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-neighborhood-quotient.md" "Restricting the quotient to a good-pair neighborhood — fully proved"
+  click n285 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-neighborhood-relative-homology.md" "Enlarging to the chosen neighborhood preserves relative homology — fully proved"
+  click n286 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-point-quotient-exact-sequence.md" "The good-pair quotient exact sequence — fully proved"
+  click n287 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-point-quotient-relative-homology.md" "Good-pair relative homology is reduced quotient homology — fully proved"
+  click n288 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-point-quotient-sequence-naturality.md" "Naturality of the good-pair quotient sequence — fully proved"
+  click n289 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-quotient-comparison-naturality.md" "The good-pair quotient comparison is natural — fully proved"
+  click n290 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-functor.md" "Functorial point quotients of topological pairs — fully proved"
+  click n291 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-neighborhood-contraction.md" "The quotient neighborhood contracts to its point — fully proved"
+  click n292 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-neighborhood-excision.md" "The neighborhood quotient map preserves relative homology — fully proved"
+  click n293 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-neighborhood-relative-homology.md" "Enlarging the quotient point preserves relative homology — fully proved"
+  click n294 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-projection-topology.md" "Topology of the point-quotient projection — fully proved"
+  click n295 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/pointed-relative-reduced-homology-naturality.md" "The pointed relative-to-reduced comparison is natural — fully proved"
+  click n296 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/relative-homology-map-isomorphism-criterion.md" "Componentwise isomorphisms imply a relative isomorphism — fully proved"
+  click n297 "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/strong-deformation-retract.md" "Strong deformation retracts — fully proved"
+  click n298 "roadmap/homology/simplicial-and-singular/relative-homology/pair-long-exact-sequence.md" "The long exact sequence of a pair — fully proved"
+  click n299 "roadmap/homology/simplicial-and-singular/relative-homology/pair-long-exact-sequence-naturality.md" "The pair long exact sequence is natural — fully proved"
+  click n300 "roadmap/homology/simplicial-and-singular/relative-homology/pointed-relative-reduced-homology.md" "Relative homology at a basepoint is reduced homology — fully proved"
+  click n301 "roadmap/homology/simplicial-and-singular/relative-homology/pointed-zeroth-homology-splitting.md" "Zeroth homology splits into reduced homology and the coefficient object — fully proved"
+  click n302 "roadmap/homology/simplicial-and-singular/relative-homology/reduced-pair-long-exact-sequence.md" "The reduced long exact sequence of a nonempty pair — fully proved"
+  click n303 "roadmap/homology/simplicial-and-singular/relative-homology/reduced-pair-long-exact-sequence-naturality.md" "The reduced pair long exact sequence is natural — fully proved"
+  click n304 "roadmap/homology/simplicial-and-singular/relative-homology/reduced-positive-degree-comparison.md" "Reduced and ordinary homology agree in positive degrees — fully proved"
+  click n305 "roadmap/homology/simplicial-and-singular/relative-homology/reduced-singular-homology.md" "Reduced singular homology — fully proved"
+  click n306 "roadmap/homology/simplicial-and-singular/relative-homology/relative-homology-homotopy-invariance.md" "Homotopic maps of pairs induce the same relative-homology map — fully proved"
+  click n307 "roadmap/homology/simplicial-and-singular/relative-homology/relative-singular-chain-homotopy.md" "A homotopy of pairs gives a relative chain homotopy — fully proved"
+  click n308 "roadmap/homology/simplicial-and-singular/relative-homology/relative-singular-homology.md" "Relative singular chains and homology — fully proved"
+  click n309 "roadmap/homology/simplicial-and-singular/relative-homology/short-exact-homology-sequence.md" "A short exact sequence gives an exact homology sequence — in mathlib"
+  click n310 "roadmap/homology/simplicial-and-singular/relative-homology/simplicial-pair-relative-homology.md" "Relative homology of a simplicial-set pair — in mathlib"
+  click n311 "roadmap/homology/simplicial-and-singular/relative-homology/singular-pair-functor.md" "The singular set of a topological pair — fully proved"
+  click n312 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/README.md" "Small chains and excision — 10 items · 10 fully proved"
+  click n313 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/affine-barycentric-subdivision.md" "Affine barycentric subdivision is compatible with faces — fully proved"
+  click n314 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/affine-chain-subdivision-homotopy.md" "Affine-chain subdivision is homotopic to the identity — fully proved"
+  click n315 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/barycentric-subdivision-diameter.md" "Barycentric subdivision contracts simplex diameter — fully proved"
+  click n316 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/binary-cover-excision-chain-equivalence.md" "The binary-cover excision chain map is a homotopy equivalence — fully proved"
+  click n317 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/binary-cover-excision-homology-isomorphism.md" "Binary-cover excision induces homology isomorphisms — fully proved"
+  click n318 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/deleted-subset-excision-homology-isomorphism.md" "Deleted-subset excision induces homology isomorphisms — fully proved"
+  click n319 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/eventually-small-singular-simplices.md" "Iterated subdivision eventually makes every singular simplex small — fully proved"
+  click n320 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/relative-chain-union-devissage.md" "Relative excision reduces to the union subcomplex — fully proved"
+  click n321 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/singular-chain-subdivision-homotopy.md" "Singular-chain subdivision is naturally homotopic to the identity — fully proved"
+  click n322 "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/small-chain-inclusion-homotopy-equivalence.md" "Small singular chains include by a chain-homotopy equivalence — fully proved"
+  click n323 "roadmap/homology/simplicial-and-singular/relative-homology/topological-triple.md" "Topological triples and their maps — fully proved"
+  click n324 "roadmap/homology/simplicial-and-singular/relative-homology/triple-chain-short-exact-sequence.md" "Relative chains of a triple form a short exact sequence — fully proved"
+  click n325 "roadmap/homology/simplicial-and-singular/relative-homology/triple-long-exact-sequence.md" "The long exact sequence of a triple — fully proved"
+  click n326 "roadmap/homology/simplicial-and-singular/relative-homology/triple-long-exact-sequence-naturality.md" "The triple long exact sequence is natural — fully proved"
+  click n327 "roadmap/homology/simplicial-and-singular/singular-chain-complex.md" "The singular chain complex — in mathlib"
+  click n328 "roadmap/homology/simplicial-and-singular/singular-homology.md" "Singular homology — in mathlib"
+  click n329 "roadmap/homology/simplicial-and-singular/singular-homology-homotopy-invariance.md" "Homotopic maps induce the same singular-homology map — in mathlib"
+  click n330 "roadmap/homology/simplicial-and-singular/topological-homotopy-chain-homotopy.md" "A topological homotopy gives a singular-chain homotopy — in mathlib"
+  click n331 "roadmap/homology/simplicial-and-singular/totally-disconnected-higher-homology.md" "Higher homology vanishes for totally disconnected spaces — in mathlib"
+  click n332 "roadmap/homology/simplicial-and-singular/zeroth-homology-components.md" "Zeroth homology is free on path components — in mathlib"
+  click n333 "roadmap/homotopy-theory/README.md" "Homotopy theory — 3 items · 3 not ready"
+  click n334 "roadmap/homotopy-theory/connections-with-cohomology/README.md" "Connections with cohomology — not ready"
+  click n335 "roadmap/homotopy-theory/elementary-methods/README.md" "Elementary methods of calculation — not ready"
+  click n336 "roadmap/homotopy-theory/homotopy-groups/README.md" "Homotopy groups — not ready"
+  click n337 "roadmap/README.md" "Algebraic Topology (Hatcher) roadmap — 307 items · 18 in mathlib · 250 fully proved · 8 ready to state · 8 not ready · 23 planned"
+  click n338 "roadmap/underlying-geometric-notions/README.md" "Some underlying geometric notions — not ready"
   classDef mathlib fill:#1C5C33,stroke:#134426,color:#FFFFFF,stroke-width:2px
   classDef fully_proved fill:#31A24C,stroke:#22773A,color:#FFFFFF,stroke-width:2px
   classDef proved fill:#8ED4A2,stroke:#22773A,color:#0B2415,stroke-width:2px
@@ -1199,4 +1390,4 @@ graph LR
 
 ## Legend
 
-<div class="bp-legend-grid"><span class="bp-swatch bp-swatch-mathlib"></span><span class="bp-legend-label">in mathlib</span><span class="bp-legend-count">18</span><span class="bp-legend-meaning">Upstreamed into Mathlib.</span><span class="bp-swatch bp-swatch-fully_proved"></span><span class="bp-legend-label">fully proved</span><span class="bp-legend-count">246</span><span class="bp-legend-meaning">Proved, and every prerequisite is fully proved too.</span><span class="bp-swatch bp-swatch-can_state"></span><span class="bp-legend-label">ready to state</span><span class="bp-legend-count">1</span><span class="bp-legend-meaning">Nothing it needs is blocked, so the statement can be written in Lean.</span><span class="bp-swatch bp-swatch-not_ready"></span><span class="bp-legend-label">not ready</span><span class="bp-legend-count">8</span><span class="bp-legend-meaning">Needs more blueprint work before it can be attempted.</span><span class="bp-swatch bp-swatch-planned"></span><span class="bp-legend-label">planned</span><span class="bp-legend-count">3</span><span class="bp-legend-meaning">Described in the blueprint only.</span></div>
+<div class="bp-legend-grid"><span class="bp-swatch bp-swatch-mathlib"></span><span class="bp-legend-label">in mathlib</span><span class="bp-legend-count">18</span><span class="bp-legend-meaning">Upstreamed into Mathlib.</span><span class="bp-swatch bp-swatch-fully_proved"></span><span class="bp-legend-label">fully proved</span><span class="bp-legend-count">250</span><span class="bp-legend-meaning">Proved, and every prerequisite is fully proved too.</span><span class="bp-swatch bp-swatch-can_state"></span><span class="bp-legend-label">ready to state</span><span class="bp-legend-count">8</span><span class="bp-legend-meaning">Nothing it needs is blocked, so the statement can be written in Lean.</span><span class="bp-swatch bp-swatch-not_ready"></span><span class="bp-legend-label">not ready</span><span class="bp-legend-count">8</span><span class="bp-legend-meaning">Needs more blueprint work before it can be attempted.</span><span class="bp-swatch bp-swatch-planned"></span><span class="bp-legend-label">planned</span><span class="bp-legend-count">23</span><span class="bp-legend-meaning">Described in the blueprint only.</span></div>

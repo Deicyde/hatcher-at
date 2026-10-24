@@ -48,8 +48,9 @@ All sixteen formalization leaves are formalized locally and complete.
 
 This milestone stops after Proposition 2.29. Local degree and Proposition 2.30
 continue in the separate [local-degree milestone](../local-degree/README.md).
-Examples 2.31–2.32, suspension invariance, cellular homology, the Hopf
-converse, and Theorem 2.27 remain deferred.
+Examples 2.31–2.32 and suspension invariance continue in the new
+[degree-realization and suspension milestone](../degree-realization-suspension/README.md).
+Cellular homology, the Hopf converse, and Theorem 2.27 remain queued.
 
 ## Sources
 

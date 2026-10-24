@@ -6,7 +6,10 @@ the core Mayer–Vietoris sequences on printed pages 149–150 (PDF pages
 The selected degree foundations on printed pages 134–135 and local-degree
 continuation through Proposition 2.30 have their own
 [degree](hatcher-2-2-degree.md) and
-[local-degree](hatcher-2-2-local-degree.md) source notes. Statements below are
+[local-degree](hatcher-2-2-local-degree.md) source notes. The next
+[degree-realization and suspension unit](hatcher-2-2-degree-applications.md)
+records Examples 2.31–2.32, Proposition 2.33, and the pole observation on
+printed pages 136–137. Statements below are
 paraphrased; consult the official PDF for the source text and diagrams.
 
 ## Binary interior-cover sequence
@@ -92,13 +95,15 @@ Mayer–Vietoris sequences and their chain-level construction. A second selected
 unit contains the conditional neighborhood-deformation-retract extension and
 Example 2.46. A third unit contains degree and properties (a)–(g), Theorem
 2.28, and Proposition 2.29. A fourth selected unit contains local degree and
-Proposition 2.30, with their exact boundaries recorded separately.
+Proposition 2.30, with their exact boundaries recorded separately and all
+leaves complete. A fifth selected unit decomposes the degree-realization
+examples, Proposition 2.33, and its pole/local-degree consequence.
 
-The general CW-subcomplex neighborhood construction, Examples 2.47–2.48,
-Mayer–Vietoris naturality as a separate API, relative Mayer–Vietoris,
-degree-realization examples, suspension invariance, cellular homology, and
-homology with general coefficient groups as a separate source topic remain
-excluded.
+Cellular homology beginning with Lemma 2.34, the general CW-subcomplex
+neighborhood construction, Examples 2.47–2.48, Mayer–Vietoris naturality as
+a separate API, relative Mayer–Vietoris, and homology with general
+coefficient groups remain queued. They are not excluded source topics or
+claims of external blockers.
 
 The local formalization may use a general abelian target category and a
 coefficient object `R`; Hatcher's displayed groups are the integral

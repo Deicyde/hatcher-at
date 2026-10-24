@@ -4,41 +4,24 @@ article_id: af_018beb3e9d962f2092677b89
 
 # Algebraic Topology (Hatcher) roadmap
 
-Formalize results from Hatcher's *Algebraic Topology* in Lean 4 on top of
-Mathlib, working outward from the fundamental group.
+Formalize selected results from Hatcher's *Algebraic Topology* in Lean 4 on
+Mathlib, working outward from the fundamental group. Chapters follow the
+book's order; fine leaves expose the actual source objects and maps.
 
-Mathlib already carries much of the book's groundwork: path homotopy, the
-fundamental groupoid, covering spaces with their lifting theorems, CW
-complexes, and singular homology in degree zero. What it lacks is the book's
-spine of computations, starting with `π₁(S¹) ≅ ℤ`. The roadmap therefore maps
-the whole book but decomposes it from that point.
+The completed scope contains 268 formalizable leaves: 250 proved locally and
+18 supplied by pinned Mathlib. It includes the selected fundamental-group
+spines, homology and excision applications, degree foundations, and all twenty
+local-degree leaves through Proposition 2.30. The next thirty-one-leaf
+[degree-realization and suspension milestone](homology/computations-and-applications/degree-realization-suspension/README.md)
+plans the maps of arbitrary degree, integer circle powers, suspension
+invariance, and the pole local-degree consequence on printed pages 136–137.
+These new leaves are unproved planning work, bringing the selected DAG to 299
+formalizable leaves.
 
-Chapters follow Hatcher's own order. The selected scope now has 268
-formalizable leaves. Of these, 264 are complete: 246 are formalized locally
-and 18 are pinned Mathlib declarations. This includes all 133 leaves in the
-previously completed §1.1, §1.2, §1.3, §2.1 functoriality, and Appendix A.1
-slices; the §1.3 spine extends through Proposition 1.40. A fifteen-leaf §2.1 slice also
-decomposes reduced and relative homology, long exact sequences, naturality, and
-relative homotopy invariance, and all fifteen of its leaves are complete. The
-four leaves in the §2.1 triple exact-sequence slice are complete as well. All
-ten leaves in the §2.1 small-chains/excision DAG are complete. All six §2.2
-Mayer–Vietoris leaves are complete. The thirteen leaves for the
-neighborhood-retract extension, Example 2.46, and reduced sphere homology are
-also formalized locally and complete. The three Corollary 2.15 leaves through
-Brouwer's theorem are complete. The promoted strong-deformation-retract
-background leaf is also complete. All fifteen leaves for the good-pair quotient
-comparison, Theorem 2.13, and naturality are formalized locally and complete.
-All thirty-two leaves for the post-excision applications through Theorem 2.26
-and their Appendix A.5 regular-neighborhood prerequisite are formalized
-locally and complete. The degree properties (a)–(g), Theorem 2.28, and
-Proposition 2.29 are formalized locally in sixteen additional complete leaves.
-Local degree and Proposition 2.30 are decomposed into twenty additional
-leaves; sixteen are formalized locally and four remain. The generic sigma-pair
-chain and homology comparisons are complete; the next frontier is the
-finite-puncture homology coproduct. The unselected source remains queued for
-later roadmap passes outside this milestone.
-The [coverage contract](../coverage/README.md) says which is which, and
-[the source notes](../sources/hatcher.md) fix the citation scheme.
+The [coverage contract](../coverage/README.md) maps the whole main-line source
+and retains thirteen queued areas; it does not call them exclusions or
+external blockers. Lettered additional topics and exercises remain outside
+scope. [Source notes](../sources/hatcher.md) fix the citation scheme.
 
 ## Chapters
 
