@@ -147,6 +147,7 @@ import Hatcher.Sphere.FinitePunctureExcision
 import Hatcher.Sphere.FiniteFiberLocalMap
 import Hatcher.Sphere.FiniteFiberDegree
 import Hatcher.Sphere.FinitePunctureOrientation
+import Hatcher.Sphere.DegreeLocalSum
 import Hatcher.Sphere.NonsurjectiveDegree
 import Hatcher.Sphere.OddTangentField
 import Hatcher.Sphere.PuncturedStereographic

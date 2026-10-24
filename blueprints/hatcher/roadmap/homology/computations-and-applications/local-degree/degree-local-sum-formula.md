@@ -3,6 +3,9 @@ article_id: af_680f7dd9f0023187b145b0eb
 source_units: [hatcher-2-2-local-degree]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.degree_eq_sum_localDegree
 ---
 
 # Degree is the sum of the local degrees
