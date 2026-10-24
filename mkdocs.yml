@@ -7,6 +7,11 @@ docs_dir: site-src
 site_dir: site
 use_directory_urls: false
 
+# Group the pinned renderer's prose shortcuts under their directory parents.
+# The hook changes only MkDocs' in-memory SUMMARY, not the vault or renderer.
+hooks:
+  - scripts/blueprint_nav.py
+
 # Keep the primary site navigation project-independent. book.md is the same
 # material as the chapter pages in one scroll, so it is published and linked
 # from the contents page rather than competing with them here. The Blueprint page

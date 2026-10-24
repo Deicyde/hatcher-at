@@ -8,6 +8,8 @@ on:
       - "blueprints/**"
       - "**.lean"
       - "mkdocs.yml"
+      - "scripts/blueprint_nav.py"
+      - "tests/test_blueprint_nav.py"
       - ".github/workflows/blueprint-pages.yml"
   pull_request:
     paths:
@@ -15,6 +17,8 @@ on:
       - "blueprints/**"
       - "**.lean"
       - "mkdocs.yml"
+      - "scripts/blueprint_nav.py"
+      - "tests/test_blueprint_nav.py"
       - ".github/workflows/blueprint-pages.yml"
   workflow_dispatch:
 
@@ -54,6 +58,14 @@ jobs:
           --output site-src
           --lean-root .
           --require-declarations
+
+      - name: Test generated book navigation
+        run: >-
+          uvx --from mkdocs==1.6.1
+          --with mkdocs-material==9.6.21
+          --with mkdocs-literate-nav==0.6.2
+          --with pymdown-extensions==10.21.3
+          python -m unittest discover -s tests -p test_blueprint_nav.py
 
       - name: Build the Markdown site
         run: >-
