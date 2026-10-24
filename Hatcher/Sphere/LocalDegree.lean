@@ -125,3 +125,89 @@ theorem localFundamentalClass_map_eq_localDegree
   exact localFundamentalClass_map_eq_neighborhoodLocalDegree n hn N
 
 end Hatcher.Sphere
+
+
+namespace Hatcher.Sphere
+
+namespace LocalDegreeNeighborhood
+
+variable {n : ℕ}
+  {f g : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n}
+  {x y : TopCat.sphere.{0} n}
+
+/-- Transfer an isolating neighborhood to a map that agrees on its open set. -/
+def ofEqOn (N : LocalDegreeNeighborhood f x y) (hfg : Set.EqOn f g N.U) :
+    LocalDegreeNeighborhood g x y where
+  U := N.U
+  isOpen_U := N.isOpen_U
+  x_mem := N.x_mem
+  map_eq := (hfg N.x_mem).symm.trans N.map_eq
+  eq_of_mem_of_map_eq hz hzy :=
+    N.eq_of_mem_of_map_eq hz ((hfg hz).trans hzy)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Agreement on an isolating neighborhood identifies the actual induced
+morphisms of punctured pairs. -/
+theorem pairHom_ofEqOn
+    (N : LocalDegreeNeighborhood f x y) (hfg : Set.EqOn f g N.U) :
+    (N.ofEqOn hfg).pairHom = N.pairHom := by
+  apply MorphismProperty.Arrow.Hom.ext
+  · ext z
+    apply Subtype.ext
+    change g z.1.1 = f z.1.1
+    exact (hfg z.1.2).symm
+  · ext z
+    change g z.1 = f z.1
+    exact (hfg z.2).symm
+
+end LocalDegreeNeighborhood
+
+/-- Agreement on an open neighborhood preserves isolation and the signed
+local degree, for every choice of isolation witnesses. -/
+theorem localDegree_germ_invariance
+    (n : ℕ) (hn : 0 < n)
+    {f g : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n}
+    {x y : TopCat.sphere.{0} n}
+    (U : Set (TopCat.sphere.{0} n))
+    (hU : IsOpen U) (hxU : x ∈ U)
+    (hfg : Set.EqOn f g U) (hf : IsolatedPreimage f x y) :
+    IsolatedPreimage g x y ∧
+      ∀ (hf' : IsolatedPreimage f x y) (hg : IsolatedPreimage g x y),
+        localDegree n hn f x y hf' = localDegree n hn g x y hg := by
+  classical
+  let N : LocalDegreeNeighborhood f x y := Classical.choice hf
+  let M := N.restrict (N.U ∩ U) ⟨N.x_mem, hxU⟩
+    (N.isOpen_U.inter hU) Set.inter_subset_left
+  have hfgM : Set.EqOn f g M.U := by
+    intro z hz
+    exact hfg hz.2
+  let Ng := M.ofEqOn hfgM
+  refine ⟨Ng.isolatedPreimage, ?_⟩
+  intro hf' hg
+  let H := Hatcher.Relative.homologyFunctor (AddCommGrpCat.of ℤ) n
+  let classM := integralSphereNeighborhoodFundamentalClass
+    n hn x M.U M.x_mem M.isOpen_U
+  have hpair : Ng.pairHom = M.pairHom :=
+    M.pairHom_ofEqOn hfgM
+  have hscaled :
+      AddCommGrpCat.asHom (localDegree n hn f x y hf') ≫
+          integralSphereLocalFundamentalClass n hn y =
+        AddCommGrpCat.asHom (localDegree n hn g x y hg) ≫
+          integralSphereLocalFundamentalClass n hn y := by
+    calc
+      _ = classM ≫ H.map M.pairHom :=
+        (localFundamentalClass_map_eq_localDegree n hn f x y hf' M).symm
+      _ = classM ≫ H.map Ng.pairHom := by rw [hpair]
+      _ = _ := localFundamentalClass_map_eq_localDegree n hn g x y hg Ng
+  let _ : IsIso (integralSphereLocalFundamentalClass n hn y) :=
+    integralSphereLocalFundamentalClass_isIso n hn y
+  have hhom :
+      AddCommGrpCat.asHom (G := AddCommGrpCat.of ℤ)
+          (localDegree n hn f x y hf') =
+        AddCommGrpCat.asHom (G := AddCommGrpCat.of ℤ)
+          (localDegree n hn g x y hg) := by
+    rw [← cancel_mono (integralSphereLocalFundamentalClass n hn y)]
+    exact hscaled
+  exact AddCommGrpCat.asHom_injective hhom
+
+end Hatcher.Sphere

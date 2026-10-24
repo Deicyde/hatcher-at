@@ -3,6 +3,9 @@ article_id: af_a756c24e9493a057e03f83dc
 source_units: [hatcher-2-2-degree-realization-suspension]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.localDegree_germ_invariance Hatcher.Sphere.LocalDegreeNeighborhood.pairHom_ofEqOn
 ---
 
 # Maps with the same germ have the same local degree
