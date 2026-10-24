@@ -144,4 +144,56 @@ theorem degree_eq_sum_localDegree
         (D.neighborhood i).isolatedPreimage
         (finiteFiberIsolatedPreimage f y hfinite i)
 
+/-- A singleton sphere-map fiber gives an isolated preimage in every
+dimension. The required finiteness and fiber membership are consequences of
+the singleton equation. -/
+theorem singletonFiberIsolatedPreimage {n : ℕ}
+    (f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n)
+    (x y : TopCat.sphere.{0} n) (hfiber : fiber f y = {x}) :
+    IsolatedPreimage f x y := by
+  have hfinite : (fiber f y).Finite := by
+    rw [hfiber]
+    exact Set.finite_singleton x
+  have hx : x ∈ fiber f y := by
+    rw [hfiber]
+    exact Set.mem_singleton x
+  exact finiteFiberIsolatedPreimage f y hfinite ⟨x, hx⟩
+
+/-- A singleton fiber's neighborhood-independent local degree is the global
+degree for every isolation witness. This specializes Proposition 2.30 and
+does not require a local-homeomorphism hypothesis. -/
+theorem localDegree_eq_degree_of_fiber_eq_singleton
+    (n : ℕ) (hn : 0 < n)
+    (f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n)
+    (x y : TopCat.sphere.{0} n) (hfiber : fiber f y = {x})
+    (h : IsolatedPreimage f x y) :
+    localDegree n hn f x y h = degree n hn f := by
+  classical
+  have hfinite : (fiber f y).Finite := by
+    rw [hfiber]
+    exact Set.finite_singleton x
+  have hx : x ∈ fiber f y := by
+    rw [hfiber]
+    exact Set.mem_singleton x
+  let i : fiber f y := ⟨x, hx⟩
+  let : Fintype (fiber f y) := finiteFiberFintype hfinite
+  let : Subsingleton (fiber f y) := ⟨fun a b ↦ Subtype.ext (by
+    have ha : a.1 = x :=
+      Set.mem_singleton_iff.mp ((Set.ext_iff.mp hfiber a.1).mp a.2)
+    have hb : b.1 = x :=
+      Set.mem_singleton_iff.mp ((Set.ext_iff.mp hfiber b.1).mp b.2)
+    exact ha.trans hb.symm)⟩
+  have hsum : degree n hn f =
+      localDegree n hn f x y (finiteFiberIsolatedPreimage f y hfinite i) := by
+    calc
+      degree n hn f = ∑ j : fiber f y,
+          localDegree n hn f j.1 y (finiteFiberIsolatedPreimage f y hfinite j) :=
+        degree_eq_sum_localDegree n hn f y hfinite
+      _ = localDegree n hn f x y (finiteFiberIsolatedPreimage f y hfinite i) :=
+        Fintype.sum_subsingleton
+          (fun j : fiber f y ↦
+            localDegree n hn f j.1 y (finiteFiberIsolatedPreimage f y hfinite j)) i
+  exact (localDegree_proof_irrel n hn f x y h
+    (finiteFiberIsolatedPreimage f y hfinite i)).trans hsum.symm
+
 end Hatcher.Sphere

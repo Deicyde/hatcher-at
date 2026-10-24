@@ -3,6 +3,9 @@ article_id: af_c91632048e647755bd9a6e50
 source_units: [hatcher-2-2-degree-realization-suspension]
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.singletonFiberIsolatedPreimage Hatcher.Sphere.localDegree_eq_degree_of_fiber_eq_singleton
 ---
 
 # A singleton fiber has local degree equal to global degree
