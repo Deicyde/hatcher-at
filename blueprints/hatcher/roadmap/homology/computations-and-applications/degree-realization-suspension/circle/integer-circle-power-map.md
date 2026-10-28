@@ -16,6 +16,7 @@ Record its complex-coordinate equation, P₀ being constant, and the negative-ex
 ## Depends on
 
 - [disk boundary two circle](../../../../fundamental-group/van-kampen/cell-attachment-support/disk-boundary-two-circle.md)
+- [Natural circle powers and their loop compatibility](../../../../fundamental-group/van-kampen/cell-attachment-support/circle-degree-map.md)
 
 ## Sources
 

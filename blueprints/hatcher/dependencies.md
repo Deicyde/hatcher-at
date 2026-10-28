@@ -4,7 +4,7 @@ kind: graph
 
 # Dependency graph
 
-339 nodes · 685 dependencies. Arrows point from a prerequisite to what depends on it; a dashed
+339 nodes · 686 dependencies. Arrows point from a prerequisite to what depends on it; a dashed
 arrow marks a prerequisite that only the proof needs. Select a node to open it.
 
 ```mermaid
@@ -147,10 +147,10 @@ graph LR
   n135["The fundamental group of a wedge of circles"]:::fully_proved
   n136["The fundamental group of a wedge"]:::fully_proved
   n137("The standard cover of a well-pointed wedge"):::fully_proved
-  n138["Homology<br/><small>177 items · 10 in mathlib · 135 fully proved · 8 ready to state · 1 not ready · 23 planned</small>"]:::scope
-  n139["Computations and applications<br/><small>121 items · 90 fully proved · 8 ready to state · 23 planned</small>"]:::scope
+  n138["Homology<br/><small>177 items · 10 in mathlib · 137 fully proved · 6 ready to state · 1 not ready · 23 planned</small>"]:::scope
+  n139["Computations and applications<br/><small>121 items · 92 fully proved · 6 ready to state · 23 planned</small>"]:::scope
   n140["Degree foundations and applications<br/><small>16 items · 16 fully proved</small>"]:::scope_complete
-  n141["Prescribed degrees and suspension<br/><small>31 items · 8 ready to state · 23 planned</small>"]:::scope
+  n141["Prescribed degrees and suspension<br/><small>31 items · 2 fully proved · 6 ready to state · 23 planned</small>"]:::scope
   n142["Integer circle powers<br/><small>9 items · 2 ready to state · 7 planned</small>"]:::scope
   n143("Circle inversion is the standard coordinate reflection"):::planned
   n144("Local positive stretching deforms to a rotation through punctured maps"):::planned
@@ -172,10 +172,10 @@ graph LR
   n160("Each ball-collapse map has degree plus or minus one"):::planned
   n161["Collapsing the complement of disjoint sphere balls gives the pinch map"]:::planned
   n162("Every integer is the degree of a sphere map"):::planned
-  n163["Shared local-degree comparisons<br/><small>3 items · 3 ready to state</small>"]:::scope
-  n164("Maps with the same germ have the same local degree"):::can_state
+  n163["Shared local-degree comparisons<br/><small>3 items · 2 fully proved · 1 ready to state</small>"]:::scope
+  n164("Maps with the same germ have the same local degree"):::fully_proved
   n165("A puncture-preserving local homotopy preserves local degree"):::can_state
-  n166("A singleton fiber has local degree equal to global degree"):::can_state
+  n166("A singleton fiber has local degree equal to global degree"):::fully_proved
   n167["Suspension and degree at its poles<br/><small>9 items · 1 ready to state · 8 planned</small>"]:::scope
   n168("Every integer is a local degree in sphere dimension at least two"):::planned
   n169("The cone over a sphere forms a contractible good pair"):::can_state
@@ -346,7 +346,7 @@ graph LR
   n334("Connections with cohomology"):::not_ready
   n335("Elementary methods of calculation"):::not_ready
   n336("Homotopy groups"):::not_ready
-  n337["Algebraic Topology (Hatcher) roadmap<br/><small>307 items · 18 in mathlib · 250 fully proved · 8 ready to state · 8 not ready · 23 planned</small>"]:::scope
+  n337["Algebraic Topology (Hatcher) roadmap<br/><small>307 items · 18 in mathlib · 252 fully proved · 6 ready to state · 8 not ready · 23 planned</small>"]:::scope
   n338("Some underlying geometric notions"):::not_ready
   n6 -.-> n3
   n2 --> n4
@@ -587,6 +587,7 @@ graph LR
   n178 -.-> n146
   n184 -.-> n146
   n94 --> n147
+  n90 --> n147
   n147 --> n148
   n147 --> n149
   n190 --> n149
@@ -1171,10 +1172,10 @@ graph LR
   click n135 "roadmap/fundamental-group/van-kampen/wedge-circles-free-group.md" "The fundamental group of a wedge of circles — fully proved"
   click n136 "roadmap/fundamental-group/van-kampen/wedge-fundamental-group.md" "The fundamental group of a wedge — fully proved"
   click n137 "roadmap/fundamental-group/van-kampen/well-pointed-wedge-cover.md" "The standard cover of a well-pointed wedge — fully proved"
-  click n138 "roadmap/homology/README.md" "Homology — 177 items · 10 in mathlib · 135 fully proved · 8 ready to state · 1 not ready · 23 planned"
-  click n139 "roadmap/homology/computations-and-applications/README.md" "Computations and applications — 121 items · 90 fully proved · 8 ready to state · 23 planned"
+  click n138 "roadmap/homology/README.md" "Homology — 177 items · 10 in mathlib · 137 fully proved · 6 ready to state · 1 not ready · 23 planned"
+  click n139 "roadmap/homology/computations-and-applications/README.md" "Computations and applications — 121 items · 92 fully proved · 6 ready to state · 23 planned"
   click n140 "roadmap/homology/computations-and-applications/degree/README.md" "Degree foundations and applications — 16 items · 16 fully proved"
-  click n141 "roadmap/homology/computations-and-applications/degree-realization-suspension/README.md" "Prescribed degrees and suspension — 31 items · 8 ready to state · 23 planned"
+  click n141 "roadmap/homology/computations-and-applications/degree-realization-suspension/README.md" "Prescribed degrees and suspension — 31 items · 2 fully proved · 6 ready to state · 23 planned"
   click n142 "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/README.md" "Integer circle powers — 9 items · 2 ready to state · 7 planned"
   click n143 "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/circle-inversion-reflection.md" "Circle inversion is the standard coordinate reflection — planned"
   click n144 "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/circle-power-local-stretch-deformation.md" "Local positive stretching deforms to a rotation through punctured maps — planned"
@@ -1196,10 +1197,10 @@ graph LR
   click n160 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/sphere-ball-collapse-degree-unit.md" "Each ball-collapse map has degree plus or minus one — planned"
   click n161 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/sphere-ball-pinch-quotient.md" "Collapsing the complement of disjoint sphere balls gives the pinch map — planned"
   click n162 "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/sphere-degree-realization.md" "Every integer is the degree of a sphere map — planned"
-  click n163 "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/README.md" "Shared local-degree comparisons — 3 items · 3 ready to state"
-  click n164 "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/local-degree-germ-invariance.md" "Maps with the same germ have the same local degree — ready to state"
+  click n163 "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/README.md" "Shared local-degree comparisons — 3 items · 2 fully proved · 1 ready to state"
+  click n164 "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/local-degree-germ-invariance.md" "Maps with the same germ have the same local degree — fully proved"
   click n165 "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/local-degree-punctured-homotopy-invariance.md" "A puncture-preserving local homotopy preserves local degree — ready to state"
-  click n166 "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/local-degree-singleton-fiber.md" "A singleton fiber has local degree equal to global degree — ready to state"
+  click n166 "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/local-degree-singleton-fiber.md" "A singleton fiber has local degree equal to global degree — fully proved"
   click n167 "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/README.md" "Suspension and degree at its poles — 9 items · 1 ready to state · 8 planned"
   click n168 "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/arbitrary-local-degree.md" "Every integer is a local degree in sphere dimension at least two — planned"
   click n169 "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/sphere-cone-geometry.md" "The cone over a sphere forms a contractible good pair — ready to state"
@@ -1370,7 +1371,7 @@ graph LR
   click n334 "roadmap/homotopy-theory/connections-with-cohomology/README.md" "Connections with cohomology — not ready"
   click n335 "roadmap/homotopy-theory/elementary-methods/README.md" "Elementary methods of calculation — not ready"
   click n336 "roadmap/homotopy-theory/homotopy-groups/README.md" "Homotopy groups — not ready"
-  click n337 "roadmap/README.md" "Algebraic Topology (Hatcher) roadmap — 307 items · 18 in mathlib · 250 fully proved · 8 ready to state · 8 not ready · 23 planned"
+  click n337 "roadmap/README.md" "Algebraic Topology (Hatcher) roadmap — 307 items · 18 in mathlib · 252 fully proved · 6 ready to state · 8 not ready · 23 planned"
   click n338 "roadmap/underlying-geometric-notions/README.md" "Some underlying geometric notions — not ready"
   classDef mathlib fill:#1C5C33,stroke:#134426,color:#FFFFFF,stroke-width:2px
   classDef fully_proved fill:#31A24C,stroke:#22773A,color:#FFFFFF,stroke-width:2px
@@ -1390,4 +1391,4 @@ graph LR
 
 ## Legend
 
-<div class="bp-legend-grid"><span class="bp-swatch bp-swatch-mathlib"></span><span class="bp-legend-label">in mathlib</span><span class="bp-legend-count">18</span><span class="bp-legend-meaning">Upstreamed into Mathlib.</span><span class="bp-swatch bp-swatch-fully_proved"></span><span class="bp-legend-label">fully proved</span><span class="bp-legend-count">250</span><span class="bp-legend-meaning">Proved, and every prerequisite is fully proved too.</span><span class="bp-swatch bp-swatch-can_state"></span><span class="bp-legend-label">ready to state</span><span class="bp-legend-count">8</span><span class="bp-legend-meaning">Nothing it needs is blocked, so the statement can be written in Lean.</span><span class="bp-swatch bp-swatch-not_ready"></span><span class="bp-legend-label">not ready</span><span class="bp-legend-count">8</span><span class="bp-legend-meaning">Needs more blueprint work before it can be attempted.</span><span class="bp-swatch bp-swatch-planned"></span><span class="bp-legend-label">planned</span><span class="bp-legend-count">23</span><span class="bp-legend-meaning">Described in the blueprint only.</span></div>
+<div class="bp-legend-grid"><span class="bp-swatch bp-swatch-mathlib"></span><span class="bp-legend-label">in mathlib</span><span class="bp-legend-count">18</span><span class="bp-legend-meaning">Upstreamed into Mathlib.</span><span class="bp-swatch bp-swatch-fully_proved"></span><span class="bp-legend-label">fully proved</span><span class="bp-legend-count">252</span><span class="bp-legend-meaning">Proved, and every prerequisite is fully proved too.</span><span class="bp-swatch bp-swatch-can_state"></span><span class="bp-legend-label">ready to state</span><span class="bp-legend-count">6</span><span class="bp-legend-meaning">Nothing it needs is blocked, so the statement can be written in Lean.</span><span class="bp-swatch bp-swatch-not_ready"></span><span class="bp-legend-label">not ready</span><span class="bp-legend-count">8</span><span class="bp-legend-meaning">Needs more blueprint work before it can be attempted.</span><span class="bp-swatch bp-swatch-planned"></span><span class="bp-legend-label">planned</span><span class="bp-legend-count">23</span><span class="bp-legend-meaning">Described in the blueprint only.</span></div>

@@ -69,8 +69,9 @@ realization starts in sphere dimension two.
 ## Preservation and execution handoff
 
 Preserve all existing declarations, formalization markers, source statements,
-and the strict no-open-statements policy. The thirty-one new leaves are
-unproved planning articles, with durable IDs assigned by the migration tool.
+and the strict no-open-statements policy. The thirty-one continuation leaves
+have durable IDs assigned by the migration tool. Germ invariance and the
+singleton-fiber comparison are now complete; twenty-nine leaves remain unproved.
 Lean-side API names and library findings belong in their hidden per-article
 implementation notes. Formalize owns all proof execution after this DAG is
 validated and committed. No source text or operational state belongs in the

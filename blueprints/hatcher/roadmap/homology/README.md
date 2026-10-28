@@ -19,8 +19,9 @@ The degree foundations through Proposition 2.29 are decomposed into sixteen
 additional leaves, all formalized locally and complete. The local-degree
 continuation through Proposition 2.30 has twenty complete leaves. A new
 thirty-one-leaf degree-realization and suspension milestone covers Examples
-2.31–2.32, Proposition 2.33, and the pole local-degree consequence. These new
-leaves are planned, while the remainder of the chapter stays queued.
+2.31–2.32, Proposition 2.33, and the pole local-degree consequence. Its two
+shared germ-invariance and singleton-fiber comparisons are complete;
+twenty-nine leaves remain unproved, while the remainder of the chapter stays queued.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -63,8 +64,9 @@ complete leaves. Its new
 is complete in all twenty leaves. The new
 [degree-realization and suspension branch](computations-and-applications/degree-realization-suspension/README.md)
 decomposes the pinch construction, integer circle powers, the natural
-suspension boundary, and its pole consequences into thirty-one unproved
-leaves. Cellular homology, later Mayer–Vietoris applications, and homology
+suspension boundary, and its pole consequences into thirty-one leaves, of
+which two shared comparisons are complete and twenty-nine remain unproved.
+Cellular homology, later Mayer–Vietoris applications, and homology
 with coefficients remain queued.
 Invariance of domain belongs to out-of-scope Additional Topic §2.B.
 

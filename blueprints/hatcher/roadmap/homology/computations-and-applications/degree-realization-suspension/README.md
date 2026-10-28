@@ -11,8 +11,9 @@ local degree in sphere dimension at least two.
 
 This milestone decomposes the whole passage from Example 2.31 to the paragraph
 immediately before Cellular Homology into thirty-one formalizable leaves.
-The twenty-leaf local-degree milestone is complete; these new leaves are
-planned work and carry no formalization assertions.
+The twenty-leaf local-degree milestone is complete. This continuation has two
+complete leaves, germ invariance and the singleton-fiber comparison, and
+twenty-nine unproved leaves.
 
 ## Local comparison lemmas
 

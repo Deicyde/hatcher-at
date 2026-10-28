@@ -16,8 +16,9 @@ regular-neighborhood leaves. All thirty-two are complete. The remainder of
 Proposition 2.29. All sixteen leaves are formalized locally and complete; the
 local-degree continuation through Proposition 2.30 is complete in twenty
 leaves. The new thirty-one-leaf degree-realization and suspension milestone
-continues through Proposition 2.33 and its pole observation. Those leaves are
-planned; Cellular Homology and the later material remain queued.
+continues through Proposition 2.33 and its pole observation. Its germ-invariance
+and singleton-fiber comparisons are complete; twenty-nine leaves remain
+unproved. Cellular Homology and the later material remain queued.
 
 Given excision and the long exact sequence, homology becomes computable. From
 `Hₙ(Sⁿ) ≅ ℤ` comes the degree of a map `Sⁿ → Sⁿ`, with its local formula as a

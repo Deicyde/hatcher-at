@@ -6,7 +6,9 @@ article_id: af_a481e53a2c2bb373616a42cc
 
 These three comparisons reuse the completed public local degree and finite-fiber formula. Germ equality and puncture-preserving homotopy are different operations; the singleton specialization serves both collapse maps and suspension poles.
 
-This branch contains 3 unproved formalizable leaves in dependency order.
+This branch contains 3 formalizable leaves in dependency order. Germ
+invariance and the singleton-fiber comparison are complete; puncture-preserving
+local homotopy invariance remains unproved.
 
 ## Formalization units
 
