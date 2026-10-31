@@ -3,6 +3,8 @@ article_id: af_8b5834cecd5f26bb39171dae
 source_units: [hatcher-2-2-degree-realization-suspension]
 declaration: def
 origin: cited
+statement: formalized
+lean: Hatcher.Sphere.circlePowerMap
 ---
 
 # Integer powers define continuous self-maps of the circle
