@@ -132,6 +132,7 @@ import Hatcher.Sphere.DegreeOrientation
 import Hatcher.Sphere.Degree
 import Hatcher.Sphere.DegreeProperties
 import Hatcher.Sphere.CirclePower
+import Hatcher.Sphere.CircleRotation
 import Hatcher.Sphere.FixedPointFreeDegree
 import Hatcher.Sphere.FreeEvenAction
 import Hatcher.Sphere.ActionDegree
