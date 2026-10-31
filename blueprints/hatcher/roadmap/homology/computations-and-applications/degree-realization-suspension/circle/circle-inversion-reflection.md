@@ -3,6 +3,9 @@ article_id: af_15277fbc486e518fc1e1acf7
 source_units: [hatcher-2-2-degree-realization-suspension]
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.circlePowerMap_inversion_reflection_and_degree
 ---
 
 # Circle inversion is the standard coordinate reflection
