@@ -1,6 +1,5 @@
 ---
 article_id: af_5ead003fab03dbcaedbcd8d7
-source_units: [hatcher-2-2-degree-realization-suspension]
 declaration: theorem
 origin: cited
 ---

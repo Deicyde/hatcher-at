@@ -1,6 +1,5 @@
 ---
 article_id: af_66ea1f639ef9bbd0f6236d16
-source_units: [hatcher-2-2-mv-transport-sphere-recurrence]
 declaration: theorem
 origin: cited
 statement: formalized

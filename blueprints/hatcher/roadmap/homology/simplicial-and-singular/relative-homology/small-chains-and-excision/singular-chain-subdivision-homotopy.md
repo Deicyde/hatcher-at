@@ -1,6 +1,5 @@
 ---
 article_id: af_1bb146350ccc1bbd8409054f
-source_units: [hatcher-2-1-small-chains-excision]
 declaration: def
 origin: bridged
 statement: formalized

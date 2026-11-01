@@ -1,6 +1,5 @@
 ---
 article_id: af_6980b13216f55b4875c16e28
-source_units: [appendix-proposition-a-5]
 declaration: theorem
 origin: bridged
 statement: formalized

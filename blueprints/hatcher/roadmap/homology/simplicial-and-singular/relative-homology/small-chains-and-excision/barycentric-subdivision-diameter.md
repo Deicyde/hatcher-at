@@ -1,6 +1,5 @@
 ---
 article_id: af_9cc2a0377fff8b1774bfdf1f
-source_units: [hatcher-2-1-small-chains-excision]
 declaration: theorem
 origin: cited
 statement: formalized

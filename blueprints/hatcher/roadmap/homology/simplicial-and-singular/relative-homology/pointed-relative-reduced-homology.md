@@ -1,6 +1,5 @@
 ---
 article_id: af_0d5b949221c2653c9284c81a
-source_units: [hatcher-2-1-relative-homology-les]
 declaration: def
 origin: cited
 statement: formalized

@@ -1,6 +1,5 @@
 ---
 article_id: af_530dad8cebc4444a6d3714d4
-source_units: [hatcher-2-2-degree-foundations]
 declaration: theorem
 origin: cited
 statement: formalized

@@ -1,6 +1,5 @@
 ---
 article_id: af_c01ebb7ebd5194958368a3f5
-source_units: [hatcher-1-3-selected-spine]
 declaration: theorem
 origin: cited
 statement: formalized

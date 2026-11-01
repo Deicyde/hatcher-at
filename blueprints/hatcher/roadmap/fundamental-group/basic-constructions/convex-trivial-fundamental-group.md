@@ -1,6 +1,5 @@
 ---
 article_id: af_c30a886203db7414ef7c1a61
-source_units: [hatcher-1-1-basic-constructions]
 declaration: theorem
 origin: bridged
 mathlib: true

@@ -1,6 +1,5 @@
 ---
 article_id: af_64e2faf664f742dcc73fca0a
-source_units: [hatcher-2-1-post-excision-applications]
 declaration: theorem
 origin: cited
 lean: Hatcher.Relative.localHomologyOpenNeighborhoodMap_isIso

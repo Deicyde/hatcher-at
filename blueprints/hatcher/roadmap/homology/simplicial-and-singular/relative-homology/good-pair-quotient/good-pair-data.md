@@ -1,6 +1,5 @@
 ---
 article_id: af_ad99652fe9860290c388915f
-source_units: [hatcher-2-1-good-pair-quotient]
 declaration: structure
 origin: cited
 statement: formalized

@@ -1,6 +1,5 @@
 ---
 article_id: af_6ac8441d977814c7a46ab804
-source_units: [hatcher-2-2-local-degree]
 declaration: theorem
 origin: bridged
 statement: formalized

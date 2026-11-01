@@ -1,6 +1,5 @@
 ---
 article_id: af_5207ed172ee75a4870d0f7f2
-source_units: [hatcher-2-1-sphere-homology]
 declaration: def
 origin: cited
 statement: formalized

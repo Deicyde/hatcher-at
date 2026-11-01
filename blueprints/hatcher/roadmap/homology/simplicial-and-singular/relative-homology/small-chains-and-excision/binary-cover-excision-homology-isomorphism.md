@@ -1,6 +1,5 @@
 ---
 article_id: af_1f0213e0638fc4d49b7907ba
-source_units: [hatcher-2-1-small-chains-excision]
 declaration: instance
 origin: cited
 lean: Hatcher.Excision.coverHomologyMap_isIso

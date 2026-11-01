@@ -1,6 +1,5 @@
 ---
 article_id: af_95e4bb7e36db9514602e747b
-source_units: [hatcher-2-1-post-excision-applications]
 declaration: theorem
 origin: cited
 lean: Hatcher.Euclidean.invarianceOfDimension_open

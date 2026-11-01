@@ -1,6 +1,5 @@
 ---
 article_id: af_0ec130d0961b57b7cd05f3c9
-source_units: [hatcher-2-1-post-excision-applications]
 declaration: def
 origin: bridged
 lean: Hatcher.Relative.relativeHomologySigmaIso

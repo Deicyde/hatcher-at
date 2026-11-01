@@ -1,6 +1,5 @@
 ---
 article_id: af_93141dfac04e27231fe8a0ca
-source_units: [hatcher-1-2-selected-spine]
 declaration: def
 origin: cited
 statement: formalized

@@ -1,6 +1,5 @@
 ---
 article_id: af_ab8bb311f815ae4ee1f81367
-source_units: [hatcher-2-1-corollary-2-15]
 declaration: theorem
 origin: cited
 statement: formalized

@@ -1,6 +1,5 @@
 ---
 article_id: af_f479ae58dad58fcf6864ebc2
-source_units: [hatcher-2-2-mayer-vietoris]
 declaration: theorem
 origin: cited
 lean: Hatcher.MayerVietoris.augmentedChainComplexShortComplex_shortExact

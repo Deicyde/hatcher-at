@@ -1,6 +1,5 @@
 ---
 article_id: af_e4422275f900824fc877374c
-source_units: [hatcher-2-2-mayer-vietoris]
 declaration: theorem
 origin: cited
 lean: Hatcher.MayerVietoris.reducedSequence_exact

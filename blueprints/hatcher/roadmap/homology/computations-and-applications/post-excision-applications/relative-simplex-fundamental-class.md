@@ -1,6 +1,5 @@
 ---
 article_id: af_3a3deb51fb0d65763cad34d9
-source_units: [hatcher-2-1-post-excision-applications]
 declaration: theorem
 origin: cited
 statement: formalized

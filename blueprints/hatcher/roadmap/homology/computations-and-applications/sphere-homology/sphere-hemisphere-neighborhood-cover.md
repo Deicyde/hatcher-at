@@ -1,6 +1,5 @@
 ---
 article_id: af_3810514880894eb04f67c787
-source_units: [hatcher-2-2-mv-transport-sphere-recurrence]
 declaration: def
 origin: bridged
 statement: formalized

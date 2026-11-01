@@ -11,6 +11,10 @@ on:
 permissions:
   contents: read
 
+env:
+  AUTOFORM_SOURCE: "https://github.com/facebookresearch/autoform-bot.git"
+  AUTOFORM_REF: "ea30c115502ecaf03304702004928bd76789623b"
+
 concurrency:
   group: autoform-verify-${{ github.ref }}
   cancel-in-progress: true
@@ -31,8 +35,8 @@ jobs:
 
       - name: Validate the theorem DAG
         run: >-
-          uvx --from https://github.com/facebookresearch/autoform-bot/archive/1cf2ca825fec5e6d3303e24374e218bf3e8ab5c1.tar.gz
-          autoform workspace check . --lean-root .
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}"
+          autoform check blueprints/hatcher --lean-root .
 
       - name: Install elan
         run: |

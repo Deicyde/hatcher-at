@@ -1,6 +1,5 @@
 ---
 article_id: af_2a09c48fe99a73a2e9df0d1a
-source_units: [hatcher-2-1-relative-homology-les]
 declaration: def
 origin: bridged
 mathlib: true

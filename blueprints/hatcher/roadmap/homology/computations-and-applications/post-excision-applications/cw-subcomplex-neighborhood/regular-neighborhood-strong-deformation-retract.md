@@ -1,6 +1,5 @@
 ---
 article_id: af_3397bfd09838597452912b09
-source_units: [appendix-proposition-a-5]
 declaration: def
 origin: cited
 statement: formalized

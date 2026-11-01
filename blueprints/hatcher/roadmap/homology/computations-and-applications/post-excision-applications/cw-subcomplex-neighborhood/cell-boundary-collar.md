@@ -1,6 +1,5 @@
 ---
 article_id: af_4287a147c2d2150daf5a2475
-source_units: [appendix-proposition-a-5]
 declaration: def
 origin: bridged
 statement: formalized

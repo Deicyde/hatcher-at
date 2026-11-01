@@ -1,6 +1,5 @@
 ---
 article_id: af_1c27eabf2c01f79d636b09ff
-source_units: [hatcher-2-2-degree-foundations]
 declaration: def
 origin: bridged
 statement: formalized

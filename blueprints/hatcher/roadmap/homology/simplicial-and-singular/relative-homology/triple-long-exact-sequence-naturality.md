@@ -1,6 +1,5 @@
 ---
 article_id: af_d76311ba89ebf1425b8eed61
-source_units: [hatcher-2-1-triple-les]
 declaration: theorem
 origin: cited
 statement: formalized

@@ -1,6 +1,5 @@
 ---
 article_id: af_ebb4b344828f45dcaaa53f6c
-source_units: [hatcher-1-3-selected-spine]
 declaration: def
 origin: cited
 mathlib: true

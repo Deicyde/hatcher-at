@@ -1,6 +1,5 @@
 ---
 article_id: af_641bb17f8f6aeb2a33fabd0d
-source_units: [hatcher-2-2-degree-realization-suspension]
 declaration: theorem
 origin: bridged
 ---

@@ -1,6 +1,5 @@
 ---
 article_id: af_94c9b10f3bfd64e882b0e386
-source_units: [hatcher-2-2-degree-realization-suspension]
 declaration: def
 origin: bridged
 ---

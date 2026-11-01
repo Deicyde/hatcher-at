@@ -1,6 +1,5 @@
 ---
 article_id: af_cf02faa75ba81780b7cc01da
-source_units: [hatcher-2-1-triple-les]
 declaration: structure
 origin: bridged
 statement: formalized

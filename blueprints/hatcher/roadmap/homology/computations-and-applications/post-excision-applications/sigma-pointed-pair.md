@@ -1,6 +1,5 @@
 ---
 article_id: af_47796e967178521ad49710b5
-source_units: [hatcher-2-1-post-excision-applications]
 declaration: def
 origin: background
 lean: Hatcher.Relative.sigmaPointedPair

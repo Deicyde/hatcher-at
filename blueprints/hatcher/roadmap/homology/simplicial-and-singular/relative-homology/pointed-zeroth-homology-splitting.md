@@ -1,6 +1,5 @@
 ---
 article_id: af_3c5607bf6881ebacd23e2767
-source_units: [hatcher-2-1-relative-homology-les]
 declaration: def
 origin: cited
 lean: Hatcher.Reduced.homologyZeroIso

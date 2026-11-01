@@ -1,6 +1,5 @@
 ---
 article_id: af_7e0d8531ee8d17dae6a2fb88
-source_units: [appendix-proposition-a-5]
 declaration: def
 origin: background
 statement: formalized

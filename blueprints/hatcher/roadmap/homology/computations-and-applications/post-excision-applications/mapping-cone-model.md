@@ -1,6 +1,5 @@
 ---
 article_id: af_63172729a78d73c830baa7d1
-source_units: [hatcher-2-1-post-excision-applications]
 declaration: def
 origin: cited
 statement: formalized

@@ -4,7 +4,6 @@ on:
   push:
     branches: [main]
     paths:
-      - ".autoform.toml"
       - "blueprints/**"
       - "**.lean"
       - "mkdocs.yml"
@@ -13,7 +12,6 @@ on:
       - ".github/workflows/blueprint-pages.yml"
   pull_request:
     paths:
-      - ".autoform.toml"
       - "blueprints/**"
       - "**.lean"
       - "mkdocs.yml"
@@ -24,6 +22,10 @@ on:
 
 permissions:
   contents: read
+
+env:
+  AUTOFORM_SOURCE: "https://github.com/facebookresearch/autoform-bot.git"
+  AUTOFORM_REF: "ea30c115502ecaf03304702004928bd76789623b"
 
 concurrency:
   group: blueprint-pages
@@ -45,16 +47,15 @@ jobs:
       # declaration that is not in the sources.
       - name: Validate the theorem DAG and its declarations
         run: >-
-          uvx --from https://github.com/facebookresearch/autoform-bot/archive/1cf2ca825fec5e6d3303e24374e218bf3e8ab5c1.tar.gz
-          autoform workspace check . --lean-root .
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}"
+          autoform check blueprints/hatcher --lean-root .
 
       # Writes site-src/: statement boxes, derived statuses, the Mermaid graph,
       # and permalinks into the Lean code at this exact commit.
       - name: Render the blueprint
         run: >-
-          uvx --from https://github.com/facebookresearch/autoform-bot/archive/1cf2ca825fec5e6d3303e24374e218bf3e8ab5c1.tar.gz
-          autoform render .
-          --project hatcher
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}"
+          autoform render blueprints/hatcher
           --output site-src
           --lean-root .
           --require-declarations
@@ -62,18 +63,29 @@ jobs:
       - name: Test generated book navigation
         run: >-
           uvx --from mkdocs==1.6.1
-          --with mkdocs-material==9.6.21
+          --with mkdocs-material==9.7.7
           --with mkdocs-literate-nav==0.6.2
-          --with pymdown-extensions==10.21.3
+          --with markdown==3.10.3
+          --with pymdown-extensions==11.0.1
           python -m unittest discover -s tests -p test_blueprint_nav.py
 
       - name: Build the Markdown site
         run: >-
           uvx --from mkdocs==1.6.1
-          --with mkdocs-material==9.6.21
+          --with mkdocs-material==9.7.7
           --with mkdocs-literate-nav==0.6.2
-          --with pymdown-extensions==10.21.3
+          --with markdown==3.10.3
+          --with pymdown-extensions==11.0.1
           mkdocs build --strict
+
+      # Lists internal links and anchors that lead nowhere, which `--strict`
+      # never checks in render's raw HTML, and statement cards the build
+      # dropped. It never fails the build or stops a deploy.
+      - name: Check the built site (report only)
+        continue-on-error: true
+        run: >-
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}"
+          autoform site check site --source site-src
 
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'

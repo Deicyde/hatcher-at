@@ -1,6 +1,5 @@
 ---
 article_id: af_d49202a5a6ec350660634b56
-source_units: [hatcher-2-1-small-chains-excision]
 declaration: def
 origin: cited
 lean: Hatcher.Excision.smallChainInclusionHomotopyEquiv

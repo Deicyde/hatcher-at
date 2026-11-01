@@ -1,6 +1,5 @@
 ---
 article_id: af_dad2eb4f720152d1a39ca44e
-source_units: [hatcher-2-2-local-degree]
 declaration: def
 origin: bridged
 statement: formalized

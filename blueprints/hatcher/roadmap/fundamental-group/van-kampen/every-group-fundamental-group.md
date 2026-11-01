@@ -1,6 +1,5 @@
 ---
 article_id: af_e1a364ab3eaebce2e62114e0
-source_units: [hatcher-1-2-selected-spine]
 declaration: corollary
 origin: cited
 statement: formalized
