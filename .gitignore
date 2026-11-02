@@ -1,6 +1,7 @@
 /.lake/
 site/
 site-src/
+.autoform-publication-*/
 *.log
 .DS_Store
 

@@ -38,7 +38,10 @@ jobs:
       - name: Validate the theorem DAG
         run: >-
           uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}"
-          autoform check blueprints/hatcher --lean-root .
+          autoform check blueprint --lean-root .
+
+      - name: Validate source-unit provenance
+        run: python3 scripts/check_source_units.py blueprint
 
       - name: Install elan
         run: |

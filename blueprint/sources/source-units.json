@@ -1,0 +1,2103 @@
+{
+  "schema": "hatcher-source-units/v1",
+  "description": "Preserved source accounting from the legacy Autoform workspace.",
+  "legacy_workspace_manifest": "schema = \"autoform-workspace/v1\"\n\n[locations.\"blueprints\"]\npath = \"blueprints\"\nprovides = [\"blueprints\"]\n\n[projects]\n[projects.\"hatcher\"]\ntitle = \"Algebraic Topology (Hatcher)\"\nblueprint = {location = \"blueprints\", path = \"hatcher\"}\n",
+  "artifact": "sources/hatcher-execution-scope.txt",
+  "artifact_sha256": "7bfbb55721ca5d603113948c8d3c532d546a949854cb62de37676fa98ddd6056",
+  "units": [
+    {
+      "unit": "hatcher-1-1-basic-constructions",
+      "area": "§1.1 Basic constructions",
+      "start_line": 1,
+      "end_line": 1,
+      "locator": "Hatcher §1.1, pages 25–38",
+      "unit_sha256": "d4babbb34e3035c1ee16fbc7e6b707dbf0c17c3cfacf0ef8834756326f8b9a00",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "chapter-0-underlying-geometric-notions",
+      "area": "Chapter 0, underlying geometric notions",
+      "start_line": 2,
+      "end_line": 2,
+      "locator": "Hatcher Chapter 0, pages 1–20",
+      "unit_sha256": "0c3060a7dd102a89e57b59c842194aa76f56691f210b8e7becdb3ea196da6d21",
+      "coverage": "DEFERRED"
+    },
+    {
+      "unit": "hatcher-1-2-selected-spine",
+      "area": "§1.2 selected spine",
+      "start_line": 3,
+      "end_line": 3,
+      "locator": "Hatcher §1.2, pages 40–55",
+      "unit_sha256": "6743c757054319ea82b98fd0c8e7ae9d405b7f22117053bda8573a635dacc8a9",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-1-2-deferred-remainder",
+      "area": "§1.2 results outside the selected slice",
+      "start_line": 4,
+      "end_line": 4,
+      "locator": "Hatcher §1.2, pages 40–55",
+      "unit_sha256": "069343d0d5c388320af4a0fa3cd598b8db46f34ec6803b3c3c7fd1c46e3f90eb",
+      "coverage": "DEFERRED"
+    },
+    {
+      "unit": "hatcher-1-3-selected-spine",
+      "area": "§1.3 classification and deck spine",
+      "start_line": 5,
+      "end_line": 5,
+      "locator": "Hatcher §1.3, pages 56–82",
+      "unit_sha256": "881efdeb7a6e4db559c43675606e17063b7cfd6d3f1330c94de8e83c6536ed61",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-1-3-deferred-remainder",
+      "area": "§1.3 results outside the selected slice",
+      "start_line": 6,
+      "end_line": 6,
+      "locator": "Hatcher §1.3, pages 56–82",
+      "unit_sha256": "fa7d018b262c5f5800109b7c49e3f950f0bdccdd71952a41a1e06bf823f6efac",
+      "coverage": "DEFERRED"
+    },
+    {
+      "unit": "hatcher-2-1-selected-spine",
+      "area": "§2.1 singular-homology functoriality spine",
+      "start_line": 7,
+      "end_line": 7,
+      "locator": "Hatcher §2.1, pages 102–133",
+      "unit_sha256": "6d7497c44b12dc33b5df9d8dcf523a958b4f727b0d7908ea0e8e3badfdd347c6",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-1-relative-homology-les",
+      "area": "§2.1 reduced and relative homology with long exact sequences",
+      "start_line": 8,
+      "end_line": 8,
+      "locator": "Hatcher §2.1, pages 110, 113–118, and 127–128",
+      "unit_sha256": "aabcb68c9717f5f5cc063345b137ac95127096da3a30d2c72fcef63243928a65",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-1-triple-les",
+      "area": "§2.1 long exact sequence of a triple",
+      "start_line": 9,
+      "end_line": 9,
+      "locator": "Hatcher §2.1, pages 118–119 and 127–128",
+      "unit_sha256": "cb575d45059f9973a268de41e1af526317b0554fa0930939db003c004314535e",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-1-small-chains-excision",
+      "area": "§2.1 small chains and excision",
+      "start_line": 10,
+      "end_line": 10,
+      "locator": "Hatcher §2.1, pages 119–124",
+      "unit_sha256": "7131f31c731e5c0878b31b29a7e40792e5a02b758b5da1ebb31e0c65f38f604a",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-1-sphere-homology",
+      "area": "§2.1 reduced homology of spheres",
+      "start_line": 11,
+      "end_line": 11,
+      "locator": "Hatcher §2.1, pages 109–114",
+      "unit_sha256": "ad16b70f651b49dc7cd4c0610fb64ccd30b0bbd994a349d77e2de2e4408138da",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-1-corollary-2-15",
+      "area": "§2.1 Corollary 2.15",
+      "start_line": 12,
+      "end_line": 12,
+      "locator": "Hatcher §2.1, pages 114–115",
+      "unit_sha256": "2d49df5dc78a1e96159b707d0f66dca267c2b44abe7c114ea9d5225ec51f25c3",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-1-good-pair-quotient",
+      "area": "§2.1 good pairs and quotient exact sequence",
+      "start_line": 13,
+      "end_line": 13,
+      "locator": "Hatcher §2.1, pages 114, 124, and 128",
+      "unit_sha256": "678963fee087b12085f82c43b5ebd6deb1664c995e5669a0269d22ccb68a2a02",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-1-post-excision-applications",
+      "area": "§2.1 post-excision applications",
+      "start_line": 14,
+      "end_line": 14,
+      "locator": "Hatcher §2.1, pages 125–126",
+      "unit_sha256": "1afb2ccc60da9538505a4cbd65feecc45306d38a78222a5675eb7362fa70b713",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-1-deferred-remainder",
+      "area": "§2.1 remaining deferred results",
+      "start_line": 15,
+      "end_line": 15,
+      "locator": "Hatcher §2.1, pages 102–133 except the selected slices",
+      "unit_sha256": "cc508cce1007b4939547650bd86946f185cbda2bfadd93e641359e1069177752",
+      "coverage": "DEFERRED"
+    },
+    {
+      "unit": "hatcher-2-2-mayer-vietoris",
+      "area": "§2.2 ordinary and reduced Mayer–Vietoris sequences",
+      "start_line": 16,
+      "end_line": 16,
+      "locator": "Hatcher §2.2, pages 149–150",
+      "unit_sha256": "15860684ed973c25411a01b97634ee5c0f0b5fe9d587d2009876cd5876011dea",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-2-mv-transport-sphere-recurrence",
+      "area": "§2.2 Mayer–Vietoris transport and sphere recurrence",
+      "start_line": 17,
+      "end_line": 17,
+      "locator": "Hatcher §2.2, page 150",
+      "unit_sha256": "bcebd7105f9477d8755b643e25bdcab20dd4577388bd196bd88214c51cae861a",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-2-degree-foundations",
+      "area": "§2.2 degree foundations",
+      "start_line": 18,
+      "end_line": 18,
+      "locator": "Hatcher §2.2, pages 134–135",
+      "unit_sha256": "4ddb04fda9f97f614f21124e055af2669c8ee2c2771e52b77b306a90dd2677fc",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-2-local-degree",
+      "area": "§2.2 local degree and Proposition 2.30",
+      "start_line": 19,
+      "end_line": 19,
+      "locator": "Hatcher §2.2, pages 135–136",
+      "unit_sha256": "3b004b0c9c6a66f3cdb09112ac223353516aed14366675039bd9359d7f047f43",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-2-degree-realization-suspension",
+      "area": "§2.2 degree realization and suspension",
+      "start_line": 20,
+      "end_line": 20,
+      "locator": "Hatcher §2.2, Examples 2.31–2.32, Proposition 2.33, and the pole observation, printed pages 136–137",
+      "unit_sha256": "b204fffa5f2e0e6e121b5155d4cd1486f8af8cf2cefce4eae85b16a4d8681253",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-2-computations-applications",
+      "area": "§2.2 cellular homology, later applications, and coefficients",
+      "start_line": 21,
+      "end_line": 21,
+      "locator": "Hatcher §2.2, printed pages 137–159 from Cellular Homology onward, except the selected Mayer–Vietoris passages on pages 149–150",
+      "unit_sha256": "5e3342ab2d9371f9e9eaa4e32204b303276098541316a466a0affb7db89c09fc",
+      "coverage": "DEFERRED"
+    },
+    {
+      "unit": "hatcher-2-3-formal-viewpoint",
+      "area": "§2.3 Formal viewpoint",
+      "start_line": 22,
+      "end_line": 22,
+      "locator": "Hatcher §2.3, pages 160–165",
+      "unit_sha256": "d1104663ca164b82f33fd006b55060c996c602330693bfec4e61eba22530d4d7",
+      "coverage": "DEFERRED"
+    },
+    {
+      "unit": "hatcher-3-1-cohomology-groups",
+      "area": "§3.1 Cohomology groups",
+      "start_line": 23,
+      "end_line": 23,
+      "locator": "Hatcher §3.1, pages 190–205",
+      "unit_sha256": "2b86cf2a2b961dd0eb7abaad041fb0b2323aa483988ebad9cf4934d250aca917",
+      "coverage": "DEFERRED"
+    },
+    {
+      "unit": "hatcher-3-2-cup-product",
+      "area": "§3.2 Cup product",
+      "start_line": 24,
+      "end_line": 24,
+      "locator": "Hatcher §3.2, pages 206–229",
+      "unit_sha256": "9a816e99214134d16abfbabaa5b144b63f86513a80c9d0360be23121723f684f",
+      "coverage": "DEFERRED"
+    },
+    {
+      "unit": "hatcher-3-3-poincare-duality",
+      "area": "§3.3 Poincaré duality",
+      "start_line": 25,
+      "end_line": 25,
+      "locator": "Hatcher §3.3, pages 230–260",
+      "unit_sha256": "c9730782969b87332484c53febccb30ff3cc5dac191a40e4ff66a1ceb386d552",
+      "coverage": "DEFERRED"
+    },
+    {
+      "unit": "hatcher-4-1-homotopy-groups",
+      "area": "§4.1 Homotopy groups",
+      "start_line": 26,
+      "end_line": 26,
+      "locator": "Hatcher §4.1, pages 339–359",
+      "unit_sha256": "fec386b117eff960f6af60f3ce0b6f7ba78bc098b450ae4cef69248167cc6fcb",
+      "coverage": "DEFERRED"
+    },
+    {
+      "unit": "hatcher-4-2-elementary-methods",
+      "area": "§4.2 Elementary methods",
+      "start_line": 27,
+      "end_line": 27,
+      "locator": "Hatcher §4.2, pages 360–392",
+      "unit_sha256": "e4e973e0c9d493c2f6ca59f1837bde6b4953e69df966a1d2f2d6fccd9f47aa53",
+      "coverage": "DEFERRED"
+    },
+    {
+      "unit": "hatcher-4-3-connections-cohomology",
+      "area": "§4.3 Connections with cohomology",
+      "start_line": 28,
+      "end_line": 28,
+      "locator": "Hatcher §4.3, pages 393–420",
+      "unit_sha256": "3ff5e03e3ad165c3bad3234eb9670b1626ba3ab281f9f475f46cc494b052d134",
+      "coverage": "DEFERRED"
+    },
+    {
+      "unit": "appendix-proposition-a-1",
+      "area": "Appendix Proposition A.1",
+      "start_line": 29,
+      "end_line": 29,
+      "locator": "Hatcher Appendix, Proposition A.1",
+      "unit_sha256": "974df7bb29f1375f810ff98cbde04e99fb81f1615e1a1637cf9cd987783030fa",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "appendix-proposition-a-5",
+      "area": "Appendix Proposition A.5",
+      "start_line": 30,
+      "end_line": 30,
+      "locator": "Hatcher Appendix, Proposition A.5, pages 522–523",
+      "unit_sha256": "dd5b4ce0130e7ae454780da1a646fc9369032f359114caf4aef34e85252087bf",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "appendix-remainder",
+      "area": "Appendix remainder",
+      "start_line": 31,
+      "end_line": 31,
+      "locator": "Hatcher Appendix except Propositions A.1 and A.5",
+      "unit_sha256": "426efc3eaf0faa3c2f186837c8df48512187e7f9fc2abe123f9e4a8bbdc60632",
+      "coverage": "DEFERRED"
+    },
+    {
+      "unit": "lettered-additional-topics",
+      "area": "Lettered additional topics",
+      "start_line": 32,
+      "end_line": 32,
+      "locator": "Hatcher §§1.A–4.L",
+      "unit_sha256": "16905334d7dfc5520f9f89e337877212520b3800f320ecd22099601478df6a02",
+      "coverage": "OUT"
+    },
+    {
+      "unit": "exercises",
+      "area": "Exercises",
+      "start_line": 33,
+      "end_line": 33,
+      "locator": "Exercise sets throughout Hatcher",
+      "unit_sha256": "6b62bc779713d6145d530fd369f5e6dfa8c241f508a7a4138ad3874d520a0fe7",
+      "coverage": "OUT"
+    }
+  ],
+  "articles": {
+    "af_1e6f9ec346e3b7485e19d9a3": {
+      "path": "roadmap/appendix/classical-cw-bridge/classical-cell-arrow-iso.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_db2445f3fea351a02e084322": {
+      "path": "roadmap/appendix/classical-cw-bridge/compact-subset-bounded-skeleton.md",
+      "source_units": [
+        "appendix-proposition-a-1"
+      ]
+    },
+    "af_83ffc141377e9db9715f7e9e": {
+      "path": "roadmap/appendix/classical-cw-bridge/successor-skeleton-quotient.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_273a5ce6a092b8f64f470004": {
+      "path": "roadmap/appendix/classical-skeleton-cell-attachment.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_7fbee0c3ad37e661e770ab4d": {
+      "path": "roadmap/appendix/compact-subspace-finite-subcomplex.md",
+      "source_units": [
+        "appendix-proposition-a-1"
+      ]
+    },
+    "af_4f40c7e33508d93baac75265": {
+      "path": "roadmap/fundamental-group/basic-constructions/affine-path-homotopy.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_c84b824b4ed5b5be3e947b7b": {
+      "path": "roadmap/fundamental-group/basic-constructions/borsuk-ulam-sphere.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_dc4c0168f0ede11ba75a2f9a": {
+      "path": "roadmap/fundamental-group/basic-constructions/brouwer-disc.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_bdc7528d23af5d56f0b7e4ef": {
+      "path": "roadmap/fundamental-group/basic-constructions/change-of-basepoint.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_88db0f1093e08d3ab00257ce": {
+      "path": "roadmap/fundamental-group/basic-constructions/circle-covering.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_c30a886203db7414ef7c1a61": {
+      "path": "roadmap/fundamental-group/basic-constructions/convex-trivial-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_7ea2ad84d8edec0c92f3274e": {
+      "path": "roadmap/fundamental-group/basic-constructions/euclidean-two-not-homeomorphic.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_4f18e6725ebc63e9b6186037": {
+      "path": "roadmap/fundamental-group/basic-constructions/fundamental-group-circle.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_67ed4905c351d887224e90d5": {
+      "path": "roadmap/fundamental-group/basic-constructions/fundamental-group-law.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_1b551d825f8642fe8e8eec1a": {
+      "path": "roadmap/fundamental-group/basic-constructions/fundamental-theorem-algebra.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_28bc6aa1a0e500efc3633ca9": {
+      "path": "roadmap/fundamental-group/basic-constructions/homotopic-maps-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_1f0895b5c7dfb77e33224fd8": {
+      "path": "roadmap/fundamental-group/basic-constructions/homotopy-equivalence-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_52510d3a4c437271e3ebe8ba": {
+      "path": "roadmap/fundamental-group/basic-constructions/loop-in-open-cover.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_8aa019244d3ae482b8cc2020": {
+      "path": "roadmap/fundamental-group/basic-constructions/no-retraction-disc.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_01a39a5c18f0240f7888c0f7": {
+      "path": "roadmap/fundamental-group/basic-constructions/path-homotopy-equivalence.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_31b7f34b97c364b77eac9aad": {
+      "path": "roadmap/fundamental-group/basic-constructions/product-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_6dee64aae05fa95dd6fbcd83": {
+      "path": "roadmap/fundamental-group/basic-constructions/retractions-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_5cea9ce243397b09b5e3237a": {
+      "path": "roadmap/fundamental-group/basic-constructions/simply-connected-unique-path-classes.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_58f45e8cb68bf4b4365038ee": {
+      "path": "roadmap/fundamental-group/basic-constructions/sphere-simply-connected.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_08f181ae06ce36bac8627c84": {
+      "path": "roadmap/fundamental-group/basic-constructions/three-closed-sets-antipodal.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_7e18c86739116c84823e7c20": {
+      "path": "roadmap/fundamental-group/basic-constructions/torus-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_6b3c5494b72549253646f155": {
+      "path": "roadmap/fundamental-group/basic-constructions/winding-number.md",
+      "source_units": [
+        "hatcher-1-1-basic-constructions"
+      ]
+    },
+    "af_ea94d53a9ef0926ab162bfee": {
+      "path": "roadmap/fundamental-group/covering-spaces/based-connected-cover.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_c98f72c75c3f49caac29c0e7": {
+      "path": "roadmap/fundamental-group/covering-spaces/closed-lift-image.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_c01ebb7ebd5194958368a3f5": {
+      "path": "roadmap/fundamental-group/covering-spaces/cover-basepoint-conjugacy.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_cf7c80b8e186853730545999": {
+      "path": "roadmap/fundamental-group/covering-spaces/covering-injective-path-classes.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_f913ff74a0a871d5f1b164e1": {
+      "path": "roadmap/fundamental-group/covering-spaces/deck-transformations/covering-space-action.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_fb85ae24e0123ced981ca5c9": {
+      "path": "roadmap/fundamental-group/covering-spaces/deck-transformations/deck-group-calculation.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_93fbc37089b045961d5ea14a": {
+      "path": "roadmap/fundamental-group/covering-spaces/deck-transformations/deck-realization.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_ebb4b344828f45dcaaa53f6c": {
+      "path": "roadmap/fundamental-group/covering-spaces/deck-transformations/deck-transformation-group.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_f2f117d239d61324fa03beff": {
+      "path": "roadmap/fundamental-group/covering-spaces/deck-transformations/normalizer-to-deck-exactness.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_2fd38cecccb62974522aa339": {
+      "path": "roadmap/fundamental-group/covering-spaces/deck-transformations/normalizer-to-deck.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_a5834253c67d2209cf4b4b8e": {
+      "path": "roadmap/fundamental-group/covering-spaces/deck-transformations/orbit-quotient-deck-group.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_4f74ca06c7815be5efe37f5c": {
+      "path": "roadmap/fundamental-group/covering-spaces/deck-transformations/orbit-quotient-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_f26b7fc2a604528b58cd5f39": {
+      "path": "roadmap/fundamental-group/covering-spaces/homotopy-lifting.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_38b9433863f982a08be4b162": {
+      "path": "roadmap/fundamental-group/covering-spaces/lifting-criterion.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_6d85bf7f4fb1bcb124a18cee": {
+      "path": "roadmap/fundamental-group/covering-spaces/locally-path-connected-total-space.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_01f1d32e23e7d1c05553c471": {
+      "path": "roadmap/fundamental-group/covering-spaces/monodromy-action.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_238d1dd83722c5a2266b57e6": {
+      "path": "roadmap/fundamental-group/covering-spaces/pointed-cover-classification.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_748dca8af0bc5f4091a3db8f": {
+      "path": "roadmap/fundamental-group/covering-spaces/pointed-cover-rigidity.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_19db673677b8848bafffc26a": {
+      "path": "roadmap/fundamental-group/covering-spaces/sheet-index.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_802f39c4c289595489455819": {
+      "path": "roadmap/fundamental-group/covering-spaces/subgroup-cover-image.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_be39cedf8b22e6b8c7ab9dba": {
+      "path": "roadmap/fundamental-group/covering-spaces/subgroup-cover-is-covering.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_bb4143d76ff1dafda52aaa39": {
+      "path": "roadmap/fundamental-group/covering-spaces/subgroup-cover-space.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_ee2a8e41f4d52a391953eb89": {
+      "path": "roadmap/fundamental-group/covering-spaces/unique-lifting.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_f439e1fff07c297a187b7c77": {
+      "path": "roadmap/fundamental-group/covering-spaces/universal-cover-initial.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_03778eab6bda848bf3919cc7": {
+      "path": "roadmap/fundamental-group/covering-spaces/universal-cover/nullhomotopic-open-basis.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_96911f811174cc9ed741c8af": {
+      "path": "roadmap/fundamental-group/covering-spaces/universal-cover/semilocally-simply-connected.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_2cdace3f3cd80dd59f041dfa": {
+      "path": "roadmap/fundamental-group/covering-spaces/universal-cover/universal-cover-basis.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_7e708d886f021b9d74f144fc": {
+      "path": "roadmap/fundamental-group/covering-spaces/universal-cover/universal-cover-is-covering.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_37f237fed9ee4ab3e041de74": {
+      "path": "roadmap/fundamental-group/covering-spaces/universal-cover/universal-cover-path-connected.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_9661ec8367d7d815ef8fa43d": {
+      "path": "roadmap/fundamental-group/covering-spaces/universal-cover/universal-cover-path-space.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_4924ce7fc94298427e633deb": {
+      "path": "roadmap/fundamental-group/covering-spaces/universal-cover/universal-cover-simply-connected.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_d1c77a01b4169d50c8ee6a57": {
+      "path": "roadmap/fundamental-group/covering-spaces/unpointed-cover-classification.md",
+      "source_units": [
+        "hatcher-1-3-selected-spine"
+      ]
+    },
+    "af_150143235a6365f6fb31116a": {
+      "path": "roadmap/fundamental-group/van-kampen/attach-higher-cells-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_603e02ac39cec77ac40e768f": {
+      "path": "roadmap/fundamental-group/van-kampen/attach-two-cells-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_6526ed4b12ff934cdb825655": {
+      "path": "roadmap/fundamental-group/van-kampen/attaching-spheres-generate-intersection.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_806651882449c734dfacee63": {
+      "path": "roadmap/fundamental-group/van-kampen/binary-van-kampen-pushout.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_d40cc60ada4364ba06f00457": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-cover-model.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_44c18946ee5a142c153be548": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/abstract-cell-attachment-indexed-model.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_b4073e48cecc2c23414164fb": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/auxiliary/auxiliary-attachment-retract.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_6166529cd0668d9e3bbf7043": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/auxiliary/auxiliary-base-cover-retract.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_1a04a09d1dd81895c2a78411": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/auxiliary/auxiliary-cell-attachment-open-cover.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_43db7201dc624aac2ff260ed": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/auxiliary/auxiliary-cell-attachment-space.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_0edc868d44849128f8728457": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/auxiliary/auxiliary-cover-basepoint-transport.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_7e63b8ef03a5c3457a6322f0": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/auxiliary/auxiliary-overlap-attaching-map.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_01425aa8a8d4928d8039e3e6": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/auxiliary/auxiliary-overlap-open-cover.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_7f02274bbda3e997009bd431": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/auxiliary/auxiliary-overlap-piece-sphere.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_4d712408a8cbf7efd1b49e64": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/auxiliary/auxiliary-upper-cover-contractible.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_8c128342fc57668c60bffac3": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/binary-cover-contractible-piece.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_f1a95c595d707f27effaf836": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/binary-cover-trivial-piece-quotient.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_51e0760947368340fe1d5c5f": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/circle-degree-map.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_2386ef9a815b61ddee2179ef": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/circle-well-pointed.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_29c021c7f6a7d6fa0628012e": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/cone-disk-homeomorphism.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_cd32f07aad963f625a603fa6": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/cyclic-relation-quotient.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_6c62c4e9a3ce19ebaaa1a93d": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/disk-boundary-two-circle.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_9d7266d5983f276518daca8e": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/empty-cell-attachment-iso.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_bdf4b6a0596bcc5d303eeaf9": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/higher-cell-attachment-path-components.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_a19e022e940644366ba5f04a": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/indexed-basic-cell-attachment.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_0b0fcef5fc479822bf06ba4c": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/indexed-cone-open-cover.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_5672357a1dfa0c16481f12ce": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/indexed-cone-pushout.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_5fb3ca54030c6288d4ce8eea": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/path-connected-two-skeleton.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_774c47bdf915006fbe45b28e": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/single-basic-cell-attachment.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_4c3c37a7ddc05af3eb57338c": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/single-cone-base-retract.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_583d33f600e077d48f72815a": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/single-cone-intersection.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_b3b1f5a35c05a79813552fed": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/single-cone-open-cover.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_4b332f0605993173d8ce0b94": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/single-cone-pushout.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_66c0d8a4bc1245caa282640f": {
+      "path": "roadmap/fundamental-group/van-kampen/cell-attachment-support/single-cone-upper-contractible.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_e322d9b2b4634b0e4b52e80c": {
+      "path": "roadmap/fundamental-group/van-kampen/cover-factorization.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_fbc5f125d607f701cf8ed8a1": {
+      "path": "roadmap/fundamental-group/van-kampen/cover-group-presentation.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_cdfdd640e75db0f65a9e7e19": {
+      "path": "roadmap/fundamental-group/van-kampen/cover-map-relations.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_e1a364ab3eaebce2e62114e0": {
+      "path": "roadmap/fundamental-group/van-kampen/every-group-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_b46833ba0dee42bdf8a7f504": {
+      "path": "roadmap/fundamental-group/van-kampen/every-group-presentation.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_9b54c2e1e18382f244cd1c57": {
+      "path": "roadmap/fundamental-group/van-kampen/factorization-moves.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_3c10e2334ea23d186e4a5f3b": {
+      "path": "roadmap/fundamental-group/van-kampen/finite-skeleton-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_bb19d99fce28cd9e2c2961bb": {
+      "path": "roadmap/fundamental-group/van-kampen/homotopic-factorizations.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_ebce9802ffc8eff0bc9ddf69": {
+      "path": "roadmap/fundamental-group/van-kampen/homotopy-cover-decomposition.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_a1c43352820c5831e110d751": {
+      "path": "roadmap/fundamental-group/van-kampen/pointed-wedge.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_6c25ed58fef0c56b0b6e98b9": {
+      "path": "roadmap/fundamental-group/van-kampen/presentation-complex/circle-one-cell-quotient.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_f9c5fec59717acad10d01cee": {
+      "path": "roadmap/fundamental-group/van-kampen/presentation-complex/cyclic-presentation-complex.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_28607389cd096a6a3db5da9a": {
+      "path": "roadmap/fundamental-group/van-kampen/presentation-complex/disk-boundary-fundamental-group-representative.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_d318cc4dc82968256f79aee5": {
+      "path": "roadmap/fundamental-group/van-kampen/presentation-complex/empty-cell-attachment-constructor.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_a3d30c4dc82968256f79aee5": {
+      "path": "roadmap/fundamental-group/van-kampen/presentation-complex/eventually-constant-cell-sequence.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_65cb9c02fe8911d8b404bb3b": {
+      "path": "roadmap/fundamental-group/van-kampen/presentation-complex/point-zero-cell-attachment.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_566c2d0d935658850d39e13f": {
+      "path": "roadmap/fundamental-group/van-kampen/presentation-complex/pointed-wedge-path-connected.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_35e455c0951614a9498ecf00": {
+      "path": "roadmap/fundamental-group/van-kampen/presentation-complex/pointed-wedge-universal-property.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_5722cc28c5abdb41e886a338": {
+      "path": "roadmap/fundamental-group/van-kampen/presentation-complex/presentation-complex-cw-structure.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_5ef0b19d3507e0f51deef27d": {
+      "path": "roadmap/fundamental-group/van-kampen/presentation-complex/presentation-complex-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_5d288dd83abaf2eee954ea08": {
+      "path": "roadmap/fundamental-group/van-kampen/presentation-complex/presentation-complex-realization.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_759c634e0bfe5a36d279e9d0": {
+      "path": "roadmap/fundamental-group/van-kampen/presentation-complex/relator-cell-attachment.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_f504a5652653f883d78795e8": {
+      "path": "roadmap/fundamental-group/van-kampen/presentation-complex/wedge-circles-one-skeleton.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_43621dbc2063991527df5593": {
+      "path": "roadmap/fundamental-group/van-kampen/two-skeleton-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_a711efc8af6cd055434bb0de": {
+      "path": "roadmap/fundamental-group/van-kampen/van-kampen-kernel.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_9e137dd78707459e5193d14f": {
+      "path": "roadmap/fundamental-group/van-kampen/van-kampen-quotient.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_5040a99f20e27330d5bb75a9": {
+      "path": "roadmap/fundamental-group/van-kampen/van-kampen-surjective.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_b57fd812655135136537fc44": {
+      "path": "roadmap/fundamental-group/van-kampen/wedge-circles-free-group.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_93141dfac04e27231fe8a0ca": {
+      "path": "roadmap/fundamental-group/van-kampen/wedge-fundamental-group.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_a65c509f85687421ec4a24b3": {
+      "path": "roadmap/fundamental-group/van-kampen/well-pointed-wedge-cover.md",
+      "source_units": [
+        "hatcher-1-2-selected-spine"
+      ]
+    },
+    "af_15277fbc486e518fc1e1acf7": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/circle-inversion-reflection.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_f2326d93cde64505bb99af6f": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/circle-power-local-stretch-deformation.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_c8a7d2f324ee8bdf78624605": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/circle-rotation-homotopy.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_180617f5eedc10f191b736bc": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/integer-circle-power-degree.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_8b5834cecd5f26bb39171dae": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/integer-circle-power-map.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_bf71d5e0974f47deb6980564": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/positive-circle-power-arc-chart.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_641bb17f8f6aeb2a33fabd0d": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/positive-circle-power-degree.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_6e5aacb87c2f0cdae64ef743": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/positive-circle-power-fiber.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_7f28a7505a467328c2236288": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/circle/positive-circle-power-local-degree.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_7b75fc9548f3d4af72397bf9": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/compact-complement-quotient-one-point.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_a8f2082aa2844d26554baedf": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/finite-disjoint-sphere-balls.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_f0ce52bed8b3559c75b76fa3": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/finite-one-point-sigma-wedge.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_28aa787eaafee642920f2b12": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/signed-pinch-degree-sum.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_816a860dce27fb50bd0ec80d": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/signed-pinch-fiber.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_cbbb5f2c6b7cb6da153db1c5": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/signed-pinch-local-degree.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_9c72fd7cc56bcc576a868ebe": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/signed-sphere-fold-map.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_7744d41b3e4b105ba6e1575a": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/sphere-ball-collapse-degree-unit.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_94c9b10f3bfd64e882b0e386": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/sphere-ball-pinch-quotient.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_c25fd700a7f3e9d9ce373eb6": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/pinch/sphere-degree-realization.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_a756c24e9493a057e03f83dc": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/local-degree-germ-invariance.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_b27bb3e374b92a7334095698": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/local-degree-punctured-homotopy-invariance.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_c91632048e647755bd9a6e50": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/shared/local-degree-singleton-fiber.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_2d6e95c5e95928f553b35e71": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/arbitrary-local-degree.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_94410cbcc0ca4ddd482ec0f6": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/sphere-cone-geometry.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_6423827cee00e5b7d1c68aaa": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/sphere-cone-map.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_3bee065ead7f165534b9f450": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/sphere-cone-quotient-homeomorphism.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_199be8e09b149f1f0bc4e775": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/sphere-suspension-boundary-naturality.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_05d0454bfa12070e4397bbb7": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/sphere-suspension-map.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_be75466581d57f6e3c313714": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/suspension-pole-fibers.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_5ead003fab03dbcaedbcd8d7": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/suspension-pole-local-degree.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_6335225854364397e3a20e8f": {
+      "path": "roadmap/homology/computations-and-applications/degree-realization-suspension/suspension/suspension-preserves-degree.md",
+      "source_units": [
+        "hatcher-2-2-degree-realization-suspension"
+      ]
+    },
+    "af_48c015e1354062483f49ed29": {
+      "path": "roadmap/homology/computations-and-applications/degree/antipodal-degree.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_c25aace6019fc7573293d3ca": {
+      "path": "roadmap/homology/computations-and-applications/degree/basic-degree-properties.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_71d7ceb0f3904f7453776fe2": {
+      "path": "roadmap/homology/computations-and-applications/degree/coordinate-reflection-degree.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_e6003b902922b5db4aeeda3f": {
+      "path": "roadmap/homology/computations-and-applications/degree/double-simplex-swap-class.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_c2fff585a63bdde52a391759": {
+      "path": "roadmap/homology/computations-and-applications/degree/fixed-point-free-degree.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_abbd1071b7feae6c88eb97da": {
+      "path": "roadmap/homology/computations-and-applications/degree/free-even-sphere-action.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_ce0cbfdf3fed16c8fe605273": {
+      "path": "roadmap/homology/computations-and-applications/degree/integral-sphere-orientation.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_a5d8f1242fb4422fcba20d43": {
+      "path": "roadmap/homology/computations-and-applications/degree/nonsurjective-degree-zero.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_f60a411fd48e65a2b5a72805": {
+      "path": "roadmap/homology/computations-and-applications/degree/nonzero-tangent-field-iff-odd.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_82daa470562d75a3f2a999dd": {
+      "path": "roadmap/homology/computations-and-applications/degree/odd-sphere-tangent-field.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_1c27eabf2c01f79d636b09ff": {
+      "path": "roadmap/homology/computations-and-applications/degree/punctured-sphere-stereographic.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_1d16b68f4d8e27f80da30d75": {
+      "path": "roadmap/homology/computations-and-applications/degree/sphere-action-degree-character.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_973242ed62dcdeb1142aae93": {
+      "path": "roadmap/homology/computations-and-applications/degree/sphere-coordinate-sign-changes.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_a3e5e85d8bde5ed4ffd0a743": {
+      "path": "roadmap/homology/computations-and-applications/degree/sphere-degree-definition.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_530dad8cebc4444a6d3714d4": {
+      "path": "roadmap/homology/computations-and-applications/degree/tangent-field-parity-obstruction.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_1e83c364583b4ef47b8b0570": {
+      "path": "roadmap/homology/computations-and-applications/degree/tangent-vector-field-data.md",
+      "source_units": [
+        "hatcher-2-2-degree-foundations"
+      ]
+    },
+    "af_680f7dd9f0023187b145b0eb": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/degree-local-sum-formula.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_ea15ac26d6ba9e882549231f": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/deleted-pair-open-neighborhood.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_23c4db77f1f2f28686db47cb": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/disjoint-open-union-homeomorphism.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_3482f234b914950daa685013": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/disjoint-punctured-pair-iso.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_fa4a1039c6e4767afd3acb10": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/finite-fiber-local-map.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_8413c196d3f1b253bf582afb": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/finite-fiber-neighborhoods.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_11fc9a48da227190dd7e1eeb": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/finite-puncture-homology-coproduct.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_6df77f1cf20ec9e15cb7abbd": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/finite-puncture-orientation-sum.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_89e2481cf4df5cf4ef419a56": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/finite-puncture-pair-excision.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_2420d65a757f7dd87b503542": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/finite-puncture-projection-matrix.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_01985c349aff3cf79987cf88": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/global-degree-fiber-square.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_79a8181ed895e3e9b2e4e24e": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/homeomorphism-local-degree.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_70b8f0060e881e7493096139": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/isolated-preimage-neighborhood.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_6ac8441d977814c7a46ab804": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/local-degree-shrinking.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_900f5d8974f03b1b5ecf96b7": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/local-degree-well-defined.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_3d24367a7abad40e88f4616d": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/neighborhood-local-degree.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_158175fa503c963a995517cb": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/relative-chains-sigma-pair.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_e9f8e873d37465155412edda": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/relative-homology-sigma-pair.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_85e59358edc190186cfde9fb": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/sigma-topological-pair.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_dad2eb4f720152d1a39ca44e": {
+      "path": "roadmap/homology/computations-and-applications/local-degree/sphere-local-orientation.md",
+      "source_units": [
+        "hatcher-2-2-local-degree"
+      ]
+    },
+    "af_eb5fb984d257557c4e2ad751": {
+      "path": "roadmap/homology/computations-and-applications/local-homology-and-dimension/contractible-ambient-relative-homology.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_95e4bb7e36db9514602e747b": {
+      "path": "roadmap/homology/computations-and-applications/local-homology-and-dimension/invariance-of-dimension-open-sets.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_64e2faf664f742dcc73fca0a": {
+      "path": "roadmap/homology/computations-and-applications/local-homology-and-dimension/local-homology-open-neighborhood.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_1174b6b1a3e283fe5bfe011c": {
+      "path": "roadmap/homology/computations-and-applications/local-homology-and-dimension/punctured-euclidean-local-homology.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_f479ae58dad58fcf6864ebc2": {
+      "path": "roadmap/homology/computations-and-applications/mayer-vietoris/augmented-binary-cover-chain-short-exact-sequence.md",
+      "source_units": [
+        "hatcher-2-2-mayer-vietoris"
+      ]
+    },
+    "af_d14323e64adefa9370c7e101": {
+      "path": "roadmap/homology/computations-and-applications/mayer-vietoris/binary-cover-chain-complex.md",
+      "source_units": [
+        "hatcher-2-2-mayer-vietoris"
+      ]
+    },
+    "af_c930cb570baa902b5242a221": {
+      "path": "roadmap/homology/computations-and-applications/mayer-vietoris/binary-cover-chain-short-exact-sequence.md",
+      "source_units": [
+        "hatcher-2-2-mayer-vietoris"
+      ]
+    },
+    "af_e0f7b901ba3a7f5ceb5ea0d6": {
+      "path": "roadmap/homology/computations-and-applications/mayer-vietoris/binary-cover-mayer-vietoris-sequence.md",
+      "source_units": [
+        "hatcher-2-2-mayer-vietoris"
+      ]
+    },
+    "af_e4422275f900824fc877374c": {
+      "path": "roadmap/homology/computations-and-applications/mayer-vietoris/reduced-binary-cover-mayer-vietoris-sequence.md",
+      "source_units": [
+        "hatcher-2-2-mayer-vietoris"
+      ]
+    },
+    "af_f11bd43beef6f83e595364c2": {
+      "path": "roadmap/homology/computations-and-applications/mayer-vietoris/small-augmented-chain-inclusion-homotopy-equivalence.md",
+      "source_units": [
+        "hatcher-2-2-mayer-vietoris"
+      ]
+    },
+    "af_5af80c1672a496d005d3afa3": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/contractible-subspace-relative-reduced-homology.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_e05bd43fe7cbd9529f3e41d0": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-excision.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_4287a147c2d2150daf5a2475": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/cell-boundary-collar.md",
+      "source_units": [
+        "appendix-proposition-a-5"
+      ]
+    },
+    "af_3397bfd09838597452912b09": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/regular-neighborhood-strong-deformation-retract.md",
+      "source_units": [
+        "appendix-proposition-a-5"
+      ]
+    },
+    "af_5f0a0a354967820017e486a7": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/regular-neighborhood-system.md",
+      "source_units": [
+        "appendix-proposition-a-5"
+      ]
+    },
+    "af_7e0d8531ee8d17dae6a2fb88": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/subcomplex-intersection.md",
+      "source_units": [
+        "appendix-proposition-a-5"
+      ]
+    },
+    "af_6980b13216f55b4875c16e28": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/cw-subcomplex-neighborhood/subcomplex-neighborhood-cover.md",
+      "source_units": [
+        "appendix-proposition-a-5"
+      ]
+    },
+    "af_0b7faad59136939d2ec0734b": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/double-simplex-fundamental-class.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_570a45f4a12c99b18f2f5d42": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/double-simplex-fundamental-cycle.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_34760c1b3ece607058533faf": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/double-simplex-relative-comparison.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_4da2fc5b7cd04ae7b7ed5f40": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/double-simplex-sphere-homeomorphism.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_88908032037e3aad0cb5e672": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/mapping-cone-cover-relative-homology.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_63172729a78d73c830baa7d1": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/mapping-cone-model.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_a2e49a25cd3a4caa14d957af": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/mapping-cone-relative-reduced-homology.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_b3bfe8f0cd2aeab13b17a77d": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/pointed-wedge-point-quotient.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_0ec130d0961b57b7cd05f3c9": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/relative-homology-coproduct.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_3a3deb51fb0d65763cad34d9": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/relative-simplex-fundamental-class.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_a60a7ada9a033af784c579a4": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/sigma-good-pair.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_47796e967178521ad49710b5": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/sigma-pointed-pair.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_8204b616ad8eafa934bae57a": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/singular-relative-chains-coproduct.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_f470c42e2b74bf78b5a5d459": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-boundary-good-pairs.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_4849582f9a5a21cf759a4846": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-boundary-horn.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_9f3e4a786d0db9eda48df751": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-disk-pair-homeomorphism.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_e92b61d61380699a545407f8": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-zero-face-point-quotient.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_8d17f4be9605a1e8324a99fb": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-zero-face-relative-homology.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_f95465a69adbe4843302e352": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/standard-simplex-zero-horn-retraction.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_24f895b6cfca07ed98a9e342": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/triple-connecting-cycle-formula.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_c8461d2db3fb08c9bd7f4e52": {
+      "path": "roadmap/homology/computations-and-applications/post-excision-applications/wedge-reduced-homology.md",
+      "source_units": [
+        "hatcher-2-1-post-excision-applications"
+      ]
+    },
+    "af_ab8bb311f815ae4ee1f81367": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/brouwer-fixed-point-disk.md",
+      "source_units": [
+        "hatcher-2-1-corollary-2-15"
+      ]
+    },
+    "af_5147501f7fe804efe87f1dca": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/closed-ball-radial-deformation-retract.md",
+      "source_units": [
+        "hatcher-2-2-mv-transport-sphere-recurrence"
+      ]
+    },
+    "af_8bce459d247605e450eef75c": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/contractible-space-reduced-homology.md",
+      "source_units": [
+        "hatcher-2-1-sphere-homology"
+      ]
+    },
+    "af_a6eb442378369693c34b1c50": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/disk-boundary-no-retraction.md",
+      "source_units": [
+        "hatcher-2-1-corollary-2-15"
+      ]
+    },
+    "af_d07b06943e65422125e14267": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/fixed-point-free-disk-map-retraction.md",
+      "source_units": [
+        "hatcher-2-1-corollary-2-15"
+      ]
+    },
+    "af_5207ed172ee75a4870d0f7f2": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/homotopy-equivalence-reduced-homology-iso.md",
+      "source_units": [
+        "hatcher-2-1-sphere-homology"
+      ]
+    },
+    "af_07d3736d22868453762d05f0": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/ordinary-neighborhood-mayer-vietoris.md",
+      "source_units": [
+        "hatcher-2-2-mv-transport-sphere-recurrence"
+      ]
+    },
+    "af_ef8d3aebf368209450a69077": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/punctured-space-radial-deformation-retract.md",
+      "source_units": [
+        "hatcher-2-2-mv-transport-sphere-recurrence"
+      ]
+    },
+    "af_aaaedd2fdc35d4e3dfcabaae": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/reduced-homology-homotopy-invariance.md",
+      "source_units": [
+        "hatcher-2-1-sphere-homology"
+      ]
+    },
+    "af_66ea1f639ef9bbd0f6236d16": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/reduced-neighborhood-mayer-vietoris.md",
+      "source_units": [
+        "hatcher-2-2-mv-transport-sphere-recurrence"
+      ]
+    },
+    "af_3810514880894eb04f67c787": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/sphere-hemisphere-neighborhood-cover.md",
+      "source_units": [
+        "hatcher-2-2-mv-transport-sphere-recurrence"
+      ]
+    },
+    "af_e9e884c0b3be617ff7d221dc": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/sphere-hemisphere-stereographic-models.md",
+      "source_units": [
+        "hatcher-2-2-mv-transport-sphere-recurrence"
+      ]
+    },
+    "af_0f89993a3608e24f605cc5a8": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/sphere-reduced-homology-recurrence.md",
+      "source_units": [
+        "hatcher-2-2-mv-transport-sphere-recurrence"
+      ]
+    },
+    "af_fc6563b922b5d53422e79281": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/sphere-reduced-homology.md",
+      "source_units": [
+        "hatcher-2-1-sphere-homology",
+        "hatcher-2-2-mv-transport-sphere-recurrence"
+      ]
+    },
+    "af_7721073fdde0911573d95b14": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/zero-sphere-reduced-homology.md",
+      "source_units": [
+        "hatcher-2-1-sphere-homology"
+      ]
+    },
+    "af_3d33a544b876beec3eeff46e": {
+      "path": "roadmap/homology/computations-and-applications/sphere-homology/zero-sphere-two-point-homeomorphism.md",
+      "source_units": [
+        "hatcher-2-1-sphere-homology"
+      ]
+    },
+    "af_6620be96e3373fceee281549": {
+      "path": "roadmap/homology/simplicial-and-singular/chain-homotopy-invariance.md",
+      "source_units": [
+        "hatcher-2-1-selected-spine"
+      ]
+    },
+    "af_e10c2735f8505461244e8e20": {
+      "path": "roadmap/homology/simplicial-and-singular/chain-map-homology.md",
+      "source_units": [
+        "hatcher-2-1-selected-spine"
+      ]
+    },
+    "af_709463f21814230fca81dc9f": {
+      "path": "roadmap/homology/simplicial-and-singular/homotopy-equivalence-homology-iso.md",
+      "source_units": [
+        "hatcher-2-1-selected-spine"
+      ]
+    },
+    "af_09312a15c3d8d96e43cf27d7": {
+      "path": "roadmap/homology/simplicial-and-singular/point-homology.md",
+      "source_units": [
+        "hatcher-2-1-selected-spine"
+      ]
+    },
+    "af_7968fc65ae53f656ce78c58d": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/augmented-singular-chain-complex.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_ad99652fe9860290c388915f": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-data.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_9ac7fe6f41815e0f139260e2": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-excision-diagram.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_bb3f77cd307019c6adcf877c": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-neighborhood-quotient.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_1259fc0c85b68b0d2f27a1bc": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-neighborhood-relative-homology.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_e11b1e1dac0e10649ea63070": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-point-quotient-exact-sequence.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_7e40bcc1610ef4c11f35a6bb": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-point-quotient-relative-homology.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_1681cfca508c6b0f47bd1569": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-point-quotient-sequence-naturality.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_9896b1645c08fe4c85a03257": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/good-pair-quotient-comparison-naturality.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_87cd8f5d6a5cc82bf5766bcf": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-functor.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_d2437d3f858877fb8db266dd": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-neighborhood-contraction.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_ca7400a4baee60c2a4693910": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-neighborhood-excision.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_345a2474df13c2f42cc9e4eb": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-neighborhood-relative-homology.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_dda9959596a494d3473c0349": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/point-quotient-projection-topology.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_90639a13c044152fff528cfe": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/pointed-relative-reduced-homology-naturality.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_d047fabeff7641326468fef6": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/relative-homology-map-isomorphism-criterion.md",
+      "source_units": [
+        "hatcher-2-1-good-pair-quotient"
+      ]
+    },
+    "af_71b0371444cb6512f02a8169": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/good-pair-quotient/strong-deformation-retract.md",
+      "source_units": [
+        "hatcher-2-2-mv-transport-sphere-recurrence"
+      ]
+    },
+    "af_6423c35a3510db89ce80b6a0": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/pair-long-exact-sequence-naturality.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_28eb45968cda0d7223634efb": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/pair-long-exact-sequence.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_0d5b949221c2653c9284c81a": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/pointed-relative-reduced-homology.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_3c5607bf6881ebacd23e2767": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/pointed-zeroth-homology-splitting.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_d988056a42cddea384f57669": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/reduced-pair-long-exact-sequence-naturality.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_df93848f39d91ecc5e5fab42": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/reduced-pair-long-exact-sequence.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_7da35d562938b0efe2922263": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/reduced-positive-degree-comparison.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_d419a29f857a10423aa75cdf": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/reduced-singular-homology.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_53042df9d43d42059a2311d5": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/relative-homology-homotopy-invariance.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_6cab8eafd3aeafc53888d4dd": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/relative-singular-chain-homotopy.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_e709207d0f23c61c8259719f": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/relative-singular-homology.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_22af3ad0a34dfc2e051ccf6b": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/short-exact-homology-sequence.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_2a09c48fe99a73a2e9df0d1a": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/simplicial-pair-relative-homology.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_0a7e9a54781df8354811b9b7": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/singular-pair-functor.md",
+      "source_units": [
+        "hatcher-2-1-relative-homology-les"
+      ]
+    },
+    "af_5d0836e3e923b63dbb7abb27": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/affine-barycentric-subdivision.md",
+      "source_units": [
+        "hatcher-2-1-small-chains-excision"
+      ]
+    },
+    "af_79821bb097f7e681e401770f": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/affine-chain-subdivision-homotopy.md",
+      "source_units": [
+        "hatcher-2-1-small-chains-excision"
+      ]
+    },
+    "af_9cc2a0377fff8b1774bfdf1f": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/barycentric-subdivision-diameter.md",
+      "source_units": [
+        "hatcher-2-1-small-chains-excision"
+      ]
+    },
+    "af_40ecfa37c3493430859955e2": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/binary-cover-excision-chain-equivalence.md",
+      "source_units": [
+        "hatcher-2-1-small-chains-excision"
+      ]
+    },
+    "af_1f0213e0638fc4d49b7907ba": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/binary-cover-excision-homology-isomorphism.md",
+      "source_units": [
+        "hatcher-2-1-small-chains-excision"
+      ]
+    },
+    "af_647c3193fb9509bf31577ca0": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/deleted-subset-excision-homology-isomorphism.md",
+      "source_units": [
+        "hatcher-2-1-small-chains-excision"
+      ]
+    },
+    "af_8e7c6263a4a02cbcbde0c94e": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/eventually-small-singular-simplices.md",
+      "source_units": [
+        "hatcher-2-1-small-chains-excision"
+      ]
+    },
+    "af_85e867a8cc904f3010b21537": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/relative-chain-union-devissage.md",
+      "source_units": [
+        "hatcher-2-1-small-chains-excision"
+      ]
+    },
+    "af_1bb146350ccc1bbd8409054f": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/singular-chain-subdivision-homotopy.md",
+      "source_units": [
+        "hatcher-2-1-small-chains-excision"
+      ]
+    },
+    "af_d49202a5a6ec350660634b56": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/small-chains-and-excision/small-chain-inclusion-homotopy-equivalence.md",
+      "source_units": [
+        "hatcher-2-1-small-chains-excision"
+      ]
+    },
+    "af_cf02faa75ba81780b7cc01da": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/topological-triple.md",
+      "source_units": [
+        "hatcher-2-1-triple-les"
+      ]
+    },
+    "af_f2cf9ea8b806c2c89d563079": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/triple-chain-short-exact-sequence.md",
+      "source_units": [
+        "hatcher-2-1-triple-les"
+      ]
+    },
+    "af_d76311ba89ebf1425b8eed61": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/triple-long-exact-sequence-naturality.md",
+      "source_units": [
+        "hatcher-2-1-triple-les"
+      ]
+    },
+    "af_096133707d4ba17fcfa64275": {
+      "path": "roadmap/homology/simplicial-and-singular/relative-homology/triple-long-exact-sequence.md",
+      "source_units": [
+        "hatcher-2-1-triple-les"
+      ]
+    },
+    "af_75b6fc8b1d54269a3c681785": {
+      "path": "roadmap/homology/simplicial-and-singular/singular-chain-complex.md",
+      "source_units": [
+        "hatcher-2-1-selected-spine"
+      ]
+    },
+    "af_51e96e7c13ef33c86536df2b": {
+      "path": "roadmap/homology/simplicial-and-singular/singular-homology-homotopy-invariance.md",
+      "source_units": [
+        "hatcher-2-1-selected-spine"
+      ]
+    },
+    "af_aef97a906a5acd7cdb6eb6b0": {
+      "path": "roadmap/homology/simplicial-and-singular/singular-homology.md",
+      "source_units": [
+        "hatcher-2-1-selected-spine"
+      ]
+    },
+    "af_ba169ce13cfec9d889969636": {
+      "path": "roadmap/homology/simplicial-and-singular/topological-homotopy-chain-homotopy.md",
+      "source_units": [
+        "hatcher-2-1-selected-spine"
+      ]
+    },
+    "af_48578e29aa987a0a17839619": {
+      "path": "roadmap/homology/simplicial-and-singular/totally-disconnected-higher-homology.md",
+      "source_units": [
+        "hatcher-2-1-selected-spine"
+      ]
+    },
+    "af_66d5f24ab6fa333843941b48": {
+      "path": "roadmap/homology/simplicial-and-singular/zeroth-homology-components.md",
+      "source_units": [
+        "hatcher-2-1-selected-spine"
+      ]
+    }
+  }
+}

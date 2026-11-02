@@ -4,19 +4,21 @@ on:
   push:
     branches: [main]
     paths:
-      - "blueprints/**"
+      - "blueprint/**"
       - "**.lean"
       - "mkdocs.yml"
       - "scripts/blueprint_nav.py"
+      - "scripts/check_source_units.py"
       - "tests/test_blueprint_nav.py"
       - ".github/autoform-ref"
       - ".github/workflows/blueprint-pages.yml"
   pull_request:
     paths:
-      - "blueprints/**"
+      - "blueprint/**"
       - "**.lean"
       - "mkdocs.yml"
       - "scripts/blueprint_nav.py"
+      - "scripts/check_source_units.py"
       - "tests/test_blueprint_nav.py"
       - ".github/autoform-ref"
       - ".github/workflows/blueprint-pages.yml"
@@ -89,17 +91,27 @@ jobs:
       - name: Validate the theorem DAG and its declarations
         run: >-
           uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}"
-          autoform check blueprints/hatcher --lean-root .
+          autoform check blueprint --lean-root .
+
+      - name: Validate source-unit provenance
+        run: python3 scripts/check_source_units.py blueprint
+
+      - name: Audit the roadmap (report only)
+        continue-on-error: true
+        run: >-
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}"
+          autoform audit blueprint --lean-root .
 
       # Writes site-src/: statement boxes, derived statuses, the Mermaid graph,
       # and permalinks into the Lean code at this exact commit.
       - name: Render the blueprint
         run: >-
           uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}"
-          autoform render blueprints/hatcher
+          autoform render blueprint
           --output site-src
           --lean-root .
           --require-declarations
+          --ref "${GITHUB_SHA}"
 
       - name: Test generated book navigation
         run: >-
