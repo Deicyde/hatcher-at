@@ -63,10 +63,7 @@ def main() -> None:
     end = text.find("\n---\n", 4)
     header = text[4:end].splitlines()
     mappings = [line for line in header if line.startswith("lean:")]
-    expected_mapping = (
-        f"lean: {args.declaration[0]}" if len(args.declaration) == 1
-        else "lean: [" + ", ".join(args.declaration) + "]"
-    )
+    expected_mapping = "lean: " + ", ".join(args.declaration)
     if mappings and mappings != [expected_mapping]:
         parser.error("the article already maps a different Lean declaration")
     added_mapping = not mappings
