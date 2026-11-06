@@ -239,7 +239,8 @@ private noncomputable def compactComplementQuotientMap {X : TopCat.{w}}
     (by
       ext x
       change compactComplementCollapse V hV x.1 = (∞ : OnePoint V)
-      simp [compactComplementCollapse, x.property])
+      have hx : x.1 ∉ V := x.property
+      simp [compactComplementCollapse, hx])
 
 private lemma compactComplementQuotientMap_projection {X : TopCat.{w}}
     [T2Space X] (V : Set X) (hV : IsOpen V) (x : X) :
@@ -277,6 +278,9 @@ noncomputable def compactComplementQuotientOnePointHomeomorph
   classical
   let P : TopPair.{w} := TopPair.ofSubset Vᶜ
   letI : Nonempty P.snd := hVc.to_subtype
+  letI : CompactSpace P.fst := by
+    change CompactSpace X
+    infer_instance
   letI : CompactSpace (pointQuotient P) :=
     Function.Surjective.compactSpace
       (pointQuotientProjection P).hom.continuous
@@ -289,11 +293,15 @@ noncomputable def compactComplementQuotientOnePointHomeomorph
       left_inv := by
         intro y
         obtain ⟨x, rfl⟩ := pointQuotientProjection_surjective P y
+        dsimp [P] at x ⊢
         rw [compactComplementQuotientMap_projection]
         by_cases hx : x ∈ V
         · simp [compactComplementCollapse, hx]
-        · have hqx : pointQuotientProjection P x = pointQuotientPoint P := by
-            change x ∈ pointQuotientProjection P ⁻¹' {pointQuotientPoint P}
+        · have hqx :
+              pointQuotientProjection (TopPair.ofSubset Vᶜ) x =
+                pointQuotientPoint (TopPair.ofSubset Vᶜ) := by
+            change x ∈ pointQuotientProjection (TopPair.ofSubset Vᶜ) ⁻¹'
+              {pointQuotientPoint (TopPair.ofSubset Vᶜ)}
             rw [pointQuotientProjection_preimage_point]
             exact ⟨⟨x, hx⟩, rfl⟩
           simpa [compactComplementCollapse, hx] using hqx.symm
@@ -302,6 +310,8 @@ noncomputable def compactComplementQuotientOnePointHomeomorph
         induction p using OnePoint.rec with
         | infty => exact compactComplementQuotientMap_point V hV
         | coe v =>
+          change compactComplementQuotientMap V hV
+              (pointQuotientProjection (TopPair.ofSubset Vᶜ) v.1) = (v : OnePoint V)
           rw [compactComplementQuotientMap_projection]
           simp [compactComplementCollapse, v.property] }
   exact Continuous.homeoOfEquivCompactToT2
