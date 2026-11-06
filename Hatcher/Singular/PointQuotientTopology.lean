@@ -294,7 +294,7 @@ noncomputable def compactComplementQuotientOnePointHomeomorph
         intro y
         obtain ⟨x, rfl⟩ := pointQuotientProjection_surjective P y
         dsimp [P] at x ⊢
-        rw [compactComplementQuotientMap_projection]
+        rw [compactComplementQuotientMap_projection (X := X) V hV x]
         by_cases hx : x ∈ V
         · simp [compactComplementCollapse, hx]
         · have hqx :
