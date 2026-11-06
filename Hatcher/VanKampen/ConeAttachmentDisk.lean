@@ -1,6 +1,8 @@
 import Hatcher.VanKampen.ConeAttachment
 import Hatcher.Singular.GoodPair
 import Hatcher.VanKampen.ConeAttachmentDeformation
+import Hatcher.Sphere.HemisphereCharts
+import Hatcher.Singular.PointQuotientTopology
 import Mathlib.Topology.Category.TopCat.Sphere
 import Mathlib.Analysis.Normed.Module.Connected
 
@@ -613,5 +615,540 @@ theorem sphere_cone_pair_map_comp (n : ℕ)
     rcases p with x | p
     · rfl
     · rcases p with a | ⟨x, r⟩ <;> rfl
+
+end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+open CategoryTheory Limits Topology
+open Hatcher.Relative Hatcher.VanKampen.ConeAttachment
+
+universe u
+
+private def sphereConeSnocVector (m : ℕ)
+    (w : EuclideanSpace ℝ (Fin m)) (z : ℝ) :
+    EuclideanSpace ℝ (Fin (m + 1)) :=
+  WithLp.toLp 2 (Fin.snoc (WithLp.ofLp w) z)
+
+private theorem sphere_cone_snoc_vector_cast_succ (m : ℕ)
+    (w : EuclideanSpace ℝ (Fin m)) (z : ℝ) (i : Fin m) :
+    sphereConeSnocVector m w z i.castSucc = w i := by
+  change Fin.snoc (WithLp.ofLp w) z i.castSucc = w i
+  simp only [Fin.snoc_castSucc]
+
+private theorem sphere_cone_snoc_vector_last (m : ℕ)
+    (w : EuclideanSpace ℝ (Fin m)) (z : ℝ) :
+    sphereConeSnocVector m w z (Fin.last m) = z := by
+  change Fin.snoc (WithLp.ofLp w) z (Fin.last m) = z
+  simp only [Fin.snoc_last]
+
+private theorem sphere_cone_snoc_vector_norm_sq (m : ℕ)
+    (w : EuclideanSpace ℝ (Fin m)) (z : ℝ) :
+    ‖sphereConeSnocVector m w z‖ ^ 2 = ‖w‖ ^ 2 + z ^ 2 := by
+  rw [EuclideanSpace.real_norm_sq_eq, Fin.sum_univ_castSucc,
+    EuclideanSpace.real_norm_sq_eq]
+  simp only [sphere_cone_snoc_vector_cast_succ, sphere_cone_snoc_vector_last]
+
+private theorem sphere_cone_radicand_nonneg (r : I) :
+    0 ≤ 1 - (2 * (r : ℝ) - 1) ^ 2 := by
+  have h := mul_nonneg r.2.1 (sub_nonneg.mpr r.2.2)
+  nlinarith
+
+private theorem sphere_cone_radicand_pos (r : I) (h0 : r ≠ 0) (h1 : r ≠ 1) :
+    0 < 1 - (2 * (r : ℝ) - 1) ^ 2 := by
+  have h0r : (r : ℝ) ≠ 0 := unitInterval.coe_ne_zero.mpr h0
+  have h1r : (r : ℝ) ≠ 1 := by
+    intro h
+    exact h1 (Subtype.ext h)
+  have hr0 : 0 < (r : ℝ) := lt_of_le_of_ne r.2.1 h0r.symm
+  have hr1 : (r : ℝ) < 1 := lt_of_le_of_ne r.2.2 h1r
+  have h := mul_pos hr0 (sub_pos.mpr hr1)
+  nlinarith
+
+private def sphereConeCylinderVector (n : ℕ)
+    (x : TopCat.sphere.{u} n) (r : I) :
+    EuclideanSpace ℝ (Fin (n + 2)) :=
+  sphereConeSnocVector (n + 1)
+    (Real.sqrt (1 - (2 * (r : ℝ) - 1) ^ 2) • (sphereULiftHomeomorph n x).1)
+    (2 * (r : ℝ) - 1)
+
+private theorem sphere_cone_cylinder_vector_norm (n : ℕ)
+    (x : TopCat.sphere.{u} n) (r : I) :
+    ‖sphereConeCylinderVector n x r‖ = 1 := by
+  have hsq : ‖sphereConeCylinderVector n x r‖ ^ 2 = 1 := by
+    rw [sphereConeCylinderVector, sphere_cone_snoc_vector_norm_sq,
+      norm_smul_of_nonneg (Real.sqrt_nonneg _),
+      mem_sphere_zero_iff_norm.mp (sphereULiftHomeomorph n x).2, mul_one,
+      Real.sq_sqrt (sphere_cone_radicand_nonneg r)]
+    ring
+  have hnonneg := norm_nonneg (sphereConeCylinderVector n x r)
+  nlinarith
+
+/-- The prescribed point of the next standard sphere at retained cylinder
+height `r`. Its horizontal coordinate is multiplied by
+`sqrt (1 - (2*r - 1)^2)` and its last coordinate is `2*r - 1`. -/
+def sphereConeCylinderPoint (n : ℕ) (x : TopCat.sphere.{u} n) (r : I) :
+    TopCat.sphere.{u} (n + 1) :=
+  (sphereULiftHomeomorph (n + 1)).symm
+    ⟨sphereConeCylinderVector n x r,
+      mem_sphere_zero_iff_norm.2 (sphere_cone_cylinder_vector_norm n x r)⟩
+
+/-- The complete Euclidean coordinate formula for a retained cylinder point. -/
+theorem sphere_cone_cylinder_point_coordinates (n : ℕ)
+    (x : TopCat.sphere.{u} n) (r : I) :
+    ((sphereULiftHomeomorph (n + 1) (sphereConeCylinderPoint n x r)).1 :
+        EuclideanSpace ℝ (Fin (n + 2))) =
+      WithLp.toLp 2
+        (Fin.snoc
+          (fun i : Fin (n + 1) =>
+            Real.sqrt (1 - (2 * (r : ℝ) - 1) ^ 2) *
+              ((sphereULiftHomeomorph n x).1 :
+                EuclideanSpace ℝ (Fin (n + 1))) i)
+          (2 * (r : ℝ) - 1)) :=
+  rfl
+
+private theorem continuous_sphere_cone_cylinder_vector (n : ℕ) :
+    Continuous (fun p : TopCat.sphere.{u} n × I =>
+      sphereConeCylinderVector n p.1 p.2) := by
+  let Z : TopCat.sphere.{u} n × I → ℝ := fun p => 2 * (p.2 : ℝ) - 1
+  let A : TopCat.sphere.{u} n × I → ℝ := fun p => Real.sqrt (1 - (Z p) ^ 2)
+  have hZ : Continuous Z := by
+    dsimp [Z]
+    exact (continuous_const.mul
+      (continuous_subtype_val.comp continuous_snd)).sub continuous_const
+  have hA : Continuous A := by
+    dsimp [A]
+    exact (continuous_const.sub (hZ.pow 2)).sqrt
+  have hX : Continuous (fun p : TopCat.sphere.{u} n × I =>
+      (sphereULiftHomeomorph n p.1).1) :=
+    continuous_subtype_val.comp
+      ((sphereULiftHomeomorph n).continuous.comp continuous_fst)
+  change Continuous (fun p : TopCat.sphere.{u} n × I =>
+    WithLp.toLp 2
+      (Fin.snoc
+        (fun i : Fin (n + 1) =>
+          A p * ((sphereULiftHomeomorph n p.1).1 :
+            EuclideanSpace ℝ (Fin (n + 1))) i)
+        (Z p)))
+  apply (PiLp.continuous_toLp 2 (fun _ : Fin (n + 2) => ℝ)).comp
+  apply continuous_pi
+  intro i
+  cases i using Fin.lastCases with
+  | last =>
+      simp only [Fin.snoc_last]
+      exact hZ
+  | cast i =>
+      simp only [Fin.snoc_castSucc]
+      exact hA.mul
+        ((PiLp.continuous_apply 2 (fun _ : Fin (n + 1) => ℝ) i).comp hX)
+
+private theorem continuous_sphere_cone_cylinder_point (n : ℕ) :
+    Continuous (fun p : TopCat.sphere.{u} n × I =>
+      sphereConeCylinderPoint n p.1 p.2) := by
+  exact (sphereULiftHomeomorph (n + 1)).symm.continuous.comp
+    ((continuous_sphere_cone_cylinder_vector n).subtype_mk
+      (fun p => mem_sphere_zero_iff_norm.2
+        (sphere_cone_cylinder_vector_norm n p.1 p.2)))
+
+private theorem sphere_cone_cylinder_point_zero (n : ℕ)
+    (x : TopCat.sphere.{u} n) :
+    sphereConeCylinderPoint n x 0 = southPole.{u} n := by
+  apply (sphereULiftHomeomorph (n + 1)).injective
+  apply Subtype.ext
+  change sphereConeCylinderVector n x 0 = -lastVector n
+  apply PiLp.ext
+  intro i
+  cases i using Fin.lastCases <;>
+    simp [sphereConeCylinderVector, sphere_cone_snoc_vector_cast_succ,
+      sphere_cone_snoc_vector_last, lastVector, PiLp.single_apply]
+
+private theorem sphere_cone_cylinder_point_one (n : ℕ)
+    (x : TopCat.sphere.{u} n) :
+    sphereConeCylinderPoint n x 1 = northPole.{u} n := by
+  apply (sphereULiftHomeomorph (n + 1)).injective
+  apply Subtype.ext
+  change sphereConeCylinderVector n x 1 = lastVector n
+  apply PiLp.ext
+  intro i
+  cases i using Fin.lastCases <;>
+    simp [sphereConeCylinderVector, sphere_cone_snoc_vector_cast_succ,
+      sphere_cone_snoc_vector_last, lastVector, PiLp.single_apply]
+
+private def sphereConePreSphereMap (n : ℕ) :
+    Prequotient (TopCat.sphere.{u} n) (TopCat.sphere.{u} n) →
+      TopCat.sphere.{u} (n + 1)
+  | Sum.inl _ => northPole n
+  | Sum.inr (Sum.inl _) => southPole n
+  | Sum.inr (Sum.inr (x, r)) => sphereConeCylinderPoint n x r
+
+private theorem continuous_sphere_cone_pre_sphere_map (n : ℕ) :
+    Continuous (sphereConePreSphereMap.{u} n) := by
+  rw [continuous_sum_dom]
+  constructor
+  · exact continuous_const
+  · rw [continuous_sum_dom]
+    exact ⟨continuous_const, continuous_sphere_cone_cylinder_point n⟩
+
+private theorem sphere_cone_pre_sphere_map_normal_form (n : ℕ)
+    (p : Prequotient (TopCat.sphere.{u} n) (TopCat.sphere.{u} n)) :
+    sphereConePreSphereMap n
+        (normalForm (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) p) =
+      sphereConePreSphereMap n p := by
+  rcases p with x | p
+  · rfl
+  · rcases p with a | ⟨x, r⟩
+    · rfl
+    · by_cases h0 : r = 0
+      · subst r
+        simp [normalForm, sphereConePreSphereMap, sphere_cone_cylinder_point_zero]
+      · by_cases h1 : r = 1
+        · subst r
+          simp [normalForm, sphereConePreSphereMap, sphere_cone_cylinder_point_one]
+        · simp [normalForm, sphereConePreSphereMap, h0, h1]
+
+private def sphereConeToSphereFun (n : ℕ) :
+    Hatcher.VanKampen.ConeAttachment
+        (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) →
+      TopCat.sphere.{u} (n + 1) :=
+  Quotient.lift (sphereConePreSphereMap n) fun a b hab => by
+    change normalForm (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) a =
+      normalForm (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) b at hab
+    rw [← sphere_cone_pre_sphere_map_normal_form n a,
+      ← sphere_cone_pre_sphere_map_normal_form n b, hab]
+
+private theorem continuous_sphere_cone_to_sphere_fun (n : ℕ) :
+    Continuous (sphereConeToSphereFun.{u} n) := by
+  apply (isQuotientMap_quotientMk
+    (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)).continuous_iff.mpr
+  change Continuous (sphereConePreSphereMap n)
+  exact continuous_sphere_cone_pre_sphere_map n
+
+private def sphereConeToSphereMap (n : ℕ) :
+    (sphereConePair.{u} n).fst ⟶ TopCat.sphere.{u} (n + 1) :=
+  TopCat.ofHom
+    ⟨sphereConeToSphereFun n, continuous_sphere_cone_to_sphere_fun n⟩
+
+private def sphereConeNorthPointMap (n : ℕ) :
+    TopCat.of PUnit ⟶ TopCat.sphere.{u} (n + 1) :=
+  TopCat.ofHom ⟨fun _ => northPole n, continuous_const⟩
+
+private theorem sphere_cone_to_sphere_base_square (n : ℕ) :
+    (sphereConePair.{u} n).map ≫ sphereConeToSphereMap n =
+      pointQuotientCollapse (sphereConePair.{u} n) ≫ sphereConeNorthPointMap n := by
+  ext x
+  change sphereConeToSphereFun n
+    (base (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x) = northPole n
+  rfl
+
+/-- The continuous map from the actual cone-base point quotient to the next
+standard sphere, descended through the retained cone and the TopCat pushout. -/
+def sphereConeQuotientMap (n : ℕ) :
+    pointQuotient (sphereConePair.{u} n) ⟶ TopCat.sphere.{u} (n + 1) :=
+  pushout.desc (sphereConeToSphereMap n) (sphereConeNorthPointMap n)
+    (sphere_cone_to_sphere_base_square n)
+
+private theorem sphere_cone_quotient_map_projection (n : ℕ)
+    (c : (sphereConePair.{u} n).fst) :
+    sphereConeQuotientMap n
+        (pointQuotientProjection (sphereConePair.{u} n) c) =
+      sphereConeToSphereMap n c := by
+  have h : pointQuotientProjection (sphereConePair.{u} n) ≫
+      sphereConeQuotientMap n = sphereConeToSphereMap n := by
+    dsimp [pointQuotientProjection, sphereConeQuotientMap, pointQuotient]
+    apply pushout.inl_desc
+  exact ConcreteCategory.congr_hom h c
+
+private theorem sphere_cone_quotient_map_point (n : ℕ) :
+    sphereConeQuotientMap n (pointQuotientPoint (sphereConePair.{u} n)) =
+      northPole.{u} n := by
+  have h : pointQuotientPointInclusion (sphereConePair.{u} n) ≫
+      sphereConeQuotientMap n = sphereConeNorthPointMap n := by
+    dsimp [pointQuotientPointInclusion, sphereConeQuotientMap, pointQuotient]
+    apply pushout.inr_desc
+  exact ConcreteCategory.congr_hom h PUnit.unit
+
+private theorem sphere_cone_quotient_map_apex (n : ℕ) :
+    sphereConeQuotientMap n
+        (pointQuotientProjection (sphereConePair.{u} n)
+          (apex (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n))) =
+      southPole.{u} n := by
+  exact sphere_cone_quotient_map_projection n
+    (apex (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n))
+
+private theorem sphere_cone_quotient_map_cylinder (n : ℕ)
+    (x : TopCat.sphere.{u} n) (r : I) :
+    sphereConeQuotientMap n
+        (pointQuotientProjection (sphereConePair.{u} n)
+          (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r)) =
+      sphereConeCylinderPoint n x r := by
+  exact sphere_cone_quotient_map_projection n
+    (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r)
+
+private theorem sphere_cone_quotient_projection_base (n : ℕ)
+    (x : TopCat.sphere.{u} n) :
+    pointQuotientProjection (sphereConePair.{u} n)
+        (base (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x) =
+      pointQuotientPoint (sphereConePair.{u} n) := by
+  have h : base (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x ∈
+      pointQuotientProjection (sphereConePair.{u} n) ⁻¹'
+        {pointQuotientPoint (sphereConePair.{u} n)} := by
+    rw [pointQuotientProjection_preimage_point]
+    exact ⟨x, rfl⟩
+  exact h
+
+private theorem sphere_cone_quotient_cylinder_representative (n : ℕ)
+    (q : pointQuotient (sphereConePair.{u} n)) :
+    ∃ x : TopCat.sphere.{u} n, ∃ r : I,
+      pointQuotientProjection (sphereConePair.{u} n)
+        (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r) = q := by
+  let : Nonempty (sphereConePair.{u} n).snd := (sphereConeGoodPairData n).nonempty
+  obtain ⟨c, hc⟩ := pointQuotientProjection_surjective (sphereConePair.{u} n) q
+  change Hatcher.VanKampen.ConeAttachment
+    (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) at c
+  have hrep : ∃ x : TopCat.sphere.{u} n, ∃ r : I,
+      cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r = c := by
+    refine Quotient.inductionOn c ?_
+    intro p
+    rcases p with x | p
+    · exact ⟨x, 1, cylinder_one _ x⟩
+    · rcases p with a | ⟨x, r⟩
+      · cases a
+        let x : TopCat.sphere.{u} n := Classical.choice (sphereConeGoodPairData n).nonempty
+        exact ⟨x, 0, cylinder_zero _ x⟩
+      · exact ⟨x, r, rfl⟩
+  obtain ⟨x, r, hr⟩ := hrep
+  exact ⟨x, r, (congrArg (pointQuotientProjection (sphereConePair.{u} n)) hr).trans hc⟩
+
+private theorem sphere_cone_cylinder_point_last (n : ℕ)
+    (x : TopCat.sphere.{u} n) (r : I) :
+    ((sphereULiftHomeomorph (n + 1) (sphereConeCylinderPoint n x r)).1 :
+      EuclideanSpace ℝ (Fin (n + 2))) (Fin.last (n + 1)) = 2 * (r : ℝ) - 1 := by
+  change sphereConeCylinderVector n x r (Fin.last (n + 1)) = 2 * (r : ℝ) - 1
+  rw [sphereConeCylinderVector, sphere_cone_snoc_vector_last]
+
+private theorem sphere_cone_cylinder_point_cast_succ (n : ℕ)
+    (x : TopCat.sphere.{u} n) (r : I) (i : Fin (n + 1)) :
+    ((sphereULiftHomeomorph (n + 1) (sphereConeCylinderPoint n x r)).1 :
+        EuclideanSpace ℝ (Fin (n + 2))) i.castSucc =
+      Real.sqrt (1 - (2 * (r : ℝ) - 1) ^ 2) *
+        ((sphereULiftHomeomorph n x).1 : EuclideanSpace ℝ (Fin (n + 1))) i := by
+  change sphereConeCylinderVector n x r i.castSucc = _
+  exact sphere_cone_snoc_vector_cast_succ (n + 1)
+    (Real.sqrt (1 - (2 * (r : ℝ) - 1) ^ 2) • (sphereULiftHomeomorph n x).1)
+    (2 * (r : ℝ) - 1) i
+
+private theorem sphere_cone_cylinder_point_height_eq (n : ℕ)
+    (x y : TopCat.sphere.{u} n) (r s : I)
+    (h : sphereConeCylinderPoint n x r = sphereConeCylinderPoint n y s) : r = s := by
+  have hz : 2 * (r : ℝ) - 1 = 2 * (s : ℝ) - 1 := by
+    simpa only [sphere_cone_cylinder_point_last] using
+      congrArg (fun p : TopCat.sphere.{u} (n + 1) =>
+        ((sphereULiftHomeomorph (n + 1) p).1 :
+          EuclideanSpace ℝ (Fin (n + 2))) (Fin.last (n + 1))) h
+  exact Subtype.ext (by linarith)
+
+private theorem sphere_cone_cylinder_point_interior_injective (n : ℕ)
+    (x y : TopCat.sphere.{u} n) (r : I) (h0 : r ≠ 0) (h1 : r ≠ 1)
+    (h : sphereConeCylinderPoint n x r = sphereConeCylinderPoint n y r) : x = y := by
+  let a : ℝ := Real.sqrt (1 - (2 * (r : ℝ) - 1) ^ 2)
+  have ha : 0 < a := Real.sqrt_pos.2 (sphere_cone_radicand_pos r h0 h1)
+  have hraw : (sphereULiftHomeomorph n x).1 = (sphereULiftHomeomorph n y).1 := by
+    apply PiLp.ext
+    intro i
+    have hcoord := congrArg (fun p : TopCat.sphere.{u} (n + 1) =>
+      ((sphereULiftHomeomorph (n + 1) p).1 :
+        EuclideanSpace ℝ (Fin (n + 2))) i.castSucc) h
+    rw [sphere_cone_cylinder_point_cast_succ,
+      sphere_cone_cylinder_point_cast_succ] at hcoord
+    have hc := congrArg (fun b : ℝ => a⁻¹ * b) hcoord
+    change a⁻¹ * (a * ((sphereULiftHomeomorph n x).1 :
+        EuclideanSpace ℝ (Fin (n + 1))) i) =
+      a⁻¹ * (a * ((sphereULiftHomeomorph n y).1 :
+        EuclideanSpace ℝ (Fin (n + 1))) i) at hc
+    simpa only [← mul_assoc, inv_mul_cancel₀ (ne_of_gt ha), one_mul] using hc
+  exact (sphereULiftHomeomorph n).injective (Subtype.ext hraw)
+
+private theorem sphere_cone_quotient_map_injective (n : ℕ) :
+    Function.Injective (sphereConeQuotientMap.{u} n) := by
+  intro q q' h
+  obtain ⟨x, r, hq⟩ := sphere_cone_quotient_cylinder_representative n q
+  obtain ⟨y, s, hq'⟩ := sphere_cone_quotient_cylinder_representative n q'
+  have hpoint : sphereConeCylinderPoint n x r = sphereConeCylinderPoint n y s := by
+    rw [← hq, ← hq'] at h
+    simpa only [sphere_cone_quotient_map_cylinder] using h
+  have hrs := sphere_cone_cylinder_point_height_eq n x y r s hpoint
+  subst s
+  rw [← hq, ← hq']
+  by_cases h0 : r = 0
+  · subst r
+    simp only [cylinder_zero]
+  · by_cases h1 : r = 1
+    · subst r
+      simp only [cylinder_one, id_eq, sphere_cone_quotient_projection_base]
+    · rw [sphere_cone_cylinder_point_interior_injective n x y r h0 h1 hpoint]
+
+private theorem sphere_cone_cylinder_point_surjective (n : ℕ) :
+    Function.Surjective (fun p : TopCat.sphere.{u} n × I =>
+      sphereConeCylinderPoint n p.1 p.2) := by
+  intro y
+  let v : EuclideanSpace ℝ (Fin (n + 2)) := (sphereULiftHomeomorph (n + 1) y).1
+  let z : ℝ := v (Fin.last (n + 1))
+  let w : EuclideanSpace ℝ (Fin (n + 1)) :=
+    WithLp.toLp 2 (Fin.init (WithLp.ofLp v))
+  have hv : sphereConeSnocVector (n + 1) w z = v := by
+    change WithLp.toLp 2
+      (Fin.snoc (Fin.init (WithLp.ofLp v)) (WithLp.ofLp v (Fin.last (n + 1)))) = v
+    rw [Fin.snoc_init_self, WithLp.toLp_ofLp]
+  have hnorm : ‖v‖ = 1 :=
+    mem_sphere_zero_iff_norm.mp (sphereULiftHomeomorph (n + 1) y).2
+  have hsq : ‖w‖ ^ 2 + z ^ 2 = 1 := by
+    have h := sphere_cone_snoc_vector_norm_sq (n + 1) w z
+    rw [hv, hnorm] at h
+    nlinarith
+  have hz : |z| ≤ 1 := by
+    have h := PiLp.norm_apply_le v (Fin.last (n + 1))
+    simpa only [Real.norm_eq_abs, hnorm] using h
+  have hz0 : -1 ≤ z := (abs_le.mp hz).1
+  have hz1 : z ≤ 1 := (abs_le.mp hz).2
+  let r : I := ⟨(z + 1) / 2, by constructor <;> linarith⟩
+  have hzr : 2 * (r : ℝ) - 1 = z := by
+    dsimp [r]
+    ring
+  have hsqrt : Real.sqrt (1 - z ^ 2) = ‖w‖ := by
+    have hrad : 1 - z ^ 2 = ‖w‖ ^ 2 := by linarith
+    rw [hrad, Real.sqrt_sq (norm_nonneg w)]
+  by_cases hw : w = 0
+  · let x : TopCat.sphere.{u} n := Classical.choice (sphereConeGoodPairData n).nonempty
+    have hw0 : Real.sqrt (1 - z ^ 2) = 0 := by
+      rw [hsqrt, hw, norm_zero]
+    refine ⟨(x, r), ?_⟩
+    apply (sphereULiftHomeomorph (n + 1)).injective
+    apply Subtype.ext
+    change sphereConeCylinderVector n x r = v
+    rw [sphereConeCylinderVector, hzr, hw0, zero_smul]
+    simpa only [hw] using hv
+  · let xRaw : RawSphere n :=
+      ⟨‖w‖⁻¹ • w, mem_sphere_zero_iff_norm.2 (by
+        rw [norm_smul_of_nonneg (inv_nonneg.mpr (norm_nonneg w))]
+        exact inv_mul_cancel₀ (norm_ne_zero_iff.mpr hw))⟩
+    let x : TopCat.sphere.{u} n := (sphereULiftHomeomorph n).symm xRaw
+    have hx : (sphereULiftHomeomorph n x).1 = ‖w‖⁻¹ • w :=
+      congrArg (fun p : RawSphere n => p.1)
+        ((sphereULiftHomeomorph n).apply_symm_apply xRaw)
+    refine ⟨(x, r), ?_⟩
+    apply (sphereULiftHomeomorph (n + 1)).injective
+    apply Subtype.ext
+    change sphereConeCylinderVector n x r = v
+    rw [sphereConeCylinderVector, hzr, hx, hsqrt, smul_smul,
+      mul_inv_cancel₀ (norm_ne_zero_iff.mpr hw), one_smul]
+    exact hv
+
+private theorem sphere_cone_quotient_map_surjective (n : ℕ) :
+    Function.Surjective (sphereConeQuotientMap.{u} n) := by
+  intro y
+  obtain ⟨p, hp⟩ := sphere_cone_cylinder_point_surjective n y
+  exact ⟨pointQuotientProjection (sphereConePair.{u} n)
+      (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) p.1 p.2),
+    (sphere_cone_quotient_map_cylinder n p.1 p.2).trans hp⟩
+
+private theorem sphere_cone_compact_space (n : ℕ) :
+    CompactSpace (sphereConePair.{u} n).fst := by
+  change CompactSpace (Hatcher.VanKampen.ConeAttachment
+    (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n))
+  exact (diskHomeomorph.{u} (n + 1)).symm.compactSpace
+
+private theorem sphere_cone_quotient_compact_space (n : ℕ) :
+    CompactSpace (pointQuotient (sphereConePair.{u} n)) := by
+  let : CompactSpace (sphereConePair.{u} n).fst := sphere_cone_compact_space n
+  let : Nonempty (sphereConePair.{u} n).snd := (sphereConeGoodPairData n).nonempty
+  exact Function.Surjective.compactSpace
+    (pointQuotientProjection (sphereConePair.{u} n)).hom.continuous
+    (pointQuotientProjection_surjective (sphereConePair.{u} n))
+
+/-- The fixed cone-base quotient homeomorphism with the prescribed suspension
+coordinates, for every `n`, including zero. Retained height one, the collapsed
+base, goes to the existing north pole; the explicit apex at height zero goes
+to the existing south pole. The retained coordinate agrees with Hatcher's
+coordinate by `t = 1 - r`. -/
+def sphereConeQuotientHomeomorph (n : ℕ) :
+    pointQuotient (sphereConePair.{u} n) ≃ₜ TopCat.sphere.{u} (n + 1) := by
+  letI : CompactSpace (pointQuotient (sphereConePair.{u} n)) :=
+    sphere_cone_quotient_compact_space n
+  letI : T2Space (TopCat.sphere.{u} (n + 1)) := by
+    change T2Space (ULift.{u} (RawSphere (n + 1)))
+    infer_instance
+  exact Continuous.homeoOfEquivCompactToT2
+    (f := Equiv.ofBijective (sphereConeQuotientMap n)
+      ⟨sphere_cone_quotient_map_injective n, sphere_cone_quotient_map_surjective n⟩)
+    (sphereConeQuotientMap n).hom.continuous
+
+/-- The collapsed retained base maps to the existing north pole. -/
+@[simp]
+theorem sphere_cone_quotient_homeomorph_point (n : ℕ) :
+    sphereConeQuotientHomeomorph n
+        (pointQuotientPoint (sphereConePair.{u} n)) = northPole.{u} n := by
+  change sphereConeQuotientMap n
+    (pointQuotientPoint (sphereConePair.{u} n)) = northPole.{u} n
+  exact sphere_cone_quotient_map_point n
+
+/-- Every actual retained base point represents the north pole. -/
+@[simp]
+theorem sphere_cone_quotient_homeomorph_base (n : ℕ)
+    (x : TopCat.sphere.{u} n) :
+    sphereConeQuotientHomeomorph n
+        (pointQuotientProjection (sphereConePair.{u} n)
+          (base (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x)) =
+      northPole.{u} n := by
+  exact (congrArg (sphereConeQuotientHomeomorph n)
+    (sphere_cone_quotient_projection_base n x)).trans
+    (sphere_cone_quotient_homeomorph_point n)
+
+/-- The actual cone apex maps to the existing south pole. -/
+@[simp]
+theorem sphere_cone_quotient_homeomorph_apex (n : ℕ) :
+    sphereConeQuotientHomeomorph n
+        (pointQuotientProjection (sphereConePair.{u} n)
+          (apex (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n))) =
+      southPole.{u} n := by
+  change sphereConeQuotientMap n
+    (pointQuotientProjection (sphereConePair.{u} n)
+      (apex (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n))) = southPole.{u} n
+  exact sphere_cone_quotient_map_apex n
+
+/-- The homeomorphism preserves the prescribed cylinder formula at every
+retained height, including both endpoint classes. -/
+@[simp]
+theorem sphere_cone_quotient_homeomorph_cylinder (n : ℕ)
+    (x : TopCat.sphere.{u} n) (r : I) :
+    sphereConeQuotientHomeomorph n
+        (pointQuotientProjection (sphereConePair.{u} n)
+          (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r)) =
+      sphereConeCylinderPoint n x r := by
+  change sphereConeQuotientMap n
+    (pointQuotientProjection (sphereConePair.{u} n)
+      (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r)) =
+    sphereConeCylinderPoint n x r
+  exact sphere_cone_quotient_map_cylinder n x r
+
+/-- The complete fixed coordinate formula on an actual cone-base quotient
+class: horizontal factor `sqrt (1 - (2*r - 1)^2)`, last coordinate `2*r - 1`. -/
+theorem sphere_cone_quotient_homeomorph_coordinates (n : ℕ)
+    (x : TopCat.sphere.{u} n) (r : I) :
+    ((sphereULiftHomeomorph (n + 1)
+      (sphereConeQuotientHomeomorph n
+        (pointQuotientProjection (sphereConePair.{u} n)
+          (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r)))).1 :
+        EuclideanSpace ℝ (Fin (n + 2))) =
+      WithLp.toLp 2
+        (Fin.snoc
+          (fun i : Fin (n + 1) =>
+            Real.sqrt (1 - (2 * (r : ℝ) - 1) ^ 2) *
+              ((sphereULiftHomeomorph n x).1 :
+                EuclideanSpace ℝ (Fin (n + 1))) i)
+          (2 * (r : ℝ) - 1)) := by
+  exact (congrArg (fun y : TopCat.sphere.{u} (n + 1) =>
+    ((sphereULiftHomeomorph (n + 1) y).1 : EuclideanSpace ℝ (Fin (n + 2))))
+      (sphere_cone_quotient_homeomorph_cylinder n x r)).trans
+    (sphere_cone_cylinder_point_coordinates n x r)
 
 end Hatcher.Sphere
