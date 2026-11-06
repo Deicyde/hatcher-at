@@ -11,15 +11,15 @@ on:
     inputs:
       article_id:
         description: Article whose candidate needs proof evidence
-        default: af_f0ce52bed8b3559c75b76fa3
+        default: af_05d0454bfa12070e4397bbb7
         required: true
       module:
         description: Lean module containing the candidate
-        default: Hatcher.Singular.PointedWedgePointQuotient
+        default: Hatcher.VanKampen.ConeAttachmentDisk
         required: true
       declaration:
         description: Candidate declaration to inspect
-        default: Hatcher.Relative.finiteOnePointSigmaWedgeHomeomorph
+        default: Hatcher.Sphere.sphereSuspensionMap
         required: true
 
 permissions:
@@ -27,9 +27,9 @@ permissions:
 
 env:
   AUTOFORM_SOURCE: "https://github.com/facebookresearch/autoform-bot.git"
-  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_f0ce52bed8b3559c75b76fa3' }}
-  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Singular.PointedWedgePointQuotient' }}
-  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Relative.finiteOnePointSigmaWedgeHomeomorph' }}
+  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_05d0454bfa12070e4397bbb7' }}
+  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.VanKampen.ConeAttachmentDisk' }}
+  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.sphereSuspensionMap' }}
 
 concurrency:
   group: autoform-verify-${{ github.ref }}
@@ -187,8 +187,14 @@ jobs:
             --article-id "$EVIDENCE_ARTICLE" \
             --module "$EVIDENCE_MODULE" \
             --declaration "$EVIDENCE_DECLARATION" \
-            --declaration Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_coe \
-            --declaration Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_infty
+            --declaration Hatcher.Sphere.sphereSuspensionProjection \
+            --declaration Hatcher.Sphere.sphere_suspension_map_quotient \
+            --declaration Hatcher.Sphere.sphere_suspension_map_ambient_naturality \
+            --declaration Hatcher.Sphere.sphere_suspension_map_cylinder \
+            --declaration Hatcher.Sphere.sphere_suspension_map_north_pole \
+            --declaration Hatcher.Sphere.sphere_suspension_map_south_pole \
+            --declaration Hatcher.Sphere.sphere_suspension_map_id \
+            --declaration Hatcher.Sphere.sphere_suspension_map_comp
 
       - name: Export quotient import impact
         run: |
