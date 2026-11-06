@@ -215,6 +215,7 @@ jobs:
           import Batteries.Tactic.Lint
 
           #print axioms Hatcher.Sphere.circlePowerMap_positive_arcChart
+          #print axioms Hatcher.Sphere.circlePowerMap_positive_localStretchDeformation
           #print axioms Hatcher.Sphere.localDegree_punctured_homotopy_invariance
           #print axioms Hatcher.Sphere.finite_disjoint_sphere_balls
           #print axioms Hatcher.Relative.compactComplementQuotientOnePointHomeomorph
@@ -225,6 +226,16 @@ jobs:
           #print axioms Hatcher.Sphere.sphereConeBase
           #print axioms Hatcher.Sphere.sphereConePair
           #print axioms Hatcher.Sphere.sphereConeGoodPairData
+          #print axioms Hatcher.Sphere.sphereConePairMap
+          #print axioms Hatcher.Sphere.sphereConeMap
+          #print axioms Hatcher.Sphere.sphere_cone_map_base
+          #print axioms Hatcher.Sphere.sphere_cone_map_apex
+          #print axioms Hatcher.Sphere.sphere_cone_map_cylinder
+          #print axioms Hatcher.Sphere.sphere_cone_map_base_square
+          #print axioms Hatcher.Sphere.sphere_cone_pair_map_fst
+          #print axioms Hatcher.Sphere.sphere_cone_pair_map_snd
+          #print axioms Hatcher.Sphere.sphere_cone_pair_map_id
+          #print axioms Hatcher.Sphere.sphere_cone_pair_map_comp
 
           #lint only unusedArguments in Hatcher.Sphere.CirclePower
           #lint only unusedArguments in Hatcher.Sphere.LocalDegree

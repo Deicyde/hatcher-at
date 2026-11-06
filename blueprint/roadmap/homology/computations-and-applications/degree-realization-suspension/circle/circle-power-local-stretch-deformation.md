@@ -2,6 +2,9 @@
 article_id: af_f2326d93cde64505bb99af6f
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.circlePowerMap_positive_localStretchDeformation
 ---
 
 # Local positive stretching deforms to a rotation through punctured maps
