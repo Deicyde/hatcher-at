@@ -2,6 +2,9 @@
 article_id: af_bf71d5e0974f47deb6980564
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.circlePowerMap_positive_arcChart
 ---
 
 # Positive circle powers stretch local angular charts

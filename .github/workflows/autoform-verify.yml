@@ -181,6 +181,14 @@ jobs:
             --module "$EVIDENCE_MODULE" \
             --declaration "$EVIDENCE_DECLARATION"
 
+      - name: Export local-degree import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_b27bb3e374b92a7334095698 Hatcher.Sphere.LocalDegree . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/local-degree-import-impact.json
+
       - name: Upload proof review evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
