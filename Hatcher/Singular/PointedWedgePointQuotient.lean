@@ -295,8 +295,9 @@ private noncomputable def finiteOnePointSigmaWedgeData
         change ¬ ((∞ : OnePoint (X i)) ≠ ∞)
         simp
       · intro hz
+        change ¬ (z.2 ≠ (∞ : OnePoint (X z.1))) at hz
         have hzi : z.2 = (∞ : OnePoint (X z.1)) := by
-          simpa only [V, Set.mem_compl_iff, Set.mem_setOf_eq, not_not] using hz
+          exact not_not.mp hz
         rcases z with ⟨i, y⟩
         change y = (∞ : OnePoint (X i)) at hzi
         subst y
@@ -409,7 +410,7 @@ private noncomputable def finiteOnePointSigmaWedgeData
         continuous_invFun := continuous_const }
     refine ⟨e, rfl, ?_⟩
     intro i x
-    exact isEmptyElim i
+    exact (hι ⟨i⟩).elim
 
 /-- Compactifying a finite topological disjoint union gives the actual
 pointed wedge of the compactified summands, each based at infinity.
