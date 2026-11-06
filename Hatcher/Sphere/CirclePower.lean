@@ -193,9 +193,9 @@ theorem circlePowerMap_positive_arcChart (k : ℕ) (hk : 0 < k)
         simpa only [haε] using hlt
     · intro ht
       constructor
-      · apply (mul_lt_mul_left ha_pos).mp
+      · apply (mul_lt_mul_iff_of_pos_left ha_pos).mp
         simpa only [mul_neg, haε] using ht.1
-      · apply (mul_lt_mul_left ha_pos).mp
+      · apply (mul_lt_mul_iff_of_pos_left ha_pos).mp
         simpa only [haε] using ht.2
   let σ : Set.Ioo (-ε) ε ≃ₜ Set.Ioo (-β) β :=
     (Homeomorph.mulLeft₀ a ha_pos.ne').subtype
@@ -245,7 +245,7 @@ theorem circlePowerMap_positive_arcChart (k : ℕ) (hk : 0 < k)
       (e (P (φ t : S)) : ℂ) =
         (e x : ℂ) ^ k * Complex.exp (((k : ℝ) * (t : ℝ) : ℝ) * Complex.I) := by
     rw [hpower t]
-    simp only [_root_.Circle.coe_mul, _root_.Circle.coe_pow, _root_.Circle.coe_exp]
+    simp only [_root_.Circle.coe_mul, _root_.Circle.coe_pow, _root_.Circle.coe_exp, a]
   have hfiber : U ∩ P ⁻¹' {P x} = {x} := by
     ext z
     constructor
