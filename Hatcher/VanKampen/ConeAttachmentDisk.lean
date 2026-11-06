@@ -633,13 +633,15 @@ private def sphereConeSnocVector (m : ℕ)
 private theorem sphere_cone_snoc_vector_cast_succ (m : ℕ)
     (w : EuclideanSpace ℝ (Fin m)) (z : ℝ) (i : Fin m) :
     sphereConeSnocVector m w z i.castSucc = w i := by
-  change Fin.snoc (WithLp.ofLp w) z i.castSucc = w i
+  change Fin.snoc (α := fun _ : Fin (m + 1) => ℝ)
+    (WithLp.ofLp w) z i.castSucc = w i
   simp only [Fin.snoc_castSucc]
 
 private theorem sphere_cone_snoc_vector_last (m : ℕ)
     (w : EuclideanSpace ℝ (Fin m)) (z : ℝ) :
     sphereConeSnocVector m w z (Fin.last m) = z := by
-  change Fin.snoc (WithLp.ofLp w) z (Fin.last m) = z
+  change Fin.snoc (α := fun _ : Fin (m + 1) => ℝ)
+    (WithLp.ofLp w) z (Fin.last m) = z
   simp only [Fin.snoc_last]
 
 private theorem sphere_cone_snoc_vector_norm_sq (m : ℕ)
@@ -725,7 +727,7 @@ private theorem continuous_sphere_cone_cylinder_vector (n : ℕ) :
       ((sphereULiftHomeomorph n).continuous.comp continuous_fst)
   change Continuous (fun p : TopCat.sphere.{u} n × I =>
     WithLp.toLp 2
-      (Fin.snoc
+      (Fin.snoc (α := fun _ : Fin (n + 2) => ℝ)
         (fun i : Fin (n + 1) =>
           A p * ((sphereULiftHomeomorph n p.1).1 :
             EuclideanSpace ℝ (Fin (n + 1))) i)
@@ -760,7 +762,7 @@ private theorem sphere_cone_cylinder_point_zero (n : ℕ)
   intro i
   cases i using Fin.lastCases <;>
     simp [sphereConeCylinderVector, sphere_cone_snoc_vector_cast_succ,
-      sphere_cone_snoc_vector_last, lastVector, PiLp.single_apply]
+      sphere_cone_snoc_vector_last, lastVector]
 
 private theorem sphere_cone_cylinder_point_one (n : ℕ)
     (x : TopCat.sphere.{u} n) :
@@ -771,8 +773,8 @@ private theorem sphere_cone_cylinder_point_one (n : ℕ)
   apply PiLp.ext
   intro i
   cases i using Fin.lastCases <;>
-    simp [sphereConeCylinderVector, sphere_cone_snoc_vector_cast_succ,
-      sphere_cone_snoc_vector_last, lastVector, PiLp.single_apply]
+    norm_num [sphereConeCylinderVector, sphere_cone_snoc_vector_cast_succ,
+      sphere_cone_snoc_vector_last, lastVector]
 
 private def sphereConePreSphereMap (n : ℕ) :
     Prequotient (TopCat.sphere.{u} n) (TopCat.sphere.{u} n) →
@@ -1031,10 +1033,10 @@ private theorem sphere_cone_cylinder_point_surjective (n : ℕ) :
       ⟨‖w‖⁻¹ • w, mem_sphere_zero_iff_norm.2 (by
         rw [norm_smul_of_nonneg (inv_nonneg.mpr (norm_nonneg w))]
         exact inv_mul_cancel₀ (norm_ne_zero_iff.mpr hw))⟩
-    let x : TopCat.sphere.{u} n := (sphereULiftHomeomorph n).symm xRaw
-    have hx : (sphereULiftHomeomorph n x).1 = ‖w‖⁻¹ • w :=
+    let x : TopCat.sphere.{u} n := (sphereULiftHomeomorph.{u} n).symm xRaw
+    have hx : (sphereULiftHomeomorph.{u} n x).1 = ‖w‖⁻¹ • w :=
       congrArg (fun p : RawSphere n => p.1)
-        ((sphereULiftHomeomorph n).apply_symm_apply xRaw)
+        ((sphereULiftHomeomorph.{u} n).apply_symm_apply xRaw)
     refine ⟨(x, r), ?_⟩
     apply (sphereULiftHomeomorph (n + 1)).injective
     apply Subtype.ext
