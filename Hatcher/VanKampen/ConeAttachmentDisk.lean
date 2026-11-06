@@ -1,5 +1,8 @@
 import Hatcher.VanKampen.ConeAttachment
+import Hatcher.Singular.GoodPair
+import Hatcher.VanKampen.ConeAttachmentDeformation
 import Mathlib.Topology.Category.TopCat.Sphere
+import Mathlib.Analysis.Normed.Module.Connected
 
 /-!
 # A cone on the disk boundary is a disk
@@ -302,3 +305,106 @@ theorem diskHomeomorph_cylinder (n : ℕ)
   rfl
 
 end Hatcher.VanKampen.ConeAttachment
+
+namespace Hatcher.Sphere
+
+open CategoryTheory Topology
+open Hatcher.VanKampen Hatcher.VanKampen.ConeAttachment
+
+universe u
+
+/-- The retained cone on the actual standard `n`-sphere. -/
+def sphereCone (n : ℕ) : TopCat.{u} :=
+  TopCat.of (ConeAttachment
+    (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n))
+
+/-- The canonical retained base of the standard sphere cone. -/
+def sphereConeBase (n : ℕ) :
+    TopCat.sphere.{u} n ⟶ sphereCone.{u} n :=
+  TopCat.ofHom
+    { toFun := base (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)
+      continuous_toFun :=
+        (isQuotientMap_quotientMk
+          (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)).continuous.comp
+          continuous_inl }
+
+private theorem sphere_cone_base_is_closed_embedding (n : ℕ) :
+    IsClosedEmbedding (sphereConeBase.{u} n) := by
+  let E := EuclideanSpace ℝ (Fin (n + 1))
+  let B : Set E := Metric.sphere 0 1
+  let D : Set E := Metric.closedBall 0 1
+  have hBD : B ⊆ D := Metric.sphere_subset_closedBall
+  have hB : IsClosed B := Metric.isClosed_sphere
+  have hInclusion : IsClosedEmbedding (Set.inclusion hBD) :=
+    IsClosedEmbedding.of_comp
+      (IsEmbedding.subtypeVal : IsEmbedding ((↑) : D → E))
+      hB.isClosedEmbedding_subtypeVal
+  have hDisk : IsClosedEmbedding
+      (TopCat.diskBoundaryInclusion.{u} (n + 1)) := by
+    change IsClosedEmbedding (fun x : ULift.{u} B =>
+      ULift.up (Set.inclusion hBD x.down))
+    let eB : ULift.{u} B ≃ₜ B := Homeomorph.ulift
+    let eD : ULift.{u} D ≃ₜ D := Homeomorph.ulift
+    exact eD.symm.isClosedEmbedding.comp
+      (hInclusion.comp eB.isClosedEmbedding)
+  have hComp :
+      diskHomeomorph.{u} (n + 1) ∘ sphereConeBase.{u} n =
+        (TopCat.diskBoundaryInclusion.{u} (n + 1) :
+          TopCat.sphere.{u} n → TopCat.disk.{u} (n + 1)) := by
+    funext x
+    exact diskHomeomorph_base_eq_diskBoundaryInclusion (n + 1) x
+  rw [← hComp] at hDisk
+  exact IsClosedEmbedding.of_comp
+    (diskHomeomorph.{u} (n + 1)).isEmbedding hDisk
+
+/-- The actual sphere cone paired with its retained standard sphere. -/
+def sphereConePair (n : ℕ) : TopPair.{u} :=
+  TopPair.of (sphereConeBase.{u} n)
+    (sphere_cone_base_is_closed_embedding n).isEmbedding
+
+/-- The open base-side cover gives genuine good-pair data on the sphere cone. -/
+def sphereConeGoodPairData (n : ℕ) :
+    Hatcher.Relative.GoodPairData (sphereConePair.{u} n) where
+  nonempty := by
+    obtain ⟨x, hx⟩ :=
+      (NormedSpace.sphere_nonempty
+        (x := (0 : EuclideanSpace ℝ (Fin (n + 1)))) (r := 1)).mpr
+        (zero_le_one : (0 : ℝ) ≤ 1)
+    exact ⟨ULift.up ⟨x, hx⟩⟩
+  isClosed_range :=
+    (sphere_cone_base_is_closed_embedding n).isClosed_range
+  V := lowerCover (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)
+  range_subset_interior := by
+    rw [(isOpen_lowerCover
+      (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)).interior_eq]
+    rintro _ ⟨x, rfl⟩
+    exact (lowerBaseInclusion (ContinuousMap.id (TopCat.sphere.{u} n)) x).2
+  strongDeformationRetract := by
+    change Hatcher.StrongDeformationRetract
+      (lowerBaseInclusion (ContinuousMap.id (TopCat.sphere.{u} n)))
+    exact lowerStrongDeformationRetract _
+
+/-- For every `n`, including zero, the actual sphere cone and its retained
+base form a good pair with an open base neighborhood and contractible ambient
+cone. Retained height zero is the apex, height one is the base, and the source
+height is `1 - r`. -/
+theorem sphere_cone_geometry (n : ℕ) :
+    Hatcher.Relative.IsGoodPair (sphereConePair.{u} n) ∧
+      IsOpen (sphereConeGoodPairData.{u} n).V ∧
+      ContractibleSpace (sphereConePair.{u} n).fst ∧
+      (∀ x : TopCat.sphere.{u} n,
+        cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x 0 =
+            apex (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) ∧
+          cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x 1 =
+            (sphereConePair.{u} n).map x) ∧
+      (∀ r : I, (unitInterval.symm r : ℝ) = 1 - (r : ℝ)) := by
+  refine ⟨⟨sphereConeGoodPairData n⟩, isOpen_lowerCover _, ?_, ?_, ?_⟩
+  · letI : ContractibleSpace
+        (Metric.closedBall (0 : EuclideanSpace ℝ (Fin (n + 1))) 1) :=
+      Metric.contractibleSpace_closedBall (zero_le_one : (0 : ℝ) ≤ 1)
+    exact ((diskHomeomorph.{u} (n + 1)).trans Homeomorph.ulift).contractibleSpace
+  · intro x
+    exact ⟨cylinder_zero _ x, cylinder_one _ x⟩
+  · exact unitInterval.coe_symm_eq
+
+end Hatcher.Sphere

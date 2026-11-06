@@ -27,13 +27,13 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--article-id", required=True)
     parser.add_argument("--module", required=True)
-    parser.add_argument("--declaration", required=True)
+    parser.add_argument("--declaration", action="append", required=True)
     parser.add_argument("--prepare-only", action="store_true")
     args = parser.parse_args()
     if not re.fullmatch(r"af_[0-9a-f]{24}", args.article_id):
         parser.error("article-id must be a durable Autoform article ID")
     lean_name = r"[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*"
-    for value in (args.module, args.declaration):
+    for value in [args.module, *args.declaration]:
         if not re.fullmatch(lean_name, value):
             parser.error("module and declaration must be qualified Lean names")
 
@@ -63,7 +63,10 @@ def main() -> None:
     end = text.find("\n---\n", 4)
     header = text[4:end].splitlines()
     mappings = [line for line in header if line.startswith("lean:")]
-    expected_mapping = f"lean: {args.declaration}"
+    expected_mapping = (
+        f"lean: {args.declaration[0]}" if len(args.declaration) == 1
+        else "lean: [" + ", ".join(args.declaration) + "]"
+    )
     if mappings and mappings != [expected_mapping]:
         parser.error("the article already maps a different Lean declaration")
     added_mapping = not mappings
@@ -84,7 +87,8 @@ def main() -> None:
         "article_id": args.article_id,
         "article_path": article.relative_to(blueprint).as_posix(),
         "module": args.module,
-        "declaration": args.declaration,
+        "declaration": args.declaration[0],
+        "declarations": args.declaration,
         "lean_source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
         "review_projection_added_target_mapping": added_mapping,
         "progress_assertions_changed": False,
@@ -101,8 +105,8 @@ def main() -> None:
     probe.write_text(
         f"import {args.module}\n"
         "import Batteries.Tactic.Lint\n\n"
-        f"#print axioms {args.declaration}\n"
-        f"#lint only unusedArguments in {args.module}\n",
+        + "".join(f"#print axioms {name}\n" for name in args.declaration)
+        + f"#lint only unusedArguments in {args.module}\n",
         encoding="utf-8",
     )
     run(["lake", "env", "lean", str(probe)], artifacts / "axioms-and-lint.txt")

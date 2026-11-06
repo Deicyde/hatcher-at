@@ -1,6 +1,15 @@
 # The cone over a sphere forms a contractible good pair
 
-Reuse ConeAttachment (id : S_n -> S_n), coneBoundaryHom, diskHomeomorph (n+1), its base/apex/cylinder equations, lowerCover id, and lowerStrongDeformationRetract id. The existing cylinder is r=0 at the apex and r=1 at the base; Hatcher uses t=1-r. Construct the actual embedded TopPair and GoodPairData, and transport Metric.contractibleSpace_closedBall through the actual homeomorphism.
+Uncompiled checks for `Hatcher.Sphere.sphere_cone_geometry` and its supporting
+constructions in `Hatcher.VanKampen.ConeAttachmentDisk`:
 
-These are project-authored Lean-side planning findings. The associated roadmap
-leaf is unproved; no compilation or proof claim is made here.
+- Confirm that the closed disk-boundary inclusion's `ULift` expression is
+  definitionally the standard `TopCat.diskBoundaryInclusion (n + 1)`.
+- Confirm that `goodPairNeighborhoodInclusion` for the chosen `lowerCover id`
+  is definitionally `lowerBaseInclusion (ContinuousMap.id _)`.
+- Check the `n = 0` specialization: the actual sphere is the boundary of the
+  one-dimensional disk, and the nonemptiness proof uses `Fin (n + 1)`.
+- Check the public theorem's axioms and unused arguments after compilation.
+
+The candidate has not been compiled or reviewed. The associated roadmap
+article retains its original assertions.
