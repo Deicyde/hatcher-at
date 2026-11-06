@@ -240,17 +240,17 @@ open scoped OnePoint
 
 variable (X)
 
-private noncomputable def finiteOnePointSigmaWedgeData
+private theorem finiteOnePointSigmaWedgeExists
     [Finite ι] [∀ i, LocallyCompactSpace (X i)] [∀ i, T2Space (X i)] :
-    {e : OnePoint (Σ i, X i) ≃ₜ
+    ∃ e : OnePoint (Σ i, X i) ≃ₜ
         Hatcher.PointedWedge (fun i ↦ OnePoint (X i))
-          (fun i ↦ (∞ : OnePoint (X i))) //
+          (fun i ↦ (∞ : OnePoint (X i))),
       e (∞ : OnePoint (Σ i, X i)) =
           Hatcher.PointedWedge.basepoint (fun i ↦ (∞ : OnePoint (X i))) ∧
       ∀ (i : ι) (x : X i),
         e ((⟨i, x⟩ : Σ j, X j) : OnePoint (Σ j, X j)) =
           Hatcher.PointedWedge.inclusion (fun j ↦ (∞ : OnePoint (X j))) i
-            (x : OnePoint (X i))} := by
+            (x : OnePoint (X i)) := by
   classical
   refine if hι : Nonempty ι then ?_ else ?_
   · letI : Nonempty ι := hι
@@ -420,7 +420,7 @@ noncomputable def finiteOnePointSigmaWedgeHomeomorph
     OnePoint (Σ i, X i) ≃ₜ
       Hatcher.PointedWedge (fun i ↦ OnePoint (X i))
         (fun i ↦ (∞ : OnePoint (X i))) :=
-  (finiteOnePointSigmaWedgeData X).1
+  Classical.choose (finiteOnePointSigmaWedgeExists X)
 
 /-- A finite point maps to its canonical compactified-summand inclusion. -/
 @[simp]
@@ -431,7 +431,7 @@ theorem finite_one_point_sigma_wedge_homeomorph_apply_coe
         ((⟨i, x⟩ : Σ j, X j) : OnePoint (Σ j, X j)) =
       Hatcher.PointedWedge.inclusion (fun j ↦ (∞ : OnePoint (X j))) i
         (x : OnePoint (X i)) :=
-  (finiteOnePointSigmaWedgeData X).2.2 i x
+  (Classical.choose_spec (finiteOnePointSigmaWedgeExists X)).2 i x
 
 /-- Infinity maps to the existing wedge's common basepoint. -/
 @[simp]
@@ -439,7 +439,7 @@ theorem finite_one_point_sigma_wedge_homeomorph_apply_infty
     [Finite ι] [∀ i, LocallyCompactSpace (X i)] [∀ i, T2Space (X i)] :
     finiteOnePointSigmaWedgeHomeomorph X (∞ : OnePoint (Σ i, X i)) =
       Hatcher.PointedWedge.basepoint (fun i ↦ (∞ : OnePoint (X i))) :=
-  (finiteOnePointSigmaWedgeData X).2.1
+  (Classical.choose_spec (finiteOnePointSigmaWedgeExists X)).1
 
 end FiniteOnePointSigma
 
