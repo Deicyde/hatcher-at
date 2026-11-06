@@ -2,6 +2,9 @@
 article_id: af_94410cbcc0ca4ddd482ec0f6
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.sphere_cone_geometry, Hatcher.Sphere.sphereCone, Hatcher.Sphere.sphereConeBase, Hatcher.Sphere.sphereConePair, Hatcher.Sphere.sphereConeGoodPairData
 ---
 
 # The cone over a sphere forms a contractible good pair

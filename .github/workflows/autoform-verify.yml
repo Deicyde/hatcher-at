@@ -96,7 +96,12 @@ jobs:
         run: lake exe cache get || echo "no cache available — building from source"
 
       - name: Build the focused proof module
-        run: lake build "$EVIDENCE_MODULE"
+        run: >-
+          lake build "$EVIDENCE_MODULE"
+          Hatcher.Sphere.CirclePower Hatcher.Sphere.LocalDegree
+          Hatcher.Sphere.PuncturedStereographic
+          Hatcher.Singular.PointQuotientTopology
+          Hatcher.VanKampen.ConeAttachmentDisk
 
       - name: Build Lean
         run: lake build
@@ -190,6 +195,54 @@ jobs:
             af_7b75fc9548f3d4af72397bf9 Hatcher.Singular.PointQuotientTopology . \
             --lean-root . --json \
             > .lake/formalize-evidence/artifacts/quotient-import-impact.json
+
+      - name: Check the combined formalization frontier
+        run: |
+          set -euo pipefail
+          cat > .lake/formalize-evidence/FrontierChecks.lean <<'LEAN'
+          import Hatcher.Sphere.CirclePower
+          import Hatcher.Sphere.LocalDegree
+          import Hatcher.Sphere.PuncturedStereographic
+          import Hatcher.Singular.PointQuotientTopology
+          import Hatcher.VanKampen.ConeAttachmentDisk
+          import Batteries.Tactic.Lint
+
+          #print axioms Hatcher.Sphere.circlePowerMap_positive_arcChart
+          #print axioms Hatcher.Sphere.localDegree_punctured_homotopy_invariance
+          #print axioms Hatcher.Sphere.finite_disjoint_sphere_balls
+          #print axioms Hatcher.Relative.compactComplementQuotientOnePointHomeomorph
+          #print axioms Hatcher.Relative.compactComplementQuotientOnePointHomeomorph_apply_point
+          #print axioms Hatcher.Relative.compactComplementQuotientOnePointHomeomorph_apply_projection
+          #print axioms Hatcher.Sphere.sphere_cone_geometry
+          #print axioms Hatcher.Sphere.sphereCone
+          #print axioms Hatcher.Sphere.sphereConeBase
+          #print axioms Hatcher.Sphere.sphereConePair
+          #print axioms Hatcher.Sphere.sphereConeGoodPairData
+
+          #lint only unusedArguments in Hatcher.Sphere.CirclePower
+          #lint only unusedArguments in Hatcher.Sphere.LocalDegree
+          #lint only unusedArguments in Hatcher.Sphere.PuncturedStereographic
+          #lint only unusedArguments in Hatcher.Singular.PointQuotientTopology
+          #lint only unusedArguments in Hatcher.VanKampen.ConeAttachmentDisk
+          LEAN
+          lake env lean .lake/formalize-evidence/FrontierChecks.lean \
+            | tee .lake/formalize-evidence/artifacts/frontier-axioms-and-lint.txt
+
+      - name: Export local-degree import impact
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_b27bb3e374b92a7334095698 Hatcher.Sphere.LocalDegree . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/local-degree-import-impact.json
+
+      - name: Export cone import impact
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_94410cbcc0ca4ddd482ec0f6 Hatcher.VanKampen.ConeAttachmentDisk . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/cone-import-impact.json
 
       - name: Upload proof review evidence
         if: always()
