@@ -305,6 +305,11 @@ theorem circlePowerMap_positive_localStretchDeformation
   let β : ℝ := Real.pi / 2
   rcases circlePowerMap_positive_arcChart k hk x with
     ⟨U, _, φ, _, _, _, hU, _, hx, _, hφ, _, _, _, _, hPk, _⟩
+  change ∀ t : Set.Ioo (-ε) ε,
+    e (φ t : S) = e x * _root_.Circle.exp (t : ℝ) at hφ
+  change ∀ t : Set.Ioo (-ε) ε,
+    (e (P (φ t : S)) : ℂ) = (e x : ℂ) ^ k *
+      Complex.exp (((k : ℝ) * (t : ℝ) : ℝ) * Complex.I) at hPk
   have ha_one : 1 ≤ a := by
     dsimp [a]
     exact (Nat.one_le_cast (α := ℝ)).mpr (Nat.succ_le_of_lt hk)
