@@ -11,15 +11,15 @@ on:
     inputs:
       article_id:
         description: Article whose candidate needs proof evidence
-        default: af_a8f2082aa2844d26554baedf
+        default: af_94410cbcc0ca4ddd482ec0f6
         required: true
       module:
         description: Lean module containing the candidate
-        default: Hatcher.Sphere.PuncturedStereographic
+        default: Hatcher.VanKampen.ConeAttachmentDisk
         required: true
       declaration:
         description: Candidate declaration to inspect
-        default: Hatcher.Sphere.finite_disjoint_sphere_balls
+        default: Hatcher.Sphere.sphere_cone_geometry
         required: true
 
 permissions:
@@ -27,9 +27,9 @@ permissions:
 
 env:
   AUTOFORM_SOURCE: "https://github.com/facebookresearch/autoform-bot.git"
-  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_a8f2082aa2844d26554baedf' }}
-  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Sphere.PuncturedStereographic' }}
-  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.finite_disjoint_sphere_balls' }}
+  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_94410cbcc0ca4ddd482ec0f6' }}
+  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.VanKampen.ConeAttachmentDisk' }}
+  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.sphere_cone_geometry' }}
 
 concurrency:
   group: autoform-verify-${{ github.ref }}
@@ -179,7 +179,11 @@ jobs:
           python3 scripts/formalize_evidence.py \
             --article-id "$EVIDENCE_ARTICLE" \
             --module "$EVIDENCE_MODULE" \
-            --declaration "$EVIDENCE_DECLARATION"
+            --declaration "$EVIDENCE_DECLARATION" \
+            --declaration Hatcher.Sphere.sphereCone \
+            --declaration Hatcher.Sphere.sphereConeBase \
+            --declaration Hatcher.Sphere.sphereConePair \
+            --declaration Hatcher.Sphere.sphereConeGoodPairData
 
       - name: Export cone import baseline
         run: |
