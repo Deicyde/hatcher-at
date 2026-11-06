@@ -5,6 +5,7 @@ Authors: Jack McCarthy
 -/
 
 import Hatcher.Sphere.LocalDegreeShrinking
+import Hatcher.Singular.RelativeHomotopy
 
 /-!
 # Local degree at an isolated preimage
@@ -204,6 +205,123 @@ theorem localDegree_germ_invariance
   have hhom :
       AddCommGrpCat.asHom (G := AddCommGrpCat.of ℤ)
           (localDegree n hn f x y hf') =
+        AddCommGrpCat.asHom (G := AddCommGrpCat.of ℤ)
+          (localDegree n hn g x y hg) := by
+    rw [← cancel_mono (integralSphereLocalFundamentalClass n hn y)]
+    exact hscaled
+  exact AddCommGrpCat.asHom_injective hhom
+
+end Hatcher.Sphere
+
+
+namespace Hatcher.Sphere
+
+/-- A continuous homotopy on an open neighborhood, fixing the central target
+and avoiding that target elsewhere at every parameter, preserves isolation
+and the signed local degree for every choice of isolation witnesses. -/
+theorem localDegree_punctured_homotopy_invariance
+    (n : ℕ) (hn : 0 < n)
+    {f g : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n}
+    {x y : TopCat.sphere.{0} n}
+    (U : Set (TopCat.sphere.{0} n))
+    (hU : IsOpen U) (hxU : x ∈ U)
+    (H : C(unitInterval × U, TopCat.sphere.{0} n))
+    (hzero : ∀ z : U, H (0, z) = f z.1)
+    (hone : ∀ z : U, H (1, z) = g z.1)
+    (hcenter : ∀ t : unitInterval, H (t, ⟨x, hxU⟩) = y)
+    (havoid : ∀ (t : unitInterval) (z : U), z.1 ≠ x → H (t, z) ≠ y) :
+    IsolatedPreimage f x y ∧ IsolatedPreimage g x y ∧
+      ∀ (hf : IsolatedPreimage f x y) (hg : IsolatedPreimage g x y),
+        localDegree n hn f x y hf = localDegree n hn g x y hg := by
+  classical
+  let Nf : LocalDegreeNeighborhood f x y :=
+    { U := U
+      isOpen_U := hU
+      x_mem := hxU
+      map_eq := (hzero ⟨x, hxU⟩).symm.trans (hcenter 0)
+      eq_of_mem_of_map_eq := by
+        intro z hz hzy
+        by_contra hzx
+        exact (havoid 0 ⟨z, hz⟩ hzx)
+          ((hzero ⟨z, hz⟩).trans hzy) }
+  let Ng : LocalDegreeNeighborhood g x y :=
+    { U := U
+      isOpen_U := hU
+      x_mem := hxU
+      map_eq := (hone ⟨x, hxU⟩).symm.trans (hcenter 1)
+      eq_of_mem_of_map_eq := by
+        intro z hz hzy
+        by_contra hzx
+        exact (havoid 1 ⟨z, hz⟩ hzx)
+          ((hone ⟨z, hz⟩).trans hzy) }
+  let Hfst : TopCat.Homotopy
+      (TopPair.Hom.fst Nf.pairHom) (TopPair.Hom.fst Ng.pairHom) :=
+    { toContinuousMap := H
+      map_zero_left := by
+        intro z
+        change H (0, z) = f z.1
+        exact hzero z
+      map_one_left := by
+        intro z
+        change H (1, z) = g z.1
+        exact hone z }
+  let puncturedH :
+      C(unitInterval × ({⟨x, hxU⟩}ᶜ : Set U),
+        ({y}ᶜ : Set (TopCat.sphere.{0} n))) :=
+    { toFun := fun p ↦ ⟨H (p.1, p.2.1), by
+        have hz : p.2.1 ≠ (⟨x, hxU⟩ : U) := by
+          simpa only [Set.mem_compl_iff, Set.mem_singleton_iff] using p.2.2
+        have hzx : p.2.1.1 ≠ x := by
+          intro hzx
+          exact hz (Subtype.ext hzx)
+        simpa only [Set.mem_compl_iff, Set.mem_singleton_iff] using
+          havoid p.1 p.2.1 hzx⟩
+      continuous_toFun := by
+        apply Continuous.subtype_mk
+        exact H.continuous.comp
+          (continuous_fst.prodMk
+            (continuous_subtype_val.comp continuous_snd)) }
+  let Hsnd : TopCat.Homotopy
+      (TopPair.Hom.snd Nf.pairHom) (TopPair.Hom.snd Ng.pairHom) :=
+    { toContinuousMap := puncturedH
+      map_zero_left := by
+        intro z
+        apply Subtype.ext
+        change H (0, z.1) = f z.1.1
+        exact hzero z.1
+      map_one_left := by
+        intro z
+        apply Subtype.ext
+        change H (1, z.1) = g z.1.1
+        exact hone z.1 }
+  let Hpair : TopPair.Homotopy Nf.pairHom Ng.pairHom :=
+    { fst := Hfst
+      snd := Hsnd
+      w := by
+        ext p
+        rfl }
+  refine ⟨Nf.isolatedPreimage, Ng.isolatedPreimage, ?_⟩
+  intro hf hg
+  let F := Hatcher.Relative.homologyFunctor (AddCommGrpCat.of ℤ) n
+  let classU := integralSphereNeighborhoodFundamentalClass
+    n hn x U hxU hU
+  have hmaps : F.map Nf.pairHom = F.map Ng.pairHom :=
+    Hatcher.Relative.congr_homologyMap Hpair (AddCommGrpCat.of ℤ) n
+  have hscaled :
+      AddCommGrpCat.asHom (localDegree n hn f x y hf) ≫
+          integralSphereLocalFundamentalClass n hn y =
+        AddCommGrpCat.asHom (localDegree n hn g x y hg) ≫
+          integralSphereLocalFundamentalClass n hn y := by
+    calc
+      _ = classU ≫ F.map Nf.pairHom :=
+        (localFundamentalClass_map_eq_localDegree n hn f x y hf Nf).symm
+      _ = classU ≫ F.map Ng.pairHom := by rw [hmaps]
+      _ = _ := localFundamentalClass_map_eq_localDegree n hn g x y hg Ng
+  let _ : IsIso (integralSphereLocalFundamentalClass n hn y) :=
+    integralSphereLocalFundamentalClass_isIso n hn y
+  have hhom :
+      AddCommGrpCat.asHom (G := AddCommGrpCat.of ℤ)
+          (localDegree n hn f x y hf) =
         AddCommGrpCat.asHom (G := AddCommGrpCat.of ℤ)
           (localDegree n hn g x y hg) := by
     rw [← cancel_mono (integralSphereLocalFundamentalClass n hn y)]
