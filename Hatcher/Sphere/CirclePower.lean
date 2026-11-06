@@ -285,8 +285,8 @@ theorem circlePowerMap_positive_localStretchDeformation
         e (H (s, φ t)) = e y * _root_.Circle.exp
           (((1 - (s : ℝ)) * (k : ℝ) + (s : ℝ)) * (t : ℝ))) ∧
       (∀ (s : unitInterval) (t : Set.Ioo (-ε) ε),
-        (e (H (s, φ t)) : ℂ) = (e y : ℂ) * Complex.exp
-          (((((1 - (s : ℝ)) * (k : ℝ) + (s : ℝ)) * (t : ℝ) : ℝ) : ℂ) *
+        (e (H (s, φ t)) : ℂ) = (e y : ℂ) * Complex.exp (
+          ((((1 - (s : ℝ)) * (k : ℝ) + (s : ℝ)) * (t : ℝ) : ℝ) : ℂ) *
             Complex.I)) ∧
       (∀ u : U, H (0, u) = P (u : TopCat.sphere.{0} 1)) ∧
       (∀ u : U, H (1, u) =
@@ -370,8 +370,8 @@ theorem circlePowerMap_positive_localStretchDeformation
         (((1 - (s : ℝ)) * a + (s : ℝ)) * (t : ℝ)) := by
     rw [hHφ s t, hscale_formula s]
   have hcomplex (s : unitInterval) (t : Set.Ioo (-ε) ε) :
-      (e (H (s, φ t)) : ℂ) = (e y : ℂ) * Complex.exp
-        (((((1 - (s : ℝ)) * (k : ℝ) + (s : ℝ)) * (t : ℝ) : ℝ) : ℂ) *
+      (e (H (s, φ t)) : ℂ) = (e y : ℂ) * Complex.exp (
+        ((((1 - (s : ℝ)) * (k : ℝ) + (s : ℝ)) * (t : ℝ) : ℝ) : ℂ) *
           Complex.I) := by
     rw [hformula s t]
     simp only [_root_.Circle.coe_mul, _root_.Circle.coe_exp, a]
