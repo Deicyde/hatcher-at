@@ -57,11 +57,11 @@ theorem finite_disjoint_sphere_balls (n : ℕ) (hn : 0 < n) (k : ℕ) :
         fun y ↦ (e.symm y).1
       let c : Fin k → EuclideanSpace ℝ (Fin n) :=
         fun i ↦ EuclideanSpace.single ⟨0, hn⟩ (4 * (i.1 : ℝ))
-      (sphereULiftHomeomorph n b).1 =
+      (sphereULiftHomeomorph.{0} n b).1 =
           EuclideanSpace.single (Fin.last n) (1 : ℝ) ∧
       ((ℝ ∙ EuclideanSpace.single (0 : Fin (n + 1)) (1 : ℝ))ᗮ).reflection
-          (sphereULiftHomeomorph n b).1 =
-        (sphereULiftHomeomorph n b).1 ∧
+          (sphereULiftHomeomorph.{0} n b).1 =
+        (sphereULiftHomeomorph.{0} n b).1 ∧
       Topology.IsOpenEmbedding f ∧
       Pairwise (fun i j ↦
         Disjoint (f '' closedBall (c i) 1) (f '' closedBall (c j) 1)) ∧
@@ -75,19 +75,19 @@ theorem finite_disjoint_sphere_balls (n : ℕ) (hn : 0 < n) (k : ℕ) :
         Nonempty (closedBall (c i) 1 ≃ₜ (f '' closedBall (c i) 1)) ∧
         Nonempty ((f '' ball (c i) 1) ≃ₜ ball (c i) 1) := by
   classical
-  letI : T2Space (TopCat.sphere.{0} n) :=
-    (sphereULiftHomeomorph n).isEmbedding.t2Space
+  let : T2Space (TopCat.sphere.{0} n) :=
+    (sphereULiftHomeomorph.{0} n).isEmbedding.t2Space
   let p : RawSphere n :=
     ⟨EuclideanSpace.single (Fin.last n) (1 : ℝ), by simp⟩
-  let b : TopCat.sphere.{0} n := (sphereULiftHomeomorph n).symm p
+  let b : TopCat.sphere.{0} n := (sphereULiftHomeomorph.{0} n).symm p
   let e := puncturedSphereHomeomorphEuclidean n b
   let f : EuclideanSpace ℝ (Fin n) → TopCat.sphere.{0} n :=
     fun y ↦ (e.symm y).1
   let c : Fin k → EuclideanSpace ℝ (Fin n) :=
     fun i ↦ EuclideanSpace.single ⟨0, hn⟩ (4 * (i.1 : ℝ))
-  have haxis : (sphereULiftHomeomorph n b).1 =
+  have haxis : (sphereULiftHomeomorph.{0} n b).1 =
       EuclideanSpace.single (Fin.last n) (1 : ℝ) :=
-    congrArg Subtype.val ((sphereULiftHomeomorph n).apply_symm_apply p)
+    congrArg Subtype.val ((sphereULiftHomeomorph.{0} n).apply_symm_apply p)
   have hfirst_last : (0 : Fin (n + 1)) ≠ Fin.last n := by
     intro h
     have hval := congrArg Fin.val h
@@ -95,8 +95,8 @@ theorem finite_disjoint_sphere_balls (n : ℕ) (hn : 0 < n) (k : ℕ) :
     exact (ne_of_gt hn) hval.symm
   have hreflection :
       ((ℝ ∙ EuclideanSpace.single (0 : Fin (n + 1)) (1 : ℝ))ᗮ).reflection
-          (sphereULiftHomeomorph n b).1 =
-        (sphereULiftHomeomorph n b).1 := by
+          (sphereULiftHomeomorph.{0} n b).1 =
+        (sphereULiftHomeomorph.{0} n b).1 := by
     apply Submodule.reflection_mem_subspace_eq_self
     rw [Submodule.mem_orthogonal_singleton_iff_inner_right, haxis]
     simp [EuclideanSpace.inner_single_left, hfirst_last]
