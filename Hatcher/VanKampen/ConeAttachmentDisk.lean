@@ -412,3 +412,206 @@ theorem sphere_cone_geometry (n : ℕ) :
   · exact unitInterval.coe_symm_eq
 
 end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+open CategoryTheory Topology
+open Hatcher.VanKampen.ConeAttachment
+
+universe u
+
+private def sphereConePreMap (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    Prequotient (TopCat.sphere.{u} n) (TopCat.sphere.{u} n) →
+      Prequotient (TopCat.sphere.{u} n) (TopCat.sphere.{u} n)
+  | Sum.inl x => Sum.inl (f x)
+  | Sum.inr (Sum.inl a) => Sum.inr (Sum.inl a)
+  | Sum.inr (Sum.inr (x, r)) => Sum.inr (Sum.inr (f x, r))
+
+private theorem sphere_cone_pre_map_normal_form (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n)
+    (p : Prequotient (TopCat.sphere.{u} n) (TopCat.sphere.{u} n)) :
+    normalForm (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)
+        (sphereConePreMap n f p) =
+      sphereConePreMap n f
+        (normalForm (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) p) := by
+  rcases p with x | p
+  · rfl
+  · rcases p with a | ⟨x, r⟩
+    · rfl
+    · by_cases h0 : r = 0
+      · subst r
+        simp [normalForm, sphereConePreMap]
+      · by_cases h1 : r = 1
+        · subst r
+          simp [normalForm, sphereConePreMap]
+        · simp [normalForm, sphereConePreMap, h0, h1]
+
+private theorem sphere_cone_pre_map_respects (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n)
+    (a b : Prequotient (TopCat.sphere.{u} n) (TopCat.sphere.{u} n))
+    (h : (setoid (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)).r a b) :
+    (setoid (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)).r
+      (sphereConePreMap n f a) (sphereConePreMap n f b) := by
+  change normalForm (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) a =
+    normalForm (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) b at h
+  change normalForm (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)
+      (sphereConePreMap n f a) =
+    normalForm (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)
+      (sphereConePreMap n f b)
+  rw [sphere_cone_pre_map_normal_form n f a,
+    sphere_cone_pre_map_normal_form n f b, h]
+
+private def sphereConeMapFun (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    Hatcher.VanKampen.ConeAttachment
+        (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) →
+      Hatcher.VanKampen.ConeAttachment
+        (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) :=
+  Quotient.map'
+    (s₁ := setoid (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n))
+    (s₂ := setoid (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n))
+    (sphereConePreMap n f) (sphere_cone_pre_map_respects n f)
+
+private theorem continuous_sphere_cone_pre_map (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    Continuous (sphereConePreMap n f) := by
+  rw [continuous_sum_dom]
+  constructor
+  · change Continuous (fun x : TopCat.sphere.{u} n =>
+      (Sum.inl (f x) :
+        Prequotient (TopCat.sphere.{u} n) (TopCat.sphere.{u} n)))
+    exact continuous_inl.comp f.hom.continuous
+  · rw [continuous_sum_dom]
+    constructor
+    · change Continuous (fun a : Unit =>
+        (Sum.inr (Sum.inl a) :
+          Prequotient (TopCat.sphere.{u} n) (TopCat.sphere.{u} n)))
+      exact continuous_inr.comp continuous_inl
+    · change Continuous (fun p : TopCat.sphere.{u} n × I =>
+        (Sum.inr (Sum.inr (f p.1, p.2)) :
+          Prequotient (TopCat.sphere.{u} n) (TopCat.sphere.{u} n)))
+      exact continuous_inr.comp
+        (continuous_inr.comp
+          ((f.hom.continuous.comp continuous_fst).prodMk continuous_snd))
+
+private theorem continuous_sphere_cone_map_fun (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    Continuous (sphereConeMapFun n f) := by
+  apply (isQuotientMap_quotientMk
+    (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)).continuous_iff.mpr
+  change Continuous (fun p :
+      Prequotient (TopCat.sphere.{u} n) (TopCat.sphere.{u} n) =>
+    quotientMk (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)
+      (sphereConePreMap n f p))
+  exact (isQuotientMap_quotientMk
+    (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)).continuous.comp
+      (continuous_sphere_cone_pre_map n f)
+
+/-- The continuous map of the retained sphere cone that applies `f` to the
+sphere coordinate and preserves its height, including both endpoints. -/
+def sphereConeMap (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    sphereCone.{u} n ⟶ sphereCone.{u} n :=
+  TopCat.ofHom
+    ⟨sphereConeMapFun n f, continuous_sphere_cone_map_fun n f⟩
+
+/-- The retained base is mapped by the original sphere map. -/
+@[simp]
+theorem sphere_cone_map_base (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n)
+    (x : TopCat.sphere.{u} n) :
+    sphereConeMap n f (sphereConeBase n x) = sphereConeBase n (f x) :=
+  rfl
+
+/-- Every sphere cone map fixes the actual cone apex. -/
+@[simp]
+theorem sphere_cone_map_apex (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    sphereConeMap n f
+        (apex (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)) =
+      apex (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) :=
+  rfl
+
+/-- A cylinder point keeps its retained height and its sphere coordinate
+is mapped by `f`. This holds also at height zero and height one. -/
+@[simp]
+theorem sphere_cone_map_cylinder (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n)
+    (x : TopCat.sphere.{u} n) (r : I) :
+    sphereConeMap n f
+        (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r) =
+      cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) (f x) r :=
+  rfl
+
+/-- The sphere map and its cone map form the actual retained-base square. -/
+theorem sphere_cone_map_base_square (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    f ≫ sphereConeBase n = sphereConeBase n ≫ sphereConeMap n f := by
+  ext x
+  exact (sphere_cone_map_base n f x).symm
+
+/-- The cone-base pair map induced by a continuous map of the actual standard
+sphere. The base component is exactly `f`; the ambient component preserves
+retained height `r`, hence also Hatcher's height `t = 1 - r`. This construction
+includes the zero-dimensional sphere and constant maps. -/
+def sphereConePairMap (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    sphereConePair.{u} n ⟶ sphereConePair.{u} n :=
+  TopPair.ofHom
+    (X := sphereConePair.{u} n) (Y := sphereConePair.{u} n)
+    (sphereConeMap n f) f (by
+      change f ≫ sphereConeBase n = sphereConeBase n ≫ sphereConeMap n f
+      exact sphere_cone_map_base_square n f)
+
+/-- The ambient component of the induced pair map is the actual cone map. -/
+@[simp]
+theorem sphere_cone_pair_map_fst (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    TopPair.Hom.fst (sphereConePairMap n f) = sphereConeMap n f :=
+  rfl
+
+/-- The subspace component of the induced pair map is exactly `f`. -/
+@[simp]
+theorem sphere_cone_pair_map_snd (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    TopPair.Hom.snd (sphereConePairMap n f) = f :=
+  rfl
+
+/-- The identity sphere map induces the identity of the actual cone-base pair. -/
+@[simp]
+theorem sphere_cone_pair_map_id (n : ℕ) :
+    sphereConePairMap n (𝟙 (TopCat.sphere.{u} n)) =
+      𝟙 (sphereConePair.{u} n) := by
+  apply MorphismProperty.Arrow.Hom.ext
+  · rfl
+  · change sphereConeMap n (𝟙 (TopCat.sphere.{u} n)) =
+      𝟙 (sphereCone.{u} n)
+    ext q
+    change sphereConeMapFun n (𝟙 (TopCat.sphere.{u} n)) q = q
+    refine Quotient.inductionOn q ?_
+    intro p
+    rcases p with x | p
+    · rfl
+    · rcases p with a | ⟨x, r⟩ <;> rfl
+
+/-- Sphere cone pair maps preserve actual composition of sphere maps. -/
+@[simp]
+theorem sphere_cone_pair_map_comp (n : ℕ)
+    (f g : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    sphereConePairMap n (f ≫ g) =
+      sphereConePairMap n f ≫ sphereConePairMap n g := by
+  apply MorphismProperty.Arrow.Hom.ext
+  · rfl
+  · change sphereConeMap n (f ≫ g) =
+      sphereConeMap n f ≫ sphereConeMap n g
+    ext q
+    change sphereConeMapFun n (f ≫ g) q =
+      sphereConeMapFun n g (sphereConeMapFun n f q)
+    refine Quotient.inductionOn q ?_
+    intro p
+    rcases p with x | p
+    · rfl
+    · rcases p with a | ⟨x, r⟩ <;> rfl
+
+end Hatcher.Sphere
