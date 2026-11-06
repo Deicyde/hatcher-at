@@ -11,15 +11,15 @@ on:
     inputs:
       article_id:
         description: Article whose candidate needs proof evidence
-        default: af_7b75fc9548f3d4af72397bf9
+        default: af_6423827cee00e5b7d1c68aaa
         required: true
       module:
         description: Lean module containing the candidate
-        default: Hatcher.Singular.PointQuotientTopology
+        default: Hatcher.VanKampen.ConeAttachmentDisk
         required: true
       declaration:
         description: Candidate declaration to inspect
-        default: Hatcher.Relative.compactComplementQuotientOnePointHomeomorph
+        default: Hatcher.Sphere.sphereConePairMap
         required: true
 
 permissions:
@@ -27,9 +27,9 @@ permissions:
 
 env:
   AUTOFORM_SOURCE: "https://github.com/facebookresearch/autoform-bot.git"
-  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_7b75fc9548f3d4af72397bf9' }}
-  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Singular.PointQuotientTopology' }}
-  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Relative.compactComplementQuotientOnePointHomeomorph' }}
+  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_6423827cee00e5b7d1c68aaa' }}
+  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.VanKampen.ConeAttachmentDisk' }}
+  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.sphereConePairMap' }}
 
 concurrency:
   group: autoform-verify-${{ github.ref }}
@@ -185,8 +185,15 @@ jobs:
             --article-id "$EVIDENCE_ARTICLE" \
             --module "$EVIDENCE_MODULE" \
             --declaration "$EVIDENCE_DECLARATION" \
-            --declaration Hatcher.Relative.compactComplementQuotientOnePointHomeomorph_apply_point \
-            --declaration Hatcher.Relative.compactComplementQuotientOnePointHomeomorph_apply_projection
+            --declaration Hatcher.Sphere.sphereConeMap \
+            --declaration Hatcher.Sphere.sphere_cone_map_base \
+            --declaration Hatcher.Sphere.sphere_cone_map_apex \
+            --declaration Hatcher.Sphere.sphere_cone_map_cylinder \
+            --declaration Hatcher.Sphere.sphere_cone_map_base_square \
+            --declaration Hatcher.Sphere.sphere_cone_pair_map_fst \
+            --declaration Hatcher.Sphere.sphere_cone_pair_map_snd \
+            --declaration Hatcher.Sphere.sphere_cone_pair_map_id \
+            --declaration Hatcher.Sphere.sphere_cone_pair_map_comp
 
       - name: Export quotient import impact
         run: |
@@ -243,6 +250,14 @@ jobs:
             af_94410cbcc0ca4ddd482ec0f6 Hatcher.VanKampen.ConeAttachmentDisk . \
             --lean-root . --json \
             > .lake/formalize-evidence/artifacts/cone-import-impact.json
+
+      - name: Export finite-wedge import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_f0ce52bed8b3559c75b76fa3 Hatcher.Singular.PointedWedgePointQuotient . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/wedge-import-impact-baseline.json
 
       - name: Upload proof review evidence
         if: always()
