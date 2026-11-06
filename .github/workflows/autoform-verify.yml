@@ -7,12 +7,29 @@ on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      article_id:
+        description: Article whose candidate needs proof evidence
+        default: af_bf71d5e0974f47deb6980564
+        required: true
+      module:
+        description: Lean module containing the candidate
+        default: Hatcher.Sphere.CirclePower
+        required: true
+      declaration:
+        description: Candidate declaration to inspect
+        default: Hatcher.Sphere.circlePowerMap_positive_arcChart
+        required: true
 
 permissions:
   contents: read
 
 env:
   AUTOFORM_SOURCE: "https://github.com/facebookresearch/autoform-bot.git"
+  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_bf71d5e0974f47deb6980564' }}
+  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Sphere.CirclePower' }}
+  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.circlePowerMap_positive_arcChart' }}
 
 concurrency:
   group: autoform-verify-${{ github.ref }}
@@ -26,6 +43,8 @@ jobs:
     steps:
       - name: Check out project
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Read the Autoform pin
         run: echo "AUTOFORM_REF=$(cat .github/autoform-ref)" >> "$GITHUB_ENV"
@@ -75,6 +94,9 @@ jobs:
 
       - name: Fetch the Mathlib build cache
         run: lake exe cache get || echo "no cache available — building from source"
+
+      - name: Build the focused proof module
+        run: lake build "$EVIDENCE_MODULE"
 
       - name: Build Lean
         run: lake build
@@ -151,3 +173,19 @@ jobs:
               print(result.stderr, file=sys.stderr)
               sys.exit("axiom probe failed to elaborate")
           PY
+
+      - name: Export proof review evidence
+        run: |
+          python3 scripts/formalize_evidence.py \
+            --article-id "$EVIDENCE_ARTICLE" \
+            --module "$EVIDENCE_MODULE" \
+            --declaration "$EVIDENCE_DECLARATION"
+
+      - name: Upload proof review evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: formalize-evidence-${{ github.run_id }}
+          path: .lake/formalize-evidence/artifacts/
+          include-hidden-files: true
+          if-no-files-found: ignore
