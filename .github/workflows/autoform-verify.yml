@@ -252,6 +252,14 @@ jobs:
             --lean-root . --json \
             > .lake/formalize-evidence/artifacts/wedge-import-impact.json
 
+      - name: Export positive-local-degree import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_7f28a7505a467328c2236288 Hatcher.Sphere.HomeomorphismLocalDegree . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/positive-local-degree-import-impact-baseline.json
+
       - name: Upload proof review evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
