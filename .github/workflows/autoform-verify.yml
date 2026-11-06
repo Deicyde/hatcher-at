@@ -11,15 +11,15 @@ on:
     inputs:
       article_id:
         description: Article whose candidate needs proof evidence
-        default: af_7b75fc9548f3d4af72397bf9
+        default: af_f2326d93cde64505bb99af6f
         required: true
       module:
         description: Lean module containing the candidate
-        default: Hatcher.Singular.PointQuotientTopology
+        default: Hatcher.Sphere.CirclePower
         required: true
       declaration:
         description: Candidate declaration to inspect
-        default: Hatcher.Relative.compactComplementQuotientOnePointHomeomorph
+        default: Hatcher.Sphere.circlePowerMap_positive_localStretchDeformation
         required: true
 
 permissions:
@@ -27,9 +27,9 @@ permissions:
 
 env:
   AUTOFORM_SOURCE: "https://github.com/facebookresearch/autoform-bot.git"
-  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_7b75fc9548f3d4af72397bf9' }}
-  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Singular.PointQuotientTopology' }}
-  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Relative.compactComplementQuotientOnePointHomeomorph' }}
+  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_f2326d93cde64505bb99af6f' }}
+  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Sphere.CirclePower' }}
+  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.circlePowerMap_positive_localStretchDeformation' }}
 
 concurrency:
   group: autoform-verify-${{ github.ref }}
@@ -184,9 +184,7 @@ jobs:
           python3 scripts/formalize_evidence.py \
             --article-id "$EVIDENCE_ARTICLE" \
             --module "$EVIDENCE_MODULE" \
-            --declaration "$EVIDENCE_DECLARATION" \
-            --declaration Hatcher.Relative.compactComplementQuotientOnePointHomeomorph_apply_point \
-            --declaration Hatcher.Relative.compactComplementQuotientOnePointHomeomorph_apply_projection
+            --declaration "$EVIDENCE_DECLARATION"
 
       - name: Export quotient import impact
         run: |
