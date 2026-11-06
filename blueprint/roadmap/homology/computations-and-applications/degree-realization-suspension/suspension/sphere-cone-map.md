@@ -2,6 +2,8 @@
 article_id: af_6423827cee00e5b7d1c68aaa
 declaration: def
 origin: cited
+statement: formalized
+lean: Hatcher.Sphere.sphereConePairMap, Hatcher.Sphere.sphereConeMap, Hatcher.Sphere.sphere_cone_map_base, Hatcher.Sphere.sphere_cone_map_apex, Hatcher.Sphere.sphere_cone_map_cylinder, Hatcher.Sphere.sphere_cone_map_base_square, Hatcher.Sphere.sphere_cone_pair_map_fst, Hatcher.Sphere.sphere_cone_pair_map_snd, Hatcher.Sphere.sphere_cone_pair_map_id, Hatcher.Sphere.sphere_cone_pair_map_comp
 ---
 
 # A sphere map induces a self-map of its cone-base pair

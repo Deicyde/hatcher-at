@@ -208,6 +208,7 @@ jobs:
           import Batteries.Tactic.Lint
 
           #print axioms Hatcher.Sphere.circlePowerMap_positive_arcChart
+          #print axioms Hatcher.Sphere.circlePowerMap_positive_localStretchDeformation
           #print axioms Hatcher.Sphere.localDegree_punctured_homotopy_invariance
           #print axioms Hatcher.Sphere.finite_disjoint_sphere_balls
           #print axioms Hatcher.Relative.compactComplementQuotientOnePointHomeomorph
@@ -218,6 +219,16 @@ jobs:
           #print axioms Hatcher.Sphere.sphereConeBase
           #print axioms Hatcher.Sphere.sphereConePair
           #print axioms Hatcher.Sphere.sphereConeGoodPairData
+          #print axioms Hatcher.Sphere.sphereConePairMap
+          #print axioms Hatcher.Sphere.sphereConeMap
+          #print axioms Hatcher.Sphere.sphere_cone_map_base
+          #print axioms Hatcher.Sphere.sphere_cone_map_apex
+          #print axioms Hatcher.Sphere.sphere_cone_map_cylinder
+          #print axioms Hatcher.Sphere.sphere_cone_map_base_square
+          #print axioms Hatcher.Sphere.sphere_cone_pair_map_fst
+          #print axioms Hatcher.Sphere.sphere_cone_pair_map_snd
+          #print axioms Hatcher.Sphere.sphere_cone_pair_map_id
+          #print axioms Hatcher.Sphere.sphere_cone_pair_map_comp
 
           #lint only unusedArguments in Hatcher.Sphere.CirclePower
           #lint only unusedArguments in Hatcher.Sphere.LocalDegree
@@ -259,6 +270,22 @@ jobs:
             af_7f28a7505a467328c2236288 Hatcher.Sphere.HomeomorphismLocalDegree . \
             --lean-root . --json \
             > .lake/formalize-evidence/artifacts/positive-local-degree-import-impact-baseline.json
+
+      - name: Export finite-wedge import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_f0ce52bed8b3559c75b76fa3 Hatcher.Singular.PointedWedgePointQuotient . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/wedge-import-impact-baseline.json
+
+      - name: Export cone-quotient import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_3bee065ead7f165534b9f450 Hatcher.VanKampen.ConeAttachmentDisk . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/cone-quotient-import-impact-baseline.json
 
       - name: Upload proof review evidence
         if: always()

@@ -266,4 +266,193 @@ theorem circlePowerMap_positive_arcChart (k : ℕ) (hk : 0 < k)
   exact ⟨U, V, φ, ψ, σ, h, hA_open (e x) ε, hA_open ((e x) ^ k) β,
     hU_mem, hV_mem, hφ, hψ, hσ, hcomm, hactual, hcomplex, hfiber⟩
 
+/-- Positive angular stretching deforms to the rotation sending the center to
+its image, on the full open arc of radius `π / (2k)`. The homotopy fixes that
+image and avoids it at every other point of the arc throughout the deformation. -/
+theorem circlePowerMap_positive_localStretchDeformation
+    (k : ℕ) (hk : 0 < k) (x : TopCat.sphere.{0} 1) :
+    let e := diskBoundaryTwoHomeomorphCircle.{0}
+    let P : TopCat.sphere.{0} 1 → TopCat.sphere.{0} 1 := circlePowerMap (k : ℤ)
+    let y := P x
+    let ε : ℝ := Real.pi / (2 * (k : ℝ))
+    ∃ (U : Set (TopCat.sphere.{0} 1)) (hx : x ∈ U)
+      (φ : Set.Ioo (-ε) ε ≃ₜ U)
+      (H : C(unitInterval × U, TopCat.sphere.{0} 1)),
+      IsOpen U ∧
+      (∀ t, e (φ t : TopCat.sphere.{0} 1) =
+        e x * _root_.Circle.exp (t : ℝ)) ∧
+      (∀ (s : unitInterval) (t : Set.Ioo (-ε) ε),
+        e (H (s, φ t)) = e y * _root_.Circle.exp
+          (((1 - (s : ℝ)) * (k : ℝ) + (s : ℝ)) * (t : ℝ))) ∧
+      (∀ (s : unitInterval) (t : Set.Ioo (-ε) ε),
+        (e (H (s, φ t)) : ℂ) = (e y : ℂ) * Complex.exp (
+          ((((1 - (s : ℝ)) * (k : ℝ) + (s : ℝ)) * (t : ℝ) : ℝ) : ℂ) *
+            Complex.I)) ∧
+      (∀ u : U, H (0, u) = P (u : TopCat.sphere.{0} 1)) ∧
+      (∀ u : U, H (1, u) =
+        e.symm ((e y * (e x)⁻¹) * e (u : TopCat.sphere.{0} 1))) ∧
+      (∀ s : unitInterval, H (s, ⟨x, hx⟩) = y) ∧
+      (∀ (s : unitInterval) (u : U),
+        (u : TopCat.sphere.{0} 1) ≠ x → H (s, u) ≠ y) := by
+  classical
+  dsimp only
+  let S : Type := TopCat.sphere.{0} 1
+  let e : S ≃ₜ _root_.Circle := diskBoundaryTwoHomeomorphCircle.{0}
+  let P : S → S := circlePowerMap (k : ℤ)
+  let y : S := P x
+  let a : ℝ := k
+  let ε : ℝ := Real.pi / (2 * a)
+  let β : ℝ := Real.pi / 2
+  rcases circlePowerMap_positive_arcChart k hk x with
+    ⟨U, _, φ, _, _, _, hU, _, hx, _, hφ, _, _, _, _, hPk, _⟩
+  change ∀ t : Set.Ioo (-ε) ε,
+    e (φ t : S) = e x * _root_.Circle.exp (t : ℝ) at hφ
+  change ∀ t : Set.Ioo (-ε) ε,
+    (e (P (φ t : S)) : ℂ) = (e x : ℂ) ^ k *
+      Complex.exp (((k : ℝ) * (t : ℝ) : ℝ) * Complex.I) at hPk
+  have ha_one : 1 ≤ a := by
+    dsimp [a]
+    exact (Nat.one_le_cast (α := ℝ)).mpr (Nat.succ_le_of_lt hk)
+  have ha_pos : 0 < a := zero_lt_one.trans_le ha_one
+  have hβ_pos : 0 < β := by
+    dsimp [β]
+    exact div_pos Real.pi_pos (by norm_num)
+  have hβ_pi : β ≤ Real.pi := by
+    dsimp [β]
+    exact div_le_self Real.pi_nonneg (by norm_num)
+  have hε_eq : ε = β / a := by
+    dsimp [ε, β]
+    rw [div_div]
+  have hε_pos : 0 < ε := by
+    rw [hε_eq]
+    exact div_pos hβ_pos ha_pos
+  have haε : a * ε = β := by
+    rw [hε_eq, div_eq_mul_inv, mul_left_comm,
+      mul_inv_cancel₀ ha_pos.ne', mul_one]
+  let ka : Set.Icc (1 : ℝ) a := ⟨a, ⟨ha_one, le_rfl⟩⟩
+  let k1 : Set.Icc (1 : ℝ) a := ⟨1, ⟨le_rfl, ha_one⟩⟩
+  let scaleI : unitInterval → Set.Icc (1 : ℝ) a :=
+    Set.Icc.convexComb ka k1
+  let scale : unitInterval → ℝ := fun s => (scaleI s : ℝ)
+  have hscale : Continuous scale :=
+    continuous_subtype_val.comp (Set.Icc.continuous_convexComb ka k1)
+  have hscale_formula (s : unitInterval) :
+      scale s = (1 - (s : ℝ)) * a + (s : ℝ) := by
+    change (Set.Icc.convexComb ka k1 s : ℝ) =
+      (1 - (s : ℝ)) * a + (s : ℝ)
+    rw [Set.Icc.coe_convexComb]
+    change (1 - (s : ℝ)) * a + (s : ℝ) * 1 =
+      (1 - (s : ℝ)) * a + (s : ℝ)
+    rw [mul_one]
+  have hscale_zero : scale (0 : unitInterval) = a := by
+    change (Set.Icc.convexComb ka k1 0 : ℝ) = a
+    rw [Set.Icc.convexComb_zero]
+  have hscale_one : scale (1 : unitInterval) = 1 := by
+    change (Set.Icc.convexComb ka k1 1 : ℝ) = 1
+    rw [Set.Icc.convexComb_one]
+  have hscale_lower (s : unitInterval) : 1 ≤ scale s := (scaleI s).property.1
+  have hscale_upper (s : unitInterval) : scale s ≤ a := (scaleI s).property.2
+  have hscale_pos (s : unitInterval) : 0 < scale s :=
+    zero_lt_one.trans_le (hscale_lower s)
+  let θ : U → ℝ := fun u => (φ.symm u : ℝ)
+  have hθ : Continuous θ := continuous_subtype_val.comp φ.symm.continuous
+  have hθφ (t : Set.Ioo (-ε) ε) : θ (φ t) = (t : ℝ) := by
+    change (φ.symm (φ t) : ℝ) = (t : ℝ)
+    rw [φ.symm_apply_apply]
+  let H : C(unitInterval × U, S) :=
+    { toFun := fun p => e.symm (e y * _root_.Circle.exp (scale p.1 * θ p.2))
+      continuous_toFun := e.symm.continuous.comp
+        (continuous_const.mul
+          (_root_.Circle.exp.continuous.comp
+            ((hscale.comp continuous_fst).mul (hθ.comp continuous_snd)))) }
+  have hHφ (s : unitInterval) (t : Set.Ioo (-ε) ε) :
+      e (H (s, φ t)) = e y * _root_.Circle.exp (scale s * (t : ℝ)) := by
+    change e (e.symm (e y * _root_.Circle.exp (scale s * θ (φ t)))) =
+      e y * _root_.Circle.exp (scale s * (t : ℝ))
+    rw [e.apply_symm_apply, hθφ t]
+  have hformula (s : unitInterval) (t : Set.Ioo (-ε) ε) :
+      e (H (s, φ t)) = e y * _root_.Circle.exp
+        (((1 - (s : ℝ)) * a + (s : ℝ)) * (t : ℝ)) := by
+    rw [hHφ s t, hscale_formula s]
+  have hcomplex (s : unitInterval) (t : Set.Ioo (-ε) ε) :
+      (e (H (s, φ t)) : ℂ) = (e y : ℂ) * Complex.exp (
+        ((((1 - (s : ℝ)) * (k : ℝ) + (s : ℝ)) * (t : ℝ) : ℝ) : ℂ) *
+          Complex.I) := by
+    rw [hformula s t]
+    simp only [_root_.Circle.coe_mul, _root_.Circle.coe_exp, a]
+  have hy_coordinate : e y = (e x) ^ k := by
+    change diskBoundaryTwoHomeomorphCircle.{0} (circlePowerMap (k : ℤ) x) =
+      (diskBoundaryTwoHomeomorphCircle.{0} x) ^ k
+    rw [circlePowerMap_coordinate, zpow_natCast]
+  have hzero (u : U) : H (0, u) = P (u : S) := by
+    obtain ⟨t, ht⟩ := φ.surjective u
+    rw [← ht]
+    apply e.injective
+    apply _root_.Circle.coe_injective
+    rw [hHφ (0 : unitInterval) t, hscale_zero, hy_coordinate]
+    simpa only [_root_.Circle.coe_mul, _root_.Circle.coe_pow,
+      _root_.Circle.coe_exp, a] using (hPk t).symm
+  have hone (u : U) :
+      H (1, u) = e.symm ((e y * (e x)⁻¹) * e (u : S)) := by
+    obtain ⟨t, ht⟩ := φ.surjective u
+    rw [← ht]
+    apply e.injective
+    rw [hHφ (1 : unitInterval) t, hscale_one, e.apply_symm_apply, hφ t, one_mul]
+    calc
+      e y * _root_.Circle.exp (t : ℝ) =
+          (e y * ((e x)⁻¹ * e x)) * _root_.Circle.exp (t : ℝ) := by
+        rw [inv_mul_cancel, mul_one]
+      _ = (e y * (e x)⁻¹) * (e x * _root_.Circle.exp (t : ℝ)) := by
+        simp only [mul_assoc]
+  let t0 : Set.Ioo (-ε) ε := ⟨0, ⟨neg_lt_zero.mpr hε_pos, hε_pos⟩⟩
+  have hφzero : φ t0 = ⟨x, hx⟩ := by
+    apply Subtype.ext
+    apply e.injective
+    rw [hφ t0]
+    simp only [t0, _root_.Circle.exp_zero, mul_one]
+  have hθcenter : θ ⟨x, hx⟩ = 0 := by
+    rw [← hφzero, hθφ t0]
+  have hcenter (s : unitInterval) : H (s, ⟨x, hx⟩) = y := by
+    change e.symm (e y * _root_.Circle.exp (scale s * θ ⟨x, hx⟩)) = y
+    rw [hθcenter, mul_zero, _root_.Circle.exp_zero, mul_one, e.symm_apply_apply]
+  have hbound (s : unitInterval) (t : Set.Ioo (-ε) ε) :
+      |scale s * (t : ℝ)| < β := by
+    calc
+      |scale s * (t : ℝ)| = scale s * |(t : ℝ)| := by
+        rw [abs_mul, abs_of_pos (hscale_pos s)]
+      _ < scale s * ε :=
+        mul_lt_mul_of_pos_left (abs_lt.mpr t.property) (hscale_pos s)
+      _ ≤ a * ε := mul_le_mul_of_nonneg_right (hscale_upper s) hε_pos.le
+      _ = β := haε
+  have hβ_zero : (0 : ℝ) ∈ Set.Ioo (-β) β := ⟨neg_lt_zero.mpr hβ_pos, hβ_pos⟩
+  have hpoint (s : unitInterval) (t : Set.Ioo (-ε) ε)
+      (htarget : H (s, φ t) = y) : (t : ℝ) = 0 := by
+    have hEq : e y * _root_.Circle.exp (scale s * (t : ℝ)) = e y :=
+      (hHφ s t).symm.trans (congrArg e htarget)
+    have hEq_mul : e y * _root_.Circle.exp (scale s * (t : ℝ)) =
+        e y * _root_.Circle.exp 0 := by
+      simpa only [_root_.Circle.exp_zero, mul_one] using hEq
+    have hexp : _root_.Circle.exp (scale s * (t : ℝ)) = _root_.Circle.exp 0 :=
+      mul_left_cancel hEq_mul
+    have hprod : scale s * (t : ℝ) = 0 :=
+      (_root_.Circle.bijOn_exp_Ioo_centeredArc hβ_pi).injOn
+        (abs_lt.mp (hbound s t)) hβ_zero hexp
+    exact (mul_eq_zero.mp hprod).resolve_left (hscale_pos s).ne'
+  have havoid (s : unitInterval) (u : U) (hu : (u : S) ≠ x) : H (s, u) ≠ y := by
+    intro htarget
+    let t : Set.Ioo (-ε) ε := φ.symm u
+    have hut : φ t = u := φ.apply_symm_apply u
+    have hy' : H (s, φ t) = y := by
+      rw [hut]
+      exact htarget
+    have htzero : (t : ℝ) = 0 := hpoint s t hy'
+    have ht0 : t = t0 := Subtype.ext htzero
+    have hueq : u = ⟨x, hx⟩ := by
+      calc
+        u = φ t := hut.symm
+        _ = φ t0 := congrArg φ ht0
+        _ = ⟨x, hx⟩ := hφzero
+    exact hu (congrArg Subtype.val hueq)
+  exact ⟨U, hx, φ, H, hU, hφ, hformula, hcomplex, hzero, hone, hcenter, havoid⟩
+
 end Hatcher.Sphere
