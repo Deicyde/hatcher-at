@@ -375,6 +375,10 @@ def sphereConeGoodPairData (n : ℕ) :
     (sphere_cone_base_is_closed_embedding n).isClosed_range
   V := lowerCover (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)
   range_subset_interior := by
+    change Set.range
+        (base (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)) ⊆
+      interior (lowerCover
+        (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n))
     rw [(isOpen_lowerCover
       (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)).interior_eq]
     rintro _ ⟨x, rfl⟩
@@ -399,7 +403,7 @@ theorem sphere_cone_geometry (n : ℕ) :
             (sphereConePair.{u} n).map x) ∧
       (∀ r : I, (unitInterval.symm r : ℝ) = 1 - (r : ℝ)) := by
   refine ⟨⟨sphereConeGoodPairData n⟩, isOpen_lowerCover _, ?_, ?_, ?_⟩
-  · letI : ContractibleSpace
+  · let : ContractibleSpace
         (Metric.closedBall (0 : EuclideanSpace ℝ (Fin (n + 1))) 1) :=
       Metric.contractibleSpace_closedBall (zero_le_one : (0 : ℝ) ≤ 1)
     exact ((diskHomeomorph.{u} (n + 1)).trans Homeomorph.ulift).contractibleSpace
