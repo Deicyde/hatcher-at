@@ -75,6 +75,8 @@ theorem finite_disjoint_sphere_balls (n : ℕ) (hn : 0 < n) (k : ℕ) :
         Nonempty (closedBall (c i) 1 ≃ₜ (f '' closedBall (c i) 1)) ∧
         Nonempty ((f '' ball (c i) 1) ≃ₜ ball (c i) 1) := by
   classical
+  letI : T2Space (TopCat.sphere.{0} n) :=
+    (sphereULiftHomeomorph n).isEmbedding.t2Space
   let p : RawSphere n :=
     ⟨EuclideanSpace.single (Fin.last n) (1 : ℝ), by simp⟩
   let b : TopCat.sphere.{0} n := (sphereULiftHomeomorph n).symm p
@@ -119,7 +121,8 @@ theorem finite_disjoint_sphere_balls (n : ℕ) (hn : 0 < n) (k : ℕ) :
         rw [abs_of_nonneg (by linarith :
           0 ≤ 4 * (i.1 : ℝ) - 4 * (j.1 : ℝ))]
         linarith
-    simpa [c, EuclideanSpace.single, Real.dist_eq] using hdist
+    simpa [c, EuclideanSpace.single, Real.dist_eq,
+      (one_add_one_eq_two : (1 : ℝ) + 1 = 2)] using hdist
   refine ⟨b, haxis, hreflection, hf, ?_, ?_⟩
   · intro i j hij
     refine Set.disjoint_left.mpr ?_
