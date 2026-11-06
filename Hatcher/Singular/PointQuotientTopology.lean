@@ -294,17 +294,22 @@ noncomputable def compactComplementQuotientOnePointHomeomorph
         intro y
         obtain ⟨x, rfl⟩ := pointQuotientProjection_surjective P y
         dsimp [P] at x ⊢
+        change X at x
         rw [compactComplementQuotientMap_projection (X := X) V hV x]
-        by_cases hx : x ∈ V
-        · simp [compactComplementCollapse, hx]
-        · have hqx :
-              pointQuotientProjection (TopPair.ofSubset Vᶜ) x =
-                pointQuotientPoint (TopPair.ofSubset Vᶜ) := by
-            change x ∈ pointQuotientProjection (TopPair.ofSubset Vᶜ) ⁻¹'
-              {pointQuotientPoint (TopPair.ofSubset Vᶜ)}
-            rw [pointQuotientProjection_preimage_point]
-            exact ⟨⟨x, hx⟩, rfl⟩
-          simpa [compactComplementCollapse, hx] using hqx.symm
+        change
+          (if hx : x ∈ V then ((⟨x, hx⟩ : V) : OnePoint V) else ∞).elim
+            (pointQuotientPoint (TopPair.ofSubset Vᶜ))
+            (fun v : V ↦ pointQuotientProjection (TopPair.ofSubset Vᶜ) v.1) =
+              pointQuotientProjection (TopPair.ofSubset Vᶜ) x
+        split_ifs with hx <;> try rfl
+        have hqx :
+            pointQuotientProjection (TopPair.ofSubset Vᶜ) x =
+              pointQuotientPoint (TopPair.ofSubset Vᶜ) := by
+          change x ∈ pointQuotientProjection (TopPair.ofSubset Vᶜ) ⁻¹'
+            {pointQuotientPoint (TopPair.ofSubset Vᶜ)}
+          rw [pointQuotientProjection_preimage_point]
+          exact ⟨⟨x, hx⟩, rfl⟩
+        exact hqx.symm
       right_inv := by
         intro p
         induction p using OnePoint.rec with
