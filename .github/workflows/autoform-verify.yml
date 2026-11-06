@@ -181,6 +181,14 @@ jobs:
             --module "$EVIDENCE_MODULE" \
             --declaration "$EVIDENCE_DECLARATION"
 
+      - name: Export cone import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_94410cbcc0ca4ddd482ec0f6 Hatcher.VanKampen.ConeAttachmentDisk . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/cone-import-impact.json
+
       - name: Upload proof review evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

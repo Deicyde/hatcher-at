@@ -2,6 +2,9 @@
 article_id: af_a8f2082aa2844d26554baedf
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.finite_disjoint_sphere_balls
 ---
 
 # A positive-dimensional sphere contains any finite number of disjoint balls
