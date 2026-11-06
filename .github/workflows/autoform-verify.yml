@@ -183,6 +183,14 @@ jobs:
             --declaration Hatcher.Relative.compactComplementQuotientOnePointHomeomorph_apply_point \
             --declaration Hatcher.Relative.compactComplementQuotientOnePointHomeomorph_apply_projection
 
+      - name: Export quotient import impact
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_7b75fc9548f3d4af72397bf9 Hatcher.Singular.PointQuotientTopology . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/quotient-import-impact.json
+
       - name: Upload proof review evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
