@@ -5,6 +5,7 @@ Authors: Jack McCarthy
 -/
 import Hatcher.Singular.PointQuotient
 import Mathlib.CategoryTheory.Limits.Types.Pushouts
+import Mathlib.Topology.Compactification.OnePoint.Basic
 import Mathlib.Topology.Constructions
 import Mathlib.Topology.Homeomorph.Lemmas
 
@@ -185,5 +186,164 @@ lemma pointQuotientComplementHomeomorph_apply (P : TopPair.{w})
     (x : ((Set.range P.map)ᶜ : Set P.fst)) :
     (pointQuotientComplementHomeomorph P hP x).1 =
       pointQuotientProjection P x.1 := rfl
+
+open scoped OnePoint
+
+private noncomputable def compactComplementCollapse {X : TopCat.{w}}
+    [T2Space X] (V : Set X) (hV : IsOpen V) : C(X, OnePoint V) := by
+  classical
+  let f : X → OnePoint V := fun x ↦
+    if hx : x ∈ V then ((⟨x, hx⟩ : V) : OnePoint V) else ∞
+  refine ⟨f, continuous_def.2 ?_⟩
+  intro s hs
+  let t : Set V := ((↑) : V → OnePoint V) ⁻¹' s
+  by_cases hinfty : (∞ : OnePoint V) ∈ s
+  · have ht : IsCompact tᶜ :=
+      ((OnePoint.isOpen_iff_of_mem hinfty).mp hs).2
+    have hclosed : IsClosed ((Subtype.val : V → X) '' tᶜ) :=
+      (ht.image continuous_subtype_val).isClosed
+    have heq : f ⁻¹' s = ((Subtype.val : V → X) '' tᶜ)ᶜ := by
+      ext x
+      constructor
+      · intro hx hmem
+        rcases hmem with ⟨v, hv, rfl⟩
+        exact hv (by simpa [t, f, v.property] using hx)
+      · intro hx
+        by_cases hxV : x ∈ V
+        · have hv : (⟨x, hxV⟩ : V) ∈ t := by
+            by_contra hnot
+            exact hx ⟨⟨x, hxV⟩, hnot, rfl⟩
+          simpa [t, f, hxV] using hv
+        · simpa [f, hxV] using hinfty
+    rw [heq]
+    exact hclosed.isOpen_compl
+  · have ht : IsOpen t := hs.preimage OnePoint.continuous_coe
+    have heq : f ⁻¹' s = (Subtype.val : V → X) '' t := by
+      ext x
+      constructor
+      · intro hx
+        by_cases hxV : x ∈ V
+        · exact ⟨⟨x, hxV⟩, by simpa [t, f, hxV] using hx, rfl⟩
+        · exact (hinfty (by simpa [f, hxV] using hx)).elim
+      · rintro ⟨v, hv, rfl⟩
+        simpa [t, f, v.property] using hv
+    rw [heq]
+    exact hV.isOpenMap_subtype_val t ht
+
+private noncomputable def compactComplementQuotientMap {X : TopCat.{w}}
+    [T2Space X] (V : Set X) (hV : IsOpen V) :
+    pointQuotient (TopPair.ofSubset Vᶜ) ⟶ TopCat.of (OnePoint V) :=
+  pushout.desc
+    (TopCat.ofHom (compactComplementCollapse V hV))
+    (TopCat.ofHom ⟨fun _ : PUnit ↦ (∞ : OnePoint V), continuous_const⟩)
+    (by
+      ext x
+      change compactComplementCollapse V hV x.1 = (∞ : OnePoint V)
+      have hx : x.1 ∉ V := x.property
+      simp [compactComplementCollapse, hx])
+
+private lemma compactComplementQuotientMap_projection {X : TopCat.{w}}
+    [T2Space X] (V : Set X) (hV : IsOpen V) (x : X) :
+    compactComplementQuotientMap V hV
+        (pointQuotientProjection (TopPair.ofSubset Vᶜ) x) =
+      compactComplementCollapse V hV x := by
+  have heq :
+      pointQuotientProjection (TopPair.ofSubset Vᶜ) ≫
+          compactComplementQuotientMap V hV =
+        TopCat.ofHom (compactComplementCollapse V hV) := by
+    dsimp [pointQuotientProjection, compactComplementQuotientMap, pointQuotient]
+    apply pushout.inl_desc
+  exact ConcreteCategory.congr_hom heq x
+
+private lemma compactComplementQuotientMap_point {X : TopCat.{w}}
+    [T2Space X] (V : Set X) (hV : IsOpen V) :
+    compactComplementQuotientMap V hV
+        (pointQuotientPoint (TopPair.ofSubset Vᶜ)) = (∞ : OnePoint V) := by
+  have heq :
+      pointQuotientPointInclusion (TopPair.ofSubset Vᶜ) ≫
+          compactComplementQuotientMap V hV =
+        (TopCat.ofHom ⟨fun _ : PUnit ↦ (∞ : OnePoint V), continuous_const⟩ :
+          TopCat.of PUnit ⟶ TopCat.of (OnePoint V)) := by
+    dsimp [pointQuotientPointInclusion, compactComplementQuotientMap, pointQuotient]
+    apply pushout.inr_desc
+  exact ConcreteCategory.congr_hom heq PUnit.unit
+
+/-- Collapsing the nonempty complement of an open set in a compact Hausdorff
+space gives its one-point compactification, using the actual point quotient.
+The open set may be empty. -/
+noncomputable def compactComplementQuotientOnePointHomeomorph
+    (X : TopCat.{w}) [CompactSpace X] [T2Space X]
+    (V : Set X) (hV : IsOpen V) (hVc : (Vᶜ).Nonempty) :
+    pointQuotient (TopPair.ofSubset Vᶜ) ≃ₜ OnePoint V := by
+  classical
+  let P : TopPair.{w} := TopPair.ofSubset Vᶜ
+  letI : Nonempty P.snd := hVc.to_subtype
+  letI : CompactSpace P.fst := by
+    change CompactSpace X
+    infer_instance
+  letI : CompactSpace (pointQuotient P) :=
+    Function.Surjective.compactSpace
+      (pointQuotientProjection P).hom.continuous
+      (pointQuotientProjection_surjective P)
+  letI : LocallyCompactSpace V := hV.locallyCompactSpace
+  let e : pointQuotient P ≃ OnePoint V :=
+    { toFun := compactComplementQuotientMap V hV
+      invFun := fun p ↦ p.elim (pointQuotientPoint P)
+        (fun v ↦ pointQuotientProjection P v.1)
+      left_inv := by
+        intro y
+        obtain ⟨x, rfl⟩ := pointQuotientProjection_surjective P y
+        dsimp [P] at x ⊢
+        change X at x
+        rw [compactComplementQuotientMap_projection (X := X) V hV x]
+        change
+          (if hx : x ∈ V then ((⟨x, hx⟩ : V) : OnePoint V) else ∞).elim
+            (pointQuotientPoint (TopPair.ofSubset Vᶜ))
+            (fun v : V ↦ pointQuotientProjection (TopPair.ofSubset Vᶜ) v.1) =
+              pointQuotientProjection (TopPair.ofSubset Vᶜ) x
+        split_ifs with hx <;> try rfl
+        have hqx :
+            pointQuotientProjection (TopPair.ofSubset Vᶜ) x =
+              pointQuotientPoint (TopPair.ofSubset Vᶜ) := by
+          change x ∈ pointQuotientProjection (TopPair.ofSubset Vᶜ) ⁻¹'
+            {pointQuotientPoint (TopPair.ofSubset Vᶜ)}
+          rw [pointQuotientProjection_preimage_point]
+          exact ⟨⟨x, hx⟩, rfl⟩
+        exact hqx.symm
+      right_inv := by
+        intro p
+        induction p using OnePoint.rec with
+        | infty => exact compactComplementQuotientMap_point V hV
+        | coe v =>
+          change compactComplementQuotientMap V hV
+              (pointQuotientProjection (TopPair.ofSubset Vᶜ) v.1) = (v : OnePoint V)
+          rw [compactComplementQuotientMap_projection]
+          simp [compactComplementCollapse, v.property] }
+  exact Continuous.homeoOfEquivCompactToT2
+    (show Continuous e from (compactComplementQuotientMap V hV).hom.continuous)
+
+/-- The homeomorphism sends the actual collapsed complement to infinity. -/
+@[simp]
+theorem compactComplementQuotientOnePointHomeomorph_apply_point
+    (X : TopCat.{w}) [CompactSpace X] [T2Space X]
+    (V : Set X) (hV : IsOpen V) (hVc : (Vᶜ).Nonempty) :
+    compactComplementQuotientOnePointHomeomorph X V hV hVc
+        (pointQuotientPoint (TopPair.ofSubset Vᶜ)) = (∞ : OnePoint V) := by
+  change compactComplementQuotientMap V hV
+      (pointQuotientPoint (TopPair.ofSubset Vᶜ)) = (∞ : OnePoint V)
+  exact compactComplementQuotientMap_point V hV
+
+/-- On the open set the actual quotient projection is the canonical inclusion
+into the one-point compactification. -/
+@[simp]
+theorem compactComplementQuotientOnePointHomeomorph_apply_projection
+    (X : TopCat.{w}) [CompactSpace X] [T2Space X]
+    (V : Set X) (hV : IsOpen V) (hVc : (Vᶜ).Nonempty) (v : V) :
+    compactComplementQuotientOnePointHomeomorph X V hV hVc
+        (pointQuotientProjection (TopPair.ofSubset Vᶜ) v.1) = (v : OnePoint V) := by
+  change compactComplementQuotientMap V hV
+      (pointQuotientProjection (TopPair.ofSubset Vᶜ) v.1) = (v : OnePoint V)
+  rw [compactComplementQuotientMap_projection]
+  simp [compactComplementCollapse, v.property]
 
 end Hatcher.Relative

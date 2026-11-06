@@ -2,6 +2,9 @@
 article_id: af_b27bb3e374b92a7334095698
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.localDegree_punctured_homotopy_invariance
 ---
 
 # A puncture-preserving local homotopy preserves local degree
