@@ -11,15 +11,15 @@ on:
     inputs:
       article_id:
         description: Article whose candidate needs proof evidence
-        default: af_6423827cee00e5b7d1c68aaa
+        default: af_5ead003fab03dbcaedbcd8d7
         required: true
       module:
         description: Lean module containing the candidate
-        default: Hatcher.VanKampen.ConeAttachmentDisk
+        default: Hatcher.Sphere.DegreeLocalSum
         required: true
       declaration:
         description: Candidate declaration to inspect
-        default: Hatcher.Sphere.sphereConePairMap
+        default: Hatcher.Sphere.sphere_suspension_pole_local_degree
         required: true
 
 permissions:
@@ -27,9 +27,9 @@ permissions:
 
 env:
   AUTOFORM_SOURCE: "https://github.com/facebookresearch/autoform-bot.git"
-  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_6423827cee00e5b7d1c68aaa' }}
-  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.VanKampen.ConeAttachmentDisk' }}
-  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.sphereConePairMap' }}
+  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_5ead003fab03dbcaedbcd8d7' }}
+  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Sphere.DegreeLocalSum' }}
+  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.sphere_suspension_pole_local_degree' }}
 
 concurrency:
   group: autoform-verify-${{ github.ref }}
@@ -102,6 +102,9 @@ jobs:
           Hatcher.Sphere.PuncturedStereographic
           Hatcher.Singular.PointQuotientTopology
           Hatcher.VanKampen.ConeAttachmentDisk
+          Hatcher.Singular.PointedWedgePointQuotient
+          Hatcher.Sphere.HomeomorphismLocalDegree Hatcher.Sphere.DegreeLocalSum
+          Hatcher.Sphere.Homology
 
       - name: Build Lean
         run: lake build
@@ -184,16 +187,7 @@ jobs:
           python3 scripts/formalize_evidence.py \
             --article-id "$EVIDENCE_ARTICLE" \
             --module "$EVIDENCE_MODULE" \
-            --declaration "$EVIDENCE_DECLARATION" \
-            --declaration Hatcher.Sphere.sphereConeMap \
-            --declaration Hatcher.Sphere.sphere_cone_map_base \
-            --declaration Hatcher.Sphere.sphere_cone_map_apex \
-            --declaration Hatcher.Sphere.sphere_cone_map_cylinder \
-            --declaration Hatcher.Sphere.sphere_cone_map_base_square \
-            --declaration Hatcher.Sphere.sphere_cone_pair_map_fst \
-            --declaration Hatcher.Sphere.sphere_cone_pair_map_snd \
-            --declaration Hatcher.Sphere.sphere_cone_pair_map_id \
-            --declaration Hatcher.Sphere.sphere_cone_pair_map_comp
+            --declaration "$EVIDENCE_DECLARATION"
 
       - name: Export quotient import impact
         run: |
@@ -212,6 +206,11 @@ jobs:
           import Hatcher.Sphere.PuncturedStereographic
           import Hatcher.Singular.PointQuotientTopology
           import Hatcher.VanKampen.ConeAttachmentDisk
+          import Hatcher.Singular.PointedWedgePointQuotient
+          import Hatcher.Sphere.HomeomorphismLocalDegree
+          import Hatcher.Sphere.DegreeLocalSum
+          import Hatcher.Sphere.Homology
+          import Hatcher.Sphere.DegreeProperties
           import Batteries.Tactic.Lint
 
           #print axioms Hatcher.Sphere.circlePowerMap_positive_arcChart
@@ -236,12 +235,70 @@ jobs:
           #print axioms Hatcher.Sphere.sphere_cone_pair_map_snd
           #print axioms Hatcher.Sphere.sphere_cone_pair_map_id
           #print axioms Hatcher.Sphere.sphere_cone_pair_map_comp
+          #print axioms Hatcher.Relative.finiteOnePointSigmaWedgeHomeomorph
+          #print axioms Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_coe
+          #print axioms Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_infty
+          #print axioms Hatcher.Sphere.sphereConeQuotientHomeomorph
+          #print axioms Hatcher.Sphere.sphereConeCylinderPoint
+          #print axioms Hatcher.Sphere.sphere_cone_cylinder_point_coordinates
+          #print axioms Hatcher.Sphere.sphereConeQuotientMap
+          #print axioms Hatcher.Sphere.sphere_cone_quotient_homeomorph_point
+          #print axioms Hatcher.Sphere.sphere_cone_quotient_homeomorph_base
+          #print axioms Hatcher.Sphere.sphere_cone_quotient_homeomorph_apex
+          #print axioms Hatcher.Sphere.sphere_cone_quotient_homeomorph_cylinder
+          #print axioms Hatcher.Sphere.sphere_cone_quotient_homeomorph_coordinates
+          #print axioms Hatcher.Sphere.circlePowerMap_positive_localDegree
+          #print axioms Hatcher.Sphere.circlePowerMap_positive_degree
+          #print axioms Hatcher.Sphere.sphereSuspensionMap
+          #print axioms Hatcher.Sphere.sphereSuspensionProjection
+          #print axioms Hatcher.Sphere.sphere_suspension_map_quotient
+          #print axioms Hatcher.Sphere.sphere_suspension_map_ambient_naturality
+          #print axioms Hatcher.Sphere.sphere_suspension_map_cylinder
+          #print axioms Hatcher.Sphere.sphere_suspension_map_north_pole
+          #print axioms Hatcher.Sphere.sphere_suspension_map_south_pole
+          #print axioms Hatcher.Sphere.sphere_suspension_map_id
+          #print axioms Hatcher.Sphere.sphere_suspension_map_comp
+          #print axioms Hatcher.Sphere.sphereBallPinch
+          #print axioms Hatcher.Sphere.sphereBallCenter
+          #print axioms Hatcher.Sphere.sphereBallEmbedding
+          #print axioms Hatcher.Sphere.sphereBallClosed
+          #print axioms Hatcher.Sphere.sphereBallOpen
+          #print axioms Hatcher.Sphere.sphereBallUnion
+          #print axioms Hatcher.Sphere.SphereBallPinchData
+          #print axioms Hatcher.Sphere.SphereBallPinchData.pinchMap
+          #print axioms Hatcher.Sphere.SphereBallPinchData.pinch_map_apply_ball
+          #print axioms Hatcher.Sphere.SphereBallPinchData.pinch_map_apply_compl
+          #print axioms Hatcher.Sphere.SphereBallPinchData.summandSelector
+          #print axioms Hatcher.Sphere.SphereBallPinchData.summand_selector_apply_basepoint
+          #print axioms Hatcher.Sphere.SphereBallPinchData.summand_selector_apply_inclusion
+          #print axioms Hatcher.Sphere.SphereBallPinchData.componentCollapse
+          #print axioms Hatcher.Sphere.SphereBallPinchData.component_collapse_apply_ball
+          #print axioms Hatcher.Sphere.SphereBallPinchData.component_collapse_apply_other
+          #print axioms Hatcher.Sphere.SphereBallPinchData.component_collapse_apply_compl
+          #print axioms Hatcher.Sphere.SphereBallPinchData.component_collapse_apply_not_mem
+          #print axioms Hatcher.Sphere.SphereBallPinchData.pinch_map_zero
+          #print axioms Hatcher.Sphere.SphereBallPinchData.emptyWedgeToSphere
+          #print axioms Hatcher.Sphere.SphereBallPinchData.emptySphereMap
+          #print axioms Hatcher.Sphere.SphereBallPinchData.empty_sphere_map_eq_const
+          #print axioms Hatcher.Sphere.sphere_suspension_boundary_naturality
+          #print axioms Hatcher.Sphere.sphereConeGoodPair
+          #print axioms Hatcher.Sphere.sphereSuspensionBoundaryIso
+          #print axioms Hatcher.Sphere.sphere_suspension_boundary_iso_hom
+          #print axioms Hatcher.Sphere.sphere_suspension_pole_fibers
+          #print axioms Hatcher.Sphere.circlePowerMap_degree
+          #print axioms Hatcher.Sphere.sphere_suspension_preserves_degree
+          #print axioms Hatcher.Sphere.sphere_suspension_pole_local_degree
 
           #lint only unusedArguments in Hatcher.Sphere.CirclePower
           #lint only unusedArguments in Hatcher.Sphere.LocalDegree
           #lint only unusedArguments in Hatcher.Sphere.PuncturedStereographic
           #lint only unusedArguments in Hatcher.Singular.PointQuotientTopology
           #lint only unusedArguments in Hatcher.VanKampen.ConeAttachmentDisk
+          #lint only unusedArguments in Hatcher.Singular.PointedWedgePointQuotient
+          #lint only unusedArguments in Hatcher.Sphere.HomeomorphismLocalDegree
+          #lint only unusedArguments in Hatcher.Sphere.DegreeLocalSum
+          #lint only unusedArguments in Hatcher.Sphere.Homology
+          #lint only unusedArguments in Hatcher.Sphere.DegreeProperties
           LEAN
           lake env lean .lake/formalize-evidence/FrontierChecks.lean \
             | tee .lake/formalize-evidence/artifacts/frontier-axioms-and-lint.txt
@@ -262,6 +319,22 @@ jobs:
             --lean-root . --json \
             > .lake/formalize-evidence/artifacts/cone-import-impact.json
 
+      - name: Export finite-wedge import impact
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_f0ce52bed8b3559c75b76fa3 Hatcher.Singular.PointedWedgePointQuotient . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/wedge-import-impact.json
+
+      - name: Export positive-local-degree import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_7f28a7505a467328c2236288 Hatcher.Sphere.HomeomorphismLocalDegree . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/positive-local-degree-import-impact-baseline.json
+
       - name: Export finite-wedge import baseline
         run: |
           uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
@@ -277,6 +350,102 @@ jobs:
             af_3bee065ead7f165534b9f450 Hatcher.VanKampen.ConeAttachmentDisk . \
             --lean-root . --json \
             > .lake/formalize-evidence/artifacts/cone-quotient-import-impact-baseline.json
+
+      - name: Export cone-quotient import impact
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_3bee065ead7f165534b9f450 Hatcher.VanKampen.ConeAttachmentDisk . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/cone-quotient-import-impact.json
+
+      - name: Export positive-local-degree import impact
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_7f28a7505a467328c2236288 Hatcher.Sphere.HomeomorphismLocalDegree . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/positive-local-degree-import-impact.json
+
+      - name: Export positive-global-degree import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_641bb17f8f6aeb2a33fabd0d Hatcher.Sphere.DegreeLocalSum . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/positive-global-degree-import-impact-baseline.json
+
+      - name: Export sphere-pinch import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_94c9b10f3bfd64e882b0e386 Hatcher.Sphere.PuncturedStereographic . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/sphere-pinch-import-impact-baseline.json
+
+      - name: Export positive-global-degree import impact
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_641bb17f8f6aeb2a33fabd0d Hatcher.Sphere.DegreeLocalSum . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/positive-global-degree-import-impact.json
+
+      - name: Export integer-circle-degree import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_180617f5eedc10f191b736bc Hatcher.Sphere.DegreeLocalSum . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/integer-circle-degree-import-impact-baseline.json
+
+      - name: Export suspension-boundary import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_199be8e09b149f1f0bc4e775 Hatcher.Sphere.Homology . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/suspension-boundary-import-impact-baseline.json
+
+      - name: Export suspension-boundary import impact
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_199be8e09b149f1f0bc4e775 Hatcher.Sphere.Homology . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/suspension-boundary-import-impact.json
+
+      - name: Export sphere-pinch import impact
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_94c9b10f3bfd64e882b0e386 Hatcher.Sphere.PuncturedStereographic . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/sphere-pinch-import-impact.json
+
+      - name: Export suspension-degree import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_6335225854364397e3a20e8f Hatcher.Sphere.DegreeProperties . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/suspension-degree-import-impact-baseline.json
+
+      - name: Export integer-circle-degree import impact
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_180617f5eedc10f191b736bc Hatcher.Sphere.DegreeLocalSum . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/integer-circle-degree-import-impact.json
+
+      - name: Export suspension-degree import impact
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_6335225854364397e3a20e8f Hatcher.Sphere.DegreeProperties . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/suspension-degree-import-impact.json
 
       - name: Upload proof review evidence
         if: always()
