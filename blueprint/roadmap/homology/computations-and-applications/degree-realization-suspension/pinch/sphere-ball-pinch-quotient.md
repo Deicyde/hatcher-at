@@ -2,6 +2,8 @@
 article_id: af_94c9b10f3bfd64e882b0e386
 declaration: def
 origin: bridged
+statement: formalized
+lean: Hatcher.Sphere.sphereBallPinch, Hatcher.Sphere.sphereBallCenter, Hatcher.Sphere.sphereBallEmbedding, Hatcher.Sphere.sphereBallClosed, Hatcher.Sphere.sphereBallOpen, Hatcher.Sphere.sphereBallUnion, Hatcher.Sphere.SphereBallPinchData, Hatcher.Sphere.SphereBallPinchData.pinchMap, Hatcher.Sphere.SphereBallPinchData.pinch_map_apply_ball, Hatcher.Sphere.SphereBallPinchData.pinch_map_apply_compl, Hatcher.Sphere.SphereBallPinchData.summandSelector, Hatcher.Sphere.SphereBallPinchData.summand_selector_apply_basepoint, Hatcher.Sphere.SphereBallPinchData.summand_selector_apply_inclusion, Hatcher.Sphere.SphereBallPinchData.componentCollapse, Hatcher.Sphere.SphereBallPinchData.component_collapse_apply_ball, Hatcher.Sphere.SphereBallPinchData.component_collapse_apply_other, Hatcher.Sphere.SphereBallPinchData.component_collapse_apply_compl, Hatcher.Sphere.SphereBallPinchData.component_collapse_apply_not_mem, Hatcher.Sphere.SphereBallPinchData.pinch_map_zero, Hatcher.Sphere.SphereBallPinchData.emptyWedgeToSphere, Hatcher.Sphere.SphereBallPinchData.emptySphereMap, Hatcher.Sphere.SphereBallPinchData.empty_sphere_map_eq_const
 ---
 
 # Collapsing the complement of disjoint sphere balls gives the pinch map

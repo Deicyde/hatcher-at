@@ -2,6 +2,9 @@
 article_id: af_180617f5eedc10f191b736bc
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.circlePowerMap_degree
 ---
 
 # The degree of an integer circle power is its exponent

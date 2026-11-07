@@ -2,6 +2,9 @@
 article_id: af_be75466581d57f6e3c313714
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.sphere_suspension_pole_fibers
 ---
 
 # The suspension poles have singleton fibers

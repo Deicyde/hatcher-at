@@ -7,6 +7,10 @@ Authors: Jack McCarthy
 import Hatcher.Sphere.FinitePunctureOrientation
 import Hatcher.Sphere.FiniteFiberLocalMap
 import Mathlib.Algebra.BigOperators.Group.Finset.Lemmas
+import Hatcher.Sphere.HomeomorphismLocalDegree
+import Hatcher.Sphere.CirclePowerFiber
+import Hatcher.Sphere.CircleInversion
+import Hatcher.Sphere.NonsurjectiveDegree
 
 /-!
 # Degree is the sum of local degrees
@@ -195,5 +199,216 @@ theorem localDegree_eq_degree_of_fiber_eq_singleton
             localDegree n hn f j.1 y (finiteFiberIsolatedPreimage f y hfinite j)) i
   exact (localDegree_proof_irrel n hn f x y h
     (finiteFiberIsolatedPreimage f y hfinite i)).trans hsum.symm
+
+/-- The actual positive integer-power map of the standard circle has its
+exponent as signed degree, by summing its local degrees over its actual fiber. -/
+theorem circlePowerMap_positive_degree (k : ℕ) (hk : 0 < k) :
+    degree 1 (by decide) (circlePowerMap (k : ℤ)) = (k : ℤ) := by
+  classical
+  let f : TopCat.sphere.{0} 1 ⟶ TopCat.sphere.{0} 1 := circlePowerMap (k : ℤ)
+  let y : TopCat.sphere.{0} 1 := diskBoundaryTwoBasepoint.{0}
+  change degree 1 (by decide) f = (k : ℤ)
+  obtain ⟨_, _, E₀, _⟩ := circlePowerMap_positive_fiber k hk y
+  change ({z : TopCat.sphere.{0} 1 // f z = y} ≃ Fin k) at E₀
+  let E : fiber f y ≃ Fin k :=
+    (Equiv.subtypeEquivRight
+      (p := fun z : TopCat.sphere.{0} 1 => z ∈ fiber f y)
+      (q := fun z => f z = y)
+      (fun z => mem_fiber (f := f) (y := y) (z := z))).trans E₀
+  have hfinite : (fiber f y).Finite := by
+    letI : Fintype (fiber f y) := Fintype.ofEquiv (Fin k) E.symm
+    exact Set.toFinite (fiber f y)
+  letI : Fintype (fiber f y) := finiteFiberFintype hfinite
+  have hcard : Fintype.card (fiber f y) = k := by
+    simpa only [Fintype.card_fin] using Fintype.card_congr E
+  have hone (i : fiber f y) :
+      localDegree 1 (by decide) f i.1 y
+        (finiteFiberIsolatedPreimage f y hfinite i) = 1 := by
+    have hi : f i.1 = y := mem_fiber.mp i.property
+    have himage : IsolatedPreimage f i.1 (f i.1) := by
+      simpa only [hi] using finiteFiberIsolatedPreimage f y hfinite i
+    have hlocal := (circlePowerMap_positive_localDegree k hk i.1).2 himage
+    change localDegree 1 (by decide) f i.1 (f i.1) himage = 1 at hlocal
+    simpa only [hi] using hlocal
+  have hsum := degree_eq_sum_localDegree 1 (by decide) f y hfinite
+  change degree 1 (by decide) f = ∑ i : fiber f y,
+    localDegree 1 (by decide) f i.1 y
+      (finiteFiberIsolatedPreimage f y hfinite i) at hsum
+  calc
+    degree 1 (by decide) f = ∑ i : fiber f y,
+        localDegree 1 (by decide) f i.1 y
+          (finiteFiberIsolatedPreimage f y hfinite i) := hsum
+    _ = ∑ i : fiber f y, (1 : ℤ) := by
+      apply Finset.sum_congr rfl
+      intro i hi
+      exact hone i
+    _ = (k : ℤ) := by
+      simp only [Finset.sum_const, Finset.card_univ, nsmul_eq_mul, mul_one, hcard]
+
+/-- **Hatcher, Example 2.32 (printed page 137).** The actual integer-power map
+of the standard circle has its signed integer exponent as degree. -/
+theorem circlePowerMap_degree (d : ℤ) :
+    degree 1 (by decide) (circlePowerMap d) = d := by
+  cases d with
+  | ofNat k =>
+      cases k with
+      | zero =>
+          change degree 1 (by decide) (circlePowerMap (0 : ℤ)) = (0 : ℤ)
+          rw [circlePowerMap_zero]
+          apply degree_eq_zero_of_not_surjective 1 (by decide)
+            (TopCat.const diskBoundaryTwoBasepoint.{0})
+          intro hsurj
+          obtain ⟨x, hx⟩ := hsurj
+            (diskBoundaryTwoHomeomorphCircle.{0}.symm
+              (_root_.Circle.exp Real.pi))
+          change diskBoundaryTwoBasepoint.{0} =
+            diskBoundaryTwoHomeomorphCircle.{0}.symm
+              (_root_.Circle.exp Real.pi) at hx
+          have heq := congrArg diskBoundaryTwoHomeomorphCircle.{0} hx
+          exact _root_.Circle.exp_pi_ne_one (by
+            simpa only [diskBoundaryTwoHomeomorphCircle_basepoint,
+              Homeomorph.apply_symm_apply] using heq.symm)
+      | succ k =>
+          exact circlePowerMap_positive_degree (k + 1) (Nat.succ_pos k)
+  | negSucc k =>
+      change degree 1 (by decide)
+        (circlePowerMap (-((k + 1 : ℕ) : ℤ))) = -((k + 1 : ℕ) : ℤ)
+      calc
+        degree 1 (by decide) (circlePowerMap (-((k + 1 : ℕ) : ℤ))) =
+            degree 1 (by decide) (circlePowerMap ((k + 1 : ℕ) : ℤ)) *
+              degree 1 (by decide) (circlePowerMap (-1)) := by
+          rw [circlePowerMap_neg_natCast, degree_comp]
+        _ = ((k + 1 : ℕ) : ℤ) * (-1) := by
+          rw [circlePowerMap_positive_degree (k + 1) (Nat.succ_pos k),
+            circlePowerMap_inversion_reflection_and_degree.2]
+        _ = -((k + 1 : ℕ) : ℤ) := by
+          simp only [mul_neg, mul_one]
+
+end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+/-- **Hatcher, the pole observation after Proposition 2.33.** Either existing
+suspension pole is an isolated preimage of itself, and its local degree is the
+global degree of the suspension for every isolation witness. This includes
+`n = 0` and arbitrary continuous sphere maps. -/
+theorem sphere_suspension_pole_local_degree
+    (n : ℕ)
+    (f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n)
+    (p : TopCat.sphere.{0} (n + 1))
+    (hp : p = northPole.{0} n ∨ p = southPole.{0} n) :
+    IsolatedPreimage (sphereSuspensionMap n f) p p ∧
+      ∀ (h : IsolatedPreimage (sphereSuspensionMap n f) p p),
+        localDegree (n + 1) (Nat.zero_lt_succ n)
+            (sphereSuspensionMap n f) p p h =
+          degree (n + 1) (Nat.zero_lt_succ n) (sphereSuspensionMap n f) := by
+  have hfiber : fiber (sphereSuspensionMap n f) p = {p} := by
+    change (sphereSuspensionMap n f) ⁻¹' {p} = {p}
+    rcases hp with rfl | rfl
+    · exact (sphere_suspension_pole_fibers n f).1
+    · exact (sphere_suspension_pole_fibers n f).2
+  refine ⟨singletonFiberIsolatedPreimage
+    (sphereSuspensionMap n f) p p hfiber, ?_⟩
+  intro h
+  exact localDegree_eq_degree_of_fiber_eq_singleton
+    (n + 1) (Nat.zero_lt_succ n) (sphereSuspensionMap n f) p p hfiber h
+
+end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+namespace SphereBallPinchData
+
+/-- Every actual component collapse of certified sphere-ball pinch data has
+signed degree `1` or `-1`, using its punctured-sphere chart. -/
+theorem component_collapse_degree_eq_one_or_neg_one
+    {n k : ℕ} {hn : 0 < n} (D : SphereBallPinchData n hn k) (i : Fin k) :
+    degree n hn (TopCat.ofHom (D.componentCollapse i)) = 1 ∨
+      degree n hn (TopCat.ofHom (D.componentCollapse i)) = -1 := by
+  classical
+  let : T2Space (TopCat.sphere.{0} n) :=
+    (sphereULiftHomeomorph.{0} n).isEmbedding.t2Space
+  let f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n :=
+    TopCat.ofHom (D.componentCollapse i)
+  change degree n hn f = 1 ∨ degree n hn f = -1
+  let y₀ : ({D.b}ᶜ : Set (TopCat.sphere.{0} n)) :=
+    (puncturedSphereHomeomorphEuclidean n D.b).symm 0
+  let y : TopCat.sphere.{0} n := y₀.1
+  have hy : y ≠ D.b := by
+    simpa only [Set.mem_compl_iff, Set.mem_singleton_iff] using y₀.property
+  let u : sphereBallOpen hn D.b i := (D.ballChart i).symm y₀
+  let x : TopCat.sphere.{0} n := u.1
+  have hmap (z : sphereBallOpen hn D.b i) :
+      f z.1 = (D.ballChart i z).1 := by
+    change D.componentCollapse i z.1 = (D.ballChart i z).1
+    exact D.component_collapse_apply_ball i z
+  have hfx : f x = y := by
+    calc
+      f x = (D.ballChart i u).1 := hmap u
+      _ = y := congrArg Subtype.val ((D.ballChart i).apply_symm_apply y₀)
+  have hfiber : fiber f y = {x} := by
+    ext z
+    constructor
+    · intro hz
+      have hzmap : f z = y := mem_fiber.mp hz
+      have hzB : z ∈ sphereBallOpen hn D.b i := by
+        by_contra hzB
+        have hconst : f z = D.b := by
+          change D.componentCollapse i z = D.b
+          exact D.component_collapse_apply_not_mem i z hzB
+        exact hy (hzmap.symm.trans hconst)
+      let z' : sphereBallOpen hn D.b i := ⟨z, hzB⟩
+      have hzH : D.ballChart i z' = D.ballChart i u := by
+        apply Subtype.ext
+        calc
+          (D.ballChart i z').1 = f z := (hmap z').symm
+          _ = y := hzmap
+          _ = f x := hfx.symm
+          _ = (D.ballChart i u).1 := hmap u
+      have hzu : z' = u := (D.ballChart i).injective hzH
+      have hzx : z = x := congrArg Subtype.val hzu
+      exact Set.mem_singleton_iff.mpr hzx
+    · intro hz
+      have hzx : z = x := Set.mem_singleton_iff.mp hz
+      apply mem_fiber.mpr
+      rw [hzx]
+      exact hfx
+  let h : IsolatedPreimage f x y :=
+    singletonFiberIsolatedPreimage f x y hfiber
+  let N : LocalDegreeNeighborhood f x y :=
+    { U := sphereBallOpen hn D.b i
+      isOpen_U := (D.closed_properties i).2.2.2.2.1
+      x_mem := u.property
+      map_eq := hfx
+      eq_of_mem_of_map_eq := by
+        intro z _ hzy
+        have hzF : z ∈ fiber f y := mem_fiber.mpr hzy
+        rw [hfiber] at hzF
+        exact Set.mem_singleton_iff.mp hzF }
+  let L : N.LocalHomeomorphData :=
+    { V := ({D.b}ᶜ : Set (TopCat.sphere.{0} n))
+      isOpen_V := isClosed_singleton.isOpen_compl
+      y_mem := y₀.property
+      e := D.ballChart i
+      e_apply := by
+        intro z
+        change (D.ballChart i z).1 = f z.1
+        exact (hmap z).symm }
+  have hunit := localDegree_eq_one_or_neg_one_of_localHomeomorph n hn h N L
+  have hglobal :=
+    localDegree_eq_degree_of_fiber_eq_singleton n hn f x y hfiber h
+  simpa only [hglobal] using hunit
+
+end SphereBallPinchData
+
+/-- Each component collapse of the canonical positive-dimensional sphere pinch
+has signed degree `1` or `-1`. The index `Fin k` includes the empty family. -/
+theorem sphere_ball_collapse_degree_unit
+    (n : ℕ) (hn : 0 < n) (k : ℕ) (i : Fin k) :
+    degree n hn
+        (TopCat.ofHom ((sphereBallPinch n hn k).componentCollapse i)) = 1 ∨
+      degree n hn
+        (TopCat.ofHom ((sphereBallPinch n hn k).componentCollapse i)) = -1 :=
+  (sphereBallPinch n hn k).component_collapse_degree_eq_one_or_neg_one i
 
 end Hatcher.Sphere
