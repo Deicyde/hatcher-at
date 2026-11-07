@@ -6,6 +6,7 @@ Authors: Jack McCarthy
 import Hatcher.Singular.PointQuotient
 import Hatcher.Singular.SigmaPointedPair
 import Hatcher.VanKampen.PointedWedgeUniversal
+import Hatcher.Singular.PointQuotientTopology
 
 /-!
 # The pointed wedge as a point quotient
@@ -232,5 +233,214 @@ theorem pointQuotientSigmaPointedPairIsoPointedWedge_hom_projection_apply
       (pointQuotientProjection (sigmaPointedPair x₀) ⟨i, x⟩) =
     Hatcher.PointedWedge.inclusion x₀ i x at h
   exact h
+
+section FiniteOnePointSigma
+
+open scoped OnePoint
+
+variable (X)
+
+private theorem finiteOnePointSigmaWedgeExists
+    [Finite ι] [∀ i, LocallyCompactSpace (X i)] [∀ i, T2Space (X i)] :
+    ∃ e : OnePoint (Σ i, X i) ≃ₜ
+        Hatcher.PointedWedge (fun i ↦ OnePoint (X i))
+          (fun i ↦ (∞ : OnePoint (X i))),
+      e (∞ : OnePoint (Σ i, X i)) =
+          Hatcher.PointedWedge.basepoint (fun i ↦ (∞ : OnePoint (X i))) ∧
+      ∀ (i : ι) (x : X i),
+        e ((⟨i, x⟩ : Σ j, X j) : OnePoint (Σ j, X j)) =
+          Hatcher.PointedWedge.inclusion (fun j ↦ (∞ : OnePoint (X j))) i
+            (x : OnePoint (X i)) := by
+  classical
+  refine if hι : Nonempty ι then ?_ else ?_
+  · letI : Nonempty ι := hι
+    let T : ι → TopCat.{max u v} := fun i ↦ TopCat.of (OnePoint (X i))
+    let x₀ : ∀ i, T i := fun i ↦ (∞ : OnePoint (X i))
+    let P : TopPair.{max u v} := sigmaPointedPair (X := T) x₀
+    let Z : TopCat.{max u v} := P.fst
+    let V : Set Z := {z | z.2 ≠ (∞ : OnePoint (X z.1))}
+    letI : CompactSpace Z := by
+      change CompactSpace (Σ i, OnePoint (X i))
+      infer_instance
+    letI : T2Space Z := by
+      change T2Space (Σ i, OnePoint (X i))
+      infer_instance
+    let a : (Σ i, X i) → Z :=
+      Sigma.map (fun i ↦ i) fun i x ↦ (x : OnePoint (X i))
+    have ha : Topology.IsOpenEmbedding a := by
+      change Topology.IsOpenEmbedding
+        (Sigma.map (fun i : ι ↦ i) fun i (x : X i) ↦ (x : OnePoint (X i)))
+      exact (Topology.isOpenEmbedding_sigmaMap Function.injective_id).2 fun i ↦
+        OnePoint.isOpenEmbedding_coe
+    have haRange : Set.range a = V := by
+      ext z
+      constructor
+      · rintro ⟨⟨i, x⟩, rfl⟩
+        change (x : OnePoint (X i)) ≠ ∞
+        exact OnePoint.coe_ne_infty x
+      · intro hz
+        rcases z with ⟨i, y⟩
+        change y ≠ (∞ : OnePoint (X i)) at hz
+        induction y using OnePoint.rec with
+        | infty => exact (hz rfl).elim
+        | coe x => exact ⟨⟨i, x⟩, rfl⟩
+    have hV : IsOpen V := haRange ▸ ha.isOpen_range
+    let eV : (Σ i, X i) ≃ₜ V :=
+      ha.isEmbedding.toHomeomorph.trans (Homeomorph.setCongr haRange)
+    have hPRange : Set.range P.map = Vᶜ := by
+      ext z
+      constructor
+      · rintro ⟨b, rfl⟩
+        rcases b with ⟨i, ⟨⟩⟩
+        change ¬ ((∞ : OnePoint (X i)) ≠ ∞)
+        simp
+      · intro hz
+        change ¬ (z.2 ≠ (∞ : OnePoint (X z.1))) at hz
+        have hzi : z.2 = (∞ : OnePoint (X z.1)) := by
+          exact not_not.mp hz
+        rcases z with ⟨i, y⟩
+        change y = (∞ : OnePoint (X i)) at hzi
+        subst y
+        exact ⟨⟨i, PUnit.unit⟩, rfl⟩
+    let Q : TopPair.{max u v} := TopPair.ofSubset Vᶜ
+    let eA : P.snd ≃ₜ Q.snd :=
+      (TopPair.isEmbedding_map P).toHomeomorph.trans (Homeomorph.setCongr hPRange)
+    let eAi : P.snd ≅ Q.snd := TopCat.isoOfHomeo eA
+    let p : P ≅ Q :=
+      { hom := TopPair.ofHom (𝟙 Z) eAi.hom (by
+          ext b
+          rfl)
+        inv := TopPair.ofHom (𝟙 Z) eAi.inv (by
+          ext b
+          change P.map (eA.symm b) = b.1
+          exact congrArg Subtype.val (eA.apply_symm_apply b))
+        hom_inv_id := by
+          apply MorphismProperty.Arrow.Hom.ext
+          · change eAi.hom ≫ eAi.inv = 𝟙 _
+            exact eAi.hom_inv_id
+          · change (𝟙 Z) ≫ (𝟙 Z) = 𝟙 Z
+            simp
+        inv_hom_id := by
+          apply MorphismProperty.Arrow.Hom.ext
+          · change eAi.inv ≫ eAi.hom = 𝟙 _
+            exact eAi.inv_hom_id
+          · change (𝟙 Z) ≫ (𝟙 Z) = 𝟙 Z
+            simp }
+    let q : pointQuotient P ≅ pointQuotient Q :=
+      { hom := pointQuotientMap p.hom
+        inv := pointQuotientMap p.inv
+        hom_inv_id := by
+          rw [← pointQuotientMap_comp, p.hom_inv_id, pointQuotientMap_id]
+        inv_hom_id := by
+          rw [← pointQuotientMap_comp, p.inv_hom_id, pointQuotientMap_id] }
+    let eQ := TopCat.homeoOfIso q
+    have heQ_projection (z : Z) :
+        eQ (pointQuotientProjection P z) = pointQuotientProjection Q z := by
+      have heq := ConcreteCategory.congr_hom
+        (pointQuotientProjection_naturality p.hom) z
+      change eQ (pointQuotientProjection P z) = pointQuotientProjection Q z at heq
+      exact heq
+    have heQ_point : eQ (pointQuotientPoint P) = pointQuotientPoint Q := by
+      have heq := ConcreteCategory.congr_hom
+        (pointQuotientPointInclusion_naturality p.hom) PUnit.unit
+      change eQ (pointQuotientPoint P) = pointQuotientPoint Q at heq
+      exact heq
+    have heQ_symm_projection (z : Z) :
+        eQ.symm (pointQuotientProjection Q z) = pointQuotientProjection P z := by
+      apply eQ.injective
+      rw [eQ.apply_symm_apply]
+      exact (heQ_projection z).symm
+    have heQ_symm_point : eQ.symm (pointQuotientPoint Q) = pointQuotientPoint P := by
+      apply eQ.injective
+      rw [eQ.apply_symm_apply]
+      exact heQ_point.symm
+    have hVc : (Vᶜ).Nonempty := by
+      rcases hι with ⟨i⟩
+      refine ⟨⟨i, (∞ : OnePoint (X i))⟩, ?_⟩
+      change ¬ ((∞ : OnePoint (X i)) ≠ ∞)
+      simp
+    let C := compactComplementQuotientOnePointHomeomorph Z V hV hVc
+    have hC_point : C.symm (∞ : OnePoint V) = pointQuotientPoint Q := by
+      apply C.injective
+      rw [C.apply_symm_apply]
+      exact (compactComplementQuotientOnePointHomeomorph_apply_point Z V hV hVc).symm
+    have hC_projection (z : V) :
+        C.symm (z : OnePoint V) = pointQuotientProjection Q z.1 := by
+      apply C.injective
+      rw [C.apply_symm_apply]
+      exact (compactComplementQuotientOnePointHomeomorph_apply_projection
+        Z V hV hVc z).symm
+    let w := TopCat.homeoOfIso
+      (pointQuotientSigmaPointedPairIsoPointedWedge (X := T) x₀)
+    let e := eV.onePointCongr.trans (C.symm.trans (eQ.symm.trans w))
+    refine ⟨e, ?_, ?_⟩
+    · change w (eQ.symm (C.symm (∞ : OnePoint V))) =
+        Hatcher.PointedWedge.basepoint x₀
+      rw [hC_point, heQ_symm_point]
+      exact pointQuotientSigmaPointedPairIsoPointedWedge_hom_point (X := T) x₀
+    · intro i x
+      let z : V := eV (⟨i, x⟩ : Σ j, X j)
+      have hz : z.1 = (⟨i, (x : OnePoint (X i))⟩ : Z) := rfl
+      change w (eQ.symm (C.symm (z : OnePoint V))) =
+        Hatcher.PointedWedge.inclusion x₀ i (x : OnePoint (X i))
+      rw [hC_projection z, heQ_symm_projection, hz]
+      exact pointQuotientSigmaPointedPairIsoPointedWedge_hom_projection_apply
+        (X := T) x₀ i (x : OnePoint (X i))
+  · letI : IsEmpty ι := ⟨fun i ↦ hι ⟨i⟩⟩
+    let e : OnePoint (Σ i, X i) ≃ₜ
+        Hatcher.PointedWedge (fun i ↦ OnePoint (X i))
+          (fun i ↦ (∞ : OnePoint (X i))) :=
+      { toEquiv :=
+          { toFun := fun _ ↦
+              Hatcher.PointedWedge.basepoint (fun i ↦ (∞ : OnePoint (X i)))
+            invFun := fun _ ↦ (∞ : OnePoint (Σ i, X i))
+            left_inv := by
+              intro z
+              induction z using OnePoint.rec with
+              | infty => rfl
+              | coe z => exact isEmptyElim z.1
+            right_inv := by
+              intro z
+              induction z using Quotient.inductionOn with
+              | _ z =>
+                cases z with
+                | none => rfl
+                | some z => exact isEmptyElim z.1 }
+        continuous_toFun := continuous_const
+        continuous_invFun := continuous_const }
+    refine ⟨e, rfl, ?_⟩
+    intro i x
+    exact (hι ⟨i⟩).elim
+
+/-- Compactifying a finite topological disjoint union gives the actual
+pointed wedge of the compactified summands, each based at infinity.
+The empty family is included. -/
+noncomputable def finiteOnePointSigmaWedgeHomeomorph
+    [Finite ι] [∀ i, LocallyCompactSpace (X i)] [∀ i, T2Space (X i)] :
+    OnePoint (Σ i, X i) ≃ₜ
+      Hatcher.PointedWedge (fun i ↦ OnePoint (X i))
+        (fun i ↦ (∞ : OnePoint (X i))) :=
+  Classical.choose (finiteOnePointSigmaWedgeExists X)
+
+/-- A finite point maps to its canonical compactified-summand inclusion. -/
+@[simp]
+theorem finite_one_point_sigma_wedge_homeomorph_apply_coe
+    [Finite ι] [∀ i, LocallyCompactSpace (X i)] [∀ i, T2Space (X i)]
+    (i : ι) (x : X i) :
+    finiteOnePointSigmaWedgeHomeomorph X
+        ((⟨i, x⟩ : Σ j, X j) : OnePoint (Σ j, X j)) =
+      Hatcher.PointedWedge.inclusion (fun j ↦ (∞ : OnePoint (X j))) i
+        (x : OnePoint (X i)) :=
+  (Classical.choose_spec (finiteOnePointSigmaWedgeExists X)).2 i x
+
+/-- Infinity maps to the existing wedge's common basepoint. -/
+@[simp]
+theorem finite_one_point_sigma_wedge_homeomorph_apply_infty
+    [Finite ι] [∀ i, LocallyCompactSpace (X i)] [∀ i, T2Space (X i)] :
+    finiteOnePointSigmaWedgeHomeomorph X (∞ : OnePoint (Σ i, X i)) =
+      Hatcher.PointedWedge.basepoint (fun i ↦ (∞ : OnePoint (X i))) :=
+  (Classical.choose_spec (finiteOnePointSigmaWedgeExists X)).1
+
+end FiniteOnePointSigma
 
 end Hatcher.Relative

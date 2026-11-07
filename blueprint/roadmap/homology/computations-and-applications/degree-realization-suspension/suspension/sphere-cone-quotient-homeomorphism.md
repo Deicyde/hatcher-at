@@ -2,6 +2,8 @@
 article_id: af_3bee065ead7f165534b9f450
 declaration: def
 origin: bridged
+statement: formalized
+lean: Hatcher.Sphere.sphereConeQuotientHomeomorph, Hatcher.Sphere.sphereConeCylinderPoint, Hatcher.Sphere.sphere_cone_cylinder_point_coordinates, Hatcher.Sphere.sphereConeQuotientMap, Hatcher.Sphere.sphere_cone_quotient_homeomorph_point, Hatcher.Sphere.sphere_cone_quotient_homeomorph_base, Hatcher.Sphere.sphere_cone_quotient_homeomorph_apex, Hatcher.Sphere.sphere_cone_quotient_homeomorph_cylinder, Hatcher.Sphere.sphere_cone_quotient_homeomorph_coordinates
 ---
 
 # The cone-base quotient is the next sphere with its suspension poles

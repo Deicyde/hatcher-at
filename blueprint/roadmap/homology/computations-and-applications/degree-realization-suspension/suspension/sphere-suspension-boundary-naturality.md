@@ -2,6 +2,9 @@
 article_id: af_199be8e09b149f1f0bc4e775
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.sphere_suspension_boundary_naturality, Hatcher.Sphere.sphereConeGoodPair, Hatcher.Sphere.sphereSuspensionBoundaryIso, Hatcher.Sphere.sphere_suspension_boundary_iso_hom
 ---
 
 # The suspension boundary isomorphism intertwines the induced maps
