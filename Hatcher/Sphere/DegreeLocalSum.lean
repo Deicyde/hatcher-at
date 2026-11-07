@@ -314,3 +314,101 @@ theorem sphere_suspension_pole_local_degree
     (n + 1) (Nat.zero_lt_succ n) (sphereSuspensionMap n f) p p hfiber h
 
 end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+namespace SphereBallPinchData
+
+/-- Every actual component collapse of certified sphere-ball pinch data has
+signed degree `1` or `-1`, using its punctured-sphere chart. -/
+theorem component_collapse_degree_eq_one_or_neg_one
+    {n k : ℕ} {hn : 0 < n} (D : SphereBallPinchData n hn k) (i : Fin k) :
+    degree n hn (TopCat.ofHom (D.componentCollapse i)) = 1 ∨
+      degree n hn (TopCat.ofHom (D.componentCollapse i)) = -1 := by
+  classical
+  let : T2Space (TopCat.sphere.{0} n) :=
+    (sphereULiftHomeomorph.{0} n).isEmbedding.t2Space
+  let f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n :=
+    TopCat.ofHom (D.componentCollapse i)
+  change degree n hn f = 1 ∨ degree n hn f = -1
+  let y₀ : ({D.b}ᶜ : Set (TopCat.sphere.{0} n)) :=
+    (puncturedSphereHomeomorphEuclidean n D.b).symm 0
+  let y : TopCat.sphere.{0} n := y₀.1
+  have hy : y ≠ D.b := by
+    simpa only [Set.mem_compl_iff, Set.mem_singleton_iff] using y₀.property
+  let u : sphereBallOpen hn D.b i := (D.ballChart i).symm y₀
+  let x : TopCat.sphere.{0} n := u.1
+  have hmap (z : sphereBallOpen hn D.b i) :
+      f z.1 = (D.ballChart i z).1 := by
+    change D.componentCollapse i z.1 = (D.ballChart i z).1
+    exact D.component_collapse_apply_ball i z
+  have hfx : f x = y := by
+    calc
+      f x = (D.ballChart i u).1 := hmap u
+      _ = y := congrArg Subtype.val ((D.ballChart i).apply_symm_apply y₀)
+  have hfiber : fiber f y = {x} := by
+    ext z
+    constructor
+    · intro hz
+      have hzmap : f z = y := mem_fiber.mp hz
+      have hzB : z ∈ sphereBallOpen hn D.b i := by
+        by_contra hzB
+        have hconst : f z = D.b := by
+          change D.componentCollapse i z = D.b
+          exact D.component_collapse_apply_not_mem i z hzB
+        exact hy (hzmap.symm.trans hconst)
+      let z' : sphereBallOpen hn D.b i := ⟨z, hzB⟩
+      have hzH : D.ballChart i z' = D.ballChart i u := by
+        apply Subtype.ext
+        calc
+          (D.ballChart i z').1 = f z := (hmap z').symm
+          _ = y := hzmap
+          _ = f x := hfx.symm
+          _ = (D.ballChart i u).1 := hmap u
+      have hzu : z' = u := (D.ballChart i).injective hzH
+      have hzx : z = x := congrArg Subtype.val hzu
+      exact Set.mem_singleton_iff.mpr hzx
+    · intro hz
+      have hzx : z = x := Set.mem_singleton_iff.mp hz
+      apply mem_fiber.mpr
+      rw [hzx]
+      exact hfx
+  let h : IsolatedPreimage f x y :=
+    singletonFiberIsolatedPreimage f x y hfiber
+  let N : LocalDegreeNeighborhood f x y :=
+    { U := sphereBallOpen hn D.b i
+      isOpen_U := (D.closed_properties i).2.2.2.2.1
+      x_mem := u.property
+      map_eq := hfx
+      eq_of_mem_of_map_eq := by
+        intro z _ hzy
+        have hzF : z ∈ fiber f y := mem_fiber.mpr hzy
+        rw [hfiber] at hzF
+        exact Set.mem_singleton_iff.mp hzF }
+  let L : N.LocalHomeomorphData :=
+    { V := ({D.b}ᶜ : Set (TopCat.sphere.{0} n))
+      isOpen_V := isClosed_singleton.isOpen_compl
+      y_mem := y₀.property
+      e := D.ballChart i
+      e_apply := by
+        intro z
+        change (D.ballChart i z).1 = f z.1
+        exact (hmap z).symm }
+  have hunit := localDegree_eq_one_or_neg_one_of_localHomeomorph n hn h N L
+  have hglobal :=
+    localDegree_eq_degree_of_fiber_eq_singleton n hn f x y hfiber h
+  simpa only [hglobal] using hunit
+
+end SphereBallPinchData
+
+/-- Each component collapse of the canonical positive-dimensional sphere pinch
+has signed degree `1` or `-1`. The index `Fin k` includes the empty family. -/
+theorem sphere_ball_collapse_degree_unit
+    (n : ℕ) (hn : 0 < n) (k : ℕ) (i : Fin k) :
+    degree n hn
+        (TopCat.ofHom ((sphereBallPinch n hn k).componentCollapse i)) = 1 ∨
+      degree n hn
+        (TopCat.ofHom ((sphereBallPinch n hn k).componentCollapse i)) = -1 :=
+  (sphereBallPinch n hn k).component_collapse_degree_eq_one_or_neg_one i
+
+end Hatcher.Sphere
