@@ -253,6 +253,7 @@ theorem circlePowerMap_degree (d : ℤ) :
   | ofNat k =>
       cases k with
       | zero =>
+          change degree 1 (by decide) (circlePowerMap (0 : ℤ)) = (0 : ℤ)
           rw [circlePowerMap_zero]
           apply degree_eq_zero_of_not_surjective 1 (by decide)
             (TopCat.const diskBoundaryTwoBasepoint.{0})
