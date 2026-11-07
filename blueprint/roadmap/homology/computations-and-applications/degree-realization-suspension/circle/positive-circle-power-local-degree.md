@@ -2,6 +2,9 @@
 article_id: af_7f28a7505a467328c2236288
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.circlePowerMap_positive_localDegree
 ---
 
 # Every local degree of a positive circle power is plus one
