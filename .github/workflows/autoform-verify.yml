@@ -11,15 +11,15 @@ on:
     inputs:
       article_id:
         description: Article whose candidate needs proof evidence
-        default: af_6335225854364397e3a20e8f
+        default: af_5ead003fab03dbcaedbcd8d7
         required: true
       module:
         description: Lean module containing the candidate
-        default: Hatcher.Sphere.DegreeProperties
+        default: Hatcher.Sphere.DegreeLocalSum
         required: true
       declaration:
         description: Candidate declaration to inspect
-        default: Hatcher.Sphere.sphere_suspension_preserves_degree
+        default: Hatcher.Sphere.sphere_suspension_pole_local_degree
         required: true
 
 permissions:
@@ -27,9 +27,9 @@ permissions:
 
 env:
   AUTOFORM_SOURCE: "https://github.com/facebookresearch/autoform-bot.git"
-  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_6335225854364397e3a20e8f' }}
-  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Sphere.DegreeProperties' }}
-  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.sphere_suspension_preserves_degree' }}
+  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_5ead003fab03dbcaedbcd8d7' }}
+  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Sphere.DegreeLocalSum' }}
+  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.sphere_suspension_pole_local_degree' }}
 
 concurrency:
   group: autoform-verify-${{ github.ref }}
