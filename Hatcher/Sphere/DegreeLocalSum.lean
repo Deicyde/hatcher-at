@@ -7,6 +7,10 @@ Authors: Jack McCarthy
 import Hatcher.Sphere.FinitePunctureOrientation
 import Hatcher.Sphere.FiniteFiberLocalMap
 import Mathlib.Algebra.BigOperators.Group.Finset.Lemmas
+import Hatcher.Sphere.HomeomorphismLocalDegree
+import Hatcher.Sphere.CirclePowerFiber
+import Hatcher.Sphere.CircleInversion
+import Hatcher.Sphere.NonsurjectiveDegree
 
 /-!
 # Degree is the sum of local degrees
@@ -195,5 +199,89 @@ theorem localDegree_eq_degree_of_fiber_eq_singleton
             localDegree n hn f j.1 y (finiteFiberIsolatedPreimage f y hfinite j)) i
   exact (localDegree_proof_irrel n hn f x y h
     (finiteFiberIsolatedPreimage f y hfinite i)).trans hsum.symm
+
+/-- The actual positive integer-power map of the standard circle has its
+exponent as signed degree, by summing its local degrees over its actual fiber. -/
+theorem circlePowerMap_positive_degree (k : ℕ) (hk : 0 < k) :
+    degree 1 (by decide) (circlePowerMap (k : ℤ)) = (k : ℤ) := by
+  classical
+  let f : TopCat.sphere.{0} 1 ⟶ TopCat.sphere.{0} 1 := circlePowerMap (k : ℤ)
+  let y : TopCat.sphere.{0} 1 := diskBoundaryTwoBasepoint.{0}
+  change degree 1 (by decide) f = (k : ℤ)
+  obtain ⟨_, _, E₀, _⟩ := circlePowerMap_positive_fiber k hk y
+  change ({z : TopCat.sphere.{0} 1 // f z = y} ≃ Fin k) at E₀
+  let E : fiber f y ≃ Fin k :=
+    (Equiv.subtypeEquivRight
+      (p := fun z : TopCat.sphere.{0} 1 => z ∈ fiber f y)
+      (q := fun z => f z = y)
+      (fun z => mem_fiber (f := f) (y := y) (z := z))).trans E₀
+  have hfinite : (fiber f y).Finite := by
+    letI : Fintype (fiber f y) := Fintype.ofEquiv (Fin k) E.symm
+    exact Set.toFinite (fiber f y)
+  letI : Fintype (fiber f y) := finiteFiberFintype hfinite
+  have hcard : Fintype.card (fiber f y) = k := by
+    simpa only [Fintype.card_fin] using Fintype.card_congr E
+  have hone (i : fiber f y) :
+      localDegree 1 (by decide) f i.1 y
+        (finiteFiberIsolatedPreimage f y hfinite i) = 1 := by
+    have hi : f i.1 = y := mem_fiber.mp i.property
+    have himage : IsolatedPreimage f i.1 (f i.1) := by
+      simpa only [hi] using finiteFiberIsolatedPreimage f y hfinite i
+    have hlocal := (circlePowerMap_positive_localDegree k hk i.1).2 himage
+    change localDegree 1 (by decide) f i.1 (f i.1) himage = 1 at hlocal
+    simpa only [hi] using hlocal
+  have hsum := degree_eq_sum_localDegree 1 (by decide) f y hfinite
+  change degree 1 (by decide) f = ∑ i : fiber f y,
+    localDegree 1 (by decide) f i.1 y
+      (finiteFiberIsolatedPreimage f y hfinite i) at hsum
+  calc
+    degree 1 (by decide) f = ∑ i : fiber f y,
+        localDegree 1 (by decide) f i.1 y
+          (finiteFiberIsolatedPreimage f y hfinite i) := hsum
+    _ = ∑ i : fiber f y, (1 : ℤ) := by
+      apply Finset.sum_congr rfl
+      intro i hi
+      exact hone i
+    _ = (k : ℤ) := by
+      simp only [Finset.sum_const, Finset.card_univ, nsmul_eq_mul, mul_one, hcard]
+
+/-- **Hatcher, Example 2.32 (printed page 137).** The actual integer-power map
+of the standard circle has its signed integer exponent as degree. -/
+theorem circlePowerMap_degree (d : ℤ) :
+    degree 1 (by decide) (circlePowerMap d) = d := by
+  cases d with
+  | ofNat k =>
+      cases k with
+      | zero =>
+          change degree 1 (by decide) (circlePowerMap (0 : ℤ)) = (0 : ℤ)
+          rw [circlePowerMap_zero]
+          apply degree_eq_zero_of_not_surjective 1 (by decide)
+            (TopCat.const diskBoundaryTwoBasepoint.{0})
+          intro hsurj
+          obtain ⟨x, hx⟩ := hsurj
+            (diskBoundaryTwoHomeomorphCircle.{0}.symm
+              (_root_.Circle.exp Real.pi))
+          change diskBoundaryTwoBasepoint.{0} =
+            diskBoundaryTwoHomeomorphCircle.{0}.symm
+              (_root_.Circle.exp Real.pi) at hx
+          have heq := congrArg diskBoundaryTwoHomeomorphCircle.{0} hx
+          exact _root_.Circle.exp_pi_ne_one (by
+            simpa only [diskBoundaryTwoHomeomorphCircle_basepoint,
+              Homeomorph.apply_symm_apply] using heq.symm)
+      | succ k =>
+          exact circlePowerMap_positive_degree (k + 1) (Nat.succ_pos k)
+  | negSucc k =>
+      change degree 1 (by decide)
+        (circlePowerMap (-((k + 1 : ℕ) : ℤ))) = -((k + 1 : ℕ) : ℤ)
+      calc
+        degree 1 (by decide) (circlePowerMap (-((k + 1 : ℕ) : ℤ))) =
+            degree 1 (by decide) (circlePowerMap ((k + 1 : ℕ) : ℤ)) *
+              degree 1 (by decide) (circlePowerMap (-1)) := by
+          rw [circlePowerMap_neg_natCast, degree_comp]
+        _ = ((k + 1 : ℕ) : ℤ) * (-1) := by
+          rw [circlePowerMap_positive_degree (k + 1) (Nat.succ_pos k),
+            circlePowerMap_inversion_reflection_and_degree.2]
+        _ = -((k + 1 : ℕ) : ℤ) := by
+          simp only [mul_neg, mul_one]
 
 end Hatcher.Sphere
