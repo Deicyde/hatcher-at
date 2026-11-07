@@ -2,6 +2,9 @@
 article_id: af_7744d41b3e4b105ba6e1575a
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.sphere_ball_collapse_degree_unit, Hatcher.Sphere.SphereBallPinchData.component_collapse_degree_eq_one_or_neg_one
 ---
 
 # Each ball-collapse map has degree plus or minus one
