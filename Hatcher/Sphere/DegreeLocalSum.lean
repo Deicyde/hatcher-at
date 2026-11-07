@@ -285,3 +285,32 @@ theorem circlePowerMap_degree (d : ℤ) :
           simp only [mul_neg, mul_one]
 
 end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+/-- **Hatcher, the pole observation after Proposition 2.33.** Either existing
+suspension pole is an isolated preimage of itself, and its local degree is the
+global degree of the suspension for every isolation witness. This includes
+`n = 0` and arbitrary continuous sphere maps. -/
+theorem sphere_suspension_pole_local_degree
+    (n : ℕ)
+    (f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n)
+    (p : TopCat.sphere.{0} (n + 1))
+    (hp : p = northPole.{0} n ∨ p = southPole.{0} n) :
+    IsolatedPreimage (sphereSuspensionMap n f) p p ∧
+      ∀ (h : IsolatedPreimage (sphereSuspensionMap n f) p p),
+        localDegree (n + 1) (Nat.zero_lt_succ n)
+            (sphereSuspensionMap n f) p p h =
+          degree (n + 1) (Nat.zero_lt_succ n) (sphereSuspensionMap n f) := by
+  have hfiber : fiber (sphereSuspensionMap n f) p = {p} := by
+    change (sphereSuspensionMap n f) ⁻¹' {p} = {p}
+    rcases hp with rfl | rfl
+    · exact (sphere_suspension_pole_fibers n f).1
+    · exact (sphere_suspension_pole_fibers n f).2
+  refine ⟨singletonFiberIsolatedPreimage
+    (sphereSuspensionMap n f) p p hfiber, ?_⟩
+  intro h
+  exact localDegree_eq_degree_of_fiber_eq_singleton
+    (n + 1) (Nat.zero_lt_succ n) (sphereSuspensionMap n f) p p hfiber h
+
+end Hatcher.Sphere
