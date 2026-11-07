@@ -1345,3 +1345,70 @@ theorem sphere_suspension_map_comp (n : ℕ)
   rw [Homeomorph.symm_apply_apply]
 
 end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+open CategoryTheory
+open Hatcher.Relative Hatcher.VanKampen.ConeAttachment
+
+universe u
+
+private theorem sphere_suspension_cylinder_representation (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n)
+    (y : TopCat.sphere.{u} (n + 1)) :
+    ∃ x : TopCat.sphere.{u} n, ∃ r : I,
+      y = sphereConeCylinderPoint n x r ∧
+        sphereSuspensionMap n f y = sphereConeCylinderPoint n (f x) r := by
+  obtain ⟨x, r, hq⟩ := sphere_cone_quotient_cylinder_representative n
+    ((sphereConeQuotientHomeomorph.{u} n).symm y)
+  have he : sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientProjection (sphereConePair.{u} n)
+        (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r)) = y :=
+    (congrArg (sphereConeQuotientHomeomorph.{u} n) hq).trans
+      ((sphereConeQuotientHomeomorph.{u} n).apply_symm_apply y)
+  refine ⟨x, r, he.symm.trans (sphere_cone_quotient_homeomorph_cylinder n x r), ?_⟩
+  exact ((congrArg (sphereSuspensionMap n f) he).symm.trans
+    (sphere_suspension_map_cylinder n f x r)).trans
+      (sphere_cone_quotient_homeomorph_cylinder n (f x) r)
+
+/-- **Hatcher, the pole observation after Proposition 2.33.** Every suspension
+has singleton fibers over its existing north and south poles. This holds for
+all `n`, including zero, and arbitrary continuous sphere maps, including
+constant maps. -/
+theorem sphere_suspension_pole_fibers (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    (sphereSuspensionMap n f) ⁻¹' {northPole.{u} n} = {northPole.{u} n} ∧
+      (sphereSuspensionMap n f) ⁻¹' {southPole.{u} n} = {southPole.{u} n} := by
+  constructor
+  · ext y
+    simp only [Set.mem_preimage, Set.mem_singleton_iff]
+    constructor
+    · intro h
+      obtain ⟨x, r, hy, hsf⟩ := sphere_suspension_cylinder_representation n f y
+      have hpoint : sphereConeCylinderPoint n (f x) r =
+          sphereConeCylinderPoint n (f x) 1 :=
+        hsf.symm.trans (h.trans (sphere_cone_cylinder_point_one n (f x)).symm)
+      have hr : r = 1 :=
+        sphere_cone_cylinder_point_height_eq n (f x) (f x) r 1 hpoint
+      rw [hr] at hy
+      exact hy.trans (sphere_cone_cylinder_point_one n x)
+    · intro hy
+      subst y
+      exact sphere_suspension_map_north_pole n f
+  · ext y
+    simp only [Set.mem_preimage, Set.mem_singleton_iff]
+    constructor
+    · intro h
+      obtain ⟨x, r, hy, hsf⟩ := sphere_suspension_cylinder_representation n f y
+      have hpoint : sphereConeCylinderPoint n (f x) r =
+          sphereConeCylinderPoint n (f x) 0 :=
+        hsf.symm.trans (h.trans (sphere_cone_cylinder_point_zero n (f x)).symm)
+      have hr : r = 0 :=
+        sphere_cone_cylinder_point_height_eq n (f x) (f x) r 0 hpoint
+      rw [hr] at hy
+      exact hy.trans (sphere_cone_cylinder_point_zero n x)
+    · intro hy
+      subst y
+      exact sphere_suspension_map_south_pole n f
+
+end Hatcher.Sphere
