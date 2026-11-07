@@ -202,7 +202,7 @@ private theorem ordinary_sphere_suspension_boundary_naturality
   let c := τL.hom.app (TopCat.sphere.{0} n)
   have hD : (ordinarySphereSuspensionBoundaryIso n hn).hom = a ≫ b ≫ c := by
     simp only [ordinarySphereSuspensionBoundaryIso, a, b, c, τH, τL, R,
-      Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom, Category.assoc]
+      Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom]
   have ha : H.map (sphereSuspensionMap n f) ≫ a =
       a ≫ RH.map (sphereSuspensionMap n f) :=
     τH.inv.naturality (sphereSuspensionMap n f)
@@ -246,7 +246,10 @@ private theorem integer_endomorphisms_commute
     _ = AddCommGrpCat.asHom (h (1 : ℤ)) ≫
         AddCommGrpCat.asHom (g (1 : ℤ)) := by
       apply AddCommGrpCat.int_hom_ext
-      simp [ConcreteCategory.comp_apply, AddCommGrpCat.asHom_hom_apply, mul_comm]
+      change ((1 : ℤ) • g (1 : ℤ)) • h (1 : ℤ) =
+        ((1 : ℤ) • h (1 : ℤ)) • g (1 : ℤ)
+      simpa only [one_zsmul, Int.zsmul_eq_mul] using
+        mul_comm (g (1 : ℤ)) (h (1 : ℤ))
     _ = h ≫ g :=
       (congrArg₂ (fun a b : AddCommGrpCat.of ℤ ⟶ AddCommGrpCat.of ℤ => a ≫ b) hh hg).symm
 
