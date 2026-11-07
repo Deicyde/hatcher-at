@@ -6,6 +6,8 @@ Authors: Jack McCarthy
 
 import Hatcher.Sphere.LocalDegree
 import Hatcher.Sphere.DegreeProperties
+import Hatcher.Sphere.CirclePower
+import Hatcher.Sphere.CircleRotation
 
 /-!
 # Local degree of a homeomorphism
@@ -306,5 +308,63 @@ theorem localDegree_homeomorph_eq_degree
   apply AddCommGrpCat.asHom_injective
   rw [← cancel_mono (integralSphereLocalFundamentalClass n hn (e x))]
   exact hscaled
+
+/-- Every point is an isolated preimage of its image under a positive circle
+power, and its signed local degree is one for every isolation witness. -/
+theorem circlePowerMap_positive_localDegree
+    (k : ℕ) (hk : 0 < k) (x : TopCat.sphere.{0} 1) :
+    IsolatedPreimage (n := 1) (circlePowerMap (k : ℤ)) x
+        (circlePowerMap (k : ℤ) x) ∧
+      ∀ h : IsolatedPreimage (n := 1) (circlePowerMap (k : ℤ)) x
+          (circlePowerMap (k : ℤ) x),
+        localDegree 1 (by decide) (circlePowerMap (k : ℤ)) x
+          (circlePowerMap (k : ℤ) x) h = 1 := by
+  classical
+  let f : TopCat.sphere.{0} 1 ⟶ TopCat.sphere.{0} 1 := circlePowerMap (k : ℤ)
+  let y : TopCat.sphere.{0} 1 := f x
+  let e : TopCat.sphere.{0} 1 ≃ₜ _root_.Circle := diskBoundaryTwoHomeomorphCircle.{0}
+  change IsolatedPreimage f x y ∧
+    ∀ h : IsolatedPreimage f x y, localDegree 1 (by decide) f x y h = 1
+  rcases circlePowerMap_positive_localStretchDeformation k hk x with
+    ⟨U, hx, _, H, hU, _, _, _, hzero, hone, hcenter, havoid⟩
+  change ∀ z : U, H (0, z) = f z.1 at hzero
+  change ∀ z : U, H (1, z) =
+    e.symm ((e y * (e x)⁻¹) * e z.1) at hone
+  change ∀ s : unitInterval, H (s, ⟨x, hx⟩) = y at hcenter
+  change ∀ (s : unitInterval) (z : U), z.1 ≠ x → H (s, z) ≠ y at havoid
+  let r : _root_.Circle := e y * (e x)⁻¹
+  let E : TopCat.sphere.{0} 1 ≃ₜ TopCat.sphere.{0} 1 :=
+    e.trans ((Homeomorph.mulLeft r).trans e.symm)
+  let g : TopCat.sphere.{0} 1 ⟶ TopCat.sphere.{0} 1 := (TopCat.isoOfHomeo E).hom
+  have hmap : g = circleRotation r := by
+    apply TopCat.ext
+    intro z
+    rfl
+  have hterminal : ∀ z : U, H (1, z) = g z.1 := by
+    intro z
+    change H (1, z) = e.symm ((e y * (e x)⁻¹) * e z.1)
+    exact hone z
+  have hEx : E x = y := by
+    change g x = y
+    exact (hterminal ⟨x, hx⟩).symm.trans (hcenter 1)
+  obtain ⟨hf, hg, heq⟩ := localDegree_punctured_homotopy_invariance
+    1 (by decide) (f := f) (g := g) (x := x) (y := y)
+    U hU hx H hzero hterminal hcenter havoid
+  have hdegreeg : degree 1 (by decide) g = 1 := by
+    rw [hmap]
+    exact (circleRotation_homotopic_identity_and_degree r).2
+  have hlocalg : localDegree 1 (by decide) g x y hg = degree 1 (by decide) g := by
+    have hgE : IsolatedPreimage g x (E x) := by
+      simpa only [hEx] using hg
+    have hhome := localDegree_homeomorph_eq_degree 1 (by decide) E x hgE
+    change localDegree 1 (by decide) g x (E x) hgE = degree 1 (by decide) g at hhome
+    simpa only [hEx] using hhome
+  have hresult (h : IsolatedPreimage f x y) :
+      localDegree 1 (by decide) f x y h = 1 := by
+    calc
+      localDegree 1 (by decide) f x y h = localDegree 1 (by decide) g x y hg := heq h hg
+      _ = degree 1 (by decide) g := hlocalg
+      _ = 1 := hdegreeg
+  exact ⟨hf, hresult⟩
 
 end Hatcher.Sphere
