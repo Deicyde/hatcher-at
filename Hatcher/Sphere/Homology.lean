@@ -85,22 +85,6 @@ open Hatcher.Relative
 def sphereConeGoodPair (n : ℕ) : Hatcher.Relative.GoodPair.{u} :=
   ⟨sphereConePair.{u} n, (sphere_cone_geometry n).1⟩
 
-private theorem sphere_cone_quotient_connecting_isIso (n : ℕ) :
-    IsIso (goodPairPointQuotientConnecting
-      (sphereConeGoodPair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl) := by
-  let : ContractibleSpace (sphereConePair.{0} n).fst :=
-    (sphere_cone_geometry n).2.2.1
-  let : IsIso (reducedPairConnecting
-      (sphereConePair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl) :=
-    reducedPairConnecting_isIso_of_contractibleAmbient
-      (sphereConePair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl
-  dsimp only [goodPairPointQuotientConnecting]
-  exact IsIso.comp_isIso' (inferInstance : IsIso
-    ((goodPairPointQuotientRelativeHomologyNatIso
-      (AddCommGrpCat.of ℤ) (n + 1)).inv.app (sphereConeGoodPair.{0} n)))
-    (inferInstance : IsIso (reducedPairConnecting
-      (sphereConePair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl))
-
 /-- The canonical integral suspension boundary isomorphism is reduced homology
 of the actual inverse quotient-sphere homeomorphism, followed by the
 quotient-to-relative comparison and the actual cone-pair connecting map.
@@ -110,14 +94,15 @@ def sphereSuspensionBoundaryIso (n : ℕ) :
       (AddCommGrpCat.of ℤ) (n + 1)).obj (TopCat.sphere.{0} (n + 1)) ≅
     (Hatcher.Reduced.homologyFunctor.{0}
       (AddCommGrpCat.of ℤ) n).obj (TopCat.sphere.{0} n) := by
-  let : IsIso (goodPairPointQuotientConnecting
-      (sphereConeGoodPair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl) :=
-    sphere_cone_quotient_connecting_isIso n
+  let : ContractibleSpace (sphereConePair.{0} n).fst :=
+    (sphere_cone_geometry n).2.2.1
   exact (Hatcher.Reduced.homologyFunctor.{0}
     (AddCommGrpCat.of ℤ) (n + 1)).mapIso
       (TopCat.isoOfHomeo (sphereConeQuotientHomeomorph.{0} n)).symm ≪≫
-    asIso (goodPairPointQuotientConnecting
-      (sphereConeGoodPair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl)
+    ((goodPairPointQuotientRelativeHomologyNatIso
+      (AddCommGrpCat.of ℤ) (n + 1)).app (sphereConeGoodPair.{0} n)).symm ≪≫
+    contractibleAmbientRelativeHomologyIso
+      (sphereConePair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl
 
 /-- The forward suspension boundary map is the specified canonical composite. -/
 theorem sphere_suspension_boundary_iso_hom (n : ℕ) :
@@ -129,7 +114,9 @@ theorem sphere_suspension_boundary_iso_hom (n : ℕ) :
           (AddCommGrpCat.of ℤ) (n + 1)).inv.app (sphereConeGoodPair.{0} n) ≫
         reducedPairConnecting
           (sphereConePair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl := by
-  rfl
+  simp only [sphereSuspensionBoundaryIso, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.symm_hom, NatIso.app_inv, contractibleAmbientRelativeHomologyIso_hom,
+    Category.assoc]
 
 private theorem sphere_suspension_inverse_quotient_square (n : ℕ)
     (f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n) :
@@ -163,7 +150,7 @@ theorem sphere_suspension_boundary_naturality (n : ℕ)
   let δ := goodPairPointQuotientConnecting
     (sphereConeGoodPair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl
   have hΔ : (sphereSuspensionBoundaryIso n).hom = H.map e.inv ≫ δ := by
-    rfl
+    exact sphere_suspension_boundary_iso_hom n
   have hTop : H.map (sphereSuspensionMap n f) ≫ H.map e.inv =
       H.map e.inv ≫ H.map (pointQuotientMap (sphereConePairMap n f)) := by
     rw [← Functor.map_comp, ← Functor.map_comp]
@@ -177,18 +164,6 @@ theorem sphere_suspension_boundary_naturality (n : ℕ)
   rw [hΔ]
   change H.map (sphereSuspensionMap n f) ≫ (H.map e.inv ≫ δ) =
     (H.map e.inv ≫ δ) ≫ L.map f
-  calc
-    H.map (sphereSuspensionMap n f) ≫ (H.map e.inv ≫ δ) =
-        (H.map (sphereSuspensionMap n f) ≫ H.map e.inv) ≫ δ :=
-      (Category.assoc _ _ _).symm
-    _ = (H.map e.inv ≫ H.map (pointQuotientMap (sphereConePairMap n f))) ≫ δ :=
-      congrArg (fun t => t ≫ δ) hTop
-    _ = H.map e.inv ≫
-        (H.map (pointQuotientMap (sphereConePairMap n f)) ≫ δ) :=
-      Category.assoc _ _ _
-    _ = H.map e.inv ≫ (δ ≫ L.map f) :=
-      congrArg (fun t => H.map e.inv ≫ t) hδ.symm
-    _ = (H.map e.inv ≫ δ) ≫ L.map f :=
-      (Category.assoc _ _ _).symm
+  rw [← Category.assoc, hTop, Category.assoc, ← hδ, ← Category.assoc]
 
 end Hatcher.Sphere
