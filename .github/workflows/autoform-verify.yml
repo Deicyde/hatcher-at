@@ -11,15 +11,15 @@ on:
     inputs:
       article_id:
         description: Article whose candidate needs proof evidence
-        default: af_f0ce52bed8b3559c75b76fa3
+        default: af_94c9b10f3bfd64e882b0e386
         required: true
       module:
         description: Lean module containing the candidate
-        default: Hatcher.Singular.PointedWedgePointQuotient
+        default: Hatcher.Sphere.PuncturedStereographic
         required: true
       declaration:
         description: Candidate declaration to inspect
-        default: Hatcher.Relative.finiteOnePointSigmaWedgeHomeomorph
+        default: Hatcher.Sphere.sphereBallPinch
         required: true
 
 permissions:
@@ -27,9 +27,9 @@ permissions:
 
 env:
   AUTOFORM_SOURCE: "https://github.com/facebookresearch/autoform-bot.git"
-  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_f0ce52bed8b3559c75b76fa3' }}
-  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Singular.PointedWedgePointQuotient' }}
-  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Relative.finiteOnePointSigmaWedgeHomeomorph' }}
+  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_94c9b10f3bfd64e882b0e386' }}
+  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Sphere.PuncturedStereographic' }}
+  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.sphereBallPinch' }}
 
 concurrency:
   group: autoform-verify-${{ github.ref }}
@@ -187,8 +187,27 @@ jobs:
             --article-id "$EVIDENCE_ARTICLE" \
             --module "$EVIDENCE_MODULE" \
             --declaration "$EVIDENCE_DECLARATION" \
-            --declaration Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_coe \
-            --declaration Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_infty
+            --declaration Hatcher.Sphere.sphereBallCenter \
+            --declaration Hatcher.Sphere.sphereBallEmbedding \
+            --declaration Hatcher.Sphere.sphereBallClosed \
+            --declaration Hatcher.Sphere.sphereBallOpen \
+            --declaration Hatcher.Sphere.sphereBallUnion \
+            --declaration Hatcher.Sphere.SphereBallPinchData \
+            --declaration Hatcher.Sphere.SphereBallPinchData.pinchMap \
+            --declaration Hatcher.Sphere.SphereBallPinchData.pinch_map_apply_ball \
+            --declaration Hatcher.Sphere.SphereBallPinchData.pinch_map_apply_compl \
+            --declaration Hatcher.Sphere.SphereBallPinchData.summandSelector \
+            --declaration Hatcher.Sphere.SphereBallPinchData.summand_selector_apply_basepoint \
+            --declaration Hatcher.Sphere.SphereBallPinchData.summand_selector_apply_inclusion \
+            --declaration Hatcher.Sphere.SphereBallPinchData.componentCollapse \
+            --declaration Hatcher.Sphere.SphereBallPinchData.component_collapse_apply_ball \
+            --declaration Hatcher.Sphere.SphereBallPinchData.component_collapse_apply_other \
+            --declaration Hatcher.Sphere.SphereBallPinchData.component_collapse_apply_compl \
+            --declaration Hatcher.Sphere.SphereBallPinchData.component_collapse_apply_not_mem \
+            --declaration Hatcher.Sphere.SphereBallPinchData.pinch_map_zero \
+            --declaration Hatcher.Sphere.SphereBallPinchData.emptyWedgeToSphere \
+            --declaration Hatcher.Sphere.SphereBallPinchData.emptySphereMap \
+            --declaration Hatcher.Sphere.SphereBallPinchData.empty_sphere_map_eq_const
 
       - name: Export quotient import impact
         run: |
@@ -373,6 +392,14 @@ jobs:
             af_199be8e09b149f1f0bc4e775 Hatcher.Sphere.Homology . \
             --lean-root . --json \
             > .lake/formalize-evidence/artifacts/suspension-boundary-import-impact-baseline.json
+
+      - name: Export sphere-pinch import impact
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_94c9b10f3bfd64e882b0e386 Hatcher.Sphere.PuncturedStereographic . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/sphere-pinch-import-impact.json
 
       - name: Upload proof review evidence
         if: always()
