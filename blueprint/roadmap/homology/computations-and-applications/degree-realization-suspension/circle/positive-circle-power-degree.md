@@ -2,6 +2,9 @@
 article_id: af_641bb17f8f6aeb2a33fabd0d
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.circlePowerMap_positive_degree
 ---
 
 # A positive circle power has its exponent as degree
