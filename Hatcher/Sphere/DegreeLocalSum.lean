@@ -412,3 +412,192 @@ theorem sphere_ball_collapse_degree_unit
   (sphereBallPinch n hn k).component_collapse_degree_eq_one_or_neg_one i
 
 end Hatcher.Sphere
+
+open CategoryTheory
+open scoped EuclideanSpace
+
+namespace Hatcher.Sphere
+
+namespace SphereBallPinchData
+
+variable {n k : ℕ} {hn : 0 < n}
+
+/-- The actual zeroth coordinate reflection fixes the pinch's omitted point. -/
+theorem zeroth_reflection_apply_basepoint (D : SphereBallPinchData n hn k) :
+    (coordinateReflectionIso n (0 : Fin (n + 1))).hom D.b = D.b := by
+  rw [← reflectionIso_coordinateNormal n (0 : Fin (n + 1))]
+  apply (sphereULiftHomeomorph.{0} n).injective
+  apply Subtype.ext
+  rw [sphereULiftHomeomorph_reflectionIso_apply]
+  change
+    ((ℝ ∙ EuclideanSpace.single (0 : Fin (n + 1)) (1 : ℝ))ᗮ).reflection
+        (sphereULiftHomeomorph.{0} n D.b).1 =
+      (sphereULiftHomeomorph.{0} n D.b).1
+  exact D.zeroth_reflection
+
+/-- Choose identity or the actual zeroth reflection by comparing the component's
+signed degree with the prescribed sign. -/
+noncomputable def signedCorrectionIso (D : SphereBallPinchData n hn k)
+    (σ : Fin k → ℤ) (i : Fin k) :
+    TopCat.sphere.{0} n ≅ TopCat.sphere.{0} n := by
+  classical
+  exact if degree n hn (TopCat.ofHom (D.componentCollapse i)) = σ i
+    then Iso.refl (TopCat.sphere.{0} n)
+    else coordinateReflectionIso n (0 : Fin (n + 1))
+
+/-- Every selected correction preserves the actual common basepoint. -/
+theorem signed_correction_apply_basepoint (D : SphereBallPinchData n hn k)
+    (σ : Fin k → ℤ) (i : Fin k) :
+    (D.signedCorrectionIso σ i).hom D.b = D.b := by
+  classical
+  unfold signedCorrectionIso
+  split_ifs with heq
+  · rfl
+  · exact D.zeroth_reflection_apply_basepoint
+
+/-- The actual component followed by its correction has the prescribed signed
+degree, using the computed unit and the reflection calculation. -/
+theorem signed_corrected_component_degree (D : SphereBallPinchData n hn k)
+    (σ : Fin k → ℤ) (hσ : ∀ i, σ i = 1 ∨ σ i = -1) (i : Fin k) :
+    degree n hn
+        (TopCat.ofHom (D.componentCollapse i) ≫ (D.signedCorrectionIso σ i).hom) =
+      σ i := by
+  classical
+  by_cases heq :
+      degree n hn (TopCat.ofHom (D.componentCollapse i)) = σ i
+  · rw [signedCorrectionIso, if_pos heq]
+    change degree n hn
+      (TopCat.ofHom (D.componentCollapse i) ≫ 𝟙 (TopCat.sphere.{0} n)) = σ i
+    rw [degree_comp, degree_id, mul_one]
+    exact heq
+  · rw [signedCorrectionIso, if_neg heq, degree_comp, degree_coordinateReflection]
+    rcases D.component_collapse_degree_eq_one_or_neg_one i with hc | hc
+    · rcases hσ i with hs | hs
+      · exact (heq (hc.trans hs.symm)).elim
+      · rw [hc, hs]
+        norm_num
+    · rcases hσ i with hs | hs
+      · rw [hc, hs]
+        norm_num
+      · exact (heq (hc.trans hs.symm)).elim
+
+/-- The actual based continuous fold induced by the selected correction maps. -/
+noncomputable def basedSignedFold (D : SphereBallPinchData n hn k)
+    (σ : Fin k → ℤ) :
+    C(Hatcher.PointedWedge (fun _ : Fin k ↦ TopCat.sphere.{0} n)
+      (fun _ ↦ D.b), TopCat.sphere.{0} n) :=
+  Hatcher.PointedWedge.desc (fun _ : Fin k ↦ D.b) D.b
+    (fun i ↦ (D.signedCorrectionIso σ i).hom.hom)
+    (by
+      intro i
+      change (D.signedCorrectionIso σ i).hom D.b = D.b
+      exact D.signed_correction_apply_basepoint σ i)
+
+/-- The fold sends the retained wedge point to the actual sphere basepoint. -/
+theorem based_signed_fold_apply_basepoint (D : SphereBallPinchData n hn k)
+    (σ : Fin k → ℤ) :
+    D.basedSignedFold σ
+        (Hatcher.PointedWedge.basepoint (fun _ : Fin k ↦ D.b)) = D.b :=
+  rfl
+
+/-- On each summand the fold is its selected correction. -/
+theorem based_signed_fold_apply_inclusion (D : SphereBallPinchData n hn k)
+    (σ : Fin k → ℤ) (i : Fin k) (x : TopCat.sphere.{0} n) :
+    D.basedSignedFold σ
+        (Hatcher.PointedWedge.inclusion (fun _ : Fin k ↦ D.b) i x) =
+      (D.signedCorrectionIso σ i).hom x :=
+  rfl
+
+end SphereBallPinchData
+
+/-- An output certificate for the actual fold with the fixed correction maps.
+Its component-degree equations are derived by the constructor. -/
+structure SignedSphereFoldData {n k : ℕ} {hn : 0 < n}
+    (D : SphereBallPinchData n hn k) (σ : Fin k → ℤ) where
+  fold :
+    C(Hatcher.PointedWedge (fun _ : Fin k ↦ TopCat.sphere.{0} n)
+      (fun _ ↦ D.b), TopCat.sphere.{0} n)
+  fold_basepoint :
+    fold (Hatcher.PointedWedge.basepoint (fun _ : Fin k ↦ D.b)) = D.b
+  fold_inclusion :
+    ∀ (i : Fin k) (x : TopCat.sphere.{0} n),
+      fold (Hatcher.PointedWedge.inclusion (fun _ : Fin k ↦ D.b) i x) =
+        (D.signedCorrectionIso σ i).hom x
+  corrected_component_degree :
+    ∀ i : Fin k,
+      degree n hn
+          (TopCat.ofHom (D.componentCollapse i) ≫ (D.signedCorrectionIso σ i).hom) =
+        σ i
+
+private theorem signed_sphere_fold_data_nonempty {n k : ℕ} {hn : 0 < n}
+    (D : SphereBallPinchData n hn k) (σ : Fin k → ℤ)
+    (hσ : ∀ i, σ i = 1 ∨ σ i = -1) :
+    Nonempty (SignedSphereFoldData D σ) := by
+  exact ⟨{
+    fold := D.basedSignedFold σ
+    fold_basepoint := D.based_signed_fold_apply_basepoint σ
+    fold_inclusion := D.based_signed_fold_apply_inclusion σ
+    corrected_component_degree := D.signed_corrected_component_degree σ hσ }⟩
+
+/-- The canonical signed fold construction for prescribed unit signs, including
+the empty family, using the actual sphere-ball pinch. -/
+noncomputable def signedSphereFoldMap
+    (n : ℕ) (hn : 0 < n) (k : ℕ) (σ : Fin k → ℤ)
+    (hσ : ∀ i, σ i = 1 ∨ σ i = -1) :
+    SignedSphereFoldData (sphereBallPinch n hn k) σ :=
+  Classical.choice
+    (signed_sphere_fold_data_nonempty (sphereBallPinch n hn k) σ hσ)
+
+namespace SignedSphereFoldData
+
+variable {n k : ℕ} {hn : 0 < n}
+  {D : SphereBallPinchData n hn k} {σ : Fin k → ℤ}
+
+/-- The actual signed sphere self-map is the fold composed with the pinch. -/
+noncomputable def selfMap (F : SignedSphereFoldData D σ) :
+    C(TopCat.sphere.{0} n, TopCat.sphere.{0} n) :=
+  F.fold.comp D.pinchMap
+
+/-- On a chosen ball the signed self-map is the corrected actual component. -/
+theorem self_map_apply_ball (F : SignedSphereFoldData D σ)
+    (i : Fin k) (x : sphereBallOpen hn D.b i) :
+    F.selfMap x.1 =
+      (D.signedCorrectionIso σ i).hom (D.componentCollapse i x.1) := by
+  change F.fold (D.pinchMap x.1) = _
+  rw [D.pinch_map_apply_ball, F.fold_inclusion, D.component_collapse_apply_ball]
+
+/-- The signed self-map sends the complement of the ball union to the basepoint. -/
+theorem self_map_apply_compl (F : SignedSphereFoldData D σ)
+    (x : TopCat.sphere.{0} n) (hx : x ∉ sphereBallUnion n hn k D.b) :
+    F.selfMap x = D.b := by
+  change F.fold (D.pinchMap x) = D.b
+  rw [D.pinch_map_apply_compl x hx]
+  exact F.fold_basepoint
+
+/-- The signed sphere self-map preserves the actual basepoint. -/
+theorem self_map_apply_basepoint (F : SignedSphereFoldData D σ) :
+    F.selfMap D.b = D.b := by
+  apply self_map_apply_compl F D.b
+  intro hb
+  rcases Set.mem_iUnion.mp hb with ⟨i, hi⟩
+  exact (D.closed_properties i).2.2.1
+    (Set.image_mono Metric.ball_subset_closedBall hi)
+
+/-- For zero balls the actual signed self-map is constant at the basepoint. -/
+theorem self_map_zero {n : ℕ} {hn : 0 < n}
+    {D : SphereBallPinchData n hn 0} {σ : Fin 0 → ℤ}
+    (F : SignedSphereFoldData D σ) :
+    F.selfMap = ContinuousMap.const (TopCat.sphere.{0} n) D.b := by
+  apply ContinuousMap.ext
+  intro x
+  change F.fold (D.pinchMap x) = D.b
+  have hq :
+      D.pinchMap x =
+        Hatcher.PointedWedge.basepoint (fun _ : Fin 0 ↦ D.b) :=
+    DFunLike.congr_fun D.pinch_map_zero x
+  rw [hq]
+  exact F.fold_basepoint
+
+end SignedSphereFoldData
+
+end Hatcher.Sphere
