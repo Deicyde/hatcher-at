@@ -1154,3 +1154,194 @@ theorem sphere_cone_quotient_homeomorph_coordinates (n : ℕ)
     (sphere_cone_cylinder_point_coordinates n x r)
 
 end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+open CategoryTheory
+open Hatcher.Relative Hatcher.VanKampen.ConeAttachment
+
+universe u
+
+/-- The actual sphere cone's quotient projection followed by the fixed
+homeomorphism to the next standard sphere. -/
+def sphereSuspensionProjection (n : ℕ) :
+    sphereCone.{u} n ⟶ TopCat.sphere.{u} (n + 1) :=
+  TopCat.ofHom
+    { toFun := fun c => sphereConeQuotientHomeomorph.{u} n
+        (pointQuotientProjection (sphereConePair.{u} n) c)
+      continuous_toFun := (sphereConeQuotientHomeomorph.{u} n).continuous.comp
+        (pointQuotientProjection (sphereConePair.{u} n)).hom.continuous }
+
+/-- The genuine suspension of a continuous standard sphere map. The actual
+map induced by `sphereConePairMap n f` on its point quotient is transported
+through the fixed cone-base quotient homeomorphism. This includes `n = 0`
+and constant sphere maps. -/
+def sphereSuspensionMap (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    TopCat.sphere.{u} (n + 1) ⟶ TopCat.sphere.{u} (n + 1) :=
+  TopCat.ofHom
+    { toFun := fun y => sphereConeQuotientHomeomorph.{u} n
+        (pointQuotientMap (sphereConePairMap n f)
+          ((sphereConeQuotientHomeomorph.{u} n).symm y))
+      continuous_toFun := (sphereConeQuotientHomeomorph.{u} n).continuous.comp
+        ((pointQuotientMap (sphereConePairMap n f)).hom.continuous.comp
+          (sphereConeQuotientHomeomorph.{u} n).symm.continuous) }
+
+/-- The fixed homeomorphism intertwines the actual induced quotient map
+with the suspension map. -/
+@[simp]
+theorem sphere_suspension_map_quotient (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n)
+    (z : pointQuotient (sphereConePair.{u} n)) :
+    sphereSuspensionMap n f (sphereConeQuotientHomeomorph n z) =
+      sphereConeQuotientHomeomorph n
+        (pointQuotientMap (sphereConePairMap n f) z) := by
+  change sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientMap (sphereConePairMap n f)
+        ((sphereConeQuotientHomeomorph.{u} n).symm
+          (sphereConeQuotientHomeomorph.{u} n z))) =
+    sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientMap (sphereConePairMap n f) z)
+  rw [Homeomorph.symm_apply_apply]
+
+/-- On the actual ambient cone, `Sf ∘ q = q ∘ Cf`. -/
+theorem sphere_suspension_map_ambient_naturality (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    sphereSuspensionProjection n ≫ sphereSuspensionMap n f =
+      sphereConeMap n f ≫ sphereSuspensionProjection n := by
+  ext c
+  change sphereSuspensionMap n f
+      (sphereConeQuotientHomeomorph.{u} n
+        (pointQuotientProjection (sphereConePair.{u} n) c)) =
+    sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientProjection (sphereConePair.{u} n) (sphereConeMap n f c))
+  have hq := ConcreteCategory.congr_hom
+    (pointQuotientProjection_naturality (sphereConePairMap n f)) c
+  change pointQuotientMap (sphereConePairMap n f)
+      (pointQuotientProjection (sphereConePair.{u} n) c) =
+    pointQuotientProjection (sphereConePair.{u} n) (sphereConeMap n f c) at hq
+  exact (sphere_suspension_map_quotient n f
+    (pointQuotientProjection (sphereConePair.{u} n) c)).trans
+      (congrArg (sphereConeQuotientHomeomorph.{u} n) hq)
+
+/-- A suspension cylinder class retains its height and applies the original
+sphere map to its sphere coordinate, including both endpoint classes. -/
+@[simp]
+theorem sphere_suspension_map_cylinder (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n)
+    (x : TopCat.sphere.{u} n) (r : I) :
+    sphereSuspensionMap n f
+        (sphereConeQuotientHomeomorph n
+          (pointQuotientProjection (sphereConePair.{u} n)
+            (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r))) =
+      sphereConeQuotientHomeomorph n
+        (pointQuotientProjection (sphereConePair.{u} n)
+          (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) (f x) r)) := by
+  change sphereSuspensionMap n f
+      (sphereSuspensionProjection n
+        (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r)) =
+    sphereSuspensionProjection n
+      (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) (f x) r)
+  have h := ConcreteCategory.congr_hom
+    (sphere_suspension_map_ambient_naturality n f)
+    (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r)
+  change sphereSuspensionMap n f
+      (sphereSuspensionProjection n
+        (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r)) =
+    sphereSuspensionProjection n
+      (sphereConeMap n f
+        (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r)) at h
+  rw [sphere_cone_map_cylinder] at h
+  exact h
+
+/-- Every suspension fixes the existing north pole, the image of the actual
+collapsed retained base. -/
+@[simp]
+theorem sphere_suspension_map_north_pole (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    sphereSuspensionMap n f (northPole.{u} n) = northPole.{u} n := by
+  let z : pointQuotient (sphereConePair.{u} n) :=
+    pointQuotientPoint (sphereConePair.{u} n)
+  have hz : pointQuotientMap (sphereConePairMap n f) z = z :=
+    ConcreteCategory.congr_hom
+      (pointQuotientPointInclusion_naturality (sphereConePairMap n f)) PUnit.unit
+  have he : sphereConeQuotientHomeomorph.{u} n z = northPole.{u} n :=
+    sphere_cone_quotient_homeomorph_point n
+  calc
+    sphereSuspensionMap n f (northPole.{u} n) =
+        sphereSuspensionMap n f (sphereConeQuotientHomeomorph n z) :=
+      congrArg (sphereSuspensionMap n f) he.symm
+    _ = sphereConeQuotientHomeomorph n
+        (pointQuotientMap (sphereConePairMap n f) z) :=
+      sphere_suspension_map_quotient n f z
+    _ = sphereConeQuotientHomeomorph n z :=
+      congrArg (sphereConeQuotientHomeomorph.{u} n) hz
+    _ = northPole.{u} n := he
+
+/-- Every suspension fixes the existing south pole, the image of the actual
+explicit cone apex. -/
+@[simp]
+theorem sphere_suspension_map_south_pole (n : ℕ)
+    (f : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    sphereSuspensionMap n f (southPole.{u} n) = southPole.{u} n := by
+  let a : sphereCone.{u} n :=
+    apex (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n)
+  have ha : sphereSuspensionProjection n a = southPole.{u} n := by
+    change sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientProjection (sphereConePair.{u} n)
+        (apex (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n))) = southPole.{u} n
+    exact sphere_cone_quotient_homeomorph_apex n
+  have hfix : sphereConeMap n f a = a := sphere_cone_map_apex n f
+  have hnat : sphereSuspensionMap n f (sphereSuspensionProjection n a) =
+      sphereSuspensionProjection n (sphereConeMap n f a) :=
+    ConcreteCategory.congr_hom (sphere_suspension_map_ambient_naturality n f) a
+  calc
+    sphereSuspensionMap n f (southPole.{u} n) =
+        sphereSuspensionMap n f (sphereSuspensionProjection n a) :=
+      congrArg (sphereSuspensionMap n f) ha.symm
+    _ = sphereSuspensionProjection n (sphereConeMap n f a) := hnat
+    _ = sphereSuspensionProjection n a := congrArg (sphereSuspensionProjection n) hfix
+    _ = southPole.{u} n := ha
+
+/-- The identity sphere map suspends to the identity of the next sphere. -/
+@[simp]
+theorem sphere_suspension_map_id (n : ℕ) :
+    sphereSuspensionMap n (𝟙 (TopCat.sphere.{u} n)) =
+      𝟙 (TopCat.sphere.{u} (n + 1)) := by
+  ext y
+  change sphereConeQuotientHomeomorph.{u} n
+    (pointQuotientMap (sphereConePairMap n (𝟙 (TopCat.sphere.{u} n)))
+      ((sphereConeQuotientHomeomorph.{u} n).symm y)) = y
+  rw [sphere_cone_pair_map_id, pointQuotientMap_id]
+  exact (sphereConeQuotientHomeomorph.{u} n).apply_symm_apply y
+
+/-- Suspension preserves the actual composition of continuous sphere maps. -/
+@[simp]
+theorem sphere_suspension_map_comp (n : ℕ)
+    (f g : TopCat.sphere.{u} n ⟶ TopCat.sphere.{u} n) :
+    sphereSuspensionMap n (f ≫ g) =
+      sphereSuspensionMap n f ≫ sphereSuspensionMap n g := by
+  ext y
+  change sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientMap (sphereConePairMap n (f ≫ g))
+        ((sphereConeQuotientHomeomorph.{u} n).symm y)) =
+    sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientMap (sphereConePairMap n g)
+        ((sphereConeQuotientHomeomorph.{u} n).symm
+          (sphereConeQuotientHomeomorph.{u} n
+            (pointQuotientMap (sphereConePairMap n f)
+              ((sphereConeQuotientHomeomorph.{u} n).symm y)))))
+  rw [sphere_cone_pair_map_comp, pointQuotientMap_comp]
+  change sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientMap (sphereConePairMap n g)
+        (pointQuotientMap (sphereConePairMap n f)
+          ((sphereConeQuotientHomeomorph.{u} n).symm y))) =
+    sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientMap (sphereConePairMap n g)
+        ((sphereConeQuotientHomeomorph.{u} n).symm
+          (sphereConeQuotientHomeomorph.{u} n
+            (pointQuotientMap (sphereConePairMap n f)
+              ((sphereConeQuotientHomeomorph.{u} n).symm y)))))
+  rw [Homeomorph.symm_apply_apply]
+
+end Hatcher.Sphere

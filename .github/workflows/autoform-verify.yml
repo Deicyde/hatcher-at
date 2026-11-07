@@ -11,15 +11,15 @@ on:
     inputs:
       article_id:
         description: Article whose candidate needs proof evidence
-        default: af_641bb17f8f6aeb2a33fabd0d
+        default: af_f0ce52bed8b3559c75b76fa3
         required: true
       module:
         description: Lean module containing the candidate
-        default: Hatcher.Sphere.DegreeLocalSum
+        default: Hatcher.Singular.PointedWedgePointQuotient
         required: true
       declaration:
         description: Candidate declaration to inspect
-        default: Hatcher.Sphere.circlePowerMap_positive_degree
+        default: Hatcher.Relative.finiteOnePointSigmaWedgeHomeomorph
         required: true
 
 permissions:
@@ -27,9 +27,9 @@ permissions:
 
 env:
   AUTOFORM_SOURCE: "https://github.com/facebookresearch/autoform-bot.git"
-  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_641bb17f8f6aeb2a33fabd0d' }}
-  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Sphere.DegreeLocalSum' }}
-  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.circlePowerMap_positive_degree' }}
+  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_f0ce52bed8b3559c75b76fa3' }}
+  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Singular.PointedWedgePointQuotient' }}
+  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Relative.finiteOnePointSigmaWedgeHomeomorph' }}
 
 concurrency:
   group: autoform-verify-${{ github.ref }}
@@ -103,7 +103,7 @@ jobs:
           Hatcher.Singular.PointQuotientTopology
           Hatcher.VanKampen.ConeAttachmentDisk
           Hatcher.Singular.PointedWedgePointQuotient
-          Hatcher.Sphere.HomeomorphismLocalDegree
+          Hatcher.Sphere.HomeomorphismLocalDegree Hatcher.Sphere.DegreeLocalSum
 
       - name: Build Lean
         run: lake build
@@ -186,7 +186,9 @@ jobs:
           python3 scripts/formalize_evidence.py \
             --article-id "$EVIDENCE_ARTICLE" \
             --module "$EVIDENCE_MODULE" \
-            --declaration "$EVIDENCE_DECLARATION"
+            --declaration "$EVIDENCE_DECLARATION" \
+            --declaration Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_coe \
+            --declaration Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_infty
 
       - name: Export quotient import impact
         run: |
@@ -207,6 +209,7 @@ jobs:
           import Hatcher.VanKampen.ConeAttachmentDisk
           import Hatcher.Singular.PointedWedgePointQuotient
           import Hatcher.Sphere.HomeomorphismLocalDegree
+          import Hatcher.Sphere.DegreeLocalSum
           import Batteries.Tactic.Lint
 
           #print axioms Hatcher.Sphere.circlePowerMap_positive_arcChart
@@ -244,6 +247,16 @@ jobs:
           #print axioms Hatcher.Sphere.sphere_cone_quotient_homeomorph_cylinder
           #print axioms Hatcher.Sphere.sphere_cone_quotient_homeomorph_coordinates
           #print axioms Hatcher.Sphere.circlePowerMap_positive_localDegree
+          #print axioms Hatcher.Sphere.circlePowerMap_positive_degree
+          #print axioms Hatcher.Sphere.sphereSuspensionMap
+          #print axioms Hatcher.Sphere.sphereSuspensionProjection
+          #print axioms Hatcher.Sphere.sphere_suspension_map_quotient
+          #print axioms Hatcher.Sphere.sphere_suspension_map_ambient_naturality
+          #print axioms Hatcher.Sphere.sphere_suspension_map_cylinder
+          #print axioms Hatcher.Sphere.sphere_suspension_map_north_pole
+          #print axioms Hatcher.Sphere.sphere_suspension_map_south_pole
+          #print axioms Hatcher.Sphere.sphere_suspension_map_id
+          #print axioms Hatcher.Sphere.sphere_suspension_map_comp
 
           #lint only unusedArguments in Hatcher.Sphere.CirclePower
           #lint only unusedArguments in Hatcher.Sphere.LocalDegree
@@ -252,6 +265,7 @@ jobs:
           #lint only unusedArguments in Hatcher.VanKampen.ConeAttachmentDisk
           #lint only unusedArguments in Hatcher.Singular.PointedWedgePointQuotient
           #lint only unusedArguments in Hatcher.Sphere.HomeomorphismLocalDegree
+          #lint only unusedArguments in Hatcher.Sphere.DegreeLocalSum
           LEAN
           lake env lean .lake/formalize-evidence/FrontierChecks.lean \
             | tee .lake/formalize-evidence/artifacts/frontier-axioms-and-lint.txt
@@ -343,6 +357,22 @@ jobs:
             af_641bb17f8f6aeb2a33fabd0d Hatcher.Sphere.DegreeLocalSum . \
             --lean-root . --json \
             > .lake/formalize-evidence/artifacts/positive-global-degree-import-impact.json
+
+      - name: Export integer-circle-degree import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_180617f5eedc10f191b736bc Hatcher.Sphere.DegreeLocalSum . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/integer-circle-degree-import-impact-baseline.json
+
+      - name: Export suspension-boundary import baseline
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_199be8e09b149f1f0bc4e775 Hatcher.Sphere.Homology . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/suspension-boundary-import-impact-baseline.json
 
       - name: Upload proof review evidence
         if: always()
