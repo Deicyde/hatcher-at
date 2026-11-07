@@ -399,8 +399,8 @@ private theorem sphere_ball_pinch_data_nonempty (n : ℕ) (hn : 0 < n) (k : ℕ)
     quotient_point := hQPoint
     quotient_ball := hQBall }⟩
   intro i
-  simpa only [sphereBallClosed, sphereBallOpen, sphereBallEmbedding, sphereBallCenter]
-    using hballs i
+  delta sphereBallClosed sphereBallOpen sphereBallEmbedding sphereBallCenter
+  exact hballs i
 
 /-- The actual complement-collapse sphere pinch into the pointed wedge of
 the prescribed number of spheres, with the empty family included. -/
