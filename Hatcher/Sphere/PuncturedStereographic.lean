@@ -1,5 +1,7 @@
 import Hatcher.Sphere.HemisphereCharts
 import Mathlib.Analysis.Convex.Contractible
+import Hatcher.Singular.PointedWedgePointQuotient
+import Hatcher.Topology.DisjointOpenUnion
 
 /-!
 # Stereographic projection from a punctured sphere
@@ -162,5 +164,394 @@ theorem finite_disjoint_sphere_balls (n : ℕ) (hn : 0 < n) (k : ℕ) :
       hf.isOpenMap _ isOpen_ball,
       ⟨hf.isEmbedding.homeomorphImage (closedBall (c i) 1)⟩,
       ⟨(hf.isEmbedding.homeomorphImage (ball (c i) 1)).symm⟩⟩
+
+end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+open scoped OnePoint
+
+/-- The prescribed Euclidean center of the ith sphere ball. -/
+noncomputable def sphereBallCenter {n k : ℕ} (hn : 0 < n) (i : Fin k) :
+    EuclideanSpace ℝ (Fin n) :=
+  EuclideanSpace.single ⟨0, hn⟩ (4 * (i.1 : ℝ))
+
+/-- Inverse stereographic projection, followed by the actual subtype inclusion. -/
+noncomputable def sphereBallEmbedding (n : ℕ) (b : TopCat.sphere.{0} n) :
+    EuclideanSpace ℝ (Fin n) → TopCat.sphere.{0} n :=
+  fun y ↦ ((puncturedSphereHomeomorphEuclidean n b).symm y).1
+
+/-- The actual closed sphere ball transported from the prescribed Euclidean ball. -/
+noncomputable def sphereBallClosed {n k : ℕ} (hn : 0 < n)
+    (b : TopCat.sphere.{0} n) (i : Fin k) : Set (TopCat.sphere.{0} n) :=
+  sphereBallEmbedding n b '' closedBall (sphereBallCenter hn i) 1
+
+/-- The actual open sphere ball transported from the prescribed Euclidean ball. -/
+noncomputable def sphereBallOpen {n k : ℕ} (hn : 0 < n)
+    (b : TopCat.sphere.{0} n) (i : Fin k) : Set (TopCat.sphere.{0} n) :=
+  sphereBallEmbedding n b '' ball (sphereBallCenter hn i) 1
+
+/-- The union of the constructed open balls, with the empty union retained. -/
+noncomputable def sphereBallUnion (n : ℕ) (hn : 0 < n) (k : ℕ)
+    (b : TopCat.sphere.{0} n) : Set (TopCat.sphere.{0} n) :=
+  ⋃ i : Fin k, sphereBallOpen hn b i
+
+/-- The actual geometry, punctured charts, and complement-collapse quotient
+comparison used in the sphere pinch construction. All ball sets are fixed by
+their prescribed stereographic formulas. -/
+structure SphereBallPinchData (n : ℕ) (hn : 0 < n) (k : ℕ) where
+  b : TopCat.sphere.{0} n
+  last_axis :
+    (sphereULiftHomeomorph.{0} n b).1 =
+      EuclideanSpace.single (Fin.last n) (1 : ℝ)
+  zeroth_reflection :
+    ((ℝ ∙ EuclideanSpace.single (0 : Fin (n + 1)) (1 : ℝ))ᗮ).reflection
+        (sphereULiftHomeomorph.{0} n b).1 =
+      (sphereULiftHomeomorph.{0} n b).1
+  embedding_open : Topology.IsOpenEmbedding (sphereBallEmbedding n b)
+  closed_disjoint :
+    Pairwise (fun i j : Fin k ↦
+      Disjoint (sphereBallClosed hn b i) (sphereBallClosed hn b j))
+  closed_properties :
+    ∀ i : Fin k,
+      Topology.IsClosedEmbedding
+          (sphereBallEmbedding n b ∘
+            (Subtype.val :
+              closedBall (sphereBallCenter hn i) 1 → EuclideanSpace ℝ (Fin n))) ∧
+      IsClosed (sphereBallClosed hn b i) ∧
+      b ∉ sphereBallClosed hn b i ∧
+      interior (sphereBallClosed hn b i) = sphereBallOpen hn b i ∧
+      IsOpen (sphereBallOpen hn b i) ∧
+      Nonempty (closedBall (sphereBallCenter hn i) 1 ≃ₜ sphereBallClosed hn b i) ∧
+      Nonempty (sphereBallOpen hn b i ≃ₜ ball (sphereBallCenter hn i) 1)
+  ballChart :
+    ∀ i : Fin k, sphereBallOpen hn b i ≃ₜ ({b}ᶜ : Set (TopCat.sphere.{0} n))
+  quotientHomeomorph :
+    Hatcher.Relative.pointQuotient (TopPair.ofSubset (sphereBallUnion n hn k b)ᶜ) ≃ₜ
+      Hatcher.PointedWedge (fun _ : Fin k ↦ TopCat.sphere.{0} n) (fun _ ↦ b)
+  quotient_point :
+    quotientHomeomorph
+        (Hatcher.Relative.pointQuotientPoint
+          (TopPair.ofSubset (sphereBallUnion n hn k b)ᶜ)) =
+      Hatcher.PointedWedge.basepoint (fun _ : Fin k ↦ b)
+  quotient_ball :
+    ∀ (i : Fin k) (x : sphereBallOpen hn b i),
+      quotientHomeomorph
+          (Hatcher.Relative.pointQuotientProjection
+            (TopPair.ofSubset (sphereBallUnion n hn k b)ᶜ) x.1) =
+        Hatcher.PointedWedge.inclusion (fun _ : Fin k ↦ b) i (ballChart i x).1
+
+private theorem sphere_ball_pinch_data_nonempty (n : ℕ) (hn : 0 < n) (k : ℕ) :
+    Nonempty (SphereBallPinchData n hn k) := by
+  classical
+  letI : T2Space (TopCat.sphere.{0} n) :=
+    (sphereULiftHomeomorph.{0} n).isEmbedding.t2Space
+  letI : CompactSpace (TopCat.sphere.{0} n) :=
+    Function.Surjective.compactSpace
+      (sphereULiftHomeomorph.{0} n).symm.continuous
+      (sphereULiftHomeomorph.{0} n).symm.surjective
+  obtain ⟨b, haxis, hreflection, hj, hclosed, hballs⟩ :=
+    finite_disjoint_sphere_balls n hn k
+  change Topology.IsOpenEmbedding (sphereBallEmbedding n b) at hj
+  change Pairwise (fun i j : Fin k ↦
+    Disjoint (sphereBallClosed hn b i) (sphereBallClosed hn b j)) at hclosed
+  let E := EuclideanSpace ℝ (Fin n)
+  let e := puncturedSphereHomeomorphEuclidean n b
+  let B : Fin k → Set (TopCat.sphere.{0} n) := fun i ↦ sphereBallOpen hn b i
+  let C : Fin k → Set (TopCat.sphere.{0} n) := fun i ↦ sphereBallClosed hn b i
+  let V : Set (TopCat.sphere.{0} n) := sphereBallUnion n hn k b
+  have hOpen : ∀ i : Fin k, IsOpen (B i) := by
+    intro i
+    exact (hballs i).2.2.2.2.1
+  have hBC : ∀ i : Fin k, B i ⊆ C i := by
+    intro i
+    exact Set.image_mono ball_subset_closedBall
+  have hDisjoint : Pairwise (fun i j : Fin k ↦ Disjoint (B i) (B j)) := by
+    intro i j hij
+    exact (hclosed hij).mono (hBC i) (hBC j)
+  have hV : IsOpen V := isOpen_iUnion hOpen
+  have hbV : b ∉ V := by
+    intro hb
+    rcases Set.mem_iUnion.mp hb with ⟨i, hi⟩
+    exact (hballs i).2.2.1 (hBC i hi)
+  have hVc : (Vᶜ).Nonempty := ⟨b, hbV⟩
+  letI : ∀ i : Fin k, LocallyCompactSpace (B i) :=
+    fun i ↦ (hOpen i).locallyCompactSpace
+  letI : ∀ i : Fin k, T2Space (B i) := fun i ↦ inferInstance
+  let eta : ∀ i : Fin k, B i ≃ₜ E := fun i ↦
+    (hj.isEmbedding.homeomorphImage (ball (sphereBallCenter hn i) 1)).symm.trans
+      (((Homeomorph.unitBall : E ≃ₜ ball (0 : E) 1).trans
+        (OpenPartialHomeomorph.unitBallBall (sphereBallCenter hn i) (1 : ℝ)
+          zero_lt_one).toHomeomorphSourceTarget).symm)
+  let H : ∀ i : Fin k, B i ≃ₜ ({b}ᶜ : Set (TopCat.sphere.{0} n)) :=
+    fun i ↦ (eta i).trans e.symm
+  have hjRange :
+      Set.range (sphereBallEmbedding n b) = ({b}ᶜ : Set (TopCat.sphere.{0} n)) := by
+    ext x
+    constructor
+    · rintro ⟨y, rfl⟩
+      exact (e.symm y).property
+    · intro hx
+      let x' : ({b}ᶜ : Set (TopCat.sphere.{0} n)) := ⟨x, hx⟩
+      refine ⟨e x', ?_⟩
+      exact congrArg Subtype.val (e.symm_apply_apply x')
+  let theta : OnePoint E ≃ₜ TopCat.sphere.{0} n :=
+    OnePoint.equivOfIsEmbeddingOfRangeEq b (sphereBallEmbedding n b)
+      hj.isEmbedding hjRange
+  let phi : ∀ i : Fin k, OnePoint (B i) ≃ₜ TopCat.sphere.{0} n :=
+    fun i ↦ (eta i).onePointCongr.trans theta
+  have hPhiInfinity : ∀ i : Fin k, phi i (∞ : OnePoint (B i)) = b := by
+    intro i
+    change theta (∞ : OnePoint E) = b
+    exact OnePoint.equivOfIsEmbeddingOfRangeEq_apply_infty b
+      (sphereBallEmbedding n b) hj.isEmbedding hjRange
+  have hPhiCoe :
+      ∀ (i : Fin k) (x : B i), phi i (x : OnePoint (B i)) = (H i x).1 := by
+    intro i x
+    change theta ((eta i x : E) : OnePoint E) =
+      sphereBallEmbedding n b (eta i x)
+    exact OnePoint.equivOfIsEmbeddingOfRangeEq_apply_coe b
+      (sphereBallEmbedding n b) hj.isEmbedding hjRange (eta i x)
+  let P : TopPair.{0} := TopPair.ofSubset Vᶜ
+  let A : Hatcher.Relative.pointQuotient P ≃ₜ OnePoint V :=
+    Hatcher.Relative.compactComplementQuotientOnePointHomeomorph
+      (TopCat.sphere.{0} n) V hV hVc
+  let U : (Σ i : Fin k, B i) ≃ₜ V :=
+    Hatcher.Topology.sigmaSubtypeHomeomorphUnion B hDisjoint hOpen
+  let F :
+      OnePoint (Σ i : Fin k, B i) ≃ₜ
+        Hatcher.PointedWedge (fun i : Fin k ↦ OnePoint (B i))
+          (fun i ↦ (∞ : OnePoint (B i))) :=
+    Hatcher.Relative.finiteOnePointSigmaWedgeHomeomorph
+      (fun i : Fin k ↦ TopCat.of (B i))
+  let G :
+      Hatcher.PointedWedge (fun i : Fin k ↦ OnePoint (B i))
+          (fun i ↦ (∞ : OnePoint (B i))) ≃ₜ
+        Hatcher.PointedWedge (fun _ : Fin k ↦ TopCat.sphere.{0} n) (fun _ ↦ b) :=
+    Hatcher.PointedWedge.homeomorphCongr
+      (fun i : Fin k ↦ (∞ : OnePoint (B i))) (fun _ ↦ b) phi hPhiInfinity
+  let Q :
+      Hatcher.Relative.pointQuotient P ≃ₜ
+        Hatcher.PointedWedge (fun _ : Fin k ↦ TopCat.sphere.{0} n) (fun _ ↦ b) :=
+    A.trans (U.symm.onePointCongr.trans (F.trans G))
+  have hGPoint :
+      G (Hatcher.PointedWedge.basepoint (fun i : Fin k ↦ (∞ : OnePoint (B i)))) =
+        Hatcher.PointedWedge.basepoint (fun _ : Fin k ↦ b) := by
+    rfl
+  have hGInclusion :
+      ∀ (i : Fin k) (x : OnePoint (B i)),
+        G (Hatcher.PointedWedge.inclusion (fun j : Fin k ↦ (∞ : OnePoint (B j))) i x) =
+          Hatcher.PointedWedge.inclusion (fun _ : Fin k ↦ b) i (phi i x) := by
+    intro i x
+    rfl
+  have hAPoint :
+      A (Hatcher.Relative.pointQuotientPoint P) = (∞ : OnePoint V) :=
+    Hatcher.Relative.compactComplementQuotientOnePointHomeomorph_apply_point
+      (TopCat.sphere.{0} n) V hV hVc
+  have hFPoint :
+      F (∞ : OnePoint (Σ i : Fin k, B i)) =
+        Hatcher.PointedWedge.basepoint (fun i : Fin k ↦ (∞ : OnePoint (B i))) :=
+    Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_infty
+      (fun i : Fin k ↦ TopCat.of (B i))
+  have hQPoint :
+      Q (Hatcher.Relative.pointQuotientPoint P) =
+        Hatcher.PointedWedge.basepoint (fun _ : Fin k ↦ b) := by
+    change G (F (U.symm.onePointCongr (A (Hatcher.Relative.pointQuotientPoint P)))) = _
+    rw [hAPoint]
+    change G (F (∞ : OnePoint (Σ i : Fin k, B i))) = _
+    rw [hFPoint]
+    exact hGPoint
+  have hQBall :
+      ∀ (i : Fin k) (x : B i),
+        Q (Hatcher.Relative.pointQuotientProjection P x.1) =
+          Hatcher.PointedWedge.inclusion (fun _ : Fin k ↦ b) i (H i x).1 := by
+    intro i x
+    let v : V := ⟨x.1, Set.mem_iUnion.mpr ⟨i, x.2⟩⟩
+    have hAv :
+        A (Hatcher.Relative.pointQuotientProjection P x.1) = (v : OnePoint V) :=
+      Hatcher.Relative.compactComplementQuotientOnePointHomeomorph_apply_projection
+        (TopCat.sphere.{0} n) V hV hVc v
+    have hUv : U.symm v = (⟨i, x⟩ : Σ j : Fin k, B j) :=
+      Hatcher.Topology.sigmaSubtypeHomeomorphUnion_symm_apply_mk
+        B hDisjoint hOpen i x
+    have hFx :
+        F ((⟨i, x⟩ : Σ j : Fin k, B j) : OnePoint (Σ j : Fin k, B j)) =
+          Hatcher.PointedWedge.inclusion
+            (fun j : Fin k ↦ (∞ : OnePoint (B j))) i (x : OnePoint (B i)) :=
+      Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_coe
+        (fun j : Fin k ↦ TopCat.of (B j)) i x
+    change G (F (U.symm.onePointCongr
+      (A (Hatcher.Relative.pointQuotientProjection P x.1)))) = _
+    rw [hAv]
+    change G (F ((U.symm v : Σ j : Fin k, B j) :
+      OnePoint (Σ j : Fin k, B j))) = _
+    rw [hUv, hFx, hGInclusion, hPhiCoe]
+  refine ⟨{
+    b := b
+    last_axis := haxis
+    zeroth_reflection := hreflection
+    embedding_open := hj
+    closed_disjoint := hclosed
+    closed_properties := ?_
+    ballChart := H
+    quotientHomeomorph := Q
+    quotient_point := hQPoint
+    quotient_ball := hQBall }⟩
+  intro i
+  simpa only [sphereBallClosed, sphereBallOpen, sphereBallEmbedding, sphereBallCenter]
+    using hballs i
+
+/-- The actual complement-collapse sphere pinch into the pointed wedge of
+the prescribed number of spheres, with the empty family included. -/
+noncomputable def sphereBallPinch (n : ℕ) (hn : 0 < n) (k : ℕ) :
+    SphereBallPinchData n hn k :=
+  Classical.choice (sphere_ball_pinch_data_nonempty n hn k)
+
+namespace SphereBallPinchData
+
+variable {n k : ℕ} {hn : 0 < n}
+
+/-- The pinch map is the actual point-quotient projection followed by the
+constructed quotient homeomorphism. -/
+noncomputable def pinchMap (D : SphereBallPinchData n hn k) :
+    C(TopCat.sphere.{0} n,
+      Hatcher.PointedWedge (fun _ : Fin k ↦ TopCat.sphere.{0} n) (fun _ ↦ D.b)) :=
+  (⟨D.quotientHomeomorph, D.quotientHomeomorph.continuous⟩ :
+    C(Hatcher.Relative.pointQuotient
+        (TopPair.ofSubset (sphereBallUnion n hn k D.b)ᶜ),
+      Hatcher.PointedWedge (fun _ : Fin k ↦ TopCat.sphere.{0} n) (fun _ ↦ D.b))).comp
+    (Hatcher.Relative.pointQuotientProjection
+      (TopPair.ofSubset (sphereBallUnion n hn k D.b)ᶜ)).hom
+
+/-- On each actual open ball the pinch is its punctured-sphere chart
+followed by the corresponding wedge inclusion. -/
+theorem pinch_map_apply_ball (D : SphereBallPinchData n hn k)
+    (i : Fin k) (x : sphereBallOpen hn D.b i) :
+    D.pinchMap x.1 =
+      Hatcher.PointedWedge.inclusion (fun _ : Fin k ↦ D.b) i (D.ballChart i x).1 :=
+  D.quotient_ball i x
+
+/-- Every point outside the actual open-ball union maps to the wedge point. -/
+theorem pinch_map_apply_compl (D : SphereBallPinchData n hn k)
+    (x : TopCat.sphere.{0} n) (hx : x ∉ sphereBallUnion n hn k D.b) :
+    D.pinchMap x = Hatcher.PointedWedge.basepoint (fun _ : Fin k ↦ D.b) := by
+  let P : TopPair.{0} := TopPair.ofSubset (sphereBallUnion n hn k D.b)ᶜ
+  have hqx :
+      Hatcher.Relative.pointQuotientProjection P x =
+        Hatcher.Relative.pointQuotientPoint P := by
+    change x ∈ Hatcher.Relative.pointQuotientProjection P ⁻¹'
+      {Hatcher.Relative.pointQuotientPoint P}
+    rw [Hatcher.Relative.pointQuotientProjection_preimage_point]
+    exact ⟨⟨x, hx⟩, rfl⟩
+  change D.quotientHomeomorph (Hatcher.Relative.pointQuotientProjection P x) = _
+  rw [hqx]
+  exact D.quotient_point
+
+/-- The continuous wedge selector that preserves the chosen summand and
+sends every other summand to the same actual point b. -/
+def summandSelector (D : SphereBallPinchData n hn k) (i : Fin k) :
+    C(Hatcher.PointedWedge (fun _ : Fin k ↦ TopCat.sphere.{0} n) (fun _ ↦ D.b),
+      TopCat.sphere.{0} n) :=
+  Hatcher.PointedWedge.desc (fun _ : Fin k ↦ D.b) D.b
+    (fun j ↦ if j = i then ContinuousMap.id (TopCat.sphere.{0} n)
+      else ContinuousMap.const (TopCat.sphere.{0} n) D.b)
+    (by
+      intro j
+      by_cases hji : j = i <;> simp [hji])
+
+@[simp]
+theorem summand_selector_apply_basepoint (D : SphereBallPinchData n hn k)
+    (i : Fin k) :
+    D.summandSelector i (Hatcher.PointedWedge.basepoint (fun _ : Fin k ↦ D.b)) = D.b :=
+  rfl
+
+/-- The selector's value on every actual summand, including the basepoint. -/
+theorem summand_selector_apply_inclusion (D : SphereBallPinchData n hn k)
+    (i j : Fin k) (x : TopCat.sphere.{0} n) :
+    D.summandSelector i (Hatcher.PointedWedge.inclusion (fun _ : Fin k ↦ D.b) j x) =
+      if j = i then x else D.b := by
+  by_cases hji : j = i <;> simp [summandSelector, hji]
+
+/-- The continuous sphere component collapse obtained from the actual
+pinch map and the corresponding continuous wedge selector. -/
+noncomputable def componentCollapse (D : SphereBallPinchData n hn k) (i : Fin k) :
+    C(TopCat.sphere.{0} n, TopCat.sphere.{0} n) :=
+  (D.summandSelector i).comp D.pinchMap
+
+/-- The chosen ball maps through its actual punctured-sphere chart. -/
+theorem component_collapse_apply_ball (D : SphereBallPinchData n hn k)
+    (i : Fin k) (x : sphereBallOpen hn D.b i) :
+    D.componentCollapse i x.1 = (D.ballChart i x).1 := by
+  change D.summandSelector i (D.pinchMap x.1) = _
+  rw [pinch_map_apply_ball, summand_selector_apply_inclusion]
+  simp
+
+/-- Every other open ball is collapsed to the actual omitted point. -/
+theorem component_collapse_apply_other (D : SphereBallPinchData n hn k)
+    (i j : Fin k) (hji : j ≠ i) (x : sphereBallOpen hn D.b j) :
+    D.componentCollapse i x.1 = D.b := by
+  change D.summandSelector i (D.pinchMap x.1) = _
+  rw [pinch_map_apply_ball, summand_selector_apply_inclusion]
+  simp [hji]
+
+/-- The component collapse sends the complement of the union to b. -/
+theorem component_collapse_apply_compl (D : SphereBallPinchData n hn k)
+    (i : Fin k) (x : TopCat.sphere.{0} n)
+    (hx : x ∉ sphereBallUnion n hn k D.b) :
+    D.componentCollapse i x = D.b := by
+  change D.summandSelector i (D.pinchMap x) = _
+  rw [pinch_map_apply_compl D x hx]
+  exact summand_selector_apply_basepoint D i
+
+/-- A component collapse is constant at b off its selected open ball. -/
+theorem component_collapse_apply_not_mem (D : SphereBallPinchData n hn k)
+    (i : Fin k) (x : TopCat.sphere.{0} n) (hx : x ∉ sphereBallOpen hn D.b i) :
+    D.componentCollapse i x = D.b := by
+  by_cases hxV : x ∈ sphereBallUnion n hn k D.b
+  · rcases Set.mem_iUnion.mp hxV with ⟨j, hxj⟩
+    have hji : j ≠ i := by
+      intro h
+      subst j
+      exact hx hxj
+    exact component_collapse_apply_other D i j hji ⟨x, hxj⟩
+  · exact component_collapse_apply_compl D i x hxV
+
+/-- For zero balls, the actual pinch into the actual empty pointed wedge
+is the constant map to its retained basepoint. -/
+theorem pinch_map_zero (D : SphereBallPinchData n hn 0) :
+    D.pinchMap = ContinuousMap.const (TopCat.sphere.{0} n)
+      (Hatcher.PointedWedge.basepoint (fun _ : Fin 0 ↦ D.b)) := by
+  apply ContinuousMap.ext
+  intro x
+  apply pinch_map_apply_compl D x
+  intro hx
+  rcases Set.mem_iUnion.mp hx with ⟨i, _⟩
+  exact Fin.elim0 i
+
+/-- The based continuous map from the actual empty wedge to the sphere. -/
+def emptyWedgeToSphere (D : SphereBallPinchData n hn 0) :
+    C(Hatcher.PointedWedge (fun _ : Fin 0 ↦ TopCat.sphere.{0} n) (fun _ ↦ D.b),
+      TopCat.sphere.{0} n) :=
+  Hatcher.PointedWedge.desc (fun _ : Fin 0 ↦ D.b) D.b
+    (fun i ↦ Fin.elim0 i) (fun i ↦ Fin.elim0 i)
+
+/-- The sphere map associated with the empty pinch family. -/
+noncomputable def emptySphereMap (D : SphereBallPinchData n hn 0) :
+    C(TopCat.sphere.{0} n, TopCat.sphere.{0} n) :=
+  D.emptyWedgeToSphere.comp D.pinchMap
+
+/-- The zero-family sphere map is the actual constant map at the same b. -/
+theorem empty_sphere_map_eq_const (D : SphereBallPinchData n hn 0) :
+    D.emptySphereMap = ContinuousMap.const (TopCat.sphere.{0} n) D.b := by
+  apply ContinuousMap.ext
+  intro x
+  change D.emptyWedgeToSphere (D.pinchMap x) = D.b
+  have hq :
+      D.pinchMap x = Hatcher.PointedWedge.basepoint (fun _ : Fin 0 ↦ D.b) :=
+    DFunLike.congr_fun (pinch_map_zero D) x
+  rw [hq]
+  rfl
+
+end SphereBallPinchData
 
 end Hatcher.Sphere
