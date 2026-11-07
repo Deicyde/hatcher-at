@@ -284,6 +284,7 @@ jobs:
           #print axioms Hatcher.Sphere.sphereSuspensionBoundaryIso
           #print axioms Hatcher.Sphere.sphere_suspension_boundary_iso_hom
           #print axioms Hatcher.Sphere.sphere_suspension_pole_fibers
+          #print axioms Hatcher.Sphere.circlePowerMap_degree
 
           #lint only unusedArguments in Hatcher.Sphere.CirclePower
           #lint only unusedArguments in Hatcher.Sphere.LocalDegree
