@@ -11,15 +11,15 @@ on:
     inputs:
       article_id:
         description: Article whose candidate needs proof evidence
-        default: af_f0ce52bed8b3559c75b76fa3
+        default: af_180617f5eedc10f191b736bc
         required: true
       module:
         description: Lean module containing the candidate
-        default: Hatcher.Singular.PointedWedgePointQuotient
+        default: Hatcher.Sphere.DegreeLocalSum
         required: true
       declaration:
         description: Candidate declaration to inspect
-        default: Hatcher.Relative.finiteOnePointSigmaWedgeHomeomorph
+        default: Hatcher.Sphere.circlePowerMap_degree
         required: true
 
 permissions:
@@ -27,9 +27,9 @@ permissions:
 
 env:
   AUTOFORM_SOURCE: "https://github.com/facebookresearch/autoform-bot.git"
-  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_f0ce52bed8b3559c75b76fa3' }}
-  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Singular.PointedWedgePointQuotient' }}
-  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Relative.finiteOnePointSigmaWedgeHomeomorph' }}
+  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_180617f5eedc10f191b736bc' }}
+  EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Sphere.DegreeLocalSum' }}
+  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.circlePowerMap_degree' }}
 
 concurrency:
   group: autoform-verify-${{ github.ref }}
@@ -187,9 +187,7 @@ jobs:
           python3 scripts/formalize_evidence.py \
             --article-id "$EVIDENCE_ARTICLE" \
             --module "$EVIDENCE_MODULE" \
-            --declaration "$EVIDENCE_DECLARATION" \
-            --declaration Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_coe \
-            --declaration Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_infty
+            --declaration "$EVIDENCE_DECLARATION"
 
       - name: Export quotient import impact
         run: |
@@ -427,6 +425,14 @@ jobs:
             af_6335225854364397e3a20e8f Hatcher.Sphere.DegreeProperties . \
             --lean-root . --json \
             > .lake/formalize-evidence/artifacts/suspension-degree-import-impact-baseline.json
+
+      - name: Export integer-circle-degree import impact
+        run: |
+          uvx --from "git+${AUTOFORM_SOURCE}@${AUTOFORM_REF}" \
+            autoform work import-impact \
+            af_180617f5eedc10f191b736bc Hatcher.Sphere.DegreeLocalSum . \
+            --lean-root . --json \
+            > .lake/formalize-evidence/artifacts/integer-circle-degree-import-impact.json
 
       - name: Upload proof review evidence
         if: always()
