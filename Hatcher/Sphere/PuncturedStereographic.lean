@@ -196,6 +196,7 @@ noncomputable def sphereBallUnion (n : ℕ) (hn : 0 < n) (k : ℕ)
     (b : TopCat.sphere.{0} n) : Set (TopCat.sphere.{0} n) :=
   ⋃ i : Fin k, sphereBallOpen hn b i
 
+set_option maxHeartbeats 800000 in
 /-- The actual geometry, punctured charts, and complement-collapse quotient
 comparison used in the sphere pinch construction. All ball sets are fixed by
 their prescribed stereographic formulas. -/
@@ -244,9 +245,9 @@ structure SphereBallPinchData (n : ℕ) (hn : 0 < n) (k : ℕ) where
 private theorem sphere_ball_pinch_data_nonempty (n : ℕ) (hn : 0 < n) (k : ℕ) :
     Nonempty (SphereBallPinchData n hn k) := by
   classical
-  letI : T2Space (TopCat.sphere.{0} n) :=
+  let : T2Space (TopCat.sphere.{0} n) :=
     (sphereULiftHomeomorph.{0} n).isEmbedding.t2Space
-  letI : CompactSpace (TopCat.sphere.{0} n) :=
+  let : CompactSpace (TopCat.sphere.{0} n) :=
     Function.Surjective.compactSpace
       (sphereULiftHomeomorph.{0} n).symm.continuous
       (sphereULiftHomeomorph.{0} n).symm.surjective
@@ -275,9 +276,9 @@ private theorem sphere_ball_pinch_data_nonempty (n : ℕ) (hn : 0 < n) (k : ℕ)
     rcases Set.mem_iUnion.mp hb with ⟨i, hi⟩
     exact (hballs i).2.2.1 (hBC i hi)
   have hVc : (Vᶜ).Nonempty := ⟨b, hbV⟩
-  letI : ∀ i : Fin k, LocallyCompactSpace (B i) :=
+  let : ∀ i : Fin k, LocallyCompactSpace (B i) :=
     fun i ↦ (hOpen i).locallyCompactSpace
-  letI : ∀ i : Fin k, T2Space (B i) := fun i ↦ inferInstance
+  let : ∀ i : Fin k, T2Space (B i) := fun i ↦ inferInstance
   let eta : ∀ i : Fin k, B i ≃ₜ E := fun i ↦
     (hj.isEmbedding.homeomorphImage (ball (sphereBallCenter hn i) 1)).symm.trans
       (((Homeomorph.unitBall : E ≃ₜ ball (0 : E) 1).trans
@@ -449,7 +450,7 @@ theorem pinch_map_apply_compl (D : SphereBallPinchData n hn k)
 
 /-- The continuous wedge selector that preserves the chosen summand and
 sends every other summand to the same actual point b. -/
-def summandSelector (D : SphereBallPinchData n hn k) (i : Fin k) :
+noncomputable def summandSelector (D : SphereBallPinchData n hn k) (i : Fin k) :
     C(Hatcher.PointedWedge (fun _ : Fin k ↦ TopCat.sphere.{0} n) (fun _ ↦ D.b),
       TopCat.sphere.{0} n) :=
   Hatcher.PointedWedge.desc (fun _ : Fin k ↦ D.b) D.b
@@ -529,7 +530,7 @@ theorem pinch_map_zero (D : SphereBallPinchData n hn 0) :
   exact Fin.elim0 i
 
 /-- The based continuous map from the actual empty wedge to the sphere. -/
-def emptyWedgeToSphere (D : SphereBallPinchData n hn 0) :
+noncomputable def emptyWedgeToSphere (D : SphereBallPinchData n hn 0) :
     C(Hatcher.PointedWedge (fun _ : Fin 0 ↦ TopCat.sphere.{0} n) (fun _ ↦ D.b),
       TopCat.sphere.{0} n) :=
   Hatcher.PointedWedge.desc (fun _ : Fin 0 ↦ D.b) D.b
