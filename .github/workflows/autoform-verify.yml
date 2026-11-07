@@ -11,7 +11,7 @@ on:
     inputs:
       article_id:
         description: Article whose candidate needs proof evidence
-        default: af_5ead003fab03dbcaedbcd8d7
+        default: af_7744d41b3e4b105ba6e1575a
         required: true
       module:
         description: Lean module containing the candidate
@@ -19,7 +19,7 @@ on:
         required: true
       declaration:
         description: Candidate declaration to inspect
-        default: Hatcher.Sphere.sphere_suspension_pole_local_degree
+        default: Hatcher.Sphere.sphere_ball_collapse_degree_unit
         required: true
 
 permissions:
@@ -27,9 +27,9 @@ permissions:
 
 env:
   AUTOFORM_SOURCE: "https://github.com/facebookresearch/autoform-bot.git"
-  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_5ead003fab03dbcaedbcd8d7' }}
+  EVIDENCE_ARTICLE: ${{ inputs.article_id || 'af_7744d41b3e4b105ba6e1575a' }}
   EVIDENCE_MODULE: ${{ inputs.module || 'Hatcher.Sphere.DegreeLocalSum' }}
-  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.sphere_suspension_pole_local_degree' }}
+  EVIDENCE_DECLARATION: ${{ inputs.declaration || 'Hatcher.Sphere.sphere_ball_collapse_degree_unit' }}
 
 concurrency:
   group: autoform-verify-${{ github.ref }}
@@ -187,7 +187,8 @@ jobs:
           python3 scripts/formalize_evidence.py \
             --article-id "$EVIDENCE_ARTICLE" \
             --module "$EVIDENCE_MODULE" \
-            --declaration "$EVIDENCE_DECLARATION"
+            --declaration "$EVIDENCE_DECLARATION" \
+            --declaration Hatcher.Sphere.SphereBallPinchData.component_collapse_degree_eq_one_or_neg_one
 
       - name: Export quotient import impact
         run: |
