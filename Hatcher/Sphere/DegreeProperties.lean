@@ -5,6 +5,7 @@ Authors: Jack McCarthy
 -/
 
 import Hatcher.Sphere.Degree
+import Hatcher.Sphere.Homology
 import Mathlib.Algebra.Ring.Int.Units
 import Mathlib.Topology.Homotopy.Equiv
 
@@ -158,5 +159,125 @@ theorem degree_eq_one_or_neg_one_of_homeomorph
     degree n hn (TopCat.ofHom e.toHomotopyEquiv.toFun) = -1
   exact degree_eq_one_or_neg_one_of_homotopyEquiv
     n hn e.toHomotopyEquiv
+
+end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+/-- The canonical reduced suspension boundary transported to ordinary
+homology by the positive-degree natural comparisons. -/
+private def ordinarySphereSuspensionBoundaryIso (n : ℕ) (hn : 0 < n) :
+    (((singularHomologyFunctor AddCommGrpCat (n + 1)).obj
+      (AddCommGrpCat.of ℤ)).obj (TopCat.sphere.{0} (n + 1))) ≅
+    (((singularHomologyFunctor AddCommGrpCat n).obj
+      (AddCommGrpCat.of ℤ)).obj (TopCat.sphere.{0} n)) :=
+  ((Hatcher.Reduced.homologyIsoOfPositiveDegree
+    (C := AddCommGrpCat.{0}) (AddCommGrpCat.of ℤ) (n + 1)
+    (Nat.zero_lt_succ n)).app (TopCat.sphere.{0} (n + 1))).symm ≪≫
+    sphereSuspensionBoundaryIso n ≪≫
+    ((Hatcher.Reduced.homologyIsoOfPositiveDegree
+      (C := AddCommGrpCat.{0}) (AddCommGrpCat.of ℤ) n hn).app
+        (TopCat.sphere.{0} n))
+
+private theorem ordinary_sphere_suspension_boundary_naturality
+    (n : ℕ) (hn : 0 < n)
+    (f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n) :
+    ((singularHomologyFunctor AddCommGrpCat (n + 1)).obj
+      (AddCommGrpCat.of ℤ)).map (sphereSuspensionMap n f) ≫
+        (ordinarySphereSuspensionBoundaryIso n hn).hom =
+      (ordinarySphereSuspensionBoundaryIso n hn).hom ≫
+        ((singularHomologyFunctor AddCommGrpCat n).obj
+          (AddCommGrpCat.of ℤ)).map f := by
+  let R := AddCommGrpCat.of ℤ
+  let H := (singularHomologyFunctor AddCommGrpCat (n + 1)).obj R
+  let L := (singularHomologyFunctor AddCommGrpCat n).obj R
+  let RH := Hatcher.Reduced.homologyFunctor.{0} R (n + 1)
+  let RL := Hatcher.Reduced.homologyFunctor.{0} R n
+  let τH := Hatcher.Reduced.homologyIsoOfPositiveDegree
+    (C := AddCommGrpCat.{0}) R (n + 1) (Nat.zero_lt_succ n)
+  let τL := Hatcher.Reduced.homologyIsoOfPositiveDegree
+    (C := AddCommGrpCat.{0}) R n hn
+  let a := τH.inv.app (TopCat.sphere.{0} (n + 1))
+  let b := (sphereSuspensionBoundaryIso n).hom
+  let c := τL.hom.app (TopCat.sphere.{0} n)
+  have hD : (ordinarySphereSuspensionBoundaryIso n hn).hom = a ≫ b ≫ c := by
+    simp only [ordinarySphereSuspensionBoundaryIso, a, b, c, τH, τL, R,
+      Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom, Category.assoc]
+  have ha : H.map (sphereSuspensionMap n f) ≫ a =
+      a ≫ RH.map (sphereSuspensionMap n f) :=
+    τH.inv.naturality (sphereSuspensionMap n f)
+  have hb : RH.map (sphereSuspensionMap n f) ≫ b = b ≫ RL.map f :=
+    sphere_suspension_boundary_naturality n f
+  have hc : RL.map f ≫ c = c ≫ L.map f := τL.hom.naturality f
+  rw [hD]
+  change H.map (sphereSuspensionMap n f) ≫ (a ≫ b ≫ c) =
+    (a ≫ b ≫ c) ≫ L.map f
+  calc
+    H.map (sphereSuspensionMap n f) ≫ (a ≫ b ≫ c) =
+        (H.map (sphereSuspensionMap n f) ≫ a) ≫ (b ≫ c) :=
+      (Category.assoc (H.map (sphereSuspensionMap n f)) a (b ≫ c)).symm
+    _ = (a ≫ RH.map (sphereSuspensionMap n f)) ≫ (b ≫ c) :=
+      congrArg (fun t => t ≫ (b ≫ c)) ha
+    _ = a ≫ (RH.map (sphereSuspensionMap n f) ≫ b) ≫ c := by
+      simp only [Category.assoc]
+    _ = a ≫ (b ≫ RL.map f) ≫ c :=
+      congrArg (fun t => a ≫ t ≫ c) hb
+    _ = (a ≫ b) ≫ (RL.map f ≫ c) := by simp only [Category.assoc]
+    _ = (a ≫ b) ≫ (c ≫ L.map f) := congrArg (fun t => (a ≫ b) ≫ t) hc
+    _ = (a ≫ b ≫ c) ≫ L.map f := by simp only [Category.assoc]
+
+/-- Every additive endomorphism of the actual integer object is its scalar
+map, determined by the image of `1`. -/
+private theorem integer_endomorphism_eq_as_hom
+    (g : AddCommGrpCat.of ℤ ⟶ AddCommGrpCat.of ℤ) :
+    g = AddCommGrpCat.asHom (g (1 : ℤ)) := by
+  apply AddCommGrpCat.int_hom_ext
+  change g (1 : ℤ) = (1 : ℤ) • g (1 : ℤ)
+  simp
+
+private theorem integer_endomorphisms_commute
+    (g h : AddCommGrpCat.of ℤ ⟶ AddCommGrpCat.of ℤ) : g ≫ h = h ≫ g := by
+  have hg := integer_endomorphism_eq_as_hom g
+  have hh := integer_endomorphism_eq_as_hom h
+  calc
+    g ≫ h = AddCommGrpCat.asHom (g (1 : ℤ)) ≫
+        AddCommGrpCat.asHom (h (1 : ℤ)) :=
+      congrArg₂ (fun a b : AddCommGrpCat.of ℤ ⟶ AddCommGrpCat.of ℤ => a ≫ b) hg hh
+    _ = AddCommGrpCat.asHom (h (1 : ℤ)) ≫
+        AddCommGrpCat.asHom (g (1 : ℤ)) := by
+      apply AddCommGrpCat.int_hom_ext
+      simp [ConcreteCategory.comp_apply, AddCommGrpCat.asHom_hom_apply, mul_comm]
+    _ = h ≫ g :=
+      (congrArg₂ (fun a b : AddCommGrpCat.of ℤ ⟶ AddCommGrpCat.of ℤ => a ≫ b) hh hg).symm
+
+/-- **Hatcher, Proposition 2.33 (printed page 137).** The genuine suspension
+preserves the ordered ordinary integral degree. Naturality gives conjugate
+integer endomorphisms commuting with the actual boundary isomorphism, which
+can be cancelled without choosing its sign. -/
+theorem sphere_suspension_preserves_degree (n : ℕ) (hn : 0 < n)
+    (f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n) :
+    degree (n + 1) (Nat.zero_lt_succ n) (sphereSuspensionMap n f) =
+      degree n hn f := by
+  let R := AddCommGrpCat.of ℤ
+  let H := (singularHomologyFunctor AddCommGrpCat (n + 1)).obj R
+  let L := (singularHomologyFunctor AddCommGrpCat n).obj R
+  let OH := integralSphereHomologyIso (n + 1) (Nat.zero_lt_succ n)
+  let OL := integralSphereHomologyIso n hn
+  let D := ordinarySphereSuspensionBoundaryIso n hn
+  let K : AddCommGrpCat.of ℤ ≅ AddCommGrpCat.of ℤ := OH.symm ≪≫ D ≪≫ OL
+  have hD : H.map (sphereSuspensionMap n f) ≫ D.hom = D.hom ≫ L.map f :=
+    ordinary_sphere_suspension_boundary_naturality n hn f
+  have hConj : degreeEndomorphism (n + 1) (Nat.zero_lt_succ n)
+      (sphereSuspensionMap n f) ≫ K.hom =
+      K.hom ≫ degreeEndomorphism n hn f := by
+    simpa only [degreeEndomorphism, K, OH, OL, H, L, R,
+      Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_assoc] using
+        congrArg (fun t => OH.inv ≫ t ≫ OL.hom) hD
+  have hEq : degreeEndomorphism (n + 1) (Nat.zero_lt_succ n)
+      (sphereSuspensionMap n f) = degreeEndomorphism n hn f :=
+    (cancel_mono K.hom).1
+      (hConj.trans (integer_endomorphisms_commute K.hom
+        (degreeEndomorphism n hn f)))
+  exact congrArg (fun g : AddCommGrpCat.of ℤ ⟶ AddCommGrpCat.of ℤ => g (1 : ℤ)) hEq
 
 end Hatcher.Sphere
