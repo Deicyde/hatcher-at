@@ -210,6 +210,7 @@ jobs:
           import Hatcher.Sphere.HomeomorphismLocalDegree
           import Hatcher.Sphere.DegreeLocalSum
           import Hatcher.Sphere.Homology
+          import Hatcher.Sphere.DegreeProperties
           import Batteries.Tactic.Lint
 
           #print axioms Hatcher.Sphere.circlePowerMap_positive_arcChart
@@ -285,6 +286,7 @@ jobs:
           #print axioms Hatcher.Sphere.sphere_suspension_boundary_iso_hom
           #print axioms Hatcher.Sphere.sphere_suspension_pole_fibers
           #print axioms Hatcher.Sphere.circlePowerMap_degree
+          #print axioms Hatcher.Sphere.sphere_suspension_preserves_degree
 
           #lint only unusedArguments in Hatcher.Sphere.CirclePower
           #lint only unusedArguments in Hatcher.Sphere.LocalDegree
@@ -295,6 +297,7 @@ jobs:
           #lint only unusedArguments in Hatcher.Sphere.HomeomorphismLocalDegree
           #lint only unusedArguments in Hatcher.Sphere.DegreeLocalSum
           #lint only unusedArguments in Hatcher.Sphere.Homology
+          #lint only unusedArguments in Hatcher.Sphere.DegreeProperties
           LEAN
           lake env lean .lake/formalize-evidence/FrontierChecks.lean \
             | tee .lake/formalize-evidence/artifacts/frontier-axioms-and-lint.txt
