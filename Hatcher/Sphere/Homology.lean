@@ -114,9 +114,15 @@ theorem sphere_suspension_boundary_iso_hom (n : ℕ) :
           (AddCommGrpCat.of ℤ) (n + 1)).inv.app (sphereConeGoodPair.{0} n) ≫
         reducedPairConnecting
           (sphereConePair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl := by
-  simp only [sphereSuspensionBoundaryIso, Iso.trans_hom, Functor.mapIso_hom,
-    Iso.symm_hom, Iso.app_inv, contractibleAmbientRelativeHomologyIso_hom,
-    Category.assoc]
+  change
+    ((Hatcher.Reduced.homologyFunctor.{0}
+        (AddCommGrpCat.of ℤ) (n + 1)).map
+          (TopCat.isoOfHomeo (sphereConeQuotientHomeomorph.{0} n)).inv ≫
+      ((goodPairPointQuotientRelativeHomologyNatIso
+        (AddCommGrpCat.of ℤ) (n + 1)).inv.app (sphereConeGoodPair.{0} n) ≫
+        reducedPairConnecting
+          (sphereConePair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl)) = _
+  exact (Category.assoc _ _ _).symm
 
 private theorem sphere_suspension_inverse_quotient_square (n : ℕ)
     (f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n) :
