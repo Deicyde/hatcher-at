@@ -115,7 +115,7 @@ theorem sphere_suspension_boundary_iso_hom (n : ℕ) :
         reducedPairConnecting
           (sphereConePair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl := by
   simp only [sphereSuspensionBoundaryIso, Iso.trans_hom, Functor.mapIso_hom,
-    Iso.symm_hom, NatIso.app_inv, contractibleAmbientRelativeHomologyIso_hom,
+    Iso.symm_hom, Iso.app_inv, contractibleAmbientRelativeHomologyIso_hom,
     Category.assoc]
 
 private theorem sphere_suspension_inverse_quotient_square (n : ℕ)
@@ -147,8 +147,10 @@ theorem sphere_suspension_boundary_naturality (n : ℕ)
   let H := Hatcher.Reduced.homologyFunctor.{0} (AddCommGrpCat.of ℤ) (n + 1)
   let L := Hatcher.Reduced.homologyFunctor.{0} (AddCommGrpCat.of ℤ) n
   let e := TopCat.isoOfHomeo (sphereConeQuotientHomeomorph.{0} n)
-  let δ := goodPairPointQuotientConnecting
-    (sphereConeGoodPair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl
+  let δ : H.obj (pointQuotient (sphereConePair.{0} n)) ⟶
+      L.obj (TopCat.sphere.{0} n) :=
+    goodPairPointQuotientConnecting
+      (sphereConeGoodPair.{0} n) (AddCommGrpCat.of ℤ) (n + 1) n rfl
   have hΔ : (sphereSuspensionBoundaryIso n).hom = H.map e.inv ≫ δ := by
     exact sphere_suspension_boundary_iso_hom n
   have hTop : H.map (sphereSuspensionMap n f) ≫ H.map e.inv =
@@ -164,6 +166,11 @@ theorem sphere_suspension_boundary_naturality (n : ℕ)
   rw [hΔ]
   change H.map (sphereSuspensionMap n f) ≫ (H.map e.inv ≫ δ) =
     (H.map e.inv ≫ δ) ≫ L.map f
-  rw [← Category.assoc, hTop, Category.assoc, ← hδ, ← Category.assoc]
+  exact (Category.assoc (H.map (sphereSuspensionMap n f)) (H.map e.inv) δ).symm.trans
+    ((congrArg (fun t => t ≫ δ) hTop).trans
+      ((Category.assoc (H.map e.inv)
+          (H.map (pointQuotientMap (sphereConePairMap n f))) δ).trans
+        ((congrArg (fun t => H.map e.inv ≫ t) hδ.symm).trans
+          (Category.assoc (H.map e.inv) δ (L.map f)).symm)))
 
 end Hatcher.Sphere
