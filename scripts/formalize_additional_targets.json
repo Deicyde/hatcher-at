@@ -38,6 +38,13 @@
       "declarations": [
         "Hatcher.Sphere.sphere_degree_realization"
       ]
+    },
+    {
+      "article_id": "af_2d6e95c5e95928f553b35e71",
+      "module": "Hatcher.Sphere.DegreeLocalSum",
+      "declarations": [
+        "Hatcher.Sphere.sphere_local_degree_realization_succ_succ"
+      ]
     }
   ]
 }
