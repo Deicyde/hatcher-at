@@ -964,3 +964,45 @@ theorem sphere_signed_pinch_degree_sum
   (signedSphereFoldMap n hn k σ hσ).degree_eq_sum_signs
 
 end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+/-- **Hatcher, Example 2.31.** Every integer is the existing signed degree of
+an actual geometric pinch-and-fold map of each positive-dimensional sphere. -/
+theorem sphere_degree_realization (n : ℕ) (hn : 0 < n) (d : ℤ) :
+    ∃ f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n,
+      degree n hn f = d := by
+  classical
+  cases d with
+  | ofNat k =>
+      let σ : Fin (Int.ofNat k).natAbs → ℤ := fun _ => 1
+      have hσ : ∀ i, σ i = 1 ∨ σ i = -1 := fun _ => Or.inl rfl
+      let F := signedSphereFoldMap n hn (Int.ofNat k).natAbs σ hσ
+      refine ⟨TopCat.ofHom F.selfMap, ?_⟩
+      have hdegree := sphere_signed_pinch_degree_sum
+        n hn (Int.ofNat k).natAbs σ hσ
+      change degree n hn (TopCat.ofHom F.selfMap) = ∑ i : Fin k, σ i at hdegree
+      change degree n hn (TopCat.ofHom F.selfMap) = (k : ℤ)
+      calc
+        degree n hn (TopCat.ofHom F.selfMap) = ∑ i : Fin k, σ i := hdegree
+        _ = (k : ℤ) := by
+          simp only [σ, Finset.sum_const, Finset.card_univ,
+            Fintype.card_fin, Int.nsmul_eq_mul, mul_one]
+  | negSucc k =>
+      let σ : Fin (Int.negSucc k).natAbs → ℤ := fun _ => -1
+      have hσ : ∀ i, σ i = 1 ∨ σ i = -1 := fun _ => Or.inr rfl
+      let F := signedSphereFoldMap n hn (Int.negSucc k).natAbs σ hσ
+      refine ⟨TopCat.ofHom F.selfMap, ?_⟩
+      have hdegree := sphere_signed_pinch_degree_sum
+        n hn (Int.negSucc k).natAbs σ hσ
+      change degree n hn (TopCat.ofHom F.selfMap) =
+        ∑ i : Fin (k + 1), σ i at hdegree
+      change degree n hn (TopCat.ofHom F.selfMap) = -((k + 1 : ℕ) : ℤ)
+      calc
+        degree n hn (TopCat.ofHom F.selfMap) =
+            ∑ i : Fin (k + 1), σ i := hdegree
+        _ = -((k + 1 : ℕ) : ℤ) := by
+          simp only [σ, Finset.sum_const, Finset.card_univ,
+            Fintype.card_fin, Int.nsmul_eq_mul, mul_neg, mul_one]
+
+end Hatcher.Sphere
