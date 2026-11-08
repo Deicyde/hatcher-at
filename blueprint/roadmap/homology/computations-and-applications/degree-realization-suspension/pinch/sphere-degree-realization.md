@@ -2,6 +2,9 @@
 article_id: af_c25fd700a7f3e9d9ce373eb6
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.sphere_degree_realization
 ---
 
 # Every integer is the degree of a sphere map
