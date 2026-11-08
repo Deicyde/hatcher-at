@@ -463,15 +463,35 @@ theorem signed_corrected_component_degree (D : SphereBallPinchData n hn k)
         (TopCat.ofHom (D.componentCollapse i) ≫ (D.signedCorrectionIso σ i).hom) =
       σ i := by
   classical
-  by_cases heq :
-      degree n hn (TopCat.ofHom (D.componentCollapse i)) = σ i
-  · rw [signedCorrectionIso, if_pos heq]
-    change degree n hn
-      (TopCat.ofHom (D.componentCollapse i) ≫ 𝟙 (TopCat.sphere.{0} n)) = σ i
-    rw [degree_comp, degree_id, mul_one]
-    exact heq
-  · rw [signedCorrectionIso, if_neg heq, degree_comp, degree_coordinateReflection]
-    rcases D.component_collapse_degree_eq_one_or_neg_one i with hc | hc
+  let c : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n :=
+    TopCat.ofHom (D.componentCollapse i)
+  change degree n hn (c ≫ (D.signedCorrectionIso σ i).hom) = σ i
+  by_cases heq : degree n hn c = σ i
+  · have ha : D.signedCorrectionIso σ i = Iso.refl (TopCat.sphere.{0} n) := by
+      change (if degree n hn c = σ i then Iso.refl (TopCat.sphere.{0} n)
+        else coordinateReflectionIso n (0 : Fin (n + 1))) = _
+      exact ite_eq_left heq
+    have hmap : c ≫ (D.signedCorrectionIso σ i).hom = c := by
+      rw [ha]
+      exact Category.comp_id c
+    exact (congrArg (degree n hn) hmap).trans heq
+  · have ha : D.signedCorrectionIso σ i =
+        coordinateReflectionIso n (0 : Fin (n + 1)) := by
+      change (if degree n hn c = σ i then Iso.refl (TopCat.sphere.{0} n)
+        else coordinateReflectionIso n (0 : Fin (n + 1))) = _
+      exact ite_eq_right heq
+    have hdegree : degree n hn (c ≫ (D.signedCorrectionIso σ i).hom) =
+        degree n hn c * (-1) := by
+      calc
+        degree n hn (c ≫ (D.signedCorrectionIso σ i).hom) =
+            degree n hn c * degree n hn (D.signedCorrectionIso σ i).hom :=
+          degree_comp n hn c (D.signedCorrectionIso σ i).hom
+        _ = degree n hn c * (-1) := by
+          rw [ha, degree_coordinateReflection]
+    rw [hdegree]
+    have hunit : degree n hn c = 1 ∨ degree n hn c = -1 :=
+      D.component_collapse_degree_eq_one_or_neg_one i
+    rcases hunit with hc | hc
     · rcases hσ i with hs | hs
       · exact (heq (hc.trans hs.symm)).elim
       · rw [hc, hs]

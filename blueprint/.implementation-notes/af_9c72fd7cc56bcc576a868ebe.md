@@ -47,3 +47,15 @@ normalization, iso/hom/continuous-map coercions, signed degree cases,
 certificate elaboration/extraction, and point/ball/empty-family computations.
 The existing import closure supplies the reached APIs. Full validation and
 independent review remain pending.
+
+
+## Useful failed route and current repair
+
+The first remote focused build could not rewrite categorical degree
+multiplicativity after unfolding the correction inline: implicit transparency
+left a mismatch between the bundled TopCat sphere topology and its reduced
+raw representation. The replacement fixes the component as an explicitly
+typed TopCat morphism, proves the selected correction isomorphism equation,
+and invokes degree_comp with explicit morphism arguments. Public statements,
+inputs, original source and CI selectors are preserved. Current if-branch
+lemmas replace deprecated names. Exact compilation remains required.
