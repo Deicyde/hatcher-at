@@ -15,6 +15,14 @@
         "Hatcher.Sphere.SignedSphereFoldData.regular_fiber_finite",
         "Hatcher.Sphere.SignedSphereFoldData.regular_fiber_zero"
       ]
+    },
+    {
+      "article_id": "af_cbbb5f2c6b7cb6da153db1c5",
+      "module": "Hatcher.Sphere.DegreeLocalSum",
+      "declarations": [
+        "Hatcher.Sphere.sphere_signed_pinch_local_degree",
+        "Hatcher.Sphere.SignedSphereFoldData.regular_point_local_degree"
+      ]
     }
   ]
 }
