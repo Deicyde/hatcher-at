@@ -37,9 +37,10 @@ suspension geometry, and the reduced boundary comparison, include S⁰. The
 local-degree realization conclusion begins in dimension two. Zero and negative
 integers, empty pinch families, and constant suspended maps are included.
 
-Cellular homology beginning with Lemma 2.34, the later §2.2 material, the Hopf
-converse, and Theorem 2.27 remain queued rather than excluded or blocked. The
-separate coverage rows retain those source areas.
+The next [cellular-homology milestone](../cellular-homology/README.md) plans
+Lemma 2.34, the cellular complex and Theorem 2.35. The later §2.2 material,
+the Hopf converse and Theorem 2.27 remain queued rather than excluded or
+blocked. Separate coverage rows retain those source areas.
 
 ## Sources
 

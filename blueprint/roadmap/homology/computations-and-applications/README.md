@@ -17,8 +17,10 @@ Proposition 2.29. All sixteen leaves are formalized locally and complete; the
 local-degree continuation through Proposition 2.30 is complete in twenty
 leaves. The completed thirty-one-leaf degree-realization and suspension
 milestone continues through Proposition 2.33 and its pole observation,
-including both-pole realization of every integer local degree. Cellular
-Homology and the later material remain queued.
+including both-pole realization of every integer local degree. The next
+fifteen-leaf cellular-homology milestone covers Lemma 2.34, the cellular
+complex and Theorem 2.35. These new leaves are unproved; later material
+remains queued.
 
 Given excision and the long exact sequence, homology becomes computable. From
 `Hₙ(Sⁿ) ≅ ℤ` comes the degree of a map `Sⁿ → Sⁿ`, with its local formula as a
@@ -76,9 +78,11 @@ pinned Mathlib coverage nor a project dependency.
 - [Degree foundations and applications](degree/README.md)
 - [Local degree and the finite-fiber sum](local-degree/README.md)
 - [Prescribed degrees and suspension](degree-realization-suspension/README.md)
+- [Cellular homology through the singular comparison](cellular-homology/README.md)
 
-Cellular homology beginning with Lemma 2.34, the later Mayer–Vietoris
-applications, and homology with general coefficient groups remain queued.
+The cellular milestone stops at Theorem 2.35’s proof. Immediate applications,
+the attaching-map degree formula, later Mayer–Vietoris topics and homology
+with general coefficient groups remain queued.
 They are not user exclusions or externally blocked work.
 
 ## Sources
