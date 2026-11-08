@@ -809,3 +809,111 @@ theorem sphere_signed_pinch_fiber (n : ℕ) (hn : 0 < n) (k : ℕ)
     F.regular_fiber_finite y hy⟩
 
 end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+namespace SignedSphereFoldData
+
+variable {n k : ℕ} {hn : 0 < n}
+  {D : SphereBallPinchData n hn k} {σ : Fin k → ℤ}
+
+private theorem corrected_component_fiber_singleton (F : SignedSphereFoldData D σ)
+    (y : TopCat.sphere.{0} n) (hy : y ≠ D.b) (i : Fin k) :
+    fiber (TopCat.ofHom (D.componentCollapse i) ≫ (D.signedCorrectionIso σ i).hom) y =
+      {(F.regularFiberPoint y hy i).1} := by
+  let g : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n :=
+    TopCat.ofHom (D.componentCollapse i) ≫ (D.signedCorrectionIso σ i).hom
+  let u : sphereBallOpen hn D.b i := D.signedRegularBallPoint σ y hy i
+  let x : TopCat.sphere.{0} n := (F.regularFiberPoint y hy i).1
+  have hx : x = u.1 := by
+    rfl
+  have hmap (z : sphereBallOpen hn D.b i) :
+      g z.1 = (D.signedCorrectionIso σ i).hom (D.ballChart i z).1 := by
+    change (D.signedCorrectionIso σ i).hom (D.componentCollapse i z.1) = _
+    exact congrArg (fun q => (D.signedCorrectionIso σ i).hom q)
+      (D.component_collapse_apply_ball i z)
+  have hxu : F.selfMap u.1 = y := regular_ball_point_image F y hy i
+  have hgu : g u.1 = y := by
+    have hEq : F.selfMap u.1 = g u.1 := F.self_map_apply_ball i u
+    exact hEq.symm.trans hxu
+  have hgx : g x = y := by
+    rw [hx]
+    exact hgu
+  change fiber g y = {x}
+  ext z
+  constructor
+  · intro hz
+    have hzg : g z = y := mem_fiber.mp hz
+    have hzB : z ∈ sphereBallOpen hn D.b i := by
+      by_contra hzB
+      have hconstant : g z = D.b := by
+        change (D.signedCorrectionIso σ i).hom (D.componentCollapse i z) = D.b
+        rw [D.component_collapse_apply_not_mem i z hzB]
+        exact D.signed_correction_apply_basepoint σ i
+      exact hy (hzg.symm.trans hconstant)
+    let z' : sphereBallOpen hn D.b i := ⟨z, hzB⟩
+    have hsame : (D.signedCorrectionIso σ i).hom (D.ballChart i z').1 =
+        (D.signedCorrectionIso σ i).hom (D.ballChart i u).1 :=
+      (hmap z').symm.trans (hzg.trans (hgu.symm.trans (hmap u)))
+    have hchart_val : (D.ballChart i z').1 = (D.ballChart i u).1 := by
+      have hinv := congrArg (fun q => (D.signedCorrectionIso σ i).inv q) hsame
+      exact (TopCat.hom_inv_id_apply (D.signedCorrectionIso σ i)
+        (D.ballChart i z').1).symm.trans
+        (hinv.trans (TopCat.hom_inv_id_apply (D.signedCorrectionIso σ i)
+          (D.ballChart i u).1))
+    have hchart : D.ballChart i z' = D.ballChart i u := Subtype.ext hchart_val
+    have hz' : z' = u := (D.ballChart i).injective hchart
+    have hzx : z = x := (congrArg Subtype.val hz').trans hx.symm
+    exact Set.mem_singleton_iff.mpr hzx
+  · intro hz
+    have hzx : z = x := Set.mem_singleton_iff.mp hz
+    apply mem_fiber.mpr
+    rw [hzx]
+    exact hgx
+
+/-- Each explicit point of a regular signed-pinch fiber is isolated and has
+its prescribed signed local degree, for every isolation witness. -/
+theorem regular_point_local_degree (F : SignedSphereFoldData D σ)
+    (y : TopCat.sphere.{0} n) (hy : y ≠ D.b) (i : Fin k) :
+    IsolatedPreimage (TopCat.ofHom F.selfMap) (F.regularFiberPoint y hy i).1 y ∧
+      ∀ h : IsolatedPreimage (TopCat.ofHom F.selfMap) (F.regularFiberPoint y hy i).1 y,
+        localDegree n hn (TopCat.ofHom F.selfMap)
+          (F.regularFiberPoint y hy i).1 y h = σ i := by
+  let f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n := TopCat.ofHom F.selfMap
+  let g : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n :=
+    TopCat.ofHom (D.componentCollapse i) ≫ (D.signedCorrectionIso σ i).hom
+  let x : TopCat.sphere.{0} n := (F.regularFiberPoint y hy i).1
+  have hfiber : fiber g y = {x} := corrected_component_fiber_singleton F y hy i
+  have hg : IsolatedPreimage g x y := singletonFiberIsolatedPreimage g x y hfiber
+  have hU : IsOpen (sphereBallOpen hn D.b i) := (D.closed_properties i).2.2.2.2.1
+  have hxU : x ∈ sphereBallOpen hn D.b i :=
+    (D.signedRegularBallPoint σ y hy i).property
+  have hEq : Set.EqOn g f (sphereBallOpen hn D.b i) := by
+    intro z hz
+    exact (F.self_map_apply_ball i ⟨z, hz⟩).symm
+  have hGerm := localDegree_germ_invariance n hn
+    (f := g) (g := f) (x := x) (y := y)
+    (sphereBallOpen hn D.b i) hU hxU hEq hg
+  refine ⟨hGerm.1, ?_⟩
+  intro h
+  exact (hGerm.2 hg h).symm.trans
+    ((localDegree_eq_degree_of_fiber_eq_singleton n hn g x y hfiber hg).trans
+      (F.corrected_component_degree i))
+
+end SignedSphereFoldData
+
+/-- The canonical signed sphere pinch has its prescribed local sign at the
+point indexed by each actual regular ball, with isolation derived and every
+isolation witness allowed. -/
+theorem sphere_signed_pinch_local_degree (n : ℕ) (hn : 0 < n) (k : ℕ)
+    (σ : Fin k → ℤ) (hσ : ∀ i, σ i = 1 ∨ σ i = -1)
+    (y : TopCat.sphere.{0} n) (hy : y ≠ (sphereBallPinch n hn k).b) (i : Fin k) :
+    IsolatedPreimage (TopCat.ofHom (signedSphereFoldMap n hn k σ hσ).selfMap)
+        ((signedSphereFoldMap n hn k σ hσ).regularFiberPoint y hy i).1 y ∧
+      ∀ h : IsolatedPreimage (TopCat.ofHom (signedSphereFoldMap n hn k σ hσ).selfMap)
+          ((signedSphereFoldMap n hn k σ hσ).regularFiberPoint y hy i).1 y,
+        localDegree n hn (TopCat.ofHom (signedSphereFoldMap n hn k σ hσ).selfMap)
+          ((signedSphereFoldMap n hn k σ hσ).regularFiberPoint y hy i).1 y h = σ i :=
+  (signedSphereFoldMap n hn k σ hσ).regular_point_local_degree y hy i
+
+end Hatcher.Sphere
