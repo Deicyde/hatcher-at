@@ -2,6 +2,9 @@
 article_id: af_2d6e95c5e95928f553b35e71
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.sphere_local_degree_realization_succ_succ
 ---
 
 # Every integer is a local degree in sphere dimension at least two
