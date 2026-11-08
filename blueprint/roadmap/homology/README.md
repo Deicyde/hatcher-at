@@ -17,11 +17,10 @@ of the selected §2.1 post-excision applications are formalized in twenty-seven
 leaves, with five supporting Appendix A.5 leaves; all thirty-two are complete.
 The degree foundations through Proposition 2.29 are decomposed into sixteen
 additional leaves, all formalized locally and complete. The local-degree
-continuation through Proposition 2.30 has twenty complete leaves. A new
+continuation through Proposition 2.30 has twenty complete leaves. The
 thirty-one-leaf degree-realization and suspension milestone covers Examples
-2.31–2.32, Proposition 2.33, and the pole local-degree consequence. Its two
-shared germ-invariance and singleton-fiber comparisons are complete;
-twenty-nine leaves remain unproved, while the remainder of the chapter stays queued.
+2.31–2.32, Proposition 2.33, and the pole local-degree consequence. All
+thirty-one leaves are complete; the remainder of the chapter stays queued.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -61,11 +60,11 @@ reduced homology calculation, no-retraction, and Brouwer. Its new
 covers properties (a)–(g), Theorem 2.28, and Proposition 2.29 in sixteen
 complete leaves. Its new
 [local-degree branch](computations-and-applications/local-degree/README.md)
-is complete in all twenty leaves. The new
+is complete in all twenty leaves. The completed
 [degree-realization and suspension branch](computations-and-applications/degree-realization-suspension/README.md)
 decomposes the pinch construction, integer circle powers, the natural
-suspension boundary, and its pole consequences into thirty-one leaves, of
-which two shared comparisons are complete and twenty-nine remain unproved.
+suspension boundary, and its pole consequences into thirty-one complete
+leaves.
 Cellular homology, later Mayer–Vietoris applications, and homology
 with coefficients remain queued.
 Invariance of domain belongs to out-of-scope Additional Topic §2.B.
@@ -80,8 +79,8 @@ Mayer–Vietoris, `Hₙ(Sⁿ)`, degree, and cellular homology remain outside the
 pinned library. The completed local excision milestone supplies the main input
 used by the Mayer–Vietoris branches; sphere homology is formalized locally and
 degree and local degree are formalized locally rather than claimed as
-upstream coverage. Degree realization and suspension are the next planned
-local continuation.
+upstream coverage. Degree realization and suspension are complete locally;
+cellular homology is the next queued continuation.
 
 ## Sections
 

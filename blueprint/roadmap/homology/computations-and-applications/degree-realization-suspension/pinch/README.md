@@ -6,7 +6,8 @@ article_id: af_9dc72540c52baa4c5f67ce3e
 
 Hatcher's Example 2.31 is realized by the actual complement-collapse quotient and a reflected fold. Geometric compactification bridges precede the unit-sign calculation, regular fibers, local signs, and the global degree formula.
 
-This branch contains 10 unproved formalizable leaves in dependency order.
+All 10 formalizable leaves in this branch are complete, including the actual
+geometric sphere map of every integer degree and the empty-family case.
 
 ## Formalization units
 

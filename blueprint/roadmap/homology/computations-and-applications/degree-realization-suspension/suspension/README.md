@@ -6,7 +6,9 @@ article_id: af_d276e1b397f3d916bb933cda
 
 Hatcher's Proposition 2.33 uses the cone-base pair's natural reduced boundary isomorphism. The genuine quotient sphere map preserves height, giving singleton pole fibers and the final arbitrary-local-degree consequence.
 
-This branch contains 9 unproved formalizable leaves in dependency order.
+All 9 formalizable leaves in this branch are complete. One genuine
+suspension realizes each integer as local degree at both existing poles,
+with derived isolation and equality for every isolation witness.
 
 ## Formalization units
 

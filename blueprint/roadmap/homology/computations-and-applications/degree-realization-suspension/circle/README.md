@@ -6,7 +6,8 @@ article_id: af_346f0a9d807a720dc54264df
 
 Hatcher's Example 2.32 computes the signed homological degree of z ↦ z^d. The branch separates root geometry and local positive stretching from the integer calculation; zero powers never enter the finite-fiber argument.
 
-This branch contains 9 unproved formalizable leaves in dependency order.
+All 9 formalizable leaves in this branch are complete. The signed degree
+calculation includes positive, negative and zero exponents.
 
 ## Formalization units
 

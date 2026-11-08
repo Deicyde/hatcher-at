@@ -11,9 +11,11 @@ local degree in sphere dimension at least two.
 
 This milestone decomposes the whole passage from Example 2.31 to the paragraph
 immediately before Cellular Homology into thirty-one formalizable leaves.
-The twenty-leaf local-degree milestone is complete. This continuation has two
-complete leaves, germ invariance and the singleton-fiber comparison, and
-twenty-nine unproved leaves.
+The twenty-leaf local-degree milestone and all thirty-one leaves of this
+continuation are complete. The proof chain includes the geometric pinch and
+signed fold, regular fibers and local signs, integer circle powers, the
+natural suspension boundary and degree preservation, and arbitrary signed
+local degrees at both poles.
 
 ## Local comparison lemmas
 
