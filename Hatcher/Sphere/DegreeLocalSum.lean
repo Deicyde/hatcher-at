@@ -621,3 +621,191 @@ theorem self_map_zero {n : ℕ} {hn : 0 < n}
 end SignedSphereFoldData
 
 end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+namespace SphereBallPinchData
+
+variable {n k : ℕ} {hn : 0 < n}
+
+private theorem signed_correction_inverse_ne_basepoint (D : SphereBallPinchData n hn k)
+    (σ : Fin k → ℤ) (i : Fin k) (y : TopCat.sphere.{0} n) (hy : y ≠ D.b) :
+    (D.signedCorrectionIso σ i).inv y ≠ D.b := by
+  intro h
+  have heq := congrArg (fun x => (D.signedCorrectionIso σ i).hom x) h
+  have hleft : (D.signedCorrectionIso σ i).hom ((D.signedCorrectionIso σ i).inv y) = y :=
+    TopCat.inv_hom_id_apply (D.signedCorrectionIso σ i) y
+  have hright : (D.signedCorrectionIso σ i).hom D.b = D.b :=
+    D.signed_correction_apply_basepoint σ i
+  exact hy (hleft.symm.trans (heq.trans hright))
+
+/-- The actual point of the ith ball over a regular target, obtained by applying
+its chart inverse to the inverse correction of that target. -/
+noncomputable def signedRegularBallPoint (D : SphereBallPinchData n hn k)
+    (σ : Fin k → ℤ) (y : TopCat.sphere.{0} n) (hy : y ≠ D.b) (i : Fin k) :
+    sphereBallOpen hn D.b i :=
+  (D.ballChart i).symm
+    ⟨(D.signedCorrectionIso σ i).inv y, by
+      simpa only [Set.mem_compl_iff, Set.mem_singleton_iff] using
+        signed_correction_inverse_ne_basepoint D σ i y hy⟩
+
+private theorem signed_regular_ball_point_chart (D : SphereBallPinchData n hn k)
+    (σ : Fin k → ℤ) (y : TopCat.sphere.{0} n) (hy : y ≠ D.b) (i : Fin k) :
+    (D.ballChart i (D.signedRegularBallPoint σ y hy i)).1 =
+      (D.signedCorrectionIso σ i).inv y := by
+  exact congrArg Subtype.val ((D.ballChart i).apply_symm_apply _)
+
+end SphereBallPinchData
+
+namespace SignedSphereFoldData
+
+variable {n k : ℕ} {hn : 0 < n}
+  {D : SphereBallPinchData n hn k} {σ : Fin k → ℤ}
+
+private theorem regular_ball_point_image (F : SignedSphereFoldData D σ)
+    (y : TopCat.sphere.{0} n) (hy : y ≠ D.b) (i : Fin k) :
+    F.selfMap (D.signedRegularBallPoint σ y hy i).1 = y := by
+  have hmap := F.self_map_apply_ball i (D.signedRegularBallPoint σ y hy i)
+  have hc := D.component_collapse_apply_ball i (D.signedRegularBallPoint σ y hy i)
+  calc
+    F.selfMap (D.signedRegularBallPoint σ y hy i).1 =
+        (D.signedCorrectionIso σ i).hom
+          (D.componentCollapse i (D.signedRegularBallPoint σ y hy i).1) := hmap
+    _ = (D.signedCorrectionIso σ i).hom
+          (D.ballChart i (D.signedRegularBallPoint σ y hy i)).1 :=
+      congrArg (fun x => (D.signedCorrectionIso σ i).hom x) hc
+    _ = (D.signedCorrectionIso σ i).hom ((D.signedCorrectionIso σ i).inv y) :=
+      congrArg (fun x => (D.signedCorrectionIso σ i).hom x)
+        (SphereBallPinchData.signed_regular_ball_point_chart D σ y hy i)
+    _ = y := TopCat.inv_hom_id_apply (D.signedCorrectionIso σ i) y
+
+/-- The explicitly constructed point of the actual signed-map fiber indexed by
+an actual ball. -/
+noncomputable def regularFiberPoint (F : SignedSphereFoldData D σ)
+    (y : TopCat.sphere.{0} n) (hy : y ≠ D.b) (i : Fin k) :
+    fiber (TopCat.ofHom F.selfMap) y :=
+  ⟨(D.signedRegularBallPoint σ y hy i).1, by
+    apply mem_fiber.mpr
+    exact regular_ball_point_image F y hy i⟩
+
+private theorem regular_fiber_point_bijective (F : SignedSphereFoldData D σ)
+    (y : TopCat.sphere.{0} n) (hy : y ≠ D.b) :
+    Function.Bijective (F.regularFiberPoint y hy) := by
+  constructor
+  · intro i j hij
+    by_contra hne
+    have hsource : (D.signedRegularBallPoint σ y hy i).1 =
+        (D.signedRegularBallPoint σ y hy j).1 := congrArg Subtype.val hij
+    have hclosed_i : (D.signedRegularBallPoint σ y hy i).1 ∈ sphereBallClosed hn D.b i :=
+      Set.image_mono Metric.ball_subset_closedBall
+        (D.signedRegularBallPoint σ y hy i).property
+    have hclosed_j : (D.signedRegularBallPoint σ y hy i).1 ∈ sphereBallClosed hn D.b j := by
+      rw [hsource]
+      exact Set.image_mono Metric.ball_subset_closedBall
+        (D.signedRegularBallPoint σ y hy j).property
+    exact Set.disjoint_left.mp (D.closed_disjoint hne) hclosed_i hclosed_j
+  · intro z
+    have hz : F.selfMap z.1 = y := mem_fiber.mp z.property
+    have hzV : z.1 ∈ sphereBallUnion n hn k D.b := by
+      by_contra hzV
+      have hconst := F.self_map_apply_compl z.1 hzV
+      exact hy (hz.symm.trans hconst)
+    rcases Set.mem_iUnion.mp hzV with ⟨i, hzi⟩
+    let u : sphereBallOpen hn D.b i := ⟨z.1, hzi⟩
+    have hcorr : (D.signedCorrectionIso σ i).hom (D.ballChart i u).1 = y := by
+      calc
+        (D.signedCorrectionIso σ i).hom (D.ballChart i u).1 =
+            (D.signedCorrectionIso σ i).hom (D.componentCollapse i u.1) :=
+          congrArg (fun x => (D.signedCorrectionIso σ i).hom x)
+            (D.component_collapse_apply_ball i u).symm
+        _ = F.selfMap u.1 := (F.self_map_apply_ball i u).symm
+        _ = y := hz
+    have hchart_val : (D.ballChart i u).1 =
+        (D.signedCorrectionIso σ i).inv y := by
+      have hi := congrArg (fun x => (D.signedCorrectionIso σ i).inv x) hcorr
+      exact (TopCat.hom_inv_id_apply (D.signedCorrectionIso σ i)
+        (D.ballChart i u).1).symm.trans hi
+    have hchart : D.ballChart i u =
+        D.ballChart i (D.signedRegularBallPoint σ y hy i) := by
+      apply Subtype.ext
+      exact hchart_val.trans
+        (SphereBallPinchData.signed_regular_ball_point_chart D σ y hy i).symm
+    have hu : u = D.signedRegularBallPoint σ y hy i := (D.ballChart i).injective hchart
+    refine ⟨i, ?_⟩
+    apply Subtype.ext
+    exact (congrArg Subtype.val hu).symm
+
+/-- The actual regular signed-map fiber is equivalent to the prescribed ball
+index set; the inverse is the explicit point construction. -/
+noncomputable def regularFiberEquiv (F : SignedSphereFoldData D σ)
+    (y : TopCat.sphere.{0} n) (hy : y ≠ D.b) :
+    fiber (TopCat.ofHom F.selfMap) y ≃ Fin k :=
+  (Equiv.ofBijective (F.regularFiberPoint y hy)
+    (regular_fiber_point_bijective F y hy)).symm
+
+@[simp]
+theorem regular_fiber_equiv_apply_point (F : SignedSphereFoldData D σ)
+    (y : TopCat.sphere.{0} n) (hy : y ≠ D.b) (i : Fin k) :
+    F.regularFiberEquiv y hy (F.regularFiberPoint y hy i) = i :=
+  (Equiv.ofBijective (F.regularFiberPoint y hy)
+    (regular_fiber_point_bijective F y hy)).symm_apply_apply i
+
+@[simp]
+theorem regular_fiber_point_apply_index (F : SignedSphereFoldData D σ)
+    (y : TopCat.sphere.{0} n) (hy : y ≠ D.b)
+    (z : fiber (TopCat.ofHom F.selfMap) y) :
+    F.regularFiberPoint y hy (F.regularFiberEquiv y hy z) = z :=
+  (Equiv.ofBijective (F.regularFiberPoint y hy)
+    (regular_fiber_point_bijective F y hy)).apply_symm_apply z
+
+/-- The inverse equivalence has the required chart/correction inverse formula
+and lies in its actual indexed open ball. -/
+theorem regular_fiber_equiv_symm_point (F : SignedSphereFoldData D σ)
+    (y : TopCat.sphere.{0} n) (hy : y ≠ D.b) (i : Fin k) :
+    ((F.regularFiberEquiv y hy).symm i).1 =
+        (D.signedRegularBallPoint σ y hy i).1 ∧
+      ((F.regularFiberEquiv y hy).symm i).1 ∈ sphereBallOpen hn D.b i := by
+  constructor
+  · rfl
+  · exact (D.signedRegularBallPoint σ y hy i).property
+
+/-- Finiteness is derived from the actual regular fiber equivalence. -/
+theorem regular_fiber_finite (F : SignedSphereFoldData D σ)
+    (y : TopCat.sphere.{0} n) (hy : y ≠ D.b) :
+    (fiber (TopCat.ofHom F.selfMap) y).Finite := by
+  classical
+  let : Fintype (fiber (TopCat.ofHom F.selfMap) y) :=
+    Fintype.ofEquiv (Fin k) (F.regularFiberEquiv y hy).symm
+  exact Set.toFinite _
+
+/-- For no balls the literal regular fiber is empty. -/
+theorem regular_fiber_zero {n : ℕ} {hn : 0 < n}
+    {D : SphereBallPinchData n hn 0} {σ : Fin 0 → ℤ}
+    (F : SignedSphereFoldData D σ) (y : TopCat.sphere.{0} n) (hy : y ≠ D.b) :
+    fiber (TopCat.ofHom F.selfMap) y = ∅ := by
+  ext x
+  constructor
+  · intro hx
+    exact Fin.elim0 (F.regularFiberEquiv y hy ⟨x, hx⟩)
+  · intro hx
+    simpa only [Set.mem_empty_iff_false] using hx
+
+end SignedSphereFoldData
+
+/-- The actual regular fiber of the canonical signed sphere pinch has exactly
+one point in each prescribed ball, with its explicit correction/chart inverse. -/
+theorem sphere_signed_pinch_fiber (n : ℕ) (hn : 0 < n) (k : ℕ)
+    (σ : Fin k → ℤ) (hσ : ∀ i, σ i = 1 ∨ σ i = -1)
+    (y : TopCat.sphere.{0} n) (hy : y ≠ (sphereBallPinch n hn k).b) :
+    ∃ E : fiber (TopCat.ofHom (signedSphereFoldMap n hn k σ hσ).selfMap) y ≃ Fin k,
+      (∀ i : Fin k,
+        (E.symm i).1 =
+            ((sphereBallPinch n hn k).signedRegularBallPoint σ y hy i).1 ∧
+          (E.symm i).1 ∈ sphereBallOpen hn (sphereBallPinch n hn k).b i) ∧
+      (fiber (TopCat.ofHom (signedSphereFoldMap n hn k σ hσ).selfMap) y).Finite := by
+  let F := signedSphereFoldMap n hn k σ hσ
+  exact ⟨F.regularFiberEquiv y hy,
+    (fun i => F.regular_fiber_equiv_symm_point y hy i),
+    F.regular_fiber_finite y hy⟩
+
+end Hatcher.Sphere
