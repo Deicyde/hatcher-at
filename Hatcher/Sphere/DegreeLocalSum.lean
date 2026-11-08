@@ -917,3 +917,50 @@ theorem sphere_signed_pinch_local_degree (n : ℕ) (hn : 0 < n) (k : ℕ)
   (signedSphereFoldMap n hn k σ hσ).regular_point_local_degree y hy i
 
 end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+namespace SignedSphereFoldData
+
+variable {n k : ℕ} {hn : 0 < n}
+  {D : SphereBallPinchData n hn k} {σ : Fin k → ℤ}
+
+/-- The actual signed pinch-and-fold map has degree equal to the sum of its
+prescribed local signs, with the empty family included. -/
+theorem degree_eq_sum_signs (F : SignedSphereFoldData D σ) :
+    degree n hn (TopCat.ofHom F.selfMap) = ∑ i : Fin k, σ i := by
+  classical
+  let f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n := TopCat.ofHom F.selfMap
+  let y₀ : ({D.b}ᶜ : Set (TopCat.sphere.{0} n)) :=
+    (puncturedSphereHomeomorphEuclidean n D.b).symm 0
+  let y : TopCat.sphere.{0} n := y₀.1
+  have hy : y ≠ D.b := by
+    simpa only [Set.mem_compl_iff, Set.mem_singleton_iff] using y₀.property
+  let E : fiber f y ≃ Fin k := F.regularFiberEquiv y hy
+  have hfinite : (fiber f y).Finite := F.regular_fiber_finite y hy
+  let : Fintype (fiber f y) := finiteFiberFintype hfinite
+  let a (z : fiber f y) : ℤ :=
+    localDegree n hn f z.1 y (finiteFiberIsolatedPreimage f y hfinite z)
+  have hpoint (z : fiber f y) : F.regularFiberPoint y hy (E z) = z :=
+    F.regular_fiber_point_apply_index y hy z
+  have hlocal (z : fiber f y) : a z = σ (E z) := by
+    have hl := F.regular_point_local_degree y hy (E z)
+    rw [hpoint z] at hl
+    exact hl.2 (finiteFiberIsolatedPreimage f y hfinite z)
+  have hsum := degree_eq_sum_localDegree n hn f y hfinite
+  change degree n hn f = ∑ z : fiber f y, a z at hsum
+  change degree n hn f = ∑ i : Fin k, σ i
+  exact hsum.trans (Fintype.sum_equiv E a σ hlocal)
+
+end SignedSphereFoldData
+
+/-- **Hatcher, Example 2.31 (printed page 136).** The canonical geometric signed
+pinch has degree equal to the sum of its unit signs. -/
+theorem sphere_signed_pinch_degree_sum
+    (n : ℕ) (hn : 0 < n) (k : ℕ) (σ : Fin k → ℤ)
+    (hσ : ∀ i, σ i = 1 ∨ σ i = -1) :
+    degree n hn (TopCat.ofHom (signedSphereFoldMap n hn k σ hσ).selfMap) =
+      ∑ i : Fin k, σ i :=
+  (signedSphereFoldMap n hn k σ hσ).degree_eq_sum_signs
+
+end Hatcher.Sphere
