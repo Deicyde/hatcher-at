@@ -94,6 +94,61 @@ def main() -> None:
     (artifacts / "manifest.json").write_text(
         json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
     )
+    additional_path = root / "scripts" / "formalize_additional_targets.json"
+    additional = []
+    if additional_path.exists():
+        if not additional_path.is_file() or additional_path.is_symlink():
+            parser.error("additional evidence selections must be a regular file")
+        selections = json.loads(additional_path.read_text(encoding="utf-8"))
+        if selections.get("schema") != "hatcher-additional-evidence/v1" or not isinstance(
+                selections.get("articles"), list):
+            parser.error("invalid additional evidence selection schema")
+        seen = {args.article_id}
+        for selected in selections["articles"]:
+            article_id = selected.get("article_id")
+            module = selected.get("module")
+            declarations = selected.get("declarations")
+            if (not isinstance(article_id, str) or not re.fullmatch(r"af_[0-9a-f]{24}", article_id)
+                    or article_id in seen):
+                parser.error("invalid or duplicate additional article ID")
+            seen.add(article_id)
+            if not isinstance(module, str) or not re.fullmatch(lean_name, module):
+                parser.error("invalid additional module")
+            if (not isinstance(declarations, list) or not declarations
+                    or any(not isinstance(name, str) or not re.fullmatch(lean_name, name)
+                           for name in declarations)
+                    or len(set(declarations)) != len(declarations)):
+                parser.error("invalid additional declarations")
+            matches = []
+            for path in (blueprint / "roadmap").rglob("*.md"):
+                text = path.read_text(encoding="utf-8")
+                end = text.find("\n---\n", 4) if text.startswith("---\n") else -1
+                if end >= 0 and f"article_id: {article_id}" in text[4:end].splitlines():
+                    matches.append(path)
+            if len(matches) != 1:
+                parser.error("additional article ID must identify exactly one article")
+            selected_article = matches[0]
+            text = selected_article.read_text(encoding="utf-8")
+            end = text.index("\n---\n", 4)
+            mapping = "lean: " + ", ".join(declarations)
+            old_mappings = [line for line in text[4:end].splitlines() if line.startswith("lean:")]
+            if old_mappings and old_mappings != [mapping]:
+                parser.error("additional article already maps different declarations")
+            if not old_mappings:
+                selected_article.write_text(text[:end] + "\n" + mapping + text[end:], encoding="utf-8")
+            selected_source = root.joinpath(*module.split(".")).with_suffix(".lean")
+            if not selected_source.is_file() or selected_source.is_symlink():
+                parser.error("additional module must have a regular project source")
+            additional.append({
+                **manifest, "article_id": article_id,
+                "article_path": selected_article.relative_to(blueprint).as_posix(),
+                "module": module, "declaration": declarations[0], "declarations": declarations,
+                "lean_source_sha256": hashlib.sha256(selected_source.read_bytes()).hexdigest(),
+                "review_projection_added_target_mapping": not old_mappings,
+            })
+        (artifacts / "additional-manifest.json").write_text(
+            json.dumps({"schema": "hatcher-additional-evidence/v1", "articles": additional}, indent=2)
+            + "\n", encoding="utf-8")
     if args.prepare_only:
         print("Review projection prepared; no Lean command was run.")
         return
@@ -107,6 +162,14 @@ def main() -> None:
         encoding="utf-8",
     )
     run(["lake", "env", "lean", str(probe)], artifacts / "axioms-and-lint.txt")
+    for selected in additional:
+        selected_probe = destination / (selected["article_id"] + "Checks.lean")
+        selected_probe.write_text(
+            f"import {selected['module']}\nimport Batteries.Tactic.Lint\n\n"
+            + "".join(f"#print axioms {name}\n" for name in selected["declarations"])
+            + f"#lint only unusedArguments in {selected['module']}\n", encoding="utf-8")
+        run(["lake", "env", "lean", str(selected_probe)],
+            artifacts / (selected["article_id"] + "-axioms-and-lint.txt"))
     autoform = [
         "uvx", "--from",
         "git+https://github.com/facebookresearch/autoform-bot.git@"

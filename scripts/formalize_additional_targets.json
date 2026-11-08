@@ -1,0 +1,50 @@
+{
+  "schema": "hatcher-additional-evidence/v1",
+  "articles": [
+    {
+      "article_id": "af_816a860dce27fb50bd0ec80d",
+      "module": "Hatcher.Sphere.DegreeLocalSum",
+      "declarations": [
+        "Hatcher.Sphere.sphere_signed_pinch_fiber",
+        "Hatcher.Sphere.SphereBallPinchData.signedRegularBallPoint",
+        "Hatcher.Sphere.SignedSphereFoldData.regularFiberPoint",
+        "Hatcher.Sphere.SignedSphereFoldData.regularFiberEquiv",
+        "Hatcher.Sphere.SignedSphereFoldData.regular_fiber_equiv_apply_point",
+        "Hatcher.Sphere.SignedSphereFoldData.regular_fiber_point_apply_index",
+        "Hatcher.Sphere.SignedSphereFoldData.regular_fiber_equiv_symm_point",
+        "Hatcher.Sphere.SignedSphereFoldData.regular_fiber_finite",
+        "Hatcher.Sphere.SignedSphereFoldData.regular_fiber_zero"
+      ]
+    },
+    {
+      "article_id": "af_cbbb5f2c6b7cb6da153db1c5",
+      "module": "Hatcher.Sphere.DegreeLocalSum",
+      "declarations": [
+        "Hatcher.Sphere.sphere_signed_pinch_local_degree",
+        "Hatcher.Sphere.SignedSphereFoldData.regular_point_local_degree"
+      ]
+    },
+    {
+      "article_id": "af_28aa787eaafee642920f2b12",
+      "module": "Hatcher.Sphere.DegreeLocalSum",
+      "declarations": [
+        "Hatcher.Sphere.sphere_signed_pinch_degree_sum",
+        "Hatcher.Sphere.SignedSphereFoldData.degree_eq_sum_signs"
+      ]
+    },
+    {
+      "article_id": "af_c25fd700a7f3e9d9ce373eb6",
+      "module": "Hatcher.Sphere.DegreeLocalSum",
+      "declarations": [
+        "Hatcher.Sphere.sphere_degree_realization"
+      ]
+    },
+    {
+      "article_id": "af_2d6e95c5e95928f553b35e71",
+      "module": "Hatcher.Sphere.DegreeLocalSum",
+      "declarations": [
+        "Hatcher.Sphere.sphere_local_degree_realization_succ_succ"
+      ]
+    }
+  ]
+}

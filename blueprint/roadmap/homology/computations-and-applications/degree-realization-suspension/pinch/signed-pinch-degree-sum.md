@@ -2,6 +2,9 @@
 article_id: af_28aa787eaafee642920f2b12
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.sphere_signed_pinch_degree_sum, Hatcher.Sphere.SignedSphereFoldData.degree_eq_sum_signs
 ---
 
 # The degree of a signed pinch map is the sum of its signs

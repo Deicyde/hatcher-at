@@ -2,6 +2,8 @@
 article_id: af_9c72fd7cc56bcc576a868ebe
 declaration: def
 origin: cited
+statement: formalized
+lean: Hatcher.Sphere.signedSphereFoldMap, Hatcher.Sphere.SphereBallPinchData.zeroth_reflection_apply_basepoint, Hatcher.Sphere.SphereBallPinchData.signedCorrectionIso, Hatcher.Sphere.SphereBallPinchData.signed_correction_apply_basepoint, Hatcher.Sphere.SphereBallPinchData.signed_corrected_component_degree, Hatcher.Sphere.SphereBallPinchData.basedSignedFold, Hatcher.Sphere.SphereBallPinchData.based_signed_fold_apply_basepoint, Hatcher.Sphere.SphereBallPinchData.based_signed_fold_apply_inclusion, Hatcher.Sphere.SignedSphereFoldData, Hatcher.Sphere.SignedSphereFoldData.selfMap, Hatcher.Sphere.SignedSphereFoldData.self_map_apply_ball, Hatcher.Sphere.SignedSphereFoldData.self_map_apply_compl, Hatcher.Sphere.SignedSphereFoldData.self_map_apply_basepoint, Hatcher.Sphere.SignedSphereFoldData.self_map_zero
 ---
 
 # Reflections correct the signs of a sphere fold map

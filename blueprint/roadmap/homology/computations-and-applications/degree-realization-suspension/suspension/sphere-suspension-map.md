@@ -2,6 +2,8 @@
 article_id: af_05d0454bfa12070e4397bbb7
 declaration: def
 origin: cited
+statement: formalized
+lean: Hatcher.Sphere.sphereSuspensionMap, Hatcher.Sphere.sphereSuspensionProjection, Hatcher.Sphere.sphere_suspension_map_quotient, Hatcher.Sphere.sphere_suspension_map_ambient_naturality, Hatcher.Sphere.sphere_suspension_map_cylinder, Hatcher.Sphere.sphere_suspension_map_north_pole, Hatcher.Sphere.sphere_suspension_map_south_pole, Hatcher.Sphere.sphere_suspension_map_id, Hatcher.Sphere.sphere_suspension_map_comp
 ---
 
 # A sphere map induces its genuine suspension map
