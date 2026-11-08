@@ -1,0 +1,20 @@
+{
+  "schema": "hatcher-additional-evidence/v1",
+  "articles": [
+    {
+      "article_id": "af_816a860dce27fb50bd0ec80d",
+      "module": "Hatcher.Sphere.DegreeLocalSum",
+      "declarations": [
+        "Hatcher.Sphere.sphere_signed_pinch_fiber",
+        "Hatcher.Sphere.SphereBallPinchData.signedRegularBallPoint",
+        "Hatcher.Sphere.SignedSphereFoldData.regularFiberPoint",
+        "Hatcher.Sphere.SignedSphereFoldData.regularFiberEquiv",
+        "Hatcher.Sphere.SignedSphereFoldData.regular_fiber_equiv_apply_point",
+        "Hatcher.Sphere.SignedSphereFoldData.regular_fiber_point_apply_index",
+        "Hatcher.Sphere.SignedSphereFoldData.regular_fiber_equiv_symm_point",
+        "Hatcher.Sphere.SignedSphereFoldData.regular_fiber_finite",
+        "Hatcher.Sphere.SignedSphereFoldData.regular_fiber_zero"
+      ]
+    }
+  ]
+}
