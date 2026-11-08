@@ -1006,3 +1006,48 @@ theorem sphere_degree_realization (n : ℕ) (hn : 0 < n) (d : ℤ) :
             Fintype.card_fin, Int.nsmul_eq_mul, mul_neg, mul_one]
 
 end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+/-- **Hatcher, the pole observation after Proposition 2.33.** Every integer
+is the signed local degree at both existing poles of one actual suspension
+in sphere dimension `n + 2`. Its singleton fibers derive isolation, and the
+equalities hold for every isolation witness. -/
+theorem sphere_local_degree_realization_succ_succ (n : ℕ) (d : ℤ) :
+    ∃ F : TopCat.sphere.{0} (n + 2) ⟶ TopCat.sphere.{0} (n + 2),
+      F (northPole.{0} (n + 1)) = northPole.{0} (n + 1) ∧
+      F (southPole.{0} (n + 1)) = southPole.{0} (n + 1) ∧
+      F ⁻¹' {northPole.{0} (n + 1)} = {northPole.{0} (n + 1)} ∧
+      F ⁻¹' {southPole.{0} (n + 1)} = {southPole.{0} (n + 1)} ∧
+      IsolatedPreimage F (northPole.{0} (n + 1)) (northPole.{0} (n + 1)) ∧
+      IsolatedPreimage F (southPole.{0} (n + 1)) (southPole.{0} (n + 1)) ∧
+      (∀ h : IsolatedPreimage F
+          (northPole.{0} (n + 1)) (northPole.{0} (n + 1)),
+        localDegree (n + 2) (Nat.zero_lt_succ (n + 1)) F
+          (northPole.{0} (n + 1)) (northPole.{0} (n + 1)) h = d) ∧
+      (∀ h : IsolatedPreimage F
+          (southPole.{0} (n + 1)) (southPole.{0} (n + 1)),
+        localDegree (n + 2) (Nat.zero_lt_succ (n + 1)) F
+          (southPole.{0} (n + 1)) (southPole.{0} (n + 1)) h = d) := by
+  obtain ⟨f, hf⟩ := sphere_degree_realization
+    (n + 1) (Nat.zero_lt_succ n) d
+  let F : TopCat.sphere.{0} (n + 2) ⟶ TopCat.sphere.{0} (n + 2) :=
+    sphereSuspensionMap (n + 1) f
+  have hdeg : degree (n + 2) (Nat.zero_lt_succ (n + 1)) F = d :=
+    (sphere_suspension_preserves_degree (n + 1) (Nat.zero_lt_succ n) f).trans hf
+  have hN := sphere_suspension_pole_local_degree (n + 1) f
+    (northPole.{0} (n + 1)) (Or.inl rfl)
+  have hS := sphere_suspension_pole_local_degree (n + 1) f
+    (southPole.{0} (n + 1)) (Or.inr rfl)
+  refine ⟨F,
+    sphere_suspension_map_north_pole (n + 1) f,
+    sphere_suspension_map_south_pole (n + 1) f,
+    (sphere_suspension_pole_fibers (n + 1) f).1,
+    (sphere_suspension_pole_fibers (n + 1) f).2,
+    hN.1, hS.1, ?_, ?_⟩
+  · intro h
+    exact (hN.2 h).trans hdeg
+  · intro h
+    exact (hS.2 h).trans hdeg
+
+end Hatcher.Sphere
