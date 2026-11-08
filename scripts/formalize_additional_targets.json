@@ -31,6 +31,13 @@
         "Hatcher.Sphere.sphere_signed_pinch_degree_sum",
         "Hatcher.Sphere.SignedSphereFoldData.degree_eq_sum_signs"
       ]
+    },
+    {
+      "article_id": "af_c25fd700a7f3e9d9ce373eb6",
+      "module": "Hatcher.Sphere.DegreeLocalSum",
+      "declarations": [
+        "Hatcher.Sphere.sphere_degree_realization"
+      ]
     }
   ]
 }
