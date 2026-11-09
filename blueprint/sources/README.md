@@ -28,7 +28,12 @@ The project formalizes results from a single reference.
   consequence on printed pages 136–137.
 - [Degree-realization and suspension specification](degree-applications-implementation.md)
   fixes the genuine pinch, circle-power, cone-map, and local comparison
-  models of the next thirty-one-leaf milestone.
+  models of the completed thirty-one-leaf milestone.
+- [Hatcher §2.2, Cellular homology](hatcher-2-2-cellular.md) records Lemma
+  2.34, the cellular complex and Theorem 2.35 on printed pages 137–140.
+- [Cellular-homology implementation specification](cellular-homology-implementation.md)
+  fixes actual skeleta and cell generators, empty cases, finite-support
+  chain lifting and the canonical comparison for the fifteen planned leaves.
 - [Hatcher Appendix Proposition A.5](hatcher-appendix-a5.md) records the
   regular-neighborhood deformation retraction and intersection identity used
   by CW-subcomplex excision.

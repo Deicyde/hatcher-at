@@ -176,6 +176,34 @@ def main() -> None:
         + manifest["autoform_ref"],
         "autoform",
     ]
+    import_selections_path = root / "scripts" / "formalize_import_targets.json"
+    if import_selections_path.exists():
+        if not import_selections_path.is_file() or import_selections_path.is_symlink():
+            parser.error("import evidence selections must be a regular file")
+        import_selections = json.loads(import_selections_path.read_text(encoding="utf-8"))
+        if (import_selections.get("schema") != "hatcher-import-evidence/v1"
+                or not isinstance(import_selections.get("targets"), list)):
+            parser.error("invalid import evidence selection schema")
+        seen_imports = set()
+        for selected in import_selections["targets"]:
+            article_id = selected.get("article_id")
+            module = selected.get("module")
+            if (not isinstance(article_id, str) or not re.fullmatch(r"af_[0-9a-f]{24}", article_id)
+                    or not isinstance(module, str) or not re.fullmatch(lean_name, module)
+                    or article_id in seen_imports):
+                parser.error("invalid or duplicate import evidence target")
+            seen_imports.add(article_id)
+            impact = subprocess.run(
+                autoform + ["work", "import-impact", article_id, module, str(root),
+                            "--lean-root", str(root), "--json"],
+                capture_output=True, text=True)
+            print(impact.stdout, end="", flush=True)
+            print(impact.stderr, end="", flush=True)
+            if impact.returncode:
+                raise SystemExit(impact.returncode)
+            json.loads(impact.stdout)
+            (artifacts / (article_id + "-import-impact.json")).write_text(
+                impact.stdout, encoding="utf-8")
     run(autoform + ["check", str(blueprint), "--lean-root", str(root)],
         artifacts / "check.txt")
     run(autoform + [

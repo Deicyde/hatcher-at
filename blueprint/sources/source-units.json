@@ -3,7 +3,7 @@
   "description": "Preserved source accounting from the legacy Autoform workspace.",
   "legacy_workspace_manifest": "schema = \"autoform-workspace/v1\"\n\n[locations.\"blueprints\"]\npath = \"blueprints\"\nprovides = [\"blueprints\"]\n\n[projects]\n[projects.\"hatcher\"]\ntitle = \"Algebraic Topology (Hatcher)\"\nblueprint = {location = \"blueprints\", path = \"hatcher\"}\n",
   "artifact": "sources/hatcher-execution-scope.txt",
-  "artifact_sha256": "7bfbb55721ca5d603113948c8d3c532d546a949854cb62de37676fa98ddd6056",
+  "artifact_sha256": "9fc49e624622d830c8158505603804fd377bf87920f30c03981c3f6ce7529f30",
   "units": [
     {
       "unit": "hatcher-1-1-basic-constructions",
@@ -301,6 +301,15 @@
       "locator": "Exercise sets throughout Hatcher",
       "unit_sha256": "6b62bc779713d6145d530fd369f5e6dfa8c241f508a7a4138ad3874d520a0fe7",
       "coverage": "OUT"
+    },
+    {
+      "unit": "hatcher-2-2-cellular-homology",
+      "area": "§2.2 cellular homology through Theorem 2.35",
+      "start_line": 34,
+      "end_line": 34,
+      "locator": "Hatcher §2.2, Lemma 2.34(a,b,c), cellular chain complex and Theorem 2.35, printed pages 137–140",
+      "unit_sha256": "ce9a8de7395d07dafecca03e5039839b0cfd1098d18c94d9d1a876a4a039c1fb",
+      "coverage": "DECOMPOSED"
     }
   ],
   "articles": {
@@ -2097,6 +2106,96 @@
       "path": "roadmap/homology/simplicial-and-singular/zeroth-homology-components.md",
       "source_units": [
         "hatcher-2-1-selected-spine"
+      ]
+    },
+    "af_9e26af41f64573164e87e022": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/cellular-chain-complex.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_d17a273f91f8b9c2dc6da6d6": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/cellular-homology-comparison.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_8b76282ab7c960a7937a1a2a": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/disk-boundary-point-quotient.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_a5ded7ecaa7b856ace06f12b": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/finite-stage-homology-stability.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_f9845771da2365d6ff552919": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/nonempty-subcomplex-good-pair.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_07101a56629e9ad3a0c03550": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/positive-skeleton-relative-homology.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_401e1c6dfdf6e37cba588880": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/singular-chains-bounded-skeleton.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_1a9a1f72a7f37bbe2e0be027": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/skeleton-homology-vanishing.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_014295821647fd8a388f2ad4": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/skeleton-quotient-wedge.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_7b3b7e4204ac2cb6b6198976": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/skeleton-relative-homology.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_86dafc67e2c6c67093b0e86f": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/skeleton-step-homology-stability.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_802fb71f8d9fa8e8806b6612": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/skeleton-to-space-homology-stability.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_989591aa389447da1fa6d34d": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/sphere-point-good-pair.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_d7de7378b694809a2a726f47": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/zero-skeleton-discrete.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_70bc68672d03197021c19891": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/zero-skeleton-relative-homology.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
       ]
     }
   }

@@ -1,0 +1,9 @@
+{
+  "schema": "hatcher-import-evidence/v1",
+  "targets": [
+    {
+      "article_id": "af_f9845771da2365d6ff552919",
+      "module": "Hatcher.Singular.GoodPair"
+    }
+  ]
+}

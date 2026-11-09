@@ -5,19 +5,23 @@ Topology*, built on Mathlib. The book's text is not redistributed here.
 
 The main-line chapters and numbered sections are mapped in the
 [coverage contract](blueprint/coverage/README.md), not claimed fully
-formalized. The selected roadmap has 299 formalizable leaves: 270 are complete
-(252 proved locally and 18 supplied by pinned Mathlib), and 29 remain
-unproved. The completed scope includes the selected fundamental-group spines,
-homology, excision and quotient applications, degree foundations, and all
-twenty local-degree leaves through Proposition 2.30.
+formalized. The selected roadmap now has 314 formalizable leaves: 299 are
+complete (281 proved locally and 18 supplied by pinned Mathlib), and 15 are
+planned for cellular homology. The completed
+scope includes the selected fundamental-group spines, homology, excision and
+quotient applications, degree foundations, all twenty local-degree leaves
+through Proposition 2.30, and degree realization and suspension through
+Proposition 2.33 and its pole observation.
 
-The new [degree-realization and suspension milestone](blueprint/roadmap/homology/computations-and-applications/degree-realization-suspension/README.md)
-decomposes Examples 2.31–2.32, Proposition 2.33, and arbitrary local degrees at
-suspension poles. Its three construction branches reuse the proved signed
-degree-sum formula. Two of its thirty-one leaves, germ invariance and the
-singleton-fiber comparison, are complete; twenty-nine remain unproved.
-Thirteen other source areas remain queued; lettered
-additional topics and exercises remain outside scope.
+The completed [degree-realization and suspension milestone](blueprint/roadmap/homology/computations-and-applications/degree-realization-suspension/README.md)
+formalizes Examples 2.31–2.32, Proposition 2.33, and arbitrary local degrees at
+both suspension poles. All thirty-one leaves are complete, including actual
+geometric pinch maps, integer circle powers, the natural suspension boundary,
+and every-isolation-witness local-degree equalities.
+The next [cellular-homology milestone](blueprint/roadmap/homology/computations-and-applications/cellular-homology/README.md)
+covers Lemma 2.34, the cellular complex and Theorem 2.35 in fifteen unproved
+leaves. Thirteen residual source areas remain queued; lettered additional
+topics and exercises remain outside scope.
 
 [Browse the published formalization blueprint](https://deicyde.github.io/hatcher-at/)
 or [inspect its Markdown source](blueprint/README.md).
@@ -25,6 +29,6 @@ or [inspect its Markdown source](blueprint/README.md).
 Developed with [AutoformBot](https://github.com/facebookresearch/autoform-bot).
 
 The canonical vault is `blueprint/`. CI uses AutoformBot 0.6.0 at the immutable
-commit pinned in both workflows. The [source-unit index](blueprint/sources/source-units.json)
+commit in `.github/autoform-ref`, which both workflows read. The [source-unit index](blueprint/sources/source-units.json)
 preserves the legacy coverage locators, hashes, and article mappings; CI checks
 that provenance alongside the current Markdown format.

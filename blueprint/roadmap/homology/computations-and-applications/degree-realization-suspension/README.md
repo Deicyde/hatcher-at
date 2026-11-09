@@ -11,9 +11,11 @@ local degree in sphere dimension at least two.
 
 This milestone decomposes the whole passage from Example 2.31 to the paragraph
 immediately before Cellular Homology into thirty-one formalizable leaves.
-The twenty-leaf local-degree milestone is complete. This continuation has two
-complete leaves, germ invariance and the singleton-fiber comparison, and
-twenty-nine unproved leaves.
+The twenty-leaf local-degree milestone and all thirty-one leaves of this
+continuation are complete. The proof chain includes the geometric pinch and
+signed fold, regular fibers and local signs, integer circle powers, the
+natural suspension boundary and degree preservation, and arbitrary signed
+local degrees at both poles.
 
 ## Local comparison lemmas
 
@@ -35,9 +37,10 @@ suspension geometry, and the reduced boundary comparison, include S⁰. The
 local-degree realization conclusion begins in dimension two. Zero and negative
 integers, empty pinch families, and constant suspended maps are included.
 
-Cellular homology beginning with Lemma 2.34, the later §2.2 material, the Hopf
-converse, and Theorem 2.27 remain queued rather than excluded or blocked. The
-separate coverage rows retain those source areas.
+The next [cellular-homology milestone](../cellular-homology/README.md) plans
+Lemma 2.34, the cellular complex and Theorem 2.35. The later §2.2 material,
+the Hopf converse and Theorem 2.27 remain queued rather than excluded or
+blocked. Separate coverage rows retain those source areas.
 
 ## Sources
 

@@ -5,24 +5,24 @@ autoform_generated: true
 
 # Dependency summary
 
-307 articles in 6 chapters, with 2 dependencies between chapters. A chapter depends on another when one of its articles rests on one of the other's; "proof only" marks a dependency only a proof needs.
+322 articles in 6 chapters, with 3 dependencies between chapters. A chapter depends on another when one of its articles rests on one of the other's; "proof only" marks a dependency only a proof needs.
 
 | Status | Count | Meaning |
 | --- | ---: | --- |
 | in mathlib | 18 | Upstreamed into Mathlib. |
-| fully proved | 256 | Proved, and every prerequisite is fully proved too. |
-| ready to state | 5 | Everything its statement uses is in Lean, so the statement can be written in Lean. |
+| fully proved | 281 | Proved, and every prerequisite is fully proved too. |
+| ready to state | 6 | Everything its statement uses is in Lean, so the statement can be written in Lean. |
 | not ready | 8 | Needs more blueprint work before it can be attempted. |
-| planned | 20 | Described in the blueprint only. |
+| planned | 9 | Described in the blueprint only. |
 
 ## Chapters
 
 | Chapter | Items | Status | Ready | Depends on | Used by |
 | --- | ---: | --- | ---: | --- | --- |
-| [Appendix](roadmap/appendix/README.md) | 5 | 5 fully proved | 0 | none | The fundamental group (proof only) |
+| [Appendix](roadmap/appendix/README.md) | 5 | 5 fully proved | 0 | none | Homology (proof only), The fundamental group (proof only) |
 | [Cohomology](roadmap/cohomology/README.md) | 3 | 3 not ready | 0 | none | none |
 | [The fundamental group](roadmap/fundamental-group/README.md) | 118 | 8 in mathlib · 110 fully proved | 0 | Appendix (proof only) | Homology |
-| [Homology](roadmap/homology/README.md) | 177 | 10 in mathlib · 141 fully proved · 5 ready to state · 1 not ready · 20 planned | 5 | The fundamental group | none |
+| [Homology](roadmap/homology/README.md) | 192 | 10 in mathlib · 166 fully proved · 6 ready to state · 1 not ready · 9 planned | 6 | Appendix (proof only), The fundamental group | none |
 | [Homotopy theory](roadmap/homotopy-theory/README.md) | 3 | 3 not ready | 0 | none | none |
 | [Top level](roadmap/README.md) | 1 | 1 not ready | 0 | none | none |
 

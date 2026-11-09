@@ -15,10 +15,12 @@ regular-neighborhood leaves. All thirty-two are complete. The remainder of
 §2.2 now also has a sixteen-leaf degree-foundations milestone through
 Proposition 2.29. All sixteen leaves are formalized locally and complete; the
 local-degree continuation through Proposition 2.30 is complete in twenty
-leaves. The new thirty-one-leaf degree-realization and suspension milestone
-continues through Proposition 2.33 and its pole observation. Its germ-invariance
-and singleton-fiber comparisons are complete; twenty-nine leaves remain
-unproved. Cellular Homology and the later material remain queued.
+leaves. The completed thirty-one-leaf degree-realization and suspension
+milestone continues through Proposition 2.33 and its pole observation,
+including both-pole realization of every integer local degree. The next
+fifteen-leaf cellular-homology milestone covers Lemma 2.34, the cellular
+complex and Theorem 2.35. These new leaves are unproved; later material
+remains queued.
 
 Given excision and the long exact sequence, homology becomes computable. From
 `Hₙ(Sⁿ) ≅ ℤ` comes the degree of a map `Sⁿ → Sⁿ`, with its local formula as a
@@ -53,7 +55,7 @@ ordered sphere class to define degree, calculate reflections and the antipodal
 map, prove the fixed-point-free formula, and reach Theorem 2.28 and Proposition
 2.29. The [local-degree milestone](local-degree/README.md) then orients local
 homology and constructs the finite-puncture direct sum through the proved
-Proposition 2.30; all twenty leaves are complete. The new
+Proposition 2.30; all twenty leaves are complete. The completed
 [degree-realization and suspension milestone](degree-realization-suspension/README.md)
 uses these signed classes for the actual pinch-and-fold construction,
 integer circle powers, and the natural cone-boundary proof of Proposition
@@ -76,9 +78,11 @@ pinned Mathlib coverage nor a project dependency.
 - [Degree foundations and applications](degree/README.md)
 - [Local degree and the finite-fiber sum](local-degree/README.md)
 - [Prescribed degrees and suspension](degree-realization-suspension/README.md)
+- [Cellular homology through the singular comparison](cellular-homology/README.md)
 
-Cellular homology beginning with Lemma 2.34, the later Mayer–Vietoris
-applications, and homology with general coefficient groups remain queued.
+The cellular milestone stops at Theorem 2.35’s proof. Immediate applications,
+the attaching-map degree formula, later Mayer–Vietoris topics and homology
+with general coefficient groups remain queued.
 They are not user exclusions or externally blocked work.
 
 ## Sources

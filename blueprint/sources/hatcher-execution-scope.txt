@@ -31,3 +31,4 @@ appendix-proposition-a-5 — Appendix Proposition A.5 — Hatcher Appendix, Prop
 appendix-remainder — Appendix remainder — Hatcher Appendix except Propositions A.1 and A.5 — Deferred to a future roadmap milestone; the current appendix page is an informational map.
 lettered-additional-topics — Lettered additional topics — Hatcher §§1.A–4.L — Supplementary lettered sections are outside this project's main-line scope.
 exercises — Exercises — Exercise sets throughout Hatcher — Exercise sets are not source targets for this project.
+hatcher-2-2-cellular-homology — §2.2 cellular homology through Theorem 2.35 — Hatcher §2.2, printed pages 137–140 from Cellular Homology through the proof of Theorem 2.35 — Lemma 2.34(a,b,c), the actual cellular chain complex, and its singular-homology comparison are decomposed into fifteen formalizable leaves; the immediate applications remain queued.
