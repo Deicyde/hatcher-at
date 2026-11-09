@@ -45,6 +45,13 @@
       "declarations": [
         "Hatcher.Sphere.sphere_local_degree_realization_succ_succ"
       ]
+    },
+    {
+      "article_id": "af_f9845771da2365d6ff552919",
+      "module": "Hatcher.Singular.GoodPair",
+      "declarations": [
+        "Hatcher.ClassicalCW.subcomplex_isGoodPair"
+      ]
     }
   ]
 }
