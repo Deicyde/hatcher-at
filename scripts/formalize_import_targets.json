@@ -8,6 +8,14 @@
     {
       "article_id": "af_9e26af41f64573164e87e022",
       "module": "Hatcher.Singular.Relative"
+    },
+    {
+      "article_id": "af_989591aa389447da1fa6d34d",
+      "module": "Hatcher.Sphere.PuncturedStereographic"
+    },
+    {
+      "article_id": "af_70bc68672d03197021c19891",
+      "module": "Hatcher.Singular.SigmaRelativeChains"
     }
   ]
 }
