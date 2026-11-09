@@ -2,6 +2,9 @@
 article_id: af_9e26af41f64573164e87e022
 declaration: def
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.cellularChainComplex, Hatcher.ClassicalCW.cellularSkeletonPair, Hatcher.ClassicalCW.cellularChainObject, Hatcher.ClassicalCW.cellularDifferential, Hatcher.ClassicalCW.cellularDifferential_comp, Hatcher.ClassicalCW.cellularChainComplex_X, Hatcher.ClassicalCW.cellularChainComplex_d_succ, Hatcher.ClassicalCW.cellularChainComplex_d_eq_zero, Hatcher.ClassicalCW.cellularChainComplex_d_zero
 ---
 
 # The cellular complex is formed from skeletal relative homology
