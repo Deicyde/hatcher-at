@@ -5,6 +5,7 @@ Authors: Jack McCarthy
 -/
 
 import Hatcher.Topology.StrongDeformationRetract
+import Hatcher.Appendix.RegularNeighborhoodDeformation
 import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Mathlib.Topology.Category.TopPair
 
@@ -72,3 +73,98 @@ abbrev goodPairForget : GoodPair.{u} ⥤ TopPair.{u} :=
   goodPairProperty.ι
 
 end Hatcher.Relative
+
+namespace Hatcher.ClassicalCW
+
+universe u
+
+/-- A nonempty classical CW subcomplex is a good pair with its ambient
+complex. The witness uses the actual fixed-width regular neighborhood and
+its completed strong deformation retraction. -/
+theorem subcomplex_isGoodPair
+    {X : Type u} [TopologicalSpace X] [T2Space X]
+    (C : Set X) [CWComplex C] (A : CWComplex.Subcomplex C)
+    (hA : (A : Set X).Nonempty) :
+    Hatcher.Relative.IsGoodPair
+      (TopPair.of
+        (TopCat.ofHom (ContinuousMap.inclusion A.subset_complex))
+        (IsEmbedding.inclusion A.subset_complex)) := by
+  let P : TopPair.{u} := TopPair.of
+    (TopCat.ofHom (ContinuousMap.inclusion A.subset_complex))
+    (IsEmbedding.inclusion A.subset_complex)
+  let V : Set P.fst :=
+    ((↑) : ↑C → X) ⁻¹' regularNeighborhood C A
+  have hrange : Set.range P.map =
+      ((↑) : ↑C → X) ⁻¹' (A : Set X) := by
+    ext x
+    constructor
+    · rintro ⟨a, rfl⟩
+      exact a.2
+    · intro hx
+      exact ⟨⟨x.1, hx⟩, Subtype.ext rfl⟩
+  have hinterior : Set.range P.map ⊆ interior V := by
+    rw [hrange]
+    exact subcomplex_subset_interior_regularNeighborhood C A
+  let i : C(P.snd, V) :=
+    Hatcher.Relative.goodPairNeighborhoodInclusion P V
+      (hinterior.trans interior_subset)
+  let e : V ≃ₜ ↑(regularNeighborhood C A) :=
+    { toFun := fun x ↦ ⟨x.1.1, x.2⟩
+      invFun := fun x ↦
+        ⟨⟨x.1, regularNeighborhood_subset_complex C A x.2⟩, x.2⟩
+      left_inv := by intro x; rfl
+      right_inv := by intro x; rfl
+      continuous_toFun :=
+        (continuous_subtype_val.comp continuous_subtype_val).subtype_mk _
+      continuous_invFun :=
+        (continuous_subtype_val.subtype_mk _).subtype_mk _ }
+  have he : ∀ a : P.snd,
+      e (i a) = regularNeighborhoodInclusion C A a := by
+    intro a
+    rfl
+  let sdr := regularNeighborhoodStrongDeformationRetract C A
+  let transported : Hatcher.StrongDeformationRetract i :=
+    { retract :=
+        ⟨fun x ↦ sdr.retract (e x),
+          sdr.retract.continuous.comp e.continuous⟩
+      retract_inclusion := by
+        ext a
+        change sdr.retract (e (i a)) = a
+        rw [he]
+        have h := DFunLike.congr_fun sdr.retract_inclusion a
+        simpa only [ContinuousMap.comp_apply, ContinuousMap.id_apply] using h
+      deformation :=
+        { toFun := fun p ↦ e.symm (sdr.deformation (p.1, e p.2))
+          continuous_toFun := e.symm.continuous.comp
+            (sdr.deformation.continuous.comp
+              (continuous_fst.prodMk (e.continuous.comp continuous_snd)))
+          map_zero_left := by
+            intro x
+            change e.symm (sdr.deformation (0, e x)) = x
+            rw [sdr.deformation.apply_zero]
+            exact e.symm_apply_apply x
+          map_one_left := by
+            intro x
+            change e.symm (sdr.deformation (1, e x)) =
+              i (sdr.retract (e x))
+            rw [sdr.deformation.apply_one]
+            simp only [ContinuousMap.comp_apply]
+            apply e.injective
+            rw [e.apply_symm_apply, he]
+          prop' := by
+            intro t x hx
+            rcases hx with ⟨a, rfl⟩
+            change e.symm (sdr.deformation (t, e (i a))) = i a
+            apply e.injective
+            rw [e.apply_symm_apply, he]
+            exact sdr.deformation.eq_fst t ⟨a, rfl⟩ } }
+  change Nonempty (Hatcher.Relative.GoodPairData P)
+  refine ⟨{ nonempty := hA.coe_sort
+            isClosed_range := ?_
+            V := V
+            range_subset_interior := hinterior
+            strongDeformationRetract := transported }⟩
+  rw [hrange]
+  exact A.closed.preimage continuous_subtype_val
+
+end Hatcher.ClassicalCW
