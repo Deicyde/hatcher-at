@@ -2,6 +2,9 @@
 article_id: af_f9845771da2365d6ff552919
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.subcomplex_isGoodPair
 ---
 
 # A nonempty CW subcomplex gives a good pair
