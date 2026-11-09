@@ -1412,3 +1412,133 @@ theorem sphere_suspension_pole_fibers (n : ℕ)
       exact sphere_suspension_map_south_pole n f
 
 end Hatcher.Sphere
+
+namespace Hatcher.ClassicalCW
+
+open CategoryTheory Topology Metric
+open Hatcher.Relative Hatcher.Sphere
+open Hatcher.VanKampen.ConeAttachment
+
+universe u
+
+/-- The literal standard disk paired with its boundary inclusion. -/
+noncomputable def standardDiskBoundaryPair (m : ℕ) : TopPair.{u} :=
+  TopPair.of (TopCat.diskBoundaryInclusion.{u} m) (by
+    let _ : T2Space (TopCat.disk.{u} m) := by
+      change T2Space
+        (ULift.{u} (Metric.closedBall (0 : EuclideanSpace ℝ (Fin m)) 1))
+      infer_instance
+    exact (TopCat.diskBoundaryInclusion.{u} m).hom.continuous.isClosedEmbedding
+      ((TopCat.mono_iff_injective _).mp inferInstance) |>.isEmbedding)
+
+/-- The actual standard disk pair is the accepted sphere-cone pair. -/
+noncomputable def diskBoundaryPairIsoCone (n : ℕ) :
+    standardDiskBoundaryPair.{u} (n + 1) ≅ sphereConePair.{u} n :=
+  (MorphismProperty.Arrow.isoMk
+    (Iso.refl (TopCat.sphere.{u} n))
+    (TopCat.isoOfHomeo (diskHomeomorph.{u} (n + 1)))
+    (by
+      ext x
+      exact (diskHomeomorph_base_eq_diskBoundaryInclusion (n + 1) x).symm)).symm
+
+/-- The positive-dimensional standard boundary-collapse quotient is a sphere. -/
+noncomputable def diskBoundaryPointQuotientIsoSphere (n : ℕ) :
+    pointQuotient (standardDiskBoundaryPair.{u} (n + 1)) ≅
+      TopCat.sphere.{u} (n + 1) :=
+  ((pointQuotientPairFunctor.{u} ⋙ TopPair.proj₁).mapIso
+    (diskBoundaryPairIsoCone.{u} n)) ≪≫
+      TopCat.isoOfHomeo (sphereConeQuotientHomeomorph.{u} n)
+
+/-- The forward map is the actual induced pair quotient followed by its sphere model. -/
+theorem diskBoundaryPointQuotientIsoSphere_hom (n : ℕ) :
+    (diskBoundaryPointQuotientIsoSphere.{u} n).hom =
+      pointQuotientMap (diskBoundaryPairIsoCone.{u} n).hom ≫
+        (TopCat.isoOfHomeo (sphereConeQuotientHomeomorph.{u} n)).hom :=
+  rfl
+
+/-- The collapsed standard disk boundary maps to the existing north pole. -/
+@[simp]
+theorem diskBoundaryPointQuotientIsoSphere_point (n : ℕ) :
+    (diskBoundaryPointQuotientIsoSphere.{u} n).hom
+      (pointQuotientPoint (standardDiskBoundaryPair.{u} (n + 1))) =
+        northPole.{u} n := by
+  have h := ConcreteCategory.congr_hom
+    (pointQuotientPointInclusion_naturality (diskBoundaryPairIsoCone.{u} n).hom)
+    PUnit.unit
+  change pointQuotientMap (diskBoundaryPairIsoCone.{u} n).hom
+      (pointQuotientPoint (standardDiskBoundaryPair.{u} (n + 1))) =
+        pointQuotientPoint (sphereConePair.{u} n) at h
+  change sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientMap (diskBoundaryPairIsoCone.{u} n).hom
+        (pointQuotientPoint (standardDiskBoundaryPair.{u} (n + 1)))) =
+    northPole.{u} n
+  exact (congrArg (sphereConeQuotientHomeomorph.{u} n) h).trans
+    (sphere_cone_quotient_homeomorph_point n)
+
+/-- The formula holds on every actual projected disk point. -/
+theorem diskBoundaryPointQuotientIsoSphere_projection (n : ℕ)
+    (z : TopCat.disk.{u} (n + 1)) :
+    (diskBoundaryPointQuotientIsoSphere.{u} n).hom
+      (pointQuotientProjection (standardDiskBoundaryPair.{u} (n + 1)) z) =
+      sphereConeQuotientHomeomorph.{u} n
+        (pointQuotientProjection (sphereConePair.{u} n)
+          ((diskHomeomorph.{u} (n + 1)).symm z)) := by
+  have h := ConcreteCategory.congr_hom
+    (pointQuotientProjection_naturality (diskBoundaryPairIsoCone.{u} n).hom) z
+  change pointQuotientMap (diskBoundaryPairIsoCone.{u} n).hom
+      (pointQuotientProjection (standardDiskBoundaryPair.{u} (n + 1)) z) =
+      pointQuotientProjection (sphereConePair.{u} n)
+        ((diskHomeomorph.{u} (n + 1)).symm z) at h
+  change sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientMap (diskBoundaryPairIsoCone.{u} n).hom
+        (pointQuotientProjection (standardDiskBoundaryPair.{u} (n + 1)) z)) =
+    sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientProjection (sphereConePair.{u} n)
+        ((diskHomeomorph.{u} (n + 1)).symm z))
+  exact congrArg (sphereConeQuotientHomeomorph.{u} n) h
+
+/-- Radial standard disk points retain the accepted suspension coordinate formula. -/
+theorem diskBoundaryPointQuotientIsoSphere_cylinder (n : ℕ)
+    (x : TopCat.sphere.{u} n) (r : I) :
+    (diskBoundaryPointQuotientIsoSphere.{u} n).hom
+      (pointQuotientProjection (standardDiskBoundaryPair.{u} (n + 1))
+        (diskHomeomorph.{u} (n + 1)
+          (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r))) =
+      sphereConeCylinderPoint.{u} n x r := by
+  rw [diskBoundaryPointQuotientIsoSphere_projection,
+    Homeomorph.symm_apply_apply]
+  exact sphere_cone_quotient_homeomorph_cylinder n x r
+
+/-- In dimension zero the actual disk pair is the point paired with the empty space. -/
+noncomputable def diskZeroPairIsoPointEmpty :
+    standardDiskBoundaryPair.{u} 0 ≅
+      TopPair.ofTopCat (TopCat.of PUnit.{u + 1}) := by
+  let _ : Subsingleton (EuclideanSpace ℝ (Fin 0)) := ⟨fun x y => by
+    apply PiLp.ext
+    intro i
+    exact i.elim0⟩
+  let _ : Subsingleton (TopCat.disk.{u} 0) := by
+    change Subsingleton
+      (ULift.{u} (Metric.closedBall (0 : EuclideanSpace ℝ (Fin 0)) 1))
+    infer_instance
+  let _ : IsEmpty (TopCat.diskBoundary.{u} 0) := by
+    change IsEmpty
+      (ULift.{u} (Metric.sphere (0 : EuclideanSpace ℝ (Fin 0)) 1))
+    infer_instance
+  let z : TopCat.disk.{u} 0 := ULift.up ⟨0, by simp⟩
+  let Z : TopCat.{u} := TopCat.of PUnit.{u + 1}
+  let eX : TopCat.disk.{u} 0 ≅ Z :=
+    TopCat.isoOfHomeo
+      { toFun := fun _ => PUnit.unit
+        invFun := fun _ => z
+        left_inv := fun _ => Subsingleton.elim _ _
+        right_inv := fun _ => Subsingleton.elim _ _
+        continuous_toFun := continuous_const
+        continuous_invFun := continuous_const }
+  let eA : TopCat.diskBoundary.{u} 0 ≅ (TopPair.ofTopCat Z).snd :=
+    TopCat.isoOfHomeo Homeomorph.empty
+  exact MorphismProperty.Arrow.isoMk eA eX (by
+    ext x
+    exact (IsEmpty.false x).elim)
+
+end Hatcher.ClassicalCW
