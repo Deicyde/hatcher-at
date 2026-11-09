@@ -1,3 +1,4 @@
+import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
 import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 import Mathlib.AlgebraicTopology.SimplicialSet.Homology.Relative
@@ -6,6 +7,7 @@ import Mathlib.AlgebraicTopology.SingularSet
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
 import Mathlib.Topology.Category.TopPair
+import Mathlib.Topology.CWComplex.Classical.Basic
 
 /-!
 # Relative singular homology
@@ -254,3 +256,78 @@ lemma pairConnecting_naturality {P Q : TopPair.{w}} (f : P ⟶ Q)
 end ExactSequence
 
 end Hatcher.Relative
+
+namespace Hatcher.ClassicalCW
+
+open CategoryTheory Topology
+
+universe u
+
+variable {X : Type u} [TopologicalSpace X]
+  (C : Set X) [CWComplex C]
+
+/-- The actual pair `(Xⁿ, Xⁿ⁻¹)`, including the empty predecessor at zero. -/
+noncomputable def cellularSkeletonPair (n : ℕ) : TopPair.{u} := by
+  let h :
+      (CWComplex.skeletonLT C (n : ℕ∞) : Set X) ⊆
+        (CWComplex.skeletonLT C ((n + 1 : ℕ) : ℕ∞) : Set X) :=
+    CWComplex.skeletonLT_mono (C := C) (by exact_mod_cast Nat.le_succ n)
+  exact TopPair.of
+    (TopCat.ofHom (ContinuousMap.inclusion h))
+    (IsEmbedding.inclusion h)
+
+/-- Ordinary integral cellular chains, as actual skeletal relative homology. -/
+noncomputable def cellularChainObject (n : ℕ) : AddCommGrpCat.{u} :=
+  (Hatcher.Relative.homologyFunctor
+      (AddCommGrpCat.of (ULift.{u} ℤ)) n).obj
+    (cellularSkeletonPair C n)
+
+/-- The actual connecting map followed by relative projection. -/
+noncomputable def cellularDifferential (n : ℕ) :
+    cellularChainObject C (n + 1) ⟶ cellularChainObject C n :=
+  Hatcher.Relative.pairConnecting (cellularSkeletonPair C (n + 1))
+      (AddCommGrpCat.of (ULift.{u} ℤ)) (n + 1) n rfl ≫
+    (Hatcher.Relative.singularPairFunctor.obj
+      (cellularSkeletonPair C n)).homologyπ
+        (AddCommGrpCat.of (ULift.{u} ℤ)) n
+
+/-- Square zero follows from successive maps of the actual pair sequence. -/
+theorem cellularDifferential_comp (n : ℕ) :
+    cellularDifferential C (n + 1) ≫ cellularDifferential C n = 0 := by
+  simp only [cellularDifferential, Hatcher.Relative.pairConnecting,
+    Category.assoc, SSetPair.comp_homologyδ_assoc,
+    CategoryTheory.Limits.zero_comp, CategoryTheory.Limits.comp_zero]
+
+/-- The ordinary integral cellular chain complex, without augmentation. -/
+noncomputable def cellularChainComplex : ChainComplex AddCommGrpCat.{u} ℕ :=
+  ChainComplex.of (cellularChainObject C) (cellularDifferential C)
+    (cellularDifferential_comp C)
+
+/-- Its degree-n object is the actual skeletal relative homology object. -/
+@[simp] theorem cellularChainComplex_X (n : ℕ) :
+    (cellularChainComplex C).X n =
+      (Hatcher.Relative.homologyFunctor
+        (AddCommGrpCat.of (ULift.{u} ℤ)) n).obj
+          (cellularSkeletonPair C n) := rfl
+
+/-- Its adjacent differential computes to connecting map then projection. -/
+theorem cellularChainComplex_d_succ (n : ℕ) :
+    (cellularChainComplex C).d (n + 1) n =
+      Hatcher.Relative.pairConnecting (cellularSkeletonPair C (n + 1))
+          (AddCommGrpCat.of (ULift.{u} ℤ)) (n + 1) n rfl ≫
+        (Hatcher.Relative.singularPairFunctor.obj
+          (cellularSkeletonPair C n)).homologyπ
+            (AddCommGrpCat.of (ULift.{u} ℤ)) n :=
+  ChainComplex.of_d (cellularChainObject C) (cellularDifferential C) n
+
+/-- Every map outside the natural-number downward shape is zero. -/
+theorem cellularChainComplex_d_eq_zero {i j : ℕ} (h : i ≠ j + 1) :
+    (cellularChainComplex C).d i j = 0 :=
+  ChainComplex.of_d_ne (cellularChainObject C) (cellularDifferential C) h
+
+/-- There is no outgoing degree-zero differential or augmentation. -/
+@[simp] theorem cellularChainComplex_d_zero (j : ℕ) :
+    (cellularChainComplex C).d 0 j = 0 :=
+  cellularChainComplex_d_eq_zero C (by simp)
+
+end Hatcher.ClassicalCW
