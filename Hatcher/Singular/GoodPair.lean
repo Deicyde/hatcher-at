@@ -128,7 +128,8 @@ theorem subcomplex_isGoodPair
         ⟨fun x ↦ sdr.retract (e x),
           sdr.retract.continuous.comp e.continuous⟩
       retract_inclusion := by
-        ext a
+        apply ContinuousMap.ext
+        intro a
         change sdr.retract (e (i a)) = a
         rw [he]
         have h := DFunLike.congr_fun sdr.retract_inclusion a
