@@ -2,6 +2,9 @@
 article_id: af_8b76282ab7c960a7937a1a2a
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.diskBoundaryPointQuotientIsoSphere, Hatcher.ClassicalCW.standardDiskBoundaryPair, Hatcher.ClassicalCW.diskBoundaryPairIsoCone, Hatcher.ClassicalCW.diskBoundaryPointQuotientIsoSphere_hom, Hatcher.ClassicalCW.diskBoundaryPointQuotientIsoSphere_point, Hatcher.ClassicalCW.diskBoundaryPointQuotientIsoSphere_projection, Hatcher.ClassicalCW.diskBoundaryPointQuotientIsoSphere_cylinder, Hatcher.ClassicalCW.diskZeroPairIsoPointEmpty
 ---
 
 # Collapsing a disk boundary gives the next sphere
