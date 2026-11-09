@@ -92,7 +92,7 @@ theorem subcomplex_isGoodPair
   let P : TopPair.{u} := TopPair.of
     (TopCat.ofHom (ContinuousMap.inclusion A.subset_complex))
     (IsEmbedding.inclusion A.subset_complex)
-  let V : Set P.fst :=
+  let V : Set ↑C :=
     ((↑) : ↑C → X) ⁻¹' regularNeighborhood C A
   have hrange : Set.range P.map =
       ((↑) : ↑C → X) ⁻¹' (A : Set X) := by
@@ -105,7 +105,7 @@ theorem subcomplex_isGoodPair
   have hinterior : Set.range P.map ⊆ interior V := by
     rw [hrange]
     exact subcomplex_subset_interior_regularNeighborhood C A
-  let i : C(P.snd, V) :=
+  let i : C(↑(A : Set X), V) :=
     Hatcher.Relative.goodPairNeighborhoodInclusion P V
       (hinterior.trans interior_subset)
   let e : V ≃ₜ ↑(regularNeighborhood C A) :=
@@ -118,7 +118,7 @@ theorem subcomplex_isGoodPair
         (continuous_subtype_val.comp continuous_subtype_val).subtype_mk _
       continuous_invFun :=
         (continuous_subtype_val.subtype_mk _).subtype_mk _ }
-  have he : ∀ a : P.snd,
+  have he : ∀ a : ↑(A : Set X),
       e (i a) = regularNeighborhoodInclusion C A a := by
     intro a
     rfl
@@ -132,7 +132,8 @@ theorem subcomplex_isGoodPair
         change sdr.retract (e (i a)) = a
         rw [he]
         have h := DFunLike.congr_fun sdr.retract_inclusion a
-        simpa only [ContinuousMap.comp_apply, ContinuousMap.id_apply] using h
+        change sdr.retract (regularNeighborhoodInclusion C A a) = a at h
+        exact h
       deformation :=
         { toFun := fun p ↦ e.symm (sdr.deformation (p.1, e p.2))
           continuous_toFun := e.symm.continuous.comp
@@ -150,7 +151,8 @@ theorem subcomplex_isGoodPair
             rw [sdr.deformation.apply_one]
             simp only [ContinuousMap.comp_apply]
             apply e.injective
-            rw [e.apply_symm_apply, he]
+            rw [e.apply_symm_apply]
+            exact (he (sdr.retract (e x))).symm
           prop' := by
             intro t x hx
             rcases hx with ⟨a, rfl⟩
