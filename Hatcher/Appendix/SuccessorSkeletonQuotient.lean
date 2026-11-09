@@ -479,3 +479,93 @@ theorem skeletonLTStepDesc_cell_apply
   exact ContinuousMap.congr_fun hcomp (Sum.inr ⟨i, x⟩)
 
 end Hatcher.ClassicalCW
+
+namespace Hatcher.ClassicalCW
+
+universe u
+
+open Metric Set Topology
+
+/-- The actual zero skeleton is the discrete space of its zero-cell indices,
+with each index sent to its characteristic point. Empty complexes and
+arbitrary index types are included. -/
+noncomputable def zeroSkeletonHomeomorphCells
+    {X : Type u} [TopologicalSpace X] [T2Space X]
+    (C : Set X) [CWComplex C] :
+    WithDiscreteTopology (RelCWComplex.cell C 0) ≃ₜ
+      ↑(CWComplex.skeletonLT C 1 : Set X) := by
+  classical
+  let point (i : RelCWComplex.cell C 0) :
+      ↑(CWComplex.skeletonLT C 1 : Set X) :=
+    ⟨RelCWComplex.map 0 i 0,
+      RelCWComplex.closedCell_subset_skeletonLT (C := C) 0 i
+        (RelCWComplex.map_zero_mem_closedCell (C := C) 0 i)⟩
+  let old : C(↑(CWComplex.skeletonLT C 0 : Set X),
+      WithDiscreteTopology (RelCWComplex.cell C 0)) :=
+    { toFun := fun x => by
+        have hx : (x.1 : X) ∈ (∅ : Set X) := by
+          simpa only [CWComplex.skeletonLT_zero_eq_empty] using x.2
+        exact hx.elim
+      continuous_toFun := by
+        letI : IsEmpty ↑(CWComplex.skeletonLT C 0 : Set X) :=
+          ⟨fun x => by
+            have hx : (x.1 : X) ∈ (∅ : Set X) := by
+              simpa only [CWComplex.skeletonLT_zero_eq_empty] using x.2
+            exact hx.elim⟩
+        exact continuous_of_discreteTopology }
+  let cells (i : RelCWComplex.cell C 0) :
+      C(↑(closedBall (0 : Fin 0 → ℝ) 1),
+        WithDiscreteTopology (RelCWComplex.cell C 0)) :=
+    { toFun := fun _ => WithTopology.toTopology ⊥ i
+      continuous_toFun := continuous_const }
+  have hboundary : ∀ (i : RelCWComplex.cell C 0)
+      (x : ↑(sphere (0 : Fin 0 → ℝ) 1)),
+      old (skeletonLTStepBoundaryMap C 0 i x) =
+        cells i ⟨x, sphere_subset_closedBall x.2⟩ := by
+    intro i x
+    have hx : (x.1 : Fin 0 → ℝ) ∈
+        (∅ : Set (Fin 0 → ℝ)) := by
+      simpa only [sphere_eq_empty_of_subsingleton
+        (by norm_num : (1 : ℝ) ≠ 0)] using x.2
+    exact hx.elim
+  let label := skeletonLTStepDesc C 0 old cells hboundary
+  have hlabel (i : RelCWComplex.cell C 0) :
+      label (point i) = WithTopology.toTopology ⊥ i := by
+    exact skeletonLTStepDesc_cell_apply C 0 old cells hboundary i
+      ⟨0, by simp⟩
+  have hpoint_label (y : ↑(CWComplex.skeletonLT C 1 : Set X)) :
+      point (label y).ofTopology = y := by
+    obtain ⟨z, hz⟩ := (skeletonLTStepJointMap_isQuotient C 0).surjective y
+    rcases z with x | ⟨i, x⟩
+    · have hx : (x.1 : X) ∈ (∅ : Set X) := by
+        simpa only [CWComplex.skeletonLT_zero_eq_empty] using x.2
+      exact hx.elim
+    · have hx : x = (⟨0, by simp⟩ :
+          ↑(closedBall (0 : Fin 0 → ℝ) 1)) := Subsingleton.elim _ _
+      have hy : point i = y := by
+        simpa only [skeletonLTStepJointMap, Sum.elim_inr,
+          skeletonLTStepClosedCellsMap, skeletonLTStepClosedCellMap,
+          point, hx] using hz
+      exact (congrArg (fun q => point q.ofTopology) (hlabel i)).trans hy
+  exact
+    { toFun := fun i => point i.ofTopology
+      invFun := label
+      left_inv := by
+        intro i
+        change label (point i.ofTopology) = i
+        rw [hlabel]
+        rfl
+      right_inv := hpoint_label
+      continuous_toFun := continuous_of_discreteTopology
+      continuous_invFun := label.continuous }
+
+/-- The homeomorphism uses the actual zero-cell characteristic point. -/
+@[simp]
+theorem zeroSkeletonHomeomorphCells_apply
+    {X : Type u} [TopologicalSpace X] [T2Space X]
+    (C : Set X) [CWComplex C] (i : RelCWComplex.cell C 0) :
+    ((zeroSkeletonHomeomorphCells C) (WithTopology.toTopology ⊥ i)).1 =
+      RelCWComplex.map 0 i 0 := by
+  rfl
+
+end Hatcher.ClassicalCW
