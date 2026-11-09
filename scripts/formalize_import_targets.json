@@ -4,6 +4,10 @@
     {
       "article_id": "af_f9845771da2365d6ff552919",
       "module": "Hatcher.Singular.GoodPair"
+    },
+    {
+      "article_id": "af_9e26af41f64573164e87e022",
+      "module": "Hatcher.Singular.Relative"
     }
   ]
 }
