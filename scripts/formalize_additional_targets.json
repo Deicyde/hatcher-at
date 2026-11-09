@@ -52,6 +52,14 @@
       "declarations": [
         "Hatcher.ClassicalCW.subcomplex_isGoodPair"
       ]
+    },
+    {
+      "article_id": "af_d7de7378b694809a2a726f47",
+      "module": "Hatcher.Appendix.SuccessorSkeletonQuotient",
+      "declarations": [
+        "Hatcher.ClassicalCW.zeroSkeletonHomeomorphCells",
+        "Hatcher.ClassicalCW.zeroSkeletonHomeomorphCells_apply"
+      ]
     }
   ]
 }
