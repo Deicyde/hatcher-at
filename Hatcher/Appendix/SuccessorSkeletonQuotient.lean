@@ -507,7 +507,7 @@ noncomputable def zeroSkeletonHomeomorphCells
           simpa only [CWComplex.skeletonLT_zero_eq_empty] using x.2
         exact hx.elim
       continuous_toFun := by
-        letI : IsEmpty ↑(CWComplex.skeletonLT C 0 : Set X) :=
+        let _ : IsEmpty ↑(CWComplex.skeletonLT C 0 : Set X) :=
           ⟨fun x => by
             have hx : (x.1 : X) ∈ (∅ : Set X) := by
               simpa only [CWComplex.skeletonLT_zero_eq_empty] using x.2
@@ -538,15 +538,16 @@ noncomputable def zeroSkeletonHomeomorphCells
     obtain ⟨z, hz⟩ := (skeletonLTStepJointMap_isQuotient C 0).surjective y
     rcases z with x | ⟨i, x⟩
     · have hx : (x.1 : X) ∈ (∅ : Set X) := by
-        simpa only [CWComplex.skeletonLT_zero_eq_empty] using x.2
+        simpa only [ENat.natCast_zero, CWComplex.skeletonLT_zero_eq_empty] using x.2
       exact hx.elim
     · have hx : x = (⟨0, by simp⟩ :
           ↑(closedBall (0 : Fin 0 → ℝ) 1)) := Subsingleton.elim _ _
       have hy : point i = y := by
         simpa only [skeletonLTStepJointMap, Sum.elim_inr,
           skeletonLTStepClosedCellsMap, skeletonLTStepClosedCellMap,
-          point, hx] using hz
-      exact (congrArg (fun q => point q.ofTopology) (hlabel i)).trans hy
+          point, hx, ENat.natCast_zero, zero_add] using hz
+      exact (congrArg (fun q => point (label q).ofTopology) hy).symm.trans
+        ((congrArg (fun q => point q.ofTopology) (hlabel i)).trans hy)
   exact
     { toFun := fun i => point i.ofTopology
       invFun := label
@@ -554,7 +555,6 @@ noncomputable def zeroSkeletonHomeomorphCells
         intro i
         change label (point i.ofTopology) = i
         rw [hlabel]
-        rfl
       right_inv := hpoint_label
       continuous_toFun := continuous_of_discreteTopology
       continuous_invFun := label.continuous }
