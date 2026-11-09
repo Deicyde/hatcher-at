@@ -294,9 +294,23 @@ noncomputable def cellularDifferential (n : ℕ) :
 /-- Square zero follows from successive maps of the actual pair sequence. -/
 theorem cellularDifferential_comp (n : ℕ) :
     cellularDifferential C (n + 1) ≫ cellularDifferential C n = 0 := by
-  simp only [cellularDifferential, Hatcher.Relative.pairConnecting,
-    Category.assoc, SSetPair.comp_homologyδ_assoc,
-    CategoryTheory.Limits.zero_comp, CategoryTheory.Limits.comp_zero]
+  dsimp only [cellularDifferential, Hatcher.Relative.pairConnecting]
+  let R : AddCommGrpCat.{u} := AddCommGrpCat.of (ULift.{u} ℤ)
+  let Q := Hatcher.Relative.singularPairFunctor.obj (cellularSkeletonPair C (n + 1))
+  let a := (Hatcher.Relative.singularPairFunctor.obj
+    (cellularSkeletonPair C (n + 1 + 1))).homologyδ R (n + 1 + 1) (n + 1) rfl
+  let b := Q.homologyπ R (n + 1)
+  let c := Q.homologyδ R (n + 1) n rfl
+  let d := (Hatcher.Relative.singularPairFunctor.obj
+    (cellularSkeletonPair C n)).homologyπ R n
+  have hzero : b ≫ c = 0 := Q.comp_homologyδ R (n + 1) n rfl
+  change (a ≫ b) ≫ (c ≫ d) = 0
+  calc
+    (a ≫ b) ≫ (c ≫ d) = a ≫ ((b ≫ c) ≫ d) :=
+      (Category.assoc a b (c ≫ d)).trans
+        (congrArg (fun f => a ≫ f) (Category.assoc b c d).symm)
+    _ = a ≫ (0 ≫ d) := congrArg (fun f => a ≫ (f ≫ d)) hzero
+    _ = 0 := by rw [CategoryTheory.Limits.zero_comp, CategoryTheory.Limits.comp_zero]
 
 /-- The ordinary integral cellular chain complex, without augmentation. -/
 noncomputable def cellularChainComplex : ChainComplex AddCommGrpCat.{u} ℕ :=
