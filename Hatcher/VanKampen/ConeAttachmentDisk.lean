@@ -1505,9 +1505,20 @@ theorem diskBoundaryPointQuotientIsoSphere_cylinder (n : ℕ)
         (diskHomeomorph.{u} (n + 1)
           (cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r))) =
       sphereConeCylinderPoint.{u} n x r := by
-  rw [diskBoundaryPointQuotientIsoSphere_projection,
-    Homeomorph.symm_apply_apply]
-  exact sphere_cone_quotient_homeomorph_cylinder n x r
+  let c : (sphereConePair.{u} n).fst :=
+    cylinder (id : TopCat.sphere.{u} n → TopCat.sphere.{u} n) x r
+  let e : (sphereConePair.{u} n).fst ≃ₜ TopCat.disk.{u} (n + 1) :=
+    diskHomeomorph.{u} (n + 1)
+  have hc : e.symm (e c) = c := e.symm_apply_apply c
+  have hp := diskBoundaryPointQuotientIsoSphere_projection n (e c)
+  change (diskBoundaryPointQuotientIsoSphere.{u} n).hom
+      (pointQuotientProjection (standardDiskBoundaryPair.{u} (n + 1)) (e c)) =
+    sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientProjection (sphereConePair.{u} n) (e.symm (e c))) at hp
+  have hq := congrArg (fun q : (sphereConePair.{u} n).fst =>
+    sphereConeQuotientHomeomorph.{u} n
+      (pointQuotientProjection (sphereConePair.{u} n) q)) hc
+  exact hp.trans (hq.trans (sphere_cone_quotient_homeomorph_cylinder n x r))
 
 /-- In dimension zero the actual disk pair is the point paired with the empty space. -/
 noncomputable def diskZeroPairIsoPointEmpty :
@@ -1527,6 +1538,12 @@ noncomputable def diskZeroPairIsoPointEmpty :
     infer_instance
   let z : TopCat.disk.{u} 0 := ULift.up ⟨0, by simp⟩
   let Z : TopCat.{u} := TopCat.of PUnit.{u + 1}
+  let _ : IsEmpty (TopPair.ofTopCat Z).snd := by
+    change IsEmpty PEmpty.{u + 1}
+    infer_instance
+  let _ : IsEmpty (standardDiskBoundaryPair.{u} 0).left := by
+    change IsEmpty (TopCat.diskBoundary.{u} 0)
+    infer_instance
   let eX : TopCat.disk.{u} 0 ≅ Z :=
     TopCat.isoOfHomeo
       { toFun := fun _ => PUnit.unit
