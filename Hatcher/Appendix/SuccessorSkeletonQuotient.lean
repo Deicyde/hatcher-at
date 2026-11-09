@@ -543,9 +543,11 @@ noncomputable def zeroSkeletonHomeomorphCells
     · have hx : x = (⟨0, by simp⟩ :
           ↑(closedBall (0 : Fin 0 → ℝ) 1)) := Subsingleton.elim _ _
       have hy : point i = y := by
-        simpa only [skeletonLTStepJointMap, Sum.elim_inr,
-          skeletonLTStepClosedCellsMap, skeletonLTStepClosedCellMap,
-          point, hx, ENat.natCast_zero, zero_add] using hz
+        apply Subtype.ext
+        have hv := congrArg Subtype.val hz
+        change RelCWComplex.map 0 i x.1 = y.1 at hv
+        change RelCWComplex.map 0 i 0 = y.1
+        simpa only [hx] using hv
       exact (congrArg (fun q => point (label q).ofTopology) hy).symm.trans
         ((congrArg (fun q => point q.ofTopology) (hlabel i)).trans hy)
   exact
