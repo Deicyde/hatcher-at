@@ -263,7 +263,7 @@ open CategoryTheory Topology
 
 universe u
 
-variable {X : Type u} [TopologicalSpace X]
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
   (C : Set X) [CWComplex C]
 
 /-- The actual pair `(Xⁿ, Xⁿ⁻¹)`, including the empty predecessor at zero. -/
