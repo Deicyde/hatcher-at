@@ -140,6 +140,18 @@
         "Hatcher.ClassicalCW.singularSkeletonChainMap_boundary_iff",
         "Hatcher.ClassicalCW.singularSkeletonChainMap_cycle_iff"
       ]
+    },
+    {
+      "article_id": "af_72fa8d9ce5a45b5bccf4b17b",
+      "module": "Hatcher.Singular.DoubleSimplexSphere",
+      "declarations": [
+        "Hatcher.Sphere.sphereAugmentedSpaceLiftIso",
+        "Hatcher.Sphere.sphereCoordinateUniverseLift",
+        "Hatcher.Sphere.sphereSimplexLift",
+        "Hatcher.Sphere.sphereSimplexLift_face",
+        "Hatcher.Sphere.sphereAugmentedSpaceLiftIso_f_zero",
+        "Hatcher.Sphere.sphereAugmentedSpaceLiftIso_\u03b9"
+      ]
     }
   ]
 }
