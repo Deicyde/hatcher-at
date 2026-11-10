@@ -32,3 +32,9 @@ Uncompiled elaboration risks are mixed-universe continuous-map/face
 normalization, coefficient-family inference, the singular degree-object
 inference of `chainComplex_hom_ext`, and augmented successor-component
 reductions. These require exact remote verification before acceptance.
+
+Remote elaboration identified the continuous-map congruence as an equivalence,
+requiring no extra projection. The repaired proposal uses explicit per-face
+coefficient equations for the signed sum, typed actual augmentation maps for
+the vertex calculation, and a dependent match for the augmented component
+family. Fresh remote compilation remains required.

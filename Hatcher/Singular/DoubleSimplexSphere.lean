@@ -725,7 +725,7 @@ noncomputable def sphereSimplexLift (d r : ℕ) :
       (TopCat.toSSet.obj (TopCat.sphere.{u} d)) _⦋r⦌ :=
   (TopCat.toSSetObjEquiv (TopCat.sphere.{0} d) (.op ⦋r⦌)).trans
     (((Homeomorph.refl (Convexity.StdSimplex ℝ (Fin (r + 1)))).continuousMapCongr
-      (sphereCoordinateUniverseLift.{u} d)).toEquiv.trans
+      (sphereCoordinateUniverseLift.{u} d)).trans
         (TopCat.toSSetObjEquiv (TopCat.sphere.{u} d) (.op ⦋r⦌)).symm)
 
 theorem sphereSimplexLift_face (d r : ℕ) (i : Fin (r + 2))
@@ -775,8 +775,19 @@ private theorem sphereLiftXIso_d (d r : ℕ) :
       (sphereLiftXIso.{u} d r).hom)
   rw [← Category.assoc, sphereLiftXIso_ι, SSet.ιChainComplex_d]
   rw [← Category.assoc, SSet.ιChainComplex_d]
-  simp only [Preadditive.sum_comp, Preadditive.zsmul_comp,
-    sphereLiftXIso_ι, sphereSimplexLift_face]
+  simp only [Preadditive.sum_comp, Preadditive.zsmul_comp]
+  apply Finset.sum_congr rfl
+  intro i _hi
+  have hm := sphereLiftXIso_ι.{u} d r
+    ((TopCat.toSSet.obj (TopCat.sphere.{0} d)).δ i s)
+  have hf := sphereSimplexLift_face.{u} d r i s
+  have hterm := hm.trans (congrArg
+    (fun t : (TopCat.toSSet.obj (TopCat.sphere.{u} d)) _⦋r⦌ =>
+      (TopCat.toSSet.obj (TopCat.sphere.{u} d)).ιChainComplex
+        (R := sphereLiftCoefficient.{u}) t) hf)
+  exact congrArg
+    (fun f : sphereLiftCoefficient.{u} ⟶ (sphereLiftOrdinaryComplex.{u} d).X r =>
+      ((-1 : ℤ) ^ i.val) • f) hterm.symm
 
 private theorem sphereLiftAugmentation (d : ℕ) :
     (sphereLiftXIso.{u} d 0).hom ≫
@@ -784,10 +795,27 @@ private theorem sphereLiftAugmentation (d : ℕ) :
           (TopCat.sphere.{u} d) =
       Hatcher.Reduced.chainAugmentation sphereLiftCoefficient.{u}
         (TopCat.sphere.{0} d) := by
+  let R : AddCommGrpCat.{u} := sphereLiftCoefficient.{u}
+  let ε₀ : (sphereLiftOldOrdinaryComplex.{u} d).X 0 ⟶ R :=
+    Hatcher.Reduced.chainAugmentation R (TopCat.sphere.{0} d)
+  let ε₁ : (sphereLiftOrdinaryComplex.{u} d).X 0 ⟶ R :=
+    Hatcher.Reduced.chainAugmentation R (TopCat.sphere.{u} d)
+  change (sphereLiftXIso.{u} d 0).hom ≫ ε₁ = ε₀
   apply SSet.chainComplex_hom_ext
   intro s
-  rw [← Category.assoc, sphereLiftXIso_ι]
-  rw [Hatcher.Reduced.ι_chainAugmentation, Hatcher.Reduced.ι_chainAugmentation]
+  let i₀ : R ⟶ (sphereLiftOldOrdinaryComplex.{u} d).X 0 :=
+    (TopCat.toSSet.obj (TopCat.sphere.{0} d)).ιChainComplex s
+  let i₁ : R ⟶ (sphereLiftOrdinaryComplex.{u} d).X 0 :=
+    (TopCat.toSSet.obj (TopCat.sphere.{u} d)).ιChainComplex
+      (sphereSimplexLift.{u} d 0 s)
+  have hi : i₀ ≫ (sphereLiftXIso.{u} d 0).hom = i₁ := sphereLiftXIso_ι d 0 s
+  change i₀ ≫ ((sphereLiftXIso.{u} d 0).hom ≫ ε₁) = i₀ ≫ ε₀
+  calc
+    _ = (i₀ ≫ (sphereLiftXIso.{u} d 0).hom) ≫ ε₁ := (Category.assoc _ _ _).symm
+    _ = i₁ ≫ ε₁ := congrArg (fun f => f ≫ ε₁) hi
+    _ = 𝟙 R := Hatcher.Reduced.ι_chainAugmentation R (TopCat.sphere.{u} d)
+      (sphereSimplexLift.{u} d 0 s)
+    _ = i₀ ≫ ε₀ := (Hatcher.Reduced.ι_chainAugmentation R (TopCat.sphere.{0} d) s).symm
 
 private abbrev sphereLiftAugmentedComplex (d : ℕ) : ChainComplex AddCommGrpCat.{u} ℕ :=
   (Hatcher.Reduced.augmentedSingularChainComplexFunctor.{u}
@@ -799,9 +827,10 @@ private abbrev sphereLiftOldAugmentedComplex (d : ℕ) : ChainComplex AddCommGrp
 
 private noncomputable def sphereLiftAugmentedXIso (d : ℕ) :
     ∀ r : ℕ, (sphereLiftOldAugmentedComplex.{u} d).X r ≅
-      (sphereLiftAugmentedComplex.{u} d).X r
-  | 0 => Iso.refl sphereLiftCoefficient.{u}
-  | r + 1 => sphereLiftXIso.{u} d r
+      (sphereLiftAugmentedComplex.{u} d).X r :=
+  fun r => match r with
+    | 0 => Iso.refl sphereLiftCoefficient.{u}
+    | r + 1 => sphereLiftXIso.{u} d r
 
 /-- The actual augmentation-preserving singular-chain universe lift. -/
 noncomputable def sphereAugmentedSpaceLiftIso (d : ℕ) :
