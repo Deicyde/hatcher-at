@@ -666,7 +666,9 @@ noncomputable def sphereSingletonGoodPairData
       (ContinuousMap.const V ⟨b, hb⟩) {⟨b, hb⟩} :=
     Classical.choice (Classical.choose_spec geometry_spec).2
   let P : TopPair.{u} := TopPair.ofSubset ({b} : Set (TopCat.sphere.{u} n))
-  have hrange : Set.range P.map = ({b} : Set (TopCat.sphere.{u} n)) := by
+  have hrange : Set.range
+      (fun a : ({b} : Set (TopCat.sphere.{u} n)) => (a : TopCat.sphere.{u} n)) =
+      ({b} : Set (TopCat.sphere.{u} n)) := by
     ext x
     constructor
     · rintro ⟨a, rfl⟩
@@ -674,8 +676,14 @@ noncomputable def sphereSingletonGoodPairData
     · intro hx
       exact ⟨⟨x, hx⟩, rfl⟩
   have hinterior : Set.range P.map ⊆ interior V := by
-    rw [hrange, hV.interior_eq]
-    exact Set.singleton_subset_iff.mpr hb
+    change Set.range
+      (fun a : ({b} : Set (TopCat.sphere.{u} n)) => (a : TopCat.sphere.{u} n)) ⊆
+      interior (V : Set (TopCat.sphere.{u} n))
+    rintro _ ⟨a, rfl⟩
+    have hab : (a : TopCat.sphere.{u} n) = b := Set.mem_singleton_iff.mp a.2
+    have hbInterior : b ∈ interior (V : Set (TopCat.sphere.{u} n)) :=
+      hV.interior_eq.symm ▸ hb
+    exact hab.symm ▸ hbInterior
   let bV : V := ⟨b, hb⟩
   let inclusion : C(↑({b} : Set (TopCat.sphere.{u} n)), V) :=
     Hatcher.Relative.goodPairNeighborhoodInclusion P V
@@ -714,7 +722,11 @@ noncomputable def sphereSingletonGoodPairData
   change Hatcher.Relative.GoodPairData P
   exact
     { nonempty := ⟨⟨b, rfl⟩⟩
-      isClosed_range := by rw [hrange]; exact isClosed_singleton
+      isClosed_range := by
+        change IsClosed (Set.range
+          (fun a : ({b} : Set (TopCat.sphere.{u} n)) => (a : TopCat.sphere.{u} n)))
+        exact hrange.symm ▸
+          (isClosed_singleton : IsClosed ({b} : Set (TopCat.sphere.{u} n)))
       V := V
       range_subset_interior := hinterior
       strongDeformationRetract := deformation }
