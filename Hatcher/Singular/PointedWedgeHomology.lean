@@ -964,3 +964,138 @@ theorem skeletonStepHomologyStability
 end Hatcher.ClassicalCW
 
 end
+
+noncomputable section
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
+
+universe u
+
+private abbrev skeletonVanishingCoefficient : AddCommGrpCat.{u} :=
+  AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+
+private abbrev skeletonVanishingHomology (k : ℕ) : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+  (singularHomologyFunctor AddCommGrpCat.{u} k).obj skeletonVanishingCoefficient.{u}
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+private abbrev skeletonVanishingTop (n : ℕ) : TopCat.{u} :=
+  TopCat.of ↑(CWComplex.skeleton C (n : ℕ∞) : Set X)
+
+private theorem skeletonVanishing_standard_strict (n : ℕ) :
+    (CWComplex.skeleton C (n : ℕ∞) : Set X) =
+      (RelCWComplex.skeletonLT C ((n + 1 : ℕ) : ℕ∞) : Set X) := by
+  change (RelCWComplex.skeletonLT C ((n : ℕ∞) + 1) : Set X) =
+    (RelCWComplex.skeletonLT C ((n + 1 : ℕ) : ℕ∞) : Set X)
+  exact congrArg (fun p : ℕ∞ ↦ (RelCWComplex.skeletonLT C p : Set X))
+    (by simp only [Nat.cast_add, Nat.cast_one])
+
+private noncomputable def skeletonVanishingStepSourceIso (n : ℕ) :
+    skeletonVanishingTop C n ≅ (skeletalStagePair C (n + 1)).snd :=
+  TopCat.isoOfHomeo (Homeomorph.setCongr (skeletonVanishing_standard_strict C n))
+
+/- The pinned skeleton constructor requires T2Space X even in its carrier
+statements, so this helper retains that genuinely used instance. -/
+private noncomputable def skeletonVanishingStepTargetIso (n : ℕ) :
+    (skeletalStagePair C (n + 1)).fst ≅ skeletonVanishingTop C (n + 1) := by
+  have hcast : (((n + 1 : ℕ) : ℕ∞) + 1) = (((n + 1) + 1 : ℕ) : ℕ∞) := by
+    simp only [Nat.cast_add, Nat.cast_one]
+  have h : (RelCWComplex.skeletonLT C (((n + 1 : ℕ) : ℕ∞) + 1) : Set X) =
+      (CWComplex.skeleton C ((n + 1 : ℕ) : ℕ∞) : Set X) :=
+    (congrArg (fun p : ℕ∞ ↦ (RelCWComplex.skeletonLT C p : Set X)) hcast).trans
+      (skeletonVanishing_standard_strict C (n + 1)).symm
+  exact TopCat.isoOfHomeo (Homeomorph.setCongr h)
+
+/-- Ordinary integral homology of the actual n-skeleton vanishes strictly
+above n, without any bound on its number of cells. -/
+theorem skeletonHomologyVanishing (n k : ℕ) (hnk : n < k) :
+    IsZero (((singularHomologyFunctor AddCommGrpCat.{u} k).obj
+      (AddCommGrpCat.of.{u} (ULift.{u} ℤ))).obj
+        (TopCat.of ↑(CWComplex.skeleton C (n : ℕ∞) : Set X))) := by
+  induction n generalizing k with
+  | zero =>
+      let R : AddCommGrpCat.{u} := skeletonVanishingCoefficient.{u}
+      let H : TopCat.{u} ⥤ AddCommGrpCat.{u} := skeletonVanishingHomology.{u} k
+      let Z : TopCat.{u} := TopCat.of (WithDiscreteTopology (RelCWComplex.cell C 0))
+      let e : Z ≅ skeletonVanishingTop C 0 :=
+        TopCat.isoOfHomeo (zeroSkeletonHomeomorphCells C)
+      let _ : TotallyDisconnectedSpace Z := inferInstance
+      have hz : IsZero (H.obj Z) :=
+        isZero_singularHomologyFunctor_of_totallyDisconnectedSpace
+          AddCommGrpCat.{u} k R Z (Nat.ne_of_gt hnk)
+      exact hz.of_iso (H.mapIso e).symm
+  | succ n ih =>
+      let R : AddCommGrpCat.{u} := skeletonVanishingCoefficient.{u}
+      let H : TopCat.{u} ⥤ AddCommGrpCat.{u} := skeletonVanishingHomology.{u} k
+      let P : TopPair.{u} := skeletalStagePair C (n + 1)
+      let a : skeletonVanishingTop C n ≅ P.snd := skeletonVanishingStepSourceIso C n
+      let i : H.obj P.snd ⟶ H.obj P.fst := H.map P.map
+      have hk : k ≠ n + 1 := Nat.ne_of_gt hnk
+      have hk' : k + 1 ≠ n + 1 :=
+        Nat.ne_of_gt (Nat.lt_trans hnk (Nat.lt_succ_self k))
+      have hi : IsIso i := (skeletonStepHomologyStability C (n + 1) k).2.2 hk hk'
+      let _ : IsIso i := hi
+      let b : P.fst ≅ skeletonVanishingTop C (n + 1) :=
+        skeletonVanishingStepTargetIso C n
+      let e : H.obj (skeletonVanishingTop C n) ≅
+          H.obj (skeletonVanishingTop C (n + 1)) :=
+        H.mapIso a ≪≫ asIso i ≪≫ H.mapIso b
+      have hz : IsZero (H.obj (skeletonVanishingTop C n)) :=
+        ih k (Nat.lt_trans (Nat.lt_succ_self n) hnk)
+      exact hz.of_iso e.symm
+
+/-- A genuine equality of the actual skeleton with the complex transfers the
+same ordinary vanishing result to the whole space. -/
+theorem homologyVanishingOfSkeletonEq (n k : ℕ)
+    (hbound : (CWComplex.skeleton C (n : ℕ∞) : Set X) = C) (hnk : n < k) :
+    IsZero (((singularHomologyFunctor AddCommGrpCat.{u} k).obj
+      (AddCommGrpCat.of.{u} (ULift.{u} ℤ))).obj (TopCat.of ↑C)) := by
+  let H : TopCat.{u} ⥤ AddCommGrpCat.{u} := skeletonVanishingHomology.{u} k
+  let e : skeletonVanishingTop C n ≅ TopCat.of ↑C :=
+    TopCat.isoOfHomeo (Homeomorph.setCongr hbound)
+  exact (skeletonHomologyVanishing C n k hnk).of_iso (H.mapIso e).symm
+
+private theorem skeletonEqOfCellDimensionBound (n : ℕ)
+    (hbound : ∀ m : ℕ, n < m → IsEmpty (RelCWComplex.cell C m)) :
+    (CWComplex.skeleton C (n : ℕ∞) : Set X) = C := by
+  apply Set.Subset.antisymm (CWComplex.skeleton C (n : ℕ∞)).subset_complex
+  intro x hx
+  rw [← CWComplex.iUnion_openCell_eq_complex (C := C)] at hx
+  obtain ⟨m, hx⟩ := Set.mem_iUnion.mp hx
+  obtain ⟨i, hxi⟩ := Set.mem_iUnion.mp hx
+  by_cases hm : m ≤ n
+  · exact (CWComplex.skeleton_mono (C := C) (Nat.cast_le.mpr hm))
+      (CWComplex.openCell_subset_skeleton (C := C) m i hxi)
+  · let _ : IsEmpty (RelCWComplex.cell C m) := hbound m (Nat.lt_of_not_ge hm)
+    exact (IsEmpty.false i).elim
+
+/-- Every genuine bound on the cell dimensions yields the asserted vanishing;
+no surviving cell family is required to be finite. -/
+theorem homologyVanishingOfCellDimensionBound (n : ℕ)
+    (hbound : ∀ m : ℕ, n < m → IsEmpty (RelCWComplex.cell C m)) :
+    ∀ k : ℕ, n < k →
+      IsZero (((singularHomologyFunctor AddCommGrpCat.{u} k).obj
+        (AddCommGrpCat.of.{u} (ULift.{u} ℤ))).obj (TopCat.of ↑C)) := by
+  intro k hk
+  exact homologyVanishingOfSkeletonEq C n k
+    (skeletonEqOfCellDimensionBound C n hbound) hk
+
+/-- Finite dimension supplies an actual skeleton bound; finite cell counts
+and finite type are not hypotheses. -/
+theorem finiteDimensionalHomologyVanishing [CWComplex.FiniteDimensional C] :
+    ∃ n : ℕ, (CWComplex.skeleton C (n : ℕ∞) : Set X) = C ∧
+      ∀ k : ℕ, n < k →
+        IsZero (((singularHomologyFunctor AddCommGrpCat.{u} k).obj
+          (AddCommGrpCat.of.{u} (ULift.{u} ℤ))).obj (TopCat.of ↑C)) := by
+  have h := CWComplex.FiniteDimensional.eventually_isEmpty_cell (C := C)
+  rw [Filter.eventually_atTop] at h
+  obtain ⟨N, hN⟩ := h
+  have hbound : ∀ m : ℕ, N < m → IsEmpty (RelCWComplex.cell C m) :=
+    fun m hm ↦ hN m hm.le
+  exact ⟨N, skeletonEqOfCellDimensionBound C N hbound,
+    homologyVanishingOfCellDimensionBound C N hbound⟩
+
+end Hatcher.ClassicalCW
