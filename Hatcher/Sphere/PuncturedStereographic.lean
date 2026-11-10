@@ -561,7 +561,7 @@ end Hatcher.Sphere
 
 namespace Hatcher.Sphere
 
-open CategoryTheory Topology
+open CategoryTheory _root_.Topology
 open scoped unitInterval
 
 universe u
@@ -655,7 +655,16 @@ noncomputable def sphereSingletonGoodPairData
               change e.symm ((1 - (t : ℝ)) • center + (t : ℝ) • center) = bV
               rw [← add_smul, sub_add_cancel, one_smul]
               exact e.symm_apply_apply bV }
-  obtain ⟨V, hb, hV, ⟨H⟩⟩ := geometry
+  let V : Set (TopCat.sphere.{u} n) := Classical.choose geometry
+  have geometry_spec : ∃ (hb : b ∈ V), IsOpen V ∧ Nonempty
+      ((ContinuousMap.id V).HomotopyRel
+        (ContinuousMap.const V ⟨b, hb⟩) {⟨b, hb⟩}) :=
+    Classical.choose_spec geometry
+  have hb : b ∈ V := Classical.choose geometry_spec
+  have hV : IsOpen V := (Classical.choose_spec geometry_spec).1
+  let H : (ContinuousMap.id V).HomotopyRel
+      (ContinuousMap.const V ⟨b, hb⟩) {⟨b, hb⟩} :=
+    Classical.choice (Classical.choose_spec geometry_spec).2
   let P : TopPair.{u} := TopPair.ofSubset ({b} : Set (TopCat.sphere.{u} n))
   have hrange : Set.range P.map = ({b} : Set (TopCat.sphere.{u} n)) := by
     ext x
