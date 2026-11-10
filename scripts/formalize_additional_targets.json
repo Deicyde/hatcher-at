@@ -175,6 +175,16 @@
         "Hatcher.ClassicalCW.positiveStandardDiskFundamentalClass",
         "Hatcher.ClassicalCW.positiveSkeletonCellFundamentalClass"
       ]
+    },
+    {
+      "article_id": "af_7b3b7e4204ac2cb6b6198976",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.skeletonRelativeHomology",
+        "Hatcher.ClassicalCW.skeletalCellFundamentalClass",
+        "Hatcher.ClassicalCW.skeletalCellFundamentalClass_zero",
+        "Hatcher.ClassicalCW.skeletalCellFundamentalClass_succ"
+      ]
     }
   ]
 }
