@@ -6,6 +6,7 @@ Authors: Jack McCarthy
 
 import Hatcher.Sphere.Homology
 import Hatcher.Singular.DoubleSimplexSphere
+import Hatcher.Sphere.PuncturedStereographic
 import Hatcher.Singular.GoodPairPointQuotientNaturality
 import Hatcher.Singular.PointedWedgePointQuotient
 import Hatcher.Singular.SigmaGoodPair
@@ -288,8 +289,17 @@ private theorem positiveSkeletalPair_isGoodPair (k : ℕ)
     obtain ⟨a⟩ := hA
     exact ⟨a.1, a.2⟩
   have hgood := subcomplex_isGoodPair (B : Set X) Acopy hne
-  simpa only [Acopy, B, m, skeletalStagePair,
-    skeletonLTInclusion, ContinuousMap.inclusion] using hgood
+  let f : TopCat.of ↑(CWComplex.skeletonLT C (m : ℕ∞) : Set X) ⟶
+      TopCat.of ↑(CWComplex.skeletonLT C ((m + 1 : ℕ) : ℕ∞) : Set X) :=
+    TopCat.ofHom (ContinuousMap.inclusion Acopy.subset_complex)
+  have hf : f = skeletonLTInclusion C m := by
+    apply TopCat.ext
+    intro x
+    apply Subtype.ext
+    rfl
+  change IsGoodPair (TopPair.of f (IsEmbedding.inclusion Acopy.subset_complex)) at hgood
+  rw [hf] at hgood
+  exact hgood
 
 end Skeleta
 
@@ -303,6 +313,7 @@ private theorem positiveSphereBasedPair_isGoodPair (k : ℕ) :
   let P : TopPair.{u} := pointedPair S b
   let Q : TopPair.{u} := TopPair.ofSubset ({b} : Set S)
   let h : GoodPairData Q := Hatcher.Sphere.sphereSingletonGoodPairData (k + 1) b
+  let V : Set S := h.V
   have hrange : Set.range P.map = Set.range Q.map := by
     ext x
     constructor
@@ -312,13 +323,13 @@ private theorem positiveSphereBasedPair_isGoodPair (k : ℕ) :
       refine ⟨PUnit.unit, ?_⟩
       change b = q.1
       exact (Set.mem_singleton_iff.mp q.2).symm
-  have hV : Set.range P.map ⊆ interior h.V := by
+  have hV : Set.range P.map ⊆ interior V := by
     rw [hrange]
     exact h.range_subset_interior
-  let i : C(P.snd, h.V) :=
-    goodPairNeighborhoodInclusion P h.V (hV.trans interior_subset)
-  let j : C(Q.snd, h.V) :=
-    goodPairNeighborhoodInclusion Q h.V
+  let i : C(P.snd, V) :=
+    goodPairNeighborhoodInclusion P V (hV.trans interior_subset)
+  let j : C(Q.snd, V) :=
+    goodPairNeighborhoodInclusion Q V
       (h.range_subset_interior.trans interior_subset)
   let d : Hatcher.StrongDeformationRetract j := h.strongDeformationRetract
   have hpoint (p : P.snd) : i p = j ⟨b, by simp⟩ := by
@@ -326,7 +337,7 @@ private theorem positiveSphereBasedPair_isGoodPair (k : ℕ) :
     rfl
   refine ⟨{ nonempty := ?_
             isClosed_range := ?_
-            V := h.V
+            V := V
             range_subset_interior := hV
             strongDeformationRetract := ?_ }⟩
   · change Nonempty PUnit
@@ -347,14 +358,22 @@ private theorem positiveSphereBasedPair_isGoodPair (k : ℕ) :
               exact d.deformation.apply_zero x
             map_one_left := by
               intro x
-              rw [d.deformation.apply_one]
-              apply Subtype.ext
-              exact Set.mem_singleton_iff.mp (d.retract x).2
+              change d.deformation (1, x) = i PUnit.unit
+              have hlimit : d.deformation (1, x) = j (d.retract x) :=
+                d.deformation.apply_one x
+              have htarget : j (d.retract x) = i PUnit.unit := by
+                apply Subtype.ext
+                exact Set.mem_singleton_iff.mp (d.retract x).2
+              exact hlimit.trans htarget
             prop' := by
               intro t x hx
               rcases hx with ⟨p, rfl⟩
-              rw [hpoint]
-              exact d.deformation.eq_fst t ⟨⟨b, by simp⟩, rfl⟩ } }
+              change d.deformation (t, i p) = i p
+              have hp : i p = j ⟨b, by simp⟩ := hpoint p
+              have hfixed : d.deformation (t, j ⟨b, by simp⟩) = j ⟨b, by simp⟩ :=
+                d.deformation.eq_fst t ⟨⟨b, by simp⟩, rfl⟩
+              exact (congrArg (fun z : V => d.deformation (t, z)) hp).trans
+                (hfixed.trans hp.symm) } }
 
 private noncomputable def positiveSpherePositiveIso (k : ℕ) :
     (Hatcher.Reduced.homologyFunctor.{u} positiveCellCoefficient.{u} (k + 1)).obj
@@ -466,6 +485,7 @@ private noncomputable def positiveWedgeHomologyIso (k j : ℕ) :
     (fun _ => positiveSphereBasedPair_isGoodPair.{u} k) positiveCellCoefficient.{u} j
   exact @asIso AddCommGrpCat.{u} _ _ _ f hf
 
+omit [T2Space X] in
 private theorem positiveWedgeHomologyIso_hom (k j : ℕ) :
     (positiveWedgeHomologyIso C k j).hom =
       Hatcher.PointedWedge.reducedHomologyCoproductMap
@@ -655,12 +675,23 @@ private theorem positiveSkeletonCellBasisIso_class (k : ℕ)
     (hA : Nonempty (positiveSkeletalPair C k).snd) (i : positiveSkeletalCell C k) :
     (positiveSkeletonCellBasisIso C k hA).hom (positiveSkeletonCellFundamentalClass C k i) =
       Finsupp.single i 1 := by
+  let R : AddCommGrpCat.{u} := positiveCellCoefficient.{u}
+  let T := positiveSkeletalWedgeComparison C k hA (k + 1)
   let B := positiveWedgeCellBasisIso C k
   let A := positiveIntegerFinsuppIso C k
-  have hcell := positiveSkeletonCell_class_to_wedge C k hA i
-  have hinj := positiveWedgeCellBasisIso_ι C k i
-  have h := congrArg (fun f => f ≫ B.inv ≫ A.hom) (hcell.trans hinj.symm)
-  simp only [Category.assoc, Iso.hom_inv_id_assoc] at h
+  let c : R ⟶ (homologyFunctor R (k + 1)).obj (positiveSkeletalPair C k) :=
+    positiveStandardDiskFundamentalClass.{u} k ≫
+      (homologyFunctor R (k + 1)).map (skeletalStageCellPairMap C (k + 1) i)
+  let ι : R ⟶ (∐ fun _ : positiveSkeletalCell C k => R) := Sigma.ι (fun _ => R) i
+  have hcell : c ≫ T.hom = ι ≫ B.hom :=
+    (positiveSkeletonCell_class_to_wedge C k hA i).trans
+      (positiveWedgeCellBasisIso_ι C k i).symm
+  have hpost := congrArg (fun f => f ≫ B.inv ≫ A.hom) hcell
+  have hassoc : c ≫ T.hom ≫ B.inv ≫ A.hom = ι ≫ B.hom ≫ B.inv ≫ A.hom := by
+    simpa only [Category.assoc] using hpost
+  have hcancel : B.hom ≫ B.inv ≫ A.hom = A.hom := B.hom_inv_id_assoc A.hom
+  have h : c ≫ T.hom ≫ B.inv ≫ A.hom = ι ≫ A.hom :=
+    hassoc.trans (congrArg (fun f => ι ≫ f) hcancel)
   have hv := ConcreteCategory.congr_hom h (ULift.up (1 : ℤ))
   change (positiveSkeletonCellBasisIso C k hA).hom
       (positiveSkeletonCellFundamentalClass C k i) =
@@ -685,7 +716,7 @@ private theorem positiveSkeleton_offDiagonal_isZero (k : ℕ)
   have hz : ∀ i, IsZero (Z i) := fun _ =>
     (Hatcher.Sphere.reducedHomology_sphere positiveCellCoefficient.{u} (k + 1)).2 j hj
   have hsum : IsZero (∐ Z) := by
-    apply IsZero.iff_id_eq_zero.mpr
+    apply (IsZero.iff_id_eq_zero (∐ Z)).mpr
     apply Sigma.hom_ext
     intro i
     rw [Category.comp_id, comp_zero]
@@ -710,30 +741,44 @@ private theorem positiveSkeletalCells_isEmpty (k : ℕ)
 private theorem positiveSkeletalSuccessor_isEmpty (k : ℕ)
     [IsEmpty (positiveSkeletalPair C k).snd] [IsEmpty (positiveSkeletalCell C k)] :
     IsEmpty (positiveSkeletalPair C k).fst := by
+  have hOld : IsEmpty ↑(RelCWComplex.skeletonLT C ((k + 1 : ℕ) : ℕ∞) : Set X) := by
+    change IsEmpty (positiveSkeletalPair C k).snd
+    infer_instance
   refine ⟨fun x => ?_⟩
   obtain ⟨z, hz⟩ := (skeletonLTStepJointMap_isQuotient C (k + 1)).surjective x
   rcases z with a | ⟨i, z⟩
-  · exact IsEmpty.false a
+  · exact @IsEmpty.false _ hOld a
   · exact IsEmpty.false i
 
 private theorem positiveEmptySkeletalHomology_isZero (k j : ℕ)
     [IsEmpty (positiveSkeletalPair C k).snd] [IsEmpty (positiveSkeletalPair C k).fst] :
     IsZero ((homologyFunctor positiveCellCoefficient.{u} j).obj (positiveSkeletalPair C k)) := by
-  let P := positiveSkeletalPair C k
-  let g : P.fst ⟶ P.snd := TopCat.ofHom
-    { toFun := fun x => (IsEmpty.false x).elim
-      continuous_toFun := continuous_of_discreteTopology }
+  let P : TopPair.{u} := positiveSkeletalPair C k
+  have hEmpty : IsEmpty P.fst := by
+    change IsEmpty (positiveSkeletalPair C k).fst
+    infer_instance
+  let f : P.fst → P.snd := fun x => (@IsEmpty.false _ hEmpty x).elim
+  have hf : Continuous f := by
+    apply continuous_def.mpr
+    intro U _hU
+    have he : f ⁻¹' U = ∅ := by
+      ext x
+      exact (@IsEmpty.false _ hEmpty x).elim
+    rw [he]
+    exact isOpen_empty
+  let g : P.fst ⟶ P.snd := TopCat.ofHom ⟨f, hf⟩
   have hg : TopPair.Hom.fst (𝟙 P) = g ≫ P.map := by
     ext x
-    exact (IsEmpty.false x).elim
+    exact (@IsEmpty.false _ hEmpty x).elim
   have h := Hatcher.Relative.homologyFunctor_map_eq_zero_of_factors_through_subspace
     (𝟙 P) g hg positiveCellCoefficient.{u} j
-  apply IsZero.iff_id_eq_zero.mpr
+  apply (IsZero.iff_id_eq_zero ((homologyFunctor positiveCellCoefficient.{u} j).obj P)).mpr
   simpa only [Functor.map_id] using h
 
 private theorem positiveEmptyFinsupp_isZero (k : ℕ) [IsEmpty (positiveSkeletalCell C k)] :
     IsZero (AddCommGrpCat.of.{u} (positiveSkeletalCell C k →₀ ℤ)) := by
-  apply IsZero.iff_id_eq_zero.mpr
+  apply (IsZero.iff_id_eq_zero
+    (AddCommGrpCat.of.{u} (positiveSkeletalCell C k →₀ ℤ))).mpr
   ext a i
   exact (IsEmpty.false i).elim
 
