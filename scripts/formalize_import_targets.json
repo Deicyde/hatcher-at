@@ -24,6 +24,10 @@
     {
       "article_id": "af_401e1c6dfdf6e37cba588880",
       "module": "Hatcher.Singular.SigmaRelativeChains"
+    },
+    {
+      "article_id": "af_07101a56629e9ad3a0c03550",
+      "module": "Hatcher.Singular.PointedWedgeHomology"
     }
   ]
 }
