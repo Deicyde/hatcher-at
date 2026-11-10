@@ -2,6 +2,9 @@
 article_id: af_07101a56629e9ad3a0c03550
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.positiveSkeletonRelativeHomology, Hatcher.ClassicalCW.positiveStandardDiskFundamentalClass, Hatcher.ClassicalCW.positiveSkeletonCellFundamentalClass
 ---
 
 # Positive-dimensional skeletal pairs have the cell basis
