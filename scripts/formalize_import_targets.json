@@ -20,6 +20,10 @@
     {
       "article_id": "af_014295821647fd8a388f2ad4",
       "module": "Hatcher.VanKampen.ConeAttachmentDisk"
+    },
+    {
+      "article_id": "af_401e1c6dfdf6e37cba588880",
+      "module": "Hatcher.Singular.SigmaRelativeChains"
     }
   ]
 }
