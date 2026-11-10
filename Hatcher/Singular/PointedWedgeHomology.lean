@@ -1105,3 +1105,208 @@ theorem finiteDimensionalHomologyVanishing [CWComplex.FiniteDimensional C] :
     homologyVanishingOfCellDimensionBound C N hbound⟩
 
 end Hatcher.ClassicalCW
+
+noncomputable section
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
+
+universe u
+
+private abbrev finiteStageCoefficient : AddCommGrpCat.{u} :=
+  AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+
+private abbrev finiteStageHomology (k : ℕ) : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+  (singularHomologyFunctor AddCommGrpCat.{u} k).obj finiteStageCoefficient.{u}
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+private abbrev finiteStageTop (n : ℕ) : TopCat.{u} :=
+  TopCat.of ↑(CWComplex.skeleton C (n : ℕ∞) : Set X)
+
+private noncomputable def finiteStageInclusion (n m : ℕ) (hnm : n ≤ m) :
+    finiteStageTop C n ⟶ finiteStageTop C m :=
+  TopCat.ofHom (ContinuousMap.inclusion
+    (CWComplex.skeleton_mono (C := C) (Nat.cast_le.mpr hnm)))
+
+private theorem finiteStageInclusion_id (n : ℕ) :
+    finiteStageInclusion C n n (Nat.le_refl n) = 𝟙 (finiteStageTop C n) := by
+  apply TopCat.ext
+  intro x
+  apply Subtype.ext
+  rfl
+
+private theorem finiteStageInclusion_comp (n m l : ℕ)
+    (hnm : n ≤ m) (hml : m ≤ l) :
+    finiteStageInclusion C n m hnm ≫ finiteStageInclusion C m l hml =
+      finiteStageInclusion C n l (Nat.le_trans hnm hml) := by
+  apply TopCat.ext
+  intro x
+  apply Subtype.ext
+  rfl
+
+private theorem finiteStage_standard_strict (n : ℕ) :
+    (CWComplex.skeleton C (n : ℕ∞) : Set X) =
+      (RelCWComplex.skeletonLT C ((n + 1 : ℕ) : ℕ∞) : Set X) := by
+  change (RelCWComplex.skeletonLT C ((n : ℕ∞) + 1) : Set X) =
+    (RelCWComplex.skeletonLT C ((n + 1 : ℕ) : ℕ∞) : Set X)
+  exact congrArg (fun p : ℕ∞ ↦ (RelCWComplex.skeletonLT C p : Set X))
+    (by simp only [Nat.cast_add, Nat.cast_one])
+
+private noncomputable def finiteStageStepSourceIso (n : ℕ) :
+    finiteStageTop C n ≅ (skeletalStagePair C (n + 1)).snd :=
+  TopCat.isoOfHomeo (Homeomorph.setCongr (finiteStage_standard_strict C n))
+
+/- Carrier and inclusion wrappers retain T2Space X because the pinned
+skeleton objects themselves require it; no unused pure binder is added. -/
+private noncomputable def finiteStageStepTargetIso (n : ℕ) :
+    (skeletalStagePair C (n + 1)).fst ≅ finiteStageTop C (n + 1) := by
+  have hcast : (((n + 1 : ℕ) : ℕ∞) + 1) = (((n + 1) + 1 : ℕ) : ℕ∞) := by
+    simp only [Nat.cast_add, Nat.cast_one]
+  have h : (RelCWComplex.skeletonLT C (((n + 1 : ℕ) : ℕ∞) + 1) : Set X) =
+      (CWComplex.skeleton C ((n + 1 : ℕ) : ℕ∞) : Set X) :=
+    (congrArg (fun p : ℕ∞ ↦ (RelCWComplex.skeletonLT C p : Set X)) hcast).trans
+      (finiteStage_standard_strict C (n + 1)).symm
+  exact TopCat.isoOfHomeo (Homeomorph.setCongr h)
+
+private theorem finiteStageInclusion_step (n : ℕ) :
+    finiteStageInclusion C n (n + 1) (Nat.le_succ n) =
+      (finiteStageStepSourceIso C n).hom ≫ (skeletalStagePair C (n + 1)).map ≫
+        (finiteStageStepTargetIso C n).hom := by
+  apply TopCat.ext
+  intro x
+  apply Subtype.ext
+  rfl
+
+private theorem finiteStageIdentityHomology (n k : ℕ) :
+    let H : TopCat.{u} ⥤ AddCommGrpCat.{u} := finiteStageHomology.{u} k
+    let i := H.map (finiteStageInclusion C n n (Nat.le_refl n))
+    Function.Surjective i ∧ IsIso i := by
+  let H : TopCat.{u} ⥤ AddCommGrpCat.{u} := finiteStageHomology.{u} k
+  let i : H.obj (finiteStageTop C n) ⟶ H.obj (finiteStageTop C n) :=
+    H.map (finiteStageInclusion C n n (Nat.le_refl n))
+  have hi : i = 𝟙 (H.obj (finiteStageTop C n)) :=
+    (congrArg (fun f : finiteStageTop C n ⟶ finiteStageTop C n ↦ H.map f)
+      (finiteStageInclusion_id C n)).trans (H.map_id (finiteStageTop C n))
+  have hs : Function.Surjective i := by
+    intro y
+    exact ⟨y, ConcreteCategory.congr_hom hi y⟩
+  have he : IsIso i :=
+    Eq.mpr (congrArg (fun f : H.obj (finiteStageTop C n) ⟶
+      H.obj (finiteStageTop C n) ↦ IsIso f) hi) inferInstance
+  exact ⟨hs, he⟩
+
+private theorem finiteStageOneStep (n k : ℕ) :
+    let H : TopCat.{u} ⥤ AddCommGrpCat.{u} := finiteStageHomology.{u} k
+    let i := H.map (finiteStageInclusion C n (n + 1) (Nat.le_succ n))
+    (k ≤ n → Function.Surjective i) ∧ (k < n → IsIso i) := by
+  let H : TopCat.{u} ⥤ AddCommGrpCat.{u} := finiteStageHomology.{u} k
+  let P : TopPair.{u} := skeletalStagePair C (n + 1)
+  let a : finiteStageTop C n ≅ P.snd := finiteStageStepSourceIso C n
+  let b : P.fst ≅ finiteStageTop C (n + 1) := finiteStageStepTargetIso C n
+  let E := H.mapIso a
+  let E₂ := H.mapIso b
+  let p : H.obj (finiteStageTop C n) ⟶ H.obj P.snd := E.hom
+  let q₀ : H.obj P.snd ⟶ H.obj P.fst := H.map P.map
+  let q : H.obj P.snd ⟶ H.obj (finiteStageTop C (n + 1)) :=
+    H.map (P.map ≫ b.hom)
+  have hpost : q₀ ≫ E₂.hom = q := (H.map_comp P.map b.hom).symm
+  let i : H.obj (finiteStageTop C n) ⟶ H.obj (finiteStageTop C (n + 1)) :=
+    H.map (finiteStageInclusion C n (n + 1) (Nat.le_succ n))
+  have hmap : p ≫ q = i :=
+    (H.map_comp a.hom (P.map ≫ b.hom)).symm.trans
+      (congrArg (fun f : finiteStageTop C n ⟶ finiteStageTop C (n + 1) ↦ H.map f)
+        (finiteStageInclusion_step C n).symm)
+  refine ⟨?_, ?_⟩
+  · intro hk
+    have hq₀ : Function.Surjective q₀ :=
+      (skeletonStepHomologyStability C (n + 1) k).1
+        (Nat.ne_of_lt (Nat.lt_succ_of_le hk))
+    have hq : Function.Surjective q := by
+      intro y
+      obtain ⟨z, hz⟩ := hq₀ (E₂.inv y)
+      have he : E₂.hom (E₂.inv y) = y := ConcreteCategory.congr_hom E₂.inv_hom_id y
+      have h := ConcreteCategory.congr_hom hpost z
+      change E₂.hom (q₀ z) = q z at h
+      exact ⟨z, h.symm.trans ((congrArg E₂.hom hz).trans he)⟩
+    intro y
+    obtain ⟨z, hz⟩ := hq y
+    let x := E.inv z
+    have hp : p x = z := ConcreteCategory.congr_hom E.inv_hom_id z
+    have h := ConcreteCategory.congr_hom hmap x
+    change q (p x) = i x at h
+    exact ⟨x, h.symm.trans ((congrArg q hp).trans hz)⟩
+  · intro hk
+    have hp : IsIso p := inferInstance
+    have hq₀ : IsIso q₀ := (skeletonStepHomologyStability C (n + 1) k).2.2
+      (Nat.ne_of_lt (Nat.lt_succ_of_le hk.le))
+      (Nat.ne_of_lt (Nat.lt_succ_of_le (Nat.succ_le_of_lt hk)))
+    have he : IsIso E₂.hom := inferInstance
+    have hq : IsIso q := Eq.mp (congrArg
+      (fun f : H.obj P.snd ⟶ H.obj (finiteStageTop C (n + 1)) ↦ IsIso f) hpost)
+        (IsIso.comp_isIso' hq₀ he)
+    exact Eq.mp (congrArg
+      (fun f : H.obj (finiteStageTop C n) ⟶ H.obj (finiteStageTop C (n + 1)) ↦ IsIso f)
+      hmap) (IsIso.comp_isIso' hp hq)
+
+/-- The actual finite-to-finite skeleton inclusion is surjective on ordinary
+integral homology in degrees at most n and an isomorphism in degrees below n.
+The identity and empty cases use the same literal maps. -/
+theorem finiteStageHomologyStability (n m : ℕ) (hnm : n ≤ m) (k : ℕ) :
+    let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+    let H : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+      (singularHomologyFunctor AddCommGrpCat.{u} k).obj R
+    let A : Set X := CWComplex.skeleton C (n : ℕ∞)
+    let B : Set X := CWComplex.skeleton C (m : ℕ∞)
+    let hAB : A ⊆ B := CWComplex.skeleton_mono (C := C) (Nat.cast_le.mpr hnm)
+    let i := H.map (TopCat.ofHom (ContinuousMap.inclusion hAB))
+    (k ≤ n → Function.Surjective i) ∧ (k < n → IsIso i) := by
+  let H : TopCat.{u} ⥤ AddCommGrpCat.{u} := finiteStageHomology.{u} k
+  change (k ≤ n → Function.Surjective (H.map (finiteStageInclusion C n m hnm))) ∧
+    (k < n → IsIso (H.map (finiteStageInclusion C n m hnm)))
+  induction m generalizing n with
+  | zero =>
+      have hn : n = 0 := Nat.eq_zero_of_le_zero hnm
+      subst n
+      exact ⟨fun _ ↦ (finiteStageIdentityHomology C 0 k).1,
+        fun _ ↦ (finiteStageIdentityHomology C 0 k).2⟩
+  | succ m ih =>
+      by_cases hn : n = m + 1
+      · subst n
+        exact ⟨fun _ ↦ (finiteStageIdentityHomology C (m + 1) k).1,
+          fun _ ↦ (finiteStageIdentityHomology C (m + 1) k).2⟩
+      · have hnm' : n ≤ m := Nat.le_of_lt_succ (lt_of_le_of_ne hnm hn)
+        let i₀ : H.obj (finiteStageTop C n) ⟶ H.obj (finiteStageTop C m) :=
+          H.map (finiteStageInclusion C n m hnm')
+        let i₁ : H.obj (finiteStageTop C m) ⟶ H.obj (finiteStageTop C (m + 1)) :=
+          H.map (finiteStageInclusion C m (m + 1) (Nat.le_succ m))
+        let i : H.obj (finiteStageTop C n) ⟶ H.obj (finiteStageTop C (m + 1)) :=
+          H.map (finiteStageInclusion C n (m + 1) hnm)
+        have hcomp : i₀ ≫ i₁ = i :=
+          (H.map_comp (finiteStageInclusion C n m hnm')
+            (finiteStageInclusion C m (m + 1) (Nat.le_succ m))).symm.trans
+              (congrArg
+                (fun f : finiteStageTop C n ⟶ finiteStageTop C (m + 1) ↦ H.map f)
+                (finiteStageInclusion_comp C n m (m + 1) hnm' (Nat.le_succ m)))
+        have hold := ih n hnm'
+        have hlast := finiteStageOneStep C m k
+        refine ⟨?_, ?_⟩
+        · intro hk
+          have h₀ : Function.Surjective i₀ := hold.1 hk
+          have h₁ : Function.Surjective i₁ := hlast.1 (Nat.le_trans hk hnm')
+          intro y
+          obtain ⟨z, hz⟩ := h₁ y
+          obtain ⟨x, hx⟩ := h₀ z
+          have h := ConcreteCategory.congr_hom hcomp x
+          change i₁ (i₀ x) = i x at h
+          exact ⟨x, h.symm.trans ((congrArg i₁ hx).trans hz)⟩
+        · intro hk
+          have h₀ : IsIso i₀ := hold.2 hk
+          have h₁ : IsIso i₁ := hlast.2 (lt_of_lt_of_le hk hnm')
+          exact Eq.mp (congrArg
+            (fun f : H.obj (finiteStageTop C n) ⟶ H.obj (finiteStageTop C (m + 1)) ↦ IsIso f)
+            hcomp) (IsIso.comp_isIso' h₀ h₁)
+
+end Hatcher.ClassicalCW
