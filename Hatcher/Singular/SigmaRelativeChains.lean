@@ -546,7 +546,7 @@ noncomputable def zeroSkeletonPair : TopPair.{u} :=
     (IsEmbedding.inclusion h)
 
 private abbrev zeroSkeletonCoefficient : AddCommGrpCat.{u} :=
-  AddCommGrpCat.of (ULift.{u} ℤ)
+  AddCommGrpCat.of.{u} (ULift.{u} ℤ)
 
 private abbrev zeroSkeletonSpace : TopCat.{u} := (zeroSkeletonPair C).fst
 
@@ -559,7 +559,8 @@ private instance zeroSkeletonPair_empty : IsEmpty (zeroSkeletonPair C).snd := by
 
 private instance zeroSkeletonSingularPair_left_dimension :
     (Hatcher.Relative.singularPairFunctor.obj (zeroSkeletonPair C)).left.HasDimensionLT 0 := by
-  apply SSet.notNonempty_iff_hasDimensionLT_zero.mp
+  apply (SSet.notNonempty_iff_hasDimensionLT_zero
+    (Hatcher.Relative.singularPairFunctor.obj (zeroSkeletonPair C)).left).mp
   rintro ⟨s⟩
   let x : (zeroSkeletonPair C).snd := TopCat.toSSetObj₀Equiv s
   exact IsEmpty.false x
@@ -568,23 +569,23 @@ private instance zeroSkeletonSingularPair_left_dimension :
 literal empty-subspace pair. -/
 noncomputable def zeroSkeletonOrdinaryRelativeChainIso :
     ((singularChainComplexFunctor AddCommGrpCat.{u}).obj
-        zeroSkeletonCoefficient).obj (zeroSkeletonSpace C) ≅
-      (Hatcher.Relative.chainComplexFunctor zeroSkeletonCoefficient).obj
+        zeroSkeletonCoefficient.{u}).obj (zeroSkeletonSpace C) ≅
+      (Hatcher.Relative.chainComplexFunctor zeroSkeletonCoefficient.{u}).obj
         (zeroSkeletonPair C) :=
   asIso ((Hatcher.Relative.singularPairFunctor.obj
-    (zeroSkeletonPair C)).chainComplexπ zeroSkeletonCoefficient)
+    (zeroSkeletonPair C)).chainComplexπ zeroSkeletonCoefficient.{u})
 
 @[simp]
 theorem zeroSkeletonOrdinaryRelativeChainIso_hom :
     (zeroSkeletonOrdinaryRelativeChainIso C).hom =
-      (Hatcher.Relative.chainComplexFunctorπ zeroSkeletonCoefficient).app
+      (Hatcher.Relative.chainComplexFunctorπ zeroSkeletonCoefficient.{u}).app
         (zeroSkeletonPair C) := rfl
 
 /-- The induced homology comparison retains the actual chain quotient map. -/
 noncomputable def zeroSkeletonOrdinaryRelativeHomologyIso (n : ℕ) :
     ((singularHomologyFunctor AddCommGrpCat.{u} n).obj
-        zeroSkeletonCoefficient).obj (zeroSkeletonSpace C) ≅
-      (Hatcher.Relative.homologyFunctor zeroSkeletonCoefficient n).obj
+        zeroSkeletonCoefficient.{u}).obj (zeroSkeletonSpace C) ≅
+      (Hatcher.Relative.homologyFunctor zeroSkeletonCoefficient.{u} n).obj
         (zeroSkeletonPair C) :=
   (HomologicalComplex.homologyFunctor AddCommGrpCat.{u}
     (ComplexShape.down ℕ) n).mapIso (zeroSkeletonOrdinaryRelativeChainIso C)
@@ -593,7 +594,7 @@ noncomputable def zeroSkeletonOrdinaryRelativeHomologyIso (n : ℕ) :
 theorem zeroSkeletonOrdinaryRelativeHomologyIso_hom (n : ℕ) :
     (zeroSkeletonOrdinaryRelativeHomologyIso C n).hom =
       (Hatcher.Relative.singularPairFunctor.obj (zeroSkeletonPair C)).homologyπ
-        zeroSkeletonCoefficient n := rfl
+        zeroSkeletonCoefficient.{u} n := rfl
 
 private instance zeroSkeleton_discrete : DiscreteTopology (zeroSkeletonSpace C) :=
   (zeroSkeletonHomeomorphCells C).symm.isEmbedding.discreteTopology
@@ -615,17 +616,17 @@ private noncomputable def zeroCellVertex (i : RelCWComplex.cell C 0) :
   TopCat.toSSetObj₀Equiv.symm (zeroCellPoint C i)
 
 private noncomputable def zeroCellOrdinaryClassMap (i : RelCWComplex.cell C 0) :
-    zeroSkeletonCoefficient ⟶
+    zeroSkeletonCoefficient.{u} ⟶
       ((singularHomologyFunctor AddCommGrpCat.{u} 0).obj
-        zeroSkeletonCoefficient).obj (zeroSkeletonSpace C) :=
+        zeroSkeletonCoefficient.{u}).obj (zeroSkeletonSpace C) :=
   let S := TopCat.toSSet.obj (zeroSkeletonSpace C)
-  (S.chainComplex zeroSkeletonCoefficient).liftCycles
+  (S.chainComplex zeroSkeletonCoefficient.{u}).liftCycles
       (k := S.ιChainComplex (zeroCellVertex C i)) 0 (by simp) (by simp) ≫
-    (S.chainComplex zeroSkeletonCoefficient).homologyπ 0
+    (S.chainComplex zeroSkeletonCoefficient.{u}).homologyπ 0
 
 /-- The integral relative class of the actual characteristic point. -/
 noncomputable def zeroCellRelativeClass (i : RelCWComplex.cell C 0) :
-    (Hatcher.Relative.homologyFunctor zeroSkeletonCoefficient 0).obj
+    (Hatcher.Relative.homologyFunctor zeroSkeletonCoefficient.{u} 0).obj
       (zeroSkeletonPair C) :=
   (zeroCellOrdinaryClassMap C i ≫
     (zeroSkeletonOrdinaryRelativeHomologyIso C 0).hom) (ULift.up (1 : ℤ))
@@ -633,13 +634,27 @@ noncomputable def zeroCellRelativeClass (i : RelCWComplex.cell C 0) :
 private theorem zeroCellOrdinaryClassMap_components
     (i : RelCWComplex.cell C 0) :
     zeroCellOrdinaryClassMap C i ≫
-        ((zeroSkeletonSpace C).singularHomology₀Iso zeroSkeletonCoefficient).hom =
-      Sigma.ι (fun _ : ZerothHomotopy (zeroSkeletonSpace C) => zeroSkeletonCoefficient)
+        ((zeroSkeletonSpace C).singularHomology₀Iso zeroSkeletonCoefficient.{u}).hom =
+      Sigma.ι (fun _ : ZerothHomotopy (zeroSkeletonSpace C) => zeroSkeletonCoefficient.{u})
         (ZerothHomotopy.mk (zeroCellPoint C i)) := by
-  dsimp only [zeroCellOrdinaryClassMap, TopCat.singularHomology₀Iso, Iso.trans_hom]
-  rw [Category.assoc,
-    SSet.liftCycles_ιChainComplex_homologyπ_homology₀Iso_hom_assoc]
-  simp [sigmaConst, zeroCellVertex, TopCat.zerothHomotopyEquiv_symm_mk]
+  let S := TopCat.toSSet.obj (zeroSkeletonSpace C)
+  let R : AddCommGrpCat.{u} := zeroSkeletonCoefficient.{u}
+  let c : R ⟶ S.homology R 0 :=
+    (S.chainComplex R).liftCycles
+        (k := S.ιChainComplex (zeroCellVertex C i)) 0 (by simp) (by simp) ≫
+      (S.chainComplex R).homologyπ 0
+  let J : (∐ fun _ : S.π₀ => R) ≅
+      (∐ fun _ : ZerothHomotopy (zeroSkeletonSpace C) => R) :=
+    (sigmaConst.obj R).mapIso
+      (TopCat.zerothHomotopyEquiv (X := zeroSkeletonSpace C)).toIso.symm
+  have hv : c ≫ (S.homology₀Iso R).hom =
+      Sigma.ι (fun _ : S.π₀ => R) (SSet.π₀.mk (zeroCellVertex C i)) := by
+    exact (Category.assoc _ _ _).trans
+      (SSet.liftCycles_ιChainComplex_homologyπ_homology₀Iso_hom
+        S R (zeroCellVertex C i))
+  change c ≫ ((S.homology₀Iso R).hom ≫ J.hom) = _
+  rw [← Category.assoc, hv]
+  simp [J, sigmaConst, zeroCellVertex, TopCat.zerothHomotopyEquiv_symm_mk]
 
 private noncomputable def zeroSkeletonPointComponentEquiv :
     zeroSkeletonSpace C ≃ ZerothHomotopy (zeroSkeletonSpace C) :=
@@ -669,29 +684,29 @@ private theorem zeroSkeletonComponentCellEquiv_mk
   change ((zeroSkeletonHomeomorphCells C).symm
     ((zeroSkeletonHomeomorphCells C) (WithTopology.toTopology ⊥ i))).ofTopology = i
   rw [Homeomorph.symm_apply_apply]
-  rfl
 
 /- The standard integer-module Finsupp cofan is transported by the actual
 forgetful functor preserving colimits. All indexing types may be empty. -/
 private noncomputable def zeroCellIntegerCoproductIso :
-    (∐ fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient) ≅
-      AddCommGrpCat.of (RelCWComplex.cell C 0 →₀ ULift.{u} ℤ) :=
+    (∐ fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient.{u}) ≅
+      AddCommGrpCat.of.{u} (RelCWComplex.cell C 0 →₀ ULift.{u} ℤ) :=
   let F := forget₂ (ModuleCat.{u} ℤ) AddCommGrpCat.{u}
   let cofan := F.mapCocone
     (ModuleCat.finsuppCocone ℤ (ULift.{u} ℤ) (RelCWComplex.cell C 0))
   let hc : IsColimit cofan := isColimitOfPreserves F
     (ModuleCat.finsuppCoconeIsColimit ℤ (ULift.{u} ℤ) (RelCWComplex.cell C 0))
   (colimit.isColimit (Discrete.functor
-    (fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient))).coconePointUniqueUpToIso hc
+    (fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient.{u}))).coconePointUniqueUpToIso hc
 
+omit [T2Space X] in
 private theorem zeroCellIntegerCoproductIso_single
     (i : RelCWComplex.cell C 0) (a : ULift.{u} ℤ) :
     (zeroCellIntegerCoproductIso C).hom
-        (Sigma.ι (fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient) i a) =
+        (Sigma.ι (fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient.{u}) i a) =
       Finsupp.single i a := by
   have h := IsColimit.comp_coconePointUniqueUpToIso_hom
     (colimit.isColimit (Discrete.functor
-      (fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient)))
+      (fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient.{u})))
     (isColimitOfPreserves (forget₂ (ModuleCat.{u} ℤ) AddCommGrpCat.{u})
       (ModuleCat.finsuppCoconeIsColimit ℤ (ULift.{u} ℤ)
         (RelCWComplex.cell C 0))) (Discrete.mk i)
@@ -707,19 +722,19 @@ private noncomputable def zeroCellLowerCoefficientEquiv :
   map_add' := by intro a b; ext i; rfl
 
 private noncomputable def zeroCellIntegerFinsuppIso :
-    (∐ fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient) ≅
-      AddCommGrpCat.of (RelCWComplex.cell C 0 →₀ ℤ) :=
+    (∐ fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient.{u}) ≅
+      AddCommGrpCat.of.{u} (RelCWComplex.cell C 0 →₀ ℤ) :=
   zeroCellIntegerCoproductIso C ≪≫
     (zeroCellLowerCoefficientEquiv C).toAddCommGrpIso
 
 private theorem zeroCellIntegerFinsuppIso_single
     (i : RelCWComplex.cell C 0) (a : ULift.{u} ℤ) :
     (zeroCellIntegerFinsuppIso C).hom
-        (Sigma.ι (fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient) i a) =
+        (Sigma.ι (fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient.{u}) i a) =
       Finsupp.single i a.down := by
   change zeroCellLowerCoefficientEquiv C
     ((zeroCellIntegerCoproductIso C).hom
-      (Sigma.ι (fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient) i a)) = _
+      (Sigma.ι (fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient.{u}) i a)) = _
   rw [zeroCellIntegerCoproductIso_single]
   change Finsupp.mapRange ULift.down rfl (Finsupp.single i a) =
     Finsupp.single i a.down
@@ -732,12 +747,12 @@ private theorem zeroCellIntegerFinsuppIso_single
 
 /-- The actual relative H₀ isomorphism, with the canonical zero-cell basis. -/
 noncomputable def zeroSkeletonRelativeHomologyIso :
-    (Hatcher.Relative.homologyFunctor zeroSkeletonCoefficient 0).obj
+    (Hatcher.Relative.homologyFunctor zeroSkeletonCoefficient.{u} 0).obj
         (zeroSkeletonPair C) ≅
-      AddCommGrpCat.of (RelCWComplex.cell C 0 →₀ ℤ) :=
+      AddCommGrpCat.of.{u} (RelCWComplex.cell C 0 →₀ ℤ) :=
   (zeroSkeletonOrdinaryRelativeHomologyIso C 0).symm ≪≫
-    (zeroSkeletonSpace C).singularHomology₀Iso zeroSkeletonCoefficient ≪≫
-    (sigmaConst.obj zeroSkeletonCoefficient).mapIso
+    (zeroSkeletonSpace C).singularHomology₀Iso zeroSkeletonCoefficient.{u} ≪≫
+    (sigmaConst.obj zeroSkeletonCoefficient.{u}).mapIso
       (zeroSkeletonComponentCellEquiv C).toIso ≪≫
     zeroCellIntegerFinsuppIso C
 
@@ -750,20 +765,20 @@ private theorem zeroCell_relative_class_forward
   dsimp only [zeroSkeletonRelativeHomologyIso, Iso.trans_hom, Iso.symm_hom,
     zeroCellRelativeClass, Functor.mapIso_hom]
   change (zeroCellIntegerFinsuppIso C).hom
-    (((sigmaConst.obj zeroSkeletonCoefficient).map
+    (((sigmaConst.obj zeroSkeletonCoefficient.{u}).map
       (zeroSkeletonComponentCellEquiv C).toIso.hom)
-      (((zeroSkeletonSpace C).singularHomology₀Iso zeroSkeletonCoefficient).hom
+      (((zeroSkeletonSpace C).singularHomology₀Iso zeroSkeletonCoefficient.{u}).hom
         ((zeroSkeletonOrdinaryRelativeHomologyIso C 0).inv
           ((zeroSkeletonOrdinaryRelativeHomologyIso C 0).hom
             (zeroCellOrdinaryClassMap C i (ULift.up (1 : ℤ))))))) = _
   rw [(zeroSkeletonOrdinaryRelativeHomologyIso C 0).hom_inv_id_apply]
   rw [hvalue]
   have hreindex := ConcreteCategory.congr_hom
-    (Sigma.ι_comp_map' (zeroSkeletonComponentCellEquiv C) (fun _ => 𝟙 zeroSkeletonCoefficient)
+    (Sigma.ι_comp_map' (zeroSkeletonComponentCellEquiv C) (fun _ => 𝟙 zeroSkeletonCoefficient.{u})
       (ZerothHomotopy.mk (zeroCellPoint C i))) (ULift.up (1 : ℤ))
   change (zeroCellIntegerFinsuppIso C).hom
-    ((Sigma.map' (zeroSkeletonComponentCellEquiv C) (fun _ => 𝟙 zeroSkeletonCoefficient))
-      (Sigma.ι (fun _ : ZerothHomotopy (zeroSkeletonSpace C) => zeroSkeletonCoefficient)
+    ((Sigma.map' (zeroSkeletonComponentCellEquiv C) (fun _ => 𝟙 zeroSkeletonCoefficient.{u}))
+      (Sigma.ι (fun _ : ZerothHomotopy (zeroSkeletonSpace C) => zeroSkeletonCoefficient.{u})
         (ZerothHomotopy.mk (zeroCellPoint C i)) (ULift.up (1 : ℤ)))) = _
   rw [hreindex, zeroSkeletonComponentCellEquiv_mk]
   exact zeroCellIntegerFinsuppIso_single C i (ULift.up (1 : ℤ))
@@ -778,21 +793,21 @@ theorem zeroSkeletonRelativeHomologyIso_inv_single
 
 /-- All positive ordinary relative homology groups of the zero-skeleton pair vanish. -/
 theorem zeroSkeletonRelativeHomology_isZero (n : ℕ) (hn : 0 < n) :
-    IsZero ((Hatcher.Relative.homologyFunctor zeroSkeletonCoefficient n).obj
+    IsZero ((Hatcher.Relative.homologyFunctor zeroSkeletonCoefficient.{u} n).obj
       (zeroSkeletonPair C)) := by
   have h := isZero_singularHomologyFunctor_of_totallyDisconnectedSpace
-    AddCommGrpCat.{u} n zeroSkeletonCoefficient (zeroSkeletonSpace C) (Nat.ne_of_gt hn)
+    AddCommGrpCat.{u} n zeroSkeletonCoefficient.{u} (zeroSkeletonSpace C) (Nat.ne_of_gt hn)
   exact h.of_iso (zeroSkeletonOrdinaryRelativeHomologyIso C n)
 
 /-- Hatcher Lemma 2.34(a), degree-zero endpoint with the actual vertex basis.
 The proof includes arbitrary and empty cell families. -/
 theorem zeroSkeletonRelativeHomology :
     (∀ n : ℕ, 0 < n →
-      IsZero ((Hatcher.Relative.homologyFunctor zeroSkeletonCoefficient n).obj
+      IsZero ((Hatcher.Relative.homologyFunctor zeroSkeletonCoefficient.{u} n).obj
         (zeroSkeletonPair C))) ∧
-    ∃ E : (Hatcher.Relative.homologyFunctor zeroSkeletonCoefficient 0).obj
+    ∃ E : (Hatcher.Relative.homologyFunctor zeroSkeletonCoefficient.{u} 0).obj
           (zeroSkeletonPair C) ≅
-        AddCommGrpCat.of (RelCWComplex.cell C 0 →₀ ℤ),
+        AddCommGrpCat.of.{u} (RelCWComplex.cell C 0 →₀ ℤ),
       ∀ i : RelCWComplex.cell C 0,
         E.inv (Finsupp.single i 1) = zeroCellRelativeClass C i :=
   ⟨zeroSkeletonRelativeHomology_isZero C,
