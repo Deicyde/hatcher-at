@@ -166,6 +166,15 @@
         "Hatcher.Sphere.liftedOrderedSphereFundamentalClass",
         "Hatcher.Sphere.liftedOrderedSphereFundamentalClass_eq_cycle"
       ]
+    },
+    {
+      "article_id": "af_07101a56629e9ad3a0c03550",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.positiveSkeletonRelativeHomology",
+        "Hatcher.ClassicalCW.positiveStandardDiskFundamentalClass",
+        "Hatcher.ClassicalCW.positiveSkeletonCellFundamentalClass"
+      ]
     }
   ]
 }
