@@ -1,49 +1,34 @@
 # Canonical space-universe lifting preserves augmented sphere chains
 
-Uncompiled source proposal. No statement or proof completion is asserted.
+Complete source proposal in `Hatcher/Singular/DoubleSimplexSphere.lean`.
+Remote Lean compilation, axiom and linter checks, canonical proof evidence and
+independent review remain required; no completion marker is asserted.
 
-## Proposed public interface
+The primary construction is `Hatcher.Sphere.sphereAugmentedSpaceLiftIso`.
+Its public source and target complex types use the same explicit coefficient
+object `AddCommGrpCat.of.{u} (ULift.{u} ℤ)` in `AddCommGrpCat.{u}`. The space
+universe changes from zero to u. All sphere dimensions, including zero, are
+covered.
 
-Primary construction: `Hatcher.Sphere.sphereAugmentedSpaceLiftIso d`.
-Keep all source and target complexes in `ChainComplex AddCommGrpCat.{u} ℕ`
-with the same explicit coefficient object `AddCommGrpCat.of.{u} (ULift.{u} ℤ)`.
-The space-functor universes are zero on the source and u on the target.
+Public data and computation laws are `sphereCoordinateUniverseLift`,
+`sphereSimplexLift`, `sphereSimplexLift_face`,
+`sphereAugmentedSpaceLiftIso_f_zero`, and `sphereAugmentedSpaceLiftIso_ι`.
+The coordinate homeomorphism removes the old lift and inserts the new one.
+The actual continuous-map equivalence constructs the singular-simplex lift.
+Reindexing the coefficient coproducts gives the degreewise isomorphisms; the
+face equations and alternating differential prove chain compatibility.
+The augmentation component is the identity and preserves every vertex's
+augmentation. Public types inline the actual coefficient object and the
+simplex data required by the next ordered-generator leaf are public.
 
-Required public data and computation declarations:
+The source is an additive append with the existing module header and every
+old declaration preserved. No effective import change is needed. The exact
+accepted module/project baseline is available for later semantic comparison.
+Fresh target/helper blueprint searches found no duplicate endpoint. Nine
+physical package indexes are absent, so indexed library coverage is unknown.
+Direct pinned source supplies the singular-chain and augmented-chain APIs.
 
-- `Hatcher.Sphere.sphereCoordinateUniverseLift d`: the actual raw-coordinate
-  homeomorphism between the two sphere models.
-- `Hatcher.Sphere.sphereSimplexLift d r`: the actual singular-simplex
-  equivalence induced by that homeomorphism in degree r.
-- `Hatcher.Sphere.sphereSimplexLift_face`: the face compatibility law.
-- `Hatcher.Sphere.sphereAugmentedSpaceLiftIso_f_zero`: identity of the actual
-  coefficient object in augmentation degree zero.
-- `Hatcher.Sphere.sphereAugmentedSpaceLiftIso_ι`: each coefficient-copy
-  inclusion maps to the inclusion indexed by `sphereSimplexLift d r s`.
-
-The simplex equivalence is public because the next bridge's literal first and
-second simplex definitions and difference equation need that actual map.
-Public statement types must use these public data or inline the actual
-objects, rather than refer to inaccessible private aliases.
-
-## Implementation route
-
-Use `TopCat.toSSetObjEquiv` and `Homeomorph.continuousMapCongr` for the
-canonical space lift. Reindex the coefficient coproducts with
-`Sigma.whiskerEquiv`, prove the alternating differential law by
-`SSet.ιChainComplex_d`, and extend to augmentation degree zero by the identity.
-`Hatcher.Reduced.ι_chainAugmentation` fixes the augmentation equation.
-`HomologicalComplex.Hom.isoOfComponents` assembles the actual isomorphism.
-
-The prepared complete draft isolates this chain-lift block from the ordered
-generator block. Likely existing source location is
-`Hatcher/Singular/DoubleSimplexSphere.lean`, whose closure already supplies the
-underlying reduced chains and sphere model. Effective imports and ownership
-must be checked from the exact accepted baseline before source edits.
-
-Direct pinned Mathlib and source-bound blueprint searches found no duplicate
-endpoint with these actual simplex and augmentation equations. Nine package
-indexes are unavailable, so indexed coverage is unknown. Mixed-universe
-simplex face normalization, copied coefficient instances and the augmented
-component reductions remain uncompiled risks. Exact Lean builds, axiom and
-linter checks, full evidence and independent review are required.
+Uncompiled elaboration risks are mixed-universe continuous-map/face
+normalization, coefficient-family inference, the singular degree-object
+inference of `chainComplex_hom_ext`, and augmented successor-component
+reductions. These require exact remote verification before acceptance.
