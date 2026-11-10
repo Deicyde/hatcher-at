@@ -1,4 +1,6 @@
 import Hatcher.Sphere.HemisphereCharts
+import Hatcher.Singular.GoodPair
+import Hatcher.Sphere.ZeroSphere
 import Mathlib.Analysis.Convex.Contractible
 import Hatcher.Singular.PointedWedgePointQuotient
 import Hatcher.Topology.DisjointOpenUnion
@@ -554,5 +556,166 @@ theorem empty_sphere_map_eq_const (D : SphereBallPinchData n hn 0) :
   rfl
 
 end SphereBallPinchData
+
+end Hatcher.Sphere
+
+namespace Hatcher.Sphere
+
+open CategoryTheory Topology
+open scoped unitInterval
+
+universe u
+
+/-- An actual open neighborhood and fixed-point contraction make the
+singleton inclusion in every sphere a good pair, including dimension zero. -/
+noncomputable def sphereSingletonGoodPairData
+    (n : ℕ) (b : TopCat.sphere.{u} n) :
+    Hatcher.Relative.GoodPairData
+      (TopPair.ofSubset ({b} : Set (TopCat.sphere.{u} n))) := by
+  classical
+  let _ : T2Space (TopCat.sphere.{u} n) :=
+    (sphereULiftHomeomorph.{u} n).isEmbedding.t2Space
+  have geometry : ∃ (V : Set (TopCat.sphere.{u} n)) (hb : b ∈ V),
+      IsOpen V ∧ Nonempty
+        ((ContinuousMap.id V).HomotopyRel
+          (ContinuousMap.const V ⟨b, hb⟩) {⟨b, hb⟩}) := by
+    cases n with
+    | zero =>
+        let e := zeroSphereIsoTwoPoint.{u}
+        have hinj : Function.Injective e.hom :=
+          (TopCat.mono_iff_injective e.hom).mp (by infer_instance)
+        let _ : Finite (TopCat.sphere.{u} 0) :=
+          Finite.of_injective e.hom hinj
+        let _ : DiscreteTopology (TopCat.sphere.{u} 0) := inferInstance
+        refine ⟨{b}, by simp, isOpen_discrete _, ⟨?_⟩⟩
+        exact
+          { toFun := fun q => q.2
+            continuous_toFun := continuous_snd
+            map_zero_left := fun _ => rfl
+            map_one_left := fun _ => Subsingleton.elim _ _
+            prop' := fun _ _ _ => rfl }
+    | succ k =>
+        let raw : RawSphere (k + 1) := sphereULiftHomeomorph.{u} (k + 1) b
+        let p : TopCat.sphere.{u} (k + 1) :=
+          (sphereULiftHomeomorph.{u} (k + 1)).symm (-raw)
+        have hbp : b ≠ p := by
+          intro h
+          have hraw : raw = -raw :=
+            (congrArg (sphereULiftHomeomorph.{u} (k + 1)) h).trans
+              ((sphereULiftHomeomorph.{u} (k + 1)).apply_symm_apply (-raw))
+          exact (ne_neg_of_mem_unit_sphere ℝ raw) hraw
+        let V : Set (TopCat.sphere.{u} (k + 1)) := {p}ᶜ
+        have hb : b ∈ V := by
+          simpa only [V, Set.mem_compl_iff, Set.mem_singleton_iff] using hbp
+        have hV : IsOpen V := isClosed_singleton.isOpen_compl
+        let transfer : TopCat.sphere.{u} (k + 1) ≃ₜ
+            TopCat.sphere.{0} (k + 1) :=
+          (sphereULiftHomeomorph.{u} (k + 1)).trans
+            (sphereULiftHomeomorph.{0} (k + 1)).symm
+        let p₀ : TopCat.sphere.{0} (k + 1) := transfer p
+        have hmem : ∀ x : TopCat.sphere.{u} (k + 1),
+            x ∈ V ↔ transfer x ∈ ({p₀}ᶜ : Set (TopCat.sphere.{0} (k + 1))) := by
+          intro x
+          simp only [V, p₀, Set.mem_compl_iff, Set.mem_singleton_iff]
+          constructor
+          · intro hx hxp
+            exact hx (transfer.injective hxp)
+          · intro hx hxp
+            exact hx (congrArg transfer hxp)
+        let e : V ≃ₜ EuclideanSpace ℝ (Fin (k + 1)) :=
+          (transfer.subtype hmem).trans
+            (puncturedSphereHomeomorphEuclidean (k + 1) p₀)
+        let bV : V := ⟨b, hb⟩
+        let center := e bV
+        refine ⟨V, hb, hV, ⟨?_⟩⟩
+        exact
+          { toFun := fun q =>
+              e.symm ((1 - (q.1 : ℝ)) • e q.2 + (q.1 : ℝ) • center)
+            continuous_toFun := by
+              have ht : Continuous (fun q : I × V => (q.1 : ℝ)) :=
+                continuous_subtype_val.comp continuous_fst
+              have he : Continuous (fun q : I × V => e q.2) :=
+                e.continuous.comp continuous_snd
+              exact e.symm.continuous.comp
+                (((continuous_const.sub ht).smul he).add (ht.smul continuous_const))
+            map_zero_left := by
+              intro x
+              change e.symm ((1 - (0 : ℝ)) • e x + (0 : ℝ) • center) = x
+              simp only [sub_zero, one_smul, zero_smul, add_zero]
+              exact e.symm_apply_apply x
+            map_one_left := by
+              intro x
+              change e.symm ((1 - (1 : ℝ)) • e x + (1 : ℝ) • center) = bV
+              simp only [sub_self, zero_smul, one_smul, zero_add]
+              exact e.symm_apply_apply bV
+            prop' := by
+              intro t x hx
+              have hxb : x = bV := Set.mem_singleton_iff.mp hx
+              subst x
+              change e.symm ((1 - (t : ℝ)) • center + (t : ℝ) • center) = bV
+              rw [← add_smul, sub_add_cancel, one_smul]
+              exact e.symm_apply_apply bV }
+  obtain ⟨V, hb, hV, ⟨H⟩⟩ := geometry
+  let P : TopPair.{u} := TopPair.ofSubset ({b} : Set (TopCat.sphere.{u} n))
+  have hrange : Set.range P.map = ({b} : Set (TopCat.sphere.{u} n)) := by
+    ext x
+    constructor
+    · rintro ⟨a, rfl⟩
+      exact a.2
+    · intro hx
+      exact ⟨⟨x, hx⟩, rfl⟩
+  have hinterior : Set.range P.map ⊆ interior V := by
+    rw [hrange, hV.interior_eq]
+    exact Set.singleton_subset_iff.mpr hb
+  let bV : V := ⟨b, hb⟩
+  let inclusion : C(↑({b} : Set (TopCat.sphere.{u} n)), V) :=
+    Hatcher.Relative.goodPairNeighborhoodInclusion P V
+      (hinterior.trans interior_subset)
+  let retract : C(V, ↑({b} : Set (TopCat.sphere.{u} n))) :=
+    ContinuousMap.const V ⟨b, rfl⟩
+  have hconstant : inclusion.comp retract = ContinuousMap.const V bV := by
+    apply ContinuousMap.ext
+    intro x
+    apply Subtype.ext
+    rfl
+  have hrangeInclusion : Set.range inclusion = ({bV} : Set V) := by
+    ext x
+    constructor
+    · rintro ⟨a, rfl⟩
+      apply Set.mem_singleton_iff.mpr
+      apply Subtype.ext
+      exact Set.mem_singleton_iff.mp a.2
+    · intro hx
+      have hxb : x = bV := Set.mem_singleton_iff.mp hx
+      subst x
+      refine ⟨⟨b, rfl⟩, ?_⟩
+      apply Subtype.ext
+      rfl
+  let deformation : Hatcher.StrongDeformationRetract inclusion :=
+    { retract := retract
+      retract_inclusion := by
+        apply ContinuousMap.ext
+        intro a
+        exact Subsingleton.elim _ _
+      deformation := by
+        change (ContinuousMap.id V).HomotopyRel
+          (inclusion.comp retract) (Set.range inclusion)
+        rw [hconstant, hrangeInclusion]
+        exact H }
+  change Hatcher.Relative.GoodPairData P
+  exact
+    { nonempty := ⟨⟨b, rfl⟩⟩
+      isClosed_range := by rw [hrange]; exact isClosed_singleton
+      V := V
+      range_subset_interior := hinterior
+      strongDeformationRetract := deformation }
+
+/-- Every point of every standard sphere forms a good singleton-inclusion
+pair; the neighborhood and fixed-point contraction are constructed above. -/
+theorem sphere_pointedPair_isGoodPair
+    (n : ℕ) (b : TopCat.sphere.{u} n) :
+    Hatcher.Relative.IsGoodPair
+      (TopPair.ofSubset ({b} : Set (TopCat.sphere.{u} n))) :=
+  ⟨sphereSingletonGoodPairData n b⟩
 
 end Hatcher.Sphere
