@@ -1344,7 +1344,9 @@ private theorem skeletonSpaceClassBoundary_iff
     ShortComplex.mk (K.toCycles (k + 1) k) (K.homologyπ k)
       (K.toCycles_comp_homologyπ (k + 1) k)
   have hB : B.Exact :=
-    B.exact_of_g_is_cokernel (K.homologyIsCokernel (k + 1) k rfl)
+    B.exact_of_g_is_cokernel (K.homologyIsCokernel (k + 1) k
+      ((ComplexShape.down ℕ).prev_eq'
+        (show (ComplexShape.down ℕ).Rel (k + 1) k from rfl)))
   constructor
   · intro hc
     obtain ⟨w, hw⟩ := (B.ab_exact_iff).mp hB c hc
@@ -1485,7 +1487,7 @@ theorem skeletonToSpaceHomologyStability
     change H.map f (K₀.homologyπ k c) = Kₙ.homologyπ k cₙ at hmap
     have hfx : H.map f x = 0 :=
       (congrArg (H.map f) hc).symm.trans (hmap.trans hnullₙ)
-    letI : IsIso (H.map f) := (finiteStageHomologyStability C n N hN k).2 hk
+    let _ : IsIso (H.map f) := (finiteStageHomologyStability C n N hN k).2 hk
     have hinj : Function.Injective (H.map f) :=
       (AddCommGrpCat.mono_iff_injective (H.map f)).mp inferInstance
     exact hinj (hfx.trans (map_zero (H.map f).hom).symm)
@@ -1494,8 +1496,8 @@ theorem skeletonToSpaceHomologyStability
     have hz : i (x - y) = 0 :=
       (map_sub i.hom x y).trans (sub_eq_zero.mpr hxy)
     exact sub_eq_zero.mp (hzero (x - y) hz)
-  letI : Mono i := (AddCommGrpCat.mono_iff_injective i).mpr hinj
-  letI : Epi i := (AddCommGrpCat.epi_iff_surjective i).mpr (hsurj hk.le)
+  let _ : Mono i := (AddCommGrpCat.mono_iff_injective i).mpr hinj
+  let _ : Epi i := (AddCommGrpCat.epi_iff_surjective i).mpr (hsurj hk.le)
   exact isIso_of_mono_of_epi i
 
 end Hatcher.ClassicalCW
