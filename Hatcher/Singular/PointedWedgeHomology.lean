@@ -1090,7 +1090,13 @@ theorem finiteDimensionalHomologyVanishing [CWComplex.FiniteDimensional C] :
       ∀ k : ℕ, n < k →
         IsZero (((singularHomologyFunctor AddCommGrpCat.{u} k).obj
           (AddCommGrpCat.of.{u} (ULift.{u} ℤ))).obj (TopCat.of ↑C)) := by
-  have h := CWComplex.FiniteDimensional.eventually_isEmpty_cell (C := C)
+  let hRel : RelCWComplex C (∅ : Set X) := CWComplex.instRelCWComplex C
+  let hFinite : @RelCWComplex.FiniteDimensional X inferInstance C (∅ : Set X) hRel :=
+    inferInstance
+  have h : ∀ᶠ m : ℕ in Filter.atTop,
+      IsEmpty (@RelCWComplex.cell X inferInstance C (∅ : Set X) hRel m) :=
+    @RelCWComplex.FiniteDimensional.eventually_isEmpty_cell
+      X inferInstance C (∅ : Set X) hRel hFinite
   rw [Filter.eventually_atTop] at h
   obtain ⟨N, hN⟩ := h
   have hbound : ∀ m : ℕ, N < m → IsEmpty (RelCWComplex.cell C m) :=
