@@ -892,3 +892,75 @@ theorem skeletonRelativeHomology (n : ℕ) :
   | succ k => exact positiveSkeletonRelativeHomology C k
 
 end Hatcher.ClassicalCW
+
+noncomputable section
+
+namespace Hatcher.ClassicalCW
+
+open CategoryTheory CategoryTheory.Limits _root_.Topology
+
+universe u
+
+/-- Hatcher Lemma 2.34(c), one-stage form, for the actual skeleton inclusion.
+The ordinary degree-zero window and the empty initial stage are included. -/
+theorem skeletonStepHomologyStability
+    {X : Type u} [TopologicalSpace X] [T2Space X]
+    (C : Set X) [CWComplex C] (p k : ℕ) :
+    let P : TopPair.{u} := skeletalStagePair C p
+    let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+    let H : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+      (AlgebraicTopology.singularHomologyFunctor AddCommGrpCat.{u} k).obj R
+    let i := H.map P.map
+    (k ≠ p → Function.Surjective i) ∧
+    (k + 1 ≠ p → Function.Injective i) ∧
+    (k ≠ p → k + 1 ≠ p → IsIso i) := by
+  let P : TopPair.{u} := skeletalStagePair C p
+  let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+  let H : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+    (AlgebraicTopology.singularHomologyFunctor AddCommGrpCat.{u} k).obj R
+  let i : H.obj P.snd ⟶ H.obj P.fst := H.map P.map
+  change (k ≠ p → Function.Surjective i) ∧
+    (k + 1 ≠ p → Function.Injective i) ∧
+    (k ≠ p → k + 1 ≠ p → IsIso i)
+  let Q : SSetPair.{u} := Hatcher.Relative.singularPairFunctor.obj P
+  let δ : (Hatcher.Relative.homologyFunctor R (k + 1)).obj P ⟶ H.obj P.snd :=
+    Hatcher.Relative.pairConnecting P R (k + 1) k rfl
+  let π : H.obj P.fst ⟶ (Hatcher.Relative.homologyFunctor R k).obj P :=
+    Q.homologyπ R k
+  let L : ComposableArrows AddCommGrpCat.{u} 5 :=
+    Hatcher.Relative.pairSequence P R (k + 1) k rfl
+  have hL : L.Exact := Hatcher.Relative.pairSequence_exact P R (k + 1) k rfl
+  have hiL : L.map' 3 4 = i := by
+    rfl
+  have hrel (q : ℕ) (hq : q ≠ p) :
+      IsZero ((Hatcher.Relative.homologyFunctor R q).obj P) :=
+    (skeletonRelativeHomology C p).1 q hq
+  have hmono (hk : k + 1 ≠ p) : Mono i := by
+    have hδ : δ = 0 := (hrel (k + 1) hk).eq_zero_of_src δ
+    have hδL : L.map' 2 3 = 0 := by
+      change δ = 0
+      exact hδ
+    have hm : Mono (L.map' 3 4) := (hL.exact 2 (by decide)).mono_g hδL
+    rw [hiL] at hm
+    exact hm
+  have hepi (hk : k ≠ p) : Epi i := by
+    have hπ : π = 0 := (hrel k hk).eq_zero_of_tgt π
+    have hπL : L.map' 4 5 = 0 := by
+      change π = 0
+      exact hπ
+    have he : Epi (L.map' 3 4) := (hL.exact 3 (by decide)).epi_f hπL
+    rw [hiL] at he
+    exact he
+  refine ⟨?_, ?_, ?_⟩
+  · intro hk
+    exact (AddCommGrpCat.epi_iff_surjective i).mp (hepi hk)
+  · intro hk
+    exact (AddCommGrpCat.mono_iff_injective i).mp (hmono hk)
+  · intro hk hk'
+    letI : Mono i := hmono hk'
+    letI : Epi i := hepi hk
+    exact isIso_of_mono_of_epi i
+
+end Hatcher.ClassicalCW
+
+end
