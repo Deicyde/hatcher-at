@@ -1310,3 +1310,194 @@ theorem finiteStageHomologyStability (n m : ℕ) (hnm : n ≤ m) (k : ℕ) :
             hcomp) (IsIso.comp_isIso' h₀ h₁)
 
 end Hatcher.ClassicalCW
+
+noncomputable section
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
+
+universe u
+
+private theorem skeletonSpaceClassMap
+    (K L : ChainComplex AddCommGrpCat.{u} ℕ) (φ : K ⟶ L) (k : ℕ)
+    (c : K.cycles k) (d : L.cycles k)
+    (h : φ.f k (K.iCycles k c) = L.iCycles k d) :
+    HomologicalComplex.homologyMap φ k (K.homologyπ k c) = L.homologyπ k d := by
+  have hc : HomologicalComplex.cyclesMap φ k c = d := by
+    apply (AddCommGrpCat.mono_iff_injective (L.iCycles k)).mp inferInstance
+    have hi := ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i φ k) c
+    change L.iCycles k (HomologicalComplex.cyclesMap φ k c) =
+      φ.f k (K.iCycles k c) at hi
+    exact hi.trans h
+  have hπ := ConcreteCategory.congr_hom
+    (HomologicalComplex.homologyπ_naturality φ k) c
+  change HomologicalComplex.homologyMap φ k (K.homologyπ k c) =
+    L.homologyπ k (HomologicalComplex.cyclesMap φ k c) at hπ
+  exact hπ.trans (congrArg (L.homologyπ k) hc)
+
+private theorem skeletonSpaceClassBoundary_iff
+    (K : ChainComplex AddCommGrpCat.{u} ℕ) (k : ℕ) (c : K.cycles k) :
+    K.homologyπ k c = 0 ↔
+      ∃ w : K.X (k + 1), K.d (k + 1) k w = K.iCycles k c := by
+  let B : ShortComplex AddCommGrpCat.{u} :=
+    ShortComplex.mk (K.toCycles (k + 1) k) (K.homologyπ k)
+      (K.toCycles_comp_homologyπ (k + 1) k)
+  have hB : B.Exact :=
+    B.exact_of_g_is_cokernel (K.homologyIsCokernel (k + 1) k rfl)
+  constructor
+  · intro hc
+    obtain ⟨w, hw⟩ := (B.ab_exact_iff).mp hB c hc
+    refine ⟨w, ?_⟩
+    have hi := ConcreteCategory.congr_hom (K.toCycles_i (k + 1) k) w
+    change K.iCycles k (K.toCycles (k + 1) k w) = K.d (k + 1) k w at hi
+    exact hi.symm.trans (congrArg (K.iCycles k) hw)
+  · rintro ⟨w, hw⟩
+    have hc : K.toCycles (k + 1) k w = c := by
+      apply (AddCommGrpCat.mono_iff_injective (K.iCycles k)).mp inferInstance
+      have hi := ConcreteCategory.congr_hom (K.toCycles_i (k + 1) k) w
+      change K.iCycles k (K.toCycles (k + 1) k w) = K.d (k + 1) k w at hi
+      exact hi.trans hw
+    have hz := ConcreteCategory.congr_hom
+      (K.toCycles_comp_homologyπ (k + 1) k) w
+    change K.homologyπ k (K.toCycles (k + 1) k w) = 0 at hz
+    exact (congrArg (K.homologyπ k) hc).symm.trans hz
+
+/-- Hatcher Lemma 2.34(c): the actual skeleton-to-space inclusion on ordinary
+integral homology, including H0, empty and unbounded CW complexes. -/
+theorem skeletonToSpaceHomologyStability
+    {X : Type u} [TopologicalSpace X] [T2Space X]
+    (C : Set X) [CWComplex C] (n k : ℕ) :
+    let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+    let H : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+      (singularHomologyFunctor AddCommGrpCat.{u} k).obj R
+    let i := H.map (singularSkeletonInclusion C n)
+    (k ≤ n → Function.Surjective i) ∧ (k < n → IsIso i) := by
+  let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+  let F : TopCat.{u} ⥤ ChainComplex AddCommGrpCat.{u} ℕ :=
+    (singularChainComplexFunctor AddCommGrpCat.{u}).obj R
+  let H : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+    (singularHomologyFunctor AddCommGrpCat.{u} k).obj R
+  let T : TopCat.{u} := TopCat.of ↑C
+  let T₀ : TopCat.{u} := TopCat.of ↑(CWComplex.skeleton C (n : ℕ∞) : Set X)
+  let K : ChainComplex AddCommGrpCat.{u} ℕ := F.obj T
+  let K₀ : ChainComplex AddCommGrpCat.{u} ℕ := F.obj T₀
+  let φ : K₀ ⟶ K := singularSkeletonChainMap C n
+  let i : K₀.homology k ⟶ K.homology k := H.map (singularSkeletonInclusion C n)
+  change (k ≤ n → Function.Surjective i) ∧ (k < n → IsIso i)
+  have hsurj (hk : k ≤ n) : Function.Surjective i := by
+    intro y
+    obtain ⟨c, hc⟩ :=
+      ((AddCommGrpCat.epi_iff_surjective (K.homologyπ k)).mp inferInstance) y
+    let z : K.X k := K.iCycles k c
+    let l : ℕ := (ComplexShape.down ℕ).next k
+    have hz : K.d k l z = 0 := by
+      have h := ConcreteCategory.congr_hom (K.iCycles_d k l) c
+      change K.d k l z = 0 at h
+      exact h
+    obtain ⟨N, hN, _, _, _, _, lift, hLift⟩ :=
+      singularChain_exists_boundedSkeletonLift C (fun _ : Unit ↦ k) (fun _ : Unit ↦ z) n
+    let Tₙ : TopCat.{u} := TopCat.of ↑(CWComplex.skeleton C (N : ℕ∞) : Set X)
+    let Kₙ : ChainComplex AddCommGrpCat.{u} ℕ := F.obj Tₙ
+    let φₙ : Kₙ ⟶ K := singularSkeletonChainMap C N
+    let zₙ : Kₙ.X k := lift ()
+    have hLiftz : φₙ.f k zₙ = z := hLift ()
+    have hzₙ : Kₙ.d k l zₙ = 0 :=
+      (singularSkeletonChainMap_cycle_iff C N k l zₙ).mp
+        ((congrArg (K.d k l) hLiftz).trans hz)
+    let cₙ : Kₙ.cycles k := (Kₙ.sc k).abCyclesIso.inv ⟨zₙ, hzₙ⟩
+    have hcₙ : Kₙ.iCycles k cₙ = zₙ :=
+      (Kₙ.sc k).abCyclesIso_inv_apply_iCycles ⟨zₙ, hzₙ⟩
+    have himage : H.map (singularSkeletonInclusion C N) (Kₙ.homologyπ k cₙ) = y := by
+      have h := skeletonSpaceClassMap Kₙ K φₙ k cₙ c
+        ((congrArg (φₙ.f k) hcₙ).trans hLiftz)
+      change H.map (singularSkeletonInclusion C N) (Kₙ.homologyπ k cₙ) =
+        K.homologyπ k c at h
+      exact h.trans hc
+    let f : T₀ ⟶ Tₙ := TopCat.ofHom (ContinuousMap.inclusion
+      (CWComplex.skeleton_mono (C := C) (Nat.cast_le.mpr hN)))
+    have hs : Function.Surjective (H.map f) :=
+      (finiteStageHomologyStability C n N hN k).1 hk
+    obtain ⟨x, hx⟩ := hs (Kₙ.homologyπ k cₙ)
+    have hinc : f ≫ singularSkeletonInclusion C N = singularSkeletonInclusion C n := by
+      apply TopCat.ext
+      intro x
+      apply Subtype.ext
+      rfl
+    have hcomp : H.map f ≫ H.map (singularSkeletonInclusion C N) = i :=
+      (H.map_comp f (singularSkeletonInclusion C N)).symm.trans
+        (congrArg (fun g : T₀ ⟶ T ↦ H.map g) hinc)
+    have h := ConcreteCategory.congr_hom hcomp x
+    change H.map (singularSkeletonInclusion C N) (H.map f x) = i x at h
+    exact ⟨x, h.symm.trans
+      ((congrArg (H.map (singularSkeletonInclusion C N)) hx).trans himage)⟩
+  refine ⟨hsurj, ?_⟩
+  intro hk
+  have hzero (x : K₀.homology k) (hx : i x = 0) : x = 0 := by
+    obtain ⟨c, hc⟩ :=
+      ((AddCommGrpCat.epi_iff_surjective (K₀.homologyπ k)).mp inferInstance) x
+    let ca : K.cycles k := HomologicalComplex.cyclesMap φ k c
+    have hm := ConcreteCategory.congr_hom (HomologicalComplex.homologyπ_naturality φ k) c
+    change i (K₀.homologyπ k c) = K.homologyπ k ca at hm
+    have hnull : K.homologyπ k ca = 0 :=
+      hm.symm.trans ((congrArg i hc).trans hx)
+    obtain ⟨w, hw⟩ := (skeletonSpaceClassBoundary_iff K k ca).mp hnull
+    let z₀ : K₀.X k := K₀.iCycles k c
+    have hca := ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i φ k) c
+    change K.iCycles k ca = φ.f k z₀ at hca
+    have hbound : K.d (k + 1) k w = φ.f k z₀ := hw.trans hca
+    obtain ⟨N, hN, _, _, _, _, lift, hLift⟩ :=
+      singularChain_exists_boundedSkeletonLift C
+        (fun _ : Unit ↦ k + 1) (fun _ : Unit ↦ w) n
+    let Tₙ : TopCat.{u} := TopCat.of ↑(CWComplex.skeleton C (N : ℕ∞) : Set X)
+    let Kₙ : ChainComplex AddCommGrpCat.{u} ℕ := F.obj Tₙ
+    let φₙ : Kₙ ⟶ K := singularSkeletonChainMap C N
+    let wₙ : Kₙ.X (k + 1) := lift ()
+    have hLiftw : φₙ.f (k + 1) wₙ = w := hLift ()
+    let f : T₀ ⟶ Tₙ := TopCat.ofHom (ContinuousMap.inclusion
+      (CWComplex.skeleton_mono (C := C) (Nat.cast_le.mpr hN)))
+    let ψ : K₀ ⟶ Kₙ := F.map f
+    let zₙ : Kₙ.X k := ψ.f k z₀
+    have hinc : f ≫ singularSkeletonInclusion C N = singularSkeletonInclusion C n := by
+      apply TopCat.ext
+      intro x
+      apply Subtype.ext
+      rfl
+    have hchain : ψ ≫ φₙ = φ :=
+      (F.map_comp f (singularSkeletonInclusion C N)).symm.trans
+        (congrArg (fun g : T₀ ⟶ T ↦ F.map g) hinc)
+    have hzmap : φₙ.f k zₙ = φ.f k z₀ := by
+      have h := ConcreteCategory.congr_hom
+        (congrArg (fun g : K₀ ⟶ K ↦ g.f k) hchain) z₀
+      change φₙ.f k zₙ = φ.f k z₀ at h
+      exact h
+    have hreflect : K.d (k + 1) k (φₙ.f (k + 1) wₙ) = φₙ.f k zₙ :=
+      (congrArg (K.d (k + 1) k) hLiftw).trans (hbound.trans hzmap.symm)
+    have hwₙ : Kₙ.d (k + 1) k wₙ = zₙ :=
+      (singularSkeletonChainMap_boundary_iff C N (k + 1) k wₙ zₙ).mp hreflect
+    let cₙ : Kₙ.cycles k := HomologicalComplex.cyclesMap ψ k c
+    have hcₙ := ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i ψ k) c
+    change Kₙ.iCycles k cₙ = zₙ at hcₙ
+    have hnullₙ : Kₙ.homologyπ k cₙ = 0 :=
+      (skeletonSpaceClassBoundary_iff Kₙ k cₙ).mpr ⟨wₙ, hwₙ.trans hcₙ.symm⟩
+    have hmap := ConcreteCategory.congr_hom
+      (HomologicalComplex.homologyπ_naturality ψ k) c
+    change H.map f (K₀.homologyπ k c) = Kₙ.homologyπ k cₙ at hmap
+    have hfx : H.map f x = 0 :=
+      (congrArg (H.map f) hc).symm.trans (hmap.trans hnullₙ)
+    letI : IsIso (H.map f) := (finiteStageHomologyStability C n N hN k).2 hk
+    have hinj : Function.Injective (H.map f) :=
+      (AddCommGrpCat.mono_iff_injective (H.map f)).mp inferInstance
+    exact hinj (hfx.trans (map_zero (H.map f).hom).symm)
+  have hinj : Function.Injective i := by
+    intro x y hxy
+    have hz : i (x - y) = 0 :=
+      (map_sub i.hom x y).trans (sub_eq_zero.mpr hxy)
+    exact sub_eq_zero.mp (hzero (x - y) hz)
+  letI : Mono i := (AddCommGrpCat.mono_iff_injective i).mpr hinj
+  letI : Epi i := (AddCommGrpCat.epi_iff_surjective i).mpr (hsurj hk.le)
+  exact isIso_of_mono_of_epi i
+
+end Hatcher.ClassicalCW
+
+end
