@@ -1,5 +1,6 @@
 import Hatcher.VanKampen.ConeAttachment
 import Hatcher.Singular.GoodPair
+import Hatcher.Singular.PointedWedgePointQuotient
 import Hatcher.VanKampen.ConeAttachmentDeformation
 import Hatcher.Sphere.HemisphereCharts
 import Hatcher.Singular.PointQuotientTopology
@@ -1557,5 +1558,507 @@ noncomputable def diskZeroPairIsoPointEmpty :
   exact MorphismProperty.Arrow.isoMk eA eX (by
     ext x
     exact (IsEmpty.false x).elim)
+
+end Hatcher.ClassicalCW
+
+noncomputable section
+
+namespace Hatcher.ClassicalCW
+
+open CategoryTheory CategoryTheory.Limits _root_.Topology Metric
+open Hatcher.Relative
+
+universe u
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+/-- The actual successor-stage pair, with its literal skeleton inclusion. -/
+noncomputable def skeletalStagePair (n : ℕ) : TopPair.{u} := by
+  let h : (RelCWComplex.skeletonLT C n : Set X) ⊆
+      (RelCWComplex.skeletonLT C (n + 1) : Set X) :=
+    RelCWComplex.skeletonLT_mono (C := C) (by norm_num)
+  exact TopPair.of (skeletonLTInclusion C n)
+    (show IsEmbedding (ContinuousMap.inclusion h) from IsEmbedding.inclusion h)
+
+private def skeletalStageClassicalCharacteristic (n : ℕ)
+    (i : RelCWComplex.cell C n) :
+    classicalDisk.{u} n ⟶ (skeletalStagePair C n).fst :=
+  TopCat.ofHom
+    { toFun := fun x ↦ skeletonLTStepClosedCellMap C n i x.down
+      continuous_toFun :=
+        (continuous_skeletonLTStepClosedCellMap C n i).comp continuous_uliftDown }
+
+private def skeletalStageClassicalBoundary (n : ℕ)
+    (i : RelCWComplex.cell C n) :
+    classicalDiskBoundary.{u} n ⟶ (skeletalStagePair C n).snd :=
+  TopCat.ofHom
+    { toFun := fun x ↦ skeletonLTStepBoundaryMap C n i x.down
+      continuous_toFun :=
+        (continuous_skeletonLTStepBoundaryMap C n i).comp continuous_uliftDown }
+
+private theorem skeletalStageClassical_square (n : ℕ)
+    (i : RelCWComplex.cell C n) :
+    classicalDiskBoundaryInclusion.{u} n ≫
+        skeletalStageClassicalCharacteristic C n i =
+      skeletalStageClassicalBoundary C n i ≫ (skeletalStagePair C n).map := by
+  apply TopCat.ext
+  intro x
+  apply Subtype.ext
+  rfl
+
+/-- The map of actual pairs determined by the standardized characteristic disk. -/
+noncomputable def skeletalStageCellPairMap (n : ℕ)
+    (i : RelCWComplex.cell C n) :
+    standardDiskBoundaryPair.{u} n ⟶ skeletalStagePair C n := by
+  let e := classicalCellArrowIso.{u} n
+  have he : e.inv.left ≫ classicalDiskBoundaryInclusion.{u} n =
+      TopCat.diskBoundaryInclusion.{u} n ≫ e.inv.right :=
+    e.inv.w
+  refine TopPair.ofHom
+    (e.inv.right ≫ skeletalStageClassicalCharacteristic C n i)
+    (e.inv.left ≫ skeletalStageClassicalBoundary C n i) ?_
+  change (e.inv.left ≫ skeletalStageClassicalBoundary C n i) ≫
+      (skeletalStagePair C n).map =
+    TopCat.diskBoundaryInclusion.{u} n ≫
+      (e.inv.right ≫ skeletalStageClassicalCharacteristic C n i)
+  calc
+    (e.inv.left ≫ skeletalStageClassicalBoundary C n i) ≫
+        (skeletalStagePair C n).map =
+      e.inv.left ≫ (skeletalStageClassicalBoundary C n i ≫
+        (skeletalStagePair C n).map) := Category.assoc _ _ _
+    _ = e.inv.left ≫ (classicalDiskBoundaryInclusion.{u} n ≫
+        skeletalStageClassicalCharacteristic C n i) :=
+      congrArg (fun f ↦ e.inv.left ≫ f) (skeletalStageClassical_square C n i).symm
+    _ = (e.inv.left ≫ classicalDiskBoundaryInclusion.{u} n) ≫
+        skeletalStageClassicalCharacteristic C n i := (Category.assoc _ _ _).symm
+    _ = (TopCat.diskBoundaryInclusion.{u} n ≫ e.inv.right) ≫
+        skeletalStageClassicalCharacteristic C n i :=
+      congrArg (fun f ↦ f ≫ skeletalStageClassicalCharacteristic C n i) he
+    _ = TopCat.diskBoundaryInclusion.{u} n ≫
+        (e.inv.right ≫ skeletalStageClassicalCharacteristic C n i) :=
+      Category.assoc _ _ _
+
+private abbrev skeletalStageSpheres (k : ℕ) :
+    RelCWComplex.cell C (k + 1) → TopCat.{u} :=
+  fun _ ↦ TopCat.sphere.{u} (k + 1)
+
+private abbrev skeletalStagePoles (k : ℕ) :
+    ∀ i, skeletalStageSpheres C k i :=
+  fun _ ↦ Hatcher.Sphere.northPole.{u} k
+
+private abbrev skeletalStageWedge (k : ℕ) : TopCat.{u} :=
+  TopCat.of (Hatcher.PointedWedge
+    (fun i ↦ skeletalStageSpheres C k i) (skeletalStagePoles C k))
+
+private theorem skeletalStageClassicalDisk_hom_inv (n : ℕ)
+    (z : classicalDisk.{u} n) :
+    (classicalCellArrowIso.{u} n).inv.right
+      ((classicalCellArrowIso.{u} n).hom.right z) = z := by
+  let e := classicalCellArrowIso.{u} n
+  have he : e.hom.right ≫ e.inv.right = 𝟙 (classicalDisk.{u} n) :=
+    congrArg
+      (fun f : Arrow.mk (classicalDiskBoundaryInclusion.{u} n) ⟶
+        Arrow.mk (classicalDiskBoundaryInclusion.{u} n) ↦ f.right)
+      e.hom_inv_id
+  exact ConcreteCategory.congr_hom he z
+
+private theorem skeletalStageClassicalDisk_inv_hom (n : ℕ)
+    (z : TopCat.disk.{u} n) :
+    (classicalCellArrowIso.{u} n).hom.right
+      ((classicalCellArrowIso.{u} n).inv.right z) = z := by
+  let e := classicalCellArrowIso.{u} n
+  have he : e.inv.right ≫ e.hom.right = 𝟙 (TopCat.disk.{u} n) :=
+    congrArg
+      (fun f : Arrow.mk (TopCat.RelativeCWComplex.basicCell.{u} n ()) ⟶
+        Arrow.mk (TopCat.RelativeCWComplex.basicCell.{u} n ()) ↦ f.right)
+      e.inv_hom_id
+  exact ConcreteCategory.congr_hom he z
+
+private def skeletalStageCellToWedge (k : ℕ)
+    (i : RelCWComplex.cell C (k + 1)) :
+    C(↑(closedBall (0 : Fin (k + 1) → ℝ) 1), skeletalStageWedge C k) where
+  toFun z :=
+    Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i
+      ((diskBoundaryPointQuotientIsoSphere.{u} k).hom
+        (pointQuotientProjection (standardDiskBoundaryPair.{u} (k + 1))
+          ((classicalCellArrowIso.{u} (k + 1)).hom.right
+            (ULift.up z : classicalDisk.{u} (k + 1)))))
+  continuous_toFun :=
+    (Hatcher.PointedWedge.continuous_inclusion (skeletalStagePoles C k) i).comp
+      ((diskBoundaryPointQuotientIsoSphere.{u} k).hom.hom.continuous.comp
+        ((pointQuotientProjection
+          (standardDiskBoundaryPair.{u} (k + 1))).hom.continuous.comp
+          ((classicalCellArrowIso.{u} (k + 1)).hom.right.hom.continuous.comp
+            continuous_uliftUp)))
+
+private def skeletalStageOldToWedge (k : ℕ) :
+    C(↑(RelCWComplex.skeletonLT C (k + 1) : Set X), skeletalStageWedge C k) :=
+  ⟨fun _ ↦ Hatcher.PointedWedge.basepoint (skeletalStagePoles C k), continuous_const⟩
+
+private theorem skeletalStageToWedge_boundary (k : ℕ)
+    (i : RelCWComplex.cell C (k + 1))
+    (x : ↑(sphere (0 : Fin (k + 1) → ℝ) 1)) :
+    skeletalStageOldToWedge C k (skeletonLTStepBoundaryMap C (k + 1) i x) =
+      skeletalStageCellToWedge C k i ⟨x, sphere_subset_closedBall x.2⟩ := by
+  let D := standardDiskBoundaryPair.{u} (k + 1)
+  let e := classicalCellArrowIso.{u} (k + 1)
+  let y : classicalDiskBoundary.{u} (k + 1) := ULift.up x
+  have he :
+      e.hom.right (ULift.up ⟨x, sphere_subset_closedBall x.2⟩ :
+        classicalDisk.{u} (k + 1)) =
+      TopCat.diskBoundaryInclusion.{u} (k + 1) (e.hom.left y) :=
+    (ConcreteCategory.congr_hom e.hom.w y).symm
+  have hd :
+      pointQuotientProjection D
+        (TopCat.diskBoundaryInclusion.{u} (k + 1) (e.hom.left y)) =
+      pointQuotientPoint D := by
+    have h := ConcreteCategory.congr_hom
+      (pushout.condition (f := D.map) (g := pointQuotientCollapse D))
+      (e.hom.left y)
+    change pointQuotientProjection D
+        (TopCat.diskBoundaryInclusion.{u} (k + 1) (e.hom.left y)) =
+      pointQuotientPointInclusion D (pointQuotientCollapse D (e.hom.left y)) at h
+    exact h.trans (congrArg (pointQuotientPointInclusion D)
+      (Subsingleton.elim (pointQuotientCollapse D (e.hom.left y)) PUnit.unit))
+  change Hatcher.PointedWedge.basepoint (skeletalStagePoles C k) =
+    Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i
+      ((diskBoundaryPointQuotientIsoSphere.{u} k).hom
+        (pointQuotientProjection D
+          (e.hom.right (ULift.up ⟨x, sphere_subset_closedBall x.2⟩ :
+            classicalDisk.{u} (k + 1)))))
+  rw [he, hd, diskBoundaryPointQuotientIsoSphere_point]
+  exact (Hatcher.PointedWedge.inclusion_basepoint (skeletalStagePoles C k) i).symm
+
+private noncomputable def skeletalStageCollapseToWedge (k : ℕ) :
+    C(↑(RelCWComplex.skeletonLT C ((k + 1) + 1) : Set X),
+      skeletalStageWedge C k) :=
+  skeletonLTStepDesc C (k + 1)
+    (skeletalStageOldToWedge C k) (skeletalStageCellToWedge C k)
+    (skeletalStageToWedge_boundary C k)
+
+private theorem skeletalStageCollapseToWedge_old (k : ℕ)
+    (a : ↑(RelCWComplex.skeletonLT C (k + 1) : Set X)) :
+    skeletalStageCollapseToWedge C k (skeletonLTStepOldMap C (k + 1) a) =
+      Hatcher.PointedWedge.basepoint (skeletalStagePoles C k) :=
+  skeletonLTStepDesc_old_apply C (k + 1)
+    (skeletalStageOldToWedge C k) (skeletalStageCellToWedge C k)
+    (skeletalStageToWedge_boundary C k) a
+
+private theorem skeletalStageCollapseToWedge_cell (k : ℕ)
+    (i : RelCWComplex.cell C (k + 1))
+    (z : ↑(closedBall (0 : Fin (k + 1) → ℝ) 1)) :
+    skeletalStageCollapseToWedge C k (skeletonLTStepClosedCellMap C (k + 1) i z) =
+      skeletalStageCellToWedge C k i z :=
+  skeletonLTStepDesc_cell_apply C (k + 1)
+    (skeletalStageOldToWedge C k) (skeletalStageCellToWedge C k)
+    (skeletalStageToWedge_boundary C k) i z
+
+private noncomputable def skeletalStageWedgeForward (k : ℕ) :
+    pointQuotient (skeletalStagePair C (k + 1)) ⟶ skeletalStageWedge C k := by
+  refine pushout.desc (TopCat.ofHom (skeletalStageCollapseToWedge C k))
+    (pointedWedgePointInclusion (skeletalStagePoles C k)) ?_
+  apply TopCat.ext
+  intro a
+  change skeletalStageCollapseToWedge C k (skeletonLTStepOldMap C (k + 1) a) =
+    Hatcher.PointedWedge.basepoint (skeletalStagePoles C k)
+  exact skeletalStageCollapseToWedge_old C k a
+
+private theorem skeletalStageWedgeForward_projection (k : ℕ) :
+    pointQuotientProjection (skeletalStagePair C (k + 1)) ≫
+        skeletalStageWedgeForward C k =
+      TopCat.ofHom (skeletalStageCollapseToWedge C k) := by
+  dsimp [pointQuotientProjection, skeletalStageWedgeForward, pointQuotient]
+  apply pushout.inl_desc
+
+private theorem skeletalStageWedgeForward_pointInclusion (k : ℕ) :
+    pointQuotientPointInclusion (skeletalStagePair C (k + 1)) ≫
+        skeletalStageWedgeForward C k =
+      pointedWedgePointInclusion (skeletalStagePoles C k) := by
+  dsimp [pointQuotientPointInclusion, skeletalStageWedgeForward, pointQuotient]
+  apply pushout.inr_desc
+
+private theorem skeletalStageWedgeForward_point (k : ℕ) :
+    skeletalStageWedgeForward C k
+        (pointQuotientPoint (skeletalStagePair C (k + 1))) =
+      Hatcher.PointedWedge.basepoint (skeletalStagePoles C k) :=
+  ConcreteCategory.congr_hom (skeletalStageWedgeForward_pointInclusion C k) PUnit.unit
+
+private theorem skeletalStageWedgeForward_old (k : ℕ)
+    (a : ↑(RelCWComplex.skeletonLT C (k + 1) : Set X)) :
+    skeletalStageWedgeForward C k
+        (pointQuotientProjection (skeletalStagePair C (k + 1))
+          (skeletonLTStepOldMap C (k + 1) a)) =
+      Hatcher.PointedWedge.basepoint (skeletalStagePoles C k) :=
+  (ConcreteCategory.congr_hom (skeletalStageWedgeForward_projection C k)
+    (skeletonLTStepOldMap C (k + 1) a)).trans
+      (skeletalStageCollapseToWedge_old C k a)
+
+private theorem skeletalStageWedgeForward_cell (k : ℕ)
+    (i : RelCWComplex.cell C (k + 1))
+    (z : ↑(closedBall (0 : Fin (k + 1) → ℝ) 1)) :
+    skeletalStageWedgeForward C k
+        (pointQuotientProjection (skeletalStagePair C (k + 1))
+          (skeletonLTStepClosedCellMap C (k + 1) i z)) =
+      skeletalStageCellToWedge C k i z :=
+  (ConcreteCategory.congr_hom (skeletalStageWedgeForward_projection C k)
+    (skeletonLTStepClosedCellMap C (k + 1) i z)).trans
+      (skeletalStageCollapseToWedge_cell C k i z)
+
+private theorem skeletalStageDiskSphere_inversePole (k : ℕ) :
+    (diskBoundaryPointQuotientIsoSphere.{u} k).inv
+        (Hatcher.Sphere.northPole.{u} k) =
+      pointQuotientPoint (standardDiskBoundaryPair.{u} (k + 1)) := by
+  let D := standardDiskBoundaryPair.{u} (k + 1)
+  let e := diskBoundaryPointQuotientIsoSphere.{u} k
+  have hi := ConcreteCategory.congr_hom e.hom_inv_id (pointQuotientPoint D)
+  change e.inv (e.hom (pointQuotientPoint D)) = pointQuotientPoint D at hi
+  rw [diskBoundaryPointQuotientIsoSphere_point] at hi
+  exact hi
+
+private theorem skeletalStageCellQuotientMap_point (n : ℕ)
+    (i : RelCWComplex.cell C n) :
+    pointQuotientMap (skeletalStageCellPairMap C n i)
+        (pointQuotientPoint (standardDiskBoundaryPair.{u} n)) =
+      pointQuotientPoint (skeletalStagePair C n) :=
+  ConcreteCategory.congr_hom
+    (pointQuotientPointInclusion_naturality (skeletalStageCellPairMap C n i)) PUnit.unit
+
+private noncomputable def skeletalStageWedgeInverse (k : ℕ) :
+    skeletalStageWedge C k ⟶ pointQuotient (skeletalStagePair C (k + 1)) := by
+  refine TopCat.ofHom (Hatcher.PointedWedge.desc (skeletalStagePoles C k)
+    (pointQuotientPoint (skeletalStagePair C (k + 1)))
+    (fun i ↦ ((diskBoundaryPointQuotientIsoSphere.{u} k).inv ≫
+      pointQuotientMap (skeletalStageCellPairMap C (k + 1) i)).hom) ?_)
+  intro i
+  change pointQuotientMap (skeletalStageCellPairMap C (k + 1) i)
+      ((diskBoundaryPointQuotientIsoSphere.{u} k).inv
+        (Hatcher.Sphere.northPole.{u} k)) =
+    pointQuotientPoint (skeletalStagePair C (k + 1))
+  rw [skeletalStageDiskSphere_inversePole]
+  exact skeletalStageCellQuotientMap_point C (k + 1) i
+
+private theorem skeletalStageWedgeInverse_point (k : ℕ) :
+    skeletalStageWedgeInverse C k
+        (Hatcher.PointedWedge.basepoint (skeletalStagePoles C k)) =
+      pointQuotientPoint (skeletalStagePair C (k + 1)) := rfl
+
+private theorem skeletalStageWedgeInverse_inclusion (k : ℕ)
+    (i : RelCWComplex.cell C (k + 1)) (s : TopCat.sphere.{u} (k + 1)) :
+    skeletalStageWedgeInverse C k
+        (Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i s) =
+      pointQuotientMap (skeletalStageCellPairMap C (k + 1) i)
+        ((diskBoundaryPointQuotientIsoSphere.{u} k).inv s) := rfl
+
+private theorem skeletalStageWedgeForward_pairMap (k : ℕ)
+    (i : RelCWComplex.cell C (k + 1)) :
+    pointQuotientMap (skeletalStageCellPairMap C (k + 1) i) ≫
+        skeletalStageWedgeForward C k =
+      (diskBoundaryPointQuotientIsoSphere.{u} k).hom ≫
+        pointedWedgeSummandInclusion (skeletalStagePoles C k) i := by
+  apply pushout.hom_ext
+    (f := (standardDiskBoundaryPair.{u} (k + 1)).map)
+    (g := pointQuotientCollapse (standardDiskBoundaryPair.{u} (k + 1)))
+  · apply TopCat.ext
+    intro z
+    let e := classicalCellArrowIso.{u} (k + 1)
+    let D := standardDiskBoundaryPair.{u} (k + 1)
+    let P := skeletalStagePair C (k + 1)
+    have hn := ConcreteCategory.congr_hom
+      (pointQuotientProjection_naturality (skeletalStageCellPairMap C (k + 1) i)) z
+    change pointQuotientMap (skeletalStageCellPairMap C (k + 1) i)
+        (pointQuotientProjection D z) =
+      pointQuotientProjection P
+        (skeletonLTStepClosedCellMap C (k + 1) i (e.inv.right z).down) at hn
+    change skeletalStageWedgeForward C k
+        (pointQuotientMap (skeletalStageCellPairMap C (k + 1) i)
+          (pointQuotientProjection D z)) =
+      Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i
+        ((diskBoundaryPointQuotientIsoSphere.{u} k).hom (pointQuotientProjection D z))
+    rw [hn, skeletalStageWedgeForward_cell]
+    change Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i
+        ((diskBoundaryPointQuotientIsoSphere.{u} k).hom
+          (pointQuotientProjection D
+            (e.hom.right (ULift.up (e.inv.right z).down :
+              classicalDisk.{u} (k + 1))))) =
+      Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i
+        ((diskBoundaryPointQuotientIsoSphere.{u} k).hom (pointQuotientProjection D z))
+    have he := skeletalStageClassicalDisk_inv_hom (k + 1) z
+    change e.hom.right (ULift.up (e.inv.right z).down :
+      classicalDisk.{u} (k + 1)) = z at he
+    rw [he]
+  · apply TopCat.ext
+    intro t
+    cases t
+    change skeletalStageWedgeForward C k
+        (pointQuotientMap (skeletalStageCellPairMap C (k + 1) i)
+          (pointQuotientPoint (standardDiskBoundaryPair.{u} (k + 1)))) =
+      Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i
+        ((diskBoundaryPointQuotientIsoSphere.{u} k).hom
+          (pointQuotientPoint (standardDiskBoundaryPair.{u} (k + 1))))
+    rw [skeletalStageCellQuotientMap_point, skeletalStageWedgeForward_point,
+      diskBoundaryPointQuotientIsoSphere_point]
+    exact (Hatcher.PointedWedge.inclusion_basepoint (skeletalStagePoles C k) i).symm
+
+private theorem skeletalStageWedgeInverse_forward (k : ℕ) :
+    skeletalStageWedgeInverse C k ≫ skeletalStageWedgeForward C k =
+      𝟙 (skeletalStageWedge C k) := by
+  apply TopCat.hom_ext
+  apply Hatcher.PointedWedge.continuousMap_ext (skeletalStagePoles C k)
+  · change skeletalStageWedgeForward C k (skeletalStageWedgeInverse C k
+      (Hatcher.PointedWedge.basepoint (skeletalStagePoles C k))) =
+        Hatcher.PointedWedge.basepoint (skeletalStagePoles C k)
+    rw [skeletalStageWedgeInverse_point, skeletalStageWedgeForward_point]
+  · intro i s
+    change skeletalStageWedgeForward C k (skeletalStageWedgeInverse C k
+      (Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i s)) =
+        Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i s
+    rw [skeletalStageWedgeInverse_inclusion]
+    have h := ConcreteCategory.congr_hom (skeletalStageWedgeForward_pairMap C k i)
+      ((diskBoundaryPointQuotientIsoSphere.{u} k).inv s)
+    change skeletalStageWedgeForward C k
+        (pointQuotientMap (skeletalStageCellPairMap C (k + 1) i)
+          ((diskBoundaryPointQuotientIsoSphere.{u} k).inv s)) =
+      Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i
+        ((diskBoundaryPointQuotientIsoSphere.{u} k).hom
+          ((diskBoundaryPointQuotientIsoSphere.{u} k).inv s)) at h
+    have hi : (diskBoundaryPointQuotientIsoSphere.{u} k).hom
+        ((diskBoundaryPointQuotientIsoSphere.{u} k).inv s) = s :=
+      ConcreteCategory.congr_hom (diskBoundaryPointQuotientIsoSphere.{u} k).inv_hom_id s
+    exact h.trans (congrArg (Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i) hi)
+
+private theorem skeletalStageQuotient_old_point (k : ℕ)
+    (a : ↑(RelCWComplex.skeletonLT C (k + 1) : Set X)) :
+    pointQuotientProjection (skeletalStagePair C (k + 1))
+        (skeletonLTStepOldMap C (k + 1) a) =
+      pointQuotientPoint (skeletalStagePair C (k + 1)) := by
+  let P := skeletalStagePair C (k + 1)
+  have h := ConcreteCategory.congr_hom
+    (pushout.condition (f := P.map) (g := pointQuotientCollapse P)) a
+  change pointQuotientProjection P (skeletonLTStepOldMap C (k + 1) a) =
+    pointQuotientPointInclusion P (pointQuotientCollapse P a) at h
+  exact h.trans (congrArg (pointQuotientPointInclusion P)
+    (Subsingleton.elim (pointQuotientCollapse P a) PUnit.unit))
+
+private theorem skeletalStageWedgeForward_inverse (k : ℕ) :
+    skeletalStageWedgeForward C k ≫ skeletalStageWedgeInverse C k =
+      𝟙 (pointQuotient (skeletalStagePair C (k + 1))) := by
+  apply pushout.hom_ext
+    (f := (skeletalStagePair C (k + 1)).map)
+    (g := pointQuotientCollapse (skeletalStagePair C (k + 1)))
+  · apply TopCat.ext
+    intro b
+    change skeletalStageWedgeInverse C k (skeletalStageWedgeForward C k
+        (pointQuotientProjection (skeletalStagePair C (k + 1)) b)) =
+      pointQuotientProjection (skeletalStagePair C (k + 1)) b
+    obtain ⟨y, hy⟩ := surjective_skeletonLTStepJointMap C (k + 1) b
+    rcases y with a | ⟨i, z⟩
+    · change skeletonLTStepOldMap C (k + 1) a = b at hy
+      subst b
+      rw [skeletalStageWedgeForward_old, skeletalStageWedgeInverse_point]
+      exact (skeletalStageQuotient_old_point C k a).symm
+    · change skeletonLTStepClosedCellMap C (k + 1) i z = b at hy
+      subst b
+      rw [skeletalStageWedgeForward_cell]
+      change skeletalStageWedgeInverse C k
+          (Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i
+            ((diskBoundaryPointQuotientIsoSphere.{u} k).hom
+              (pointQuotientProjection (standardDiskBoundaryPair.{u} (k + 1))
+                ((classicalCellArrowIso.{u} (k + 1)).hom.right
+                  (ULift.up z : classicalDisk.{u} (k + 1)))))) =
+        pointQuotientProjection (skeletalStagePair C (k + 1))
+          (skeletonLTStepClosedCellMap C (k + 1) i z)
+      rw [skeletalStageWedgeInverse_inclusion]
+      let D := standardDiskBoundaryPair.{u} (k + 1)
+      let e := classicalCellArrowIso.{u} (k + 1)
+      let a : classicalDisk.{u} (k + 1) := ULift.up z
+      have hi := ConcreteCategory.congr_hom
+        (diskBoundaryPointQuotientIsoSphere.{u} k).hom_inv_id
+        (pointQuotientProjection D (e.hom.right a))
+      change (diskBoundaryPointQuotientIsoSphere.{u} k).inv
+          ((diskBoundaryPointQuotientIsoSphere.{u} k).hom
+            (pointQuotientProjection D (e.hom.right a))) =
+        pointQuotientProjection D (e.hom.right a) at hi
+      change pointQuotientMap (skeletalStageCellPairMap C (k + 1) i)
+          ((diskBoundaryPointQuotientIsoSphere.{u} k).inv
+            ((diskBoundaryPointQuotientIsoSphere.{u} k).hom
+              (pointQuotientProjection D (e.hom.right a)))) =
+        pointQuotientProjection (skeletalStagePair C (k + 1))
+          (skeletonLTStepClosedCellMap C (k + 1) i z)
+      rw [hi]
+      have hn := ConcreteCategory.congr_hom
+        (pointQuotientProjection_naturality (skeletalStageCellPairMap C (k + 1) i))
+        (e.hom.right a)
+      change pointQuotientMap (skeletalStageCellPairMap C (k + 1) i)
+          (pointQuotientProjection D (e.hom.right a)) =
+        pointQuotientProjection (skeletalStagePair C (k + 1))
+          (skeletalStageClassicalCharacteristic C (k + 1) i
+            (e.inv.right (e.hom.right a))) at hn
+      have he := skeletalStageClassicalDisk_hom_inv (k + 1) a
+      change e.inv.right (e.hom.right a) = a at he
+      rw [he] at hn
+      exact hn
+  · apply TopCat.ext
+    intro t
+    cases t
+    change skeletalStageWedgeInverse C k (skeletalStageWedgeForward C k
+        (pointQuotientPoint (skeletalStagePair C (k + 1)))) =
+      pointQuotientPoint (skeletalStagePair C (k + 1))
+    rw [skeletalStageWedgeForward_point, skeletalStageWedgeInverse_point]
+
+/-- The actual positive-dimensional skeletal quotient is its weak cell-sphere wedge. -/
+noncomputable def skeletonPointQuotientIsoWedge (k : ℕ) :
+    pointQuotient (skeletalStagePair C (k + 1)) ≅
+      TopCat.of (Hatcher.PointedWedge
+        (fun _ : RelCWComplex.cell C (k + 1) ↦ TopCat.sphere.{u} (k + 1))
+        (fun _ ↦ Hatcher.Sphere.northPole.{u} k)) where
+  hom := skeletalStageWedgeForward C k
+  inv := skeletalStageWedgeInverse C k
+  hom_inv_id := skeletalStageWedgeForward_inverse C k
+  inv_hom_id := skeletalStageWedgeInverse_forward C k
+
+@[simp]
+theorem skeletonPointQuotientIsoWedge_point (k : ℕ) :
+    (skeletonPointQuotientIsoWedge C k).hom
+        (pointQuotientPoint (skeletalStagePair C (k + 1))) =
+      Hatcher.PointedWedge.basepoint
+        (fun _ : RelCWComplex.cell C (k + 1) ↦ Hatcher.Sphere.northPole.{u} k) :=
+  skeletalStageWedgeForward_point C k
+
+/-- The literal classical characteristic disk has the prescribed quotient map. -/
+theorem skeletonPointQuotientIsoWedge_cell (k : ℕ)
+    (i : RelCWComplex.cell C (k + 1))
+    (z : ↑(closedBall (0 : Fin (k + 1) → ℝ) 1)) :
+    (skeletonPointQuotientIsoWedge C k).hom
+        (pointQuotientProjection (skeletalStagePair C (k + 1))
+          (skeletonLTStepClosedCellMap C (k + 1) i z)) =
+      Hatcher.PointedWedge.inclusion
+        (fun _ : RelCWComplex.cell C (k + 1) ↦ Hatcher.Sphere.northPole.{u} k) i
+        ((diskBoundaryPointQuotientIsoSphere.{u} k).hom
+          (pointQuotientProjection (standardDiskBoundaryPair.{u} (k + 1))
+            ((classicalCellArrowIso.{u} (k + 1)).hom.right
+              (ULift.up z : classicalDisk.{u} (k + 1))))) :=
+  skeletalStageWedgeForward_cell C k i z
+
+/-- The induced map of actual pairs agrees with its actual sphere inclusion. -/
+theorem skeletonPointQuotientIsoWedge_pairMap (k : ℕ)
+    (i : RelCWComplex.cell C (k + 1)) :
+    pointQuotientMap (skeletalStageCellPairMap C (k + 1) i) ≫
+        (skeletonPointQuotientIsoWedge C k).hom =
+      (diskBoundaryPointQuotientIsoSphere.{u} k).hom ≫
+        pointedWedgeSummandInclusion
+          (X := fun _ : RelCWComplex.cell C (k + 1) ↦ TopCat.sphere.{u} (k + 1))
+          (fun _ ↦ Hatcher.Sphere.northPole.{u} k) i :=
+  skeletalStageWedgeForward_pairMap C k i
+
+@[simp]
+theorem skeletonPointQuotientIsoWedge_inv_inclusion (k : ℕ)
+    (i : RelCWComplex.cell C (k + 1)) (s : TopCat.sphere.{u} (k + 1)) :
+    (skeletonPointQuotientIsoWedge C k).inv
+        (Hatcher.PointedWedge.inclusion
+          (fun _ : RelCWComplex.cell C (k + 1) ↦ Hatcher.Sphere.northPole.{u} k) i s) =
+      pointQuotientMap (skeletalStageCellPairMap C (k + 1) i)
+        ((diskBoundaryPointQuotientIsoSphere.{u} k).inv s) :=
+  skeletalStageWedgeInverse_inclusion C k i s
 
 end Hatcher.ClassicalCW
