@@ -676,12 +676,12 @@ private theorem zeroCellOrdinaryClassMap_components
     (X := zeroSkeletonSpace C) (zeroCellVertex C i)).trans
       (congrArg (ZerothHomotopy.mk (X := zeroSkeletonSpace C)) hpoint)
   change Sigma.ι (fun _ : S.π₀ => R) (SSet.π₀.mk (zeroCellVertex C i)) ≫
-      Sigma.map' (f := fun _ : S.π₀ => R)
-        (g := fun _ : ZerothHomotopy (zeroSkeletonSpace C) => R)
+      Sigma.map' (g := fun _ : S.π₀ => R)
+        (f := fun _ : ZerothHomotopy (zeroSkeletonSpace C) => R)
         (TopCat.zerothHomotopyEquiv (X := zeroSkeletonSpace C)).symm
         (fun _ => 𝟙 R) = _
-  exact (Sigma.ι_comp_map' (f := fun _ : S.π₀ => R)
-    (g := fun _ : ZerothHomotopy (zeroSkeletonSpace C) => R)
+  exact (Sigma.ι_comp_map' (g := fun _ : S.π₀ => R)
+    (f := fun _ : ZerothHomotopy (zeroSkeletonSpace C) => R)
     (TopCat.zerothHomotopyEquiv (X := zeroSkeletonSpace C)).symm
     (fun _ => 𝟙 R) (SSet.π₀.mk (zeroCellVertex C i))).trans
       ((Category.id_comp _).trans (congrArg
@@ -812,13 +812,13 @@ private theorem zeroCell_relative_class_forward
   rw [hvalue]
   have hreindex := ConcreteCategory.congr_hom
     (Sigma.ι_comp_map'
-      (f := fun _ : ZerothHomotopy (zeroSkeletonSpace C) => zeroSkeletonCoefficient.{u})
-      (g := fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient.{u})
+      (g := fun _ : ZerothHomotopy (zeroSkeletonSpace C) => zeroSkeletonCoefficient.{u})
+      (f := fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient.{u})
       (zeroSkeletonComponentCellEquiv C) (fun _ => 𝟙 zeroSkeletonCoefficient.{u})
       (ZerothHomotopy.mk (zeroCellPoint C i))) (ULift.up (1 : ℤ))
   change (Sigma.map'
-      (f := fun _ : ZerothHomotopy (zeroSkeletonSpace C) => zeroSkeletonCoefficient.{u})
-      (g := fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient.{u})
+      (g := fun _ : ZerothHomotopy (zeroSkeletonSpace C) => zeroSkeletonCoefficient.{u})
+      (f := fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient.{u})
       (zeroSkeletonComponentCellEquiv C) (fun _ => 𝟙 zeroSkeletonCoefficient.{u}))
       (Sigma.ι (fun _ : ZerothHomotopy (zeroSkeletonSpace C) => zeroSkeletonCoefficient.{u})
         (ZerothHomotopy.mk (zeroCellPoint C i)) (ULift.up (1 : ℤ))) =
@@ -827,8 +827,8 @@ private theorem zeroCell_relative_class_forward
       (ULift.up (1 : ℤ)) at hreindex
   change (zeroCellIntegerFinsuppIso C).hom
     ((Sigma.map'
-      (f := fun _ : ZerothHomotopy (zeroSkeletonSpace C) => zeroSkeletonCoefficient.{u})
-      (g := fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient.{u})
+      (g := fun _ : ZerothHomotopy (zeroSkeletonSpace C) => zeroSkeletonCoefficient.{u})
+      (f := fun _ : RelCWComplex.cell C 0 => zeroSkeletonCoefficient.{u})
       (zeroSkeletonComponentCellEquiv C) (fun _ => 𝟙 zeroSkeletonCoefficient.{u}))
       (Sigma.ι (fun _ : ZerothHomotopy (zeroSkeletonSpace C) => zeroSkeletonCoefficient.{u})
         (ZerothHomotopy.mk (zeroCellPoint C i)) (ULift.up (1 : ℤ)))) = _
