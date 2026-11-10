@@ -943,26 +943,39 @@ theorem liftedOrderedSphereCycle_eq_difference (k : ℕ) :
   let Γ := sphereAugmentedSpaceLiftIso.{u} (k + 1)
   let first : S _⦋k + 1⦌ := Hatcher.Simplex.doubleSimplexFirstSingularSimplex (k + 1)
   let second : S _⦋k + 1⦌ := Hatcher.Simplex.doubleSimplexSecondSingularSimplex (k + 1)
-  have hfirst : S.ιChainComplex (R := R) first ≫
-      (SSet.chainComplexMap f R).f (k + 1) =
-    T.ιChainComplex (R := R) (f.app (.op ⦋k + 1⦌) first) :=
+  let p : (S.chainComplex R).X (k + 1) ⟶ (T.chainComplex R).X (k + 1) :=
+    (SSet.chainComplexMap f R).f (k + 1)
+  let q : (T.chainComplex R).X (k + 1) ⟶ (U.chainComplex R).X (k + 1) :=
+    Γ.hom.f (k + 2)
+  let i₁ : R ⟶ (S.chainComplex R).X (k + 1) := S.ιChainComplex (R := R) first
+  let i₂ : R ⟶ (S.chainComplex R).X (k + 1) := S.ιChainComplex (R := R) second
+  let j₁ : R ⟶ (T.chainComplex R).X (k + 1) :=
+    T.ιChainComplex (R := R) (f.app (.op ⦋k + 1⦌) first)
+  let j₂ : R ⟶ (T.chainComplex R).X (k + 1) :=
+    T.ιChainComplex (R := R) (f.app (.op ⦋k + 1⦌) second)
+  let t₁ : R ⟶ (U.chainComplex R).X (k + 1) := U.ιChainComplex (R := R)
+    (sphereSimplexLift.{u} (k + 1) (k + 1) (f.app (.op ⦋k + 1⦌) first))
+  let t₂ : R ⟶ (U.chainComplex R).X (k + 1) := U.ιChainComplex (R := R)
+    (sphereSimplexLift.{u} (k + 1) (k + 1) (f.app (.op ⦋k + 1⦌) second))
+  have hfirst : i₁ ≫ p = j₁ :=
     SSet.ι_chainComplexMap_f (X := S) (Y := T) (f := f) (R := R) first
-  have hsecond : S.ιChainComplex (R := R) second ≫
-      (SSet.chainComplexMap f R).f (k + 1) =
-    T.ιChainComplex (R := R) (f.app (.op ⦋k + 1⦌) second) :=
+  have hsecond : i₂ ≫ p = j₂ :=
     SSet.ι_chainComplexMap_f (X := S) (Y := T) (f := f) (R := R) second
-  have hfirstLift := sphereAugmentedSpaceLiftIso_ι.{u} (k + 1) (k + 1)
-    (f.app (.op ⦋k + 1⦌) first)
-  have hsecondLift := sphereAugmentedSpaceLiftIso_ι.{u} (k + 1) (k + 1)
-    (f.app (.op ⦋k + 1⦌) second)
-  change (S.ιChainComplex (R := R) first - S.ιChainComplex (R := R) second) ≫
-      ((SSet.chainComplexMap f R).f (k + 1) ≫ Γ.hom.f (k + 2)) =
-    U.ιChainComplex (R := R)
-        (sphereSimplexLift.{u} (k + 1) (k + 1) (f.app (.op ⦋k + 1⦌) first)) -
-      U.ιChainComplex (R := R)
-        (sphereSimplexLift.{u} (k + 1) (k + 1) (f.app (.op ⦋k + 1⦌) second))
-  rw [Preadditive.sub_comp, ← Category.assoc, hfirst, hfirstLift,
-    ← Category.assoc, hsecond, hsecondLift]
+  have hfirstLift : j₁ ≫ q = t₁ := sphereAugmentedSpaceLiftIso_ι.{u}
+    (k + 1) (k + 1) (f.app (.op ⦋k + 1⦌) first)
+  have hsecondLift : j₂ ≫ q = t₂ := sphereAugmentedSpaceLiftIso_ι.{u}
+    (k + 1) (k + 1) (f.app (.op ⦋k + 1⦌) second)
+  have h₁ : i₁ ≫ (p ≫ q) = t₁ :=
+    (Category.assoc i₁ p q).symm.trans
+      ((congrArg (fun g : R ⟶ (T.chainComplex R).X (k + 1) ↦ g ≫ q) hfirst).trans
+        hfirstLift)
+  have h₂ : i₂ ≫ (p ≫ q) = t₂ :=
+    (Category.assoc i₂ p q).symm.trans
+      ((congrArg (fun g : R ⟶ (T.chainComplex R).X (k + 1) ↦ g ≫ q) hsecond).trans
+        hsecondLift)
+  change (i₁ - i₂) ≫ (p ≫ q) = t₁ - t₂
+  exact (Preadditive.sub_comp i₁ i₂ (p ≫ q)).trans
+    (congrArg₂ (fun a b : R ⟶ (U.chainComplex R).X (k + 1) ↦ a - b) h₁ h₂)
 
 /-- Differential compatibility transports the proved ordered cycle equation. -/
 theorem liftedOrderedSphereCycle_d (k : ℕ) :
@@ -997,27 +1010,42 @@ theorem liftedOrderedSphereFundamentalClass_eq_cycle (k : ℕ) :
   let K : ChainComplex AddCommGrpCat.{u} ℕ :=
     (Hatcher.Reduced.augmentedSingularChainComplexFunctor.{0} R).obj
       (Hatcher.Simplex.doubleSimplex (k + 1))
+  let M : ChainComplex AddCommGrpCat.{u} ℕ :=
+    (Hatcher.Reduced.augmentedSingularChainComplexFunctor.{0} R).obj
+      (TopCat.sphere.{0} (k + 1))
   let L : ChainComplex AddCommGrpCat.{u} ℕ := liftedOrderedSphereAugmentedComplex.{u} k
-  let F : K ⟶ L := liftedOrderedSphereChainMap.{u} k
-  let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u}
-    (ComplexShape.down ℕ) (k + 2)
-  change (Hatcher.Simplex.doubleSimplexFundamentalClass R (k + 1) ≫
-    H.map (Hatcher.Reduced.augmentedMap R
-      (Hatcher.Simplex.doubleSimplexIsoSphere (k + 1)).hom)) ≫
-        H.map (sphereAugmentedSpaceLiftIso.{u} (k + 1)).hom = _
-  rw [Category.assoc, ← Functor.map_comp]
-  change (K.liftCycles
-      (Hatcher.Simplex.doubleSimplexFundamentalCycle R (k + 1))
-      (k + 1) (by simp) (Hatcher.Simplex.doubleSimplexFundamentalCycle_d R (k + 1)) ≫
-        K.homologyπ (k + 2)) ≫ HomologicalComplex.homologyMap F (k + 2) = _
-  rw [Category.assoc,
-    HomologicalComplex.homologyπ_naturality (φ := F) (i := k + 2),
-    ← Category.assoc]
-  have h := HomologicalComplex.liftCycles_comp_cyclesMap
-    (φ := F) (i := k + 2)
-    (Hatcher.Simplex.doubleSimplexFundamentalCycle R (k + 1))
-    (k + 1) (by simp) (Hatcher.Simplex.doubleSimplexFundamentalCycle_d R (k + 1))
-  exact congrArg (fun g : R ⟶ L.cycles (k + 2) ↦ g ≫ L.homologyπ (k + 2)) h
+  let F₁ : K ⟶ M := Hatcher.Reduced.augmentedMap R
+    (Hatcher.Simplex.doubleSimplexIsoSphere (k + 1)).hom
+  let F₂ : M ⟶ L := (sphereAugmentedSpaceLiftIso.{u} (k + 1)).hom
+  let F : K ⟶ L := F₁ ≫ F₂
+  let H : ChainComplex AddCommGrpCat.{u} ℕ ⥤ AddCommGrpCat.{u} :=
+    HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.down ℕ) (k + 2)
+  let c : R ⟶ K.X (k + 2) :=
+    Hatcher.Simplex.doubleSimplexFundamentalCycle R (k + 1)
+  have hc : c ≫ K.d (k + 2) (k + 1) = 0 :=
+    Hatcher.Simplex.doubleSimplexFundamentalCycle_d R (k + 1)
+  let l : R ⟶ K.cycles (k + 2) := K.liftCycles c (k + 1) (by simp) hc
+  let r : R ⟶ L.cycles (k + 2) := L.liftCycles
+    (liftedOrderedSphereCycle.{u} k) (k + 1) (by simp) (liftedOrderedSphereCycle_d.{u} k)
+  let b : R ⟶ H.obj K := Hatcher.Simplex.doubleSimplexFundamentalClass R (k + 1)
+  have hmap : (b ≫ H.map F₁) ≫ H.map F₂ = b ≫ H.map F :=
+    (Category.assoc b (H.map F₁) (H.map F₂)).trans
+      (congrArg (fun g : H.obj K ⟶ H.obj L ↦ b ≫ g) (H.map_comp F₁ F₂).symm)
+  have hπ : K.homologyπ (k + 2) ≫ H.map F =
+      HomologicalComplex.cyclesMap F (k + 2) ≫ L.homologyπ (k + 2) :=
+    HomologicalComplex.homologyπ_naturality (φ := F) (i := k + 2)
+  have hl : l ≫ HomologicalComplex.cyclesMap F (k + 2) = r :=
+    HomologicalComplex.liftCycles_comp_cyclesMap (φ := F) (i := k + 2)
+      c (k + 1) (by simp) hc
+  have hclass : b ≫ H.map F = r ≫ L.homologyπ (k + 2) := by
+    change (l ≫ K.homologyπ (k + 2)) ≫ H.map F = r ≫ L.homologyπ (k + 2)
+    exact (Category.assoc l (K.homologyπ (k + 2)) (H.map F)).trans
+      ((congrArg (fun g : K.cycles (k + 2) ⟶ L.homology (k + 2) ↦ l ≫ g) hπ).trans
+        ((Category.assoc l (HomologicalComplex.cyclesMap F (k + 2))
+          (L.homologyπ (k + 2))).symm.trans
+            (congrArg (fun g : R ⟶ L.cycles (k + 2) ↦ g ≫ L.homologyπ (k + 2)) hl)))
+  change (b ≫ H.map F₁) ≫ H.map F₂ = r ≫ L.homologyπ (k + 2)
+  exact hmap.trans hclass
 
 /-- The fixed ordered difference class generates reduced sphere homology in
 every space universe and every positive sphere dimension. -/
