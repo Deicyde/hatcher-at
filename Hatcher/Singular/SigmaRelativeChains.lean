@@ -921,23 +921,27 @@ private theorem boundedSingularChain_expansion (Y : TopCat.{u}) (n : ℕ)
         (R := boundedSingularCoefficient.{u}) σ
         ((singularChainFinsuppIso Y n).inv z σ) := by
   classical
-  let E := singularChainFinsuppIso Y n
-  let a := E.inv z
-  have ha : (∑ σ ∈ a.support, Finsupp.single σ (a σ)) = a := by
-    simpa only [Finsupp.sum] using Finsupp.sum_single a
-  have hz : E.hom a = z := ConcreteCategory.congr_hom E.inv_hom_id z
-  calc
-    z = E.hom a := hz.symm
-    _ = E.hom (∑ σ ∈ a.support, Finsupp.single σ (a σ)) :=
-      congrArg E.hom ha.symm
-    _ = ∑ σ ∈ a.support, E.hom (Finsupp.single σ (a σ)) :=
-      map_sum E.hom.hom (fun σ ↦ Finsupp.single σ (a σ)) a.support
-    _ = ∑ σ ∈ a.support,
+  let I : Type u := (TopCat.toSSet.obj Y).obj (.op ⦋n⦌)
+  let M : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (I →₀ ULift.{u} ℤ)
+  let G : AddCommGrpCat.{u} := (boundedSingularChains Y).X n
+  let E : M ≅ G := singularChainFinsuppIso Y n
+  let a : I →₀ ULift.{u} ℤ := E.inv z
+  let g : (I →₀ ULift.{u} ℤ) →+ G := E.hom.hom
+  have ha : (∑ σ ∈ a.support, Finsupp.single σ (a σ)) = a :=
+    Finsupp.sum_single a
+  have hz : g a = z := ConcreteCategory.congr_hom E.inv_hom_id z
+  have hs : g (∑ σ ∈ a.support, Finsupp.single σ (a σ)) =
+      ∑ σ ∈ a.support,
         (TopCat.toSSet.obj Y).ιChainComplex
           (R := boundedSingularCoefficient.{u}) σ (a σ) := by
-      apply Finset.sum_congr rfl
-      intro σ hσ
-      exact singularChainFinsuppIso_single Y n σ (a σ)
+    refine (map_sum g (fun σ ↦ Finsupp.single σ (a σ)) a.support).trans ?_
+    apply Finset.sum_congr rfl
+    intro σ hσ
+    change (singularChainFinsuppIso Y n).hom (Finsupp.single σ (a σ)) =
+      (TopCat.toSSet.obj Y).ιChainComplex
+        (R := boundedSingularCoefficient.{u}) σ (a σ)
+    exact singularChainFinsuppIso_single Y n σ (a σ)
+  exact ((congrArg g ha).trans hz).symm.trans hs
 
 variable {X : Type u} [TopologicalSpace X] [T2Space X]
   (C : Set X) [CWComplex C]
@@ -967,14 +971,15 @@ theorem singularSkeletonChainMap_injective (N k : ℕ) :
     intro a b h
     apply Subtype.ext
     exact congrArg (fun x : ↑C ↦ x.val) h
-  letI : Mono (singularSkeletonInclusion C N) :=
+  let _ : Mono (singularSkeletonInclusion C N) :=
     (TopCat.mono_iff_injective _).mpr hi
-  letI : Mono (singularSkeletonChainMap C N) := by
+  let _ : Mono (singularSkeletonChainMap C N) := by
     change Mono (((singularChainComplexFunctor AddCommGrpCat.{u}).obj
       boundedSingularCoefficient.{u}).map (singularSkeletonInclusion C N))
     infer_instance
-  have hm : Mono ((singularSkeletonChainMap C N).f k) := inferInstance
-  exact (AddCommGrpCat.mono_iff_injective _).mp hm
+  let _ : Mono ((singularSkeletonChainMap C N).f k) := inferInstance
+  exact CategoryTheory.injective_of_mono
+    ((forget AddCommGrpCat.{u}).map ((singularSkeletonChainMap C N).f k))
 
 /-- Every differential equation after inclusion already holds in the skeleton. -/
 theorem singularSkeletonChainMap_boundary_iff (N k l : ℕ)
@@ -1070,7 +1075,7 @@ private theorem singularFamily_exists_boundedSkeletonLift
   classical
   letI : Fintype ι := Fintype.ofFinite ι
   rcases isEmpty_or_nonempty ι with hι | hι
-  · letI : IsEmpty ι := hι
+  · let _ : IsEmpty ι := hι
     refine ⟨L, le_rfl, (fun _ ↦ rfl), (fun i ↦ False.elim (IsEmpty.false i)), ?_⟩
     intro i
     exact (IsEmpty.false i).elim
@@ -1080,7 +1085,7 @@ private theorem singularFamily_exists_boundedSkeletonLift
     let E : Type (max u v) := Σ i : ι,
       {σ : (TopCat.toSSet.obj (boundedCWTop C)).obj (.op ⦋degree i⦌) //
         σ ∈ (a i).support}
-    letI : Finite E := inferInstance
+    let _ : Finite E := inferInstance
     let T : Set X := ⋃ e : E, Set.range
       (fun t : Convexity.StdSimplex ℝ (Fin (degree e.1 + 1)) ↦
         (TopCat.toSSetObjEquiv (boundedCWTop C) (.op ⦋degree e.1⦌) e.2.val t).val)
@@ -1115,48 +1120,48 @@ private theorem singularFamily_exists_boundedSkeletonLift
           (a i σ.val)
     have hEmpty : IsEmpty ι → N = L := by
       intro h
-      letI : IsEmpty ι := h
+      let _ : IsEmpty ι := h
       obtain ⟨i⟩ := hι
       exact (IsEmpty.false i).elim
     refine ⟨N, Nat.le_max_right m L, hEmpty, lift, ?_⟩
     intro i
-    change (singularSkeletonChainMap C N).f (degree i)
-        (∑ σ ∈ (a i).support.attach,
-          (TopCat.toSSet.obj (boundedSkeletonTop C N)).ιChainComplex
-            (R := boundedSingularCoefficient.{u})
-            (singularSimplexRestricted C N (degree i) σ.val (hσ i σ.val σ.property))
-            (a i σ.val)) = z i
-    calc
-      (singularSkeletonChainMap C N).f (degree i)
-          (∑ σ ∈ (a i).support.attach,
-            (TopCat.toSSet.obj (boundedSkeletonTop C N)).ιChainComplex
-              (R := boundedSingularCoefficient.{u})
-              (singularSimplexRestricted C N (degree i) σ.val (hσ i σ.val σ.property))
-              (a i σ.val)) =
-        ∑ σ ∈ (a i).support.attach,
-          (singularSkeletonChainMap C N).f (degree i)
-            ((TopCat.toSSet.obj (boundedSkeletonTop C N)).ιChainComplex
-              (R := boundedSingularCoefficient.{u})
-              (singularSimplexRestricted C N (degree i) σ.val (hσ i σ.val σ.property))
-              (a i σ.val)) :=
-        map_sum ((singularSkeletonChainMap C N).f (degree i)).hom
-          (fun σ ↦
-            (TopCat.toSSet.obj (boundedSkeletonTop C N)).ιChainComplex
-              (R := boundedSingularCoefficient.{u})
-              (singularSimplexRestricted C N (degree i) σ.val (hσ i σ.val σ.property))
-              (a i σ.val))
-          (a i).support.attach
-      _ = ∑ σ ∈ (a i).support.attach,
+    let I : Type u := (TopCat.toSSet.obj (boundedCWTop C)).obj (.op ⦋degree i⦌)
+    let coeff : I →₀ ULift.{u} ℤ := a i
+    let S : Finset I := coeff.support
+    let B : AddCommGrpCat.{u} :=
+      (boundedSingularChains (boundedSkeletonTop C N)).X (degree i)
+    let D : AddCommGrpCat.{u} := (boundedSingularChains (boundedCWTop C)).X (degree i)
+    let f : {σ : I // σ ∈ S} → B := fun σ ↦
+      (TopCat.toSSet.obj (boundedSkeletonTop C N)).ιChainComplex
+        (R := boundedSingularCoefficient.{u})
+        (singularSimplexRestricted C N (degree i) σ.val (hσ i σ.val σ.property))
+        (coeff σ.val)
+    let g : B →+ D := ((singularSkeletonChainMap C N).f (degree i)).hom
+    change g (∑ σ ∈ S.attach, f σ) = z i
+    have hs : g (∑ σ ∈ S.attach, f σ) = ∑ σ ∈ S.attach, g (f σ) :=
+      map_sum g f S.attach
+    have hg : (∑ σ ∈ S.attach, g (f σ)) =
+        ∑ σ ∈ S.attach,
           (TopCat.toSSet.obj (boundedCWTop C)).ιChainComplex
-            (R := boundedSingularCoefficient.{u}) σ.val (a i σ.val) := by
-        apply Finset.sum_congr rfl
-        intro σ h
-        rw [singularSkeletonChainMap_generator, singularSimplexRestricted_map]
-      _ = ∑ σ ∈ (a i).support,
-          (TopCat.toSSet.obj (boundedCWTop C)).ιChainComplex
-            (R := boundedSingularCoefficient.{u}) σ (a i σ) :=
-        Finset.sum_attach _ _
-      _ = z i := (boundedSingularChain_expansion (boundedCWTop C) (degree i) (z i)).symm
+            (R := boundedSingularCoefficient.{u}) σ.val (coeff σ.val) := by
+      apply Finset.sum_congr rfl
+      intro σ h
+      have hgen := singularSkeletonChainMap_generator C N (degree i)
+        (singularSimplexRestricted C N (degree i) σ.val (hσ i σ.val σ.property))
+        (coeff σ.val)
+      have hproj := singularSimplexRestricted_map C N (degree i) σ.val
+        (hσ i σ.val σ.property)
+      exact hgen.trans (congrArg
+        (fun τ : I ↦ (TopCat.toSSet.obj (boundedCWTop C)).ιChainComplex
+          (R := boundedSingularCoefficient.{u}) τ (coeff σ.val)) hproj)
+    have hc : (∑ σ ∈ S.attach,
+        (TopCat.toSSet.obj (boundedCWTop C)).ιChainComplex
+          (R := boundedSingularCoefficient.{u}) σ.val (coeff σ.val)) = z i :=
+      (Finset.sum_attach S (fun σ : I ↦
+        (TopCat.toSSet.obj (boundedCWTop C)).ιChainComplex
+          (R := boundedSingularCoefficient.{u}) σ (coeff σ))).trans
+        (boundedSingularChain_expansion (boundedCWTop C) (degree i) (z i)).symm
+    exact hs.trans (hg.trans hc)
 
 /-- A finite family of actual chains, even in different degrees, lifts to one
 actual skeleton. The same inclusion reflects all cycle and boundary equations.
