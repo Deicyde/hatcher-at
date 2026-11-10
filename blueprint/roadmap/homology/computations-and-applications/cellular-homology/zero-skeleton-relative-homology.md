@@ -2,6 +2,9 @@
 article_id: af_70bc68672d03197021c19891
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.zeroSkeletonRelativeHomology, Hatcher.ClassicalCW.zeroSkeletonPair, Hatcher.ClassicalCW.zeroSkeletonOrdinaryRelativeChainIso, Hatcher.ClassicalCW.zeroSkeletonOrdinaryRelativeChainIso_hom, Hatcher.ClassicalCW.zeroSkeletonOrdinaryRelativeHomologyIso, Hatcher.ClassicalCW.zeroSkeletonOrdinaryRelativeHomologyIso_hom, Hatcher.ClassicalCW.zeroCellPoint, Hatcher.ClassicalCW.zeroCellPoint_val, Hatcher.ClassicalCW.zeroCellRelativeClass, Hatcher.ClassicalCW.zeroSkeletonRelativeHomologyIso, Hatcher.ClassicalCW.zeroSkeletonRelativeHomologyIso_inv_single, Hatcher.ClassicalCW.zeroSkeletonRelativeHomology_isZero
 ---
 
 # The zero-skeleton pair has the free group on its vertices
