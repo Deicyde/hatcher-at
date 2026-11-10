@@ -36,7 +36,7 @@ The intended formal comparison records its forward-map equation.
 
 ## Adopted scope
 
-The [15-leaf milestone](../roadmap/homology/computations-and-applications/cellular-homology/README.md)
+The [17-leaf milestone](../roadmap/homology/computations-and-applications/cellular-homology/README.md)
 ends with this proof, before the immediate applications on printed page 140.
 It includes empty, zero-dimensional, infinite-cell and infinite-dimensional
 CW complexes. Later applications and the attaching-map degree calculation

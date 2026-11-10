@@ -2197,6 +2197,18 @@
       "source_units": [
         "hatcher-2-2-cellular-homology"
       ]
+    },
+    "af_72fa8d9ce5a45b5bccf4b17b": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/sphere-space-universe-chain-lift.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_44f4c1e406da249186c75b97": {
+      "path": "roadmap/homology/computations-and-applications/cellular-homology/sphere-lifted-ordered-fundamental-class.md",
+      "source_units": [
+        "hatcher-2-2-cellular-homology"
+      ]
     }
   }
 }

@@ -18,9 +18,9 @@ local-degree continuation through Proposition 2.30 is complete in twenty
 leaves. The completed thirty-one-leaf degree-realization and suspension
 milestone continues through Proposition 2.33 and its pole observation,
 including both-pole realization of every integer local degree. The next
-fifteen-leaf cellular-homology milestone covers Lemma 2.34, the cellular
-complex and Theorem 2.35. These new leaves are unproved; later material
-remains queued.
+seventeen-leaf cellular-homology milestone covers Lemma 2.34, the cellular
+complex and Theorem 2.35, including the explicit sphere generator bridges.
+The linked articles record current progress; later material remains queued.
 
 Given excision and the long exact sequence, homology becomes computable. From
 `Hₙ(Sⁿ) ≅ ℤ` comes the degree of a map `Sⁿ → Sⁿ`, with its local formula as a

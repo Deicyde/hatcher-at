@@ -8,7 +8,7 @@ Formalize selected results from Hatcher's *Algebraic Topology* in Lean 4 on
 Mathlib, working outward from the fundamental group. Chapters follow the
 book's order; fine leaves expose the actual source objects and maps.
 
-The completed scope contains 299 formalizable leaves: 281 proved
+The completed scope contains 307 formalizable leaves: 289 proved
 locally and 18 supplied by pinned Mathlib. It includes the selected
 fundamental-group spines, homology and excision applications, degree
 foundations, and all twenty local-degree leaves through Proposition 2.30.
@@ -19,9 +19,10 @@ proves suspension invariance, and realizes arbitrary local degrees at both
 suspension poles on printed pages 136–137.
 
 The next [cellular-homology milestone](homology/computations-and-applications/cellular-homology/README.md)
-adds fifteen planned leaves through Lemma 2.34 and Theorem 2.35 on printed
-pages 137–140. The selected DAG therefore has 314 formalizable leaves,
-with the previous 299 completed.
+contains seventeen formalizable leaves through Lemma 2.34 and Theorem 2.35 on
+printed pages 137–140, including two explicit sphere generator bridges. The
+selected DAG therefore has 316 formalizable leaves, with 307 completed and
+nine planned on this source snapshot.
 
 The [coverage contract](../coverage/README.md) maps the whole main-line source
 and retains thirteen queued areas; it does not call them exclusions or

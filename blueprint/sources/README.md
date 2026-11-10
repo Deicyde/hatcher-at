@@ -33,7 +33,8 @@ The project formalizes results from a single reference.
   2.34, the cellular complex and Theorem 2.35 on printed pages 137–140.
 - [Cellular-homology implementation specification](cellular-homology-implementation.md)
   fixes actual skeleta and cell generators, empty cases, finite-support
-  chain lifting and the canonical comparison for the fifteen planned leaves.
+  chain lifting, the canonical comparison and two sphere generator bridges
+  across seventeen formalizable leaves.
 - [Hatcher Appendix Proposition A.5](hatcher-appendix-a5.md) records the
   regular-neighborhood deformation retraction and intersection identity used
   by CW-subcomplex excision.

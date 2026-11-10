@@ -37,6 +37,8 @@ across universe lifts when needed.
 - [Double simplex sphere homeomorphism](../post-excision-applications/double-simplex-sphere-homeomorphism.md)
 - [Reduced positive degree comparison](../../simplicial-and-singular/relative-homology/reduced-positive-degree-comparison.md)
 
+- [The ordered sphere generator lifts with its defining cycle](sphere-lifted-ordered-fundamental-class.md)
+
 ## Sources
 
 - [Hatcher §2.2, cellular homology, printed pages 137–140](../../../../sources/hatcher-2-2-cellular.md#lemma-234)

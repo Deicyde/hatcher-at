@@ -5,8 +5,8 @@ Topology*, built on Mathlib. The book's text is not redistributed here.
 
 The main-line chapters and numbered sections are mapped in the
 [coverage contract](blueprint/coverage/README.md), not claimed fully
-formalized. The selected roadmap now has 314 formalizable leaves: 299 are
-complete (281 proved locally and 18 supplied by pinned Mathlib), and 15 are
+formalized. The selected roadmap now has 316 formalizable leaves: 307 are
+complete (289 proved locally and 18 supplied by pinned Mathlib), and 9 are
 planned for cellular homology. The completed
 scope includes the selected fundamental-group spines, homology, excision and
 quotient applications, degree foundations, all twenty local-degree leaves
@@ -19,8 +19,8 @@ both suspension poles. All thirty-one leaves are complete, including actual
 geometric pinch maps, integer circle powers, the natural suspension boundary,
 and every-isolation-witness local-degree equalities.
 The next [cellular-homology milestone](blueprint/roadmap/homology/computations-and-applications/cellular-homology/README.md)
-covers Lemma 2.34, the cellular complex and Theorem 2.35 in fifteen unproved
-leaves. Thirteen residual source areas remain queued; lettered additional
+covers Lemma 2.34, the cellular complex and Theorem 2.35 in seventeen formalizable
+leaves, including the two explicit sphere generator bridges. Thirteen residual source areas remain queued; lettered additional
 topics and exercises remain outside scope.
 
 [Browse the published formalization blueprint](https://deicyde.github.io/hatcher-at/)

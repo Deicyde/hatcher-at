@@ -9,7 +9,8 @@ skeleta, vanishing above their dimension, and stability of their inclusion
 maps. The cellular complex uses those actual relative groups and the pair
 connecting maps; its homology agrees with ordinary singular homology.
 
-This milestone has 15 planned formalizable leaves. None is marked proved.
+This milestone has 17 formalizable leaves: eight are verified and nine remain
+planned. The linked articles record verified formalization progress.
 Every final statement covers arbitrary classical CW complexes, including
 empty complexes, infinitely many cells and unbounded dimensions. Put X⁻¹ = ∅;
 in implementation, strict skeleton indices avoid natural subtraction.
@@ -22,6 +23,8 @@ in implementation, strict skeleton indices avoid natural subtraction.
 - [A successive skeleton quotient is the wedge of its cells](skeleton-quotient-wedge.md)
 - [Every pointed sphere is a good pair](sphere-point-good-pair.md)
 - [The zero-skeleton pair has the free group on its vertices](zero-skeleton-relative-homology.md)
+- [Canonical space-universe lifting preserves augmented sphere chains](sphere-space-universe-chain-lift.md)
+- [The ordered sphere generator lifts with its defining cycle](sphere-lifted-ordered-fundamental-class.md)
 - [Positive-dimensional skeletal pairs have the cell basis](positive-skeleton-relative-homology.md)
 - [Skeletal relative homology is concentrated in the cell dimension](skeleton-relative-homology.md)
 

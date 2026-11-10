@@ -5,8 +5,8 @@ Topology* (Cambridge University Press, 2002), built on Mathlib. Source notes
 cite the official book without redistributing its text.
 
 Every main-line chapter and numbered section is mapped. The selected roadmap
-contains 314 formalizable leaves: 299 are complete (281 proved locally and
-18 supplied by exact pinned Mathlib declarations), and 15 are planned. The twenty-leaf
+contains 316 formalizable leaves: 307 are complete (289 proved locally and
+18 supplied by exact pinned Mathlib declarations), and 9 are planned. The twenty-leaf
 [local-degree milestone](roadmap/homology/computations-and-applications/local-degree/README.md)
 is complete through Proposition 2.30, including the geometric finite-puncture
 coproduct, projection matrix, orientation sum, and the empty finite fiber.
@@ -18,7 +18,7 @@ integer degrees in sphere dimension at least two. Its germ-invariance and
 singleton-fiber comparisons, geometric constructions and degree consequences
 are formalized; all thirty-one leaves are complete. The new
 [cellular-homology milestone](roadmap/homology/computations-and-applications/cellular-homology/README.md)
-plans Lemma 2.34, the cellular complex and Theorem 2.35 in fifteen leaves.
+plans Lemma 2.34, the cellular complex and Theorem 2.35 in seventeen leaves.
 Thirteen residual source areas remain queued, not excluded or claimed
 externally blocked.
 

@@ -20,9 +20,10 @@ additional leaves, all formalized locally and complete. The local-degree
 continuation through Proposition 2.30 has twenty complete leaves. The
 thirty-one-leaf degree-realization and suspension milestone covers Examples
 2.31–2.32, Proposition 2.33, and the pole local-degree consequence. All
-thirty-one leaves are complete. The new fifteen-leaf cellular-homology
+thirty-one leaves are complete. The seventeen-leaf cellular-homology
 milestone continues through Lemma 2.34 and Theorem 2.35 on printed pages
-137–140; its leaves are unproved and the later material stays queued.
+137–140; its linked articles record current progress, and the later material
+stays queued.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -69,7 +70,7 @@ suspension boundary, and its pole consequences into thirty-one complete
 leaves.
 The [cellular-homology milestone](computations-and-applications/cellular-homology/README.md)
 now plans the skeletal calculation, finite-chain passage, cellular complex
-and canonical singular comparison in fifteen leaves. Later applications,
+and canonical singular comparison in seventeen leaves. Later applications,
 Mayer–Vietoris topics and homology with coefficients remain queued.
 Invariance of domain belongs to out-of-scope Additional Topic §2.B.
 
@@ -84,7 +85,8 @@ pinned library. The completed local excision milestone supplies the main input
 used by the Mayer–Vietoris branches; sphere homology is formalized locally and
 degree and local degree are formalized locally rather than claimed as
 upstream coverage. Degree realization and suspension are complete locally;
-the fifteen-leaf cellular-homology continuation is planned next.
+the seventeen-leaf cellular-homology continuation records the current
+skeletal calculation and its two sphere generator bridges.
 
 ## Sections
 

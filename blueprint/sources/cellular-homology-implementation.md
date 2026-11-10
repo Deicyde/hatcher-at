@@ -2,7 +2,7 @@
 
 This is a project-authored specification for the
 [Hatcher source passage](hatcher-2-2-cellular.md), not a literary source.
-It fixes the models and completeness conditions of the 15-leaf milestone.
+It fixes the models and completeness conditions of the 17-leaf milestone.
 
 ## Actual skeleta and cells
 
@@ -36,6 +36,30 @@ convenience wrappers are universe zero; their actual lifted chain-generator
 transport must be proved before the general-universe result is completed.
 Do not impose finiteness or a smaller cell-index universe to avoid that proof.
 No arbitrary-coefficient theorem is claimed by this selected milestone.
+
+## Sphere space-universe lift
+
+The two sphere generator bridges provide model support for the same
+Lemma 2.34 calculation. They add no later book passage. With the lifted
+integer coefficient object in the universe-u abelian-group category held
+fixed, the [canonical augmented sphere-chain lift](../roadmap/homology/computations-and-applications/cellular-homology/sphere-space-universe-chain-lift.md)
+changes the space model from universe zero to universe u. It uses the actual
+coordinate homeomorphism and actual singular-simplex equivalences, maps each
+coefficient-copy inclusion to that lifted simplex, and is the identity in
+augmentation degree zero. The maps and their compatibility are constructed;
+no given chain isomorphism or smaller index universe is allowed.
+
+## Lifted ordered sphere generator
+
+The [lifted ordered sphere generator](../roadmap/homology/computations-and-applications/cellular-homology/sphere-lifted-ordered-fundamental-class.md)
+retains the first-minus-second cycle from the accepted double-simplex sphere
+model of Example 2.23 on printed page 125. Its coefficient category is already
+generic. For each positive sphere dimension, transport that actual cycle
+through the canonical augmented chain lift, prove the literal difference and
+homology-class equations, and prove its class morphism is an isomorphism.
+This fixed orientation then passes through the actual disk/cone quotient and
+cell characteristic maps in the positive skeletal relative-homology result.
+Neither an arbitrary sphere isomorphism nor a supplied generator replaces it.
 
 ## Infinite-dimensional passage
 
