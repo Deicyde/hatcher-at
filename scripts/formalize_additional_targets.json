@@ -185,6 +185,13 @@
         "Hatcher.ClassicalCW.skeletalCellFundamentalClass_zero",
         "Hatcher.ClassicalCW.skeletalCellFundamentalClass_succ"
       ]
+    },
+    {
+      "article_id": "af_86dafc67e2c6c67093b0e86f",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.skeletonStepHomologyStability"
+      ]
     }
   ]
 }
