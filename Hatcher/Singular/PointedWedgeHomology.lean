@@ -830,3 +830,65 @@ theorem positiveSkeletonRelativeHomology (k : ℕ) :
 end SkeletalHomology
 
 end Hatcher.ClassicalCW
+
+noncomputable section
+
+namespace Hatcher.ClassicalCW
+
+open CategoryTheory CategoryTheory.Limits _root_.Topology
+open Hatcher.Relative
+
+universe u
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+/-- The actual characteristic class in every cell dimension, including the
+ordinary characteristic-point class in dimension zero. -/
+noncomputable def skeletalCellFundamentalClass (n : ℕ)
+    (i : RelCWComplex.cell C n) :
+    (homologyFunctor (AddCommGrpCat.of.{u} (ULift.{u} ℤ)) n).obj
+      (skeletalStagePair C n) := by
+  cases n with
+  | zero =>
+      change (homologyFunctor (AddCommGrpCat.of.{u} (ULift.{u} ℤ)) 0).obj
+        (zeroSkeletonPair C)
+      exact zeroCellRelativeClass C i
+  | succ k => exact positiveSkeletonCellFundamentalClass C k i
+
+@[simp]
+theorem skeletalCellFundamentalClass_zero (i : RelCWComplex.cell C 0) :
+    skeletalCellFundamentalClass C 0 i = zeroCellRelativeClass C i := rfl
+
+@[simp]
+theorem skeletalCellFundamentalClass_succ (k : ℕ)
+    (i : RelCWComplex.cell C (k + 1)) :
+    skeletalCellFundamentalClass C (k + 1) i =
+      positiveSkeletonCellFundamentalClass C k i := rfl
+
+/-- Hatcher Lemma 2.34(a): ordinary skeletal relative homology in all degrees,
+with the standard vectors sent to the actual characteristic classes. -/
+theorem skeletonRelativeHomology (n : ℕ) :
+    (∀ k : ℕ, k ≠ n →
+      IsZero ((homologyFunctor (AddCommGrpCat.of.{u} (ULift.{u} ℤ)) k).obj
+        (skeletalStagePair C n))) ∧
+    ∃ E : (homologyFunctor (AddCommGrpCat.of.{u} (ULift.{u} ℤ)) n).obj
+          (skeletalStagePair C n) ≅
+        AddCommGrpCat.of.{u} (RelCWComplex.cell C n →₀ ℤ),
+      ∀ i : RelCWComplex.cell C n,
+        E.inv (Finsupp.single i 1) = skeletalCellFundamentalClass C n i := by
+  cases n with
+  | zero =>
+      obtain ⟨hz, E, hE⟩ := zeroSkeletonRelativeHomology C
+      refine ⟨?_, E, ?_⟩
+      · intro k hk
+        have hpos : 0 < k := by
+          cases k with
+          | zero => exact (hk rfl).elim
+          | succ k => exact Nat.zero_lt_succ k
+        exact hz k hpos
+      · intro i
+        exact hE i
+  | succ k => exact positiveSkeletonRelativeHomology C k
+
+end Hatcher.ClassicalCW
