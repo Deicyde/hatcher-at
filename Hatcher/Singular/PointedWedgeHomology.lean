@@ -297,9 +297,20 @@ private theorem positiveSkeletalPair_isGoodPair (k : ℕ)
     intro x
     apply Subtype.ext
     rfl
-  change IsGoodPair (TopPair.of f (IsEmbedding.inclusion Acopy.subset_complex)) at hgood
-  rw [hf] at hgood
-  exact hgood
+  let hF : IsEmbedding f := IsEmbedding.inclusion Acopy.subset_complex
+  have hG : IsEmbedding (skeletonLTInclusion C m) :=
+    (skeletalStagePair C m).isEmbedding_map
+  have hpairof : ∀ (a b : TopCat.of ↑(CWComplex.skeletonLT C (m : ℕ∞) : Set X) ⟶
+      TopCat.of ↑(CWComplex.skeletonLT C ((m + 1 : ℕ) : ℕ∞) : Set X))
+      (h₁ : IsEmbedding a) (h₂ : IsEmbedding b),
+      a = b → TopPair.of a h₁ = TopPair.of b h₂ := by
+    intro a b h₁ h₂ hab
+    cases hab
+    rfl
+  have hpair := hpairof f (skeletonLTInclusion C m) hF hG hf
+  change TopPair.of f hF = skeletalStagePair C m at hpair
+  change IsGoodPair (TopPair.of f hF) at hgood
+  exact hpair ▸ hgood
 
 end Skeleta
 
@@ -501,6 +512,7 @@ private noncomputable def positiveWedgeCellBasisIso (k : ℕ) :
       (Hatcher.Sphere.liftedOrderedSphereFundamentalClass_isIso.{u} k)) ≪≫
     positiveWedgeHomologyIso C k (k + 1)
 
+omit [T2Space X] in
 private theorem positiveWedgeCellBasisIso_ι (k : ℕ) (i : positiveSkeletalCell C k) :
     Sigma.ι (fun _ : positiveSkeletalCell C k => positiveCellCoefficient.{u}) i ≫
         (positiveWedgeCellBasisIso C k).hom =
@@ -770,11 +782,14 @@ private theorem positiveEmptySkeletalHomology_isZero (k j : ℕ)
   have hg : TopPair.Hom.fst (𝟙 P) = g ≫ P.map := by
     ext x
     exact (@IsEmpty.false _ hEmpty x).elim
-  have h := Hatcher.Relative.homologyFunctor_map_eq_zero_of_factors_through_subspace
-    (𝟙 P) g hg positiveCellCoefficient.{u} j
-  apply (IsZero.iff_id_eq_zero ((homologyFunctor positiveCellCoefficient.{u} j).obj P)).mpr
-  simpa only [Functor.map_id] using h
+  let F : TopPair.{u} ⥤ AddCommGrpCat.{u} := homologyFunctor positiveCellCoefficient.{u} j
+  have h : F.map (𝟙 P) = 0 :=
+    Hatcher.Relative.homologyFunctor_map_eq_zero_of_factors_through_subspace
+      (𝟙 P) g hg positiveCellCoefficient.{u} j
+  apply (IsZero.iff_id_eq_zero (F.obj P)).mpr
+  exact (F.map_id P).symm.trans h
 
+omit [T2Space X] in
 private theorem positiveEmptyFinsupp_isZero (k : ℕ) [IsEmpty (positiveSkeletalCell C k)] :
     IsZero (AddCommGrpCat.of.{u} (positiveSkeletalCell C k →₀ ℤ)) := by
   apply (IsZero.iff_id_eq_zero
