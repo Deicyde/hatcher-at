@@ -89,6 +89,14 @@
         "Hatcher.ClassicalCW.diskBoundaryPointQuotientIsoSphere_cylinder",
         "Hatcher.ClassicalCW.diskZeroPairIsoPointEmpty"
       ]
+    },
+    {
+      "article_id": "af_989591aa389447da1fa6d34d",
+      "module": "Hatcher.Sphere.PuncturedStereographic",
+      "declarations": [
+        "Hatcher.Sphere.sphere_pointedPair_isGoodPair",
+        "Hatcher.Sphere.sphereSingletonGoodPairData"
+      ]
     }
   ]
 }
