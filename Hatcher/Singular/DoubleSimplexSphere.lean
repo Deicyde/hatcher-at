@@ -869,3 +869,165 @@ theorem sphereAugmentedSpaceLiftIso_ι (d r : ℕ)
   sphereLiftXIso_ι d r s
 
 end Hatcher.Sphere
+
+noncomputable section
+
+namespace Hatcher.Sphere
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits
+open scoped Simplicial
+
+universe u
+
+private abbrev liftedOrderedSphereCoefficient : AddCommGrpCat.{u} :=
+  AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+
+private abbrev liftedOrderedSphereAugmentedComplex (k : ℕ) :
+    ChainComplex AddCommGrpCat.{u} ℕ :=
+  (Hatcher.Reduced.augmentedSingularChainComplexFunctor.{u}
+    liftedOrderedSphereCoefficient.{u}).obj (TopCat.sphere.{u} (k + 1))
+
+private noncomputable def liftedOrderedSphereReducedLiftIso (k : ℕ) :
+    (Hatcher.Reduced.homologyFunctor.{0} liftedOrderedSphereCoefficient.{u} (k + 1)).obj
+        (TopCat.sphere.{0} (k + 1)) ≅
+      (Hatcher.Reduced.homologyFunctor.{u} liftedOrderedSphereCoefficient.{u} (k + 1)).obj
+        (TopCat.sphere.{u} (k + 1)) :=
+  (HomologicalComplex.homologyFunctor AddCommGrpCat.{u}
+    (ComplexShape.down ℕ) (k + 2)).mapIso (sphereAugmentedSpaceLiftIso.{u} (k + 1))
+
+private noncomputable def liftedOrderedSphereChainMap (k : ℕ) :
+    (Hatcher.Reduced.augmentedSingularChainComplexFunctor.{0}
+      liftedOrderedSphereCoefficient.{u}).obj (Hatcher.Simplex.doubleSimplex (k + 1)) ⟶
+        liftedOrderedSphereAugmentedComplex.{u} k :=
+  Hatcher.Reduced.augmentedMap liftedOrderedSphereCoefficient.{u}
+      (Hatcher.Simplex.doubleSimplexIsoSphere (k + 1)).hom ≫
+    (sphereAugmentedSpaceLiftIso.{u} (k + 1)).hom
+
+/-- The actual first ordered double-simplex map, followed by the fixed sphere
+model and its canonical coordinate universe lift. -/
+noncomputable def liftedOrderedSphereFirstSimplex (k : ℕ) :
+    (TopCat.toSSet.obj (TopCat.sphere.{u} (k + 1))) _⦋k + 1⦌ :=
+  sphereSimplexLift.{u} (k + 1) (k + 1)
+    ((TopCat.toSSet.map (Hatcher.Simplex.doubleSimplexIsoSphere (k + 1)).hom).app
+      (.op ⦋k + 1⦌) (Hatcher.Simplex.doubleSimplexFirstSingularSimplex (k + 1)))
+
+/-- The actual second ordered double-simplex map with the same fixed transports. -/
+noncomputable def liftedOrderedSphereSecondSimplex (k : ℕ) :
+    (TopCat.toSSet.obj (TopCat.sphere.{u} (k + 1))) _⦋k + 1⦌ :=
+  sphereSimplexLift.{u} (k + 1) (k + 1)
+    ((TopCat.toSSet.map (Hatcher.Simplex.doubleSimplexIsoSphere (k + 1)).hom).app
+      (.op ⦋k + 1⦌) (Hatcher.Simplex.doubleSimplexSecondSingularSimplex (k + 1)))
+
+/-- The transported actual ordered cycle, with its coefficient-copy map retained. -/
+noncomputable def liftedOrderedSphereCycle (k : ℕ) :
+    liftedOrderedSphereCoefficient.{u} ⟶
+      (liftedOrderedSphereAugmentedComplex.{u} k).X (k + 2) :=
+  Hatcher.Simplex.doubleSimplexFundamentalCycle liftedOrderedSphereCoefficient.{u} (k + 1) ≫
+    (liftedOrderedSphereChainMap.{u} k).f (k + 2)
+
+/-- The cycle is literally the first simplex inclusion minus the second. -/
+theorem liftedOrderedSphereCycle_eq_difference (k : ℕ) :
+    liftedOrderedSphereCycle.{u} k =
+      (TopCat.toSSet.obj (TopCat.sphere.{u} (k + 1))).ιChainComplex
+          (R := AddCommGrpCat.of.{u} (ULift.{u} ℤ))
+          (liftedOrderedSphereFirstSimplex.{u} k) -
+        (TopCat.toSSet.obj (TopCat.sphere.{u} (k + 1))).ιChainComplex
+          (R := AddCommGrpCat.of.{u} (ULift.{u} ℤ))
+          (liftedOrderedSphereSecondSimplex.{u} k) := by
+  let R : AddCommGrpCat.{u} := liftedOrderedSphereCoefficient.{u}
+  let S : SSet.{0} := TopCat.toSSet.obj (Hatcher.Simplex.doubleSimplex (k + 1))
+  let T : SSet.{0} := TopCat.toSSet.obj (TopCat.sphere.{0} (k + 1))
+  let U : SSet.{u} := TopCat.toSSet.obj (TopCat.sphere.{u} (k + 1))
+  let f : S ⟶ T :=
+    TopCat.toSSet.map (Hatcher.Simplex.doubleSimplexIsoSphere (k + 1)).hom
+  let Γ := sphereAugmentedSpaceLiftIso.{u} (k + 1)
+  let first : S _⦋k + 1⦌ := Hatcher.Simplex.doubleSimplexFirstSingularSimplex (k + 1)
+  let second : S _⦋k + 1⦌ := Hatcher.Simplex.doubleSimplexSecondSingularSimplex (k + 1)
+  have hfirst : S.ιChainComplex (R := R) first ≫
+      (SSet.chainComplexMap f R).f (k + 1) =
+    T.ιChainComplex (R := R) (f.app (.op ⦋k + 1⦌) first) :=
+    SSet.ι_chainComplexMap_f (X := S) (Y := T) (f := f) (R := R) first
+  have hsecond : S.ιChainComplex (R := R) second ≫
+      (SSet.chainComplexMap f R).f (k + 1) =
+    T.ιChainComplex (R := R) (f.app (.op ⦋k + 1⦌) second) :=
+    SSet.ι_chainComplexMap_f (X := S) (Y := T) (f := f) (R := R) second
+  have hfirstLift := sphereAugmentedSpaceLiftIso_ι.{u} (k + 1) (k + 1)
+    (f.app (.op ⦋k + 1⦌) first)
+  have hsecondLift := sphereAugmentedSpaceLiftIso_ι.{u} (k + 1) (k + 1)
+    (f.app (.op ⦋k + 1⦌) second)
+  change (S.ιChainComplex (R := R) first - S.ιChainComplex (R := R) second) ≫
+      ((SSet.chainComplexMap f R).f (k + 1) ≫ Γ.hom.f (k + 2)) =
+    U.ιChainComplex (R := R)
+        (sphereSimplexLift.{u} (k + 1) (k + 1) (f.app (.op ⦋k + 1⦌) first)) -
+      U.ιChainComplex (R := R)
+        (sphereSimplexLift.{u} (k + 1) (k + 1) (f.app (.op ⦋k + 1⦌) second))
+  rw [Preadditive.sub_comp, ← Category.assoc, hfirst, hfirstLift,
+    ← Category.assoc, hsecond, hsecondLift]
+
+/-- Differential compatibility transports the proved ordered cycle equation. -/
+theorem liftedOrderedSphereCycle_d (k : ℕ) :
+    liftedOrderedSphereCycle.{u} k ≫
+        (liftedOrderedSphereAugmentedComplex.{u} k).d (k + 2) (k + 1) = 0 := by
+  let R : AddCommGrpCat.{u} := liftedOrderedSphereCoefficient.{u}
+  let F := liftedOrderedSphereChainMap.{u} k
+  change (Hatcher.Simplex.doubleSimplexFundamentalCycle R (k + 1) ≫
+    F.f (k + 2)) ≫ _ = 0
+  rw [Category.assoc, F.comm, ← Category.assoc,
+    Hatcher.Simplex.doubleSimplexFundamentalCycle_d R (k + 1), zero_comp]
+
+/-- The accepted ordered sphere class transported through the actual augmented
+space-universe isomorphism. This definition fixes the orientation. -/
+noncomputable def liftedOrderedSphereFundamentalClass (k : ℕ) :
+    AddCommGrpCat.of.{u} (ULift.{u} ℤ) ⟶
+      (Hatcher.Reduced.homologyFunctor.{u}
+        (AddCommGrpCat.of.{u} (ULift.{u} ℤ)) (k + 1)).obj
+          (TopCat.sphere.{u} (k + 1)) :=
+  Hatcher.Simplex.doubleSimplexSphereFundamentalClass liftedOrderedSphereCoefficient.{u}
+      (k + 1) ≫
+    (liftedOrderedSphereReducedLiftIso.{u} k).hom
+
+/-- The transported orientation is the class of the exact lifted ordered cycle. -/
+theorem liftedOrderedSphereFundamentalClass_eq_cycle (k : ℕ) :
+    liftedOrderedSphereFundamentalClass.{u} k =
+      (liftedOrderedSphereAugmentedComplex.{u} k).liftCycles
+          (liftedOrderedSphereCycle.{u} k) (k + 1) (by simp)
+          (liftedOrderedSphereCycle_d.{u} k) ≫
+        (liftedOrderedSphereAugmentedComplex.{u} k).homologyπ (k + 2) := by
+  let R : AddCommGrpCat.{u} := liftedOrderedSphereCoefficient.{u}
+  let K : ChainComplex AddCommGrpCat.{u} ℕ :=
+    (Hatcher.Reduced.augmentedSingularChainComplexFunctor.{0} R).obj
+      (Hatcher.Simplex.doubleSimplex (k + 1))
+  let L : ChainComplex AddCommGrpCat.{u} ℕ := liftedOrderedSphereAugmentedComplex.{u} k
+  let F : K ⟶ L := liftedOrderedSphereChainMap.{u} k
+  let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u}
+    (ComplexShape.down ℕ) (k + 2)
+  change (Hatcher.Simplex.doubleSimplexFundamentalClass R (k + 1) ≫
+    H.map (Hatcher.Reduced.augmentedMap R
+      (Hatcher.Simplex.doubleSimplexIsoSphere (k + 1)).hom)) ≫
+        H.map (sphereAugmentedSpaceLiftIso.{u} (k + 1)).hom = _
+  rw [Category.assoc, ← Functor.map_comp]
+  change (K.liftCycles
+      (Hatcher.Simplex.doubleSimplexFundamentalCycle R (k + 1))
+      (k + 1) (by simp) (Hatcher.Simplex.doubleSimplexFundamentalCycle_d R (k + 1)) ≫
+        K.homologyπ (k + 2)) ≫ HomologicalComplex.homologyMap F (k + 2) = _
+  rw [Category.assoc,
+    HomologicalComplex.homologyπ_naturality (φ := F) (i := k + 2),
+    ← Category.assoc]
+  have h := HomologicalComplex.liftCycles_comp_cyclesMap
+    (φ := F) (i := k + 2)
+    (Hatcher.Simplex.doubleSimplexFundamentalCycle R (k + 1))
+    (k + 1) (by simp) (Hatcher.Simplex.doubleSimplexFundamentalCycle_d R (k + 1))
+  exact congrArg (fun g : R ⟶ L.cycles (k + 2) ↦ g ≫ L.homologyπ (k + 2)) h
+
+/-- The fixed ordered difference class generates reduced sphere homology in
+every space universe and every positive sphere dimension. -/
+theorem liftedOrderedSphereFundamentalClass_isIso (k : ℕ) :
+    IsIso (liftedOrderedSphereFundamentalClass.{u} k) := by
+  change IsIso
+    (Hatcher.Simplex.doubleSimplexSphereFundamentalClass liftedOrderedSphereCoefficient.{u}
+        (k + 1) ≫ (liftedOrderedSphereReducedLiftIso.{u} k).hom)
+  exact IsIso.comp_isIso'
+    (Hatcher.Simplex.doubleSimplexSphereFundamentalClass_isIso
+      liftedOrderedSphereCoefficient.{u} (k + 1)) (by infer_instance)
+
+end Hatcher.Sphere
