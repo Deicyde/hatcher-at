@@ -32,7 +32,9 @@ def main() -> None:
     args = parser.parse_args()
     if not re.fullmatch(r"af_[0-9a-f]{24}", args.article_id):
         parser.error("article-id must be a durable Autoform article ID")
-    lean_name = r"[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*"
+    # Lean declaration names can include Unicode letters such as ι and subscripts.
+    # Keep each component an identifier so the generated probes cannot inject code.
+    lean_name = r"(?:[^\W\d]|_)[\w]*(?:\.(?:[^\W\d]|_)[\w]*)*"
     for value in [args.module, *args.declaration]:
         if not re.fullmatch(lean_name, value):
             parser.error("module and declaration must be qualified Lean names")
