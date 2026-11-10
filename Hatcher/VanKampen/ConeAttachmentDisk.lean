@@ -1575,8 +1575,8 @@ variable {X : Type u} [TopologicalSpace X] [T2Space X]
 
 /-- The actual successor-stage pair, with its literal skeleton inclusion. -/
 noncomputable def skeletalStagePair (n : ℕ) : TopPair.{u} := by
-  let h : (RelCWComplex.skeletonLT C n : Set X) ⊆
-      (RelCWComplex.skeletonLT C (n + 1) : Set X) :=
+  let h : (RelCWComplex.skeletonLT C (n : ℕ∞) : Set X) ⊆
+      (RelCWComplex.skeletonLT C ((n + 1 : ℕ) : ℕ∞) : Set X) :=
     RelCWComplex.skeletonLT_mono (C := C) (by norm_num)
   exact TopPair.of (skeletonLTInclusion C n)
     (show IsEmbedding (ContinuousMap.inclusion h) from IsEmbedding.inclusion h)
@@ -1693,7 +1693,7 @@ private def skeletalStageCellToWedge (k : ℕ)
             continuous_uliftUp)))
 
 private def skeletalStageOldToWedge (k : ℕ) :
-    C(↑(RelCWComplex.skeletonLT C (k + 1) : Set X), skeletalStageWedge C k) :=
+    C(↑(RelCWComplex.skeletonLT C ((k + 1 : ℕ) : ℕ∞) : Set X), skeletalStageWedge C k) :=
   ⟨fun _ ↦ Hatcher.PointedWedge.basepoint (skeletalStagePoles C k), continuous_const⟩
 
 private theorem skeletalStageToWedge_boundary (k : ℕ)
@@ -1731,14 +1731,14 @@ private theorem skeletalStageToWedge_boundary (k : ℕ)
   exact (Hatcher.PointedWedge.inclusion_basepoint (skeletalStagePoles C k) i).symm
 
 private noncomputable def skeletalStageCollapseToWedge (k : ℕ) :
-    C(↑(RelCWComplex.skeletonLT C ((k + 1) + 1) : Set X),
+    C(↑(RelCWComplex.skeletonLT C (((k + 1) + 1 : ℕ) : ℕ∞) : Set X),
       skeletalStageWedge C k) :=
   skeletonLTStepDesc C (k + 1)
     (skeletalStageOldToWedge C k) (skeletalStageCellToWedge C k)
     (skeletalStageToWedge_boundary C k)
 
 private theorem skeletalStageCollapseToWedge_old (k : ℕ)
-    (a : ↑(RelCWComplex.skeletonLT C (k + 1) : Set X)) :
+    (a : ↑(RelCWComplex.skeletonLT C ((k + 1 : ℕ) : ℕ∞) : Set X)) :
     skeletalStageCollapseToWedge C k (skeletonLTStepOldMap C (k + 1) a) =
       Hatcher.PointedWedge.basepoint (skeletalStagePoles C k) :=
   skeletonLTStepDesc_old_apply C (k + 1)
@@ -1785,7 +1785,7 @@ private theorem skeletalStageWedgeForward_point (k : ℕ) :
   ConcreteCategory.congr_hom (skeletalStageWedgeForward_pointInclusion C k) PUnit.unit
 
 private theorem skeletalStageWedgeForward_old (k : ℕ)
-    (a : ↑(RelCWComplex.skeletonLT C (k + 1) : Set X)) :
+    (a : ↑(RelCWComplex.skeletonLT C ((k + 1 : ℕ) : ℕ∞) : Set X)) :
     skeletalStageWedgeForward C k
         (pointQuotientProjection (skeletalStagePair C (k + 1))
           (skeletonLTStepOldMap C (k + 1) a)) =
@@ -1928,7 +1928,7 @@ private theorem skeletalStageWedgeInverse_forward (k : ℕ) :
     exact h.trans (congrArg (Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i) hi)
 
 private theorem skeletalStageQuotient_old_point (k : ℕ)
-    (a : ↑(RelCWComplex.skeletonLT C (k + 1) : Set X)) :
+    (a : ↑(RelCWComplex.skeletonLT C ((k + 1 : ℕ) : ℕ∞) : Set X)) :
     pointQuotientProjection (skeletalStagePair C (k + 1))
         (skeletonLTStepOldMap C (k + 1) a) =
       pointQuotientPoint (skeletalStagePair C (k + 1)) := by
@@ -1955,7 +1955,7 @@ private theorem skeletalStageWedgeForward_inverse (k : ℕ) :
     rcases y with a | ⟨i, z⟩
     · change skeletonLTStepOldMap C (k + 1) a = b at hy
       subst b
-      rw [skeletalStageWedgeForward_old, skeletalStageWedgeInverse_point]
+      rw [skeletalStageWedgeForward_old C k a, skeletalStageWedgeInverse_point C k]
       exact (skeletalStageQuotient_old_point C k a).symm
     · change skeletonLTStepClosedCellMap C (k + 1) i z = b at hy
       subst b
