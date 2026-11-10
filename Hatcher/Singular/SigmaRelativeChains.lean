@@ -1,3 +1,5 @@
+import Hatcher.Appendix.CompactSubspaceFiniteSubcomplex
+import Mathlib.Geometry.Convex.ConvexSpace.CompactSpaceStdSimplex
 import Hatcher.Appendix.SuccessorSkeletonQuotient
 import Mathlib.Algebra.Category.ModuleCat.Colimits
 import Hatcher.Singular.SigmaPointedPair
@@ -864,5 +866,324 @@ theorem zeroSkeletonRelativeHomology :
         E.inv (Finsupp.single i 1) = zeroCellRelativeClass C i :=
   ⟨zeroSkeletonRelativeHomology_isZero C,
     zeroSkeletonRelativeHomologyIso C, zeroSkeletonRelativeHomologyIso_inv_single C⟩
+
+end Hatcher.ClassicalCW
+
+noncomputable section
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
+open scoped Simplicial
+
+universe u v
+
+private abbrev boundedSingularCoefficient : AddCommGrpCat.{u} :=
+  AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+
+private abbrev boundedSingularChains (Y : TopCat.{u}) :
+    ChainComplex AddCommGrpCat.{u} ℕ :=
+  ((singularChainComplexFunctor AddCommGrpCat.{u}).obj
+    boundedSingularCoefficient.{u}).obj Y
+
+/-- Construct finite-support coordinates from the two actual colimit cofans. -/
+private noncomputable def singularChainFinsuppIso (Y : TopCat.{u}) (n : ℕ) :
+    AddCommGrpCat.of.{u}
+        ((TopCat.toSSet.obj Y).obj (.op ⦋n⦌) →₀ ULift.{u} ℤ) ≅
+      (boundedSingularChains Y).X n :=
+  let S := TopCat.toSSet.obj Y
+  let F := forget₂ (ModuleCat.{u} ℤ) AddCommGrpCat.{u}
+  let cofan := F.mapCocone
+    (ModuleCat.finsuppCocone ℤ (ULift.{u} ℤ) (S.obj (.op ⦋n⦌)))
+  let hc : IsColimit cofan := isColimitOfPreserves F
+    (ModuleCat.finsuppCoconeIsColimit ℤ (ULift.{u} ℤ) (S.obj (.op ⦋n⦌)))
+  hc.coconePointUniqueUpToIso
+    (S.isColimitChainComplexXCofan boundedSingularCoefficient.{u} n)
+
+private theorem singularChainFinsuppIso_single (Y : TopCat.{u}) (n : ℕ)
+    (σ : (TopCat.toSSet.obj Y).obj (.op ⦋n⦌)) (a : ULift.{u} ℤ) :
+    (singularChainFinsuppIso Y n).hom (Finsupp.single σ a) =
+      (TopCat.toSSet.obj Y).ιChainComplex
+        (R := boundedSingularCoefficient.{u}) σ a := by
+  let S := TopCat.toSSet.obj Y
+  let F := forget₂ (ModuleCat.{u} ℤ) AddCommGrpCat.{u}
+  have h := IsColimit.comp_coconePointUniqueUpToIso_hom
+    (isColimitOfPreserves F
+      (ModuleCat.finsuppCoconeIsColimit ℤ (ULift.{u} ℤ) (S.obj (.op ⦋n⦌))))
+    (S.isColimitChainComplexXCofan boundedSingularCoefficient.{u} n)
+    (Discrete.mk σ)
+  exact ConcreteCategory.congr_hom h a
+
+private theorem boundedSingularChain_expansion (Y : TopCat.{u}) (n : ℕ)
+    (z : (boundedSingularChains Y).X n) :
+    z = ∑ σ ∈ ((singularChainFinsuppIso Y n).inv z).support,
+      (TopCat.toSSet.obj Y).ιChainComplex
+        (R := boundedSingularCoefficient.{u}) σ
+        ((singularChainFinsuppIso Y n).inv z σ) := by
+  classical
+  let E := singularChainFinsuppIso Y n
+  let a := E.inv z
+  have ha : (∑ σ ∈ a.support, Finsupp.single σ (a σ)) = a := by
+    simpa only [Finsupp.sum] using Finsupp.sum_single a
+  have hz : E.hom a = z := ConcreteCategory.congr_hom E.inv_hom_id z
+  calc
+    z = E.hom a := hz.symm
+    _ = E.hom (∑ σ ∈ a.support, Finsupp.single σ (a σ)) :=
+      congrArg E.hom ha.symm
+    _ = ∑ σ ∈ a.support, E.hom (Finsupp.single σ (a σ)) :=
+      map_sum E.hom.hom (fun σ ↦ Finsupp.single σ (a σ)) a.support
+    _ = ∑ σ ∈ a.support,
+        (TopCat.toSSet.obj Y).ιChainComplex
+          (R := boundedSingularCoefficient.{u}) σ (a σ) := by
+      apply Finset.sum_congr rfl
+      intro σ hσ
+      exact singularChainFinsuppIso_single Y n σ (a σ)
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+private abbrev boundedCWTop : TopCat.{u} := TopCat.of ↑C
+
+private abbrev boundedSkeletonTop (N : ℕ) : TopCat.{u} :=
+  TopCat.of ↑(CWComplex.skeleton C (N : ℕ∞) : Set X)
+
+/-- The literal inclusion of a finite-dimensional stage into the whole CW complex. -/
+noncomputable def singularSkeletonInclusion (N : ℕ) :
+    TopCat.of ↑(CWComplex.skeleton C (N : ℕ∞) : Set X) ⟶ TopCat.of ↑C :=
+  TopCat.ofHom
+    (ContinuousMap.inclusion (CWComplex.skeleton C (N : ℕ∞)).subset_complex)
+
+/-- The actual ordinary integral singular-chain map of the skeleton inclusion. -/
+noncomputable def singularSkeletonChainMap (N : ℕ) :
+    boundedSingularChains (boundedSkeletonTop C N) ⟶
+      boundedSingularChains (boundedCWTop C) :=
+  ((singularChainComplexFunctor AddCommGrpCat.{u}).obj
+    boundedSingularCoefficient.{u}).map (singularSkeletonInclusion C N)
+
+/-- The actual inclusion map is injective in every singular degree. -/
+theorem singularSkeletonChainMap_injective (N k : ℕ) :
+    Function.Injective ((singularSkeletonChainMap C N).f k) := by
+  have hi : Function.Injective (singularSkeletonInclusion C N) := by
+    intro a b h
+    apply Subtype.ext
+    exact congrArg (fun x : ↑C ↦ x.val) h
+  letI : Mono (singularSkeletonInclusion C N) :=
+    (TopCat.mono_iff_injective _).mpr hi
+  letI : Mono (singularSkeletonChainMap C N) := by
+    change Mono (((singularChainComplexFunctor AddCommGrpCat.{u}).obj
+      boundedSingularCoefficient.{u}).map (singularSkeletonInclusion C N))
+    infer_instance
+  have hm : Mono ((singularSkeletonChainMap C N).f k) := inferInstance
+  exact (AddCommGrpCat.mono_iff_injective _).mp hm
+
+/-- Every differential equation after inclusion already holds in the skeleton. -/
+theorem singularSkeletonChainMap_boundary_iff (N k l : ℕ)
+    (w : (boundedSingularChains (boundedSkeletonTop C N)).X k)
+    (z : (boundedSingularChains (boundedSkeletonTop C N)).X l) :
+    (boundedSingularChains (boundedCWTop C)).d k l
+        ((singularSkeletonChainMap C N).f k w) =
+      (singularSkeletonChainMap C N).f l z ↔
+    (boundedSingularChains (boundedSkeletonTop C N)).d k l w = z := by
+  have h := ConcreteCategory.congr_hom ((singularSkeletonChainMap C N).comm k l) w
+  change (boundedSingularChains (boundedCWTop C)).d k l
+      ((singularSkeletonChainMap C N).f k w) =
+    (singularSkeletonChainMap C N).f l
+      ((boundedSingularChains (boundedSkeletonTop C N)).d k l w) at h
+  rw [h]
+  constructor
+  · intro h
+    exact singularSkeletonChainMap_injective C N l h
+  · intro h
+    exact congrArg ((singularSkeletonChainMap C N).f l) h
+
+/-- Cycle reflection uses the ordinary, unaugmented singular differential. -/
+theorem singularSkeletonChainMap_cycle_iff (N k l : ℕ)
+    (w : (boundedSingularChains (boundedSkeletonTop C N)).X k) :
+    (boundedSingularChains (boundedCWTop C)).d k l
+        ((singularSkeletonChainMap C N).f k w) = 0 ↔
+      (boundedSingularChains (boundedSkeletonTop C N)).d k l w = 0 := by
+  simpa only [map_zero] using
+    singularSkeletonChainMap_boundary_iff C N k l w 0
+
+private theorem singularSkeletonSimplexEquiv_map (N n : ℕ)
+    (σ : (TopCat.toSSet.obj (boundedSkeletonTop C N)).obj (.op ⦋n⦌)) :
+    TopCat.toSSetObjEquiv (boundedCWTop C) (.op ⦋n⦌)
+        ((TopCat.toSSet.map (singularSkeletonInclusion C N)).app (.op ⦋n⦌) σ) =
+      (singularSkeletonInclusion C N).hom.comp
+        (TopCat.toSSetObjEquiv (boundedSkeletonTop C N) (.op ⦋n⦌) σ) := by
+  apply ContinuousMap.ext
+  intro t
+  rfl
+
+/-- Restrict the original simplex itself once its image bound is proved internally. -/
+private noncomputable def singularSimplexRestricted (N n : ℕ)
+    (σ : (TopCat.toSSet.obj (boundedCWTop C)).obj (.op ⦋n⦌))
+    (hσ : ∀ t : Convexity.StdSimplex ℝ (Fin (n + 1)),
+      (TopCat.toSSetObjEquiv (boundedCWTop C) (.op ⦋n⦌) σ t).val ∈
+        (CWComplex.skeleton C (N : ℕ∞) : Set X)) :
+    (TopCat.toSSet.obj (boundedSkeletonTop C N)).obj (.op ⦋n⦌) :=
+  (TopCat.toSSetObjEquiv (boundedSkeletonTop C N) (.op ⦋n⦌)).symm
+    { toFun := fun t ↦
+        ⟨(TopCat.toSSetObjEquiv (boundedCWTop C) (.op ⦋n⦌) σ t).val, hσ t⟩
+      continuous_toFun :=
+        (continuous_subtype_val.comp
+          (TopCat.toSSetObjEquiv (boundedCWTop C) (.op ⦋n⦌) σ).continuous).subtype_mk _ }
+
+private theorem singularSimplexRestricted_map (N n : ℕ)
+    (σ : (TopCat.toSSet.obj (boundedCWTop C)).obj (.op ⦋n⦌))
+    (hσ : ∀ t : Convexity.StdSimplex ℝ (Fin (n + 1)),
+      (TopCat.toSSetObjEquiv (boundedCWTop C) (.op ⦋n⦌) σ t).val ∈
+        (CWComplex.skeleton C (N : ℕ∞) : Set X)) :
+    (TopCat.toSSet.map (singularSkeletonInclusion C N)).app (.op ⦋n⦌)
+        (singularSimplexRestricted C N n σ hσ) = σ := by
+  apply (TopCat.toSSetObjEquiv (boundedCWTop C) (.op ⦋n⦌)).injective
+  rw [singularSkeletonSimplexEquiv_map, singularSimplexRestricted,
+    Equiv.apply_symm_apply]
+  apply ContinuousMap.ext
+  intro t
+  apply Subtype.ext
+  rfl
+
+private theorem singularSkeletonChainMap_generator (N n : ℕ)
+    (σ : (TopCat.toSSet.obj (boundedSkeletonTop C N)).obj (.op ⦋n⦌))
+    (a : ULift.{u} ℤ) :
+    (singularSkeletonChainMap C N).f n
+        ((TopCat.toSSet.obj (boundedSkeletonTop C N)).ιChainComplex
+          (R := boundedSingularCoefficient.{u}) σ a) =
+      (TopCat.toSSet.obj (boundedCWTop C)).ιChainComplex
+        (R := boundedSingularCoefficient.{u})
+        ((TopCat.toSSet.map (singularSkeletonInclusion C N)).app (.op ⦋n⦌) σ) a := by
+  have h := SSet.ι_chainComplexMap_f
+    (X := TopCat.toSSet.obj (boundedSkeletonTop C N))
+    (Y := TopCat.toSSet.obj (boundedCWTop C))
+    (f := TopCat.toSSet.map (singularSkeletonInclusion C N))
+    (R := boundedSingularCoefficient.{u}) σ
+  exact ConcreteCategory.congr_hom h a
+
+private theorem singularFamily_exists_boundedSkeletonLift
+    {ι : Type v} [Finite ι] (degree : ι → ℕ)
+    (z : ∀ i, (boundedSingularChains (boundedCWTop C)).X (degree i))
+    (L : ℕ) :
+    ∃ N : ℕ, L ≤ N ∧ (IsEmpty ι → N = L) ∧
+      ∃ lift : ∀ i, (boundedSingularChains (boundedSkeletonTop C N)).X (degree i),
+        ∀ i, (singularSkeletonChainMap C N).f (degree i) (lift i) = z i := by
+  classical
+  letI : Fintype ι := Fintype.ofFinite ι
+  rcases isEmpty_or_nonempty ι with hι | hι
+  · letI : IsEmpty ι := hι
+    refine ⟨L, le_rfl, (fun _ ↦ rfl), (fun i ↦ False.elim (IsEmpty.false i)), ?_⟩
+    intro i
+    exact (IsEmpty.false i).elim
+  · let a : ∀ i,
+        (TopCat.toSSet.obj (boundedCWTop C)).obj (.op ⦋degree i⦌) →₀ ULift.{u} ℤ :=
+      fun i ↦ (singularChainFinsuppIso (boundedCWTop C) (degree i)).inv (z i)
+    let E : Type (max u v) := Σ i : ι,
+      {σ : (TopCat.toSSet.obj (boundedCWTop C)).obj (.op ⦋degree i⦌) //
+        σ ∈ (a i).support}
+    letI : Finite E := inferInstance
+    let T : Set X := ⋃ e : E, Set.range
+      (fun t : Convexity.StdSimplex ℝ (Fin (degree e.1 + 1)) ↦
+        (TopCat.toSSetObjEquiv (boundedCWTop C) (.op ⦋degree e.1⦌) e.2.val t).val)
+    have hcompact : IsCompact T := by
+      apply isCompact_iUnion
+      intro e
+      exact isCompact_range (continuous_subtype_val.comp
+        (TopCat.toSSetObjEquiv (boundedCWTop C) (.op ⦋degree e.1⦌) e.2.val).continuous)
+    have hTC : T ⊆ C := by
+      intro x hx
+      obtain ⟨e, he⟩ := Set.mem_iUnion.mp hx
+      obtain ⟨t, rfl⟩ := he
+      exact (TopCat.toSSetObjEquiv (boundedCWTop C) (.op ⦋degree e.1⦌) e.2.val t).property
+    obtain ⟨m, hm⟩ := Hatcher.compact_subset_skeleton (C := C) hcompact hTC
+    let N := max m L
+    have hTN : T ⊆ (CWComplex.skeleton C (N : ℕ∞) : Set X) :=
+      hm.trans (CWComplex.skeleton_mono (C := C)
+        (Nat.cast_le.mpr (Nat.le_max_left m L)))
+    have hσ : ∀ (i : ι)
+        (σ : (TopCat.toSSet.obj (boundedCWTop C)).obj (.op ⦋degree i⦌)),
+        σ ∈ (a i).support →
+        ∀ t : Convexity.StdSimplex ℝ (Fin (degree i + 1)),
+          (TopCat.toSSetObjEquiv (boundedCWTop C) (.op ⦋degree i⦌) σ t).val ∈
+            (CWComplex.skeleton C (N : ℕ∞) : Set X) := by
+      intro i σ h t
+      exact hTN (Set.mem_iUnion_of_mem (⟨i, ⟨σ, h⟩⟩ : E) ⟨t, rfl⟩)
+    let lift : ∀ i, (boundedSingularChains (boundedSkeletonTop C N)).X (degree i) :=
+      fun i ↦ ∑ σ ∈ (a i).support.attach,
+        (TopCat.toSSet.obj (boundedSkeletonTop C N)).ιChainComplex
+          (R := boundedSingularCoefficient.{u})
+          (singularSimplexRestricted C N (degree i) σ.val (hσ i σ.val σ.property))
+          (a i σ.val)
+    have hEmpty : IsEmpty ι → N = L := by
+      intro h
+      letI : IsEmpty ι := h
+      obtain ⟨i⟩ := hι
+      exact (IsEmpty.false i).elim
+    refine ⟨N, Nat.le_max_right m L, hEmpty, lift, ?_⟩
+    intro i
+    change (singularSkeletonChainMap C N).f (degree i)
+        (∑ σ ∈ (a i).support.attach,
+          (TopCat.toSSet.obj (boundedSkeletonTop C N)).ιChainComplex
+            (R := boundedSingularCoefficient.{u})
+            (singularSimplexRestricted C N (degree i) σ.val (hσ i σ.val σ.property))
+            (a i σ.val)) = z i
+    calc
+      (singularSkeletonChainMap C N).f (degree i)
+          (∑ σ ∈ (a i).support.attach,
+            (TopCat.toSSet.obj (boundedSkeletonTop C N)).ιChainComplex
+              (R := boundedSingularCoefficient.{u})
+              (singularSimplexRestricted C N (degree i) σ.val (hσ i σ.val σ.property))
+              (a i σ.val)) =
+        ∑ σ ∈ (a i).support.attach,
+          (singularSkeletonChainMap C N).f (degree i)
+            ((TopCat.toSSet.obj (boundedSkeletonTop C N)).ιChainComplex
+              (R := boundedSingularCoefficient.{u})
+              (singularSimplexRestricted C N (degree i) σ.val (hσ i σ.val σ.property))
+              (a i σ.val)) :=
+        map_sum ((singularSkeletonChainMap C N).f (degree i)).hom
+          (fun σ ↦
+            (TopCat.toSSet.obj (boundedSkeletonTop C N)).ιChainComplex
+              (R := boundedSingularCoefficient.{u})
+              (singularSimplexRestricted C N (degree i) σ.val (hσ i σ.val σ.property))
+              (a i σ.val))
+          (a i).support.attach
+      _ = ∑ σ ∈ (a i).support.attach,
+          (TopCat.toSSet.obj (boundedCWTop C)).ιChainComplex
+            (R := boundedSingularCoefficient.{u}) σ.val (a i σ.val) := by
+        apply Finset.sum_congr rfl
+        intro σ h
+        rw [singularSkeletonChainMap_generator, singularSimplexRestricted_map]
+      _ = ∑ σ ∈ (a i).support,
+          (TopCat.toSSet.obj (boundedCWTop C)).ιChainComplex
+            (R := boundedSingularCoefficient.{u}) σ (a i σ) :=
+        Finset.sum_attach _ _
+      _ = z i := (boundedSingularChain_expansion (boundedCWTop C) (degree i) (z i)).symm
+
+/-- A finite family of actual chains, even in different degrees, lifts to one
+actual skeleton. The same inclusion reflects all cycle and boundary equations.
+The empty-family proof uses the prescribed bound itself. -/
+theorem singularChain_exists_boundedSkeletonLift
+    {ι : Type v} [Finite ι] (degree : ι → ℕ)
+    (z : ∀ i, (boundedSingularChains (boundedCWTop C)).X (degree i))
+    (L : ℕ) :
+    ∃ N : ℕ, L ≤ N ∧ (IsEmpty ι → N = L) ∧
+      (∀ k : ℕ, Function.Injective ((singularSkeletonChainMap C N).f k)) ∧
+      (∀ (k l : ℕ)
+        (w : (boundedSingularChains (boundedSkeletonTop C N)).X k)
+        (v : (boundedSingularChains (boundedSkeletonTop C N)).X l),
+        (boundedSingularChains (boundedCWTop C)).d k l
+            ((singularSkeletonChainMap C N).f k w) =
+          (singularSkeletonChainMap C N).f l v ↔
+        (boundedSingularChains (boundedSkeletonTop C N)).d k l w = v) ∧
+      (∀ (k l : ℕ) (w : (boundedSingularChains (boundedSkeletonTop C N)).X k),
+        (boundedSingularChains (boundedCWTop C)).d k l
+            ((singularSkeletonChainMap C N).f k w) = 0 ↔
+          (boundedSingularChains (boundedSkeletonTop C N)).d k l w = 0) ∧
+      ∃ lift : ∀ i, (boundedSingularChains (boundedSkeletonTop C N)).X (degree i),
+        ∀ i, (singularSkeletonChainMap C N).f (degree i) (lift i) = z i := by
+  obtain ⟨N, hNL, hEmpty, lift, hlift⟩ :=
+    singularFamily_exists_boundedSkeletonLift C degree z L
+  exact ⟨N, hNL, hEmpty, singularSkeletonChainMap_injective C N,
+    singularSkeletonChainMap_boundary_iff C N,
+    singularSkeletonChainMap_cycle_iff C N, lift, hlift⟩
 
 end Hatcher.ClassicalCW
