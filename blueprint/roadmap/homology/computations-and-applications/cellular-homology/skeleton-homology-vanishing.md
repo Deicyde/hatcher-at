@@ -2,6 +2,9 @@
 article_id: af_1a9a1f72a7f37bbe2e0be027
 declaration: theorem
 origin: cited
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.skeletonHomologyVanishing, Hatcher.ClassicalCW.homologyVanishingOfSkeletonEq, Hatcher.ClassicalCW.homologyVanishingOfCellDimensionBound, Hatcher.ClassicalCW.finiteDimensionalHomologyVanishing
 ---
 
 # Homology vanishes above a skeleton dimension
