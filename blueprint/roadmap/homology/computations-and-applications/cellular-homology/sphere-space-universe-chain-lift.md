@@ -2,6 +2,9 @@
 article_id: af_72fa8d9ce5a45b5bccf4b17b
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.sphereAugmentedSpaceLiftIso, Hatcher.Sphere.sphereCoordinateUniverseLift, Hatcher.Sphere.sphereSimplexLift, Hatcher.Sphere.sphereSimplexLift_face, Hatcher.Sphere.sphereAugmentedSpaceLiftIso_f_zero, Hatcher.Sphere.sphereAugmentedSpaceLiftIso_ι
 ---
 
 # Canonical space-universe lifting preserves augmented sphere chains
