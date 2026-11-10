@@ -152,6 +152,20 @@
         "Hatcher.Sphere.sphereAugmentedSpaceLiftIso_f_zero",
         "Hatcher.Sphere.sphereAugmentedSpaceLiftIso_\u03b9"
       ]
+    },
+    {
+      "article_id": "af_44f4c1e406da249186c75b97",
+      "module": "Hatcher.Singular.DoubleSimplexSphere",
+      "declarations": [
+        "Hatcher.Sphere.liftedOrderedSphereFundamentalClass_isIso",
+        "Hatcher.Sphere.liftedOrderedSphereFirstSimplex",
+        "Hatcher.Sphere.liftedOrderedSphereSecondSimplex",
+        "Hatcher.Sphere.liftedOrderedSphereCycle",
+        "Hatcher.Sphere.liftedOrderedSphereCycle_eq_difference",
+        "Hatcher.Sphere.liftedOrderedSphereCycle_d",
+        "Hatcher.Sphere.liftedOrderedSphereFundamentalClass",
+        "Hatcher.Sphere.liftedOrderedSphereFundamentalClass_eq_cycle"
+      ]
     }
   ]
 }
