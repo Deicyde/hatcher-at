@@ -128,6 +128,18 @@
         "Hatcher.ClassicalCW.skeletonPointQuotientIsoWedge_pairMap",
         "Hatcher.ClassicalCW.skeletonPointQuotientIsoWedge_inv_inclusion"
       ]
+    },
+    {
+      "article_id": "af_401e1c6dfdf6e37cba588880",
+      "module": "Hatcher.Singular.SigmaRelativeChains",
+      "declarations": [
+        "Hatcher.ClassicalCW.singularChain_exists_boundedSkeletonLift",
+        "Hatcher.ClassicalCW.singularSkeletonInclusion",
+        "Hatcher.ClassicalCW.singularSkeletonChainMap",
+        "Hatcher.ClassicalCW.singularSkeletonChainMap_injective",
+        "Hatcher.ClassicalCW.singularSkeletonChainMap_boundary_iff",
+        "Hatcher.ClassicalCW.singularSkeletonChainMap_cycle_iff"
+      ]
     }
   ]
 }
