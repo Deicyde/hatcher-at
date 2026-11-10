@@ -2,6 +2,9 @@
 article_id: af_401e1c6dfdf6e37cba588880
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.singularChain_exists_boundedSkeletonLift, Hatcher.ClassicalCW.singularSkeletonInclusion, Hatcher.ClassicalCW.singularSkeletonChainMap, Hatcher.ClassicalCW.singularSkeletonChainMap_injective, Hatcher.ClassicalCW.singularSkeletonChainMap_boundary_iff, Hatcher.ClassicalCW.singularSkeletonChainMap_cycle_iff
 ---
 
 # Finite families of singular chains lift to one skeleton
