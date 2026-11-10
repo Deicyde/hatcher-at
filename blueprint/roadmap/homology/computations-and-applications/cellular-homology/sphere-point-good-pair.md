@@ -2,6 +2,9 @@
 article_id: af_989591aa389447da1fa6d34d
 declaration: theorem
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.Sphere.sphere_pointedPair_isGoodPair, Hatcher.Sphere.sphereSingletonGoodPairData
 ---
 
 # Every pointed sphere is a good pair
