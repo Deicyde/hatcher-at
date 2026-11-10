@@ -2,6 +2,9 @@
 article_id: af_014295821647fd8a388f2ad4
 declaration: def
 origin: bridged
+statement: formalized
+proof: formalized
+lean: Hatcher.ClassicalCW.skeletonPointQuotientIsoWedge, Hatcher.ClassicalCW.skeletalStagePair, Hatcher.ClassicalCW.skeletalStageCellPairMap, Hatcher.ClassicalCW.skeletonPointQuotientIsoWedge_point, Hatcher.ClassicalCW.skeletonPointQuotientIsoWedge_cell, Hatcher.ClassicalCW.skeletonPointQuotientIsoWedge_pairMap, Hatcher.ClassicalCW.skeletonPointQuotientIsoWedge_inv_inclusion
 ---
 
 # A successive skeleton quotient is the wedge of its cells
