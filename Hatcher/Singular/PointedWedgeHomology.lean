@@ -763,7 +763,7 @@ private theorem positiveSkeletalSuccessor_isEmpty (k : ℕ)
   · exact IsEmpty.false i
 
 private theorem positiveEmptySkeletalHomology_isZero (k j : ℕ)
-    [IsEmpty (positiveSkeletalPair C k).snd] [IsEmpty (positiveSkeletalPair C k).fst] :
+    [IsEmpty (positiveSkeletalPair C k).fst] :
     IsZero ((homologyFunctor positiveCellCoefficient.{u} j).obj (positiveSkeletalPair C k)) := by
   let P : TopPair.{u} := positiveSkeletalPair C k
   have hEmpty : IsEmpty P.fst := by
