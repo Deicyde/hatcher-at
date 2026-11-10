@@ -683,7 +683,10 @@ noncomputable def sphereSingletonGoodPairData
     have hab : (a : TopCat.sphere.{u} n) = b := Set.mem_singleton_iff.mp a.2
     have hbInterior : b ∈ interior (V : Set (TopCat.sphere.{u} n)) :=
       hV.interior_eq.symm ▸ hb
-    exact hab.symm ▸ hbInterior
+    change (a : TopCat.sphere.{u} n) ∈ interior (V : Set (TopCat.sphere.{u} n))
+    exact Eq.mpr
+      (congrArg (fun y : TopCat.sphere.{u} n =>
+        y ∈ interior (V : Set (TopCat.sphere.{u} n))) hab) hbInterior
   let bV : V := ⟨b, hb⟩
   let inclusion : C(↑({b} : Set (TopCat.sphere.{u} n)), V) :=
     Hatcher.Relative.goodPairNeighborhoodInclusion P V
