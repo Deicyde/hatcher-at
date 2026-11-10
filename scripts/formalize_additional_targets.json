@@ -202,6 +202,13 @@
         "Hatcher.ClassicalCW.homologyVanishingOfCellDimensionBound",
         "Hatcher.ClassicalCW.finiteDimensionalHomologyVanishing"
       ]
+    },
+    {
+      "article_id": "af_a5ded7ecaa7b856ace06f12b",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.finiteStageHomologyStability"
+      ]
     }
   ]
 }
