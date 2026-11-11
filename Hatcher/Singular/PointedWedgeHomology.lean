@@ -1871,3 +1871,47 @@ theorem cellularHomologyComparison_forward (n : ℕ) :
 end Hatcher.ClassicalCW
 
 end
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
+
+universe u
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+/-- Hatcher's first immediate cellular application: no cells in degree n
+implies vanishing of ordinary integral homology in that degree. -/
+theorem homologyVanishingOfNoCells (n : ℕ)
+    (h : IsEmpty (RelCWComplex.cell C n)) :
+    IsZero (((singularHomologyFunctor AddCommGrpCat.{u} n).obj
+      (AddCommGrpCat.of.{u} (ULift.{u} ℤ))).obj (TopCat.of ↑C)) := by
+  letI : IsEmpty (RelCWComplex.cell C n) := h
+  let D : ChainComplex AddCommGrpCat.{u} ℕ := cellularChainComplex C
+  obtain ⟨_, e, _⟩ := skeletonRelativeHomology C n
+  have hPair : cellularSkeletonPair C n = skeletalStagePair C n := by
+    rfl
+  have hFree : IsZero
+      (AddCommGrpCat.of.{u} (RelCWComplex.cell C n →₀ ℤ)) := by
+    apply (IsZero.iff_id_eq_zero
+      (AddCommGrpCat.of.{u} (RelCWComplex.cell C n →₀ ℤ))).mpr
+    ext a i
+    exact (IsEmpty.false i).elim
+  have hMiddle : IsZero (D.X n) := by
+    change IsZero ((cellularChainComplex C).X n)
+    rw [cellularChainComplex_X C n, hPair]
+    exact hFree.of_iso e
+  let S : ShortComplex AddCommGrpCat.{u} := D.sc' (n + 1) n (Nat.pred n)
+  have hSc : IsZero S.homology :=
+    S.isZero_homology_of_isZero_X₂ (show IsZero S.X₂ from hMiddle)
+  have hn : (ComplexShape.down ℕ).next n = Nat.pred n := by
+    cases n with
+    | zero => exact ChainComplex.next_nat_zero
+    | succ r => exact ChainComplex.next_nat_succ r
+  have hCellHomology : IsZero (D.homology n) :=
+    hSc.of_iso (D.homologyIsoSc' (n + 1) n (Nat.pred n)
+      (ChainComplex.prev ℕ n) hn)
+  exact hCellHomology.of_iso (cellularHomologyComparison C n).symm
+
+end Hatcher.ClassicalCW

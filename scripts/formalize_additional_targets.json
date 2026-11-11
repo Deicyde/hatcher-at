@@ -226,6 +226,13 @@
         "Hatcher.ClassicalCW.cellularCyclesIso_hom_iCycles",
         "Hatcher.ClassicalCW.cellularHomologyComparison_forward"
       ]
+    },
+    {
+      "article_id": "af_233a40fca7c1cbf0009d559b",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.homologyVanishingOfNoCells"
+      ]
     }
   ]
 }
