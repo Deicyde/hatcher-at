@@ -22,8 +22,9 @@ thirty-one-leaf degree-realization and suspension milestone covers Examples
 2.31–2.32, Proposition 2.33, and the pole local-degree consequence. All
 thirty-one leaves are complete. The seventeen-leaf cellular-homology
 milestone continues through Lemma 2.34 and Theorem 2.35 on printed pages
-137–140; its linked articles record current progress, and the later material
-stays queued.
+137–140; all seventeen leaves are complete. The next thirty-four-leaf
+cellular boundary and computation milestone covers the immediate applications
+and full attaching-degree formula, with actual geometric models.
 
 The fundamental group sees only loops, and it is non-abelian and hard to
 compute in high dimensions. Homology replaces it with a sequence of abelian
@@ -69,9 +70,11 @@ decomposes the pinch construction, integer circle powers, the natural
 suspension boundary, and its pole consequences into thirty-one complete
 leaves.
 The [cellular-homology milestone](computations-and-applications/cellular-homology/README.md)
-now plans the skeletal calculation, finite-chain passage, cellular complex
-and canonical singular comparison in seventeen leaves. Later applications,
-Mayer–Vietoris topics and homology with coefficients remain queued.
+completes the skeletal calculation, finite-chain passage, cellular complex
+and canonical singular comparison in seventeen leaves. The next
+[cellular boundary milestone](computations-and-applications/cellular-boundary/README.md)
+plans the first computations and attaching-degree formula in 34 leaves. Later
+applications, Mayer–Vietoris topics and homology with coefficients remain queued.
 Invariance of domain belongs to out-of-scope Additional Topic §2.B.
 
 [The formal viewpoint](formal-viewpoint/README.md) axiomatizes what was built,

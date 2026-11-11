@@ -9,8 +9,7 @@ skeleta, vanishing above their dimension, and stability of their inclusion
 maps. The cellular complex uses those actual relative groups and the pair
 connecting maps; its homology agrees with ordinary singular homology.
 
-This milestone has 17 formalizable leaves: eight are verified and nine remain
-planned. The linked articles record verified formalization progress.
+All 17 formalizable leaves of this milestone are verified. The linked articles record verified formalization progress.
 Every final statement covers arbitrary classical CW complexes, including
 empty complexes, infinitely many cells and unbounded dimensions. Put X⁻¹ = ∅;
 in implementation, strict skeleton indices avoid natural subtraction.
@@ -44,9 +43,9 @@ in implementation, strict skeleton indices avoid natural subtraction.
 ## Source boundary
 
 The selected passage starts at Cellular Homology and ends with the proof of
-Theorem 2.35. Its immediate applications, attaching-map degree formula,
-Euler characteristic, later Mayer–Vietoris results and general coefficients
-remain queued. Naturality for filtration-preserving maps and cellular
+Theorem 2.35. The [next milestone](../cellular-boundary/README.md) adopts the
+immediate applications and attaching-map degree formula. Euler characteristic,
+later Mayer–Vietoris results and general coefficients remain queued. Naturality for filtration-preserving maps and cellular
 approximation require a later API pass.
 
 ## Sources

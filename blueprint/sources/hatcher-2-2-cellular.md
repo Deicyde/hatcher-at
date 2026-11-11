@@ -39,5 +39,8 @@ The intended formal comparison records its forward-map equation.
 The [17-leaf milestone](../roadmap/homology/computations-and-applications/cellular-homology/README.md)
 ends with this proof, before the immediate applications on printed page 140.
 It includes empty, zero-dimensional, infinite-cell and infinite-dimensional
-CW complexes. Later applications and the attaching-map degree calculation
-remain queued in the coverage contract.
+CW complexes. The next milestone now adopts the immediate applications and the attaching-map
+degree calculation. Later surface computations and subsequent material remain
+queued in the coverage contract.
+
+The completed passage is followed by the [cellular boundary and first computation milestone](../roadmap/homology/computations-and-applications/cellular-boundary/README.md), with 34 planned leaves on pages 140–141 and their finite geometric support on pages 6–8.

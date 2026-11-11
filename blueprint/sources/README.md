@@ -29,6 +29,12 @@ The project formalizes results from a single reference.
 - [Degree-realization and suspension specification](degree-applications-implementation.md)
   fixes the genuine pinch, circle-power, cone-map, and local comparison
   models of the completed thirty-one-leaf milestone.
+- [Hatcher §2.2, Cellular boundaries and first computations](hatcher-2-2-cellular-boundary.md)
+  records the next passage on printed pages 140–141.
+- [First cellular example models](hatcher-cellular-example-models.md) records
+  the finite geometric support on printed pages 6–8.
+- [Cellular boundary specification](cellular-boundary-implementation.md)
+  states the project-authored realization obligations.
 - [Hatcher §2.2, Cellular homology](hatcher-2-2-cellular.md) records Lemma
   2.34, the cellular complex and Theorem 2.35 on printed pages 137–140.
 - [Cellular-homology implementation specification](cellular-homology-implementation.md)

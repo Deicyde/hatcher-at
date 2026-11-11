@@ -8,21 +8,19 @@ Formalize selected results from Hatcher's *Algebraic Topology* in Lean 4 on
 Mathlib, working outward from the fundamental group. Chapters follow the
 book's order; fine leaves expose the actual source objects and maps.
 
-The completed scope contains 307 formalizable leaves: 289 proved
-locally and 18 supplied by pinned Mathlib. It includes the selected
-fundamental-group spines, homology and excision applications, degree
-foundations, and all twenty local-degree leaves through Proposition 2.30.
-The completed thirty-one-leaf
-[degree-realization and suspension milestone](homology/computations-and-applications/degree-realization-suspension/README.md)
-constructs maps of arbitrary integer degree, calculates integer circle powers,
-proves suspension invariance, and realizes arbitrary local degrees at both
-suspension poles on printed pages 136–137.
+The completed scope contains 316 formalizable leaves: 298 proved locally and
+18 supplied by pinned Mathlib. It includes the selected fundamental-group
+spines, homology and excision applications, degree foundations, all twenty
+local-degree leaves through Proposition 2.30, and the completed thirty-one-leaf
+[degree-realization and suspension milestone](homology/computations-and-applications/degree-realization-suspension/README.md).
 
-The next [cellular-homology milestone](homology/computations-and-applications/cellular-homology/README.md)
-contains seventeen formalizable leaves through Lemma 2.34 and Theorem 2.35 on
-printed pages 137–140, including two explicit sphere generator bridges. The
-selected DAG therefore has 316 formalizable leaves, with 307 completed and
-nine planned on this source snapshot.
+The completed [cellular-homology milestone](homology/computations-and-applications/cellular-homology/README.md)
+proves all seventeen leaves through Lemma 2.34 and Theorem 2.35, including the
+explicit sphere generator bridges. The next
+[cellular boundary and computation milestone](homology/computations-and-applications/cellular-boundary/README.md)
+adds 34 planned leaves on printed pages 140–141, with the finite geometric
+support on pages 6–8. The selected DAG therefore has 350 formalizable leaves,
+316 complete and 34 planned.
 
 The [coverage contract](../coverage/README.md) maps the whole main-line source
 and retains thirteen queued areas; it does not call them exclusions or

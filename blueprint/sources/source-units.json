@@ -1,9 +1,9 @@
 {
   "schema": "hatcher-source-units/v1",
-  "description": "Preserved source accounting from the legacy Autoform workspace.",
+  "description": "Preserved legacy source accounting with append-only execution units for continued Hatcher milestones.",
   "legacy_workspace_manifest": "schema = \"autoform-workspace/v1\"\n\n[locations.\"blueprints\"]\npath = \"blueprints\"\nprovides = [\"blueprints\"]\n\n[projects]\n[projects.\"hatcher\"]\ntitle = \"Algebraic Topology (Hatcher)\"\nblueprint = {location = \"blueprints\", path = \"hatcher\"}\n",
   "artifact": "sources/hatcher-execution-scope.txt",
-  "artifact_sha256": "9fc49e624622d830c8158505603804fd377bf87920f30c03981c3f6ce7529f30",
+  "artifact_sha256": "ff846a43c6f3caa348c3b19848f591b79649183c3aebc1fbac576715f9f71721",
   "units": [
     {
       "unit": "hatcher-1-1-basic-constructions",
@@ -309,6 +309,24 @@
       "end_line": 34,
       "locator": "Hatcher §2.2, Lemma 2.34(a,b,c), cellular chain complex and Theorem 2.35, printed pages 137–140",
       "unit_sha256": "ce9a8de7395d07dafecca03e5039839b0cfd1098d18c94d9d1a876a4a039c1fb",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-2-2-cellular-boundary",
+      "area": "§2.2 first cellular computations and boundary formula",
+      "start_line": 35,
+      "end_line": 35,
+      "locator": "Hatcher §2.2, printed pages 140–141 after Theorem 2.35’s proof and before Example 2.36",
+      "unit_sha256": "25370e1957caf21530fccbe03246699d47b462643266a709a4269fd5577e18c6",
+      "coverage": "DECOMPOSED"
+    },
+    {
+      "unit": "hatcher-0-cellular-example-models",
+      "area": "Chapter 0 cell models for the first cellular computations",
+      "start_line": 36,
+      "end_line": 36,
+      "locator": "Hatcher Chapter 0, Example 0.3, finite part of Example 0.6 and Products, printed pages 6–8",
+      "unit_sha256": "90b0fd626662afd480ce836746816fc8c458c2e68c5c5f13f5ceeb2f30f76d30",
       "coverage": "DECOMPOSED"
     }
   ],
@@ -2208,6 +2226,210 @@
       "path": "roadmap/homology/computations-and-applications/cellular-homology/sphere-lifted-ordered-fundamental-class.md",
       "source_units": [
         "hatcher-2-2-cellular-homology"
+      ]
+    },
+    "af_233a40fca7c1cbf0009d559b": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/consequences/no-cells-homology.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_fb8ba936f285a9a3f67861d1": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/consequences/free-subquotient-generator-bound.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_90485960c79bed6640238b7f": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/consequences/cellular-generator-bound.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_ff6c470e5df703f80a4cb1aa": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/consequences/sparse-cellular-differentials.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_b823d91d6171945253f9061e": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/consequences/sparse-cellular-homology.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_f01f5093c6f21410fe1240bd": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/consequences/projective-homology.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_bc92e32363d8d0c7790e7edc": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/consequences/sphere-product-homology.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_9167e49074bca9673dfca34e": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/cellular-boundary-coordinates.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_243867ae2016bd66752e2680": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/sphere-coefficient-lift-comparison.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_3e17caef4f3669662a05114a": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/sphere-lift-endomap-naturality.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_d23091132befa0542f4d274b": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/lifted-sphere-degree.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_9bda8aeb7e132e986e52219a": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/disk-boundary-generator.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_727404eb8a71c2d5762bbcba": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/boundary-orientation-identification.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_0f527fd2a8499cbc93b83802": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/single-cell-sphere-collapse.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_35a5c5a46f0517a2bf90e4df": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/attaching-degree-data.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_2ea97dd1cce3f34dc7e37734": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/characteristic-boundary-naturality.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_b4cea94cbaa08df88c78d099": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/cell-collapse-coordinates.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_6cd1903d8a9aef0f61982a24": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/attaching-degree-is-coordinate.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_933d5278867dcfc2ec143a47": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/finite-attaching-degree-support.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_185eb9feac271aef928d8e5c": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/cellular-boundary-formula.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_c527f881a9eb90a3fe1f8fdd": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/oriented-one-disk-endpoints.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_f7426ef6c9ced3f037f8153b": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/cellular-endpoint-boundary.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_9409a8e584ccd21b3d6f6a90": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/boundaries/one-vertex-boundary-zero.md",
+      "source_units": [
+        "hatcher-2-2-cellular-boundary"
+      ]
+    },
+    "af_dd20deca124955d04afd3c32": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/models/complex-projective-space.md",
+      "source_units": [
+        "hatcher-0-cellular-example-models"
+      ]
+    },
+    "af_196ca0792905db1ec0b5520c": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/models/projective-sphere-phase-quotient.md",
+      "source_units": [
+        "hatcher-0-cellular-example-models"
+      ]
+    },
+    "af_41a52de8ed2c3d29dbb1017e": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/models/projective-compact-hausdorff.md",
+      "source_units": [
+        "hatcher-0-cellular-example-models"
+      ]
+    },
+    "af_43ce41642bffa46e284cfb61": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/models/projective-coordinate-inclusion.md",
+      "source_units": [
+        "hatcher-0-cellular-example-models"
+      ]
+    },
+    "af_4aff6d11ec386080a329a43a": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/models/projective-affine-chart.md",
+      "source_units": [
+        "hatcher-0-cellular-example-models"
+      ]
+    },
+    "af_b73b004e18862788524b24bd": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/models/projective-characteristic-map.md",
+      "source_units": [
+        "hatcher-0-cellular-example-models"
+      ]
+    },
+    "af_3b301297bef4cf3bd1ee04c8": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/models/projective-disk-attachment.md",
+      "source_units": [
+        "hatcher-0-cellular-example-models"
+      ]
+    },
+    "af_30b3c329892b1574c84af84f": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/models/projective-classical-cw.md",
+      "source_units": [
+        "hatcher-0-cellular-example-models"
+      ]
+    },
+    "af_eeec1da26a4ec5354a3b04b8": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/models/sphere-classical-cw.md",
+      "source_units": [
+        "hatcher-0-cellular-example-models"
+      ]
+    },
+    "af_98b02d5314b897ae75721b99": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/models/finite-classical-cw-product.md",
+      "source_units": [
+        "hatcher-0-cellular-example-models"
+      ]
+    },
+    "af_7922c00273e32702e83b796a": {
+      "path": "roadmap/homology/computations-and-applications/cellular-boundary/models/sphere-product-cell-indices.md",
+      "source_units": [
+        "hatcher-0-cellular-example-models"
       ]
     }
   }

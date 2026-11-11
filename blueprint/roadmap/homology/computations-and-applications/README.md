@@ -17,17 +17,19 @@ Proposition 2.29. All sixteen leaves are formalized locally and complete; the
 local-degree continuation through Proposition 2.30 is complete in twenty
 leaves. The completed thirty-one-leaf degree-realization and suspension
 milestone continues through Proposition 2.33 and its pole observation,
-including both-pole realization of every integer local degree. The next
-seventeen-leaf cellular-homology milestone covers Lemma 2.34, the cellular
+including both-pole realization of every integer local degree. The completed
+seventeen-leaf cellular-homology milestone proves Lemma 2.34, the cellular
 complex and Theorem 2.35, including the explicit sphere generator bridges.
-The linked articles record current progress; later material remains queued.
+All seventeen leaves are verified. The next thirty-four-leaf cellular boundary
+and computation milestone includes the complete degree formula, general
+consequences and the actual complex-projective and sphere-product models.
 
 Given excision and the long exact sequence, homology becomes computable. From
 `Hₙ(Sⁿ) ≅ ℤ` comes the degree of a map `Sⁿ → Sⁿ`, with its local formula as a
 sum over preimages, which settles the hairy ball theorem and which finite
 groups act freely on spheres. Cellular homology computes `Hₙ` of a CW complex
-from its cells and attaching maps, reducing infinite singular chain groups to
-finitely generated ones. Mayer–Vietoris is the homology analogue of van
+from its cells and attaching maps, replacing singular chain groups with the
+free groups on its cell sets. Mayer–Vietoris is the homology analogue of van
 Kampen. The section closes with coefficients in an arbitrary abelian group.
 
 The selected Corollary 2.15 branch derives Brouwer's fixed-point theorem for
@@ -79,10 +81,13 @@ pinned Mathlib coverage nor a project dependency.
 - [Local degree and the finite-fiber sum](local-degree/README.md)
 - [Prescribed degrees and suspension](degree-realization-suspension/README.md)
 - [Cellular homology through the singular comparison](cellular-homology/README.md)
+- [Cellular boundaries and first computations](cellular-boundary/README.md)
 
-The cellular milestone stops at Theorem 2.35’s proof. Immediate applications,
-the attaching-map degree formula, later Mayer–Vietoris topics and homology
-with general coefficient groups remain queued.
+The completed cellular comparison stops at Theorem 2.35’s proof. The next
+milestone adopts its immediate applications and the attaching-map degree
+formula through the derivation on printed page 141. Surface calculations,
+Euler characteristic, later Mayer–Vietoris topics and homology with general
+coefficient groups remain queued.
 They are not user exclusions or externally blocked work.
 
 ## Sources
