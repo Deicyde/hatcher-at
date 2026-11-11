@@ -1503,3 +1503,358 @@ theorem skeletonToSpaceHomologyStability
 end Hatcher.ClassicalCW
 
 end
+
+noncomputable section
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
+
+universe u
+
+private abbrev cellularComparisonCoefficient : AddCommGrpCat.{u} :=
+  AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+
+private abbrev cellularComparisonHomology (k : ℕ) : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+  (singularHomologyFunctor AddCommGrpCat.{u} k).obj cellularComparisonCoefficient.{u}
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+private abbrev cellularComparisonOrdinary (n : ℕ) : AddCommGrpCat.{u} :=
+  (cellularComparisonHomology.{u} n).obj (cellularSkeletonPair C n).fst
+
+private noncomputable def cellularComparisonProjection (n : ℕ) :
+    cellularComparisonOrdinary C n ⟶ (cellularChainComplex C).X n :=
+  (Hatcher.Relative.singularPairFunctor.obj (cellularSkeletonPair C n)).homologyπ
+    cellularComparisonCoefficient.{u} n
+
+private noncomputable def cellularComparisonIncoming (n : ℕ) :
+    (cellularChainComplex C).X (n + 1) ⟶ cellularComparisonOrdinary C n :=
+  Hatcher.Relative.pairConnecting (cellularSkeletonPair C (n + 1))
+    cellularComparisonCoefficient.{u} (n + 1) n rfl
+
+private noncomputable def cellularComparisonSkeletonIso (n : ℕ) :
+    TopCat.of ↑(CWComplex.skeleton C (n : ℕ∞) : Set X) ≅
+      (cellularSkeletonPair C n).fst := by
+  have h : (CWComplex.skeleton C (n : ℕ∞) : Set X) =
+      (CWComplex.skeletonLT C ((n + 1 : ℕ) : ℕ∞) : Set X) := by
+    change (RelCWComplex.skeletonLT C ((n : ℕ∞) + 1) : Set X) =
+      (RelCWComplex.skeletonLT C ((n + 1 : ℕ) : ℕ∞) : Set X)
+    exact congrArg (fun p : ℕ∞ ↦ (RelCWComplex.skeletonLT C p : Set X))
+      (by simp only [Nat.cast_add, Nat.cast_one])
+  exact TopCat.isoOfHomeo (Homeomorph.setCongr h)
+
+private noncomputable def cellularComparisonInclusion (n : ℕ) :
+    (cellularSkeletonPair C n).fst ⟶ TopCat.of ↑C :=
+  TopCat.ofHom (ContinuousMap.inclusion
+    (CWComplex.skeletonLT C ((n + 1 : ℕ) : ℕ∞)).subset_complex)
+
+private theorem cellularComparisonStandardInclusion (n : ℕ) :
+    (cellularComparisonSkeletonIso C n).inv ≫ singularSkeletonInclusion C n =
+      cellularComparisonInclusion C n := by
+  apply TopCat.ext
+  intro x
+  apply Subtype.ext
+  rfl
+
+private theorem cellularComparisonInclusion_isIso (n k : ℕ) (hk : k < n) :
+    IsIso ((cellularComparisonHomology.{u} k).map (cellularComparisonInclusion C n)) := by
+  let H : TopCat.{u} ⥤ AddCommGrpCat.{u} := cellularComparisonHomology.{u} k
+  let e := H.mapIso (cellularComparisonSkeletonIso C n)
+  let q := H.map (singularSkeletonInclusion C n)
+  let i := H.map (cellularComparisonInclusion C n)
+  have hcomp : e.inv ≫ q = i :=
+    (H.map_comp (cellularComparisonSkeletonIso C n).inv
+      (singularSkeletonInclusion C n)).symm.trans
+        (congrArg (fun f ↦ H.map f) (cellularComparisonStandardInclusion C n))
+  have hq : IsIso q := (skeletonToSpaceHomologyStability C n k).2 hk
+  exact Eq.mp (congrArg (fun f ↦ IsIso f) hcomp)
+    (IsIso.comp_isIso' (show IsIso e.inv from inferInstance) hq)
+
+private theorem cellularComparisonInclusion_epi (n k : ℕ) (hk : k ≤ n) :
+    Epi ((cellularComparisonHomology.{u} k).map (cellularComparisonInclusion C n)) := by
+  let H : TopCat.{u} ⥤ AddCommGrpCat.{u} := cellularComparisonHomology.{u} k
+  let e := H.mapIso (cellularComparisonSkeletonIso C n)
+  let q := H.map (singularSkeletonInclusion C n)
+  let i := H.map (cellularComparisonInclusion C n)
+  letI : Epi q := (AddCommGrpCat.epi_iff_surjective q).mpr
+    ((skeletonToSpaceHomologyStability C n k).1 hk)
+  have hcomp : e.inv ≫ q = i :=
+    (H.map_comp (cellularComparisonSkeletonIso C n).inv
+      (singularSkeletonInclusion C n)).symm.trans
+        (congrArg (fun f ↦ H.map f) (cellularComparisonStandardInclusion C n))
+  exact Eq.mp (congrArg (fun f ↦ Epi f) hcomp)
+    (show Epi (e.inv ≫ q) from inferInstance)
+
+private theorem cellularComparisonProjection_zero_isIso :
+    IsIso (cellularComparisonProjection C 0) := by
+  have hp : cellularSkeletonPair C 0 = zeroSkeletonPair C := by rfl
+  have h : (zeroSkeletonOrdinaryRelativeHomologyIso C 0).hom =
+      cellularComparisonProjection C 0 := by
+    simpa only [cellularComparisonProjection, hp] using
+      (zeroSkeletonOrdinaryRelativeHomologyIso_hom C 0)
+  exact Eq.mp (congrArg (fun f ↦ IsIso f) h)
+    (show IsIso (zeroSkeletonOrdinaryRelativeHomologyIso C 0).hom from inferInstance)
+
+private theorem cellularComparisonProjection_mono (n : ℕ) :
+    Mono (cellularComparisonProjection C n) := by
+  cases n with
+  | zero =>
+      letI : IsIso (cellularComparisonProjection C 0) :=
+        cellularComparisonProjection_zero_isIso C
+      infer_instance
+  | succ r =>
+      let P : TopPair.{u} := cellularSkeletonPair C (r + 1)
+      let H : TopCat.{u} ⥤ AddCommGrpCat.{u} := cellularComparisonHomology.{u} (r + 1)
+      let e : TopCat.of ↑(CWComplex.skeleton C (r : ℕ∞) : Set X) ≅ P.snd :=
+        cellularComparisonSkeletonIso C r
+      have hz₀ : IsZero (H.obj (TopCat.of ↑(CWComplex.skeleton C (r : ℕ∞) : Set X))) :=
+        skeletonHomologyVanishing C r (r + 1) (Nat.lt_succ_self r)
+      have hz : IsZero (H.obj P.snd) := hz₀.of_iso (H.mapIso e).symm
+      let Q : SSetPair.{u} := Hatcher.Relative.singularPairFunctor.obj P
+      have hzero : H.map P.map = 0 := hz.eq_zero_of_src (H.map P.map)
+      exact (Q.homology_exact₂ cellularComparisonCoefficient.{u} (r + 1)).mono_g hzero
+
+private noncomputable def cellularComparisonCycleSequence (n : ℕ) :
+    ShortComplex AddCommGrpCat.{u} :=
+  ShortComplex.mk (cellularComparisonProjection C n) ((cellularChainComplex C).sc' (n + 1) n (Nat.pred n)).g
+    (by
+      cases n with
+      | zero =>
+          have h : ((cellularChainComplex C).sc' 1 0 0).g = 0 := by
+            change (cellularChainComplex C).d 0 0 = 0
+            exact cellularChainComplex_d_zero C 0
+          rw [h, comp_zero]
+      | succ r =>
+          let δ := cellularComparisonIncoming C r
+          have hz : cellularComparisonProjection C (r + 1) ≫ δ = 0 :=
+            (Hatcher.Relative.singularPairFunctor.obj (cellularSkeletonPair C (r + 1))).comp_homologyδ
+              cellularComparisonCoefficient.{u} (r + 1) r rfl
+          have hd : ((cellularChainComplex C).sc' (r + 1 + 1) (r + 1) r).g =
+              δ ≫ cellularComparisonProjection C r := by
+            change (cellularChainComplex C).d (r + 1) r = _
+            exact cellularChainComplex_d_succ C r
+          calc
+            cellularComparisonProjection C (r + 1) ≫
+                ((cellularChainComplex C).sc' (r + 1 + 1) (r + 1) r).g =
+                cellularComparisonProjection C (r + 1) ≫
+                  (δ ≫ cellularComparisonProjection C r) :=
+              congrArg (fun f ↦ cellularComparisonProjection C (r + 1) ≫ f) hd
+            _ = (cellularComparisonProjection C (r + 1) ≫ δ) ≫
+                cellularComparisonProjection C r := (Category.assoc _ _ _).symm
+            _ = 0 := by rw [hz, zero_comp])
+
+private theorem cellularComparisonCycleSequence_exact (n : ℕ) :
+    (cellularComparisonCycleSequence C n).Exact := by
+  cases n with
+  | zero =>
+      let e : cellularComparisonOrdinary C 0 ≅ (cellularChainComplex C).X 0 :=
+        @asIso _ _ _ _ (cellularComparisonProjection C 0)
+          (cellularComparisonProjection_zero_isIso C)
+      apply ((cellularComparisonCycleSequence C 0).ab_exact_iff).mpr
+      intro x _
+      exact ⟨e.inv x, ConcreteCategory.congr_hom e.inv_hom_id x⟩
+  | succ r =>
+      let δ := cellularComparisonIncoming C r
+      let j := cellularComparisonProjection C r
+      let Q : SSetPair.{u} :=
+        Hatcher.Relative.singularPairFunctor.obj (cellularSkeletonPair C (r + 1))
+      let B : ShortComplex AddCommGrpCat.{u} := ShortComplex.mk
+        (cellularComparisonProjection C (r + 1)) δ
+        (Q.comp_homologyδ cellularComparisonCoefficient.{u} (r + 1) r rfl)
+      have hB : B.Exact := Q.homology_exact₃ cellularComparisonCoefficient.{u} (r + 1) r rfl
+      have hd : ((cellularChainComplex C).sc' (r + 1 + 1) (r + 1) r).g = δ ≫ j := by
+        change (cellularChainComplex C).d (r + 1) r = _
+        exact cellularChainComplex_d_succ C r
+      have hj : Function.Injective j :=
+        (AddCommGrpCat.mono_iff_injective j).mp (cellularComparisonProjection_mono C r)
+      apply ((cellularComparisonCycleSequence C (r + 1)).ab_exact_iff).mpr
+      intro x hx
+      have h := ConcreteCategory.congr_hom hd x
+      change ((cellularChainComplex C).sc' (r + 1 + 1) (r + 1) r).g x = j (δ x) at h
+      have hδ : δ x = 0 := hj
+        ((h.symm.trans hx).trans (map_zero j.hom).symm)
+      exact (B.ab_exact_iff).mp hB x hδ
+
+private theorem cellularComparisonInclusion_succ (n : ℕ) :
+    (cellularSkeletonPair C (n + 1)).map ≫ cellularComparisonInclusion C (n + 1) =
+      cellularComparisonInclusion C n := by
+  apply TopCat.ext
+  intro x
+  apply Subtype.ext
+  rfl
+
+private noncomputable def cellularComparisonSpaceSequence (n : ℕ) :
+    ShortComplex AddCommGrpCat.{u} :=
+  ShortComplex.mk (cellularComparisonIncoming C n)
+    ((cellularComparisonHomology.{u} n).map (cellularComparisonInclusion C n))
+    (by
+      let H : TopCat.{u} ⥤ AddCommGrpCat.{u} := cellularComparisonHomology.{u} n
+      let P : TopPair.{u} := cellularSkeletonPair C (n + 1)
+      let a := H.map P.map
+      let b := H.map (cellularComparisonInclusion C (n + 1))
+      have hf : a ≫ b = H.map (cellularComparisonInclusion C n) :=
+        (H.map_comp P.map (cellularComparisonInclusion C (n + 1))).symm.trans
+          (congrArg (fun f ↦ H.map f) (cellularComparisonInclusion_succ C n))
+      have hz : cellularComparisonIncoming C n ≫ a = 0 :=
+        (Hatcher.Relative.singularPairFunctor.obj P).homologyδ_comp
+          cellularComparisonCoefficient.{u} (n + 1) n rfl
+      calc
+        cellularComparisonIncoming C n ≫ H.map (cellularComparisonInclusion C n) =
+            cellularComparisonIncoming C n ≫ (a ≫ b) :=
+          congrArg (fun f ↦ cellularComparisonIncoming C n ≫ f) hf.symm
+        _ = (cellularComparisonIncoming C n ≫ a) ≫ b := (Category.assoc _ _ _).symm
+        _ = 0 := by rw [hz, zero_comp])
+
+private theorem cellularComparisonSpaceSequence_exact (n : ℕ) :
+    (cellularComparisonSpaceSequence C n).Exact := by
+  let H : TopCat.{u} ⥤ AddCommGrpCat.{u} := cellularComparisonHomology.{u} n
+  let P : TopPair.{u} := cellularSkeletonPair C (n + 1)
+  let Q : SSetPair.{u} := Hatcher.Relative.singularPairFunctor.obj P
+  let a := H.map P.map
+  let b := H.map (cellularComparisonInclusion C (n + 1))
+  let B : ShortComplex AddCommGrpCat.{u} := ShortComplex.mk
+    (cellularComparisonIncoming C n) a
+    (Q.homologyδ_comp cellularComparisonCoefficient.{u} (n + 1) n rfl)
+  have hB : B.Exact := Q.homology_exact₁ cellularComparisonCoefficient.{u} (n + 1) n rfl
+  letI : IsIso b := cellularComparisonInclusion_isIso C (n + 1) n (Nat.lt_succ_self n)
+  have hb : Function.Injective b := (AddCommGrpCat.mono_iff_injective b).mp inferInstance
+  have hf : a ≫ b = H.map (cellularComparisonInclusion C n) :=
+    (H.map_comp P.map (cellularComparisonInclusion C (n + 1))).symm.trans
+      (congrArg (fun f ↦ H.map f) (cellularComparisonInclusion_succ C n))
+  apply ((cellularComparisonSpaceSequence C n).ab_exact_iff).mpr
+  intro x hx
+  have h := ConcreteCategory.congr_hom hf x
+  change b (a x) = H.map (cellularComparisonInclusion C n) x at h
+  have ha : a x = 0 := hb ((h.trans hx).trans (map_zero b.hom).symm)
+  exact (B.ab_exact_iff).mp hB x ha
+
+private noncomputable def cellularComparisonData (n : ℕ) :
+    ((cellularChainComplex C).sc' (n + 1) n (Nat.pred n)).LeftHomologyData := by
+  let S : ShortComplex AddCommGrpCat.{u} := (cellularChainComplex C).sc' (n + 1) n (Nat.pred n)
+  let B : ShortComplex AddCommGrpCat.{u} := cellularComparisonCycleSequence C n
+  let W : ShortComplex AddCommGrpCat.{u} := cellularComparisonSpaceSequence C n
+  let j := cellularComparisonProjection C n
+  let π := (cellularComparisonHomology.{u} n).map (cellularComparisonInclusion C n)
+  letI : Mono j := cellularComparisonProjection_mono C n
+  letI : Epi π := cellularComparisonInclusion_epi C n n (Nat.le_refl n)
+  have hB : B.Exact := cellularComparisonCycleSequence_exact C n
+  letI : Mono B.f := cellularComparisonProjection_mono C n
+  let hi : IsLimit (KernelFork.ofι j B.zero) := hB.fIsKernel
+  let f' := hi.lift (KernelFork.ofι S.f S.zero)
+  have hfi : f' ≫ j = S.f := hi.fac (KernelFork.ofι S.f S.zero) WalkingParallelPair.zero
+  have hδ : cellularComparisonIncoming C n ≫ j = S.f := by
+    change _ = (cellularChainComplex C).d (n + 1) n
+    exact (cellularChainComplex_d_succ C n).symm
+  have hf : f' = cellularComparisonIncoming C n :=
+    (cancel_mono j).mp (hfi.trans hδ.symm)
+  have wπ : f' ≫ π = 0 :=
+    (congrArg (fun f ↦ f ≫ π) hf).trans W.zero
+  have hW : W.Exact := cellularComparisonSpaceSequence_exact C n
+  letI : Epi W.g := cellularComparisonInclusion_epi C n n (Nat.le_refl n)
+  let hcoker : IsColimit (CokernelCofork.ofπ π W.zero) := hW.gIsCokernel
+  have hπ : IsColimit (CokernelCofork.ofπ π wπ) :=
+    CokernelCofork.IsColimit.ofπ' π wπ (fun k hk ↦
+      ⟨hcoker.desc (CokernelCofork.ofπ k
+          ((congrArg (fun f ↦ f ≫ k) hf).symm.trans hk)),
+        Cofork.IsColimit.π_desc hcoker⟩)
+  exact
+    { K := cellularComparisonOrdinary C n
+      H := (cellularComparisonHomology.{u} n).obj (TopCat.of ↑C)
+      i := j
+      π := π
+      wi := B.zero
+      hi := hi
+      wπ := wπ
+      hπ := hπ }
+
+/-- The actual skeletal relative projection identifies ordinary skeleton
+homology with the canonical cycles of the constructed cellular complex. -/
+noncomputable def cellularCyclesIso (n : ℕ) :
+    ((singularHomologyFunctor AddCommGrpCat.{u} n).obj
+      (AddCommGrpCat.of.{u} (ULift.{u} ℤ))).obj (cellularSkeletonPair C n).fst ≅
+        (cellularChainComplex C).cycles n :=
+  (cellularComparisonData C n).cyclesIso.symm ≪≫
+    ((cellularChainComplex C).cyclesIsoSc' (n + 1) n (Nat.pred n)
+      (ChainComplex.prev ℕ n)
+      (by cases n with
+          | zero => exact ChainComplex.next_nat_zero
+          | succ r => exact ChainComplex.next_nat_succ r)).symm
+
+theorem cellularCyclesIso_hom_iCycles (n : ℕ) :
+    (cellularCyclesIso C n).hom ≫ (cellularChainComplex C).iCycles n =
+      (Hatcher.Relative.singularPairFunctor.obj (cellularSkeletonPair C n)).homologyπ
+        (AddCommGrpCat.of.{u} (ULift.{u} ℤ)) n := by
+  let D : ChainComplex AddCommGrpCat.{u} ℕ := cellularChainComplex C
+  let S : ShortComplex AddCommGrpCat.{u} := D.sc' (n + 1) n (Nat.pred n)
+  have hp : (ComplexShape.down ℕ).prev n = n + 1 := ChainComplex.prev ℕ n
+  have hn : (ComplexShape.down ℕ).next n = Nat.pred n := by
+    cases n with
+    | zero => exact ChainComplex.next_nat_zero
+    | succ r => exact ChainComplex.next_nat_succ r
+  let e : D.cycles n ≅ S.cycles := D.cyclesIsoSc' (n + 1) n (Nat.pred n) hp hn
+  let data : S.LeftHomologyData := cellularComparisonData C n
+  change (data.cyclesIso.inv ≫ e.inv) ≫ D.iCycles n = data.i
+  calc
+    (data.cyclesIso.inv ≫ e.inv) ≫ D.iCycles n =
+        data.cyclesIso.inv ≫ (e.inv ≫ D.iCycles n) := Category.assoc _ _ _
+    _ = data.cyclesIso.inv ≫ S.iCycles := congrArg
+      (fun f ↦ data.cyclesIso.inv ≫ f)
+      (D.cyclesIsoSc'_inv_iCycles (n + 1) n (Nat.pred n) hp hn)
+    _ = data.i := data.cyclesIso_inv_comp_iCycles
+
+/-- Hatcher Theorem 2.35: cellular homology of the actual complex agrees
+with ordinary integral singular homology of the whole CW carrier. -/
+noncomputable def cellularHomologyComparison (n : ℕ) :
+    (cellularChainComplex C).homology n ≅
+      ((singularHomologyFunctor AddCommGrpCat.{u} n).obj
+        (AddCommGrpCat.of.{u} (ULift.{u} ℤ))).obj (TopCat.of ↑C) :=
+  (cellularChainComplex C).homologyIsoSc' (n + 1) n (Nat.pred n)
+      (ChainComplex.prev ℕ n)
+      (by cases n with
+          | zero => exact ChainComplex.next_nat_zero
+          | succ r => exact ChainComplex.next_nat_succ r) ≪≫
+    (cellularComparisonData C n).homologyIso
+
+theorem cellularHomologyComparison_forward (n : ℕ) :
+    let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+    let H : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+      (singularHomologyFunctor AddCommGrpCat.{u} n).obj R
+    let f : (cellularSkeletonPair C n).fst ⟶ TopCat.of ↑C :=
+      TopCat.ofHom (ContinuousMap.inclusion
+        (CWComplex.skeletonLT C ((n + 1 : ℕ) : ℕ∞)).subset_complex)
+    (cellularCyclesIso C n).hom ≫ (cellularChainComplex C).homologyπ n ≫
+        (cellularHomologyComparison C n).hom = H.map f := by
+  let D : ChainComplex AddCommGrpCat.{u} ℕ := cellularChainComplex C
+  let S : ShortComplex AddCommGrpCat.{u} := D.sc' (n + 1) n (Nat.pred n)
+  have hp : (ComplexShape.down ℕ).prev n = n + 1 := ChainComplex.prev ℕ n
+  have hn : (ComplexShape.down ℕ).next n = Nat.pred n := by
+    cases n with
+    | zero => exact ChainComplex.next_nat_zero
+    | succ r => exact ChainComplex.next_nat_succ r
+  let e : D.cycles n ≅ S.cycles := D.cyclesIsoSc' (n + 1) n (Nat.pred n) hp hn
+  let E : D.homology n ≅ S.homology := D.homologyIsoSc' (n + 1) n (Nat.pred n) hp hn
+  let data : S.LeftHomologyData := cellularComparisonData C n
+  have hq : D.homologyπ n ≫ E.hom = e.hom ≫ S.homologyπ :=
+    D.π_homologyIsoSc'_hom (n + 1) n (Nat.pred n) hp hn
+  change (data.cyclesIso.inv ≫ e.inv) ≫ D.homologyπ n ≫
+    (E.hom ≫ data.homologyIso.hom) = data.π
+  calc
+    (data.cyclesIso.inv ≫ e.inv) ≫ D.homologyπ n ≫
+        (E.hom ≫ data.homologyIso.hom) =
+        data.cyclesIso.inv ≫ (e.inv ≫
+          ((D.homologyπ n ≫ E.hom) ≫ data.homologyIso.hom)) :=
+      by simp only [Category.assoc]
+    _ = data.cyclesIso.inv ≫ (e.inv ≫
+        ((e.hom ≫ S.homologyπ) ≫ data.homologyIso.hom)) := congrArg
+      (fun f ↦ data.cyclesIso.inv ≫ (e.inv ≫ (f ≫ data.homologyIso.hom))) hq
+    _ = data.cyclesIso.inv ≫ (S.homologyπ ≫ data.homologyIso.hom) :=
+      by simp only [Category.assoc, Iso.inv_hom_id_assoc]
+    _ = data.cyclesIso.inv ≫ (data.cyclesIso.hom ≫ data.π) :=
+      congrArg (fun f ↦ data.cyclesIso.inv ≫ f) data.homologyπ_comp_homologyIso_hom
+    _ = data.π := by simp only [Iso.inv_hom_id_assoc]
+
+end Hatcher.ClassicalCW
+
+end
