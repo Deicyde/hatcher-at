@@ -4,7 +4,7 @@ article_id: af_e152239af8a10a168886d827
 
 # Cellular consequences and first computations
 
-7 planned declaration leaves in the cellular boundary milestone.
+7 declaration leaves in the cellular boundary milestone: the no-cells homology result is complete and the other 6 are planned.
 
 - [Homology vanishes when its degree has no cells](no-cells-homology.md)
 - [A finite free abelian subquotient has at most the same number of generators](free-subquotient-generator-bound.md)

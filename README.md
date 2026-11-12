@@ -5,8 +5,8 @@ Topology*, built on Mathlib. The book's text is not redistributed here.
 
 The main-line chapters and numbered sections are mapped in the
 [coverage contract](blueprint/coverage/README.md), not claimed fully
-formalized. The selected roadmap now has 350 formalizable leaves: 316 are
-complete (298 proved locally and 18 supplied by pinned Mathlib), and 34 are
+formalized. The selected roadmap now has 350 formalizable leaves: 317 are
+complete (299 proved locally and 18 supplied by pinned Mathlib), and 33 are
 planned for cellular boundaries and their first computations. The completed
 scope includes the selected fundamental-group spines, homology, excision and
 quotient applications, degree foundations, all twenty local-degree leaves
@@ -22,8 +22,9 @@ The completed [cellular-homology milestone](blueprint/roadmap/homology/computati
 covers Lemma 2.34, the cellular complex and Theorem 2.35 in seventeen formalizable
 leaves, including the two explicit sphere generator bridges. The next
 [cellular boundary and computation milestone](blueprint/roadmap/homology/computations-and-applications/cellular-boundary/README.md)
-adds 34 planned leaves for the attaching-degree formula, general cellular
-consequences and the actual projective and sphere-product examples.
+contains 34 leaves for the attaching-degree formula, general cellular
+consequences and the actual projective and sphere-product examples. The no-cells
+homology result is complete; the other 33 leaves are planned.
 Thirteen residual source areas remain queued; lettered additional
 topics and exercises remain outside scope.
 
