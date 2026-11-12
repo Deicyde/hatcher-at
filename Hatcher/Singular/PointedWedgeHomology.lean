@@ -1915,3 +1915,47 @@ theorem homologyVanishingOfNoCells (n : ℕ)
   exact hCellHomology.of_iso (cellularHomologyComparison C n).symm
 
 end Hatcher.ClassicalCW
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
+
+universe u
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+/-- If no two occupied cell dimensions are adjacent, every differential of
+the actual ordinary integral cellular complex is zero. -/
+theorem cellularDifferentialsZeroOfSparseCells
+    (hSparse : ∀ n : ℕ,
+      ¬ (Nonempty (RelCWComplex.cell C n) ∧
+        Nonempty (RelCWComplex.cell C (n + 1))))
+    (i j : ℕ) : (cellularChainComplex C).d i j = 0 := by
+  let D : ChainComplex AddCommGrpCat.{u} ℕ := cellularChainComplex C
+  have hEmptyChain : ∀ k : ℕ, IsEmpty (RelCWComplex.cell C k) → IsZero (D.X k) := by
+    intro k hk
+    letI : IsEmpty (RelCWComplex.cell C k) := hk
+    obtain ⟨_, e, _⟩ := skeletonRelativeHomology C k
+    have hPair : cellularSkeletonPair C k = skeletalStagePair C k := by
+      rfl
+    have hFree : IsZero
+        (AddCommGrpCat.of.{u} (RelCWComplex.cell C k →₀ ℤ)) := by
+      apply (IsZero.iff_id_eq_zero
+        (AddCommGrpCat.of.{u} (RelCWComplex.cell C k →₀ ℤ))).mpr
+      ext a c
+      exact (IsEmpty.false c).elim
+    change IsZero ((cellularChainComplex C).X k)
+    rw [cellularChainComplex_X C k, hPair]
+    exact hFree.of_iso e
+  change D.d i j = 0
+  by_cases hij : i = j + 1
+  · subst i
+    rcases isEmpty_or_nonempty (RelCWComplex.cell C j) with hTargetEmpty | hTargetNonempty
+    · exact (hEmptyChain j hTargetEmpty).eq_of_tgt (D.d (j + 1) j) 0
+    · have hSourceEmpty : IsEmpty (RelCWComplex.cell C (j + 1)) :=
+        ⟨fun c => hSparse j ⟨hTargetNonempty, ⟨c⟩⟩⟩
+      exact (hEmptyChain (j + 1) hSourceEmpty).eq_of_src (D.d (j + 1) j) 0
+  · exact cellularChainComplex_d_eq_zero C hij
+
+end Hatcher.ClassicalCW
