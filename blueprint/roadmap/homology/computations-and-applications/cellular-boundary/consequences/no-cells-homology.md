@@ -2,6 +2,9 @@
 declaration: theorem
 origin: cited
 article_id: af_233a40fca7c1cbf0009d559b
+lean: Hatcher.ClassicalCW.homologyVanishingOfNoCells
+statement: formalized
+proof: formalized
 ---
 
 # Homology vanishes when its degree has no cells
