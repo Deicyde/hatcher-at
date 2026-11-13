@@ -2,6 +2,9 @@
 declaration: theorem
 origin: cited
 article_id: af_ff6c470e5df703f80a4cb1aa
+lean: Hatcher.ClassicalCW.cellularDifferentialsZeroOfSparseCells
+statement: formalized
+proof: formalized
 ---
 
 # Gaps between cell dimensions force zero cellular differentials
