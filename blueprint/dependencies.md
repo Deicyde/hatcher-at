@@ -10,8 +10,8 @@ autoform_generated: true
 | Status | Count | Meaning |
 | --- | ---: | --- |
 | in mathlib | 18 | Upstreamed into Mathlib. |
-| fully proved | 300 | Proved, and every prerequisite is fully proved too. |
-| ready to state | 11 | Everything its statement uses is in Lean, so the statement can be written in Lean. |
+| fully proved | 301 | Proved, and every prerequisite is fully proved too. |
+| ready to state | 10 | Everything its statement uses is in Lean, so the statement can be written in Lean. |
 | not ready | 8 | Needs more blueprint work before it can be attempted. |
 | planned | 21 | Described in the blueprint only. |
 
@@ -22,7 +22,7 @@ autoform_generated: true
 | [Appendix](roadmap/appendix/README.md) | 5 | 5 fully proved | 0 | none | Homology (proof only), The fundamental group (proof only) |
 | [Cohomology](roadmap/cohomology/README.md) | 3 | 3 not ready | 0 | none | none |
 | [The fundamental group](roadmap/fundamental-group/README.md) | 118 | 8 in mathlib · 110 fully proved | 0 | Appendix (proof only) | Homology |
-| [Homology](roadmap/homology/README.md) | 228 | 10 in mathlib · 185 fully proved · 11 ready to state · 1 not ready · 21 planned | 11 | Appendix (proof only), The fundamental group | none |
+| [Homology](roadmap/homology/README.md) | 228 | 10 in mathlib · 186 fully proved · 10 ready to state · 1 not ready · 21 planned | 10 | Appendix (proof only), The fundamental group | none |
 | [Homotopy theory](roadmap/homotopy-theory/README.md) | 3 | 3 not ready | 0 | none | none |
 | [Top level](roadmap/README.md) | 1 | 1 not ready | 0 | none | none |
 

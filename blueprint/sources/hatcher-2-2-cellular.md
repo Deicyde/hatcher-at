@@ -43,4 +43,4 @@ CW complexes. The next milestone now adopts the immediate applications and the a
 degree calculation. Later surface computations and subsequent material remain
 queued in the coverage contract.
 
-The completed passage is followed by the [cellular boundary and first computation milestone](../roadmap/homology/computations-and-applications/cellular-boundary/README.md), with 34 leaves on pages 140–141 and their finite geometric support on pages 6–8. Its no-cells homology and sparse-cell differential results are complete; the remaining 32 leaves are planned.
+The completed passage is followed by the [cellular boundary and first computation milestone](../roadmap/homology/computations-and-applications/cellular-boundary/README.md), with 34 leaves on pages 140–141 and their finite geometric support on pages 6–8. Its no-cells homology, sparse-cell differential and cell-basis results are complete; the remaining 31 leaves are planned.
