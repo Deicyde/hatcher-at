@@ -2,6 +2,9 @@
 declaration: def
 origin: bridged
 article_id: af_9167e49074bca9673dfca34e
+lean: Hatcher.ClassicalCW.cellularBoundaryCoordinates, Hatcher.ClassicalCW.cellularBoundaryCoordinates_reconstruct, Hatcher.ClassicalCW.cellularBoundaryCoordinates_eq_of_basisIso
+statement: formalized
+proof: formalized
 ---
 
 # Coefficients of the actual cellular differential
