@@ -2021,3 +2021,92 @@ theorem homologyCellBasisOfSparseCells
   rw [hCell i]
 
 end Hatcher.ClassicalCW
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
+
+universe u
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+/-- The integer coordinates of the actual cellular differential of a fixed
+characteristic-cell class, in the existing target cell basis. -/
+noncomputable def cellularBoundaryCoordinates (n : ℕ)
+    (a : RelCWComplex.cell C (n + 1)) : RelCWComplex.cell C n →₀ ℤ :=
+  ((skeletonRelativeHomology C n).2.choose).hom
+    (((cellularChainComplex C).d (n + 1) n)
+      (skeletalCellFundamentalClass C (n + 1) a))
+
+/-- Reconstruct the actual differential from its finite-support integer
+coordinates and the fixed target characteristic-cell classes. -/
+theorem cellularBoundaryCoordinates_reconstruct (n : ℕ)
+    (a : RelCWComplex.cell C (n + 1)) :
+    (cellularBoundaryCoordinates C n a).sum
+        (fun b z => z • skeletalCellFundamentalClass C n b) =
+      ((cellularChainComplex C).d (n + 1) n)
+        (skeletalCellFundamentalClass C (n + 1) a) := by
+  classical
+  let e := (skeletonRelativeHomology C n).2.choose
+  have he : ∀ b : RelCWComplex.cell C n,
+      e.inv (Finsupp.single b 1) = skeletalCellFundamentalClass C n b :=
+    (skeletonRelativeHomology C n).2.choose_spec
+  have hSingle (b : RelCWComplex.cell C n) (z : ℤ) :
+      e.inv (Finsupp.single b z) = z • skeletalCellFundamentalClass C n b := by
+    calc
+      e.inv (Finsupp.single b z) = e.inv.hom (z • Finsupp.single b (1 : ℤ)) := by
+        rw [Finsupp.smul_single_one]
+      _ = z • e.inv (Finsupp.single b 1) := map_zsmul e.inv.hom _ _
+      _ = z • skeletalCellFundamentalClass C n b :=
+        congrArg (fun x => z • x) (he b)
+  let v : RelCWComplex.cell C n →₀ ℤ := cellularBoundaryCoordinates C n a
+  change v.sum (fun b z => z • skeletalCellFundamentalClass C n b) = _
+  calc
+    v.sum (fun b z => z • skeletalCellFundamentalClass C n b) =
+        v.sum (fun b z => e.inv (Finsupp.single b z)) :=
+      congrArg (fun f => v.sum f)
+        (funext fun b => funext fun z => (hSingle b z).symm)
+    _ = e.inv (v.sum Finsupp.single) := by
+      simpa only [Finsupp.sum] using
+        (map_sum e.inv.hom (fun b => Finsupp.single b (v b)) v.support).symm
+    _ = e.inv v := congrArg (fun x => e.inv x) (Finsupp.sum_single v)
+    _ = ((cellularChainComplex C).d (n + 1) n)
+        (skeletalCellFundamentalClass C (n + 1) a) := by
+      let x := ((cellularChainComplex C).d (n + 1) n)
+        (skeletalCellFundamentalClass C (n + 1) a)
+      change e.inv (e.hom x) = x
+      have h := congrArg (fun f => f x) e.hom_inv_id
+      simpa only [AddCommGrpCat.comp_apply, AddCommGrpCat.id_apply] using h
+
+/-- Any target basis isomorphism preserving the fixed cell classes gives
+these same coordinates; the construction is independent of its witness. -/
+theorem cellularBoundaryCoordinates_eq_of_basisIso (n : ℕ)
+    (E : (Hatcher.Relative.homologyFunctor
+        (AddCommGrpCat.of.{u} (ULift.{u} ℤ)) n).obj (skeletalStagePair C n) ≅
+      AddCommGrpCat.of.{u} (RelCWComplex.cell C n →₀ ℤ))
+    (hE : ∀ b : RelCWComplex.cell C n,
+      E.inv (Finsupp.single b 1) = skeletalCellFundamentalClass C n b)
+    (a : RelCWComplex.cell C (n + 1)) :
+    cellularBoundaryCoordinates C n a =
+      E.hom (((cellularChainComplex C).d (n + 1) n)
+        (skeletalCellFundamentalClass C (n + 1) a)) := by
+  let e := (skeletonRelativeHomology C n).2.choose
+  have he : ∀ b : RelCWComplex.cell C n,
+      e.inv (Finsupp.single b 1) = skeletalCellFundamentalClass C n b :=
+    (skeletonRelativeHomology C n).2.choose_spec
+  have hInv : E.inv = e.inv := by
+    apply AddCommGrpCat.hom_ext
+    apply Finsupp.addHom_ext
+    intro b z
+    have hSingle : Finsupp.single b z = z • Finsupp.single b (1 : ℤ) :=
+      (Finsupp.smul_single_one b z).symm
+    change E.inv.hom (Finsupp.single b z) = e.inv.hom (Finsupp.single b z)
+    rw [hSingle, map_zsmul, map_zsmul]
+    change z • E.inv (Finsupp.single b 1) = z • e.inv (Finsupp.single b 1)
+    rw [hE b, he b]
+  have hIso : E = e := Iso.ext_inv hInv
+  rw [hIso]
+  rfl
+
+end Hatcher.ClassicalCW
