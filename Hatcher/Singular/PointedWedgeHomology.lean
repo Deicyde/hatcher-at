@@ -2060,8 +2060,16 @@ theorem cellularBoundaryCoordinates_reconstruct (n : ℕ)
       _ = z • e.inv (Finsupp.single b 1) := map_zsmul e.inv.hom _ _
       _ = z • skeletalCellFundamentalClass C n b :=
         congrArg (fun x => z • x) (he b)
+  let P : AddCommGrpCat.{u} := (Hatcher.Relative.homologyFunctor
+    (AddCommGrpCat.of.{u} (ULift.{u} ℤ)) n).obj (skeletalStagePair C n)
+  let x : P := ((cellularChainComplex C).d (n + 1) n)
+    (skeletalCellFundamentalClass C (n + 1) a)
   let v : RelCWComplex.cell C n →₀ ℤ := cellularBoundaryCoordinates C n a
-  change v.sum (fun b z => z • skeletalCellFundamentalClass C n b) = _
+  have hInv : e.inv v = x := by
+    change e.inv (e.hom x) = x
+    have h := congrArg (fun f : P ⟶ P => f x) e.hom_inv_id
+    simpa only [AddCommGrpCat.comp_apply, AddCommGrpCat.id_apply] using h
+  change v.sum (fun b z => z • skeletalCellFundamentalClass C n b) = x
   calc
     v.sum (fun b z => z • skeletalCellFundamentalClass C n b) =
         v.sum (fun b z => e.inv (Finsupp.single b z)) :=
@@ -2071,13 +2079,7 @@ theorem cellularBoundaryCoordinates_reconstruct (n : ℕ)
       simpa only [Finsupp.sum] using
         (map_sum e.inv.hom (fun b => Finsupp.single b (v b)) v.support).symm
     _ = e.inv v := congrArg (fun x => e.inv x) (Finsupp.sum_single v)
-    _ = ((cellularChainComplex C).d (n + 1) n)
-        (skeletalCellFundamentalClass C (n + 1) a) := by
-      let x := ((cellularChainComplex C).d (n + 1) n)
-        (skeletalCellFundamentalClass C (n + 1) a)
-      change e.inv (e.hom x) = x
-      have h := congrArg (fun f => f x) e.hom_inv_id
-      simpa only [AddCommGrpCat.comp_apply, AddCommGrpCat.id_apply] using h
+    _ = x := hInv
 
 /-- Any target basis isomorphism preserving the fixed cell classes gives
 these same coordinates; the construction is independent of its witness. -/
