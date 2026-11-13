@@ -6,7 +6,7 @@ article_id: af_3ba37e06e8726db37673e7d4
 
 Hatcher §2.2, printed pages 140–141, after the proof of Theorem 2.35 and before Example 2.36. This milestone covers applications (i)–(iii), the two unnumbered geometric illustrations, the first differential and the complete higher boundary formula. Its geometric support is Example 0.3, the finite part of Example 0.6, and Products on printed pages 6–8.
 
-One of the 34 declaration leaves below is complete: ordinary homology vanishes in every degree with no cells, including degree zero. The other 33 leaves are planned. All 316 earlier formalizable leaves, including all seventeen cellular/singular-comparison leaves, remain complete.
+Two of the 34 declaration leaves below are complete: ordinary homology vanishes in every degree with no cells, including degree zero, and every cellular differential is zero when occupied cell dimensions are never adjacent. The other 32 leaves are planned. All 316 earlier formalizable leaves, including all seventeen cellular/singular-comparison leaves, remain complete.
 
 The general results use ordinary integral homology and allow empty complexes, infinite cell families and unbounded dimensions. The geometric examples construct their actual classical CW structures. Attaching coefficients are tied to the existing cell generators through proved sphere and coefficient comparisons.
 
