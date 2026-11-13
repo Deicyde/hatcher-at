@@ -2068,7 +2068,8 @@ theorem cellularBoundaryCoordinates_reconstruct (n : ℕ)
   have hInv : e.inv v = x := by
     change e.inv (e.hom x) = x
     have h := congrArg (fun f : P ⟶ P => f x) e.hom_inv_id
-    simpa only [AddCommGrpCat.comp_apply, AddCommGrpCat.id_apply] using h
+    change e.inv (e.hom x) = x at h
+    exact h
   change v.sum (fun b z => z • skeletalCellFundamentalClass C n b) = x
   calc
     v.sum (fun b z => z • skeletalCellFundamentalClass C n b) =
