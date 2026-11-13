@@ -1959,3 +1959,65 @@ theorem cellularDifferentialsZeroOfSparseCells
   · exact cellularChainComplex_d_eq_zero C hij
 
 end Hatcher.ClassicalCW
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
+
+universe u
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+/-- With no adjacent occupied cell dimensions, the actual cells give a basis
+of ordinary integral singular homology through the canonical cellular quotient
+and the cellular/singular comparison. -/
+theorem homologyCellBasisOfSparseCells
+    (hSparse : ∀ n : ℕ,
+      ¬ (Nonempty (RelCWComplex.cell C n) ∧
+        Nonempty (RelCWComplex.cell C (n + 1))))
+    (n : ℕ) :
+    let D : ChainComplex AddCommGrpCat.{u} ℕ := cellularChainComplex C
+    ∃ q : D.X n ≅ D.homology n,
+      D.iCycles n ≫ q.hom = D.homologyπ n ∧
+      ∃ E : AddCommGrpCat.of.{u} (RelCWComplex.cell C n →₀ ℤ) ≅
+          (((singularHomologyFunctor AddCommGrpCat.{u} n).obj
+            (AddCommGrpCat.of.{u} (ULift.{u} ℤ))).obj (TopCat.of ↑C)),
+        ∀ i : RelCWComplex.cell C n,
+          E.hom (Finsupp.single i 1) =
+            (q.hom ≫ (cellularHomologyComparison C n).hom)
+              (skeletalCellFundamentalClass C n i) := by
+  let D : ChainComplex AddCommGrpCat.{u} ℕ := cellularChainComplex C
+  have hD (i j : ℕ) : D.d i j = 0 :=
+    cellularDifferentialsZeroOfSparseCells C hSparse i j
+  let eCycles : D.cycles n ≅ D.X n :=
+    D.iCyclesIso n ((ComplexShape.down ℕ).next n) rfl
+      (hD n ((ComplexShape.down ℕ).next n))
+  let eHomology : D.cycles n ≅ D.homology n :=
+    D.isoHomologyπ ((ComplexShape.down ℕ).prev n) n rfl
+      (hD ((ComplexShape.down ℕ).prev n) n)
+  let q : D.X n ≅ D.homology n := eCycles.symm ≪≫ eHomology
+  have hq : D.iCycles n ≫ q.hom = D.homologyπ n := by
+    change eCycles.hom ≫ (eCycles.inv ≫ eHomology.hom) = eHomology.hom
+    rw [← Category.assoc, eCycles.hom_inv_id, Category.id_comp]
+  obtain ⟨_, e, he⟩ := skeletonRelativeHomology C n
+  have hPair : cellularSkeletonPair C n = skeletalStagePair C n := by
+    rfl
+  let eCell : D.X n ≅ AddCommGrpCat.of.{u} (RelCWComplex.cell C n →₀ ℤ) := by
+    change (cellularChainComplex C).X n ≅
+      AddCommGrpCat.of.{u} (RelCWComplex.cell C n →₀ ℤ)
+    rw [cellularChainComplex_X C n, hPair]
+    exact e
+  have hCell (i : RelCWComplex.cell C n) :
+      eCell.inv (Finsupp.single i 1) = skeletalCellFundamentalClass C n i := by
+    change e.inv (Finsupp.single i 1) = skeletalCellFundamentalClass C n i
+    exact he i
+  refine ⟨q, hq, eCell.symm ≪≫ q ≪≫ cellularHomologyComparison C n, ?_⟩
+  intro i
+  change (q.hom ≫ (cellularHomologyComparison C n).hom)
+    (eCell.inv (Finsupp.single i 1)) =
+      (q.hom ≫ (cellularHomologyComparison C n).hom)
+        (skeletalCellFundamentalClass C n i)
+  rw [hCell i]
+
+end Hatcher.ClassicalCW
