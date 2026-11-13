@@ -4,7 +4,7 @@ article_id: af_9966918de032297a2c6170ed
 
 # Attaching maps and cellular boundary degrees
 
-16 planned declaration leaves in the cellular boundary milestone.
+16 declaration leaves in the cellular boundary milestone: canonical boundary coordinates are complete and the other 15 are planned.
 
 - [Coefficients of the actual cellular differential](cellular-boundary-coordinates.md)
 - [The sphere chain comparison transports coefficients and the fixed class](sphere-coefficient-lift-comparison.md)
