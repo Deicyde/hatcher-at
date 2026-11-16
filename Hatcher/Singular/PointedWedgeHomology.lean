@@ -2127,6 +2127,7 @@ variable {X : Type u} [TopologicalSpace X] [T2Space X]
 maps, and the cellular differential of its fixed cell class is the relative
 projection of the attaching-map image of the fixed disk boundary class.
 Writing the source dimension as k + 1 includes one-cells. -/
+set_option backward.isDefEq.respectTransparency false in
 theorem characteristicBoundaryNaturality (k : ℕ)
     (i : RelCWComplex.cell C (k + 1)) :
     let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
@@ -2137,8 +2138,10 @@ theorem characteristicBoundaryNaturality (k : ℕ)
       (standardDiskBoundaryPair.{u} (k + 1)) R (k + 1) k rfl
     let δC := Hatcher.Relative.pairConnecting
       (skeletalStagePair C (k + 1)) R (k + 1) k rfl
-    let p := (Hatcher.Relative.singularPairFunctor.obj
-      (cellularSkeletonPair C k)).homologyπ R k
+    let p : H.obj (skeletalStagePair C (k + 1)).snd ⟶
+        (cellularChainComplex C).X k :=
+      (Hatcher.Relative.singularPairFunctor.obj
+        (cellularSkeletonPair C k)).homologyπ R k
     ((Hatcher.Relative.homologyFunctor R (k + 1)).map f ≫ δC =
         δD ≫ H.map (TopPair.Hom.snd f)) ∧
       ((cellularChainComplex C).d (k + 1) k
@@ -2153,19 +2156,33 @@ theorem characteristicBoundaryNaturality (k : ℕ)
     (standardDiskBoundaryPair.{u} (k + 1)) R (k + 1) k rfl
   let δC := Hatcher.Relative.pairConnecting
     (skeletalStagePair C (k + 1)) R (k + 1) k rfl
-  let p := (Hatcher.Relative.singularPairFunctor.obj
-    (cellularSkeletonPair C k)).homologyπ R k
+  let p : H.obj (skeletalStagePair C (k + 1)).snd ⟶
+      (cellularChainComplex C).X k :=
+    (Hatcher.Relative.singularPairFunctor.obj
+      (cellularSkeletonPair C k)).homologyπ R k
   let g := positiveStandardDiskFundamentalClass.{u} k
   let l := (Hatcher.Relative.homologyFunctor R (k + 1)).map f
   have hNat : l ≫ δC = δD ≫ H.map (TopPair.Hom.snd f) :=
     (Hatcher.Relative.pairConnecting_naturality f R (k + 1) k rfl).symm
   refine ⟨hNat, ?_⟩
+  let S : AddCommGrpCat.{u} := (Hatcher.Relative.homologyFunctor R (k + 1)).obj
+    (standardDiskBoundaryPair.{u} (k + 1))
+  let A : AddCommGrpCat.{u} := H.obj (skeletalStagePair C (k + 1)).snd
+  let T : AddCommGrpCat.{u} := (cellularChainComplex C).X k
+  have hDiff : (cellularChainComplex C).d (k + 1) k = δC ≫ p :=
+    cellularChainComplex_d_succ C k
   have hFormula : g ≫ l ≫ (cellularChainComplex C).d (k + 1) k =
       g ≫ δD ≫ H.map (TopPair.Hom.snd f) ≫ p := by
-    rw [cellularChainComplex_d_succ]
-    change g ≫ (l ≫ (δC ≫ p)) = g ≫ (δD ≫ (H.map (TopPair.Hom.snd f) ≫ p))
-    rw [← Category.assoc l δC p, hNat]
-    simp only [Category.assoc]
+    calc
+      g ≫ l ≫ (cellularChainComplex C).d (k + 1) k = g ≫ l ≫ (δC ≫ p) :=
+        congrArg (fun q : (cellularChainComplex C).X (k + 1) ⟶ T => g ≫ l ≫ q) hDiff
+      _ = g ≫ ((l ≫ δC) ≫ p) :=
+        congrArg (fun q : S ⟶ T => g ≫ q) (Category.assoc l δC p).symm
+      _ = g ≫ ((δD ≫ H.map (TopPair.Hom.snd f)) ≫ p) :=
+        congrArg (fun q : S ⟶ A => g ≫ q ≫ p) hNat
+      _ = g ≫ δD ≫ H.map (TopPair.Hom.snd f) ≫ p :=
+        congrArg (fun q : S ⟶ T => g ≫ q)
+          (Category.assoc δD (H.map (TopPair.Hom.snd f)) p)
   change (g ≫ l ≫ (cellularChainComplex C).d (k + 1) k) (ULift.up (1 : ℤ)) =
     (g ≫ δD ≫ H.map (TopPair.Hom.snd f) ≫ p) (ULift.up (1 : ℤ))
   exact ConcreteCategory.congr_hom hFormula (ULift.up (1 : ℤ))
