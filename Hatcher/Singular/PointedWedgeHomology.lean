@@ -2113,3 +2113,61 @@ theorem cellularBoundaryCoordinates_eq_of_basisIso (n : ℕ)
   rfl
 
 end Hatcher.ClassicalCW
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
+
+universe u
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+/-- The actual characteristic/attaching map commutes with ordinary connecting
+maps, and the cellular differential of its fixed cell class is the relative
+projection of the attaching-map image of the fixed disk boundary class.
+Writing the source dimension as k + 1 includes one-cells. -/
+theorem characteristicBoundaryNaturality (k : ℕ)
+    (i : RelCWComplex.cell C (k + 1)) :
+    let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+    let f := skeletalStageCellPairMap C (k + 1) i
+    let H : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+      (singularHomologyFunctor AddCommGrpCat.{u} k).obj R
+    let δD := Hatcher.Relative.pairConnecting
+      (standardDiskBoundaryPair.{u} (k + 1)) R (k + 1) k rfl
+    let δC := Hatcher.Relative.pairConnecting
+      (skeletalStagePair C (k + 1)) R (k + 1) k rfl
+    let p := (Hatcher.Relative.singularPairFunctor.obj
+      (cellularSkeletonPair C k)).homologyπ R k
+    ((Hatcher.Relative.homologyFunctor R (k + 1)).map f ≫ δC =
+        δD ≫ H.map (TopPair.Hom.snd f)) ∧
+      ((cellularChainComplex C).d (k + 1) k
+          (positiveSkeletonCellFundamentalClass C k i) =
+        (positiveStandardDiskFundamentalClass.{u} k ≫ δD ≫
+          H.map (TopPair.Hom.snd f) ≫ p) (ULift.up (1 : ℤ))) := by
+  let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+  let f := skeletalStageCellPairMap C (k + 1) i
+  let H : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+    (singularHomologyFunctor AddCommGrpCat.{u} k).obj R
+  let δD := Hatcher.Relative.pairConnecting
+    (standardDiskBoundaryPair.{u} (k + 1)) R (k + 1) k rfl
+  let δC := Hatcher.Relative.pairConnecting
+    (skeletalStagePair C (k + 1)) R (k + 1) k rfl
+  let p := (Hatcher.Relative.singularPairFunctor.obj
+    (cellularSkeletonPair C k)).homologyπ R k
+  let g := positiveStandardDiskFundamentalClass.{u} k
+  let l := (Hatcher.Relative.homologyFunctor R (k + 1)).map f
+  have hNat : l ≫ δC = δD ≫ H.map (TopPair.Hom.snd f) :=
+    (Hatcher.Relative.pairConnecting_naturality f R (k + 1) k rfl).symm
+  refine ⟨hNat, ?_⟩
+  have hFormula : g ≫ l ≫ (cellularChainComplex C).d (k + 1) k =
+      g ≫ δD ≫ H.map (TopPair.Hom.snd f) ≫ p := by
+    rw [cellularChainComplex_d_succ]
+    change g ≫ (l ≫ (δC ≫ p)) = g ≫ (δD ≫ (H.map (TopPair.Hom.snd f) ≫ p))
+    rw [← Category.assoc l δC p, hNat]
+    simp only [Category.assoc]
+  change (g ≫ l ≫ (cellularChainComplex C).d (k + 1) k) (ULift.up (1 : ℤ)) =
+    (g ≫ δD ≫ H.map (TopPair.Hom.snd f) ≫ p) (ULift.up (1 : ℤ))
+  exact ConcreteCategory.congr_hom hFormula (ULift.up (1 : ℤ))
+
+end Hatcher.ClassicalCW
