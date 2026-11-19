@@ -5,14 +5,15 @@ autoform_generated: true
 
 # Dependency summary
 
-358 articles in 6 chapters, with 3 dependencies between chapters. A chapter depends on another when one of its articles rests on one of the other's; "proof only" marks a dependency only a proof needs.
+The roadmap has 395 articles: 350 formalization targets and 45 others (the roadmap's own article, chapters and sections, and articles that declare nothing). It has 6 chapters, with 3 dependencies between chapters. A chapter depends on another when one of its articles rests on one of the other's; "proof only" marks a dependency only a proof needs.
+
+The Chapters table's Items column also counts 8 articles marked not ready with no declaration yet, so deferred work holds its chapter open; the status table, like `autoform check`, leaves such articles out.
 
 | Status | Count | Meaning |
 | --- | ---: | --- |
-| in mathlib | 18 | Upstreamed into Mathlib. |
-| fully proved | 302 | Proved, and every prerequisite is fully proved too. |
-| ready to state | 9 | Everything its statement uses is in Lean, so the statement can be written in Lean. |
-| not ready | 8 | Needs more blueprint work before it can be attempted. |
+| in mathlib | 18 | Restates an existing Mathlib declaration. |
+| fully proved | 304 | Proved, and every prerequisite is fully proved too. |
+| ready to state | 7 | Everything its statement uses is in Lean, so the statement can be written in Lean. |
 | planned | 21 | Described in the blueprint only. |
 
 ## Chapters
@@ -22,11 +23,11 @@ autoform_generated: true
 | [Appendix](roadmap/appendix/README.md) | 5 | 5 fully proved | 0 | none | Homology (proof only), The fundamental group (proof only) |
 | [Cohomology](roadmap/cohomology/README.md) | 3 | 3 not ready | 0 | none | none |
 | [The fundamental group](roadmap/fundamental-group/README.md) | 118 | 8 in mathlib · 110 fully proved | 0 | Appendix (proof only) | Homology |
-| [Homology](roadmap/homology/README.md) | 228 | 10 in mathlib · 187 fully proved · 9 ready to state · 1 not ready · 21 planned | 9 | Appendix (proof only), The fundamental group | none |
+| [Homology](roadmap/homology/README.md) | 228 | 10 in mathlib · 189 fully proved · 7 ready to state · 1 not ready · 21 planned | 7 | Appendix (proof only), The fundamental group | none |
 | [Homotopy theory](roadmap/homotopy-theory/README.md) | 3 | 3 not ready | 0 | none | none |
 | [Top level](roadmap/README.md) | 1 | 1 not ready | 0 | none | none |
 
-The roadmap has more articles than the 120 this page lists; the explorer shows every one.
+The Items column totals 358; this page lists items only when there are at most 120, so it lists none, and the explorer shows every one.
 
 ## Explorer
 
