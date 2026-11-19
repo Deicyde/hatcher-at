@@ -28,6 +28,10 @@
     {
       "article_id": "af_07101a56629e9ad3a0c03550",
       "module": "Hatcher.Singular.PointedWedgeHomology"
+    },
+    {
+      "article_id": "af_243867ae2016bd66752e2680",
+      "module": "Hatcher.Sphere.DegreeOrientation"
     }
   ]
 }
