@@ -2061,4 +2061,255 @@ theorem skeletonPointQuotientIsoWedge_inv_inclusion (k : ℕ)
         ((diskBoundaryPointQuotientIsoSphere.{u} k).inv s) :=
   skeletalStageWedgeInverse_inclusion C k i s
 
+private def singleCellWedgeSelector (k : ℕ) (b : RelCWComplex.cell C (k + 1)) :
+    C(skeletalStageWedge C k, TopCat.sphere.{u} (k + 1)) := by
+  classical
+  exact Hatcher.PointedWedge.desc (skeletalStagePoles C k) (Hatcher.Sphere.northPole.{u} k)
+    (fun i ↦ if i = b then ContinuousMap.id (TopCat.sphere.{u} (k + 1))
+      else ContinuousMap.const (TopCat.sphere.{u} (k + 1)) (Hatcher.Sphere.northPole.{u} k))
+    (by intro i; by_cases h : i = b <;> simp [h])
+
+/-- The collapse of all but one summand of the actual skeletal quotient. -/
+noncomputable def singleCellSphereCollapse (k : ℕ) (b : RelCWComplex.cell C (k + 1)) :
+    pointQuotient (skeletalStagePair C (k + 1)) ⟶ TopCat.sphere.{u} (k + 1) :=
+  (skeletonPointQuotientIsoWedge C k).hom ≫ TopCat.ofHom (singleCellWedgeSelector C k b)
+
+@[simp]
+theorem singleCellSphereCollapse_point (k : ℕ) (b : RelCWComplex.cell C (k + 1)) :
+    singleCellSphereCollapse C k b (pointQuotientPoint (skeletalStagePair C (k + 1))) =
+      Hatcher.Sphere.northPole.{u} k := by
+  change singleCellWedgeSelector C k b
+    ((skeletonPointQuotientIsoWedge C k).hom
+      (pointQuotientPoint (skeletalStagePair C (k + 1)))) = _
+  rw [skeletonPointQuotientIsoWedge_point]
+  rfl
+
+/-- On the selected characteristic quotient, the collapse is the prescribed sphere map. -/
+theorem singleCellSphereCollapse_selected (k : ℕ) (b : RelCWComplex.cell C (k + 1)) :
+    pointQuotientMap (skeletalStageCellPairMap C (k + 1) b) ≫ singleCellSphereCollapse C k b =
+      (diskBoundaryPointQuotientIsoSphere.{u} k).hom := by
+  rw [singleCellSphereCollapse, ← Category.assoc, skeletonPointQuotientIsoWedge_pairMap]
+  apply TopCat.ext
+  intro x
+  change singleCellWedgeSelector C k b (Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) b
+    ((diskBoundaryPointQuotientIsoSphere.{u} k).hom x)) = _
+  simp [singleCellWedgeSelector]
+
+/-- Each other characteristic quotient is sent to the sphere's north pole. -/
+theorem singleCellSphereCollapse_other (k : ℕ) (b i : RelCWComplex.cell C (k + 1))
+    (hi : i ≠ b) :
+    pointQuotientMap (skeletalStageCellPairMap C (k + 1) i) ≫ singleCellSphereCollapse C k b =
+      TopCat.ofHom (ContinuousMap.const _ (Hatcher.Sphere.northPole.{u} k)) := by
+  rw [singleCellSphereCollapse, ← Category.assoc, skeletonPointQuotientIsoWedge_pairMap]
+  apply TopCat.ext
+  intro x
+  change singleCellWedgeSelector C k b (Hatcher.PointedWedge.inclusion (skeletalStagePoles C k) i
+    ((diskBoundaryPointQuotientIsoSphere.{u} k).hom x)) = Hatcher.Sphere.northPole.{u} k
+  simp [singleCellWedgeSelector, hi]
+
+/-- Every point off the selected open cell maps to the north pole. -/
+theorem singleCellSphereCollapse_compl (k : ℕ) (b : RelCWComplex.cell C (k + 1))
+    (x : (skeletalStagePair C (k + 1)).fst)
+    (hx : (x : X) ∉ RelCWComplex.openCell (k + 1) b) :
+    singleCellSphereCollapse C k b (pointQuotientProjection (skeletalStagePair C (k + 1)) x) =
+      Hatcher.Sphere.northPole.{u} k := by
+  classical
+  have hold (a : (skeletalStagePair C (k + 1)).snd) :
+      singleCellSphereCollapse C k b (pointQuotientProjection (skeletalStagePair C (k + 1))
+        (skeletonLTStepOldMap C (k + 1) a)) = Hatcher.Sphere.northPole.{u} k := by
+    rw [skeletalStageQuotient_old_point, singleCellSphereCollapse_point]
+  obtain ⟨y, hy⟩ := surjective_skeletonLTStepJointMap C (k + 1) x
+  rcases y with a | ⟨i, z⟩
+  · change skeletonLTStepOldMap C (k + 1) a = x at hy
+    subst x
+    exact hold a
+  · change skeletonLTStepClosedCellMap C (k + 1) i z = x at hy
+    by_cases hi : i = b
+    · subst i
+      have hclosed : (x : X) ∈ RelCWComplex.closedCell (k + 1) b := by
+        rw [← hy]
+        exact ⟨z, z.property, rfl⟩
+      rw [← RelCWComplex.cellFrontier_union_openCell_eq_closedCell] at hclosed
+      change (x : X) ∈ RelCWComplex.cellFrontier (k + 1) b ∨
+        (x : X) ∈ RelCWComplex.openCell (k + 1) b at hclosed
+      let a : (skeletalStagePair C (k + 1)).snd :=
+        ⟨x, RelCWComplex.cellFrontier_subset_skeletonLT (C := C) (k + 1) b
+          (hclosed.resolve_right hx)⟩
+      have ha : skeletonLTStepOldMap C (k + 1) a = x := Subtype.ext rfl
+      rw [← ha]
+      exact hold a
+    · subst x
+      change singleCellWedgeSelector C k b ((skeletonPointQuotientIsoWedge C k).hom
+        (pointQuotientProjection (skeletalStagePair C (k + 1))
+          (skeletonLTStepClosedCellMap C (k + 1) i z))) = _
+      rw [skeletonPointQuotientIsoWedge_cell]
+      simp [singleCellWedgeSelector, hi]
+
+/-- The successor skeleton paired with the actual complement of one open cell. -/
+noncomputable def singleCellComplementPair (k : ℕ) (b : RelCWComplex.cell C (k + 1)) :
+    TopPair.{u} :=
+  TopPair.ofSubset (X := (skeletalStagePair C (k + 1)).fst)
+    (fun x ↦ (x : X) ∉ RelCWComplex.openCell (k + 1) b)
+
+private def singleCellComplementPairMap (k : ℕ) (b : RelCWComplex.cell C (k + 1)) :
+    skeletalStagePair C (k + 1) ⟶ singleCellComplementPair C k b := by
+  let P := skeletalStagePair C (k + 1)
+  have h (a : P.snd) : ((P.map a : P.fst) : X) ∉ RelCWComplex.openCell (k + 1) b :=
+    (RelCWComplex.disjoint_skeletonLT_openCell (C := C) (n := ((k + 1 : ℕ) : ℕ∞))
+      (m := k + 1) (j := b) le_rfl).notMem_of_mem_left a.property
+  exact TopPair.ofHom (𝟙 P.fst) (TopCat.ofHom
+    ⟨fun a ↦ ⟨P.map a, h a⟩, P.map.hom.continuous.subtype_mk h⟩) (by
+      apply TopCat.ext
+      intro a
+      rfl)
+
+private def singleCellComplementToSphere (k : ℕ) (b : RelCWComplex.cell C (k + 1)) :
+    pointQuotient (singleCellComplementPair C k b) ⟶ TopCat.sphere.{u} (k + 1) :=
+  pushout.desc
+    (pointQuotientProjection (skeletalStagePair C (k + 1)) ≫ singleCellSphereCollapse C k b)
+    (TopCat.ofHom (ContinuousMap.const _ (Hatcher.Sphere.northPole.{u} k)))
+    (by
+      apply TopCat.ext
+      intro x
+      exact singleCellSphereCollapse_compl C k b x.val x.property)
+
+private theorem singleCellComplementToSphere_projection (k : ℕ)
+    (b : RelCWComplex.cell C (k + 1)) :
+    pointQuotientProjection (singleCellComplementPair C k b) ≫ singleCellComplementToSphere C k b =
+      pointQuotientProjection (skeletalStagePair C (k + 1)) ≫ singleCellSphereCollapse C k b := by
+  dsimp [pointQuotientProjection, singleCellComplementToSphere, pointQuotient]
+  apply pushout.inl_desc
+
+private theorem singleCellComplementToSphere_point (k : ℕ)
+    (b : RelCWComplex.cell C (k + 1)) :
+    singleCellComplementToSphere C k b (pointQuotientPoint (singleCellComplementPair C k b)) =
+      Hatcher.Sphere.northPole.{u} k := by
+  let Q := singleCellComplementPair C k b
+  have h : pointQuotientPointInclusion Q ≫ singleCellComplementToSphere C k b =
+      TopCat.ofHom (ContinuousMap.const _ (Hatcher.Sphere.northPole.{u} k)) := by
+    dsimp [pointQuotientPointInclusion, singleCellComplementToSphere, pointQuotient]
+    apply pushout.inr_desc
+  exact ConcreteCategory.congr_hom h PUnit.unit
+
+private theorem singleCellComplementToSphere_factor (k : ℕ)
+    (b : RelCWComplex.cell C (k + 1)) :
+    pointQuotientMap (singleCellComplementPairMap C k b) ≫ singleCellComplementToSphere C k b =
+      singleCellSphereCollapse C k b := by
+  let P := skeletalStagePair C (k + 1)
+  let Q := singleCellComplementPair C k b
+  apply pushout.hom_ext (f := P.map) (g := pointQuotientCollapse P)
+  · change pointQuotientProjection P ≫
+        (pointQuotientMap (singleCellComplementPairMap C k b) ≫ singleCellComplementToSphere C k b) = _
+    rw [pointQuotientProjection_naturality_assoc]
+    change (𝟙 P.fst) ≫ pointQuotientProjection Q ≫ singleCellComplementToSphere C k b = _
+    rw [Category.id_comp, singleCellComplementToSphere_projection]
+  · change pointQuotientPointInclusion P ≫
+        (pointQuotientMap (singleCellComplementPairMap C k b) ≫ singleCellComplementToSphere C k b) = _
+    rw [pointQuotientPointInclusion_naturality_assoc]
+    apply TopCat.ext
+    intro x
+    cases x
+    exact (singleCellComplementToSphere_point C k b).trans (singleCellSphereCollapse_point C k b).symm
+
+private def singleCellSphereToComplement (k : ℕ) (b : RelCWComplex.cell C (k + 1)) :
+    TopCat.sphere.{u} (k + 1) ⟶ pointQuotient (singleCellComplementPair C k b) :=
+  (diskBoundaryPointQuotientIsoSphere.{u} k).inv ≫ pointQuotientMap
+    (skeletalStageCellPairMap C (k + 1) b ≫ singleCellComplementPairMap C k b)
+
+private theorem singleCellSphereToComplement_point (k : ℕ)
+    (b : RelCWComplex.cell C (k + 1)) :
+    singleCellSphereToComplement C k b (Hatcher.Sphere.northPole.{u} k) =
+      pointQuotientPoint (singleCellComplementPair C k b) := by
+  let D := standardDiskBoundaryPair.{u} (k + 1)
+  let e := diskBoundaryPointQuotientIsoSphere.{u} k
+  let f := skeletalStageCellPairMap C (k + 1) b ≫ singleCellComplementPairMap C k b
+  have he : e.inv (Hatcher.Sphere.northPole.{u} k) = pointQuotientPoint D := by
+    rw [← diskBoundaryPointQuotientIsoSphere_point k]
+    exact ConcreteCategory.congr_hom e.hom_inv_id (pointQuotientPoint D)
+  change pointQuotientMap f (e.inv (Hatcher.Sphere.northPole.{u} k)) = _
+  rw [he]
+  exact ConcreteCategory.congr_hom (pointQuotientPointInclusion_naturality f) PUnit.unit
+
+private theorem singleCellSphereToComplement_toSphere (k : ℕ)
+    (b : RelCWComplex.cell C (k + 1)) :
+    singleCellSphereToComplement C k b ≫ singleCellComplementToSphere C k b = 𝟙 _ := by
+  rw [singleCellSphereToComplement, pointQuotientMap_comp, Category.assoc, Category.assoc,
+    singleCellComplementToSphere_factor, singleCellSphereCollapse_selected]
+  exact (diskBoundaryPointQuotientIsoSphere.{u} k).inv_hom_id
+
+private theorem singleCellComplementToSphere_toComplement (k : ℕ)
+    (b : RelCWComplex.cell C (k + 1)) :
+    singleCellComplementToSphere C k b ≫ singleCellSphereToComplement C k b = 𝟙 _ := by
+  let P := skeletalStagePair C (k + 1)
+  let Q := singleCellComplementPair C k b
+  let D := standardDiskBoundaryPair.{u} (k + 1)
+  let e := diskBoundaryPointQuotientIsoSphere.{u} k
+  let f := skeletalStageCellPairMap C (k + 1) b
+  let g := singleCellComplementPairMap C k b
+  apply pushout.hom_ext (f := Q.map) (g := pointQuotientCollapse Q)
+  · apply TopCat.ext
+    intro x
+    change singleCellSphereToComplement C k b
+        (singleCellComplementToSphere C k b (pointQuotientProjection Q x)) =
+      pointQuotientProjection Q x
+    have hq : singleCellComplementToSphere C k b (pointQuotientProjection Q x) =
+        singleCellSphereCollapse C k b (pointQuotientProjection P x) :=
+      ConcreteCategory.congr_hom (singleCellComplementToSphere_projection C k b) x
+    rw [hq]
+    by_cases hx : (x : X) ∈ RelCWComplex.openCell (k + 1) b
+    · obtain ⟨z, hz, hzx⟩ := hx
+      let a : classicalDisk.{u} (k + 1) := ULift.up ⟨z, Metric.ball_subset_closedBall hz⟩
+      let E := classicalCellArrowIso.{u} (k + 1)
+      let y : D.fst := E.hom.right a
+      have hy : TopPair.Hom.fst f y = x := by
+        change skeletonLTStepClosedCellMap C (k + 1) b (E.inv.right (E.hom.right a)).down = x
+        rw [skeletalStageClassicalDisk_hom_inv]
+        exact Subtype.ext hzx
+      have hf : singleCellSphereCollapse C k b (pointQuotientProjection P x) =
+          e.hom (pointQuotientProjection D y) := by
+        have hn : pointQuotientMap f (pointQuotientProjection D y) =
+            pointQuotientProjection P x :=
+          (ConcreteCategory.congr_hom (pointQuotientProjection_naturality f) y).trans
+            (congrArg (pointQuotientProjection P) hy)
+        rw [← hn]
+        exact ConcreteCategory.congr_hom (singleCellSphereCollapse_selected C k b)
+          (pointQuotientProjection D y)
+      rw [hf]
+      change pointQuotientMap (f ≫ g) (e.inv (e.hom (pointQuotientProjection D y))) = _
+      have he : e.inv (e.hom (pointQuotientProjection D y)) = pointQuotientProjection D y :=
+        ConcreteCategory.congr_hom e.hom_inv_id (pointQuotientProjection D y)
+      rw [he]
+      exact (ConcreteCategory.congr_hom (pointQuotientProjection_naturality (f ≫ g)) y).trans
+        (congrArg (pointQuotientProjection Q) hy)
+    · rw [singleCellSphereCollapse_compl C k b x hx, singleCellSphereToComplement_point]
+      let a : Q.snd := ⟨x, hx⟩
+      have ha := ConcreteCategory.congr_hom
+        (pushout.condition (f := Q.map) (g := pointQuotientCollapse Q)) a
+      change pointQuotientProjection Q x =
+        pointQuotientPointInclusion Q (pointQuotientCollapse Q a) at ha
+      rw [Subsingleton.elim (pointQuotientCollapse Q a) PUnit.unit] at ha
+      exact ha.symm
+  · apply TopCat.ext
+    intro x
+    cases x
+    change singleCellSphereToComplement C k b
+      (singleCellComplementToSphere C k b (pointQuotientPoint Q)) = pointQuotientPoint Q
+    rw [singleCellComplementToSphere_point, singleCellSphereToComplement_point]
+
+/-- Collapsing the complement of the selected open cell gives its sphere. -/
+noncomputable def singleCellSphereComplementIso (k : ℕ) (b : RelCWComplex.cell C (k + 1)) :
+    pointQuotient (singleCellComplementPair C k b) ≅ TopCat.sphere.{u} (k + 1) where
+  hom := singleCellComplementToSphere C k b
+  inv := singleCellSphereToComplement C k b
+  hom_inv_id := singleCellComplementToSphere_toComplement C k b
+  inv_hom_id := singleCellSphereToComplement_toSphere C k b
+
+/-- The complement quotient projection is the same map from the successor skeleton
+as the selected-sphere collapse after the skeletal quotient projection. -/
+theorem singleCellSphereComplementIso_projection (k : ℕ) (b : RelCWComplex.cell C (k + 1)) :
+    pointQuotientProjection (singleCellComplementPair C k b) ≫
+        (singleCellSphereComplementIso C k b).hom =
+      pointQuotientProjection (skeletalStagePair C (k + 1)) ≫ singleCellSphereCollapse C k b :=
+  singleCellComplementToSphere_projection C k b
+
 end Hatcher.ClassicalCW

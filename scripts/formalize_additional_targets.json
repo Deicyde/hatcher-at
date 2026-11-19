@@ -256,6 +256,20 @@
         "Hatcher.ClassicalCW.cellularBoundaryCoordinates_reconstruct",
         "Hatcher.ClassicalCW.cellularBoundaryCoordinates_eq_of_basisIso"
       ]
+    },
+    {
+      "article_id": "af_0f527fd2a8499cbc93b83802",
+      "module": "Hatcher.VanKampen.ConeAttachmentDisk",
+      "declarations": [
+        "Hatcher.ClassicalCW.singleCellSphereCollapse",
+        "Hatcher.ClassicalCW.singleCellSphereCollapse_point",
+        "Hatcher.ClassicalCW.singleCellSphereCollapse_selected",
+        "Hatcher.ClassicalCW.singleCellSphereCollapse_other",
+        "Hatcher.ClassicalCW.singleCellSphereCollapse_compl",
+        "Hatcher.ClassicalCW.singleCellComplementPair",
+        "Hatcher.ClassicalCW.singleCellSphereComplementIso",
+        "Hatcher.ClassicalCW.singleCellSphereComplementIso_projection"
+      ]
     }
   ]
 }
