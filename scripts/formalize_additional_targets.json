@@ -284,6 +284,15 @@
         "Hatcher.ClassicalCW.singleCellSphereComplementIso",
         "Hatcher.ClassicalCW.singleCellSphereComplementIso_projection"
       ]
+    },
+    {
+      "article_id": "af_b4cea94cbaa08df88c78d099",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.singleCellCollapseHomologyCoordinate",
+        "Hatcher.ClassicalCW.singleCellCollapseHomologyCoordinate_class",
+        "Hatcher.ClassicalCW.singleCellCollapseHomologyCoordinate_apply"
+      ]
     }
   ]
 }
