@@ -2,6 +2,9 @@
 declaration: theorem
 origin: bridged
 article_id: af_9bda8aeb7e132e986e52219a
+lean: Hatcher.ClassicalCW.diskBoundaryGenerator
+statement: formalized
+proof: formalized
 ---
 
 # The fixed disk class has a generating ordinary sphere boundary

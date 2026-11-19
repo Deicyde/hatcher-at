@@ -263,6 +263,13 @@
       "declarations": [
         "Hatcher.ClassicalCW.characteristicBoundaryNaturality"
       ]
+    },
+    {
+      "article_id": "af_9bda8aeb7e132e986e52219a",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.diskBoundaryGenerator"
+      ]
     }
   ]
 }
