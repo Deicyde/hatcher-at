@@ -2875,3 +2875,56 @@ theorem cellularEndpointBoundary (a : RelCWComplex.cell C 1) :
     _ = _ := congrArg₂ (· - ·) (hclass true) (hclass false)
 
 end Hatcher.ClassicalCW
+
+namespace Hatcher.ClassicalCW
+
+open CategoryTheory _root_.Topology
+
+universe u
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The first cellular differential of a one-vertex CW complex is zero:
+the actual oriented endpoints of every one-cell are that same vertex. -/
+theorem oneVertexCellularDifferentialZero [Unique (RelCWComplex.cell C 0)] :
+    (cellularChainComplex C).d 1 0 = 0 := by
+  let d := (cellularChainComplex C).d 1 0
+  let E := (skeletonRelativeHomology C 1).2.choose
+  have hE (a : RelCWComplex.cell C 1) :
+      E.inv (Finsupp.single a 1) = skeletalCellFundamentalClass C 1 a :=
+    (skeletonRelativeHomology C 1).2.choose_spec a
+  have hone (a : RelCWComplex.cell C 1) : (E.inv ≫ d) (Finsupp.single a 1) = 0 := by
+    change d (E.inv (Finsupp.single a 1)) = 0
+    rw [hE a]
+    have he : cellularEndpointVertex C a true = cellularEndpointVertex C a false :=
+      Subsingleton.elim _ _
+    let G : AddCommGrpCat.{u} := (cellularChainComplex C).X 0
+    let pt (b : Bool) : G := zeroCellRelativeClass C (cellularEndpointVertex C a b)
+    have hpt : pt true = pt false :=
+      congrArg (fun i ↦ (zeroCellRelativeClass C i : G)) he
+    have hBoundary : d (skeletalCellFundamentalClass C 1 a) = pt true - pt false :=
+      cellularEndpointBoundary C a
+    have hCancel : pt true - pt false = (0 : G) := sub_eq_zero.mpr hpt
+    change d (skeletalCellFundamentalClass C 1 a) = (0 : G)
+    exact Eq.trans hBoundary hCancel
+  have hzero : E.inv ≫ d = 0 := by
+    apply AddCommGrpCat.hom_ext
+    apply Finsupp.addHom_ext
+    intro a z
+    change (E.inv ≫ d).hom (Finsupp.single a z) = 0
+    rw [← Finsupp.smul_single_one a z, map_zsmul]
+    change z • (E.inv ≫ d) (Finsupp.single a 1) = 0
+    rw [hone a, smul_zero]
+  change d = 0
+  apply (cancel_epi E.inv).mp
+  calc
+    E.inv ≫ d = 0 := hzero
+    _ = E.inv ≫ 0 := by
+      apply AddCommGrpCat.hom_ext
+      apply AddMonoidHom.ext
+      intro x
+      rfl
+
+end Hatcher.ClassicalCW

@@ -2,6 +2,9 @@
 declaration: theorem
 origin: bridged
 article_id: af_9409a8e584ccd21b3d6f6a90
+lean: Hatcher.ClassicalCW.oneVertexCellularDifferentialZero
+statement: formalized
+proof: formalized
 ---
 
 # A single vertex makes the first cellular differential zero

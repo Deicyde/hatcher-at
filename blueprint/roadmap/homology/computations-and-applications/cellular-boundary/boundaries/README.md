@@ -4,7 +4,7 @@ article_id: af_9966918de032297a2c6170ed
 
 # Attaching maps and cellular boundary degrees
 
-16 declaration leaves in the cellular boundary milestone: the canonical boundary coordinates, the characteristic-map boundary equation, the ordinary disk boundary generator, the collapse onto a selected cell sphere, its canonical coordinate equation, the oriented endpoints of the fixed one-disk class, and the actual one-cell boundary formula are complete, and the other nine are planned.
+16 declaration leaves in the cellular boundary milestone: the canonical boundary coordinates, the characteristic-map boundary equation, the ordinary disk boundary generator, the collapse onto a selected cell sphere, its canonical coordinate equation, the oriented endpoints of the fixed one-disk class, the actual one-cell boundary formula, and its vanishing differential with one vertex are complete. The other eight are planned.
 
 - [Coefficients of the actual cellular differential](cellular-boundary-coordinates.md)
 - [The sphere chain comparison transports coefficients and the fixed class](sphere-coefficient-lift-comparison.md)
