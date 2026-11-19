@@ -6,7 +6,7 @@ article_id: af_3ba37e06e8726db37673e7d4
 
 Hatcher §2.2, printed pages 140–141, after the proof of Theorem 2.35 and before Example 2.36. This milestone covers applications (i)–(iii), the two unnumbered geometric illustrations, the first differential and the complete higher boundary formula. Its geometric support is Example 0.3, the finite part of Example 0.6, and Products on printed pages 6–8.
 
-Seven of the 34 declaration leaves below are complete. They include the no-cells homology result, the sparse cellular differential and its homology basis, and the canonical boundary coordinates, the characteristic-map boundary equation, the ordinary disk boundary generator, and the collapse onto a selected cell sphere. The other 27 leaves are planned. All 316 earlier formalizable leaves, including all seventeen cellular/singular-comparison leaves, remain complete.
+Nine of the 34 declaration leaves below are complete. They include the no-cells homology result, the sparse cellular differential and its homology basis, and the canonical boundary coordinates, the characteristic-map boundary equation, the ordinary disk boundary generator, the collapse onto a selected cell sphere, the oriented endpoints of the fixed one-disk class, and the minimal CW structure of the standard sphere. The other 25 leaves are planned. All 316 earlier formalizable leaves, including all seventeen cellular/singular-comparison leaves, remain complete.
 
 The general results use ordinary integral homology and allow empty complexes, infinite cell families and unbounded dimensions. The geometric examples construct their actual classical CW structures. Attaching coefficients are tied to the existing cell generators through proved sphere and coefficient comparisons.
 

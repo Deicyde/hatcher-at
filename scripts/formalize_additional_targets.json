@@ -299,6 +299,16 @@
         "Hatcher.ClassicalCW.sphereTopCellInterior",
         "Hatcher.ClassicalCW.sphereTopCellInterior_apply"
       ]
+    },
+    {
+      "article_id": "af_c527f881a9eb90a3fe1f8fdd",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.ordinaryPointClassMap",
+        "Hatcher.ClassicalCW.ordinaryPointClassMap_naturality",
+        "Hatcher.ClassicalCW.orientedOneDiskEndpoints",
+        "Hatcher.ClassicalCW.orientedOneDiskEndpoints_boundary"
+      ]
     }
   ]
 }

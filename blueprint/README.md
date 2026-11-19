@@ -5,8 +5,8 @@ Topology* (Cambridge University Press, 2002), built on Mathlib. Source notes
 cite the official book without redistributing its text.
 
 Every main-line chapter and numbered section is mapped. The selected roadmap
-contains 350 formalizable leaves: 323 are complete (305 proved locally and
-18 supplied by exact pinned Mathlib declarations), and 27 are planned. The twenty-leaf
+contains 350 formalizable leaves: 325 are complete (307 proved locally and
+18 supplied by exact pinned Mathlib declarations), and 25 are planned. The twenty-leaf
 [local-degree milestone](roadmap/homology/computations-and-applications/local-degree/README.md)
 is complete through Proposition 2.30, including the geometric finite-puncture
 coproduct, projection matrix, orientation sum, and the empty finite fiber.
@@ -21,7 +21,7 @@ are formalized; all thirty-one leaves are complete. The completed
 proves Lemma 2.34, the cellular complex and Theorem 2.35 in all seventeen leaves.
 The next [cellular boundary and computation milestone](roadmap/homology/computations-and-applications/cellular-boundary/README.md)
 contains 34 leaves through the full boundary formula and the two first geometric
-illustrations, including their actual classical CW constructions. The no-cells homology, sparse-cell differential and cell-basis results are complete, as are the canonical boundary coordinates, the characteristic-map boundary equation, the ordinary disk boundary generator, and the collapse onto a selected cell sphere. The other 27 leaves are planned.
+illustrations, including their actual classical CW constructions. The no-cells homology, sparse-cell differential and cell-basis results are complete, as are the canonical boundary coordinates, the characteristic-map boundary equation, the ordinary disk boundary generator, the collapse onto a selected cell sphere, the oriented endpoints of the fixed one-disk class, and the minimal CW structure of the standard sphere. The other 25 leaves are planned.
 Thirteen residual source areas remain queued, not excluded or claimed
 externally blocked.
 
