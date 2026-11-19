@@ -272,6 +272,20 @@
       ]
     },
     {
+      "article_id": "af_0f527fd2a8499cbc93b83802",
+      "module": "Hatcher.VanKampen.ConeAttachmentDisk",
+      "declarations": [
+        "Hatcher.ClassicalCW.singleCellSphereCollapse",
+        "Hatcher.ClassicalCW.singleCellSphereCollapse_point",
+        "Hatcher.ClassicalCW.singleCellSphereCollapse_selected",
+        "Hatcher.ClassicalCW.singleCellSphereCollapse_other",
+        "Hatcher.ClassicalCW.singleCellSphereCollapse_compl",
+        "Hatcher.ClassicalCW.singleCellComplementPair",
+        "Hatcher.ClassicalCW.singleCellSphereComplementIso",
+        "Hatcher.ClassicalCW.singleCellSphereComplementIso_projection"
+      ]
+    },
+    {
       "article_id": "af_eeec1da26a4ec5354a3b04b8",
       "module": "Hatcher.VanKampen.ConeAttachmentDisk",
       "declarations": [
