@@ -2,6 +2,9 @@
 declaration: def
 origin: bridged
 article_id: af_c527f881a9eb90a3fe1f8fdd
+lean: Hatcher.ClassicalCW.ordinaryPointClassMap, Hatcher.ClassicalCW.ordinaryPointClassMap_naturality, Hatcher.ClassicalCW.orientedOneDiskEndpoints, Hatcher.ClassicalCW.orientedOneDiskEndpoints_boundary
+statement: formalized
+proof: formalized
 ---
 
 # The fixed one-disk class orders its two endpoints
