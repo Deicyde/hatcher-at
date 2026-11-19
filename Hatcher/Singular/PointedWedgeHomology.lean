@@ -2350,19 +2350,18 @@ private def oneDiskOrientationIso :
 private noncomputable def oneDiskOrientationSign : ℤ :=
   (oneDiskOrientationIso.{u}.val.hom (ULift.up (1 : ℤ))).down
 
-private theorem oneDiskOrientationSign_cases :
-    oneDiskOrientationSign.{u} = 1 ∨ oneDiskOrientationSign.{u} = -1 := by
-  let e := oneDiskOrientationIso.{u}.val
-  let y := (e.inv (ULift.up (1 : ℤ))).down
-  have hy : (ULift.up y : ULift.{u} ℤ) = y • (ULift.up (1 : ℤ) : ULift.{u} ℤ) := by
+private theorem oneDiskLiftedUnit_sign_cases (e : oneDiskCoefficients.{u} ≅ oneDiskCoefficients.{u}) :
+    (e.hom (ULift.up (1 : ℤ))).down = 1 ∨ (e.hom (ULift.up (1 : ℤ))).down = -1 := by
+  let v : ULift.{u} ℤ := ULift.up 1
+  let y := (e.inv v).down
+  have hy : (ULift.up y : ULift.{u} ℤ) = y • v := by
     apply ULift.ext
     exact (mul_one y).symm
-  have he : e.hom (ULift.up y) = ULift.up (1 : ℤ) :=
-    ConcreteCategory.congr_hom e.inv_hom_id (ULift.up (1 : ℤ))
+  have he : e.hom (ULift.up y) = v := e.inv_hom_id_apply v
   rw [hy] at he
-  change e.hom.hom (y • (ULift.up (1 : ℤ) : ULift.{u} ℤ)) = ULift.up (1 : ℤ) at he
+  change e.hom.hom (y • v) = v at he
   rw [map_zsmul] at he
-  have hz : y * oneDiskOrientationSign.{u} = 1 := congrArg ULift.down he
+  have hz : y * (e.hom v).down = 1 := congrArg ULift.down he
   obtain ⟨a, ha⟩ := IsUnit.of_mul_eq_one y ((mul_comm _ _).trans hz)
   obtain rfl | rfl := Int.units_eq_one_or a
   · left
@@ -2370,11 +2369,17 @@ private theorem oneDiskOrientationSign_cases :
   · right
     simpa using ha.symm
 
+private theorem oneDiskOrientationSign_cases :
+    oneDiskOrientationSign.{u} = 1 ∨ oneDiskOrientationSign.{u} = -1 :=
+  oneDiskLiftedUnit_sign_cases oneDiskOrientationIso.{u}.val
+
+private def oneDiskEndpointOrder (s : ℤ) : Bool ≃ Bool :=
+  if s = 1 then Equiv.refl Bool else Equiv.swap false true
+
 /-- The two actual endpoints in the orientation of the already fixed disk class:
 `false` labels the initial endpoint and `true` the terminal endpoint. -/
 noncomputable def orientedOneDiskEndpoints : Bool ≃ (standardDiskBoundaryPair.{u} 1).snd :=
-  if oneDiskOrientationSign.{u} = 1 then standardOneDiskEndpoints.{u}
-  else (Equiv.swap false true).trans standardOneDiskEndpoints.{u}
+  (oneDiskEndpointOrder oneDiskOrientationSign.{u}).trans standardOneDiskEndpoints.{u}
 
 private theorem oneDiskBoundary_sign_formula {R H : AddCommGrpCat.{u}}
     (B : H ≅ R ⊞ R) (x l r : H) (v w : R)
@@ -2441,16 +2446,18 @@ private theorem oneDiskBoundary_with_sign :
 
 private theorem orientedOneDiskEndpoints_forward (h : oneDiskOrientationSign.{u} = 1)
     (b : Bool) : orientedOneDiskEndpoints.{u} b = standardOneDiskEndpoints.{u} b := by
-  unfold orientedOneDiskEndpoints
-  rw [if_pos h]
+  change standardOneDiskEndpoints.{u} (oneDiskEndpointOrder oneDiskOrientationSign.{u} b) = _
+  simp [oneDiskEndpointOrder, h]
 
 private theorem orientedOneDiskEndpoints_reverse (h : oneDiskOrientationSign.{u} ≠ 1)
     (b : Bool) : orientedOneDiskEndpoints.{u} b = standardOneDiskEndpoints.{u} (!b) := by
-  unfold orientedOneDiskEndpoints
-  rw [if_neg h]
+  change standardOneDiskEndpoints.{u} (oneDiskEndpointOrder oneDiskOrientationSign.{u} b) = _
+  apply congrArg standardOneDiskEndpoints.{u}
+  unfold oneDiskEndpointOrder
+  rw [ite_eq_right h]
   cases b
-  · exact congrArg standardOneDiskEndpoints (Equiv.swap_apply_left false true)
-  · exact congrArg standardOneDiskEndpoints (Equiv.swap_apply_right false true)
+  · exact Equiv.swap_apply_left false true
+  · exact Equiv.swap_apply_right false true
 
 /-- The ordinary connecting morphism sends the fixed relative one-disk class to
 the terminal point class minus the initial point class. -/
