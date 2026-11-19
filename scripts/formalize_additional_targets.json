@@ -311,6 +311,15 @@
       ]
     },
     {
+      "article_id": "af_b4cea94cbaa08df88c78d099",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.singleCellCollapseHomologyCoordinate",
+        "Hatcher.ClassicalCW.singleCellCollapseHomologyCoordinate_class",
+        "Hatcher.ClassicalCW.singleCellCollapseHomologyCoordinate_apply"
+      ]
+    },
+    {
       "article_id": "af_f7426ef6c9ced3f037f8153b",
       "module": "Hatcher.Singular.PointedWedgeHomology",
       "declarations": [

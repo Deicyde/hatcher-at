@@ -2,6 +2,9 @@
 declaration: theorem
 origin: bridged
 article_id: af_b4cea94cbaa08df88c78d099
+lean: Hatcher.ClassicalCW.singleCellCollapseHomologyCoordinate, Hatcher.ClassicalCW.singleCellCollapseHomologyCoordinate_class, Hatcher.ClassicalCW.singleCellCollapseHomologyCoordinate_apply
+statement: formalized
+proof: formalized
 ---
 
 # The cell-sphere quotient reads its canonical cellular coordinate
