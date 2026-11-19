@@ -256,6 +256,16 @@
         "Hatcher.ClassicalCW.cellularBoundaryCoordinates_reconstruct",
         "Hatcher.ClassicalCW.cellularBoundaryCoordinates_eq_of_basisIso"
       ]
+    },
+    {
+      "article_id": "af_c527f881a9eb90a3fe1f8fdd",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.ordinaryPointClassMap",
+        "Hatcher.ClassicalCW.ordinaryPointClassMap_naturality",
+        "Hatcher.ClassicalCW.orientedOneDiskEndpoints",
+        "Hatcher.ClassicalCW.orientedOneDiskEndpoints_boundary"
+      ]
     }
   ]
 }
