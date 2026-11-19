@@ -2123,11 +2123,11 @@ universe u
 variable {X : Type u} [TopologicalSpace X] [T2Space X]
   (C : Set X) [CWComplex C]
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The actual characteristic/attaching map commutes with ordinary connecting
 maps, and the cellular differential of its fixed cell class is the relative
 projection of the attaching-map image of the fixed disk boundary class.
 Writing the source dimension as k + 1 includes one-cells. -/
-set_option backward.isDefEq.respectTransparency false in
 theorem characteristicBoundaryNaturality (k : ℕ)
     (i : RelCWComplex.cell C (k + 1)) :
     let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
