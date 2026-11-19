@@ -12,9 +12,9 @@ The Chapters table's Items column also counts 8 articles marked not ready with n
 | Status | Count | Meaning |
 | --- | ---: | --- |
 | in mathlib | 18 | Restates an existing Mathlib declaration. |
-| fully proved | 310 | Proved, and every prerequisite is fully proved too. |
+| fully proved | 311 | Proved, and every prerequisite is fully proved too. |
 | ready to state | 4 | Everything its statement uses is in Lean, so the statement can be written in Lean. |
-| planned | 18 | Described in the blueprint only. |
+| planned | 17 | Described in the blueprint only. |
 
 ## Chapters
 
@@ -23,7 +23,7 @@ The Chapters table's Items column also counts 8 articles marked not ready with n
 | [Appendix](roadmap/appendix/README.md) | 5 | 5 fully proved | 0 | none | Homology (proof only), The fundamental group (proof only) |
 | [Cohomology](roadmap/cohomology/README.md) | 3 | 3 not ready | 0 | none | none |
 | [The fundamental group](roadmap/fundamental-group/README.md) | 118 | 8 in mathlib · 110 fully proved | 0 | Appendix (proof only) | Homology |
-| [Homology](roadmap/homology/README.md) | 228 | 10 in mathlib · 195 fully proved · 4 ready to state · 1 not ready · 18 planned | 4 | Appendix (proof only), The fundamental group | none |
+| [Homology](roadmap/homology/README.md) | 228 | 10 in mathlib · 196 fully proved · 4 ready to state · 1 not ready · 17 planned | 4 | Appendix (proof only), The fundamental group | none |
 | [Homotopy theory](roadmap/homotopy-theory/README.md) | 3 | 3 not ready | 0 | none | none |
 | [Top level](roadmap/README.md) | 1 | 1 not ready | 0 | none | none |
 

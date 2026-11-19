@@ -2,6 +2,9 @@
 declaration: def
 origin: bridged
 article_id: af_98b02d5314b897ae75721b99
+lean: Hatcher.ClassicalCW.ClassicalProductCell, Hatcher.ClassicalCW.classicalProductCellAxes, Hatcher.ClassicalCW.finiteClassicalCwProduct, Hatcher.ClassicalCW.finiteClassicalCwProduct_finite, Hatcher.ClassicalCW.finiteClassicalCwProduct_cells, Hatcher.ClassicalCW.finiteClassicalCwProduct_characteristic, Hatcher.ClassicalCW.finiteClassicalCwProduct_openCell, Hatcher.ClassicalCW.finiteClassicalCwProduct_closedCell
+statement: formalized
+proof: formalized
 ---
 
 # Finite classical CW complexes have their actual product cell structure
