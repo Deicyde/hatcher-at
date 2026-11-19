@@ -28,6 +28,10 @@
     {
       "article_id": "af_07101a56629e9ad3a0c03550",
       "module": "Hatcher.Singular.PointedWedgeHomology"
+    },
+    {
+      "article_id": "af_fb8ba936f285a9a3f67861d1",
+      "module": "Hatcher"
     }
   ]
 }
