@@ -2689,8 +2689,12 @@ theorem oneVertexCellularDifferentialZero [Unique (RelCWComplex.cell C 0)] :
     rw [hE a]
     have he : cellularEndpointVertex C a true = cellularEndpointVertex C a false :=
       Subsingleton.elim _ _
-    change (cellularChainComplex C).d 1 0 (skeletalCellFundamentalClass C 1 a) = 0
-    simpa only [he, sub_self] using cellularEndpointBoundary C a
+    calc
+      (cellularChainComplex C).d 1 0 (skeletalCellFundamentalClass C 1 a) =
+          zeroCellRelativeClass C (cellularEndpointVertex C a true) -
+            zeroCellRelativeClass C (cellularEndpointVertex C a false) :=
+        cellularEndpointBoundary C a
+      _ = 0 := sub_eq_zero.mpr (congrArg (zeroCellRelativeClass C) he)
   have hzero : E.inv ≫ d = 0 := by
     apply AddCommGrpCat.hom_ext
     apply Finsupp.addHom_ext
