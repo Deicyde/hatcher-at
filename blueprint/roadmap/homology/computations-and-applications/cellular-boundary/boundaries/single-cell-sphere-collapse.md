@@ -2,6 +2,9 @@
 declaration: def
 origin: bridged
 article_id: af_0f527fd2a8499cbc93b83802
+lean: Hatcher.ClassicalCW.singleCellSphereCollapse, Hatcher.ClassicalCW.singleCellSphereCollapse_point, Hatcher.ClassicalCW.singleCellSphereCollapse_selected, Hatcher.ClassicalCW.singleCellSphereCollapse_other, Hatcher.ClassicalCW.singleCellSphereCollapse_compl, Hatcher.ClassicalCW.singleCellComplementPair, Hatcher.ClassicalCW.singleCellSphereComplementIso, Hatcher.ClassicalCW.singleCellSphereComplementIso_projection
+statement: formalized
+proof: formalized
 ---
 
 # Collapse the other cells onto one cell sphere
