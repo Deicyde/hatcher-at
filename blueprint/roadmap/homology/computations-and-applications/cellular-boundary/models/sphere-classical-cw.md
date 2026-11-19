@@ -2,6 +2,9 @@
 declaration: def
 origin: cited
 article_id: af_eeec1da26a4ec5354a3b04b8
+lean: Hatcher.ClassicalCW.sphereClassicalCw, Hatcher.ClassicalCW.sphereClassicalCw_finite, Hatcher.ClassicalCW.sphereClassicalCw_cells, Hatcher.ClassicalCW.sphereClassicalCw_zero, Hatcher.ClassicalCW.sphereClassicalCw_characteristic, Hatcher.ClassicalCW.sphereClassicalCw_boundary, Hatcher.ClassicalCW.sphereClassicalCw_interior, Hatcher.ClassicalCW.sphereTopCellInterior, Hatcher.ClassicalCW.sphereTopCellInterior_apply
+statement: formalized
+proof: formalized
 ---
 
 # The standard sphere has its minimal classical cell structure
