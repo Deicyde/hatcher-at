@@ -2242,7 +2242,7 @@ private theorem selectedCellLowerNonempty (k : ℕ)
   let p : (standardDiskBoundaryPair.{u} (k + 1)).snd := by
     change ULift.{u} (Metric.sphere (0 : EuclideanSpace ℝ (Fin (k + 1))) 1)
     exact ULift.up ⟨EuclideanSpace.single (0 : Fin (k + 1)) 1, by
-      simp [Metric.mem_sphere_zero_iff_norm]⟩
+      simp [mem_sphere_zero_iff_norm]⟩
   exact ⟨(TopPair.Hom.snd (skeletalStageCellPairMap C (k + 1) b)) p⟩
 
 private noncomputable def chosenSphereGeneratorIso (k : ℕ) :
@@ -2338,8 +2338,9 @@ private theorem selectedCellCoordinate_characteristic (k : ℕ)
   let s := selectedWedgeCollapse C k b
   let v := pointedWedgeSummandInclusion (positiveSkeletalSphereBasepoint C k) i
   let E := chosenSphereGeneratorIso.{u} k
-  let z := positiveStandardDiskFundamentalClass.{u} k ≫
-    (homologyFunctor R (k + 1)).map (skeletalStageCellPairMap C (k + 1) i)
+  let g := positiveStandardDiskFundamentalClass.{u} k
+  let l := (homologyFunctor R (k + 1)).map (skeletalStageCellPairMap C (k + 1) i)
+  let z := g ≫ l
   have hz : z ≫ T.hom = E.hom ≫ H.map v :=
     positiveSkeletonCell_class_to_wedge C k Q i
   have hw : W.hom ≫ s = q := W.hom_inv_id_assoc q
@@ -2349,11 +2350,11 @@ private theorem selectedCellCoordinate_characteristic (k : ℕ)
       _ = A.hom ≫ H.map (W.hom ≫ s) := congrArg (A.hom ≫ ·) (H.congr_map hw.symm)
       _ = A.hom ≫ H.map W.hom ≫ H.map s := congrArg (A.hom ≫ ·) (H.map_comp _ _)
       _ = _ := (Category.assoc _ _ _).symm
-  change _ = E.hom ≫ H.map (v ≫ s) ≫ E.inv
+  change g ≫ l ≫ (A.hom ≫ H.map q ≫ E.inv) = E.hom ≫ H.map (v ≫ s) ≫ E.inv
   calc
-    _ = (z ≫ (A.hom ≫ H.map q)) ≫ E.inv := by
-      change _ ≫ _ ≫ (A.hom ≫ H.map q ≫ E.inv) = _
-      simp only [Category.assoc, z]
+    _ = z ≫ A.hom ≫ H.map q ≫ E.inv :=
+      (Category.assoc g l (A.hom ≫ H.map q ≫ E.inv)).symm
+    _ = (z ≫ (A.hom ≫ H.map q)) ≫ E.inv := by simp only [Category.assoc]
     _ = (z ≫ (T.hom ≫ H.map s)) ≫ E.inv := congrArg (fun m ↦ (z ≫ m) ≫ E.inv) hq
     _ = (E.hom ≫ H.map v) ≫ H.map s ≫ E.inv := by
       rw [← Category.assoc z T.hom (H.map s), hz, Category.assoc]
@@ -2387,10 +2388,14 @@ theorem singleCellCollapseHomologyCoordinate_class (k : ℕ)
     exact hv.trans (by simp)
   · have hm : z ≫ M = (0 : R ⟶ R) :=
       (selectedCellCoordinate_characteristic C k b i).trans (by
-        change E.hom ≫ H.map (pointedWedgeSummandInclusion (positiveSkeletalSphereBasepoint C k) i ≫
-          selectedWedgeCollapse C k b) ≫ E.inv = _
-        rw [selectedWedgeCollapse_other C k b i h, selectedCellReduced_map_const,
-          zero_comp, comp_zero])
+        let S := TopCat.sphere.{u} (k + 1)
+        let K : S ⟶ S := TopCat.ofHom (ContinuousMap.const S (northPole.{u} k))
+        let ι := pointedWedgeSummandInclusion (positiveSkeletalSphereBasepoint C k) i
+        have hk : ι ≫ selectedWedgeCollapse C k b = K :=
+          selectedWedgeCollapse_other C k b i h
+        have hzero : H.map K = 0 := selectedCellReduced_map_const S S (northPole.{u} k) k
+        change E.hom ≫ H.map (ι ≫ selectedWedgeCollapse C k b) ≫ E.inv = _
+        rw [hk, hzero, zero_comp, comp_zero])
     have hv : (M (z v)).down = (0 : ℤ) :=
       congrArg ULift.down (ConcreteCategory.congr_hom hm v)
     exact hv.trans (by simp [Finsupp.single_apply, h, Ne.symm h])
