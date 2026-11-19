@@ -2113,3 +2113,115 @@ theorem cellularBoundaryCoordinates_eq_of_basisIso (n : ℕ)
   rfl
 
 end Hatcher.ClassicalCW
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
+
+universe u
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+set_option maxHeartbeats 600000 in
+set_option backward.isDefEq.respectTransparency false in
+/-- The actual characteristic/attaching map commutes with ordinary connecting
+maps, and the cellular differential of its fixed cell class is the relative
+projection of the attaching-map image of the fixed disk boundary class.
+Writing the source dimension as k + 1 includes one-cells. -/
+theorem characteristicBoundaryNaturality (k : ℕ)
+    (i : RelCWComplex.cell C (k + 1)) :
+    let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+    let f := skeletalStageCellPairMap C (k + 1) i
+    let H : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+      (singularHomologyFunctor AddCommGrpCat.{u} k).obj R
+    let δD := Hatcher.Relative.pairConnecting
+      (standardDiskBoundaryPair.{u} (k + 1)) R (k + 1) k rfl
+    let δC := Hatcher.Relative.pairConnecting
+      (skeletalStagePair C (k + 1)) R (k + 1) k rfl
+    let p : H.obj (skeletalStagePair C (k + 1)).snd ⟶
+        (cellularChainComplex C).X k :=
+      (Hatcher.Relative.singularPairFunctor.obj
+        (cellularSkeletonPair C k)).homologyπ R k
+    ((Hatcher.Relative.homologyFunctor R (k + 1)).map f ≫ δC =
+        δD ≫ H.map (TopPair.Hom.snd f)) ∧
+      ((cellularChainComplex C).d (k + 1) k
+          (positiveSkeletonCellFundamentalClass C k i) =
+        (positiveStandardDiskFundamentalClass.{u} k ≫ δD ≫
+          H.map (TopPair.Hom.snd f) ≫ p) (ULift.up (1 : ℤ))) := by
+  let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+  let f := skeletalStageCellPairMap C (k + 1) i
+  let H : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+    (singularHomologyFunctor AddCommGrpCat.{u} k).obj R
+  let δD := Hatcher.Relative.pairConnecting
+    (standardDiskBoundaryPair.{u} (k + 1)) R (k + 1) k rfl
+  let δC := Hatcher.Relative.pairConnecting
+    (skeletalStagePair C (k + 1)) R (k + 1) k rfl
+  let p : H.obj (skeletalStagePair C (k + 1)).snd ⟶
+      (cellularChainComplex C).X k :=
+    (Hatcher.Relative.singularPairFunctor.obj
+      (cellularSkeletonPair C k)).homologyπ R k
+  let g := positiveStandardDiskFundamentalClass.{u} k
+  let l := (Hatcher.Relative.homologyFunctor R (k + 1)).map f
+  have hNat : l ≫ δC = δD ≫ H.map (TopPair.Hom.snd f) :=
+    (Hatcher.Relative.pairConnecting_naturality f R (k + 1) k rfl).symm
+  refine ⟨hNat, ?_⟩
+  let x := g (ULift.up (1 : ℤ))
+  have hSquare : δC (l x) = H.map (TopPair.Hom.snd f) (δD x) :=
+    ConcreteCategory.congr_hom hNat x
+  have hDiff : (cellularChainComplex C).d (k + 1) k = δC ≫ p :=
+    cellularChainComplex_d_succ C k
+  change (cellularChainComplex C).d (k + 1) k (l x) =
+    p (H.map (TopPair.Hom.snd f) (δD x))
+  calc
+    (cellularChainComplex C).d (k + 1) k (l x) = p (δC (l x)) :=
+      ConcreteCategory.congr_hom hDiff (l x)
+    _ = p (H.map (TopPair.Hom.snd f) (δD x)) := congrArg (fun y => p y) hSquare
+
+end Hatcher.ClassicalCW
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
+
+universe u
+
+/-- In disk dimension `k + 2`, the ordinary connecting map sends the fixed
+relative disk class to a generator of the ordinary homology of its boundary.
+The composite carries the integer coefficient generator to this class. -/
+theorem diskBoundaryGenerator (k : ℕ) :
+    IsIso (positiveStandardDiskFundamentalClass.{u} (k + 1) ≫
+      Hatcher.Relative.pairConnecting (standardDiskBoundaryPair.{u} (k + 1 + 1))
+        (AddCommGrpCat.of.{u} (ULift.{u} ℤ)) (k + 1 + 1) (k + 1) rfl) := by
+  let n := k + 1
+  let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+  let P := standardDiskBoundaryPair.{u} (n + 1)
+  let : ContractibleSpace P.fst := by
+    change ContractibleSpace
+      (ULift.{u} (Metric.closedBall (0 : EuclideanSpace ℝ (Fin (n + 1))) 1))
+    let : ContractibleSpace (Metric.closedBall (0 : EuclideanSpace ℝ (Fin (n + 1))) 1) :=
+      Metric.contractibleSpace_closedBall (zero_le_one : (0 : ℝ) ≤ 1)
+    exact Homeomorph.ulift.contractibleSpace
+  have hzero (j : ℕ) (hj : 0 < j) :
+      IsZero (((singularHomologyFunctor AddCommGrpCat.{u} j).obj R).obj P.fst) :=
+    (Hatcher.Reduced.isZero_homology_of_contractible (X := P.fst) R j).of_iso
+      ((Hatcher.Reduced.homologyIsoOfPositiveDegree R j hj).app P.fst).symm
+  let L := Hatcher.Relative.pairSequence P R (n + 1) n rfl
+  have hL : L.Exact := Hatcher.Relative.pairSequence_exact P R (n + 1) n rfl
+  have hprev : L.map' 1 2 = 0 := (hzero (n + 1) (Nat.succ_pos n)).eq_zero_of_src _
+  have hnext : L.map' 3 4 = 0 := (hzero n (Nat.succ_pos k)).eq_zero_of_tgt _
+  have hδ : IsIso (Hatcher.Relative.pairConnecting P R (n + 1) n rfl) := by
+    have _ : Mono (L.map' 2 3) := (hL.exact 1 (by decide)).mono_g hprev
+    have _ : Epi (L.map' 2 3) := (hL.exact 2 (by decide)).epi_f hnext
+    change IsIso (L.map' 2 3)
+    apply isIso_of_mono_of_epi
+  have hg : IsIso (positiveStandardDiskFundamentalClass.{u} n) := by
+    change IsIso ((Hatcher.Sphere.liftedOrderedSphereFundamentalClass.{u} n ≫
+      (positiveSpherePositiveIso.{u} n).hom) ≫ (positiveDiskSphereOrdinaryIso.{u} n).inv)
+    exact IsIso.comp_isIso'
+      (IsIso.comp_isIso' (Hatcher.Sphere.liftedOrderedSphereFundamentalClass_isIso.{u} n)
+        (by infer_instance))
+      (by infer_instance)
+  exact IsIso.comp_isIso' hg hδ
+
+end Hatcher.ClassicalCW

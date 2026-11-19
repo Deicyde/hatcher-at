@@ -2,6 +2,9 @@
 declaration: theorem
 origin: bridged
 article_id: af_2ea97dd1cce3f34dc7e37734
+lean: Hatcher.ClassicalCW.characteristicBoundaryNaturality
+statement: formalized
+proof: formalized
 ---
 
 # Cellular boundaries follow the characteristic-map connecting square
