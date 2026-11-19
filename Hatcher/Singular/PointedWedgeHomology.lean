@@ -2675,6 +2675,7 @@ universe u
 variable {X : Type u} [TopologicalSpace X] [T2Space X]
   (C : Set X) [CWComplex C]
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The first cellular differential of a one-vertex CW complex is zero:
 the actual oriented endpoints of every one-cell are that same vertex. -/
 theorem oneVertexCellularDifferentialZero [Unique (RelCWComplex.cell C 0)] :
@@ -2689,12 +2690,15 @@ theorem oneVertexCellularDifferentialZero [Unique (RelCWComplex.cell C 0)] :
     rw [hE a]
     have he : cellularEndpointVertex C a true = cellularEndpointVertex C a false :=
       Subsingleton.elim _ _
-    calc
-      (cellularChainComplex C).d 1 0 (skeletalCellFundamentalClass C 1 a) =
-          zeroCellRelativeClass C (cellularEndpointVertex C a true) -
-            zeroCellRelativeClass C (cellularEndpointVertex C a false) :=
-        cellularEndpointBoundary C a
-      _ = 0 := sub_eq_zero.mpr (congrArg (zeroCellRelativeClass C) he)
+    let G : AddCommGrpCat.{u} := (cellularChainComplex C).X 0
+    let pt (b : Bool) : G := zeroCellRelativeClass C (cellularEndpointVertex C a b)
+    have hpt : pt true = pt false :=
+      congrArg (fun i ↦ (zeroCellRelativeClass C i : G)) he
+    have hBoundary : d (skeletalCellFundamentalClass C 1 a) = pt true - pt false :=
+      cellularEndpointBoundary C a
+    have hCancel : pt true - pt false = (0 : G) := sub_eq_zero.mpr hpt
+    change d (skeletalCellFundamentalClass C 1 a) = (0 : G)
+    exact Eq.trans hBoundary hCancel
   have hzero : E.inv ≫ d = 0 := by
     apply AddCommGrpCat.hom_ext
     apply Finsupp.addHom_ext
