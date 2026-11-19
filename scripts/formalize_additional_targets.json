@@ -286,6 +286,31 @@
       ]
     },
     {
+      "article_id": "af_eeec1da26a4ec5354a3b04b8",
+      "module": "Hatcher.VanKampen.ConeAttachmentDisk",
+      "declarations": [
+        "Hatcher.ClassicalCW.sphereClassicalCw",
+        "Hatcher.ClassicalCW.sphereClassicalCw_finite",
+        "Hatcher.ClassicalCW.sphereClassicalCw_cells",
+        "Hatcher.ClassicalCW.sphereClassicalCw_zero",
+        "Hatcher.ClassicalCW.sphereClassicalCw_characteristic",
+        "Hatcher.ClassicalCW.sphereClassicalCw_boundary",
+        "Hatcher.ClassicalCW.sphereClassicalCw_interior",
+        "Hatcher.ClassicalCW.sphereTopCellInterior",
+        "Hatcher.ClassicalCW.sphereTopCellInterior_apply"
+      ]
+    },
+    {
+      "article_id": "af_c527f881a9eb90a3fe1f8fdd",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.ordinaryPointClassMap",
+        "Hatcher.ClassicalCW.ordinaryPointClassMap_naturality",
+        "Hatcher.ClassicalCW.orientedOneDiskEndpoints",
+        "Hatcher.ClassicalCW.orientedOneDiskEndpoints_boundary"
+      ]
+    },
+    {
       "article_id": "af_b4cea94cbaa08df88c78d099",
       "module": "Hatcher.Singular.PointedWedgeHomology",
       "declarations": [

@@ -5,8 +5,8 @@ Topology*, built on Mathlib. The book's text is not redistributed here.
 
 The main-line chapters and numbered sections are mapped in the
 [coverage contract](blueprint/coverage/README.md), not claimed fully
-formalized. The selected roadmap now has 350 formalizable leaves: 323 are
-complete (305 proved locally and 18 supplied by pinned Mathlib), and 27 are
+formalized. The selected roadmap now has 350 formalizable leaves: 326 are
+complete (308 proved locally and 18 supplied by pinned Mathlib), and 24 are
 planned for cellular boundaries and their first computations. The completed
 scope includes the selected fundamental-group spines, homology, excision and
 quotient applications, degree foundations, all twenty local-degree leaves
@@ -23,7 +23,7 @@ covers Lemma 2.34, the cellular complex and Theorem 2.35 in seventeen formalizab
 leaves, including the two explicit sphere generator bridges. The next
 [cellular boundary and computation milestone](blueprint/roadmap/homology/computations-and-applications/cellular-boundary/README.md)
 contains 34 leaves for the attaching-degree formula, general cellular
-consequences and the actual projective and sphere-product examples. The no-cells homology, sparse-cell differential and cell-basis results are complete, as are the canonical boundary coordinates, the characteristic-map boundary equation, the ordinary disk boundary generator, and the collapse onto a selected cell sphere. The other 27 leaves are planned.
+consequences and the actual projective and sphere-product examples. The no-cells homology, sparse-cell differential and cell-basis results are complete, as are the canonical boundary coordinates, the characteristic-map boundary equation, the ordinary disk boundary generator, the collapse onto a selected cell sphere, its canonical coordinate equation, the oriented endpoints of the fixed one-disk class, and the minimal CW structure of the standard sphere. The other 24 leaves are planned.
 Thirteen residual source areas remain queued; lettered additional
 topics and exercises remain outside scope.
 

@@ -4,7 +4,7 @@ article_id: af_525d494206d28dc5a3311c3b
 
 # Classical cell models for the first computations
 
-11 planned declaration leaves in the cellular boundary milestone.
+11 declaration leaves in the cellular boundary milestone: the minimal classical sphere model is complete and the other 10 are planned.
 
 - [Finite complex projective spaces](complex-projective-space.md)
 - [Projective points are unit vectors modulo phase](projective-sphere-phase-quotient.md)

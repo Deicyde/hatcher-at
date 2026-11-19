@@ -2228,6 +2228,373 @@ end Hatcher.ClassicalCW
 
 namespace Hatcher.ClassicalCW
 
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits Hatcher.Relative
+open scoped Simplicial
+
+universe u
+
+private abbrev oneDiskCoefficients : AddCommGrpCat.{u} := AddCommGrpCat.of (ULift.{u} ℤ)
+
+private abbrev oneDiskH₀ (R : AddCommGrpCat.{u}) : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+  (singularHomologyFunctor AddCommGrpCat.{u} 0).obj R
+
+/-- The ordinary zeroth homology class map of the actual singular vertex at `x`. -/
+noncomputable def ordinaryPointClassMap {X : TopCat.{u}} (R : AddCommGrpCat.{u}) (x : X) :
+    R ⟶ (oneDiskH₀ R).obj X :=
+  let S := TopCat.toSSet.obj X
+  let K := S.chainComplex R
+  K.liftCycles (S.ιChainComplex (TopCat.toSSetObj₀Equiv.symm x)) 0 (by simp) (by simp) ≫
+    K.homologyπ 0
+
+/-- The point class goes to the point class of the image. -/
+@[reassoc]
+theorem ordinaryPointClassMap_naturality {X Y : TopCat.{u}} (R : AddCommGrpCat.{u})
+    (f : X ⟶ Y) (x : X) :
+    ordinaryPointClassMap R x ≫ (oneDiskH₀ R).map f = ordinaryPointClassMap R (f x) := by
+  let S := TopCat.toSSet.obj X
+  let T := TopCat.toSSet.obj Y
+  let φ := SSet.chainComplexMap (TopCat.toSSet.map f) R
+  let z : S _⦋0⦌ := TopCat.toSSetObj₀Equiv.symm x
+  change ((S.chainComplex R).liftCycles (S.ιChainComplex z) 0 (by simp) (by simp) ≫
+    (S.chainComplex R).homologyπ 0) ≫ HomologicalComplex.homologyMap φ 0 = _
+  have hz : (TopCat.toSSet.map f).app _ z =
+      TopCat.toSSetObj₀Equiv.symm (f x) := by
+    apply TopCat.toSSetObj₀Equiv.injective
+    rfl
+  rw [Category.assoc, HomologicalComplex.homologyπ_naturality,
+    HomologicalComplex.liftCycles_comp_cyclesMap_assoc]
+  change (T.chainComplex R).liftCycles (S.ιChainComplex z ≫
+    (SSet.chainComplexMap (TopCat.toSSet.map f) R).f 0) 0 (by simp) (by simp) ≫
+      (T.chainComplex R).homologyπ 0 = _
+  simp only [SSet.ι_chainComplexMap_f, hz, ordinaryPointClassMap, T] <;> rfl
+
+private theorem ordinaryPointClassMap_augmentation {X : TopCat.{u}} (R : AddCommGrpCat.{u})
+    (x : X) : ordinaryPointClassMap R x ≫ X.singularHomology₀ε R = 𝟙 R := by
+  exact (Category.assoc _ _ _).trans
+    (SSet.liftCycles_ιChainComplex_homologyπ_homology₀ε (TopCat.toSSet.obj X) R
+      (TopCat.toSSetObj₀Equiv.symm x))
+
+private theorem oneDiskAugmentation_naturality {X Y : TopCat.{u}} (R : AddCommGrpCat.{u})
+    (f : X ⟶ Y) : (oneDiskH₀ R).map f ≫ Y.singularHomology₀ε R = X.singularHomology₀ε R := by
+  let S := TopCat.toSSet.obj X
+  let K := S.chainComplex R
+  have h (z : S _⦋0⦌) : S.ιChainComplex z ≫ K.cycles₀Iso.inv =
+      K.liftCycles (S.ιChainComplex z) 0 (by simp) (by simp) := by
+    rw [← cancel_mono (K.iCycles 0)]
+    simp <;> exact Category.comp_id _
+  let p := K.cycles₀Iso.inv ≫ K.homologyπ 0
+  have _ : Epi p := by dsimp [p]; infer_instance
+  have hp (z : S _⦋0⦌) : S.ιChainComplex z ≫ p =
+      ordinaryPointClassMap R (TopCat.toSSetObj₀Equiv z) := by
+    dsimp only [p]
+    rw [← Category.assoc, h]
+    simp only [ordinaryPointClassMap, Equiv.symm_apply_apply, K, S] <;> rfl
+  apply (cancel_epi p).mp
+  apply S.chainComplex_hom_ext
+  intro z
+  let j : R ⟶ K.X 0 := S.ιChainComplex z
+  let F : K.homology 0 ⟶ (oneDiskH₀ R).obj Y := (oneDiskH₀ R).map f
+  let εX : K.homology 0 ⟶ R := X.singularHomology₀ε R
+  let εY := Y.singularHomology₀ε R
+  let x := TopCat.toSSetObj₀Equiv z
+  have h₁ : (j ≫ p) ≫ F ≫ εY = 𝟙 R :=
+    (congrArg (· ≫ F ≫ εY) (hp z)).trans
+      ((ordinaryPointClassMap_naturality_assoc R f x εY).trans
+        (ordinaryPointClassMap_augmentation R (f x)))
+  have h₂ : (j ≫ p) ≫ εX = 𝟙 R :=
+    (congrArg (· ≫ εX) (hp z)).trans (ordinaryPointClassMap_augmentation R x)
+  change j ≫ p ≫ (F ≫ εY) = j ≫ p ≫ εX
+  exact (Category.assoc _ _ _).symm.trans (h₁.trans (h₂.symm.trans (Category.assoc _ _ _)))
+
+private noncomputable def standardOneDiskEndpoints :
+    Bool ≃ TopCat.sphere.{u} 0 :=
+  (Equiv.ulift : ULift.{u} Bool ≃ Bool).symm.trans
+    (TopCat.homeoOfIso Hatcher.Sphere.zeroSphereIsoTwoPoint.{u}).symm.toEquiv
+
+@[reassoc]
+private theorem ordinaryPointClassMap_components {X : TopCat.{u}} (R : AddCommGrpCat.{u})
+    (x : X) : ordinaryPointClassMap R x ≫ (X.singularHomology₀Iso R).hom =
+      Sigma.ι (fun _ : ZerothHomotopy X ↦ R) (ZerothHomotopy.mk x) := by
+  let S := TopCat.toSSet.obj X
+  let z : S _⦋0⦌ := TopCat.toSSetObj₀Equiv.symm x
+  let e := (TopCat.zerothHomotopyEquiv (X := X)).symm
+  let j : R ⟶ S.homology R 0 := ordinaryPointClassMap R x
+  let A := (S.homology₀Iso R).hom
+  let B := ((sigmaConst.obj R).mapIso e.toIso).hom
+  have hj : j ≫ A = Sigma.ι (fun _ : S.π₀ ↦ R) (SSet.π₀.mk z) :=
+    (Category.assoc _ _ _).trans
+      (SSet.liftCycles_ιChainComplex_homologyπ_homology₀Iso_hom S R z)
+  have he : e (SSet.π₀.mk z) = ZerothHomotopy.mk x := by
+    change TopCat.zerothHomotopyEquiv.symm (SSet.π₀.mk z) = _
+    exact (TopCat.zerothHomotopyEquiv_symm_mk z).trans
+      (congrArg ZerothHomotopy.mk (TopCat.toSSetObj₀Equiv.apply_symm_apply x))
+  change j ≫ A ≫ B = _
+  calc
+    _ = (j ≫ A) ≫ B := (Category.assoc _ _ _).symm
+    _ = Sigma.ι (fun _ : S.π₀ ↦ R) (SSet.π₀.mk z) ≫ B := congrArg (· ≫ B) hj
+    _ = _ := by
+      change Sigma.ι (fun _ : S.π₀ ↦ R) (SSet.π₀.mk z) ≫
+        Sigma.map' (g := fun _ : S.π₀ ↦ R) (f := fun _ : ZerothHomotopy X ↦ R)
+          e (fun _ ↦ 𝟙 R) = _
+      rw [Sigma.ι_comp_map', Category.id_comp, he]
+
+private theorem standardOneDiskEndpoints_components (R : AddCommGrpCat.{u}) (b : Bool) :
+    ordinaryPointClassMap R (standardOneDiskEndpoints.{u} b) ≫
+      (Hatcher.Sphere.singularHomologyZeroIsoSphereZero R).hom =
+        (if b then biprod.inr else biprod.inl) := by
+  let S := TopCat.sphere.{u} 0
+  let e := Hatcher.Sphere.zeroSphereComponentsEquivTwoPoint.{u}
+  have he : e (ZerothHomotopy.mk (standardOneDiskEndpoints.{u} b)) = ULift.up b := by
+    change Hatcher.Sphere.zeroSphereComponentsEquivTwoPoint
+      (ZerothHomotopy.mk (standardOneDiskEndpoints.{u} b)) = _
+    rw [Hatcher.Sphere.zeroSphereComponentsEquivTwoPoint, Equiv.trans_apply]
+    let E := (TopCat.homeoOfIso Hatcher.Sphere.zeroSphereIsoTwoPoint.{u}).toEquiv
+    apply E.symm.injective
+    rw [Equiv.symm_apply_apply]
+    change _ = standardOneDiskEndpoints.{u} b
+    exact (Equiv.symm_apply_eq _).mpr rfl
+  let x : S := standardOneDiskEndpoints.{u} b
+  let j : R ⟶ (oneDiskH₀ R).obj S := ordinaryPointClassMap R x
+  let A := (S.singularHomology₀Iso R).hom
+  let B := (Sigma.reindex e (fun _ : ULift.{u} Bool ↦ R)).hom
+  let D := (Hatcher.Sphere.twoPointCoproductIso R).hom
+  have hA : j ≫ A = Sigma.ι (fun _ : ZerothHomotopy S ↦ R) (ZerothHomotopy.mk x) :=
+    ordinaryPointClassMap_components R x
+  change j ≫ ((A ≫ B) ≫ D) = _
+  calc
+    _ = j ≫ A ≫ B ≫ D := congrArg (j ≫ ·) (Category.assoc A B D)
+    _ = Sigma.ι (fun _ : ZerothHomotopy S ↦ R) (ZerothHomotopy.mk x) ≫ B ≫ D :=
+      (Category.assoc j A (B ≫ D)).symm.trans (congrArg (· ≫ B ≫ D) hA)
+    _ = Sigma.ι (fun _ : ULift.{u} Bool ↦ R) (e (ZerothHomotopy.mk x)) ≫ D :=
+      Sigma.ι_reindex_hom_assoc e (fun _ : ULift.{u} Bool ↦ R) (ZerothHomotopy.mk x) D
+    _ = _ := by
+      change Sigma.ι (fun _ : ULift.{u} Bool ↦ R) (e (ZerothHomotopy.mk
+        (standardOneDiskEndpoints.{u} b))) ≫ D = _
+      rw [he]
+      cases b <;> simp [D, Hatcher.Sphere.twoPointCoproductIso]
+
+private noncomputable def oneDiskAntidiagonal (R : AddCommGrpCat.{u}) : R ⟶ R ⊞ R :=
+  biprod.inr - biprod.inl
+
+private def oneDiskAntidiagonalIsKernel (R : AddCommGrpCat.{u}) :
+    IsLimit (KernelFork.ofι (f := biprod.desc (𝟙 R) (𝟙 R)) (oneDiskAntidiagonal R)
+      (by simp [oneDiskAntidiagonal, Preadditive.sub_comp])) := by
+  let S := ShortComplex.mk (oneDiskAntidiagonal R) (biprod.desc (𝟙 R) (𝟙 R))
+    (by simp [oneDiskAntidiagonal, Preadditive.sub_comp])
+  let s : S.Splitting :=
+    { r := biprod.snd
+      s := biprod.inl
+      f_r := by simp [S, oneDiskAntidiagonal, Preadditive.sub_comp]
+      s_g := by simp [S]
+      id := by
+        apply biprod.hom_ext <;> apply biprod.hom_ext' <;>
+          simp [S, oneDiskAntidiagonal, Preadditive.add_comp, Preadditive.sub_comp,
+            Preadditive.comp_add, Preadditive.comp_sub] }
+  exact s.fIsKernel
+
+private noncomputable def oneDiskBoundaryMap :
+    oneDiskCoefficients.{u} ⟶ (oneDiskH₀ oneDiskCoefficients.{u}).obj (TopCat.sphere.{u} 0) :=
+  positiveStandardDiskFundamentalClass.{u} 0 ≫
+    pairConnecting (standardDiskBoundaryPair.{u} 1) oneDiskCoefficients.{u} 1 0 rfl
+
+private def oneDiskOrientationIso :
+    { e : oneDiskCoefficients.{u} ≅ oneDiskCoefficients.{u} //
+      e.hom ≫ oneDiskAntidiagonal oneDiskCoefficients.{u} = oneDiskBoundaryMap.{u} ≫
+        (Hatcher.Sphere.singularHomologyZeroIsoSphereZero oneDiskCoefficients.{u}).hom } := by
+  let R := oneDiskCoefficients.{u}
+  let P := standardDiskBoundaryPair.{u} 1
+  let H := oneDiskH₀ R
+  let H₁ := (singularHomologyFunctor AddCommGrpCat.{u} 1).obj R
+  let B := Hatcher.Sphere.singularHomologyZeroIsoSphereZero R
+  let L := pairSequence P R 1 0 rfl
+  let g := positiveStandardDiskFundamentalClass.{u} 0
+  let : ContractibleSpace P.fst := by
+    change ContractibleSpace (ULift.{u} (Metric.closedBall (0 : EuclideanSpace ℝ (Fin 1)) 1))
+    let : ContractibleSpace (Metric.closedBall (0 : EuclideanSpace ℝ (Fin 1)) 1) :=
+      Metric.contractibleSpace_closedBall (zero_le_one : (0 : ℝ) ≤ 1)
+    exact Homeomorph.ulift.contractibleSpace
+  have hzero : IsZero (H₁.obj P.fst) :=
+    (Hatcher.Reduced.isZero_homology_of_contractible (X := P.fst) R 1).of_iso
+      ((Hatcher.Reduced.homologyIsoOfPositiveDegree R 1 Nat.one_pos).app P.fst).symm
+  have hL : L.Exact := pairSequence_exact P R 1 0 rfl
+  have hprev : L.map' 1 2 = 0 := hzero.eq_zero_of_src _
+  have _ : Mono (L.map' 2 3) := (hL.exact 1 (by decide)).mono_g hprev
+  have hk := (hL.exact 2 (by decide)).fIsKernel
+  have ha (T : AddCommGrpCat.{u}) (φ : T ⟶ H.obj P.snd) :
+      φ ≫ L.map' 3 4 = 0 ↔ φ ≫ B.hom ≫ biprod.desc (𝟙 R) (𝟙 R) = 0 := by
+    let ε := P.fst.singularHomology₀ε R
+    let _ : IsIso ε := inferInstanceAs (IsIso (P.fst.singularHomology₀ε R))
+    have hB : B.hom ≫ biprod.desc (𝟙 R) (𝟙 R) = P.snd.singularHomology₀ε R :=
+      Hatcher.Sphere.singularHomologyZeroIsoSphereZero_hom_codiagonal R
+    have hε : H.map P.map ≫ ε = P.snd.singularHomology₀ε R :=
+      oneDiskAugmentation_naturality R P.map
+    have hcomp : (φ ≫ H.map P.map) ≫ ε = φ ≫ B.hom ≫ biprod.desc (𝟙 R) (𝟙 R) :=
+      (Category.assoc _ _ _).trans (congrArg (fun m ↦ φ ≫ m) (hε.trans hB.symm))
+    have h0 : (0 : T ⟶ H.obj P.fst) ≫ ε = 0 := by simp
+    change φ ≫ H.map P.map = 0 ↔ _
+    constructor
+    · intro hz
+      exact hcomp.symm.trans ((congrArg (· ≫ ε) hz).trans h0)
+    · intro hz
+      apply (cancel_mono ε).mp
+      exact hcomp.trans (hz.trans h0.symm)
+  let h := KernelFork.isLimitOfIsLimitOfIff hk (biprod.desc (𝟙 R) (𝟙 R)) B
+    (fun ⦃T⦄ φ ↦ ha T φ)
+  let h' := oneDiskAntidiagonalIsKernel R
+  let e := h.conePointUniqueUpToIso h'
+  have he : e.hom ≫ oneDiskAntidiagonal R = pairConnecting P R 1 0 rfl ≫ B.hom :=
+    IsLimit.conePointUniqueUpToIso_hom_comp h h' WalkingParallelPair.zero
+  let _ : IsIso g := by
+    change IsIso ((Hatcher.Sphere.liftedOrderedSphereFundamentalClass.{u} 0 ≫
+      (positiveSpherePositiveIso.{u} 0).hom) ≫ (positiveDiskSphereOrdinaryIso.{u} 0).inv)
+    exact IsIso.comp_isIso'
+      (IsIso.comp_isIso' (Hatcher.Sphere.liftedOrderedSphereFundamentalClass_isIso.{u} 0)
+        (by infer_instance)) (by infer_instance)
+  refine ⟨asIso g ≪≫ e, ?_⟩
+  let d := pairConnecting P R 1 0 rfl
+  let A := oneDiskAntidiagonal R
+  change (g ≫ e.hom) ≫ A = (g ≫ d) ≫ B.hom
+  calc
+    _ = g ≫ e.hom ≫ A := Category.assoc g e.hom A
+    _ = g ≫ d ≫ B.hom := congrArg (fun m ↦ g ≫ m) he
+    _ = _ := (Category.assoc g d B.hom).symm
+
+private noncomputable def oneDiskOrientationSign : ℤ :=
+  (oneDiskOrientationIso.{u}.val.hom (ULift.up (1 : ℤ))).down
+
+private theorem oneDiskLiftedUnit_sign_cases (e : oneDiskCoefficients.{u} ≅ oneDiskCoefficients.{u}) :
+    (e.hom (ULift.up (1 : ℤ))).down = 1 ∨ (e.hom (ULift.up (1 : ℤ))).down = -1 := by
+  let v : ULift.{u} ℤ := ULift.up 1
+  let y := (e.inv v).down
+  have hy : (ULift.up y : ULift.{u} ℤ) = y • v := by
+    apply ULift.ext
+    exact (mul_one y).symm
+  have he : e.hom (ULift.up y) = v := e.inv_hom_id_apply v
+  rw [hy] at he
+  change e.hom.hom (y • v) = v at he
+  rw [map_zsmul] at he
+  have hz : y * (e.hom v).down = 1 := congrArg ULift.down he
+  obtain ⟨a, ha⟩ := IsUnit.of_mul_eq_one y ((mul_comm _ _).trans hz)
+  obtain rfl | rfl := Int.units_eq_one_or a
+  · left
+    simpa using ha.symm
+  · right
+    simpa using ha.symm
+
+private theorem oneDiskOrientationSign_cases :
+    oneDiskOrientationSign.{u} = 1 ∨ oneDiskOrientationSign.{u} = -1 :=
+  oneDiskLiftedUnit_sign_cases oneDiskOrientationIso.{u}.val
+
+private def oneDiskEndpointOrder (s : ℤ) : Bool ≃ Bool :=
+  if s = 1 then Equiv.refl Bool else Equiv.swap false true
+
+/-- The two actual endpoints in the orientation of the already fixed disk class:
+`false` labels the initial endpoint and `true` the terminal endpoint. -/
+noncomputable def orientedOneDiskEndpoints : Bool ≃ (standardDiskBoundaryPair.{u} 1).snd :=
+  (oneDiskEndpointOrder oneDiskOrientationSign.{u}).trans standardOneDiskEndpoints.{u}
+
+private theorem oneDiskBoundary_sign_formula {R H : AddCommGrpCat.{u}}
+    (B : H ≅ R ⊞ R) (x l r : H) (v w : R)
+    (hx : B.hom x = oneDiskAntidiagonal R w)
+    (hl : B.hom l = (biprod.inl : R ⟶ R ⊞ R) v)
+    (hr : B.hom r = (biprod.inr : R ⟶ R ⊞ R) v) :
+    (w = v → x = r - l) ∧ (w = -v → x = l - r) := by
+  have hb := (AddCommGrpCat.mono_iff_injective B.hom).mp (inferInstance : Mono B.hom)
+  have hd : oneDiskAntidiagonal R v = B.hom.hom (r - l) := by
+    rw [map_sub]
+    change (biprod.inr : R ⟶ R ⊞ R) v - (biprod.inl : R ⟶ R ⊞ R) v = _
+    exact congrArg₂ (· - ·) hr.symm hl.symm
+  constructor
+  · intro h
+    apply hb
+    exact hx.trans ((congrArg (oneDiskAntidiagonal R) h).trans hd)
+  · intro h
+    apply hb
+    calc
+      B.hom x = oneDiskAntidiagonal R w := hx
+      _ = oneDiskAntidiagonal R (-v) := congrArg (oneDiskAntidiagonal R) h
+      _ = -(oneDiskAntidiagonal R v) := map_neg (oneDiskAntidiagonal R).hom v
+      _ = -B.hom (r - l) := congrArg Neg.neg hd
+      _ = B.hom (l - r) := by
+        change -B.hom.hom (r - l) = B.hom.hom (l - r)
+        rw [← map_neg, neg_sub]
+
+private abbrev OneDiskBoundaryH₀ : AddCommGrpCat.{u} :=
+  (oneDiskH₀ oneDiskCoefficients.{u}).obj (TopCat.sphere.{u} 0)
+
+private def oneDiskStandardClass (b : Bool) : OneDiskBoundaryH₀.{u} :=
+  ordinaryPointClassMap oneDiskCoefficients.{u} (standardOneDiskEndpoints.{u} b) (ULift.up (1 : ℤ))
+
+private theorem oneDiskBoundary_with_sign :
+    (oneDiskOrientationSign.{u} = 1 →
+      oneDiskBoundaryMap.{u} (ULift.up (1 : ℤ)) =
+        oneDiskStandardClass.{u} true - oneDiskStandardClass.{u} false) ∧
+    (oneDiskOrientationSign.{u} = -1 →
+      oneDiskBoundaryMap.{u} (ULift.up (1 : ℤ)) =
+        oneDiskStandardClass.{u} false - oneDiskStandardClass.{u} true) := by
+  let R := oneDiskCoefficients.{u}
+  let B : OneDiskBoundaryH₀.{u} ≅ R ⊞ R := Hatcher.Sphere.singularHomologyZeroIsoSphereZero R
+  let v : R := ULift.up (1 : ℤ)
+  let w : R := oneDiskOrientationIso.{u}.val.hom v
+  let x : OneDiskBoundaryH₀.{u} := oneDiskBoundaryMap.{u} v
+  let l := oneDiskStandardClass.{u} false
+  let r := oneDiskStandardClass.{u} true
+  have hx : B.hom x = oneDiskAntidiagonal R w :=
+    (ConcreteCategory.congr_hom oneDiskOrientationIso.{u}.property v).symm
+  have hl : B.hom l = (biprod.inl : R ⟶ R ⊞ R) v :=
+    ConcreteCategory.congr_hom (standardOneDiskEndpoints_components R false) v
+  have hr : B.hom r = (biprod.inr : R ⟶ R ⊞ R) v :=
+    ConcreteCategory.congr_hom (standardOneDiskEndpoints_components R true) v
+  have h := oneDiskBoundary_sign_formula B x l r v w hx hl hr
+  constructor
+  · intro hp
+    apply h.1
+    apply ULift.ext
+    exact hp
+  · intro hn
+    apply h.2
+    apply ULift.ext
+    exact hn
+
+private theorem orientedOneDiskEndpoints_forward (h : oneDiskOrientationSign.{u} = 1)
+    (b : Bool) : orientedOneDiskEndpoints.{u} b = standardOneDiskEndpoints.{u} b := by
+  change standardOneDiskEndpoints.{u} (oneDiskEndpointOrder oneDiskOrientationSign.{u} b) = _
+  simp [oneDiskEndpointOrder, h]
+
+private theorem orientedOneDiskEndpoints_reverse (h : oneDiskOrientationSign.{u} ≠ 1)
+    (b : Bool) : orientedOneDiskEndpoints.{u} b = standardOneDiskEndpoints.{u} (!b) := by
+  change standardOneDiskEndpoints.{u} (oneDiskEndpointOrder oneDiskOrientationSign.{u} b) = _
+  apply congrArg standardOneDiskEndpoints.{u}
+  unfold oneDiskEndpointOrder
+  rw [ite_eq_right h]
+  cases b
+  · exact Equiv.swap_apply_left false true
+  · exact Equiv.swap_apply_right false true
+
+/-- The ordinary connecting morphism sends the fixed relative one-disk class to
+the terminal point class minus the initial point class. -/
+theorem orientedOneDiskEndpoints_boundary :
+    let R := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+    (positiveStandardDiskFundamentalClass.{u} 0 ≫
+      pairConnecting (standardDiskBoundaryPair.{u} 1) R 1 0 rfl) (ULift.up (1 : ℤ)) =
+      ordinaryPointClassMap R (orientedOneDiskEndpoints.{u} true) (ULift.up (1 : ℤ)) -
+        ordinaryPointClassMap R (orientedOneDiskEndpoints.{u} false) (ULift.up (1 : ℤ)) := by
+  let R := oneDiskCoefficients.{u}
+  let v : R := ULift.up (1 : ℤ)
+  change oneDiskBoundaryMap.{u} v =
+    ordinaryPointClassMap R (orientedOneDiskEndpoints.{u} true) v -
+      ordinaryPointClassMap R (orientedOneDiskEndpoints.{u} false) v
+  obtain h | h := oneDiskOrientationSign_cases.{u}
+  · rw [orientedOneDiskEndpoints_forward h true, orientedOneDiskEndpoints_forward h false]
+    exact oneDiskBoundary_with_sign.{u}.1 h
+  · have h' : oneDiskOrientationSign.{u} ≠ 1 := h.trans_ne (by decide)
+    rw [orientedOneDiskEndpoints_reverse h' true, orientedOneDiskEndpoints_reverse h' false]
+    exact oneDiskBoundary_with_sign.{u}.2 h
+
+end Hatcher.ClassicalCW
+
+namespace Hatcher.ClassicalCW
+
 open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
 open Hatcher.Relative Hatcher.Sphere
 

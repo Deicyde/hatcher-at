@@ -2328,3 +2328,402 @@ theorem singleCellSphereComplementIso_projection (k : ℕ) (b : RelCWComplex.cel
   singleCellComplementToSphere_projection C k b
 
 end Hatcher.ClassicalCW
+
+namespace Hatcher.ClassicalCW
+
+open CategoryTheory Topology Metric Set
+open Hatcher.Relative Hatcher.Sphere
+
+universe u
+
+private def sphereCellDiskIso (k : ℕ) :
+    classicalDisk.{u} (k + 1) ≅ (standardDiskBoundaryPair.{u} (k + 1)).fst :=
+  Arrow.rightFunc.mapIso (classicalCellArrowIso.{u} (k + 1))
+
+private theorem sphereCellDiskIso_mem_range (k : ℕ) (a : classicalDisk.{u} (k + 1)) :
+    (sphereCellDiskIso.{u} k).hom a ∈ Set.range (standardDiskBoundaryPair.{u} (k + 1)).map ↔
+      a.down.val ∈ Metric.sphere (0 : Fin (k + 1) → ℝ) 1 := by
+  let P := standardDiskBoundaryPair.{u} (k + 1)
+  let e := classicalCellArrowIso.{u} (k + 1)
+  let L : classicalDiskBoundary.{u} (k + 1) ≅ P.snd := Arrow.leftFunc.mapIso e
+  let R := sphereCellDiskIso.{u} k
+  have h : L.hom ≫ P.map = classicalDiskBoundaryInclusion.{u} (k + 1) ≫ R.hom := e.hom.w
+  have he (x : classicalDiskBoundary.{u} (k + 1)) :
+      P.map (L.hom x) = R.hom (classicalDiskBoundaryInclusion.{u} (k + 1) x) :=
+    ConcreteCategory.congr_hom h x
+  change R.hom a ∈ Set.range P.map ↔ _
+  constructor
+  · rintro ⟨y, hy⟩
+    let x := L.inv y
+    have hL : L.hom x = y := (TopCat.homeoOfIso L).apply_symm_apply y
+    have hx := (TopCat.homeoOfIso R).injective ((he x).symm.trans ((congrArg P.map hL).trans hy))
+    rw [← hx]
+    exact x.down.property
+  · intro ha
+    let x : classicalDiskBoundary.{u} (k + 1) := ULift.up ⟨a.down.val, ha⟩
+    have hx : classicalDiskBoundaryInclusion.{u} (k + 1) x = a := by
+      apply ULift.ext
+      apply Subtype.ext
+      rfl
+    exact ⟨L.hom x, (he x).trans (congrArg R.hom hx)⟩
+
+private theorem sphereCellDiskIso_mem_interior (k : ℕ) (a : classicalDisk.{u} (k + 1)) :
+    a.down.val ∈ ball (0 : Fin (k + 1) → ℝ) 1 ↔
+       (sphereCellDiskIso.{u} k).hom a ∈ (Set.range (standardDiskBoundaryPair.{u} (k + 1)).map)ᶜ := by
+  rw [Set.mem_compl_iff, sphereCellDiskIso_mem_range]
+  have ha := mem_closedBall.mp a.down.property
+  rw [mem_ball, mem_sphere]
+  exact lt_iff_le_and_ne.trans (and_iff_right ha)
+
+private def sphereCellDiskInterior (k : ℕ) :
+    (ball (0 : Fin (k + 1) → ℝ) 1) ≃ₜ
+      {a : classicalDisk.{u} (k + 1) // a.down.val ∈ ball (0 : Fin (k + 1) → ℝ) 1} where
+  toFun x := ⟨ULift.up ⟨x.val, ball_subset_closedBall x.property⟩, x.property⟩
+  invFun a := ⟨a.val.down.val, a.property⟩
+  left_inv x := Subtype.ext rfl
+  right_inv a := by
+    apply Subtype.ext
+    apply ULift.ext
+    apply Subtype.ext
+    rfl
+  continuous_toFun :=
+    (continuous_uliftUp.comp (continuous_subtype_val.subtype_mk _)).subtype_mk _
+  continuous_invFun := by
+    have hv : Continuous
+        (fun a : {a : classicalDisk.{u} (k + 1) //
+          a.down.val ∈ ball (0 : Fin (k + 1) → ℝ) 1} ↦ a.val) :=
+      continuous_subtype_val
+    have hd : Continuous (fun a : classicalDisk.{u} (k + 1) ↦ a.down) :=
+      continuous_uliftDown
+    exact (continuous_subtype_val.comp (hd.comp hv)).subtype_mk _
+
+private theorem sphereCellBoundaryClosed (k : ℕ) :
+    IsClosed (Set.range (standardDiskBoundaryPair.{u} (k + 1)).map) := by
+  letI : CompactSpace (standardDiskBoundaryPair.{u} (k + 1)).snd := by
+    change CompactSpace (ULift.{u} (Metric.sphere (0 : EuclideanSpace ℝ (Fin (k + 1))) 1))
+    have : CompactSpace (Metric.sphere (0 : EuclideanSpace ℝ (Fin (k + 1))) 1) :=
+      isCompact_iff_compactSpace.mp (isCompact_sphere _ _)
+    infer_instance
+  letI : T2Space (standardDiskBoundaryPair.{u} (k + 1)).fst := by
+    change T2Space (ULift.{u} (closedBall (0 : EuclideanSpace ℝ (Fin (k + 1))) 1))
+    infer_instance
+  exact (isCompact_range (standardDiskBoundaryPair.{u} (k + 1)).map.hom.continuous).isClosed
+
+private theorem sphereCellBoundaryNonempty (k : ℕ) :
+    Nonempty (standardDiskBoundaryPair.{u} (k + 1)).snd := by
+  change Nonempty (ULift.{u} (Metric.sphere (0 : EuclideanSpace ℝ (Fin (k + 1))) 1))
+  exact ⟨ULift.up ⟨EuclideanSpace.single (0 : Fin (k + 1)) 1, by
+    simp [mem_sphere_zero_iff_norm]⟩⟩
+
+/-- The interior chart of the top cell, obtained from the actual disk quotient. -/
+def sphereTopCellInterior (k : ℕ) :
+    ball (0 : Fin (k + 1) → ℝ) 1 ≃ₜ ({northPole.{u} k}ᶜ : Set (TopCat.sphere.{u} (k + 1))) := by
+  let P := standardDiskBoundaryPair.{u} (k + 1)
+  letI : Nonempty P.snd := sphereCellBoundaryNonempty k
+  let E := TopCat.homeoOfIso (diskBoundaryPointQuotientIsoSphere.{u} k)
+  have h (q : pointQuotient P) :
+      q ∈ ({pointQuotientPoint P}ᶜ : Set (pointQuotient P)) ↔
+        E q ∈ ({northPole.{u} k}ᶜ : Set (TopCat.sphere.{u} (k + 1))) := by
+    have hpt : E (pointQuotientPoint P) = northPole.{u} k :=
+      diskBoundaryPointQuotientIsoSphere_point k
+    simp only [Set.mem_compl_iff, Set.mem_singleton_iff, ← hpt]
+    exact not_congr E.injective.eq_iff.symm
+  exact (sphereCellDiskInterior k).trans
+    (((TopCat.homeoOfIso (sphereCellDiskIso.{u} k)).subtype
+      (sphereCellDiskIso_mem_interior k)).trans
+        ((pointQuotientComplementHomeomorph P (sphereCellBoundaryClosed k)).trans (E.subtype h)))
+
+private def sphereTopCellOnDisk (k : ℕ) (x : closedBall (0 : Fin (k + 1) → ℝ) 1) :
+    TopCat.sphere.{u} (k + 1) :=
+  (diskBoundaryPointQuotientIsoSphere.{u} k).hom
+    (pointQuotientProjection (standardDiskBoundaryPair.{u} (k + 1))
+      ((sphereCellDiskIso.{u} k).hom (ULift.up x)))
+
+/-- On the open disk the interior chart is the same collapse as on the closed disk. -/
+theorem sphereTopCellInterior_apply (k : ℕ) (x : ball (0 : Fin (k + 1) → ℝ) 1) :
+    (sphereTopCellInterior.{u} k x).val =
+      (diskBoundaryPointQuotientIsoSphere.{u} k).hom
+        (pointQuotientProjection (standardDiskBoundaryPair.{u} (k + 1))
+          ((Arrow.rightFunc.mapIso (classicalCellArrowIso.{u} (k + 1))).hom
+            (ULift.up ⟨x.val, ball_subset_closedBall x.property⟩))) := rfl
+
+private def sphereTopCellMap (k : ℕ) (x : Fin (k + 1) → ℝ) : TopCat.sphere.{u} (k + 1) := by
+  classical
+  exact if hx : x ∈ closedBall (0 : Fin (k + 1) → ℝ) 1 then
+    sphereTopCellOnDisk k ⟨x, hx⟩
+  else northPole.{u} k
+
+private theorem sphereTopCellMap_onDisk (k : ℕ) (x : closedBall (0 : Fin (k + 1) → ℝ) 1) :
+    sphereTopCellMap.{u} k x.val = sphereTopCellOnDisk k x := by
+  rw [sphereTopCellMap, dite_eq_left x.property]
+
+private theorem sphereTopCellMap_interior (k : ℕ) (x : ball (0 : Fin (k + 1) → ℝ) 1) :
+    sphereTopCellMap.{u} k x.val = (sphereTopCellInterior.{u} k x).val := by
+  rw [sphereTopCellMap, dite_eq_left (ball_subset_closedBall x.property)]
+  exact (sphereTopCellInterior_apply k x).symm
+
+private theorem sphereTopCellMap_boundary (k : ℕ) (x : Fin (k + 1) → ℝ)
+    (hx : x ∈ Metric.sphere (0 : Fin (k + 1) → ℝ) 1) :
+    sphereTopCellMap.{u} k x = northPole.{u} k := by
+  let P := standardDiskBoundaryPair.{u} (k + 1)
+  letI : Nonempty P.snd := sphereCellBoundaryNonempty k
+  let a : classicalDisk.{u} (k + 1) := ULift.up ⟨x, sphere_subset_closedBall hx⟩
+  have ha : (sphereCellDiskIso.{u} k).hom a ∈ Set.range P.map :=
+    (sphereCellDiskIso_mem_range k a).2 hx
+  rw [← pointQuotientProjection_preimage_point P] at ha
+  have eq : pointQuotientProjection P ((sphereCellDiskIso.{u} k).hom a) =
+      pointQuotientPoint P := ha
+  rw [sphereTopCellMap, dite_eq_left (sphere_subset_closedBall hx)]
+  change (diskBoundaryPointQuotientIsoSphere.{u} k).hom
+    (pointQuotientProjection P ((sphereCellDiskIso.{u} k).hom a)) = _
+  rw [eq]
+  exact diskBoundaryPointQuotientIsoSphere_point k
+
+private def sphereTopCellInverse (k : ℕ) (y : TopCat.sphere.{u} (k + 1)) :
+    Fin (k + 1) → ℝ := by
+  classical
+  exact if hy : y ∈ ({northPole.{u} k}ᶜ : Set (TopCat.sphere.{u} (k + 1))) then
+    ((sphereTopCellInterior.{u} k).symm ⟨y, hy⟩).val
+  else 0
+
+private theorem sphereTopCellInverse_onTarget (k : ℕ)
+    (y : ({northPole.{u} k}ᶜ : Set (TopCat.sphere.{u} (k + 1)))) :
+    sphereTopCellInverse k y.val = ((sphereTopCellInterior.{u} k).symm y).val := by
+  rw [sphereTopCellInverse, dite_eq_left y.property]
+
+private def sphereTopCellPartialEquiv (k : ℕ) :
+    PartialEquiv (Fin (k + 1) → ℝ) (TopCat.sphere.{u} (k + 1)) where
+  toFun := sphereTopCellMap k
+  invFun := sphereTopCellInverse k
+  source := ball 0 1
+  target := {northPole.{u} k}ᶜ
+  map_source' x hx := by
+    rw [sphereTopCellMap_interior k ⟨x, hx⟩]
+    exact (sphereTopCellInterior.{u} k ⟨x, hx⟩).property
+  map_target' y hy := by
+    rw [sphereTopCellInverse_onTarget k ⟨y, hy⟩]
+    exact ((sphereTopCellInterior.{u} k).symm ⟨y, hy⟩).property
+  left_inv' x hx := by
+    let z : ball (0 : Fin (k + 1) → ℝ) 1 := ⟨x, hx⟩
+    change sphereTopCellInverse k (sphereTopCellMap k z.val) = z.val
+    rw [sphereTopCellMap_interior k z,
+      sphereTopCellInverse_onTarget k (sphereTopCellInterior.{u} k z)]
+    exact congrArg Subtype.val ((sphereTopCellInterior.{u} k).symm_apply_apply z)
+  right_inv' y hy := by
+    let z : ({northPole.{u} k}ᶜ : Set (TopCat.sphere.{u} (k + 1))) := ⟨y, hy⟩
+    change sphereTopCellMap k (sphereTopCellInverse k z.val) = z.val
+    rw [sphereTopCellInverse_onTarget k z,
+      sphereTopCellMap_interior k ((sphereTopCellInterior.{u} k).symm z)]
+    exact congrArg Subtype.val ((sphereTopCellInterior.{u} k).apply_symm_apply z)
+
+private theorem sphereTopCellContinuous (k : ℕ) :
+    ContinuousOn (sphereTopCellPartialEquiv.{u} k) (closedBall 0 1) := by
+  rw [continuousOn_iff_continuous_domRestrict]
+  have h : Continuous (sphereTopCellOnDisk.{u} k) :=
+    (diskBoundaryPointQuotientIsoSphere.{u} k).hom.hom.continuous.comp
+      ((pointQuotientProjection (standardDiskBoundaryPair.{u} (k + 1))).hom.continuous.comp
+        ((sphereCellDiskIso.{u} k).hom.hom.continuous.comp continuous_uliftUp))
+  change Continuous (fun x : closedBall (0 : Fin (k + 1) → ℝ) 1 ↦
+    sphereTopCellMap.{u} k x.val)
+  rw [funext (sphereTopCellMap_onDisk.{u} k)]
+  exact h
+
+private theorem sphereTopCellInverseContinuous (k : ℕ) :
+    ContinuousOn (sphereTopCellPartialEquiv.{u} k).symm
+      (sphereTopCellPartialEquiv.{u} k).target := by
+  rw [continuousOn_iff_continuous_domRestrict]
+  have h : Continuous
+      (fun y ↦ ((sphereTopCellInterior.{u} k).symm y).val) :=
+    continuous_subtype_val.comp (sphereTopCellInterior.{u} k).symm.continuous
+  change Continuous (fun y : ({northPole.{u} k}ᶜ : Set (TopCat.sphere.{u} (k + 1))) ↦
+    sphereTopCellInverse k y.val)
+  rw [funext (sphereTopCellInverse_onTarget.{u} k)]
+  exact h
+
+private def sphereZeroCellPartialEquiv (k : ℕ) :
+    PartialEquiv (Fin 0 → ℝ) (TopCat.sphere.{u} (k + 1)) where
+  toFun := fun _ ↦ northPole.{u} k
+  invFun := fun _ ↦ 0
+  source := ball 0 1
+  target := {northPole.{u} k}
+  map_source' _ _ := Set.mem_singleton _
+  map_target' _ _ := by simp
+  left_inv' _ _ := Subsingleton.elim _ _
+  right_inv' _ hy := (Set.mem_singleton_iff.mp hy).symm
+
+private abbrev SphereCellIndex (k m : ℕ) : Type u := ULift.{u} (PLift (m = 0 ∨ m = k + 1))
+
+private def sphereCellMap (k m : ℕ) (i : SphereCellIndex.{u} k m) :
+    PartialEquiv (Fin m → ℝ) (TopCat.sphere.{u} (k + 1)) :=
+  if h : m = 0 then h.symm ▸ sphereZeroCellPartialEquiv.{u} k
+  else (i.down.down.resolve_left h).symm ▸ sphereTopCellPartialEquiv.{u} k
+
+@[simp] private theorem sphereCellMap_zero (k : ℕ) (i : SphereCellIndex.{u} k 0) :
+    sphereCellMap k 0 i = sphereZeroCellPartialEquiv k := by
+  simp [sphereCellMap]
+
+@[simp] private theorem sphereCellMap_top (k : ℕ) (i : SphereCellIndex.{u} k (k + 1)) :
+    sphereCellMap k (k + 1) i = sphereTopCellPartialEquiv k := by
+  simp [sphereCellMap]
+
+private def sphereCellZero (k : ℕ) : SphereCellIndex.{u} k 0 := ⟨⟨Or.inl rfl⟩⟩
+
+private def sphereCellTop (k : ℕ) : SphereCellIndex.{u} k (k + 1) := ⟨⟨Or.inr rfl⟩⟩
+
+private theorem sphereCellOnly (k : ℕ) :
+    ∀ᶠ m in Filter.atTop, IsEmpty (SphereCellIndex.{u} k m) := by
+  refine (Filter.eventually_ge_atTop (k + 2)).mono fun m hm ↦ ⟨?_⟩
+  intro i
+  rcases i.down.down with h | h <;> omega
+
+private theorem sphereCellSource (k m : ℕ) (i : SphereCellIndex.{u} k m) :
+    (sphereCellMap k m i).source = ball 0 1 := by
+  rcases i.down.down with rfl | rfl
+  · rw [sphereCellMap_zero]
+    rfl
+  · rw [sphereCellMap_top]
+    rfl
+
+private theorem sphereCellContinuous (k m : ℕ) (i : SphereCellIndex.{u} k m) :
+    ContinuousOn (sphereCellMap k m i) (closedBall 0 1) := by
+  rcases i.down.down with rfl | rfl
+  · rw [sphereCellMap_zero]
+    exact continuous_const.continuousOn
+  · rw [sphereCellMap_top]
+    exact sphereTopCellContinuous k
+
+private theorem sphereCellInverseContinuous (k m : ℕ) (i : SphereCellIndex.{u} k m) :
+    ContinuousOn (sphereCellMap k m i).symm (sphereCellMap k m i).target := by
+  rcases i.down.down with rfl | rfl
+  · rw [sphereCellMap_zero]
+    exact continuous_const.continuousOn
+  · rw [sphereCellMap_top]
+    exact sphereTopCellInverseContinuous k
+
+private theorem sphereCellDisjoint (k : ℕ) :
+    (univ : Set (Σ m, SphereCellIndex.{u} k m)).PairwiseDisjoint
+      (fun i ↦ sphereCellMap k i.1 i.2 '' ball 0 1) := by
+  have h (i : SphereCellIndex.{u} k 0) (j : SphereCellIndex.{u} k (k + 1)) :
+      Disjoint (sphereCellMap k 0 i '' ball 0 1) (sphereCellMap k (k + 1) j '' ball 0 1) := by
+    rw [sphereCellMap_zero, sphereCellMap_top, Set.disjoint_left]
+    rintro y ⟨x, _, rfl⟩ ⟨z, hz, hzy⟩
+    have hz' := (sphereTopCellPartialEquiv.{u} k).map_source hz
+    change sphereTopCellMap k z ∉ ({northPole.{u} k} : Set (TopCat.sphere.{u} (k + 1))) at hz'
+    exact hz' (Set.mem_singleton_iff.mpr hzy)
+  rintro ⟨m, i⟩ _ ⟨n, j⟩ _ hij
+  rcases i.down.down with rfl | rfl <;> rcases j.down.down with rfl | rfl
+  · exact (hij (congrArg (Sigma.mk 0) (Subsingleton.elim i j))).elim
+  · exact h i j
+  · exact (h j i).symm
+  · exact (hij (congrArg (Sigma.mk (k + 1)) (Subsingleton.elim i j))).elim
+
+private theorem sphereCellBoundary (k m : ℕ) (i : SphereCellIndex.{u} k m) :
+    MapsTo (sphereCellMap k m i) (Metric.sphere 0 1)
+      (⋃ (n < m) (j : SphereCellIndex.{u} k n), sphereCellMap k n j '' closedBall 0 1) := by
+  rcases i.down.down with rfl | rfl
+  · intro x hx
+    have h : x = 0 := Subsingleton.elim _ _
+    have hd := mem_sphere.mp hx
+    rw [h, dist_self] at hd
+    exact (zero_ne_one hd).elim
+  · intro x hx
+    have he : sphereCellMap k (k + 1) i x = northPole.{u} k := by
+      rw [sphereCellMap_top]
+      exact sphereTopCellMap_boundary k x hx
+    rw [he]
+    refine Set.mem_iUnion.mpr ⟨0, Set.mem_iUnion.mpr ⟨Nat.zero_lt_succ k,
+      Set.mem_iUnion.mpr ⟨sphereCellZero k, 0, by simp, ?_⟩⟩⟩
+    rw [sphereCellMap_zero]
+    rfl
+
+private theorem sphereCellCover (k : ℕ) :
+    (⋃ (m : ℕ) (i : SphereCellIndex.{u} k m), sphereCellMap k m i '' closedBall 0 1) =
+      (univ : Set (TopCat.sphere.{u} (k + 1))) := by
+  apply Set.eq_univ_of_forall
+  intro y
+  by_cases hy : y = northPole.{u} k
+  · refine Set.mem_iUnion.mpr ⟨0, Set.mem_iUnion.mpr ⟨sphereCellZero k, 0, by simp, ?_⟩⟩
+    rw [sphereCellMap_zero]
+    exact hy.symm
+  · let z := (sphereTopCellInterior.{u} k).symm ⟨y, hy⟩
+    refine Set.mem_iUnion.mpr ⟨k + 1, Set.mem_iUnion.mpr
+      ⟨sphereCellTop k, z.val, ball_subset_closedBall z.property, ?_⟩⟩
+    rw [sphereCellMap_top]
+    exact (sphereTopCellMap_interior k z).trans
+      (congrArg Subtype.val ((sphereTopCellInterior.{u} k).apply_symm_apply ⟨y, hy⟩))
+
+/-- **Hatcher, Example 0.3.** The standard positive-dimensional sphere has
+one zero-cell at the north pole and one top cell given by the disk quotient. -/
+@[instance_reducible]
+def sphereClassicalCw (k : ℕ) : CWComplex (univ : Set (TopCat.sphere.{u} (k + 1))) :=
+  CWComplex.mkFinite _ (SphereCellIndex.{u} k) (sphereCellMap k) (sphereCellOnly k)
+    (fun _ ↦ Finite.of_subsingleton) (sphereCellSource k) (sphereCellContinuous k)
+    (sphereCellInverseContinuous k) (sphereCellDisjoint k) (sphereCellBoundary k) (sphereCellCover k)
+
+/-- The minimal classical sphere is finite, without changing its cell structure. -/
+theorem sphereClassicalCw_finite (k : ℕ) :
+    letI := sphereClassicalCw.{u} k
+    CWComplex.Finite (univ : Set (TopCat.sphere.{u} (k + 1))) := by
+  exact CWComplex.finite_mkFinite _ (SphereCellIndex.{u} k) (sphereCellMap k) (sphereCellOnly k)
+    (fun _ ↦ Finite.of_subsingleton) (sphereCellSource k) (sphereCellContinuous k)
+    (sphereCellInverseContinuous k) (sphereCellDisjoint k) (sphereCellBoundary k) (sphereCellCover k)
+
+/-- There is exactly one cell in dimensions zero and top, and no cell otherwise. -/
+theorem sphereClassicalCw_cells (k m : ℕ) :
+    letI := sphereClassicalCw.{u} k
+    let C : Set (TopCat.sphere.{u} (k + 1)) := univ
+    Subsingleton (RelCWComplex.cell C m) ∧ (Nonempty (RelCWComplex.cell C m) ↔ m = 0 ∨ m = k + 1) := by
+  change Subsingleton (SphereCellIndex.{u} k m) ∧ (Nonempty (SphereCellIndex.{u} k m) ↔ _)
+  exact ⟨inferInstance, ⟨fun ⟨i⟩ ↦ i.down.down, fun h ↦ ⟨⟨⟨h⟩⟩⟩⟩⟩
+
+/-- The zero-cell is the fixed north pole of the disk quotient. -/
+theorem sphereClassicalCw_zero (k : ℕ) :
+    letI := sphereClassicalCw.{u} k
+    let C : Set (TopCat.sphere.{u} (k + 1)) := univ
+    ∀ i : RelCWComplex.cell C 0, RelCWComplex.openCell 0 i = {northPole.{u} k} := by
+  change ∀ i : SphereCellIndex.{u} k 0, sphereCellMap k 0 i '' ball 0 1 = _
+  intro i
+  rw [sphereCellMap_zero]
+  ext y
+  refine ⟨fun ⟨_, _, h⟩ ↦ Set.mem_singleton_iff.mpr h.symm, fun hy ↦ ?_⟩
+  exact ⟨0, by simp, (Set.mem_singleton_iff.mp hy).symm⟩
+
+/-- The actual top characteristic map on the closed disk is the prescribed collapse. -/
+theorem sphereClassicalCw_characteristic (k : ℕ) :
+    letI := sphereClassicalCw.{u} k
+    let C : Set (TopCat.sphere.{u} (k + 1)) := univ
+    ∀ (i : RelCWComplex.cell C (k + 1)) (x : closedBall (0 : Fin (k + 1) → ℝ) 1),
+      RelCWComplex.map (k + 1) i x.val =
+        (diskBoundaryPointQuotientIsoSphere.{u} k).hom
+          (pointQuotientProjection (standardDiskBoundaryPair.{u} (k + 1))
+            ((Arrow.rightFunc.mapIso (classicalCellArrowIso.{u} (k + 1))).hom (ULift.up x))) := by
+  change ∀ (i : SphereCellIndex.{u} k (k + 1)) (x : closedBall (0 : Fin (k + 1) → ℝ) 1),
+    sphereCellMap k (k + 1) i x.val = sphereTopCellOnDisk k x
+  intro i x
+  rw [sphereCellMap_top]
+  exact sphereTopCellMap_onDisk k x
+
+/-- The top characteristic map sends every frontier point to the zero-cell. -/
+theorem sphereClassicalCw_boundary (k : ℕ) :
+    letI := sphereClassicalCw.{u} k
+    let C : Set (TopCat.sphere.{u} (k + 1)) := univ
+    ∀ (i : RelCWComplex.cell C (k + 1)) (x : Fin (k + 1) → ℝ),
+      x ∈ Metric.sphere (0 : Fin (k + 1) → ℝ) 1 →
+        RelCWComplex.map (k + 1) i x = northPole.{u} k := by
+  change ∀ (i : SphereCellIndex.{u} k (k + 1)) (x : Fin (k + 1) → ℝ),
+    x ∈ Metric.sphere (0 : Fin (k + 1) → ℝ) 1 → sphereCellMap k (k + 1) i x = _
+  intro i x hx
+  rw [sphereCellMap_top]
+  exact sphereTopCellMap_boundary k x hx
+
+/-- The open top cell is exactly the complement of the zero-cell. -/
+theorem sphereClassicalCw_interior (k : ℕ) :
+    letI := sphereClassicalCw.{u} k
+    let C : Set (TopCat.sphere.{u} (k + 1)) := univ
+    ∀ i : RelCWComplex.cell C (k + 1), RelCWComplex.openCell (k + 1) i = {northPole.{u} k}ᶜ := by
+  change ∀ i : SphereCellIndex.{u} k (k + 1), sphereCellMap k (k + 1) i '' ball 0 1 = _
+  intro i
+  rw [sphereCellMap_top]
+  exact (sphereTopCellPartialEquiv.{u} k).image_source_eq_target
+
+end Hatcher.ClassicalCW
