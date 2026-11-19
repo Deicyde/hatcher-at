@@ -174,7 +174,7 @@ private theorem classicalProductCell_mem_ball {n : ℕ} (i : ClassicalProductCel
       simp only [mem_ball, z, classicalProductCellDist_zero C D i]
     _ ↔ z.1 ∈ ball 0 1 ∧ z.2 ∈ ball 0 1 := by
       change z ∈ ball (0, 0) 1 ↔ _
-      rw [← Metric.ball_prod_same] <;> rfl
+      simp only [mem_ball, Prod.dist_eq, max_lt_iff]
 
 private theorem classicalProductCell_mem_closedBall {n : ℕ} (i : ClassicalProductCell C D n)
     (x : Fin n → ℝ) :
@@ -186,7 +186,7 @@ private theorem classicalProductCell_mem_closedBall {n : ℕ} (i : ClassicalProd
       simp only [mem_closedBall, z, classicalProductCellDist_zero C D i]
     _ ↔ z.1 ∈ closedBall 0 1 ∧ z.2 ∈ closedBall 0 1 := by
       change z ∈ closedBall (0, 0) 1 ↔ _
-      rw [← Metric.closedBall_prod_same] <;> rfl
+      simp only [mem_closedBall, Prod.dist_eq, max_le_iff]
 
 private theorem classicalProductCell_mem_frontier {n : ℕ} (i : ClassicalProductCell C D n)
     {x : Fin n → ℝ} (hx : x ∈ sphere 0 1) :
@@ -288,6 +288,8 @@ private theorem classicalProductCellsDisjoint :
     (univ : Set (Σ n, ClassicalProductCell C D n)).PairwiseDisjoint
       (fun i ↦ classicalProductCellMap C D i.1 i.2 '' ball 0 1) := by
   intro i _ j _ hij
+  change Disjoint (classicalProductCellMap C D i.1 i.2 '' ball 0 1)
+    (classicalProductCellMap C D j.1 j.2 '' ball 0 1)
   rw [classicalProductCell_openImage C D i.2, classicalProductCell_openImage C D j.2,
     Set.disjoint_left]
   intro z hz hw
@@ -369,9 +371,9 @@ variable [CWComplex.Finite C] [CWComplex.Finite D]
 private theorem classicalProductCellEventuallyEmpty :
     ∀ᶠ n in Filter.atTop, IsEmpty (ClassicalProductCell C D n) := by
   obtain ⟨p, hp⟩ := Filter.eventually_atTop.mp
-    (CWComplex.FiniteDimensional.eventually_isEmpty_cell (C := C))
+    (CWComplex.FiniteDimensional.eventually_isEmpty_cell (C := C) (D := (∅ : Set X)))
   obtain ⟨q, hq⟩ := Filter.eventually_atTop.mp
-    (CWComplex.FiniteDimensional.eventually_isEmpty_cell (C := D))
+    (CWComplex.FiniteDimensional.eventually_isEmpty_cell (C := D) (D := (∅ : Set Y)))
   refine Filter.eventually_atTop.mpr ⟨p + q, fun n hn ↦ ⟨fun i ↦ ?_⟩⟩
   have hi := i.property
   by_cases h : p ≤ i.val.1.1
