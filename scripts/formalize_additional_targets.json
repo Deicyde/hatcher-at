@@ -309,6 +309,15 @@
         "Hatcher.ClassicalCW.orientedOneDiskEndpoints",
         "Hatcher.ClassicalCW.orientedOneDiskEndpoints_boundary"
       ]
+    },
+    {
+      "article_id": "af_f7426ef6c9ced3f037f8153b",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.cellularEndpointVertex",
+        "Hatcher.ClassicalCW.zeroCellPoint_cellularEndpointVertex",
+        "Hatcher.ClassicalCW.cellularEndpointBoundary"
+      ]
     }
   ]
 }

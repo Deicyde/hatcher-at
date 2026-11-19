@@ -2592,3 +2592,76 @@ theorem orientedOneDiskEndpoints_boundary :
     exact oneDiskBoundary_with_sign.{u}.2 h
 
 end Hatcher.ClassicalCW
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory _root_.Topology
+
+universe u
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+/-- The actual attaching endpoint, as an index of the zero skeleton.
+`false` gives the initial vertex and `true` the terminal vertex. -/
+noncomputable def cellularEndpointVertex (a : RelCWComplex.cell C 1) (b : Bool) :
+    RelCWComplex.cell C 0 :=
+  ((zeroSkeletonHomeomorphCells C).symm
+    (TopPair.Hom.snd (skeletalStageCellPairMap C 1 a) (orientedOneDiskEndpoints.{u} b))).ofTopology
+
+/-- The labelled vertex is the actual image of the corresponding disk endpoint. -/
+theorem zeroCellPoint_cellularEndpointVertex (a : RelCWComplex.cell C 1) (b : Bool) :
+    zeroCellPoint C (cellularEndpointVertex C a b) =
+      TopPair.Hom.snd (skeletalStageCellPairMap C 1 a) (orientedOneDiskEndpoints.{u} b) := by
+  let x : (zeroSkeletonPair C).fst :=
+    TopPair.Hom.snd (skeletalStageCellPairMap C 1 a) (orientedOneDiskEndpoints.{u} b)
+  change (zeroSkeletonHomeomorphCells C) ((zeroSkeletonHomeomorphCells C).symm x) = x
+  exact (zeroSkeletonHomeomorphCells C).apply_symm_apply x
+
+set_option maxHeartbeats 600000 in
+set_option backward.isDefEq.respectTransparency false in
+/-- The first cellular differential takes the fixed generator of each one-cell
+to its terminal vertex class minus its initial vertex class. The two vertices
+are allowed to coincide. -/
+theorem cellularEndpointBoundary (a : RelCWComplex.cell C 1) :
+    (cellularChainComplex C).d 1 0 (skeletalCellFundamentalClass C 1 a) =
+      zeroCellRelativeClass C (cellularEndpointVertex C a true) -
+        zeroCellRelativeClass C (cellularEndpointVertex C a false) := by
+  let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+  let v : R := ULift.up (1 : ℤ)
+  let D := standardDiskBoundaryPair.{u} 1
+  let S := (zeroSkeletonPair C).fst
+  let H : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+    (singularHomologyFunctor AddCommGrpCat.{u} 0).obj R
+  let f : D.snd ⟶ S := TopPair.Hom.snd (skeletalStageCellPairMap C 1 a)
+  let g : R ⟶ (Hatcher.Relative.homologyFunctor R 1).obj D :=
+    positiveStandardDiskFundamentalClass.{u} 0
+  let δ : (Hatcher.Relative.homologyFunctor R 1).obj D ⟶ H.obj D.snd :=
+    Hatcher.Relative.pairConnecting D R 1 0 rfl
+  let p : H.obj S ⟶ (cellularChainComplex C).X 0 :=
+    (zeroSkeletonOrdinaryRelativeHomologyIso C 0).hom
+  let x (b : Bool) : D.snd := orientedOneDiskEndpoints.{u} b
+  let y (b : Bool) : H.obj D.snd := ordinaryPointClassMap R (x b) v
+  have hp : p = (Hatcher.Relative.singularPairFunctor.obj
+      (cellularSkeletonPair C 0)).homologyπ R 0 :=
+    zeroSkeletonOrdinaryRelativeHomologyIso_hom C 0
+  have hDiff : (cellularChainComplex C).d 1 0 (skeletalCellFundamentalClass C 1 a) =
+      p (H.map f (δ (g v))) := by
+    rw [hp]
+    exact (characteristicBoundaryNaturality C 0 a).2
+  have hd : δ (g v) = y true - y false := orientedOneDiskEndpoints_boundary.{u}
+  have hclass (b : Bool) : p (H.map f (y b)) =
+      zeroCellRelativeClass C (cellularEndpointVertex C a b) := by
+    have hn : H.map f (y b) = ordinaryPointClassMap R (f (x b)) v :=
+      ConcreteCategory.congr_hom (ordinaryPointClassMap_naturality R f (x b)) v
+    have hx : f (x b) = zeroCellPoint C (cellularEndpointVertex C a b) :=
+      (zeroCellPoint_cellularEndpointVertex C a b).symm
+    rw [hn, hx] <;> rfl
+  calc
+    _ = p (H.map f (δ (g v))) := hDiff
+    _ = p (H.map f (y true - y false)) := congrArg (fun z ↦ p (H.map f z)) hd
+    _ = p (H.map f (y true)) - p (H.map f (y false)) :=
+      map_sub ((H.map f) ≫ p).hom (y true) (y false)
+    _ = _ := congrArg₂ (· - ·) (hclass true) (hclass false)
+
+end Hatcher.ClassicalCW
