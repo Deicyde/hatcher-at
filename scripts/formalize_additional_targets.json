@@ -309,6 +309,20 @@
         "Hatcher.ClassicalCW.orientedOneDiskEndpoints",
         "Hatcher.ClassicalCW.orientedOneDiskEndpoints_boundary"
       ]
+    },
+    {
+      "article_id": "af_98b02d5314b897ae75721b99",
+      "module": "Hatcher.Appendix.ClassicalSkeletonCellAttachment",
+      "declarations": [
+        "Hatcher.ClassicalCW.ClassicalProductCell",
+        "Hatcher.ClassicalCW.classicalProductCellAxes",
+        "Hatcher.ClassicalCW.finiteClassicalCwProduct",
+        "Hatcher.ClassicalCW.finiteClassicalCwProduct_finite",
+        "Hatcher.ClassicalCW.finiteClassicalCwProduct_cells",
+        "Hatcher.ClassicalCW.finiteClassicalCwProduct_characteristic",
+        "Hatcher.ClassicalCW.finiteClassicalCwProduct_openCell",
+        "Hatcher.ClassicalCW.finiteClassicalCwProduct_closedCell"
+      ]
     }
   ]
 }
