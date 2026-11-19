@@ -2170,7 +2170,8 @@ private def singleCellComplementPairMap (k : ℕ) (b : RelCWComplex.cell C (k + 
     (RelCWComplex.disjoint_skeletonLT_openCell (C := C) (n := ((k + 1 : ℕ) : ℕ∞))
       (m := k + 1) (j := b) le_rfl).notMem_of_mem_left a.property
   exact TopPair.ofHom (𝟙 P.fst) (TopCat.ofHom
-    ⟨fun a ↦ ⟨P.map a, h a⟩, P.map.hom.continuous.subtype_mk h⟩) (by
+    ⟨fun a ↦ ⟨skeletonLTStepOldMap C (k + 1) a, h a⟩,
+      (continuous_skeletonLTStepOldMap C (k + 1)).subtype_mk h⟩) (by
       apply TopCat.ext
       intro a
       rfl)
