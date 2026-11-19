@@ -256,6 +256,13 @@
         "Hatcher.ClassicalCW.cellularBoundaryCoordinates_reconstruct",
         "Hatcher.ClassicalCW.cellularBoundaryCoordinates_eq_of_basisIso"
       ]
+    },
+    {
+      "article_id": "af_9bda8aeb7e132e986e52219a",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.diskBoundaryGenerator"
+      ]
     }
   ]
 }
