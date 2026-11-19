@@ -2592,3 +2592,286 @@ theorem orientedOneDiskEndpoints_boundary :
     exact oneDiskBoundary_with_sign.{u}.2 h
 
 end Hatcher.ClassicalCW
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory CategoryTheory.Limits _root_.Topology
+open Hatcher.Relative Hatcher.Sphere
+
+universe u
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+private theorem selectedCellLowerNonempty (k : ℕ)
+    (b : RelCWComplex.cell C (k + 1)) :
+    Nonempty (positiveSkeletalPair C k).snd := by
+  let p : (standardDiskBoundaryPair.{u} (k + 1)).snd := by
+    change ULift.{u} (Metric.sphere (0 : EuclideanSpace ℝ (Fin (k + 1))) 1)
+    exact ULift.up ⟨EuclideanSpace.single (0 : Fin (k + 1)) 1, by
+      simp [mem_sphere_zero_iff_norm]⟩
+  exact ⟨(TopPair.Hom.snd (skeletalStageCellPairMap C (k + 1) b)) p⟩
+
+private noncomputable def chosenSphereGeneratorIso (k : ℕ) :
+    positiveCellCoefficient.{u} ≅
+      (Hatcher.Reduced.homologyFunctor.{u} positiveCellCoefficient.{u} (k + 1)).obj
+        (TopCat.sphere.{u} (k + 1)) :=
+  @asIso AddCommGrpCat.{u} _ _ _ (liftedOrderedSphereFundamentalClass.{u} k)
+    (liftedOrderedSphereFundamentalClass_isIso.{u} k)
+
+private noncomputable def selectedWedgeCollapse (k : ℕ) (b : RelCWComplex.cell C (k + 1)) :
+    positiveSkeletalWedge C k ⟶ TopCat.sphere.{u} (k + 1) :=
+  (skeletonPointQuotientIsoWedge C k).inv ≫ singleCellSphereCollapse C k b
+
+private theorem selectedWedgeCollapse_selected (k : ℕ) (b : RelCWComplex.cell C (k + 1)) :
+    pointedWedgeSummandInclusion (positiveSkeletalSphereBasepoint C k) b ≫
+      selectedWedgeCollapse C k b = 𝟙 (TopCat.sphere.{u} (k + 1)) := by
+  apply TopCat.ext
+  intro x
+  let E := diskBoundaryPointQuotientIsoSphere.{u} k
+  let f := pointQuotientMap (skeletalStageCellPairMap C (k + 1) b)
+  let q := singleCellSphereCollapse C k b
+  have h (z : pointQuotient (standardDiskBoundaryPair.{u} (k + 1))) :
+      q (f z) = E.hom z := ConcreteCategory.congr_hom
+        (singleCellSphereCollapse_selected C k b) z
+  change q ((skeletonPointQuotientIsoWedge C k).inv
+    (Hatcher.PointedWedge.inclusion (positiveSkeletalSphereBasepoint C k) b x)) = x
+  calc
+    _ = q (f (E.inv x)) :=
+      congrArg q (skeletonPointQuotientIsoWedge_inv_inclusion C k b x)
+    _ = E.hom (E.inv x) := h (E.inv x)
+    _ = x := (TopCat.homeoOfIso E).apply_symm_apply x
+
+private theorem selectedWedgeCollapse_other (k : ℕ) (b i : RelCWComplex.cell C (k + 1))
+    (hi : i ≠ b) :
+    pointedWedgeSummandInclusion (positiveSkeletalSphereBasepoint C k) i ≫
+      selectedWedgeCollapse C k b =
+        TopCat.ofHom (ContinuousMap.const _ (northPole.{u} k)) := by
+  apply TopCat.ext
+  intro x
+  let E := diskBoundaryPointQuotientIsoSphere.{u} k
+  let f := pointQuotientMap (skeletalStageCellPairMap C (k + 1) i)
+  let q := singleCellSphereCollapse C k b
+  have h (z : pointQuotient (standardDiskBoundaryPair.{u} (k + 1))) :
+      q (f z) = northPole.{u} k :=
+    ConcreteCategory.congr_hom (singleCellSphereCollapse_other C k b i hi) z
+  change q ((skeletonPointQuotientIsoWedge C k).inv
+    (Hatcher.PointedWedge.inclusion (positiveSkeletalSphereBasepoint C k) i x)) = northPole.{u} k
+  exact (congrArg q (skeletonPointQuotientIsoWedge_inv_inclusion C k i x)).trans (h (E.inv x))
+
+private theorem selectedCellReduced_map_const (A B : TopCat.{u}) (y : B) (k : ℕ) :
+    (Hatcher.Reduced.homologyFunctor.{u} positiveCellCoefficient.{u} (k + 1)).map
+      (TopCat.ofHom (ContinuousMap.const A y)) = 0 := by
+  let pt : TopCat.{u} := TopCat.of PUnit
+  let H := Hatcher.Reduced.homologyFunctor.{u} positiveCellCoefficient.{u} (k + 1)
+  let f : A ⟶ pt := TopCat.ofHom (ContinuousMap.const A PUnit.unit)
+  let g : pt ⟶ B := TopCat.ofHom (ContinuousMap.const pt y)
+  have hcomp : (TopCat.ofHom (ContinuousMap.const A y) : A ⟶ B) = f ≫ g := by
+    apply TopCat.ext
+    intro x
+    rfl
+  have hpt : IsZero (H.obj pt) :=
+    Hatcher.Reduced.isZero_pointHomology positiveCellCoefficient.{u} (k + 1)
+  have hf : H.map f = 0 := hpt.eq_of_tgt _ _
+  change H.map (TopCat.ofHom (ContinuousMap.const A y)) = 0
+  rw [hcomp, H.map_comp, hf, zero_comp]
+
+/-- In the fixed ordered sphere generator, the homology map of the actual
+selected-cell collapse is an integer coordinate map on the skeletal pair. -/
+noncomputable def singleCellCollapseHomologyCoordinate (k : ℕ)
+    (b : RelCWComplex.cell C (k + 1)) :
+    (homologyFunctor (AddCommGrpCat.of.{u} (ULift.{u} ℤ)) (k + 1)).obj
+      (skeletalStagePair C (k + 1)) ⟶ AddCommGrpCat.of.{u} (ULift.{u} ℤ) :=
+  (positiveSkeletalQuotientIso C k (selectedCellLowerNonempty C k b) (k + 1)).hom ≫
+    (Hatcher.Reduced.homologyFunctor.{u} positiveCellCoefficient.{u} (k + 1)).map
+      (singleCellSphereCollapse C k b) ≫ (chosenSphereGeneratorIso.{u} k).inv
+
+private theorem selectedCellCoordinate_characteristic (k : ℕ)
+    (b i : RelCWComplex.cell C (k + 1)) :
+    positiveStandardDiskFundamentalClass.{u} k ≫
+      (homologyFunctor positiveCellCoefficient.{u} (k + 1)).map
+        (skeletalStageCellPairMap C (k + 1) i) ≫ singleCellCollapseHomologyCoordinate C k b =
+    (chosenSphereGeneratorIso.{u} k).hom ≫
+      (Hatcher.Reduced.homologyFunctor.{u} positiveCellCoefficient.{u} (k + 1)).map
+        (pointedWedgeSummandInclusion (positiveSkeletalSphereBasepoint C k) i ≫
+          selectedWedgeCollapse C k b) ≫ (chosenSphereGeneratorIso.{u} k).inv := by
+  let R := positiveCellCoefficient.{u}
+  let Q := selectedCellLowerNonempty C k b
+  let H := Hatcher.Reduced.homologyFunctor.{u} R (k + 1)
+  let A := positiveSkeletalQuotientIso C k Q (k + 1)
+  let T := positiveSkeletalWedgeComparison C k Q (k + 1)
+  let W := skeletonPointQuotientIsoWedge C k
+  let q := singleCellSphereCollapse C k b
+  let s := selectedWedgeCollapse C k b
+  let v := pointedWedgeSummandInclusion (positiveSkeletalSphereBasepoint C k) i
+  let E := chosenSphereGeneratorIso.{u} k
+  let g := positiveStandardDiskFundamentalClass.{u} k
+  let l := (homologyFunctor R (k + 1)).map (skeletalStageCellPairMap C (k + 1) i)
+  let z := g ≫ l
+  have hz : z ≫ T.hom = E.hom ≫ H.map v :=
+    positiveSkeletonCell_class_to_wedge C k Q i
+  have hw : W.hom ≫ s = q := W.hom_inv_id_assoc q
+  have hq : A.hom ≫ H.map q = T.hom ≫ H.map s := by
+    change A.hom ≫ H.map q = (A.hom ≫ H.map W.hom) ≫ H.map s
+    calc
+      _ = A.hom ≫ H.map (W.hom ≫ s) := congrArg (A.hom ≫ ·) (H.congr_map hw.symm)
+      _ = A.hom ≫ H.map W.hom ≫ H.map s := congrArg (A.hom ≫ ·) (H.map_comp _ _)
+      _ = _ := (Category.assoc _ _ _).symm
+  change g ≫ l ≫ (A.hom ≫ H.map q ≫ E.inv) = E.hom ≫ H.map (v ≫ s) ≫ E.inv
+  calc
+    _ = z ≫ A.hom ≫ H.map q ≫ E.inv :=
+      (Category.assoc g l (A.hom ≫ H.map q ≫ E.inv)).symm
+    _ = (z ≫ (A.hom ≫ H.map q)) ≫ E.inv := by simp only [Category.assoc]
+    _ = (z ≫ (T.hom ≫ H.map s)) ≫ E.inv := congrArg (fun m ↦ (z ≫ m) ≫ E.inv) hq
+    _ = (E.hom ≫ H.map v) ≫ H.map s ≫ E.inv := by
+      rw [← Category.assoc z T.hom (H.map s), hz, Category.assoc]
+    _ = E.hom ≫ (H.map v ≫ H.map s) ≫ E.inv := by simp only [Category.assoc]
+    _ = _ := congrArg (fun f ↦ E.hom ≫ f ≫ E.inv) (H.map_comp v s).symm
+
+/-- On an actual characteristic class, the collapse coordinate is the matching
+standard basis entry: one on the chosen cell and zero on the other cells. -/
+theorem singleCellCollapseHomologyCoordinate_class (k : ℕ)
+    (b i : RelCWComplex.cell C (k + 1)) :
+    (singleCellCollapseHomologyCoordinate C k b
+        (skeletalCellFundamentalClass C (k + 1) i)).down = Finsupp.single i (1 : ℤ) b := by
+  classical
+  let R := positiveCellCoefficient.{u}
+  let H := Hatcher.Reduced.homologyFunctor.{u} R (k + 1)
+  let E := chosenSphereGeneratorIso.{u} k
+  let z := positiveStandardDiskFundamentalClass.{u} k ≫
+    (homologyFunctor R (k + 1)).map (skeletalStageCellPairMap C (k + 1) i)
+  let v : R := ULift.up (1 : ℤ)
+  let M := singleCellCollapseHomologyCoordinate C k b
+  change (M (z v)).down = _
+  by_cases h : i = b
+  · subst i
+    have hm : z ≫ M = 𝟙 R := (selectedCellCoordinate_characteristic C k b b).trans (by
+      change E.hom ≫ H.map (pointedWedgeSummandInclusion (positiveSkeletalSphereBasepoint C k) b ≫
+        selectedWedgeCollapse C k b) ≫ E.inv = _
+      rw [selectedWedgeCollapse_selected C k b, H.map_id, Category.id_comp]
+      exact E.hom_inv_id)
+    have hv : (M (z v)).down = (1 : ℤ) :=
+      congrArg ULift.down (ConcreteCategory.congr_hom hm v)
+    exact hv.trans (by simp)
+  · have hm : z ≫ M = (0 : R ⟶ R) :=
+      (selectedCellCoordinate_characteristic C k b i).trans (by
+        let S := TopCat.sphere.{u} (k + 1)
+        let K : S ⟶ S := TopCat.ofHom (ContinuousMap.const S (northPole.{u} k))
+        let ι := pointedWedgeSummandInclusion (positiveSkeletalSphereBasepoint C k) i
+        have hk : ι ≫ selectedWedgeCollapse C k b = K :=
+          selectedWedgeCollapse_other C k b i h
+        have hzero : H.map K = 0 := selectedCellReduced_map_const S S (northPole.{u} k) k
+        change E.hom ≫ H.map (ι ≫ selectedWedgeCollapse C k b) ≫ E.inv = _
+        rw [hk, hzero, zero_comp, comp_zero])
+    have hv : (M (z v)).down = (0 : ℤ) :=
+      congrArg ULift.down (ConcreteCategory.congr_hom hm v)
+    exact hv.trans (by simp [Finsupp.single_apply, h, Ne.symm h])
+
+/-- The actual selected-cell sphere collapse reads the selected coefficient of
+every relative class in the existing canonical cellular basis. -/
+theorem singleCellCollapseHomologyCoordinate_apply (k : ℕ)
+    (b : RelCWComplex.cell C (k + 1))
+    (x : (homologyFunctor (AddCommGrpCat.of.{u} (ULift.{u} ℤ)) (k + 1)).obj
+      (skeletalStagePair C (k + 1))) :
+    (singleCellCollapseHomologyCoordinate C k b x).down =
+      ((skeletonRelativeHomology C (k + 1)).2.choose.hom x) b := by
+  classical
+  let I := (skeletonRelativeHomology C (k + 1)).2.choose
+  let M := singleCellCollapseHomologyCoordinate C k b
+  let D : ULift.{u} ℤ →+ ℤ :=
+    { toFun := ULift.down
+      map_zero' := rfl
+      map_add' := fun _ _ ↦ rfl }
+  let ev : (RelCWComplex.cell C (k + 1) →₀ ℤ) →+ ℤ :=
+    { toFun := fun v ↦ v b
+      map_zero' := by simp
+      map_add' := fun _ _ ↦ Finsupp.add_apply .. }
+  let f := D.comp (M.hom.comp I.inv.hom)
+  have hf : f = ev := by
+    apply Finsupp.addHom_ext
+    intro i z
+    rw [← Finsupp.smul_single_one i z, map_zsmul, map_zsmul]
+    apply congrArg (z • ·)
+    change (M (I.inv (Finsupp.single i 1))).down = Finsupp.single i (1 : ℤ) b
+    have hi : I.inv (Finsupp.single i 1) = skeletalCellFundamentalClass C (k + 1) i :=
+      (skeletonRelativeHomology C (k + 1)).2.choose_spec i
+    rw [hi]
+    exact singleCellCollapseHomologyCoordinate_class C k b i
+  have hx : (M (I.inv (I.hom x))).down = (I.hom x) b := DFunLike.congr_fun hf (I.hom x)
+  rw [I.hom_inv_id_apply] at hx
+  exact hx
+
+end Hatcher.ClassicalCW
+
+namespace Hatcher.ClassicalCW
+
+open AlgebraicTopology CategoryTheory _root_.Topology
+
+universe u
+
+variable {X : Type u} [TopologicalSpace X] [T2Space X]
+  (C : Set X) [CWComplex C]
+
+/-- The actual attaching endpoint, as an index of the zero skeleton.
+`false` gives the initial vertex and `true` the terminal vertex. -/
+noncomputable def cellularEndpointVertex (a : RelCWComplex.cell C 1) (b : Bool) :
+    RelCWComplex.cell C 0 :=
+  ((zeroSkeletonHomeomorphCells C).symm
+    (TopPair.Hom.snd (skeletalStageCellPairMap C 1 a) (orientedOneDiskEndpoints.{u} b))).ofTopology
+
+/-- The labelled vertex is the actual image of the corresponding disk endpoint. -/
+theorem zeroCellPoint_cellularEndpointVertex (a : RelCWComplex.cell C 1) (b : Bool) :
+    zeroCellPoint C (cellularEndpointVertex C a b) =
+      TopPair.Hom.snd (skeletalStageCellPairMap C 1 a) (orientedOneDiskEndpoints.{u} b) := by
+  let x : (zeroSkeletonPair C).fst :=
+    TopPair.Hom.snd (skeletalStageCellPairMap C 1 a) (orientedOneDiskEndpoints.{u} b)
+  change (zeroSkeletonHomeomorphCells C) ((zeroSkeletonHomeomorphCells C).symm x) = x
+  exact (zeroSkeletonHomeomorphCells C).apply_symm_apply x
+
+set_option maxHeartbeats 600000 in
+set_option backward.isDefEq.respectTransparency false in
+/-- The first cellular differential takes the fixed generator of each one-cell
+to its terminal vertex class minus its initial vertex class. The two vertices
+are allowed to coincide. -/
+theorem cellularEndpointBoundary (a : RelCWComplex.cell C 1) :
+    (cellularChainComplex C).d 1 0 (skeletalCellFundamentalClass C 1 a) =
+      zeroCellRelativeClass C (cellularEndpointVertex C a true) -
+        zeroCellRelativeClass C (cellularEndpointVertex C a false) := by
+  let R : AddCommGrpCat.{u} := AddCommGrpCat.of.{u} (ULift.{u} ℤ)
+  let v : R := ULift.up (1 : ℤ)
+  let D := standardDiskBoundaryPair.{u} 1
+  let S := (zeroSkeletonPair C).fst
+  let H : TopCat.{u} ⥤ AddCommGrpCat.{u} :=
+    (singularHomologyFunctor AddCommGrpCat.{u} 0).obj R
+  let f : D.snd ⟶ S := TopPair.Hom.snd (skeletalStageCellPairMap C 1 a)
+  let g : R ⟶ (Hatcher.Relative.homologyFunctor R 1).obj D :=
+    positiveStandardDiskFundamentalClass.{u} 0
+  let δ : (Hatcher.Relative.homologyFunctor R 1).obj D ⟶ H.obj D.snd :=
+    Hatcher.Relative.pairConnecting D R 1 0 rfl
+  let p : H.obj S ⟶ (cellularChainComplex C).X 0 :=
+    (zeroSkeletonOrdinaryRelativeHomologyIso C 0).hom
+  let x (b : Bool) : D.snd := orientedOneDiskEndpoints.{u} b
+  let y (b : Bool) : H.obj D.snd := ordinaryPointClassMap R (x b) v
+  have hp : p = (Hatcher.Relative.singularPairFunctor.obj
+      (cellularSkeletonPair C 0)).homologyπ R 0 :=
+    zeroSkeletonOrdinaryRelativeHomologyIso_hom C 0
+  have hDiff : (cellularChainComplex C).d 1 0 (skeletalCellFundamentalClass C 1 a) =
+      p (H.map f (δ (g v))) := by
+    rw [hp]
+    exact (characteristicBoundaryNaturality C 0 a).2
+  have hd : δ (g v) = y true - y false := orientedOneDiskEndpoints_boundary.{u}
+  have hclass (b : Bool) : p (H.map f (y b)) =
+      zeroCellRelativeClass C (cellularEndpointVertex C a b) := by
+    have hn : H.map f (y b) = ordinaryPointClassMap R (f (x b)) v :=
+      ConcreteCategory.congr_hom (ordinaryPointClassMap_naturality R f (x b)) v
+    have hx : f (x b) = zeroCellPoint C (cellularEndpointVertex C a b) :=
+      (zeroCellPoint_cellularEndpointVertex C a b).symm
+    rw [hn, hx] <;> rfl
+  calc
+    _ = p (H.map f (δ (g v))) := hDiff
+    _ = p (H.map f (y true - y false)) := congrArg (fun z ↦ p (H.map f z)) hd
+    _ = p (H.map f (y true)) - p (H.map f (y false)) :=
+      map_sub ((H.map f) ≫ p).hom (y true) (y false)
+    _ = _ := congrArg₂ (· - ·) (hclass true) (hclass false)
+
+end Hatcher.ClassicalCW

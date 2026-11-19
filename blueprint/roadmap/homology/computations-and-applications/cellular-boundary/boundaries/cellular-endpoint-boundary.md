@@ -2,6 +2,9 @@
 declaration: theorem
 origin: cited
 article_id: af_f7426ef6c9ced3f037f8153b
+lean: Hatcher.ClassicalCW.cellularEndpointVertex, Hatcher.ClassicalCW.zeroCellPoint_cellularEndpointVertex, Hatcher.ClassicalCW.cellularEndpointBoundary
+statement: formalized
+proof: formalized
 ---
 
 # A one-cell boundary is its oriented endpoint difference
