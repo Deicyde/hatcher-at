@@ -318,6 +318,13 @@
         "Hatcher.ClassicalCW.zeroCellPoint_cellularEndpointVertex",
         "Hatcher.ClassicalCW.cellularEndpointBoundary"
       ]
+    },
+    {
+      "article_id": "af_9409a8e584ccd21b3d6f6a90",
+      "module": "Hatcher.Singular.PointedWedgeHomology",
+      "declarations": [
+        "Hatcher.ClassicalCW.oneVertexCellularDifferentialZero"
+      ]
     }
   ]
 }
