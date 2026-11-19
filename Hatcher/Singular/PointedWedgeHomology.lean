@@ -2123,6 +2123,7 @@ universe u
 variable {X : Type u} [TopologicalSpace X] [T2Space X]
   (C : Set X) [CWComplex C]
 
+set_option maxHeartbeats 600000 in
 set_option backward.isDefEq.respectTransparency false in
 /-- The actual characteristic/attaching map commutes with ordinary connecting
 maps, and the cellular differential of its fixed cell class is the relative
@@ -2165,26 +2166,16 @@ theorem characteristicBoundaryNaturality (k : ℕ)
   have hNat : l ≫ δC = δD ≫ H.map (TopPair.Hom.snd f) :=
     (Hatcher.Relative.pairConnecting_naturality f R (k + 1) k rfl).symm
   refine ⟨hNat, ?_⟩
-  let S : AddCommGrpCat.{u} := (Hatcher.Relative.homologyFunctor R (k + 1)).obj
-    (standardDiskBoundaryPair.{u} (k + 1))
-  let A : AddCommGrpCat.{u} := H.obj (skeletalStagePair C (k + 1)).snd
-  let T : AddCommGrpCat.{u} := (cellularChainComplex C).X k
+  let x := g (ULift.up (1 : ℤ))
+  have hSquare : δC (l x) = H.map (TopPair.Hom.snd f) (δD x) :=
+    ConcreteCategory.congr_hom hNat x
   have hDiff : (cellularChainComplex C).d (k + 1) k = δC ≫ p :=
     cellularChainComplex_d_succ C k
-  have hFormula : g ≫ l ≫ (cellularChainComplex C).d (k + 1) k =
-      g ≫ δD ≫ H.map (TopPair.Hom.snd f) ≫ p := by
-    calc
-      g ≫ l ≫ (cellularChainComplex C).d (k + 1) k = g ≫ l ≫ (δC ≫ p) :=
-        congrArg (fun q : (cellularChainComplex C).X (k + 1) ⟶ T => g ≫ l ≫ q) hDiff
-      _ = g ≫ ((l ≫ δC) ≫ p) :=
-        congrArg (fun q : S ⟶ T => g ≫ q) (Category.assoc l δC p).symm
-      _ = g ≫ ((δD ≫ H.map (TopPair.Hom.snd f)) ≫ p) :=
-        congrArg (fun q : S ⟶ A => g ≫ q ≫ p) hNat
-      _ = g ≫ δD ≫ H.map (TopPair.Hom.snd f) ≫ p :=
-        congrArg (fun q : S ⟶ T => g ≫ q)
-          (Category.assoc δD (H.map (TopPair.Hom.snd f)) p)
-  change (g ≫ l ≫ (cellularChainComplex C).d (k + 1) k) (ULift.up (1 : ℤ)) =
-    (g ≫ δD ≫ H.map (TopPair.Hom.snd f) ≫ p) (ULift.up (1 : ℤ))
-  exact ConcreteCategory.congr_hom hFormula (ULift.up (1 : ℤ))
+  change (cellularChainComplex C).d (k + 1) k (l x) =
+    p (H.map (TopPair.Hom.snd f) (δD x))
+  calc
+    (cellularChainComplex C).d (k + 1) k (l x) = p (δC (l x)) :=
+      ConcreteCategory.congr_hom hDiff (l x)
+    _ = p (H.map (TopPair.Hom.snd f) (δD x)) := congrArg (fun y => p y) hSquare
 
 end Hatcher.ClassicalCW
