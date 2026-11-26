@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import os
 from pathlib import Path, PurePosixPath
 import re
 import sys
@@ -28,6 +29,21 @@ def read_file(root: Path, relative: str, prefix: str) -> bytes:
     return target.read_bytes()
 
 
+def annotated_ids(blueprint: Path) -> dict[str, str]:
+    """Each article's durable ID, by its path under the blueprint, as its annotation in blueprint/links/ records it."""
+    ids = {}
+    for path in sorted((blueprint / "links").rglob("*.jsonl")):
+        for line in path.read_text(encoding="utf-8").splitlines():
+            entry = json.loads(line, object_pairs_hook=unique_object) if line.strip() else {}
+            if "id" not in entry:
+                continue
+            for subject in entry.get("subject", []):
+                page = Path(os.path.normpath(path.parent / subject["uri"])).relative_to(blueprint).as_posix()
+                if ids.setdefault(page, entry["id"]) != entry["id"]:
+                    raise ValueError(f"annotations give two article IDs: {page}")
+    return ids
+
+
 def verify(blueprint: Path) -> tuple[int, int]:
     data = json.loads(read_file(blueprint, "sources/source-units.json", "sources"),
                       object_pairs_hook=unique_object)
@@ -50,14 +66,12 @@ def verify(blueprint: Path) -> tuple[int, int]:
         units[identity] = unit
     if not units or not data["articles"]:
         raise ValueError("source-unit index has no source accounting")
+    ids = annotated_ids(blueprint)
     for identity, article in data["articles"].items():
         if re.fullmatch(r"af_[0-9a-f]{24}", identity) is None:
             raise ValueError(f"invalid article identity: {identity}")
-        text = read_file(blueprint, article["path"], "roadmap").decode("utf-8")
-        if not text.startswith("---\n"):
-            raise ValueError(f"article has no frontmatter: {article['path']}")
-        frontmatter = text.split("\n---\n", 1)[0]
-        if re.search(r"(?m)^article_id: " + re.escape(identity) + r"$", frontmatter) is None:
+        read_file(blueprint, article["path"], "roadmap")
+        if ids.get(article["path"]) != identity:
             raise ValueError(f"source-unit mapping names the wrong article: {article['path']}")
         membership = article["source_units"]
         if not membership or any(unit not in units for unit in membership):
