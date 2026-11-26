@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/basic-constructions/no-retraction-disc.md"}], "object": [{"location": {"declaration": "Hatcher.Disc.not_exists_retraction"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_8aa019244d3ae482b8cc2020", "extensions": {"org.autoform": {"origin": "bridged"}}}

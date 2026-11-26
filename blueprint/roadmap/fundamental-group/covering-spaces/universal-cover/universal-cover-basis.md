@@ -1,12 +1,3 @@
----
-article_id: af_2cdace3f3cd80dd59f041dfa
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.UniversalCover.isTopologicalBasis_basicOpen
----
-
 # The sets U[γ] form the universal-cover basis
 
 For a small path-connected open set `U` and a path class `[γ]` ending in `U`,

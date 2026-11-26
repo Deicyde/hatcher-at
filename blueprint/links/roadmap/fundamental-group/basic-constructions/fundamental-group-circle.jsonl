@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/basic-constructions/fundamental-group-circle.md"}], "object": [{"location": {"declaration": "Hatcher.Circle.isCyclic_fundamentalGroup"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_4f18e6725ebc63e9b6186037", "extensions": {"org.autoform": {"origin": "cited"}}}

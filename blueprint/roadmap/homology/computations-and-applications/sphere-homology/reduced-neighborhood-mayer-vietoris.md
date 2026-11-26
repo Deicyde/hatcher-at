@@ -1,12 +1,3 @@
----
-article_id: af_66ea1f639ef9bbd0f6236d16
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.MayerVietoris.reducedNeighborhoodLongExact
----
-
 # The reduced neighborhood-retract Mayer–Vietoris sequence
 
 Let `C` be an abelian category with the coproducts required by the completed

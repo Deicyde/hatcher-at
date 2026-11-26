@@ -1,12 +1,3 @@
----
-article_id: af_0f89993a3608e24f605cc5a8
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.reducedHomology_sphereSucc
----
-
 # The reduced homology of spheres satisfies the suspension recurrence
 
 Let `C` be an abelian category with `HasCoproducts.{w} C`, and let `R : C`.

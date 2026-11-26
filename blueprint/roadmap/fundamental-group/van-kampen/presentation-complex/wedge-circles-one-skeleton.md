@@ -1,12 +1,3 @@
----
-article_id: af_f504a5652653f883d78795e8
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.wedgeCirclesAttachCells
----
-
 # A wedge of circles is an indexed one-cell attachment
 
 Equip the map from a point to the common basepoint of a wedge of circles with

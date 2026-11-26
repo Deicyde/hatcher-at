@@ -1,12 +1,3 @@
----
-article_id: af_52510d3a4c437271e3ebe8ba
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.loop_homotopic_prod_of_isOpenCover
----
-
 # A loop splits across an open cover
 
 **Hatcher, Lemma 1.15 (page 35).** If `X` is the union of path-connected open

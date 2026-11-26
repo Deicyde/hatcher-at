@@ -1,12 +1,3 @@
----
-article_id: af_d2437d3f858877fb8db266dd
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.GoodPairData.pointQuotientNeighborhoodStrongDeformationRetract
----
-
 # The quotient neighborhood contracts to its point
 
 Descend the chosen strong deformation retraction of `V` onto the embedded

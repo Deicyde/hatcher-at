@@ -1,7 +1,3 @@
----
-article_id: af_1ebd2022144bd985013b309a
----
-
 # CW-subcomplex regular neighborhoods
 
 Hatcher's Appendix Proposition A.5 constructs an open regular neighborhood

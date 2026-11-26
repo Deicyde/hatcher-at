@@ -1,12 +1,3 @@
----
-article_id: af_d1c77a01b4169d50c8ee6a57
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.ConnectedCover.classificationEquivConjClasses
----
-
 # Connected covers are classified by conjugacy classes
 
 **Hatcher, Theorem 1.38, unbased clause (pages 67–68).** For a

@@ -1,11 +1,3 @@
----
-article_id: af_b4073e48cecc2c23414164fb
-declaration: def
-origin: bridged
-statement: formalized
-lean: Hatcher.VanKampen.AuxiliaryCellAttachment.attachmentStrongDeformationRetract
----
-
 # The strip enlargement retracts onto the attached space
 
 For Hatcher's auxiliary space `Z`, construct a strong deformation retraction

@@ -1,12 +1,3 @@
----
-article_id: af_158175fa503c963a995517cb
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.relativeChainComplexSigmaPairIso
----
-
 # Relative chains commute with coproducts of arbitrary pairs
 
 For a family `P : ι → TopPair`, construct the chain-complex isomorphism

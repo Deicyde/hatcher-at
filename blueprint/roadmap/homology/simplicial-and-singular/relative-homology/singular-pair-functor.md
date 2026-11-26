@@ -1,12 +1,3 @@
----
-article_id: af_0a7e9a54781df8354811b9b7
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.singularPairFunctor
----
-
 # The singular set of a topological pair
 
 For a topological pair `P`, apply `TopCat.toSSet` to the embedding

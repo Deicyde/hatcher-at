@@ -1,12 +1,3 @@
----
-article_id: af_6ac8441d977814c7a46ab804
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.neighborhoodLocalDegree_eq_of_subset
----
-
 # Local degree is unchanged when the neighborhood shrinks
 
 Let `N` be a local-degree neighborhood and let `M` be a second such

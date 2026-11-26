@@ -1,12 +1,3 @@
----
-article_id: af_647c3193fb9509bf31577ca0
-declaration: instance
-origin: cited
-lean: Hatcher.Excision.deletedSubsetHomologyMap_isIso
-statement: formalized
-proof: formalized
----
-
 # Deleted-subset excision induces homology isomorphisms
 
 **Hatcher, Theorem 2.20 (page 119), deleted-subset form.** Let `A Z : Set X`

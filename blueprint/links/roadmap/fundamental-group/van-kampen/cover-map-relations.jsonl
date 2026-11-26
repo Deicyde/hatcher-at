@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/van-kampen/cover-map-relations.md"}], "object": [{"location": {"declaration": "Hatcher.VanKampen.relationSubgroup_le_ker"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_cdfdd640e75db0f65a9e7e19", "extensions": {"org.autoform": {"origin": "bridged"}}}

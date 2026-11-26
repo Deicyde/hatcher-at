@@ -1,12 +1,3 @@
----
-article_id: af_58f45e8cb68bf4b4365038ee
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.simplyConnectedSpace
----
-
 # Higher spheres are simply connected
 
 **Hatcher, Proposition 1.14 (page 35).** `π₁(Sⁿ) = 0` for `n ≥ 2`.

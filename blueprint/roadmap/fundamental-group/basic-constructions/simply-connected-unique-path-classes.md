@@ -1,12 +1,3 @@
----
-article_id: af_5cea9ce243397b09b5e3237a
-declaration: theorem
-origin: cited
-mathlib: true
-mathlib_declaration: simply_connected_iff_unique_homotopic
-mathlib_file: Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean
----
-
 # Simply connected spaces have unique path-homotopy classes
 
 **Hatcher, Proposition 1.6 (page 28).** A space is simply connected if and

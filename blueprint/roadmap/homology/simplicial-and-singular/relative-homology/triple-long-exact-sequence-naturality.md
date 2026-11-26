@@ -1,12 +1,3 @@
----
-article_id: af_d76311ba89ebf1425b8eed61
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.tripleConnecting_naturality
----
-
 # The triple long exact sequence is natural
 
 **Hatcher, §2.1 (page 128).** A map of triples induces a morphism between their

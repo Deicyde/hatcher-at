@@ -1,12 +1,3 @@
----
-article_id: af_08f181ae06ce36bac8627c84
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.exists_antipodal_pair_of_three_closed_sets
----
-
 # Three closed sets covering the sphere contain an antipodal pair
 
 **Hatcher, Corollary 1.11 (page 33).** If the two-sphere is the union of three

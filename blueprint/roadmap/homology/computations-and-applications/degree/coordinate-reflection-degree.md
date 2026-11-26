@@ -1,12 +1,3 @@
----
-article_id: af_71d7ceb0f3904f7453776fe2
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.degree_reflection
----
-
 # A sphere reflection has degree minus one
 
 For a unit normal vector `v`, define the Euclidean reflection of `Sⁿ` across

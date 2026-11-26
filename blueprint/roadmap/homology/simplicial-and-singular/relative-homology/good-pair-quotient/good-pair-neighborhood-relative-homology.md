@@ -1,12 +1,3 @@
----
-article_id: af_1259fc0c85b68b0d2f27a1bc
-declaration: instance
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.GoodPairData.neighborhoodPairHom_homologyMap_isIso
----
-
 # Enlarging to the chosen neighborhood preserves relative homology
 
 For good-pair data on `(X,A)`, prove that the canonical map

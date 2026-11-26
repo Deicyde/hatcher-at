@@ -1,11 +1,3 @@
----
-article_id: af_cf02faa75ba81780b7cc01da
-declaration: structure
-origin: bridged
-statement: formalized
-lean: Hatcher.Relative.TopTriple
----
-
 # Topological triples and their maps
 
 For nested subspaces `B ⊆ A ⊆ X`, bundle the composable embeddings

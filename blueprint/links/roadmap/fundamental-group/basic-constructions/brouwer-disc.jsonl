@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/basic-constructions/brouwer-disc.md"}], "object": [{"location": {"declaration": "Hatcher.Disc.exists_fixed_point"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_dc4c0168f0ede11ba75a2f9a", "extensions": {"org.autoform": {"origin": "cited"}}}

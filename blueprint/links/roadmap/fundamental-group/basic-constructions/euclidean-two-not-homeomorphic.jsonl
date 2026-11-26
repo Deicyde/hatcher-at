@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/basic-constructions/euclidean-two-not-homeomorphic.md"}], "object": [{"location": {"declaration": "Hatcher.not_nonempty_homeomorph_euclideanTwo"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_7ea2ad84d8edec0c92f3274e", "extensions": {"org.autoform": {"origin": "cited"}}}

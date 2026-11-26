@@ -1,12 +1,3 @@
----
-article_id: af_01f1d32e23e7d1c05553c471
-declaration: def
-origin: bridged
-mathlib: true
-mathlib_declaration: IsCoveringMap.monodromyPerm
-mathlib_file: Mathlib/Topology/Homotopy/Lifting.lean
----
-
 # The fundamental group acts on a covering fiber
 
 For a covering `p : E → X` and basepoint `x₀ : X`, package endpoint transport

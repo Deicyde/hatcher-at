@@ -1,11 +1,3 @@
----
-article_id: af_f9c5fec59717acad10d01cee
-declaration: def
-origin: cited
-statement: formalized
-lean: Hatcher.fundamentalGroupEquiv_cyclicPresentationComplex
----
-
 # The cyclic presentation complex
 
 **Hatcher, Example 1.29 (page 52), group calculation only.** For a positive

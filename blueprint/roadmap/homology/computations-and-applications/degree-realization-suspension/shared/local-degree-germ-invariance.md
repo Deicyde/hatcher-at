@@ -1,12 +1,3 @@
----
-article_id: af_a756c24e9493a057e03f83dc
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.localDegree_germ_invariance Hatcher.Sphere.LocalDegreeNeighborhood.pairHom_ofEqOn
----
-
 # Maps with the same germ have the same local degree
 
 For n > 0, let f and g be continuous self-maps of the standard n-sphere that agree on an open neighborhood of x. If x is an isolated preimage of y for f, it is also one for g, and their signed local degrees at x over y are equal for every choice of isolation witnesses.

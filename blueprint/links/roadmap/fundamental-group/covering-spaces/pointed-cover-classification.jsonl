@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/covering-spaces/pointed-cover-classification.md"}], "object": [{"location": {"declaration": "Hatcher.BasedConnectedCover.classificationEquiv"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_238d1dd83722c5a2266b57e6", "extensions": {"org.autoform": {"origin": "cited"}}}

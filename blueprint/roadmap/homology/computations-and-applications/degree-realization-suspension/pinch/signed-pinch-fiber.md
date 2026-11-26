@@ -1,12 +1,3 @@
----
-article_id: af_816a860dce27fb50bd0ec80d
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.sphere_signed_pinch_fiber, Hatcher.Sphere.SphereBallPinchData.signedRegularBallPoint, Hatcher.Sphere.SignedSphereFoldData.regularFiberPoint, Hatcher.Sphere.SignedSphereFoldData.regularFiberEquiv, Hatcher.Sphere.SignedSphereFoldData.regular_fiber_equiv_apply_point, Hatcher.Sphere.SignedSphereFoldData.regular_fiber_point_apply_index, Hatcher.Sphere.SignedSphereFoldData.regular_fiber_equiv_symm_point, Hatcher.Sphere.SignedSphereFoldData.regular_fiber_finite, Hatcher.Sphere.SignedSphereFoldData.regular_fiber_zero
----
-
 # Regular pinch fibers are indexed by the chosen balls
 
 For the signed pinch-and-fold map fσ and every y ≠ b, construct an equivalence fσ⁻¹({y}) ≃ Fin k. The point indexed by i lies in Bᵢ and is the inverse image of aᵢ⁻¹(y) under that ball's punctured-sphere chart.

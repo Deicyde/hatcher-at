@@ -1,12 +1,3 @@
----
-article_id: af_dad2eb4f720152d1a39ca44e
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.integralSphereLocalFundamentalClass
----
-
 # The ordered sphere class orients local homology
 
 For `0 < n` and `y : TopCat.sphere n`, define

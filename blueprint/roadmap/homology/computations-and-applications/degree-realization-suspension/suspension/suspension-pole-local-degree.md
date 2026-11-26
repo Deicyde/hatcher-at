@@ -1,12 +1,3 @@
----
-article_id: af_5ead003fab03dbcaedbcd8d7
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.sphere_suspension_pole_local_degree
----
-
 # The local degree at a suspension pole is its global degree
 
 For every n : ℕ, continuous f : Sⁿ → Sⁿ, and either suspension pole p, derive that p is an isolated preimage of itself under Sf and prove localDegree(Sf,p,p) = degree(Sf), for every isolation witness.

@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/covering-spaces/unpointed-cover-classification.md"}], "object": [{"location": {"declaration": "Hatcher.ConnectedCover.classificationEquivConjClasses"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_d1c77a01b4169d50c8ee6a57", "extensions": {"org.autoform": {"origin": "cited"}}}

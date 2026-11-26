@@ -1,12 +1,3 @@
----
-article_id: af_5147501f7fe804efe87f1dca
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.closedBallStrongDeformationRetract
----
-
 # A closed ball strongly deformation retracts from Euclidean space
 
 Let `E` be a real normed vector space and let `r > 0`. Construct the radial

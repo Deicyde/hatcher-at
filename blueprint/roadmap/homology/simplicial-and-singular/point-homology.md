@@ -1,12 +1,3 @@
----
-article_id: af_09312a15c3d8d96e43cf27d7
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Singular.point_homology
----
-
 # Homology of a point
 
 **Hatcher, Proposition 2.8 (page 110).** Fix the one-point model

@@ -1,12 +1,3 @@
----
-article_id: af_67ed4905c351d887224e90d5
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.PathConcatenationGroup.fromPath_trans
----
-
 # Path concatenation gives the fundamental-group law
 
 **Hatcher, Proposition 1.3 (page 26).** The path-homotopy classes of loops at

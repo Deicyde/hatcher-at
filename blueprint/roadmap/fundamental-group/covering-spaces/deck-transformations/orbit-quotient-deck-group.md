@@ -1,12 +1,3 @@
----
-article_id: af_a5834253c67d2209cf4b4b8e
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Covering.actionEquivDeck
----
-
 # Orbit quotients are normal and have the expected deck group
 
 **Hatcher, Proposition 1.40(a,b) (page 72).** If a group `G` acts on `Y` by a

@@ -1,12 +1,3 @@
----
-article_id: af_570a45f4a12c99b18f2f5d42
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Simplex.doubleSimplexFundamentalCycle
----
-
 # The ordered difference of the two simplices is a cycle
 
 Define the double-simplex space `Hatcher.Simplex.doubleSimplex n` as the

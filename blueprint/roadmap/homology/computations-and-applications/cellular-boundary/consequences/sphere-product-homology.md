@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: cited
-article_id: af_bc92e32363d8d0c7790e7edc
----
-
 # Integral homology of a product of equal spheres
 
 For n > 1, Hᵢ(Sⁿ×Sⁿ;ℤ) is ℤ for i = 0 or i = 2n, is ℤ⊕ℤ for i = n, and is zero otherwise. Its basis corresponds to the actual product cells in each degree.

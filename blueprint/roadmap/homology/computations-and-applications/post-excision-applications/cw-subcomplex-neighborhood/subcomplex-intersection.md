@@ -1,11 +1,3 @@
----
-article_id: af_7e0d8531ee8d17dae6a2fb88
-declaration: def
-origin: background
-statement: formalized
-lean: Hatcher.ClassicalCW.Subcomplex.inter
----
-
 # Intersections of CW subcomplexes
 
 For two `CWComplex.Subcomplex C` objects, construct the subcomplex whose cells

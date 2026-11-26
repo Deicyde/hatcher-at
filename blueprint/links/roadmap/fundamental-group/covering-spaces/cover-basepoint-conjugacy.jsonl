@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/covering-spaces/cover-basepoint-conjugacy.md"}], "object": [{"location": {"declaration": "Hatcher.Covering.range_mapOfEq_basepointChange"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_c01ebb7ebd5194958368a3f5", "extensions": {"org.autoform": {"origin": "cited"}}}

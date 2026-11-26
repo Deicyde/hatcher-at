@@ -1,9 +1,3 @@
----
-declaration: def
-origin: cited
-article_id: af_30b3c329892b1574c84af84f
----
-
 # The even cells form the classical CW structure of complex projective space
 
 For every n ∈ ℕ, construct a finite classical CW structure on the actual ℂPⁿ with exactly one cell in each dimension 0,2,…,2n and none in other dimensions. Use its actual coordinate strata and characteristic disks, including ℂP⁰.

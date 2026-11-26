@@ -1,12 +1,3 @@
----
-article_id: af_2386ef9a815b61ddee2179ef
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Circle.wellPointedAt_one
----
-
 # The circle is well-pointed at one
 
 The standard basepoint `1 ∈ S¹` has an open neighborhood that strongly

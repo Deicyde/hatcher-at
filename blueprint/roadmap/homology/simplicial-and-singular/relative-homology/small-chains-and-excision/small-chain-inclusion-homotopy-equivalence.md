@@ -1,12 +1,3 @@
----
-article_id: af_d49202a5a6ec350660634b56
-declaration: def
-origin: cited
-lean: Hatcher.Excision.smallChainInclusionHomotopyEquiv
-statement: formalized
-proof: formalized
----
-
 # Small singular chains include by a chain-homotopy equivalence
 
 **Hatcher, Proposition 2.21 (pages 119–124).** For a family of subsets whose

@@ -1,12 +1,3 @@
----
-article_id: af_01985c349aff3cf79987cf88
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.finiteFiberFundamentalClass_map
----
-
 # The finite-fiber pair map carries the global degree
 
 Define `Hatcher.Sphere.finitePunctureFundamentalClass n f y` from `ℤ` to the

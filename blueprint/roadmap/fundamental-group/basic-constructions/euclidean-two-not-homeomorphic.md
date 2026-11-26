@@ -1,12 +1,3 @@
----
-article_id: af_7ea2ad84d8edec0c92f3274e
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.not_nonempty_homeomorph_euclideanTwo
----
-
 # Euclidean two-space is distinguished by dimension
 
 **Hatcher, Corollary 1.16 (page 36).** Euclidean two-space is not

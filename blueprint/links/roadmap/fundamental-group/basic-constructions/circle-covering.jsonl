@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/basic-constructions/circle-covering.md"}], "object": [{"location": {"declaration": "Hatcher.Circle.isCoveringMap_expMap"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_88db0f1093e08d3ab00257ce", "extensions": {"org.autoform": {"origin": "bridged"}}}

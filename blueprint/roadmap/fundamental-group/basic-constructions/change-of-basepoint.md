@@ -1,12 +1,3 @@
----
-article_id: af_bdc7528d23af5d56f0b7e4ef
-declaration: def
-origin: cited
-mathlib: true
-mathlib_declaration: FundamentalGroup.fundamentalGroupMulEquivOfPath
-mathlib_file: Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean
----
-
 # A path induces change of basepoint
 
 **Hatcher, Proposition 1.5 (page 28).** A path `h` from `x₀` to `x₁` induces

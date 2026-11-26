@@ -1,12 +1,3 @@
----
-article_id: af_dda9959596a494d3473c0349
-declaration: def
-origin: background
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.pointQuotientComplementHomeomorph
----
-
 # Topology of the point-quotient projection
 
 For a topological pair with nonempty subspace, prove that the ambient point-

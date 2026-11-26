@@ -1,12 +1,3 @@
----
-article_id: af_b3b1f5a35c05a79813552fed
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.ConeAttachment.isOpenCover_lower_upper
----
-
 # A single cone attachment has a two-set open cover
 
 For a map `f : S → X`, construct the point-set quotient of `X ⊔ {*} ⊔ (S × I)`

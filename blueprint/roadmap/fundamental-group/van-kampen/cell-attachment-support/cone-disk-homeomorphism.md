@@ -1,12 +1,3 @@
----
-article_id: af_29c021c7f6a7d6fa0628012e
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.ConeAttachment.diskHomeomorph
----
-
 # The cone on a disk boundary is the disk
 
 The single-cone quotient attached to Mathlib's exact `TopCat.diskBoundary n`

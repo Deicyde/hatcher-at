@@ -1,12 +1,3 @@
----
-article_id: af_65cb9c02fe8911d8b404bb3b
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.pointAttachCells
----
-
 # A point is one standard zero-cell
 
 Equip the unique map from the initial topological space to a point with one

@@ -1,12 +1,3 @@
----
-article_id: af_f439e1fff07c297a187b7c77
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.BasedConnectedCover.existsUnique_map_fromSimplyConnected
----
-
 # A simply-connected cover maps uniquely to every pointed connected cover
 
 Let `U → X` be a pointed simply-connected cover and `E → X` a pointed

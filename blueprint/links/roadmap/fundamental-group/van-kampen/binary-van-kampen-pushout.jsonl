@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/van-kampen/binary-van-kampen-pushout.md"}], "object": [{"location": {"declaration": "Hatcher.VanKampen.pushoutEquivFundamentalGroup"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_806651882449c734dfacee63", "extensions": {"org.autoform": {"origin": "bridged"}}}

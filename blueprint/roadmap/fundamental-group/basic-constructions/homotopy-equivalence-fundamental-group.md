@@ -1,12 +1,3 @@
----
-article_id: af_1f0895b5c7dfb77e33224fd8
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.fundamentalGroupMulEquivOfHomotopyEquiv
----
-
 # A homotopy equivalence induces a fundamental-group isomorphism
 
 **Hatcher, Proposition 1.18 (page 37).** A homotopy equivalence

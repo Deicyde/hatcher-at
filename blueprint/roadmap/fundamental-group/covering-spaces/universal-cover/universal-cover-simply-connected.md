@@ -1,12 +1,3 @@
----
-article_id: af_4924ce7fc94298427e633deb
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.UniversalCover.simplyConnectedSpace
----
-
 # The path-class cover is simply-connected
 
 Let `X` be path-connected, locally path-connected, and semilocally

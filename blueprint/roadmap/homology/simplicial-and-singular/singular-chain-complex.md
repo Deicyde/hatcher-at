@@ -1,12 +1,3 @@
----
-article_id: af_75b6fc8b1d54269a3c681785
-declaration: def
-origin: cited
-mathlib: true
-mathlib_declaration: AlgebraicTopology.singularChainComplexFunctor
-mathlib_file: Mathlib/AlgebraicTopology/SingularHomology/Basic.lean
----
-
 # The singular chain complex
 
 For a coefficient object `R` in a preadditive category with coproducts and a

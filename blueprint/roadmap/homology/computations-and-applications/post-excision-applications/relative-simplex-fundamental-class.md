@@ -1,12 +1,3 @@
----
-article_id: af_3a3deb51fb0d65763cad34d9
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Simplex.relativeSimplexFundamentalClass_isIso
----
-
 # The identity simplex generates relative simplex homology
 
 **Hatcher, Example 2.23 (printed page 125).** Regard the identity map of the

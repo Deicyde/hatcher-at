@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/van-kampen/two-skeleton-fundamental-group.md"}], "object": [{"location": {"declaration": "Hatcher.fundamentalGroupEquiv_twoSkeleton"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_43621dbc2063991527df5593", "extensions": {"org.autoform": {"origin": "cited"}}}

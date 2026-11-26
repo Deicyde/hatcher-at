@@ -1,12 +1,3 @@
----
-article_id: af_85e59358edc190186cfde9fb
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.sigmaPair
----
-
 # The coproduct of a family of topological pairs
 
 For `P : ι → TopPair`, define `Hatcher.Relative.sigmaPair P`. Its ambient

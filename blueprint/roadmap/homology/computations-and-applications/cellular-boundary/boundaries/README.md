@@ -1,7 +1,3 @@
----
-article_id: af_9966918de032297a2c6170ed
----
-
 # Attaching maps and cellular boundary degrees
 
 16 planned declaration leaves in the cellular boundary milestone.

@@ -1,12 +1,3 @@
----
-article_id: af_83ffc141377e9db9715f7e9e
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.skeletonLTStepJointMap_isQuotient
----
-
 # A successor classical skeleton has the cell-attachment quotient topology
 
 Assemble the inclusion of `skeletonLT C n` and the restricted characteristic

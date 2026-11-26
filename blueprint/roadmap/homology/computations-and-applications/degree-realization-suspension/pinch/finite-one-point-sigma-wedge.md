@@ -1,11 +1,3 @@
----
-article_id: af_f0ce52bed8b3559c75b76fa3
-declaration: def
-origin: bridged
-statement: formalized
-lean: Hatcher.Relative.finiteOnePointSigmaWedgeHomeomorph, Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_coe, Hatcher.Relative.finite_one_point_sigma_wedge_homeomorph_apply_infty
----
-
 # Compactifying a finite disjoint union gives the pointed wedge
 
 For a finite family of locally compact Hausdorff spaces Xᵢ, construct a homeomorphism OnePoint(Σ i, Xᵢ) ≃ ⋁ᵢ OnePoint(Xᵢ), with every summand based at infinity. On a finite point it is the corresponding wedge inclusion, and it sends infinity to the common wedge point.

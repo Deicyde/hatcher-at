@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/covering-spaces/subgroup-cover-is-covering.md"}], "object": [{"location": {"declaration": "Hatcher.SubgroupCover.isCoveringMap_proj"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_be39cedf8b22e6b8c7ab9dba", "extensions": {"org.autoform": {"origin": "cited"}}}

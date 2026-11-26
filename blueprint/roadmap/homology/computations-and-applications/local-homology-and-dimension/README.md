@@ -1,7 +1,3 @@
----
-article_id: af_5148a543223acce2b6a11083
----
-
 # Local homology and invariance of dimension
 
 This dependency-ordered branch contains the local-homology end of Hatcher

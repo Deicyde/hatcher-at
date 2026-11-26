@@ -1,12 +1,3 @@
----
-article_id: af_89e2481cf4df5cf4ef419a56
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.finitePuncturePairHom_homology_isIso
----
-
 # The disjoint local pairs excise to the finite-puncture pair
 
 For the chosen finite-fiber neighborhoods, compose the canonical pair

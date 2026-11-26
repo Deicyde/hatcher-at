@@ -1,12 +1,3 @@
----
-article_id: af_66d5f24ab6fa333843941b48
-declaration: def
-origin: cited
-mathlib: true
-mathlib_declaration: TopCat.singularHomology₀Iso
-mathlib_file: Mathlib/AlgebraicTopology/SingularHomology/HomologyZero.lean
----
-
 # Zeroth homology is free on path components
 
 **Hatcher, Proposition 2.7 (pages 109–110).** For a space `X`, zeroth

@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: bridged
-article_id: af_9409a8e584ccd21b3d6f6a90
----
-
 # A single vertex makes the first cellular differential zero
 
 For a classical CW complex with exactly one zero-cell, its actual first cellular differential is zero. Prove this from its actual oriented one-cell endpoints, with no restriction on the number of higher cells.

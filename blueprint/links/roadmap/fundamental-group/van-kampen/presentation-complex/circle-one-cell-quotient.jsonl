@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/fundamental-group/van-kampen/presentation-complex/circle-one-cell-quotient.md"}], "object": [{"location": {"declaration": "Hatcher.VanKampen.circleOneCellHomeomorph"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_6c25ed58fef0c56b0b6e98b9", "extensions": {"org.autoform": {"origin": "bridged"}}}

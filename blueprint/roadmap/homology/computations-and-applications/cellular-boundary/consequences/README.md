@@ -1,7 +1,3 @@
----
-article_id: af_e152239af8a10a168886d827
----
-
 # Cellular consequences and first computations
 
 7 declaration leaves in the cellular boundary milestone: the no-cells homology, sparse-cell differential and cell-basis results are complete and the other 4 are planned.

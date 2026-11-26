@@ -1,12 +1,3 @@
----
-article_id: af_180617f5eedc10f191b736bc
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.circlePowerMap_degree
----
-
 # The degree of an integer circle power is its exponent
 
 **Hatcher, Example 2.32.** For every d : ℤ, prove degree(P_d) = d for the actual map z ↦ z^d on the complex circle transported to S¹.

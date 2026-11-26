@@ -1,12 +1,3 @@
----
-article_id: af_c84b824b4ed5b5be3e947b7b
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.exists_eq_neg
----
-
 # Borsuk–Ulam for the two-sphere
 
 **Hatcher, Theorem 1.10 (pages 32–33).** For every continuous `f : S² → ℝ²`

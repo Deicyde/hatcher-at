@@ -1,12 +1,3 @@
----
-article_id: af_ba169ce13cfec9d889969636
-declaration: def
-origin: bridged
-mathlib: true
-mathlib_declaration: TopCat.Homotopy.singularChainComplexFunctorObjMap
-mathlib_file: Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvariance.lean
----
-
 # A topological homotopy gives a singular-chain homotopy
 
 For homotopic maps `f,g : X ⟶ Y`, the induced maps between singular chain

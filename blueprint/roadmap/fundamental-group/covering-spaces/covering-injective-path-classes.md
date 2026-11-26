@@ -1,12 +1,3 @@
----
-article_id: af_cf7c80b8e186853730545999
-declaration: lemma
-origin: cited
-mathlib: true
-mathlib_declaration: IsCoveringMap.injective_path_homotopic_map
-mathlib_file: Mathlib/Topology/Homotopy/Lifting.lean
----
-
 # Covering maps inject path-homotopy classes
 
 For a covering map `p : E → X` and endpoints `e₀,e₁ : E`, composition with

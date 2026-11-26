@@ -1,12 +1,3 @@
----
-article_id: af_7b3b7e4204ac2cb6b6198976
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.skeletonRelativeHomology, Hatcher.ClassicalCW.skeletalCellFundamentalClass, Hatcher.ClassicalCW.skeletalCellFundamentalClass_zero, Hatcher.ClassicalCW.skeletalCellFundamentalClass_succ
----
-
 # Skeletal relative homology is concentrated in the cell dimension
 
 **Hatcher, Lemma 2.34(a).** For every classical CW complex X and n,k ∈ ℕ,

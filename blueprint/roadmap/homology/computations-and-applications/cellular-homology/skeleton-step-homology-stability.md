@@ -1,12 +1,3 @@
----
-article_id: af_86dafc67e2c6c67093b0e86f
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.skeletonStepHomologyStability
----
-
 # One skeleton attachment changes homology only in adjacent degrees
 
 Write Sₚ = Xᵖ⁻¹ with S₀ empty. For the actual inclusion Sₚ → Sₚ₊₁,

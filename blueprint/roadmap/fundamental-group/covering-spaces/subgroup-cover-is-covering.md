@@ -1,12 +1,3 @@
----
-article_id: af_be39cedf8b22e6b8c7ab9dba
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.SubgroupCover.isCoveringMap_proj
----
-
 # The subgroup projection is a path-connected covering
 
 Let `X` be path-connected, locally path-connected, and semilocally

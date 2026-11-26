@@ -1,12 +1,3 @@
----
-article_id: af_87cd8f5d6a5cc82bf5766bcf
-declaration: def
-origin: background
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.pointQuotientPairFunctor
----
-
 # Functorial point quotients of topological pairs
 
 For every `P : TopPair`, define the point quotient of its ambient space as the

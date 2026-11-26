@@ -1,12 +1,3 @@
----
-article_id: af_e10c2735f8505461244e8e20
-declaration: def
-origin: cited
-mathlib: true
-mathlib_declaration: HomologicalComplex.homologyMap
-mathlib_file: Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean
----
-
 # A chain map induces a map on homology
 
 **Hatcher, Proposition 2.9 (page 111).** A chain map between chain complexes

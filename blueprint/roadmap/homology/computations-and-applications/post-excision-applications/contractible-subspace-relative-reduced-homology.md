@@ -1,12 +1,3 @@
----
-article_id: af_5af80c1672a496d005d3afa3
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.contractibleSubspaceHomologyIso
----
-
 # A contractible subspace identifies reduced and relative homology
 
 Let `P : TopPair.{w}` have contractible subspace `P.snd`. For an object `R` in

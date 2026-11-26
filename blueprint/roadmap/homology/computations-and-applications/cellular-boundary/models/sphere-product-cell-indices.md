@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: cited
-article_id: af_7922c00273e32702e83b796a
----
-
 # A product of equal spheres has four product cells
 
 For n > 1, the constructed classical CW structure on the actual Sⁿ×Sⁿ has one zero-cell, two n-cells and one 2n-cell, the products of the two factor cells, and no other cells.

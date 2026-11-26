@@ -1,12 +1,3 @@
----
-article_id: af_9f3e4a786d0db9eda48df751
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Simplex.standardSimplexPairIsoDiskPair
----
-
 # The standard simplex pair is homeomorphic to the disk pair
 
 Construct an isomorphism of topological pairs between the ordered standard

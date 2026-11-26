@@ -1,12 +1,3 @@
----
-article_id: af_85e867a8cc904f3010b21537
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Excision.relativeChainMap_homotopyEquivalence_iff
----
-
 # Relative excision reduces to the union subcomplex
 
 Let `f : P ⟶ Q` be a morphism of simplicial-set pairs whose ambient component

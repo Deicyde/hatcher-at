@@ -1,7 +1,3 @@
----
-article_id: af_2e10d266b793c4020852fe44
----
-
 # Van Kampen's theorem
 
 Hatcher §1.2 (pages 40–55). The selected 67-node spine is completely

@@ -1,12 +1,3 @@
----
-article_id: af_2d6e95c5e95928f553b35e71
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.sphere_local_degree_realization_succ_succ
----
-
 # Every integer is a local degree in sphere dimension at least two
 
 For every m ≥ 2 and d : ℤ, construct a continuous F : Sᵐ → Sᵐ fixing the north pole, with singleton fiber over that pole and signed local degree d there. Isolation is derived from the fiber equation, not supplied as an unproved construction hypothesis. The same construction realizes d at the south pole.

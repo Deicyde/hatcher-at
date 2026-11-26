@@ -1,7 +1,3 @@
----
-article_id: af_d276e1b397f3d916bb933cda
----
-
 # Suspension and degree at its poles
 
 Hatcher's Proposition 2.33 uses the cone-base pair's natural reduced boundary isomorphism. The genuine quotient sphere map preserves height, giving singleton pole fibers and the final arbitrary-local-degree consequence.

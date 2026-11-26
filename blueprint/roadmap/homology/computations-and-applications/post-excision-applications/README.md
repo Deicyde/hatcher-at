@@ -1,7 +1,3 @@
----
-article_id: af_ca24aa63391b55c8e9131745
----
-
 # Post-excision applications
 
 Hatcher §2.1, printed pages 125–126. This milestone begins immediately after

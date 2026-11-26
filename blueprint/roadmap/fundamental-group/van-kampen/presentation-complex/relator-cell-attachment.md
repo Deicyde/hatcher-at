@@ -1,12 +1,3 @@
----
-article_id: af_759c634e0bfe5a36d279e9d0
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.presentationRelatorAttachCells
----
-
 # Free-group relators form a standard two-cell attachment
 
 For `rels : Set (FreeGroup S)`, realize each relator as a based map from the

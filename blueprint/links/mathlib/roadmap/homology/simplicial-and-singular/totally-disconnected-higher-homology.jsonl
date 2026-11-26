@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/homology/simplicial-and-singular/totally-disconnected-higher-homology.md"}], "object": [{"location": {"declaration": "AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace", "module": "Mathlib.AlgebraicTopology.SingularHomology.Basic"}}], "id": "af_48578e29aa987a0a17839619"}

@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: cited
-article_id: af_6cd1903d8a9aef0f61982a24
----
-
 # Attaching degrees equal the actual boundary coefficients
 
 For every n > 1 and cells α,β in dimensions n,n−1, the integer degree of the constructed attaching-sphere map is exactly the β-coordinate of the actual cellular differential of α’s fixed cell class.

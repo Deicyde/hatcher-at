@@ -1,12 +1,3 @@
----
-article_id: af_5fb3ca54030c6288d4ce8eea
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.pathConnectedSpace_twoSkeleton
----
-
 # The 2-skeleton of a path-connected CW complex is path-connected
 
 Supply the path-connectedness instance required before iterating the

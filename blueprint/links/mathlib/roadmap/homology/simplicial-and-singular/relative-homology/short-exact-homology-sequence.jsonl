@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../../roadmap/homology/simplicial-and-singular/relative-homology/short-exact-homology-sequence.md"}], "object": [{"location": {"declaration": "HomologicalComplex.HomologySequence.composableArrows₅_exact", "module": "Mathlib.Algebra.Homology.HomologySequenceLemmas"}}], "id": "af_22af3ad0a34dfc2e051ccf6b"}

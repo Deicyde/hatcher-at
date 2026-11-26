@@ -1,12 +1,3 @@
----
-article_id: af_f913ff74a0a871d5f1b164e1
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.IsCoveringSpaceAction.isQuotientCoveringMap_orbitQuotient
----
-
 # Covering-space actions give quotient coverings
 
 Assume `[Group G]`, `[MulAction G Y]`, `[TopologicalSpace Y]`, and

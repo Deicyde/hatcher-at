@@ -1,11 +1,3 @@
----
-article_id: af_0d5b949221c2653c9284c81a
-declaration: def
-origin: cited
-statement: formalized
-lean: Hatcher.Relative.pointedPairHomologyIso
----
-
 # Relative homology at a basepoint is reduced homology
 
 **Hatcher, Example 2.18 (page 118).** For a space `X` with chosen point `x₀`,

@@ -1,12 +1,3 @@
----
-article_id: af_6620be96e3373fceee281549
-declaration: lemma
-origin: cited
-mathlib: true
-mathlib_declaration: Homotopy.homologyMap_eq
-mathlib_file: Mathlib/Algebra/Homology/Homotopy.lean
----
-
 # Chain-homotopic maps induce the same homology map
 
 **Hatcher, Proposition 2.12 (page 113).** If two chain maps are chain

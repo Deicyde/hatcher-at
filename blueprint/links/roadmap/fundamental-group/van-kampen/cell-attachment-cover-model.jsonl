@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/van-kampen/cell-attachment-cover-model.md"}], "object": [{"location": {"declaration": "Hatcher.VanKampen.exists_cellAttachmentCover"}, "role": "states"}], "status": "formalized", "kind": "lemma", "id": "af_d40cc60ada4364ba06f00457", "extensions": {"org.autoform": {"origin": "bridged"}}}

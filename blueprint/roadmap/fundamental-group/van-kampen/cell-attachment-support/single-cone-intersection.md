@@ -1,12 +1,3 @@
----
-article_id: af_583d33f600e077d48f72815a
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.ConeAttachment.coverIntersectionHomotopyEquivBase
----
-
 # The single-cone cover intersection has the homotopy type of its boundary
 
 For the standard two-set cover of a single cone attachment, the intersection

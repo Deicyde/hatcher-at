@@ -1,12 +1,3 @@
----
-article_id: af_4d712408a8cbf7efd1b49e64
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.AuxiliaryCellAttachment.contractibleSpace_upperCover
----
-
 # The strip-connected upper cover is contractible
 
 For a nonempty family of cells, prove that the upper member of Hatcher's

@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: cited
-article_id: af_f01f5093c6f21410fe1240bd
----
-
 # Integral homology of finite complex projective spaces
 
 For all n,i ∈ ℕ, Hᵢ(ℂPⁿ;ℤ) is ℤ when i = 2k for some k ≤ n and is zero otherwise. Construct the basis from the actual cell in the chosen projective CW structure. Include n = 0 and ordinary degree-zero homology.

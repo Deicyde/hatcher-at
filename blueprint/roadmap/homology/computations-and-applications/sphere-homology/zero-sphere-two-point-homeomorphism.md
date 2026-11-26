@@ -1,12 +1,3 @@
----
-article_id: af_3d33a544b876beec3eeff46e
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.zeroSphereIsoTwoPoint
----
-
 # The zero-sphere is a two-point space
 
 Construct the explicit universe-polymorphic isomorphism

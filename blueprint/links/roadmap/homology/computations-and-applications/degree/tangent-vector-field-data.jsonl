@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/homology/computations-and-applications/degree/tangent-vector-field-data.md"}], "object": [{"location": {"declaration": "Hatcher.Sphere.TangentVectorField"}, "role": "states"}], "status": "formalized", "kind": "structure", "id": "af_1e83c364583b4ef47b8b0570", "extensions": {"org.autoform": {"origin": "bridged"}}}

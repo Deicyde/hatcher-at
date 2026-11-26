@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/homology/simplicial-and-singular/relative-homology/relative-singular-homology.md"}], "object": [{"location": {"declaration": "Hatcher.Relative.homologyFunctor"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_e709207d0f23c61c8259719f", "extensions": {"org.autoform": {"origin": "cited"}}}

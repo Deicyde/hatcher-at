@@ -1,12 +1,3 @@
----
-article_id: af_b46833ba0dee42bdf8a7f504
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.exists_presentedGroup_equiv
----
-
 # Every group admits a generators-and-relations presentation
 
 For every group `G`, produce a generator type, a family of relators in the free

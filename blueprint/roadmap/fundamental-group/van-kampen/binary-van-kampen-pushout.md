@@ -1,12 +1,3 @@
----
-article_id: af_806651882449c734dfacee63
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.pushoutEquivFundamentalGroup
----
-
 # Binary van Kampen is a group pushout
 
 Let path-connected open subsets `A` and `B` cover `X`, contain the shared

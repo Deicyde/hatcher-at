@@ -1,12 +1,3 @@
----
-article_id: af_ea94d53a9ef0926ab162bfee
-declaration: structure
-origin: background
-statement: formalized
-proof: formalized
-lean: Hatcher.BasedConnectedCover
----
-
 # Pointed connected covering spaces
 
 Define a small, universe-indexed record `Hatcher.BasedConnectedCover X x₀`

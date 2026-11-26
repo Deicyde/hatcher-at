@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/homology/simplicial-and-singular/relative-homology/pair-long-exact-sequence.md"}], "object": [{"location": {"declaration": "Hatcher.Relative.pairSequence_exact"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_28eb45968cda0d7223634efb", "extensions": {"org.autoform": {"origin": "cited"}}}

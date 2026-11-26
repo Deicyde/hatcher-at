@@ -1,12 +1,3 @@
----
-article_id: af_cdfdd640e75db0f65a9e7e19
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.relationSubgroup_le_ker
----
-
 # Overlap relations vanish under the cover map
 
 For Hatcher's open-cover presentation, every generator of the overlap-relation

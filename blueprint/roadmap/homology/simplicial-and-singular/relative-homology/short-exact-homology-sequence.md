@@ -1,12 +1,3 @@
----
-article_id: af_22af3ad0a34dfc2e051ccf6b
-declaration: theorem
-origin: cited
-mathlib: true
-mathlib_declaration: HomologicalComplex.HomologySequence.composableArrows₅_exact
-mathlib_file: Mathlib/Algebra/Homology/HomologySequenceLemmas.lean
----
-
 # A short exact sequence gives an exact homology sequence
 
 **Hatcher, Theorem 2.16 (pages 116–117).** A short exact sequence of chain

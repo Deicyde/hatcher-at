@@ -1,12 +1,3 @@
----
-article_id: af_a6eb442378369693c34b1c50
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Disc.not_exists_diskBoundary_retraction
----
-
 # The boundary sphere is not a retract of the disk
 
 For every `n : ℕ`, there is no morphism

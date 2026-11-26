@@ -1,11 +1,3 @@
----
-article_id: af_150143235a6365f6fb31116a
-declaration: def
-origin: cited
-statement: formalized
-lean: Hatcher.fundamentalGroupEquiv_of_attachCells_of_two_lt
----
-
 # Attaching higher cells preserves the fundamental group
 
 **Hatcher, Proposition 1.26(b) (pages 50–51).** If `Y` is obtained from a

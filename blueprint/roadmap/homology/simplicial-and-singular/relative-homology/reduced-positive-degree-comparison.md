@@ -1,11 +1,3 @@
----
-article_id: af_7da35d562938b0efe2922263
-declaration: def
-origin: cited
-lean: Hatcher.Reduced.homologyIsoOfPositiveDegree
-statement: formalized
----
-
 # Reduced and ordinary homology agree in positive degrees
 
 **Hatcher, §2.1 (page 110).** For every space `X`, coefficient object `R`,

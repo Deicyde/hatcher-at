@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/covering-spaces/pointed-cover-rigidity.md"}], "object": [{"location": {"declaration": "Hatcher.BasedConnectedCover.nonempty_iso_iff_range_eq"}, "role": "states"}], "status": "formalized", "kind": "proposition", "id": "af_748dca8af0bc5f4091a3db8f", "extensions": {"org.autoform": {"origin": "cited"}}}

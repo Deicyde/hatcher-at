@@ -1,7 +1,3 @@
----
-article_id: af_246d6c6fe19286d3dff02ae8
----
-
 # Degree foundations and applications
 
 Hatcher §2.2, printed pages 134–135. This milestone defines the integral

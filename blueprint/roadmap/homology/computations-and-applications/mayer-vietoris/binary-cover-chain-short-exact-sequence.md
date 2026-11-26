@@ -1,12 +1,3 @@
----
-article_id: af_c930cb570baa902b5242a221
-declaration: theorem
-origin: cited
-lean: Hatcher.MayerVietoris.chainComplexShortComplex_shortExact
-statement: formalized
-proof: formalized
----
-
 # Binary-cover chains form a short exact sequence
 
 For arbitrary subsets `A B : Set X`, the Mayer–Vietoris chain complex is

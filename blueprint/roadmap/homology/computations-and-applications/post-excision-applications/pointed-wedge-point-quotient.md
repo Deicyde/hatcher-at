@@ -1,12 +1,3 @@
----
-article_id: af_b3bfe8f0cd2aeab13b17a77d
-declaration: def
-origin: bridged
-lean: Hatcher.Relative.pointQuotientSigmaPointedPairIsoPointedWedge
-statement: formalized
-proof: formalized
----
-
 # The pointed wedge is the point quotient of the sigma pair
 
 Identify the existing project model `Hatcher.PointedWedge X x₀` with the

@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/van-kampen/pointed-wedge.md"}], "object": [{"location": {"declaration": "Hatcher.PointedWedge"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_a1c43352820c5831e110d751", "extensions": {"org.autoform": {"origin": "background"}}}

@@ -1,12 +1,3 @@
----
-article_id: af_e1a364ab3eaebce2e62114e0
-declaration: corollary
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.exists_twoDimensionalCWComplex_fundamentalGroupEquiv
----
-
 # Every group is a fundamental group
 
 **Hatcher, Corollary 1.28 (page 52).** For every group `G`, there is a

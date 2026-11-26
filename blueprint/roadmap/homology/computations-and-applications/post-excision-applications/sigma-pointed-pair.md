@@ -1,12 +1,3 @@
----
-article_id: af_47796e967178521ad49710b5
-declaration: def
-origin: background
-lean: Hatcher.Relative.sigmaPointedPair
-statement: formalized
-proof: formalized
----
-
 # The coproduct pair of a family of pointed spaces
 
 For a family of pointed spaces `(X i, x₀ i)`, define the topological pair

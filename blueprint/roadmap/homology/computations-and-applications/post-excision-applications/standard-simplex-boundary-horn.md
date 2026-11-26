@@ -1,11 +1,3 @@
----
-article_id: af_4849582f9a5a21cf759a4846
-declaration: def
-origin: background
-statement: formalized
-lean: Hatcher.Simplex.standardSimplexBoundaryHornTriple
----
-
 # The boundary and zero horn of a standard topological simplex
 
 For the ordered topological simplex `Δ[n] :=

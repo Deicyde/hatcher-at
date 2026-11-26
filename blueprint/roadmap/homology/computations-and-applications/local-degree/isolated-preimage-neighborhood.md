@@ -1,12 +1,3 @@
----
-article_id: af_70b8f0060e881e7493096139
-declaration: structure
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.LocalDegreeNeighborhood
----
-
 # An isolated preimage gives a map of punctured pairs
 
 For a sphere map `f` and points `x` and `y`, define

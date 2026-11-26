@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: bridged
-article_id: af_d23091132befa0542f4d274b
----
-
 # A positive sphere map keeps its integer degree in the lifted model
 
 For every continuous self-map f of a positive-dimensional standard sphere, its actual lifted map acts on the fixed lifted ordered fundamental class by the integer degree of f. Prove this equation through the constructed space and coefficient identifications.

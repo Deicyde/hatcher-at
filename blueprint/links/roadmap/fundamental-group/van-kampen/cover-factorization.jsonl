@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/van-kampen/cover-factorization.md"}], "object": [{"location": {"declaration": "Hatcher.VanKampen.Factorization"}, "role": "states"}], "status": "formalized", "kind": "structure", "id": "af_e322d9b2b4634b0e4b52e80c", "extensions": {"org.autoform": {"origin": "bridged"}}}

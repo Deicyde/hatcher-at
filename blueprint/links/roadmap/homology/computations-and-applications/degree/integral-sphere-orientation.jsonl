@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/homology/computations-and-applications/degree/integral-sphere-orientation.md"}], "object": [{"location": {"declaration": "Hatcher.Sphere.integralSphereHomologyIso"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_ce0cbfdf3fed16c8fe605273", "extensions": {"org.autoform": {"origin": "bridged"}}}

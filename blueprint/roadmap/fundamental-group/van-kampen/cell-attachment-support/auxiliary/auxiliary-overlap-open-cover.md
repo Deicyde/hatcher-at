@@ -1,12 +1,3 @@
----
-article_id: af_01425aa8a8d4928d8039e3e6
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.AuxiliaryCellAttachment.isOpenCover_intersectionPieces
----
-
 # The auxiliary overlap has an indexed open cover
 
 Cover the overlap of Hatcher's two auxiliary members by sets indexed by the

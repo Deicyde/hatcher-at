@@ -1,12 +1,3 @@
----
-article_id: af_a8f2082aa2844d26554baedf
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.finite_disjoint_sphere_balls
----
-
 # A positive-dimensional sphere contains any finite number of disjoint balls
 
 For every n > 0 and k : ℕ, construct k embedded closed n-balls in Sⁿ whose images are pairwise disjoint. Their interiors Bᵢ are open in the sphere, carry Euclidean ball charts, and omit a common point b. Choose b on the last coordinate axis, so reflection in the zeroth coordinate fixes it.

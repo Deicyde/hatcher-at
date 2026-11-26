@@ -1,12 +1,3 @@
----
-article_id: af_cbbb5f2c6b7cb6da153db1c5
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.sphere_signed_pinch_local_degree, Hatcher.Sphere.SignedSphereFoldData.regular_point_local_degree
----
-
 # The signed pinch map has the prescribed local degrees
 
 For y ≠ b and the ith point of the regular fiber of fσ, derive an isolation witness and prove that its public local degree is σᵢ. The equality holds for every witness and uses the existing signed local-degree convention.

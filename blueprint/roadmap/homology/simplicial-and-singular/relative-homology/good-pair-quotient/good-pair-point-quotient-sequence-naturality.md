@@ -1,12 +1,3 @@
----
-article_id: af_1681cfca508c6b0f47bd1569
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.goodPairPointQuotientConnecting_naturality
----
-
 # Naturality of the good-pair quotient sequence
 
 **Hatcher, §2.1 (printed page 128).** Every map of good pairs induces the

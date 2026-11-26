@@ -1,12 +1,3 @@
----
-article_id: af_6335225854364397e3a20e8f
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.sphere_suspension_preserves_degree
----
-
 # Suspension preserves the signed degree of a sphere map
 
 **Hatcher, Proposition 2.33.** For n > 0 and every continuous f : Sⁿ → Sⁿ, prove degree(Sf) = degree(f) using the existing ordinary integral degree in dimensions n+1 and n.

@@ -1,12 +1,3 @@
----
-article_id: af_6df77f1cf20ec9e15cb7abbd
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.finitePunctureFundamentalClass_eq_sum
----
-
 # The finite-puncture class is the sum of the local classes
 
 Use `Hatcher.Sphere.finitePunctureFundamentalClass` from the global-degree

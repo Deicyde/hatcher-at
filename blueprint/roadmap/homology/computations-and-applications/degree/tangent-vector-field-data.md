@@ -1,11 +1,3 @@
----
-article_id: af_1e83c364583b4ef47b8b0570
-declaration: structure
-origin: bridged
-statement: formalized
-lean: Hatcher.Sphere.TangentVectorField
----
-
 # Tangent vector fields and normalization
 
 Define `Hatcher.Sphere.TangentVectorField n` as a continuous ambient vector

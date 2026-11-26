@@ -1,12 +1,3 @@
----
-article_id: af_1f0213e0638fc4d49b7907ba
-declaration: instance
-origin: cited
-lean: Hatcher.Excision.coverHomologyMap_isIso
-statement: formalized
-proof: formalized
----
-
 # Binary-cover excision induces homology isomorphisms
 
 **Hatcher, Theorem 2.20 (pages 119 and 124), binary-cover form.** If

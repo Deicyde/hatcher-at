@@ -1,7 +1,3 @@
----
-article_id: af_5de6fe53fd72fbf434b95401
----
-
 # Presentation-complex support
 
 These nodes turn Hatcher's proof of Corollary 1.28 into explicit interfaces

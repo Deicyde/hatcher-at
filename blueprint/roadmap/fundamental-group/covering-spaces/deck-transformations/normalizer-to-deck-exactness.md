@@ -1,12 +1,3 @@
----
-article_id: af_f2f117d239d61324fa03beff
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.BasedConnectedCover.normalizerToDeck_ker_and_surjective
----
-
 # The normalizer map is surjective with kernel the covering subgroup
 
 For a pointed connected cover over a path-connected, locally path-connected

@@ -1,7 +1,3 @@
----
-article_id: af_a43e897716ffaf6560f50495
----
-
 # Relative homology and exact sequences
 
 Hatcher §2.1 (pages 110, 113–124, and 127–128). The selected slices introduce

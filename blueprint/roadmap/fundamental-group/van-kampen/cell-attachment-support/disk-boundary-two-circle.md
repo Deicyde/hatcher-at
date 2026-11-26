@@ -1,11 +1,3 @@
----
-article_id: af_6c62c4e9a3ce19ebaaa1a93d
-declaration: def
-origin: bridged
-statement: formalized
-lean: Hatcher.diskBoundaryTwoHomeomorphCircle
----
-
 # The boundary of the two-disk is the circle
 
 Construct a basepoint-preserving homeomorphism from Mathlib's

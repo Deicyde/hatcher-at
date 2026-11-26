@@ -1,11 +1,3 @@
----
-article_id: af_6166529cd0668d9e3bbf7043
-declaration: def
-origin: bridged
-statement: formalized
-lean: Hatcher.VanKampen.AuxiliaryCellAttachment.baseCoverStrongDeformationRetract
----
-
 # The base-side auxiliary cover retracts onto the original space
 
 Construct a strong deformation retraction from the base-side member of

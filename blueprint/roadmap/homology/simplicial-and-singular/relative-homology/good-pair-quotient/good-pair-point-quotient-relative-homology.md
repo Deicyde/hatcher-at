@@ -1,12 +1,3 @@
----
-article_id: af_7e40bcc1610ef4c11f35a6bb
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.pointQuotientComparison_homologyMap_isIso_of_isGoodPair
----
-
 # Good-pair relative homology is reduced quotient homology
 
 **Hatcher, Proposition 2.22 (printed page 124).** For every good pair and every

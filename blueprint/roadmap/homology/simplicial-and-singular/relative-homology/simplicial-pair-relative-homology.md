@@ -1,12 +1,3 @@
----
-article_id: af_2a09c48fe99a73a2e9df0d1a
-declaration: def
-origin: bridged
-mathlib: true
-mathlib_declaration: SSetPair.homologyFunctor
-mathlib_file: Mathlib/AlgebraicTopology/SimplicialSet/Homology/Relative.lean
----
-
 # Relative homology of a simplicial-set pair
 
 For a monomorphism `A ⟶ X` of simplicial sets, form the cokernel chain

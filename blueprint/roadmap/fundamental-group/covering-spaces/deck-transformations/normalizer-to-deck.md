@@ -1,12 +1,3 @@
----
-article_id: af_2fd38cecccb62974522aa339
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.BasedConnectedCover.normalizerToDeck
----
-
 # The normalizer acts by deck transformations
 
 Let `C` be a pointed connected cover of a path-connected, locally

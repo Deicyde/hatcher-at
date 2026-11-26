@@ -1,12 +1,3 @@
----
-article_id: af_f95465a69adbe4843302e352
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Simplex.zeroHornStrongDeformationRetract
----
-
 # A standard simplex strongly deformation retracts onto its zero horn
 
 Construct a strong deformation retraction of `Δ[n+1]` onto `Λ⁰[n+1]`.

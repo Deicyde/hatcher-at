@@ -1,12 +1,3 @@
----
-article_id: af_7fbee0c3ad37e661e770ab4d
-declaration: proposition
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.compact_subset_finite_subcomplex
----
-
 # Compact subsets lie in finite subcomplexes
 
 **Hatcher, Proposition A.1 (page 520).** Every compact subspace of a CW

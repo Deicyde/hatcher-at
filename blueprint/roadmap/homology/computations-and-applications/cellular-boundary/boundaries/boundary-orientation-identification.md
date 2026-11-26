@@ -1,9 +1,3 @@
----
-declaration: def
-origin: bridged
-article_id: af_727404eb8a71c2d5762bbcba
----
-
 # The source boundary sphere agrees with the fixed disk orientation
 
 For n > 1, construct an actual homeomorphism Sⁿ⁻¹ → ∂Dⁿ whose induced homology map takes the fixed ordered sphere generator to the actual boundary of the current relative disk class. Retain its identity-or-reflection construction and class equation.

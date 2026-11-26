@@ -1,12 +1,3 @@
----
-article_id: af_f2326d93cde64505bb99af6f
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.circlePowerMap_positive_localStretchDeformation
----
-
 # Local positive stretching deforms to a rotation through punctured maps
 
 For k > 0 and x ∈ S¹, put y = P_k(x). On an arc parametrized by x exp(i t), with |t| < π/(2k), construct a local homotopy from P_k to the rotation sending x to y, given in complex coordinates by y exp(i ((1−s)k+s)t).

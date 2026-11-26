@@ -1,12 +1,3 @@
----
-article_id: af_a60a7ada9a033af784c579a4
-declaration: theorem
-origin: bridged
-lean: Hatcher.Relative.sigmaPointedPair_isGoodPair
-statement: formalized
-proof: formalized
----
-
 # A nonempty coproduct of pointed good pairs is good
 
 Let the index type be nonempty and suppose every pointed pair

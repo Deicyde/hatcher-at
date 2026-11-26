@@ -1,12 +1,3 @@
----
-article_id: af_530dad8cebc4444a6d3714d4
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.odd_of_nonvanishingTangentVectorField
----
-
 # A nonvanishing tangent field forces odd dimension
 
 For `0 < n`, normalize a nonvanishing tangent vector field and construct the

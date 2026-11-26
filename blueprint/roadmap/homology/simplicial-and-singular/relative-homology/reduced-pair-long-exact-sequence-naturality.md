@@ -1,12 +1,3 @@
----
-article_id: af_d988056a42cddea384f57669
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.reducedPairConnecting_naturality
----
-
 # The reduced pair long exact sequence is natural
 
 **Hatcher, §2.1 (pages 127–128).** A map of topological pairs with nonempty

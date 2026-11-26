@@ -1,12 +1,3 @@
----
-article_id: af_345a2474df13c2f42cc9e4eb
-declaration: instance
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.GoodPairData.pointQuotientPairToNeighborhoodPair_homologyMap_isIso
----
-
 # Enlarging the quotient point preserves relative homology
 
 For good-pair data, prove that the canonical map

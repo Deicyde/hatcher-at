@@ -1,7 +1,3 @@
----
-article_id: af_f9e6461f1fd2da41329de777
----
-
 # Small chains and excision
 
 Hatcher §2.1 (pages 119–124), Proposition 2.21 and Theorem 2.20. The approved

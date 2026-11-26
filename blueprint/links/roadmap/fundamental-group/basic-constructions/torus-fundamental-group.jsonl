@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/basic-constructions/torus-fundamental-group.md"}], "object": [{"location": {"declaration": "Hatcher.torusFundamentalGroupEquiv"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_7e18c86739116c84823e7c20", "extensions": {"org.autoform": {"origin": "cited"}}}

@@ -1,12 +1,3 @@
----
-article_id: af_8d17f4be9605a1e8324a99fb
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Simplex.zeroFacePair_homologyMap_isIso
----
-
 # The zero face induces an isomorphism in relative homology
 
 For every `n : ℕ`, prove that the canonical zero-face map induces an isomorphism

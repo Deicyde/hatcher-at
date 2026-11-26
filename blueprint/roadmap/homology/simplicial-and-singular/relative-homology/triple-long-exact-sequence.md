@@ -1,12 +1,3 @@
----
-article_id: af_096133707d4ba17fcfa64275
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.tripleSequence_exact, Hatcher.Relative.tripleHomologyMapXBToXA_zero_epi
----
-
 # The long exact sequence of a triple
 
 **Hatcher, §2.1 (pages 118–119).** For nested subspaces `B ⊆ A ⊆ X`, the

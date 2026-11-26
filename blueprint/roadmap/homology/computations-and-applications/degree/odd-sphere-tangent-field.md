@@ -1,12 +1,3 @@
----
-article_id: af_82daa470562d75a3f2a999dd
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.nonvanishingTangentVectorFieldOfOdd
----
-
 # Odd spheres have a nonvanishing tangent field
 
 Given `Odd n`, pair the `n+1` ambient coordinates and define Hatcher's

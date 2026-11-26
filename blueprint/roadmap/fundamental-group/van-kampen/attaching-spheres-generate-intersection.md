@@ -1,12 +1,3 @@
----
-article_id: af_6526ed4b12ff934cdb825655
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.attachmentIntersection_coverMap_surjective
----
-
 # The attaching-sphere pieces generate the intersection group
 
 For Hatcher's auxiliary cover of an `n`-cell attachment, the path-connected

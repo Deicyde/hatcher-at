@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/fundamental-group/van-kampen/presentation-complex/relator-cell-attachment.md"}], "object": [{"location": {"declaration": "Hatcher.presentationRelatorAttachCells"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_759c634e0bfe5a36d279e9d0", "extensions": {"org.autoform": {"origin": "bridged"}}}

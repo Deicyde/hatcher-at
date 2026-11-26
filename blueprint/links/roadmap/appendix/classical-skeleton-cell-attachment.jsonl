@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../roadmap/appendix/classical-skeleton-cell-attachment.md"}], "object": [{"location": {"declaration": "Hatcher.ClassicalCW.skeletonLTInclusion_attachCells"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_273a5ce6a092b8f64f470004", "extensions": {"org.autoform": {"origin": "bridged"}}}

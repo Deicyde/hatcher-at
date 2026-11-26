@@ -1,7 +1,3 @@
----
-article_id: af_3ba37e06e8726db37673e7d4
----
-
 # Cellular boundaries and first computations
 
 Hatcher §2.2, printed pages 140–141, after the proof of Theorem 2.35 and before Example 2.36. This milestone covers applications (i)–(iii), the two unnumbered geometric illustrations, the first differential and the complete higher boundary formula. Its geometric support is Example 0.3, the finite part of Example 0.6, and Products on printed pages 6–8.

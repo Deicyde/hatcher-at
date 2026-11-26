@@ -1,12 +1,3 @@
----
-article_id: af_b57fd812655135136537fc44
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.fundamentalGroupEquivWedgeCircles
----
-
 # The fundamental group of a wedge of circles
 
 For an arbitrary index type `ι`, the fundamental group of the pointed wedge

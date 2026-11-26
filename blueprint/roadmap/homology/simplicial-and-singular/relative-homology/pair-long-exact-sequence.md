@@ -1,12 +1,3 @@
----
-article_id: af_28eb45968cda0d7223634efb
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.pairSequence_exact
----
-
 # The long exact sequence of a pair
 
 **Hatcher, §2.1 (page 117).** For a topological pair `(X,A)`, the inclusion,

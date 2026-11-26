@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/basic-constructions/fundamental-theorem-algebra.md"}], "object": [{"location": {"declaration": "Hatcher.exists_root_of_degree_pos"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_1b551d825f8642fe8e8eec1a", "extensions": {"org.autoform": {"origin": "cited"}}}

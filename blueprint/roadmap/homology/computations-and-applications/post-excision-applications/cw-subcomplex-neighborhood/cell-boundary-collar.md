@@ -1,12 +1,3 @@
----
-article_id: af_4287a147c2d2150daf5a2475
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.cellBoundaryCollarDeformation
----
-
 # The radial collar of a cell boundary
 
 For the closed sup-norm ball used by a classical CW characteristic map,

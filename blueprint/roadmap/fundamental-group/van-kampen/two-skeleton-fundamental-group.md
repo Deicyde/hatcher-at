@@ -1,12 +1,3 @@
----
-article_id: af_43621dbc2063991527df5593
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.fundamentalGroupEquiv_twoSkeleton
----
-
 # The 2-skeleton determines the fundamental group
 
 **Hatcher, Proposition 1.26(c) (pages 50–51).** For a path-connected CW

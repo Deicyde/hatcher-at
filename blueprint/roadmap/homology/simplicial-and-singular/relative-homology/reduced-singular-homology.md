@@ -1,11 +1,3 @@
----
-article_id: af_d419a29f857a10423aa75cdf
-declaration: def
-origin: cited
-lean: Hatcher.Reduced.homologyFunctor
-statement: formalized
----
-
 # Reduced singular homology
 
 **Hatcher, §2.1 (pages 110 and 113).** Define reduced singular homology

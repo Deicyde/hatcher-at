@@ -1,12 +1,3 @@
----
-article_id: af_1c27eabf2c01f79d636b09ff
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.puncturedSphereHomeomorphEuclidean
----
-
 # A punctured sphere is Euclidean space
 
 For every `p : TopCat.sphere.{0} n`, construct a stereographic homeomorphism

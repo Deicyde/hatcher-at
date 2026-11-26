@@ -1,12 +1,3 @@
----
-article_id: af_35e455c0951614a9498ecf00
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.PointedWedge.continuousMapEquiv
----
-
 # Continuous maps out of a pointed wedge
 
 Package the universal property of `Hatcher.PointedWedge`: a continuous map

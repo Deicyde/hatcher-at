@@ -1,12 +1,3 @@
----
-article_id: af_31b7f34b97c364b77eac9aad
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.fundamentalGroupProdEquiv
----
-
 # The fundamental group of a product
 
 **Hatcher, Proposition 1.12 (page 34).** Projection onto the factors gives an

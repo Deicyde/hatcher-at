@@ -1,12 +1,3 @@
----
-article_id: af_fc6563b922b5d53422e79281
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.reducedHomology_sphere
----
-
 # Reduced homology of spheres
 
 Let `C` be an abelian category with `HasCoproducts.{w} C`, and let `R : C`.

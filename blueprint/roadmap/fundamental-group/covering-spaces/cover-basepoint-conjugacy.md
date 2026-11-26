@@ -1,12 +1,3 @@
----
-article_id: af_c01ebb7ebd5194958368a3f5
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Covering.range_mapOfEq_basepointChange
----
-
 # Changing the lifted basepoint conjugates the image subgroup
 
 For a path-connected covering of `(X,x₀)`, changing the chosen point in the

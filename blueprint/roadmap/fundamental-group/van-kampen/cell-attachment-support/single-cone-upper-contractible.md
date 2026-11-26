@@ -1,12 +1,3 @@
----
-article_id: af_66c0d8a4bc1245caa282640f
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.ConeAttachment.contractibleSpace_upperCover
----
-
 # The cone-side cover member is contractible
 
 For a continuous attaching map `f : S → X`, the open member consisting of the

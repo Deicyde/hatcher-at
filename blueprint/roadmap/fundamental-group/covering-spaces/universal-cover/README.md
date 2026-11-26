@@ -1,7 +1,3 @@
----
-article_id: af_dfe39ee7b774e1c7f360c2f9
----
-
 # The path-class universal cover
 
 Hatcher constructs a simply-connected cover of a path-connected, locally

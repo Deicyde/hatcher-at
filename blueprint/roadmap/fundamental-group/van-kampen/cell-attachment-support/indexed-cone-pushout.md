@@ -1,12 +1,3 @@
----
-article_id: af_5672357a1dfa0c16481f12ce
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.IndexedConeAttachment.isPushout_indexedConeAttachment
----
-
 # An indexed family of cone attachments is a topological pushout
 
 For a family of continuous attaching maps `f j : S j → X`, bundle the maps

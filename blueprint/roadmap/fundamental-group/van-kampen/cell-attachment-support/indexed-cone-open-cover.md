@@ -1,12 +1,3 @@
----
-article_id: af_0b0fcef5fc479822bf06ba4c
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.IndexedConeAttachment.isOpenCover_lower_upper
----
-
 # An indexed family of cones has a two-set open cover
 
 For attaching maps `f j : S j → X`, construct the quotient of `X` with one

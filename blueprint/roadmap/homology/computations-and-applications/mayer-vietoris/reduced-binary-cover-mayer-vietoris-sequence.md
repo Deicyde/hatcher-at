@@ -1,12 +1,3 @@
----
-article_id: af_e4422275f900824fc877374c
-declaration: theorem
-origin: cited
-lean: Hatcher.MayerVietoris.reducedSequence_exact
-statement: formalized
-proof: formalized
----
-
 # The reduced binary-cover Mayer–Vietoris sequence
 
 Let `A B : Set X` satisfy `Hatcher.Excision.CoverCondition A B`. For adjacent

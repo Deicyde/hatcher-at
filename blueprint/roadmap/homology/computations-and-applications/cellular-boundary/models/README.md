@@ -1,7 +1,3 @@
----
-article_id: af_525d494206d28dc5a3311c3b
----
-
 # Classical cell models for the first computations
 
 11 planned declaration leaves in the cellular boundary milestone.

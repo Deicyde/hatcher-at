@@ -1,12 +1,3 @@
----
-article_id: af_3482f234b914950daa685013
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.sigmaPuncturedPairIsoDeletedUnion
----
-
 # Disjoint punctured neighborhoods form the deleted union pair
 
 Let `U i` be pairwise disjoint open subsets of `X` and choose `x i ∈ U i`.

@@ -1,12 +1,3 @@
----
-article_id: af_fbc5f125d607f701cf8ed8a1
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.relationSubgroup
----
-
 # The group presentation associated to an open cover
 
 Fix an indexed family of subsets `U i ⊆ X` containing a common basepoint

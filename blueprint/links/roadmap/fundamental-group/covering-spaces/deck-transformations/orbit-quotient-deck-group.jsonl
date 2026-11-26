@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/fundamental-group/covering-spaces/deck-transformations/orbit-quotient-deck-group.md"}], "object": [{"location": {"declaration": "Hatcher.Covering.actionEquivDeck"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_a5834253c67d2209cf4b4b8e", "extensions": {"org.autoform": {"origin": "cited"}}}

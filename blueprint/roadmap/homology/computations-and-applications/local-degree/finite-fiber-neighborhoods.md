@@ -1,12 +1,3 @@
----
-article_id: af_8413c196d3f1b253bf582afb
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.finiteFiberNeighborhoods
----
-
 # A finite sphere-map fiber has disjoint isolated neighborhoods
 
 For `f : Sⁿ → Sⁿ`, `y : Sⁿ`, and a finite set-theoretic fiber

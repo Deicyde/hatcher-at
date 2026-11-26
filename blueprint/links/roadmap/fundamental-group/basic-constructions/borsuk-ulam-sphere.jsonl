@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/basic-constructions/borsuk-ulam-sphere.md"}], "object": [{"location": {"declaration": "Hatcher.Sphere.exists_eq_neg"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_c84b824b4ed5b5be3e947b7b", "extensions": {"org.autoform": {"origin": "cited"}}}

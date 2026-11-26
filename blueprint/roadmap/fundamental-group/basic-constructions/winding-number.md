@@ -1,12 +1,3 @@
----
-article_id: af_6b3c5494b72549253646f155
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Circle.windingNumber
----
-
 # Winding number of a loop in the circle
 
 Given a loop `f` in `S¹` based at `1`, lift it to the unique path `f̃` in `ℝ`

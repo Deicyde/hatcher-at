@@ -1,12 +1,3 @@
----
-article_id: af_4f74ca06c7815be5efe37f5c
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Covering.orbitQuotientFundamentalGroupEquiv
----
-
 # The orbit-quotient fundamental group recovers the acting group
 
 **Hatcher, Proposition 1.40(c) (page 72).** Let `G` act on a path-connected,

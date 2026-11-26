@@ -1,12 +1,3 @@
----
-article_id: af_3c10e2334ea23d186e4a5f3b
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.fundamentalGroupEquiv_twoSkeleton_skeleton
----
-
 # Finite skeleta above dimension two have the same fundamental group
 
 For every finite `m ≥ 2`, compose the equivalences induced by the successive

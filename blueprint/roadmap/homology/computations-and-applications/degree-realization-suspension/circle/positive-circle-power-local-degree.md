@@ -1,12 +1,3 @@
----
-article_id: af_7f28a7505a467328c2236288
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.circlePowerMap_positive_localDegree
----
-
 # Every local degree of a positive circle power is plus one
 
 For k > 0 and every x ∈ S¹, derive isolation over P_k(x) and prove localDegree(P_k,x,P_k(x)) = 1, independently of its witness.

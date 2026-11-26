@@ -1,12 +1,3 @@
----
-article_id: af_44f4c1e406da249186c75b97
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.liftedOrderedSphereFundamentalClass_isIso, Hatcher.Sphere.liftedOrderedSphereFirstSimplex, Hatcher.Sphere.liftedOrderedSphereSecondSimplex, Hatcher.Sphere.liftedOrderedSphereCycle, Hatcher.Sphere.liftedOrderedSphereCycle_eq_difference, Hatcher.Sphere.liftedOrderedSphereCycle_d, Hatcher.Sphere.liftedOrderedSphereFundamentalClass, Hatcher.Sphere.liftedOrderedSphereFundamentalClass_eq_cycle
----
-
 # The ordered sphere generator lifts with its defining cycle
 
 For every universe u and k ≥ 0, put m = k + 1 and keep the lifted integer

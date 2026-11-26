@@ -1,12 +1,3 @@
----
-article_id: af_9b54c2e1e18382f244cd1c57
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.factorization_quotient_eq_of_move
----
-
 # Elementary factorization moves preserve the quotient class
 
 Hatcher uses two elementary moves: combine adjacent factors lying in one

@@ -1,11 +1,3 @@
----
-article_id: af_7968fc65ae53f656ce78c58d
-declaration: def
-origin: cited
-lean: Hatcher.Reduced.augmentedSingularChainComplexFunctor
-statement: formalized
----
-
 # The augmented singular chain complex
 
 **Hatcher, §2.1 (page 110).** For a space `X` and coefficient object `R`,

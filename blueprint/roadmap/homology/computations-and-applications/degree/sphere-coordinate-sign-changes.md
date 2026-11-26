@@ -1,12 +1,3 @@
----
-article_id: af_973242ed62dcdeb1142aae93
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.doubleSimplexSwap_isoSphere
----
-
 # Coordinate sign changes on the sphere
 
 Construct a sphere homeomorphism that changes the signs of an arbitrary

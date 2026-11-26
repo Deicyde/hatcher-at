@@ -1,12 +1,3 @@
----
-article_id: af_680f7dd9f0023187b145b0eb
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.degree_eq_sum_localDegree
----
-
 # Degree is the sum of the local degrees
 
 Let `0 < n`, let `f : TopCat.sphere n ⟶ TopCat.sphere n`, and let

@@ -1,12 +1,3 @@
----
-article_id: af_e6003b902922b5db4aeeda3f
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Simplex.doubleSimplexFundamentalClass_map_swap
----
-
 # Swapping the double simplex negates its fundamental class
 
 Define the automorphism of `Hatcher.Simplex.doubleSimplex n` induced by

@@ -1,12 +1,3 @@
----
-article_id: af_e322d9b2b4634b0e4b52e80c
-declaration: structure
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.Factorization
----
-
 # Cover factorizations of a loop
 
 Package Hatcher's factorization of a based loop as finite data: a finite

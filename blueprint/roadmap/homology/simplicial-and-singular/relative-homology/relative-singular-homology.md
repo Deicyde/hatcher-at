@@ -1,12 +1,3 @@
----
-article_id: af_e709207d0f23c61c8259719f
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.homologyFunctor
----
-
 # Relative singular chains and homology
 
 **Hatcher, §2.1 (pages 115–118).** For a topological pair `(X,A)`, define

@@ -1,7 +1,3 @@
----
-article_id: af_9da1e6c5697d0bac0b2a1624
----
-
 # Homology
 
 Hatcher's Chapter 2 (pages 97–184). Five selected §2.1 slices are complete: the

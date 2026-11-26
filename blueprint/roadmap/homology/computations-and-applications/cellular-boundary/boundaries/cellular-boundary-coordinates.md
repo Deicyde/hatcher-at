@@ -1,9 +1,3 @@
----
-declaration: def
-origin: bridged
-article_id: af_9167e49074bca9673dfca34e
----
-
 # Coefficients of the actual cellular differential
 
 For every classical CW complex and each differential Cₙ₊₁ → Cₙ, construct its integer coefficients in the existing characteristic-cell bases. A basis cell maps to its resulting finite-support coordinate family, and reconstruct the actual differential value from those coordinates. Include degree-zero targets and arbitrary cell sets.

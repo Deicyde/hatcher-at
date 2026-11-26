@@ -1,12 +1,3 @@
----
-article_id: af_e92b61d61380699a545407f8
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Simplex.zeroFacePointQuotientIso
----
-
 # The zero face identifies the two simplex point quotients
 
 Show that the square formed by the boundary of the zero face, the zero face,

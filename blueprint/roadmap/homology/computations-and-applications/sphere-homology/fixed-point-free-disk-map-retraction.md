@@ -1,12 +1,3 @@
----
-article_id: af_d07b06943e65422125e14267
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Disc.exists_diskBoundary_retraction_of_fixedPointFree
----
-
 # A fixed-point-free disk map produces a boundary retraction
 
 For every `n : ℕ`, let

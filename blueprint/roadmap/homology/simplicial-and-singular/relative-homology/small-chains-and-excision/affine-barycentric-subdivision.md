@@ -1,12 +1,3 @@
----
-article_id: af_5d0836e3e923b63dbb7abb27
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Excision.affineSubdivisionIter_face
----
-
 # Affine barycentric subdivision is compatible with faces
 
 For an affine map from a real standard simplex into a convex space, define the

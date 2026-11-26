@@ -1,8 +1,3 @@
----
-article_id: af_c0218991e9daa36fd9c7ee90
-not_ready: true
----
-
 # Connections with cohomology
 
 Hatcher §4.3 (pages 393–420). Mapped, not yet decomposed.

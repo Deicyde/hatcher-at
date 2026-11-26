@@ -1,12 +1,3 @@
----
-article_id: af_24f895b6cfca07ed98a9e342
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.tripleConnecting_eq, Hatcher.Relative.tripleConnecting_isIso
----
-
 # The triple connecting map sends a relative cycle to its boundary
 
 Give the connecting morphism in the long exact sequence of a topological

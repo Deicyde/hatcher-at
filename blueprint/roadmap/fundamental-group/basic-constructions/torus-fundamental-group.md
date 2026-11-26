@@ -1,12 +1,3 @@
----
-article_id: af_7e18c86739116c84823e7c20
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.torusFundamentalGroupEquiv
----
-
 # The fundamental group of the torus
 
 **Hatcher, Example 1.13 (page 34).** The fundamental group of

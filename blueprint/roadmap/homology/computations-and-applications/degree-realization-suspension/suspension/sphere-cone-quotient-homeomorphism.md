@@ -1,11 +1,3 @@
----
-article_id: af_3bee065ead7f165534b9f450
-declaration: def
-origin: bridged
-statement: formalized
-lean: Hatcher.Sphere.sphereConeQuotientHomeomorph, Hatcher.Sphere.sphereConeCylinderPoint, Hatcher.Sphere.sphere_cone_cylinder_point_coordinates, Hatcher.Sphere.sphereConeQuotientMap, Hatcher.Sphere.sphere_cone_quotient_homeomorph_point, Hatcher.Sphere.sphere_cone_quotient_homeomorph_base, Hatcher.Sphere.sphere_cone_quotient_homeomorph_apex, Hatcher.Sphere.sphere_cone_quotient_homeomorph_cylinder, Hatcher.Sphere.sphere_cone_quotient_homeomorph_coordinates
----
-
 # The cone-base quotient is the next sphere with its suspension poles
 
 Construct a fixed homeomorphism eₙ : CSⁿ/Sⁿ ≃ Sⁿ⁺¹ for every n : ℕ. In the standard Euclidean coordinates it sends the class of (x,r) to (sqrt(1−(2r−1)²) x, 2r−1). The collapsed retained base is the existing north pole and the cone apex is the existing south pole.

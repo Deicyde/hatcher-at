@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/covering-spaces/sheet-index.md"}], "object": [{"location": {"declaration": "Hatcher.Covering.fiberEquivQuotientRange"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_19db673677b8848bafffc26a", "extensions": {"org.autoform": {"origin": "cited"}}}

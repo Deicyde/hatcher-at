@@ -1,12 +1,3 @@
----
-article_id: af_f1a95c595d707f27effaf836
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.binaryCoverLeftQuotientEquivFundamentalGroupOfSubsingleton
----
-
 # A binary cover with a trivial second fundamental group
 
 Let two path-connected open sets cover `X`, and suppose the second member has

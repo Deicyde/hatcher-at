@@ -1,7 +1,3 @@
----
-article_id: af_34d74c61b68ff963c2a00cc2
----
-
 # Cellular homology through its singular comparison
 
 Hatcher §2.2, printed pages 137–140, derives the relative homology of successive

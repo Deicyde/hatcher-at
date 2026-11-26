@@ -1,12 +1,3 @@
----
-article_id: af_cd32f07aad963f625a603fa6
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.cyclicPresentationQuotientEquiv
----
-
 # The degree-n circle relation gives the cyclic group
 
 For a natural number `n`, quotient `π₁(S¹, 1)` by the normal closure of the

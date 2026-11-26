@@ -1,12 +1,3 @@
----
-article_id: af_93fbc37089b045961d5ea14a
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.BasedConnectedCover.existsUnique_deck_apply_basepoint_iff_range_eq
----
-
 # A deck transformation is determined by one lifted point
 
 Let `C` be a pointed path-connected cover of a path-connected, locally

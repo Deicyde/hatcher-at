@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/homology/computations-and-applications/degree/coordinate-reflection-degree.md"}], "object": [{"location": {"declaration": "Hatcher.Sphere.degree_reflection"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_71d7ceb0f3904f7453776fe2", "extensions": {"org.autoform": {"origin": "cited"}}}

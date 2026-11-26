@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: bridged
-article_id: af_3e17caef4f3669662a05114a
----
-
 # Sphere self-maps commute with the chain and coefficient lift
 
 For every continuous self-map of a positive-dimensional standard sphere, prove that the canonical sphere and coefficient comparison intertwines the actual map and its lifted map on chains and on homology. Retain the commuting map equations.
