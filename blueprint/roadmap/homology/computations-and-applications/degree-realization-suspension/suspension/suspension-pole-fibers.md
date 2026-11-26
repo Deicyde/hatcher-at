@@ -1,12 +1,3 @@
----
-article_id: af_be75466581d57f6e3c313714
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.sphere_suspension_pole_fibers
----
-
 # The suspension poles have singleton fibers
 
 For every n : ℕ and every continuous f : Sⁿ → Sⁿ, prove that Sf⁻¹({N}) = {N} and Sf⁻¹({S}) = {S}, where N and S are the existing north and south poles of Sⁿ⁺¹.

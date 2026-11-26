@@ -1,12 +1,3 @@
----
-article_id: af_e11b1e1dac0e10649ea63070
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.goodPairPointQuotientSequence_exact
----
-
 # The good-pair quotient exact sequence
 
 **Hatcher, Theorem 2.13 (printed page 114).** For a good pair `(X,A)`, define

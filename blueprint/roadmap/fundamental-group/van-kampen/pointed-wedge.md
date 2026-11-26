@@ -1,12 +1,3 @@
----
-article_id: af_a1c43352820c5831e110d751
-declaration: def
-origin: background
-statement: formalized
-proof: formalized
-lean: Hatcher.PointedWedge
----
-
 # The pointed wedge of a family of spaces
 
 Define the wedge of an arbitrary family of pointed spaces as the quotient of

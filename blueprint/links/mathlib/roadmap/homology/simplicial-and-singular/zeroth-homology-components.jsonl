@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/homology/simplicial-and-singular/zeroth-homology-components.md"}], "object": [{"location": {"declaration": "TopCat.singularHomology₀Iso", "module": "Mathlib.AlgebraicTopology.SingularHomology.HomologyZero"}}], "id": "af_66d5f24ab6fa333843941b48"}

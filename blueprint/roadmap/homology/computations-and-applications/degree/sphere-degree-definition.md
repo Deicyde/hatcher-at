@@ -1,12 +1,3 @@
----
-article_id: af_a3e5e85d8bde5ed4ffd0a743
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.integralSphereFundamentalClass_map
----
-
 # Degree is the multiplier of the ordered sphere class
 
 For `0 < n` and `f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n`, define

@@ -1,12 +1,3 @@
----
-article_id: af_e9e884c0b3be617ff7d221dc
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.hemisphereChartData
----
-
 # Stereographic models for hemispheres and the equator
 
 For `TopCat.sphere (n + 1)`, define the closed northern hemisphere, closed

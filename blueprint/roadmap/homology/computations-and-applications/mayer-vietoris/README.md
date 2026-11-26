@@ -1,7 +1,3 @@
----
-article_id: af_83c72696eec342f329b6802b
----
-
 # Mayer–Vietoris sequences
 
 Hatcher §2.2, printed pages 149–150. This milestone constructs the ordinary

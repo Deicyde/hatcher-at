@@ -1,12 +1,3 @@
----
-article_id: af_34760c1b3ece607058533faf
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Simplex.doubleSimplexFirstPair_homologyMap_isIso
----
-
 # The first simplex computes homology relative to the second
 
 Let `D_n` be the double-simplex space and let its second simplex be the

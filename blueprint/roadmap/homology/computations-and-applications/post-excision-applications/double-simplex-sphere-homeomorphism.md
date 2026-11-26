@@ -1,12 +1,3 @@
----
-article_id: af_4da2fc5b7cd04ae7b7ed5f40
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Simplex.doubleSimplexIsoSphere
----
-
 # The double simplex is a sphere
 
 Construct a homeomorphism

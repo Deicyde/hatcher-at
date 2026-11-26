@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/homology/simplicial-and-singular/point-homology.md"}], "object": [{"location": {"declaration": "Hatcher.Singular.point_homology"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_09312a15c3d8d96e43cf27d7", "extensions": {"org.autoform": {"origin": "cited"}}}

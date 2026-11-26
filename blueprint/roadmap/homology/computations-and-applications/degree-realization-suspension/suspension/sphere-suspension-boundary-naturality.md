@@ -1,12 +1,3 @@
----
-article_id: af_199be8e09b149f1f0bc4e775
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.sphere_suspension_boundary_naturality, Hatcher.Sphere.sphereConeGoodPair, Hatcher.Sphere.sphereSuspensionBoundaryIso, Hatcher.Sphere.sphere_suspension_boundary_iso_hom
----
-
 # The suspension boundary isomorphism intertwines the induced maps
 
 For every n : ℕ, construct the canonical integral isomorphism Δₙ : H̃ₙ₊₁(Sⁿ⁺¹) ≃ H̃ₙ(Sⁿ) obtained by the good-pair quotient comparison and the boundary map of the contractible cone-base pair. For every f prove the source diagram: Δₙ ∘ (Sf)∗ = f∗ ∘ Δₙ.

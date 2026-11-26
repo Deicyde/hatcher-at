@@ -1,12 +1,3 @@
----
-article_id: af_6e5aacb87c2f0cdae64ef743
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.circlePowerMap_positive_fiber
----
-
 # A positive circle power has exactly as many preimages as its exponent
 
 For k > 0 and every y ∈ S¹, construct an equivalence P_k⁻¹({y}) ≃ Fin k. In complex coordinates its points are the actual kth roots of e(y), so fiber finiteness is derived rather than assumed.

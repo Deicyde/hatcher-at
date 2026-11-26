@@ -1,12 +1,3 @@
----
-article_id: af_bb4143d76ff1dafda52aaa39
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.SubgroupCover
----
-
 # The covering space associated to a subgroup
 
 Let `X` be path-connected, locally path-connected, and semilocally

@@ -1,12 +1,3 @@
----
-article_id: af_1174b6b1a3e283fe5bfe011c
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Euclidean.localHomology
----
-
 # Local homology of positive-dimensional Euclidean space
 
 Let `d : ℕ`, let

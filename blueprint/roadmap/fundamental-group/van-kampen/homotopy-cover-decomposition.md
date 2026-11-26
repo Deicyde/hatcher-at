@@ -1,12 +1,3 @@
----
-article_id: af_ebce9802ffc8eff0bc9ddf69
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.exists_coverDecomposition_atMostThree
----
-
 # A homotopy admits a threefold-incidence cover decomposition
 
 Let `H` be an endpoint-fixed homotopy of paths, and let an arbitrary indexed

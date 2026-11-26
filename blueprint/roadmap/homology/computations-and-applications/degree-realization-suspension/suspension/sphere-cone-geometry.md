@@ -1,12 +1,3 @@
----
-article_id: af_94410cbcc0ca4ddd482ec0f6
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.sphere_cone_geometry, Hatcher.Sphere.sphereCone, Hatcher.Sphere.sphereConeBase, Hatcher.Sphere.sphereConePair, Hatcher.Sphere.sphereConeGoodPairData
----
-
 # The cone over a sphere forms a contractible good pair
 
 For every n : ℕ, construct the actual cone-base pair Pₙ = (CSⁿ,Sⁿ) and prove that it is a good pair with contractible ambient cone. Use the existing retained cone model, where the cylinder coordinate r has apex at 0 and retained base at 1; Hatcher's coordinate is t = 1−r.

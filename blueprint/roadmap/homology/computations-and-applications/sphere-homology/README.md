@@ -1,7 +1,3 @@
----
-article_id: af_dabd641d4db49f64a116b034
----
-
 # Mayer–Vietoris transport, sphere homology, and Brouwer
 
 Hatcher §2.1, printed pages 109–115, and §2.2, printed page 150. This

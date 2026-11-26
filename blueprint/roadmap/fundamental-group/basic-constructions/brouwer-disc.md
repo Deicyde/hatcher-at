@@ -1,12 +1,3 @@
----
-article_id: af_dc4c0168f0ede11ba75a2f9a
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Disc.exists_fixed_point
----
-
 # Brouwer's fixed point theorem for the disc
 
 **Hatcher, Theorem 1.9 (pages 31–32).** Every continuous `h : D² → D²` has a

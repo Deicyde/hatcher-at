@@ -1,12 +1,3 @@
----
-article_id: af_e9f8e873d37465155412edda
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.relativeHomologySigmaPairIso
----
-
 # Relative homology commutes with coproducts of arbitrary pairs
 
 Assume the coefficient category has exact coproducts of the size of `ι`, via

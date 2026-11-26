@@ -1,12 +1,3 @@
----
-article_id: af_fa4a1039c6e4767afd3acb10
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.finiteFiberPairMap_localClass
----
-
 # The finite-fiber pair map acts by the local degrees
 
 Use the canonical pair morphism

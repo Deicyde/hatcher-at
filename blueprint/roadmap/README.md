@@ -1,7 +1,3 @@
----
-article_id: af_018beb3e9d962f2092677b89
----
-
 # Algebraic Topology (Hatcher) roadmap
 
 Formalize selected results from Hatcher's *Algebraic Topology* in Lean 4 on

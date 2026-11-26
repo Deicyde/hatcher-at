@@ -1,12 +1,3 @@
----
-article_id: af_1a04a09d1dd81895c2a78411
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.AuxiliaryCellAttachment.isOpenCover_base_upper
----
-
 # Hatcher's binary cover of the strip enlargement
 
 Assume the cell-index type is nonempty. In the strip-enlarged attachment,

@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/basic-constructions/loop-in-open-cover.md"}], "object": [{"location": {"declaration": "Hatcher.loop_homotopic_prod_of_isOpenCover"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_52510d3a4c437271e3ebe8ba", "extensions": {"org.autoform": {"origin": "cited"}}}

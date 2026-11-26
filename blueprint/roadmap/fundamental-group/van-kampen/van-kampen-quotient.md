@@ -1,12 +1,3 @@
----
-article_id: af_9e137dd78707459e5193d14f
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.quotientEquivFundamentalGroup
----
-
 # Van Kampen's quotient isomorphism
 
 **Hatcher, Theorem 1.20 (page 43).** Under the full open-cover hypotheses, the

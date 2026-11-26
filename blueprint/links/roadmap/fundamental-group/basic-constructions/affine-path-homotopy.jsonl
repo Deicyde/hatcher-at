@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/basic-constructions/affine-path-homotopy.md"}], "object": [{"location": {"declaration": "Hatcher.affinePathHomotopy"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_4f40c7e33508d93baac75265", "extensions": {"org.autoform": {"origin": "cited"}}}

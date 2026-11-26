@@ -1,12 +1,3 @@
----
-article_id: af_8204b616ad8eafa934bae57a
-declaration: def
-origin: bridged
-lean: Hatcher.Relative.relativeChainComplexSigmaIso
-statement: formalized
-proof: formalized
----
-
 # Relative singular chains commute with topological coproducts
 
 Construct a chain-complex isomorphism from the categorical coproduct of the

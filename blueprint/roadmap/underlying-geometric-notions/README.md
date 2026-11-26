@@ -1,8 +1,3 @@
----
-article_id: af_405673b01dde9b3f6c535593
-not_ready: true
----
-
 # Some underlying geometric notions
 
 Hatcher's Chapter 0 (pages 1–20) fixes the geometric vocabulary the rest of the

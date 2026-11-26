@@ -1,12 +1,3 @@
----
-article_id: af_8c128342fc57668c60bffac3
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.fundamentalGroupEquivOfBinaryCoverRetraction
----
-
 # A binary cover with a contractible second piece
 
 Let two path-connected open sets cover `Y`. Suppose the second member is

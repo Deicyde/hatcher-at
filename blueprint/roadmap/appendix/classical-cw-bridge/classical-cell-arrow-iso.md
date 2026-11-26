@@ -1,12 +1,3 @@
----
-article_id: af_1e6f9ec346e3b7485e19d9a3
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.classicalCellArrowIso
----
-
 # Classical and standard cells have isomorphic attaching arrows
 
 Compare the sup-norm disk-boundary inclusion used by Mathlib's classical

@@ -1,12 +1,3 @@
----
-article_id: af_238d1dd83722c5a2266b57e6
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.BasedConnectedCover.classificationEquiv
----
-
 # Pointed connected covers are classified by subgroups
 
 **Hatcher, Theorem 1.38, based clause (page 67).** For a path-connected,

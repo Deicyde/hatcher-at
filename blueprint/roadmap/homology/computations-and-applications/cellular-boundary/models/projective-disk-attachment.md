@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: cited
-article_id: af_3b301297bef4cf3bd1ee04c8
----
-
 # A complex projective stage attaches its actual even-dimensional disk
 
 For n > 0, construct ℂPⁿ as the 2n-disk attachment to its actual coordinate copy of ℂPⁿ⁻¹. The attaching map sends a boundary vector to its complex line in ℂPⁿ⁻¹. Preserve the disk, boundary and coordinate-inclusion equations.

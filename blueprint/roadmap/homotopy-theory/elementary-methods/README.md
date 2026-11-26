@@ -1,8 +1,3 @@
----
-article_id: af_bc761dd26cd04ba27eed044c
-not_ready: true
----
-
 # Elementary methods of calculation
 
 Hatcher §4.2 (pages 360–392). Mapped, not yet decomposed.

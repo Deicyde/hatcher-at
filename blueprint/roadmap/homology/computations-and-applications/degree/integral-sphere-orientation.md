@@ -1,12 +1,3 @@
----
-article_id: af_ce0cbfdf3fed16c8fe605273
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.integralSphereHomologyIso
----
-
 # The ordered class orients ordinary sphere homology
 
 For `n : ℕ` with `0 < n`, construct the integral isomorphism

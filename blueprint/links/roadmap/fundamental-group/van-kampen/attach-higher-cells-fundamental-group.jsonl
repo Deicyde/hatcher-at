@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/van-kampen/attach-higher-cells-fundamental-group.md"}], "object": [{"location": {"declaration": "Hatcher.fundamentalGroupEquiv_of_attachCells_of_two_lt"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_150143235a6365f6fb31116a", "extensions": {"org.autoform": {"origin": "cited"}}}

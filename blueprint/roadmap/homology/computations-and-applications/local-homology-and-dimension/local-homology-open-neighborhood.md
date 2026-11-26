@@ -1,12 +1,3 @@
----
-article_id: af_64e2faf664f742dcc73fca0a
-declaration: theorem
-origin: cited
-lean: Hatcher.Relative.localHomologyOpenNeighborhoodMap_isIso
-statement: formalized
-proof: formalized
----
-
 # Local homology is unchanged on an open neighborhood
 
 For a space `X` and `x : X`, define the punctured topological pair

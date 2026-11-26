@@ -1,8 +1,3 @@
----
-article_id: af_7d24fbee14477069c270482f
-not_ready: true
----
-
 # Cup product
 
 Hatcher §3.2 (pages 206–229). Mapped, not yet decomposed.

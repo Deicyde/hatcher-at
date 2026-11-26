@@ -1,12 +1,3 @@
----
-article_id: af_a5d8f1242fb4422fcba20d43
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.degree_eq_zero_of_not_surjective
----
-
 # A nonsurjective sphere map has degree zero
 
 For `0 < n` and `f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n`, prove

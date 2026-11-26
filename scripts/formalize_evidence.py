@@ -23,6 +23,27 @@ def run(command: list[str], output: Path | None = None) -> None:
         raise SystemExit(result.returncode)
 
 
+def annotated_articles(blueprint: Path) -> dict[str, tuple[Path, list[str]]]:
+    """Each article's durable ID, with its page and its Lean names, as blueprint/links/ records them."""
+    articles: dict[str, tuple[Path, list[str]]] = {}
+    mathlib = blueprint / "links" / "mathlib"
+    for path in sorted((blueprint / "links").rglob("*.jsonl")):
+        for line in path.read_text(encoding="utf-8").splitlines():
+            entry = json.loads(line) if line.strip() else {}
+            identity = entry.get("id")
+            if not isinstance(identity, str):
+                continue
+            pages = {Path(os.path.normpath(path.parent / subject["uri"])) for subject in entry.get("subject", [])}
+            # The article's own annotation lists its Lean names in order; the Mathlib one, its Mathlib names.
+            names = [] if path.is_relative_to(mathlib) else [
+                item["location"]["declaration"] for item in entry.get("object", [])]
+            page, known = articles.get(identity, (None, []))
+            if len(pages) != 1 or (page is not None and {page} != pages):
+                raise ValueError(f"article ID {identity} names more than one page")
+            articles[identity] = (pages.pop(), known + names)
+    return articles
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--article-id", required=True)
@@ -47,32 +68,28 @@ def main() -> None:
     artifacts.mkdir(parents=True)
     blueprint = destination / "blueprint"
     shutil.copytree(root / "blueprint", blueprint)
+    autoform_ref = (root / ".github" / "autoform-ref").read_text().strip()
+    autoform = [
+        "uvx", "--from",
+        "git+https://github.com/facebookresearch/autoform-bot.git@" + autoform_ref,
+        "autoform",
+    ]
 
-    matches: list[Path] = []
-    for path in (blueprint / "roadmap").rglob("*.md"):
-        text = path.read_text(encoding="utf-8")
-        if not text.startswith("---\n"):
-            continue
-        end = text.find("\n---\n", 4)
-        if end < 0:
-            continue
-        if f"article_id: {args.article_id}" in text[4:end].splitlines():
-            matches.append(path)
-    if len(matches) != 1:
+    # Articles' facts, their IDs and Lean names among them, live in blueprint/links/; the projection's
+    # mappings are written there with the pinned CLI, as an agent would record them.
+    try:
+        articles = annotated_articles(blueprint)
+    except (KeyError, TypeError, ValueError) as error:
+        parser.error(f"cannot read blueprint/links/: {error}")
+    roadmap = blueprint / "roadmap"
+    if args.article_id not in articles or not articles[args.article_id][0].is_relative_to(roadmap):
         parser.error("article ID must identify exactly one roadmap article")
-    article = matches[0]
-    text = article.read_text(encoding="utf-8")
-    end = text.find("\n---\n", 4)
-    header = text[4:end].splitlines()
-    mappings = [line for line in header if line.startswith("lean:")]
-    expected_mapping = "lean: " + ", ".join(args.declaration)
-    if mappings and mappings != [expected_mapping]:
+    article, mapped = articles[args.article_id]
+    if mapped and mapped != args.declaration:
         parser.error("the article already maps a different Lean declaration")
-    added_mapping = not mappings
+    added_mapping = not mapped
     if added_mapping:
-        article.write_text(
-            text[:end] + "\n" + expected_mapping + text[end:], encoding="utf-8"
-        )
+        run(autoform + ["links", "set", str(blueprint), str(article), "lean=" + ", ".join(args.declaration)])
 
     source = root.joinpath(*args.module.split(".")).with_suffix(".lean")
     if not source.is_file() or source.is_symlink():
@@ -82,7 +99,7 @@ def main() -> None:
         "commit": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], text=True
         ).strip(),
-        "autoform_ref": (root / ".github" / "autoform-ref").read_text().strip(),
+        "autoform_ref": autoform_ref,
         "article_id": args.article_id,
         "article_path": article.relative_to(blueprint).as_posix(),
         "module": args.module,
@@ -121,23 +138,14 @@ def main() -> None:
                            for name in declarations)
                     or len(set(declarations)) != len(declarations)):
                 parser.error("invalid additional declarations")
-            matches = []
-            for path in (blueprint / "roadmap").rglob("*.md"):
-                text = path.read_text(encoding="utf-8")
-                end = text.find("\n---\n", 4) if text.startswith("---\n") else -1
-                if end >= 0 and f"article_id: {article_id}" in text[4:end].splitlines():
-                    matches.append(path)
-            if len(matches) != 1:
+            if article_id not in articles or not articles[article_id][0].is_relative_to(roadmap):
                 parser.error("additional article ID must identify exactly one article")
-            selected_article = matches[0]
-            text = selected_article.read_text(encoding="utf-8")
-            end = text.index("\n---\n", 4)
-            mapping = "lean: " + ", ".join(declarations)
-            old_mappings = [line for line in text[4:end].splitlines() if line.startswith("lean:")]
-            if old_mappings and old_mappings != [mapping]:
+            selected_article, old_mappings = articles[article_id]
+            if old_mappings and old_mappings != declarations:
                 parser.error("additional article already maps different declarations")
             if not old_mappings:
-                selected_article.write_text(text[:end] + "\n" + mapping + text[end:], encoding="utf-8")
+                run(autoform + ["links", "set", str(blueprint), str(selected_article),
+                                "lean=" + ", ".join(declarations)])
             selected_source = root.joinpath(*module.split(".")).with_suffix(".lean")
             if not selected_source.is_file() or selected_source.is_symlink():
                 parser.error("additional module must have a regular project source")
@@ -172,12 +180,6 @@ def main() -> None:
             + f"#lint only unusedArguments in {selected['module']}\n", encoding="utf-8")
         run(["lake", "env", "lean", str(selected_probe)],
             artifacts / (selected["article_id"] + "-axioms-and-lint.txt"))
-    autoform = [
-        "uvx", "--from",
-        "git+https://github.com/facebookresearch/autoform-bot.git@"
-        + manifest["autoform_ref"],
-        "autoform",
-    ]
     import_selections_path = root / "scripts" / "formalize_import_targets.json"
     if import_selections_path.exists():
         if not import_selections_path.is_file() or import_selections_path.is_symlink():

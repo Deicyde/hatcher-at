@@ -1,12 +1,3 @@
----
-article_id: af_63172729a78d73c830baa7d1
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.mappingCone
----
-
 # The mapping cone of a topological pair
 
 **Hatcher, §2.1 (page 125).** For a topological pair

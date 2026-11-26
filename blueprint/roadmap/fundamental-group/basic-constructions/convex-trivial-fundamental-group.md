@@ -1,12 +1,3 @@
----
-article_id: af_c30a886203db7414ef7c1a61
-declaration: theorem
-origin: bridged
-mathlib: true
-mathlib_declaration: Convex.contractibleSpace
-mathlib_file: Mathlib/Analysis/Convex/Contractible.lean
----
-
 # Convex sets have trivial fundamental group
 
 **Hatcher, Example 1.4 (page 27).** A nonempty convex subset of `ℝⁿ` has

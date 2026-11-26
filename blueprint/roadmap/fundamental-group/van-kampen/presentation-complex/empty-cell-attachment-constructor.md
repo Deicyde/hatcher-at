@@ -1,12 +1,3 @@
----
-article_id: af_d318cc4dc82968256f79aee5
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.CellAttachment.attachCellsId
----
-
 # The identity attaches an empty family of cells
 
 For every dimension and topological space, equip the identity map with a

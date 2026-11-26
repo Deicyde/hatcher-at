@@ -1,12 +1,3 @@
----
-article_id: af_802f39c4c289595489455819
-declaration: proposition
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.SubgroupCover.range_map_eq
----
-
 # The subgroup cover realizes the chosen subgroup
 
 **Hatcher, Proposition 1.36 (pages 66–67).** Let `X` be path-connected,

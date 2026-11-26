@@ -1,12 +1,3 @@
----
-article_id: af_aef97a906a5acd7cdb6eb6b0
-declaration: def
-origin: cited
-mathlib: true
-mathlib_declaration: AlgebraicTopology.singularHomologyFunctor
-mathlib_file: Mathlib/AlgebraicTopology/SingularHomology/Basic.lean
----
-
 # Singular homology
 
 For a coefficient object `R`, a space `X`, and `n : ℕ`, define `Hₙ(X; R)` as

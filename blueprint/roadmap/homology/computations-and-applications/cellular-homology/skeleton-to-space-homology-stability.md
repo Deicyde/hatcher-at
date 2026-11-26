@@ -1,12 +1,3 @@
----
-article_id: af_802fb71f8d9fa8e8806b6612
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.skeletonToSpaceHomologyStability
----
-
 # The skeleton inclusion preserves homology below its dimension
 
 **Hatcher, Lemma 2.34(c).** For every classical CW complex X, the actual

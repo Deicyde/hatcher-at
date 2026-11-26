@@ -1,12 +1,3 @@
----
-article_id: af_ef8d3aebf368209450a69077
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.spherePuncturedStrongDeformationRetract
----
-
 # A sphere strongly deformation retracts from punctured Euclidean space
 
 Let `E` be a nontrivial real normed vector space and let `r > 0`. Construct

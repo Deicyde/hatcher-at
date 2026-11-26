@@ -1,12 +1,3 @@
----
-article_id: af_6cab8eafd3aeafc53888d4dd
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.chainHomotopyOfPairHomotopy
----
-
 # A homotopy of pairs gives a relative chain homotopy
 
 For homotopic maps of topological pairs, descend the compatible singular-chain

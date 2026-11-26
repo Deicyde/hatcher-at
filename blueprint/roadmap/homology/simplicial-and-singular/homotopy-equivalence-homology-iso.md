@@ -1,12 +1,3 @@
----
-article_id: af_709463f21814230fca81dc9f
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Singular.homologyIsoOfHomotopyEquiv
----
-
 # A homotopy equivalence induces homology isomorphisms
 
 **Hatcher, Corollary 2.11 (page 111).** For topological spaces `X` and `Y`, a

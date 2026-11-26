@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/van-kampen/factorization-moves.md"}], "object": [{"location": {"declaration": "Hatcher.VanKampen.factorization_quotient_eq_of_move"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_9b54c2e1e18382f244cd1c57", "extensions": {"org.autoform": {"origin": "bridged"}}}

@@ -1,12 +1,3 @@
----
-article_id: af_7e708d886f021b9d74f144fc
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.UniversalCover.isCoveringMap_proj
----
-
 # The endpoint map is a covering
 
 Let `X` be path-connected, locally path-connected, and semilocally

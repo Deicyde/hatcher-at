@@ -1,12 +1,3 @@
----
-article_id: af_3d24367a7abad40e88f4616d
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.localFundamentalClass_map_eq_neighborhoodLocalDegree
----
-
 # Local degree on a chosen isolated neighborhood
 
 For `0 < n` and a `LocalDegreeNeighborhood N` of `x` over `y`, transport the

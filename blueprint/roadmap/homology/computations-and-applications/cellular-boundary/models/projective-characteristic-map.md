@@ -1,9 +1,3 @@
----
-declaration: def
-origin: cited
-article_id: af_b73b004e18862788524b24bd
----
-
 # Characteristic disks of complex projective cells
 
 For every n ∈ ℕ, construct the actual map from the closed real 2n-disk to ℂPⁿ given in complex coordinates by w ↦ [w,√(1−‖w‖²)]. It is surjective; its interior is the affine chart, and equal images mean equal points or boundary points related by a unit phase. Include the zero-dimensional disk.

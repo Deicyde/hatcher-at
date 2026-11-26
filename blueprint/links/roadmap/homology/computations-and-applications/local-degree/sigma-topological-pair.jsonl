@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/homology/computations-and-applications/local-degree/sigma-topological-pair.md"}], "object": [{"location": {"declaration": "Hatcher.Relative.sigmaPair"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_85e59358edc190186cfde9fb", "extensions": {"org.autoform": {"origin": "bridged"}}}

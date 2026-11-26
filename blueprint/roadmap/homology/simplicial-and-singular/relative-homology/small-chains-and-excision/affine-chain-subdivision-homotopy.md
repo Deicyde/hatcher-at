@@ -1,12 +1,3 @@
----
-article_id: af_79821bb097f7e681e401770f
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Excision.affineChainHomotopyIdSubdivision
----
-
 # Affine-chain subdivision is homotopic to the identity
 
 For a convex real space `Y`, universes `w`, `v`, and `u`, an ambient category

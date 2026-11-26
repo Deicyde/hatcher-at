@@ -1,12 +1,3 @@
----
-article_id: af_3397bfd09838597452912b09
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.regularNeighborhoodStrongDeformationRetract
----
-
 # A regular neighborhood strongly deformation retracts onto its subcomplex
 
 **Hatcher, Appendix Proposition A.5 (printed page 523).** For every

@@ -1,12 +1,3 @@
----
-article_id: af_53042df9d43d42059a2311d5
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.congr_homologyMap
----
-
 # Homotopic maps of pairs induce the same relative-homology map
 
 **Hatcher, Proposition 2.19 (page 118).** If two maps

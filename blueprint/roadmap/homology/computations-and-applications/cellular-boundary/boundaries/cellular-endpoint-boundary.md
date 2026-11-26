@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: cited
-article_id: af_f7426ef6c9ced3f037f8153b
----
-
 # A one-cell boundary is its oriented endpoint difference
 
 For every actual one-cell, the first cellular differential takes its fixed generator to terminal vertex generator minus initial vertex generator, with endpoint order constructed from the fixed disk class. The endpoints may coincide; empty one-cell families are included.

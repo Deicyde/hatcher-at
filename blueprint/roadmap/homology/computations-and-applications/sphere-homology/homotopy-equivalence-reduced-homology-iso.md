@@ -1,12 +1,3 @@
----
-article_id: af_5207ed172ee75a4870d0f7f2
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Reduced.homologyIsoOfHomotopyEquiv
----
-
 # A homotopy equivalence induces reduced-homology isomorphisms
 
 Let `C` have a category structure, coproducts, a preadditive structure, and

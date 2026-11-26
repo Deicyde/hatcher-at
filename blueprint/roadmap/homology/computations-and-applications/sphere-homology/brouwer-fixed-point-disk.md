@@ -1,12 +1,3 @@
----
-article_id: af_ab8bb311f815ae4ee1f81367
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Disc.exists_fixed_point_disk
----
-
 # Brouwer's fixed-point theorem for disks
 
 For every `n : ℕ` and every morphism

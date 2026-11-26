@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../roadmap/appendix/compact-subspace-finite-subcomplex.md"}], "object": [{"location": {"declaration": "Hatcher.compact_subset_finite_subcomplex"}, "role": "states"}], "status": "formalized", "kind": "proposition", "id": "af_7fbee0c3ad37e661e770ab4d", "extensions": {"org.autoform": {"origin": "cited"}}}

@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: bridged
-article_id: af_2ea97dd1cce3f34dc7e37734
----
-
 # Cellular boundaries follow the characteristic-map connecting square
 
 For every n ≥ 1 and actual n-cell α, the cellular differential of its fixed characteristic class is the actual relative projection after the attaching-map image of the ordinary boundary of its fixed disk class. Retain the characteristic-map naturality equation, including the one-dimensional case.

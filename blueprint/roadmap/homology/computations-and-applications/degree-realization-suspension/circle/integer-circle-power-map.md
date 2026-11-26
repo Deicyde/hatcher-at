@@ -1,11 +1,3 @@
----
-article_id: af_8b5834cecd5f26bb39171dae
-declaration: def
-origin: cited
-statement: formalized
-lean: Hatcher.Sphere.circlePowerMap
----
-
 # Integer powers define continuous self-maps of the circle
 
 Using the completed homeomorphism e between the standard S¹ and the complex unit circle, define P_d(x) = e⁻¹((e x)^d) for every integer d. Construct this actual continuous sphere self-map from the continuous integer power operation.

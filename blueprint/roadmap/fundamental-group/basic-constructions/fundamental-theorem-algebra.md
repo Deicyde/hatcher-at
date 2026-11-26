@@ -1,12 +1,3 @@
----
-article_id: af_1b551d825f8642fe8e8eec1a
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.exists_root_of_degree_pos
----
-
 # The fundamental theorem of algebra
 
 **Hatcher, Theorem 1.8 (page 31).** Every nonconstant polynomial with complex

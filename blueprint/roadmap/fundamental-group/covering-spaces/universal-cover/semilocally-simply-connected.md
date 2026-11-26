@@ -1,12 +1,3 @@
----
-article_id: af_96911f811174cc9ed741c8af
-declaration: class
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.SemilocallySimplyConnectedSpace
----
-
 # Semilocally simply-connected spaces
 
 Define `Hatcher.SemilocallySimplyConnectedSpace X` to mean that every

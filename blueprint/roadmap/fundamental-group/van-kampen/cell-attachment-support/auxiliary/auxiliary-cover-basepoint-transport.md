@@ -1,11 +1,3 @@
----
-article_id: af_0edc868d44849128f8728457
-declaration: def
-origin: bridged
-statement: formalized
-lean: Hatcher.VanKampen.AuxiliaryCellAttachment.basepointPath
----
-
 # The auxiliary cover basepoint transports to the original basepoint
 
 Let `z₀` be the common basepoint chosen on the spine of Hatcher's auxiliary

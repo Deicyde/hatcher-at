@@ -1,12 +1,3 @@
----
-article_id: af_c2fff585a63bdde52a391759
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.degree_eq_neg_one_pow_of_fixedPointFree
----
-
 # A fixed-point-free sphere map has antipodal degree
 
 Let `0 < n` and `f : TopCat.sphere.{0} n ⟶ TopCat.sphere.{0} n`. Under

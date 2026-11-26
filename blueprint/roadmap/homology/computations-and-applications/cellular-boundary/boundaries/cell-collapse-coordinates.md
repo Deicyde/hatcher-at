@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: bridged
-article_id: af_b4cea94cbaa08df88c78d099
----
-
 # The cell-sphere quotient reads its canonical cellular coordinate
 
 For a positive-dimensional cell β, prove that the homology map of its actual complement-collapse quotient, after the fixed target sphere-generator identification, is the β-coordinate in the existing cell basis. Retain the equation for every relative class, not only individual generators.

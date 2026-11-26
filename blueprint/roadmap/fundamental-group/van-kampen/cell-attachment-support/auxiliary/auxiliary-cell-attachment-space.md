@@ -1,11 +1,3 @@
----
-article_id: af_43db7201dc624aac2ff260ed
-declaration: def
-origin: bridged
-statement: formalized
-lean: Hatcher.VanKampen.AuxiliaryCellAttachment
----
-
 # The strip-enlarged cell-attachment space
 
 For attaching maps `f j : S j → X`, chosen boundary points `s₀ j`, a common

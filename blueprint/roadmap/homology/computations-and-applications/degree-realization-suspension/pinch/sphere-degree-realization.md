@@ -1,12 +1,3 @@
----
-article_id: af_c25fd700a7f3e9d9ce373eb6
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.sphere_degree_realization
----
-
 # Every integer is the degree of a sphere map
 
 **Hatcher, Example 2.31.** For every n > 0 and every d : ℤ, there exists a continuous f : Sⁿ → Sⁿ with degree(f) = d. The witness is the geometric pinch-and-fold map, not a map supplied with its degree as a hypothesis.

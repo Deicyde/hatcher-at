@@ -1,12 +1,3 @@
----
-article_id: af_37f237fed9ee4ab3e041de74
-declaration: instance
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.UniversalCover.pathConnectedSpace
----
-
 # The path-class cover is path-connected
 
 Let `X` be path-connected, locally path-connected, and semilocally

@@ -1,12 +1,3 @@
----
-article_id: af_51e96e7c13ef33c86536df2b
-declaration: lemma
-origin: cited
-mathlib: true
-mathlib_declaration: TopCat.Homotopy.congr_homologyMap_singularChainComplexFunctor
-mathlib_file: Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvariance.lean
----
-
 # Homotopic maps induce the same singular-homology map
 
 **Hatcher, Theorem 2.10 (pages 111–113).** If continuous maps `f,g : X → Y`

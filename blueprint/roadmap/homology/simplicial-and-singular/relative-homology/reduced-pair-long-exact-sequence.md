@@ -1,12 +1,3 @@
----
-article_id: af_df93848f39d91ecc5e5fab42
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.reducedPairSequence_exact
----
-
 # The reduced long exact sequence of a nonempty pair
 
 **Hatcher, §2.1 (page 118).** For a topological pair `(X,A)` with nonempty

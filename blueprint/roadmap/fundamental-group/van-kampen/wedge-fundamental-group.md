@@ -1,12 +1,3 @@
----
-article_id: af_93141dfac04e27231fe8a0ca
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.fundamentalGroupEquivPointedWedge
----
-
 # The fundamental group of a wedge
 
 **Hatcher, Example 1.21 (page 43).** For an arbitrary family of path-connected

@@ -1,12 +1,3 @@
----
-article_id: af_9661ec8367d7d815ef8fa43d
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.UniversalCover
----
-
 # The path-class universal-cover space
 
 For a path-connected, locally path-connected, semilocally simply-connected

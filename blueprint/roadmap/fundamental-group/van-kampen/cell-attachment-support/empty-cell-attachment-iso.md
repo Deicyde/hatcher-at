@@ -1,11 +1,3 @@
----
-article_id: af_9d7266d5983f276518daca8e
-declaration: def
-origin: bridged
-statement: formalized
-lean: Hatcher.VanKampen.CellAttachment.targetIsoOfIsEmpty
----
-
 # An attachment with no cells is an isomorphism
 
 For `c : HomotopicalAlgebra.AttachCells.{u}

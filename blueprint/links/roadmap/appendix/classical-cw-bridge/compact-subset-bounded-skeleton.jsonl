@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/appendix/classical-cw-bridge/compact-subset-bounded-skeleton.md"}], "object": [{"location": {"declaration": "Hatcher.compact_subset_skeleton"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_db2445f3fea351a02e084322", "extensions": {"org.autoform": {"origin": "bridged"}}}

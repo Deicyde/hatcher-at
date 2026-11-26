@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: cited
-article_id: af_933d5278867dcfc2ec143a47
----
-
 # Only finitely many attaching degrees can be nonzero
 
 For every n > 1 and actual n-cell α, the nonzero attaching-degree coefficients are contained in the finite family of (n−1)-cells met by the compact attaching image. Include arbitrary infinite cell families and constant attaching maps.

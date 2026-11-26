@@ -1,12 +1,3 @@
----
-article_id: af_f26b7fc2a604528b58cd5f39
-declaration: proposition
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Covering.existsUnique_liftHomotopy
----
-
 # Homotopies lift uniquely through a covering map
 
 **Hatcher, Proposition 1.30 (page 60).** Given a covering map `p : E → X`, a

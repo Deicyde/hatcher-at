@@ -1,12 +1,3 @@
----
-article_id: af_ea15ac26d6ba9e882549231f
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.deletedPairOpenNeighborhoodMap_isIso
----
-
 # Deleted-pair homology is local on an open neighborhood
 
 For `F : Set X`, write `Hatcher.Relative.deletedPair X F` for

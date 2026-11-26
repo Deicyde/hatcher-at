@@ -1,12 +1,3 @@
----
-article_id: af_db2445f3fea351a02e084322
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.compact_subset_skeleton
----
-
 # Compact subsets lie in a bounded skeleton
 
 Derive the finite-dimensional form of Hatcher's Appendix Proposition A.1:

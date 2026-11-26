@@ -1,7 +1,3 @@
----
-article_id: af_1591bc37435c2335cf4649b7
----
-
 # Basic constructions
 
 Hatcher §1.1 (pages 25–38). This is the project's first completed section.

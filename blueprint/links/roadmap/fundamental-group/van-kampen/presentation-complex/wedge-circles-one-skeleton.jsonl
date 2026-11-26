@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/fundamental-group/van-kampen/presentation-complex/wedge-circles-one-skeleton.md"}], "object": [{"location": {"declaration": "Hatcher.wedgeCirclesAttachCells"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_f504a5652653f883d78795e8", "extensions": {"org.autoform": {"origin": "bridged"}}}

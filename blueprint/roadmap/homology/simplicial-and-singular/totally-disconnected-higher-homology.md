@@ -1,12 +1,3 @@
----
-article_id: af_48578e29aa987a0a17839619
-declaration: lemma
-origin: bridged
-mathlib: true
-mathlib_declaration: AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace
-mathlib_file: Mathlib/AlgebraicTopology/SingularHomology/Basic.lean
----
-
 # Higher homology vanishes for totally disconnected spaces
 
 For a totally disconnected space `X` and `n ≠ 0`, the degree-`n` singular

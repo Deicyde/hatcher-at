@@ -1,12 +1,3 @@
----
-article_id: af_7744d41b3e4b105ba6e1575a
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.sphere_ball_collapse_degree_unit, Hatcher.Sphere.SphereBallPinchData.component_collapse_degree_eq_one_or_neg_one
----
-
 # Each ball-collapse map has degree plus or minus one
 
 For every component collapse cᵢ of the sphere pinch map, prove degree(cᵢ) = 1 or degree(cᵢ) = −1. Its sign is the signed integer of the existing ordered sphere orientation, not an unspecified choice of generator.

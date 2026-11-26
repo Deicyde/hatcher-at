@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/covering-spaces/lifting-criterion.md"}], "object": [{"location": {"declaration": "Hatcher.Covering.exists_lift_iff_range_le"}, "role": "states"}], "status": "formalized", "kind": "proposition", "id": "af_38b9433863f982a08be4b162", "extensions": {"org.autoform": {"origin": "cited"}}}

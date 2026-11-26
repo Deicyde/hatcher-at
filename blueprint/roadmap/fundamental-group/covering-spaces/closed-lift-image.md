@@ -1,12 +1,3 @@
----
-article_id: af_c98f72c75c3f49caac29c0e7
-declaration: proposition
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Covering.mem_range_map_iff_monodromy_fixed
----
-
 # The induced subgroup consists of loops with closed lifts
 
 **Hatcher, Proposition 1.31, second clause (page 61).** For a pointed covering

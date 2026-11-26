@@ -1,12 +1,3 @@
----
-article_id: af_bdf4b6a0596bcc5d303eeaf9
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.joined_iff_of_attachCells_of_one_lt
----
-
 # Higher-cell attachments preserve path components
 
 Attaching an arbitrary family of cells of one fixed dimension greater than one

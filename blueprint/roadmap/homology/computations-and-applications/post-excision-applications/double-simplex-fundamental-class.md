@@ -1,12 +1,3 @@
----
-article_id: af_0b7faad59136939d2ec0734b
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Simplex.doubleSimplexFundamentalClass_isIso
----
-
 # The double-simplex difference generates reduced homology
 
 Lift `doubleSimplexFundamentalCycle R n` to a named class morphism

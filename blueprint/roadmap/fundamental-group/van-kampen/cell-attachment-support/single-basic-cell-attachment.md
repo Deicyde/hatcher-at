@@ -1,12 +1,3 @@
----
-article_id: af_774c47bdf915006fbe45b28e
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.ConeAttachment.attachCells_basicCell
----
-
 # A single cone attachment is a standard cell attachment
 
 For a continuous attaching map from `TopCat.diskBoundary n` into `X`, the

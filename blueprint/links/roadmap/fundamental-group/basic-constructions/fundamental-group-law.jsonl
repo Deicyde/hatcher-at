@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/basic-constructions/fundamental-group-law.md"}], "object": [{"location": {"declaration": "Hatcher.PathConcatenationGroup.fromPath_trans"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_67ed4905c351d887224e90d5", "extensions": {"org.autoform": {"origin": "cited"}}}

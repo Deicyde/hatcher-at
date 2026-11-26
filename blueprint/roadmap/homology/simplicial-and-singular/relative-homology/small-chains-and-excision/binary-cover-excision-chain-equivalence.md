@@ -1,12 +1,3 @@
----
-article_id: af_40ecfa37c3493430859955e2
-declaration: theorem
-origin: bridged
-lean: Hatcher.Excision.coverChainMap_homotopyEquivalence
-statement: formalized
-proof: formalized
----
-
 # The binary-cover excision chain map is a homotopy equivalence
 
 Let `A` and `B` be subsets of `X` with

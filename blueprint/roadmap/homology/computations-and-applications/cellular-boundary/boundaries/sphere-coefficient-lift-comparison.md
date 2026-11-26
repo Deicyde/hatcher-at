@@ -1,9 +1,3 @@
----
-declaration: def
-origin: bridged
-article_id: af_243867ae2016bd66752e2680
----
-
 # The sphere chain comparison transports coefficients and the fixed class
 
 For every universe u and positive sphere dimension m, let Lᵤ be the canonical

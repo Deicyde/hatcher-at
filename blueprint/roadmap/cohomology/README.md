@@ -1,7 +1,3 @@
----
-article_id: af_30170e896184dd2e21455d4e
----
-
 # Cohomology
 
 Hatcher's Chapter 3 (pages 185–336). Mapped, not yet decomposed.

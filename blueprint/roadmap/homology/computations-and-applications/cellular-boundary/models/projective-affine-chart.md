@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: bridged
-article_id: af_4aff6d11ec386080a329a43a
----
-
 # The last coordinate gives the affine projective chart
 
 The complement of the coordinate copy of ℂPⁿ⁻¹ in ℂPⁿ is the open chart ℂⁿ given by u ↦ [u,1], with inverse dividing the first coordinates by the last. Include n = 0, when the lower coordinate space is empty and the chart is the singleton.

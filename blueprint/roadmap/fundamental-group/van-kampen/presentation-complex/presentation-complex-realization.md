@@ -1,12 +1,3 @@
----
-article_id: af_5d288dd83abaf2eee954ea08
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.exists_presentationComplex_fundamentalGroupEquiv
----
-
 # Presented groups have two-dimensional presentation complexes
 
 For a generator type `S` and relators `rels : Set (FreeGroup S)`, construct

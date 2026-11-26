@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/fundamental-group/covering-spaces/unique-lifting.md"}], "object": [{"location": {"declaration": "IsCoveringMap.eq_of_comp_eq", "module": "Mathlib.Topology.Covering.Basic"}}], "id": "af_ee2a8e41f4d52a391953eb89"}

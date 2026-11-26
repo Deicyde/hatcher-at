@@ -1,12 +1,3 @@
----
-article_id: af_6d85bf7f4fb1bcb124a18cee
-declaration: lemma
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Covering.locPathConnectedSpace_total
----
-
 # Local path-connectedness ascends along a covering
 
 If `p : E → X` is a covering map and `X` is locally path-connected, then `E`

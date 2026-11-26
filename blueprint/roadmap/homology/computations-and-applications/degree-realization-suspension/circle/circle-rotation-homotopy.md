@@ -1,12 +1,3 @@
----
-article_id: af_c8a7d2f324ee8bdf78624605
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.circleRotation_homotopic_identity_and_degree
----
-
 # Every circle rotation is homotopic to the identity
 
 For every r on the complex unit circle, let R_r be the transported rotation z ↦ r z of S¹. Construct a homotopy from the identity to R_r and deduce degree(R_r) = 1.

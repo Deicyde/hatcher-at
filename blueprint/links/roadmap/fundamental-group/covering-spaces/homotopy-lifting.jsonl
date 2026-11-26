@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/covering-spaces/homotopy-lifting.md"}], "object": [{"location": {"declaration": "Hatcher.Covering.existsUnique_liftHomotopy"}, "role": "states"}], "status": "formalized", "kind": "proposition", "id": "af_f26b7fc2a604528b58cd5f39", "extensions": {"org.autoform": {"origin": "cited"}}}

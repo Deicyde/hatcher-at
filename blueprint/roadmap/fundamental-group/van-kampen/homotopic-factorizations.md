@@ -1,12 +1,3 @@
----
-article_id: af_bb19d99fce28cd9e2c2961bb
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.factorization_quotient_eq_of_homotopic
----
-
 # Homotopic factorizations have the same quotient class
 
 Let an arbitrary indexed family of open subsets cover `X`, contain a shared

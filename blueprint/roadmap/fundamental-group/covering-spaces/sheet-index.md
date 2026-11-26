@@ -1,12 +1,3 @@
----
-article_id: af_19db673677b8848bafffc26a
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Covering.fiberEquivQuotientRange
----
-
 # Sheets are cosets of the induced subgroup
 
 **Hatcher, Proposition 1.32 (page 61).** For a pointed covering with

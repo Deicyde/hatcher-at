@@ -1,12 +1,3 @@
----
-article_id: af_d047fabeff7641326468fef6
-declaration: theorem
-origin: background
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.homologyMap_isIso_of_components
----
-
 # Componentwise isomorphisms imply a relative isomorphism
 
 Let `f : P ⟶ Q` be a morphism of topological pairs. If its ambient and

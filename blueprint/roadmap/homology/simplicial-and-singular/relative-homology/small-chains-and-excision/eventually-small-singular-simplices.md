@@ -1,12 +1,3 @@
----
-article_id: af_8e7c6263a4a02cbcbde0c94e
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Excision.exists_iteratedSubdivision_mem_smallSubcomplex
----
-
 # Iterated subdivision eventually makes every singular simplex small
 
 Let `U : ι → Set X` be a family whose interiors cover `X`. Define the

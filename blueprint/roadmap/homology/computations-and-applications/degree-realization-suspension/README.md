@@ -1,7 +1,3 @@
----
-article_id: af_93e786036c72be15e60c645d
----
-
 # Prescribed degrees and suspension
 
 Hatcher §2.2, printed pages 136–137, continues the completed local-degree

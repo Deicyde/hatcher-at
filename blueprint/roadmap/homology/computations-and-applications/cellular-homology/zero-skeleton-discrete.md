@@ -1,12 +1,3 @@
----
-article_id: af_d7de7378b694809a2a726f47
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.zeroSkeletonHomeomorphCells, Hatcher.ClassicalCW.zeroSkeletonHomeomorphCells_apply
----
-
 # The zero skeleton is the discrete space of its cells
 
 For every classical CW complex X, construct a homeomorphism from its actual

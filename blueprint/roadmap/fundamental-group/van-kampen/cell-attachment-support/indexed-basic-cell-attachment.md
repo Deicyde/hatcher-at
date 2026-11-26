@@ -1,12 +1,3 @@
----
-article_id: af_a19e022e940644366ba5f04a
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.IndexedConeAttachment.attachCells_basicCell
----
-
 # An indexed cone attachment is a standard cell attachment
 
 Fix a dimension `n`. For a family of continuous maps from

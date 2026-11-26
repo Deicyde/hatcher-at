@@ -1,12 +1,3 @@
----
-article_id: af_28bc6aa1a0e500efc3633ca9
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.fundamentalGroupMap_eq_basepointChange_comp
----
-
 # Homotopic maps differ by basepoint change
 
 **Hatcher, Lemma 1.19 (page 37).** Let `H` be a homotopy from `f : X → Y`

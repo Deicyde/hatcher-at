@@ -1,7 +1,3 @@
----
-article_id: af_a481e53a2c2bb373616a42cc
----
-
 # Shared local-degree comparisons
 
 These three comparisons reuse the completed public local degree and finite-fiber formula. Germ equality and puncture-preserving homotopy are different operations; the singleton specialization serves both collapse maps and suspension poles.

@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/homology/simplicial-and-singular/singular-homology-homotopy-invariance.md"}], "object": [{"location": {"declaration": "TopCat.Homotopy.congr_homologyMap_singularChainComplexFunctor", "module": "Mathlib.AlgebraicTopology.SingularHomology.HomotopyInvariance"}}], "id": "af_51e96e7c13ef33c86536df2b"}

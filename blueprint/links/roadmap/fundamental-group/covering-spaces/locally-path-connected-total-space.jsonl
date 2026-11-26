@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/covering-spaces/locally-path-connected-total-space.md"}], "object": [{"location": {"declaration": "Hatcher.Covering.locPathConnectedSpace_total"}, "role": "states"}], "status": "formalized", "kind": "lemma", "id": "af_6d85bf7f4fb1bcb124a18cee", "extensions": {"org.autoform": {"origin": "cited"}}}

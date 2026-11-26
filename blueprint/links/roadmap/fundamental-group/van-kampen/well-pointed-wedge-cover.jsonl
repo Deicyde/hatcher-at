@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/van-kampen/well-pointed-wedge-cover.md"}], "object": [{"location": {"declaration": "Hatcher.PointedWedge.exists_vanKampenCover"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_a65c509f85687421ec4a24b3", "extensions": {"org.autoform": {"origin": "bridged"}}}

@@ -1,12 +1,3 @@
----
-article_id: af_c25aace6019fc7573293d3ca
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.degree_eq_one_or_neg_one_of_homotopyEquiv
----
-
 # The formal properties of degree
 
 Prove that sphere degree sends the identity to `1`, is multiplicative under

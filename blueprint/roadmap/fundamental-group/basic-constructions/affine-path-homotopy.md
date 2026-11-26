@@ -1,12 +1,3 @@
----
-article_id: af_4f40c7e33508d93baac75265
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.affinePathHomotopy
----
-
 # Straight-line homotopy between paths
 
 **Hatcher, Example 1.1 (page 25).** Two paths in `ℝⁿ` with the same endpoints

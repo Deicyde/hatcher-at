@@ -1,7 +1,3 @@
----
-article_id: af_4ad90cefabf555feada62a5d
----
-
 # Classical CW bridge support
 
 Mathlib has two CW-complex APIs: characteristic maps and skeleta in the

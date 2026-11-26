@@ -1,8 +1,3 @@
----
-article_id: af_4534c3c50fdc25faee87c0cc
-not_ready: true
----
-
 # Homotopy groups
 
 Hatcher §4.1 (pages 339–359). Mapped, not yet decomposed.

@@ -1,12 +1,3 @@
----
-article_id: af_1d16b68f4d8e27f80da30d75
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.sphereActionDegreeHom
----
-
 # Degree gives a character of a sphere action
 
 For a group `G`, define

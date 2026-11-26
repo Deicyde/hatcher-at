@@ -1,12 +1,3 @@
----
-article_id: af_c8461d2db3fb08c9bd7f4e52
-declaration: corollary
-origin: cited
-lean: Hatcher.PointedWedge.reducedHomologyCoproductMap_isIso
-statement: formalized
-proof: formalized
----
-
 # Reduced homology of a wedge is the direct sum of the summands
 
 **Hatcher, Corollary 2.25 (printed page 126).** For a family of pointed

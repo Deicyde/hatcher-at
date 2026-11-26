@@ -1,7 +1,3 @@
----
-article_id: af_8141568e0229bd943d8f5811
----
-
 # Hatcher's auxiliary cell-attachment cover
 
 Hatcher proves Proposition 1.26 by enlarging an indexed cell attachment with a

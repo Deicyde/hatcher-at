@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/van-kampen/cover-group-presentation.md"}], "object": [{"location": {"declaration": "Hatcher.VanKampen.relationSubgroup"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_fbc5f125d607f701cf8ed8a1", "extensions": {"org.autoform": {"origin": "bridged"}}}

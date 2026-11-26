@@ -1,12 +1,3 @@
----
-article_id: af_6dee64aae05fa95dd6fbcd83
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.fundamentalGroupMap_injective_of_retraction
----
-
 # Retractions and deformation retracts on the fundamental group
 
 **Hatcher, Proposition 1.17 (page 36).** If a space `X` retracts onto `A`,

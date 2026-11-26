@@ -1,12 +1,3 @@
----
-article_id: af_f479ae58dad58fcf6864ebc2
-declaration: theorem
-origin: cited
-lean: Hatcher.MayerVietoris.augmentedChainComplexShortComplex_shortExact
-statement: formalized
-proof: formalized
----
-
 # Augmented binary-cover chains form a short exact sequence
 
 For arbitrary subsets `A B : Set X`, augment the binary-cover chain short

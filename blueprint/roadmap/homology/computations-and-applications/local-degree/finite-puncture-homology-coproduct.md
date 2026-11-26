@@ -1,12 +1,3 @@
----
-article_id: af_11fc9a48da227190dd7e1eeb
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.finitePunctureHomologyIso
----
-
 # Finite-puncture homology is the coproduct of the local groups
 
 Compose the relative-homology sigma-pair isomorphism with the homology

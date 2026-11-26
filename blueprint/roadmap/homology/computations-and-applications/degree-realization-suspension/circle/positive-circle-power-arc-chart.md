@@ -1,12 +1,3 @@
----
-article_id: af_bf71d5e0974f47deb6980564
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.circlePowerMap_positive_arcChart
----
-
 # Positive circle powers stretch local angular charts
 
 For k > 0 and x ∈ S¹, construct open arc neighborhoods of x and P_k(x) on which P_k is a homeomorphism. In centered complex angular coordinates x exp(i t), the map is x^k exp(i k t).

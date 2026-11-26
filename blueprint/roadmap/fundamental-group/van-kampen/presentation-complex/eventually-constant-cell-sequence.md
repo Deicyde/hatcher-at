@@ -1,12 +1,3 @@
----
-article_id: af_a3d30c4dc82968256f79aee5
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.CellAttachment.cwComplexOfEventuallyConstantSequence
----
-
 # Eventually constant cell sequences form abstract CW complexes
 
 Package a natural-number sequence of standard cell attachments as a

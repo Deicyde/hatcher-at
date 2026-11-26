@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/van-kampen/homotopy-cover-decomposition.md"}], "object": [{"location": {"declaration": "Hatcher.VanKampen.exists_coverDecomposition_atMostThree"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_ebce9802ffc8eff0bc9ddf69", "extensions": {"org.autoform": {"origin": "bridged"}}}

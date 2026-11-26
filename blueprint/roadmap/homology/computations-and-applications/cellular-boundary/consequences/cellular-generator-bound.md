@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: cited
-article_id: af_90485960c79bed6640238b7f
----
-
 # Cell counts bound the number of homology generators
 
 For every classical CW complex X and n,k ∈ ℕ, if X has exactly k n-cells, Hₙ(X;ℤ) has a generating family of at most k elements. No other cell dimension is required to be finite, and no freeness conclusion for Hₙ is asserted.

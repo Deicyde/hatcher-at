@@ -1,12 +1,3 @@
----
-article_id: af_ee2a8e41f4d52a391953eb89
-declaration: theorem
-origin: cited
-mathlib: true
-mathlib_declaration: IsCoveringMap.eq_of_comp_eq
-mathlib_file: Mathlib/Topology/Covering/Basic.lean
----
-
 # A lift is determined by one point
 
 **Hatcher, Proposition 1.34 (page 62).** Two continuous lifts from a connected

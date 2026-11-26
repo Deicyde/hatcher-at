@@ -1,12 +1,3 @@
----
-article_id: af_5040a99f20e27330d5bb75a9
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.coverMap_surjective
----
-
 # The van Kampen cover map is surjective
 
 **Hatcher, Theorem 1.20, first clause (page 43).** Let `X` be the union of an

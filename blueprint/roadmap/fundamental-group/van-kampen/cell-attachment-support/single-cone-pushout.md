@@ -1,12 +1,3 @@
----
-article_id: af_4b332f0605993173d8ce0b94
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.ConeAttachment.isPushout_coneAttachment
----
-
 # A single cone attachment is a topological pushout
 
 For a continuous map `f : S → X`, the explicit single-cone attachment is the

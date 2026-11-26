@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: bridged
-article_id: af_9bda8aeb7e132e986e52219a
----
-
 # The fixed disk class has a generating ordinary sphere boundary
 
 For n > 1, the actual ordinary pair connecting map sends the fixed relative fundamental class of the standard n-disk to a generator of Hₙ₋₁(∂Dⁿ;ℤ) in the chosen integral model. Preserve the current relative disk class.

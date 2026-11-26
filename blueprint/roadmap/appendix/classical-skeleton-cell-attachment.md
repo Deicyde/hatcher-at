@@ -1,12 +1,3 @@
----
-article_id: af_273a5ce6a092b8f64f470004
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.skeletonLTInclusion_attachCells
----
-
 # Classical skeleton inclusions are abstract cell attachments
 
 For a classical Mathlib CW complex, package the inclusion from one strict

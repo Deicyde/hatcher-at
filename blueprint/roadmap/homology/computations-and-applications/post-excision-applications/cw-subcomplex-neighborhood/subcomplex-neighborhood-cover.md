@@ -1,12 +1,3 @@
----
-article_id: af_6980b13216f55b4875c16e28
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.subcomplexNeighborhoodCover
----
-
 # Subcomplex decompositions admit compatible neighborhoods
 
 Let `A` and `B` be subcomplexes whose carriers cover a classical CW complex

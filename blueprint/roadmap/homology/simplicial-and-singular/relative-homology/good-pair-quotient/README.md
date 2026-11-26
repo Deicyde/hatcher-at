@@ -1,7 +1,3 @@
----
-article_id: af_9edccdcfa003ba902f7edf2b
----
-
 # Good pairs and quotient exact sequences
 
 Hatcher §2.1, Theorem 2.13 and Proposition 2.22 (printed pages 114,

@@ -1,11 +1,3 @@
----
-article_id: af_603e02ac39cec77ac40e768f
-declaration: def
-origin: cited
-statement: formalized
-lean: Hatcher.fundamentalGroup_quotient_of_attachTwoCells
----
-
 # Attaching 2-cells adds the attaching relations
 
 **Hatcher, Proposition 1.26(a) (page 50).** If `Y` is obtained from a

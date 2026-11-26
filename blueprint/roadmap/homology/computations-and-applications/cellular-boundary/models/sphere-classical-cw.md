@@ -1,9 +1,3 @@
----
-declaration: def
-origin: cited
-article_id: af_eeec1da26a4ec5354a3b04b8
----
-
 # The standard sphere has its minimal classical cell structure
 
 For every n > 0, construct the finite classical CW structure on the actual standard Sⁿ with one zero-cell at its fixed point and one n-cell. Its characteristic map is the actual disk-boundary collapse; preserve its interior and boundary equations.

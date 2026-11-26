@@ -1,12 +1,3 @@
----
-article_id: af_23c4db77f1f2f28686db47cb
-declaration: def
-origin: background
-statement: formalized
-proof: formalized
-lean: Hatcher.Topology.sigmaSubtypeHomeomorphUnion
----
-
 # A disjoint open family is homeomorphic to its sigma type
 
 Let `U : ι → Set X` be pairwise disjoint open subsets. Construct the canonical

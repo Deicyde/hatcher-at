@@ -1,12 +1,3 @@
----
-article_id: af_ca7400a4baee60c2a4693910
-declaration: instance
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.GoodPairData.neighborhoodPairToPointQuotientNeighborhoodPair_homologyMap_isIso
----
-
 # The neighborhood quotient map preserves relative homology
 
 Prove that the canonical map

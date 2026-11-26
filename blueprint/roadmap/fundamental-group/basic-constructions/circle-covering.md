@@ -1,12 +1,3 @@
----
-article_id: af_88db0f1093e08d3ab00257ce
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Circle.isCoveringMap_expMap
----
-
 # The real line covers the circle
 
 Hatcher's proof of Theorem 1.7 runs along `p : ℝ → S¹`,

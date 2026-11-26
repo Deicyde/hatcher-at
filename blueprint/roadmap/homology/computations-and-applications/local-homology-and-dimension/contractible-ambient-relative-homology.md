@@ -1,11 +1,3 @@
----
-article_id: af_eb5fb984d257557c4e2ad751
-declaration: def
-origin: bridged
-statement: formalized
-lean: Hatcher.Relative.contractibleAmbientRelativeHomologyIso
----
-
 # Relative homology in a contractible ambient space
 
 Let `P : TopPair` have nonempty subspace and contractible ambient space. For

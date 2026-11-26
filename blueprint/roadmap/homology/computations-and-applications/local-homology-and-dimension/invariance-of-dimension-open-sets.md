@@ -1,12 +1,3 @@
----
-article_id: af_95e4bb7e36db9514602e747b
-declaration: theorem
-origin: cited
-lean: Hatcher.Euclidean.invarianceOfDimension_open
-statement: formalized
-proof: formalized
----
-
 # Homeomorphic nonempty Euclidean open sets have equal dimension
 
 **Hatcher, Theorem 2.26 (printed page 126).** Let

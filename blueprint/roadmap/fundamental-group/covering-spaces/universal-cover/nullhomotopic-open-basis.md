@@ -1,12 +1,3 @@
----
-article_id: af_03778eab6bda848bf3919cc7
-declaration: lemma
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.isTopologicalBasis_nullhomotopicOpens
----
-
 # Small nullhomotopy neighborhoods form a basis
 
 For a locally path-connected, semilocally simply-connected space `X`, the

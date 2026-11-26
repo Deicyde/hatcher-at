@@ -1,11 +1,3 @@
----
-article_id: af_71b0371444cb6512f02a8169
-declaration: structure
-origin: background
-statement: formalized
-lean: Hatcher.StrongDeformationRetract
----
-
 # Strong deformation retracts
 
 Package an inclusion `i : C(A,Y)`, a retraction `r : C(Y,A)`, the identity

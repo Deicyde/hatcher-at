@@ -1,12 +1,3 @@
----
-article_id: af_8aa019244d3ae482b8cc2020
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Disc.not_exists_retraction
----
-
 # The circle is not a retract of the disc
 
 There is no continuous `r : D² → S¹` restricting to the identity on `S¹`.

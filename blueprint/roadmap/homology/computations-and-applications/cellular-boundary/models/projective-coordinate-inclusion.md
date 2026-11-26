@@ -1,9 +1,3 @@
----
-declaration: def
-origin: bridged
-article_id: af_43ce41642bffa46e284cfb61
----
-
 # Coordinate inclusions of complex projective spaces
 
 For every n ∈ ℕ, construct the actual closed embedding ℂPⁿ → ℂPⁿ⁺¹ taking [w] to [w,0]. Its image is exactly the lines whose last coordinate is zero, with the representative equation retained.

@@ -1,12 +1,3 @@
----
-article_id: af_a5ded7ecaa7b856ace06f12b
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.finiteStageHomologyStability
----
-
 # Higher finite skeleta preserve low-degree homology
 
 For every n ≤ m, the actual inclusion Xⁿ → Xᵐ of a classical CW complex

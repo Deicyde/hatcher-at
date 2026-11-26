@@ -1,11 +1,3 @@
----
-article_id: af_7b75fc9548f3d4af72397bf9
-declaration: def
-origin: bridged
-statement: formalized
-lean: Hatcher.Relative.compactComplementQuotientOnePointHomeomorph, Hatcher.Relative.compactComplementQuotientOnePointHomeomorph_apply_point, Hatcher.Relative.compactComplementQuotientOnePointHomeomorph_apply_projection
----
-
 # Collapsing a compact complement gives a one-point compactification
 
 For a compact Hausdorff space X and an open subspace V with nonempty complement, construct a homeomorphism X/(X−V) ≃ OnePoint(V). It sends the collapsed complement to infinity and identifies the actual quotient projection on V with the canonical inclusion into the one-point compactification.

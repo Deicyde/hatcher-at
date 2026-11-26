@@ -1,12 +1,3 @@
----
-article_id: af_6423c35a3510db89ce80b6a0
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.pairConnecting_naturality
----
-
 # The pair long exact sequence is natural
 
 **Hatcher, §2.1 (page 127).** A map of topological pairs induces a morphism

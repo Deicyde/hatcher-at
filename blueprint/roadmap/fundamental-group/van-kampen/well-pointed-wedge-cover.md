@@ -1,12 +1,3 @@
----
-article_id: af_a65c509f85687421ec4a24b3
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.PointedWedge.exists_vanKampenCover
----
-
 # The standard cover of a well-pointed wedge
 
 Define `Hatcher.WellPointedAt x₀` to mean that `x₀` lies in an open subset

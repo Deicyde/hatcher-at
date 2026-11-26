@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: cited
-article_id: af_185eb9feac271aef928d8e5c
----
-
 # The cellular boundary formula
 
 For every classical CW complex and n > 1, the actual cellular boundary of each n-cell generator is the finite sum of its constructed attaching-map degrees times the existing (n−1)-cell generators. The target cell sets may be infinite; an empty target gives the empty sum.

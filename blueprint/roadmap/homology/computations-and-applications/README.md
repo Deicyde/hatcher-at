@@ -1,7 +1,3 @@
----
-article_id: af_3a2b37424915dda0dbd5d97b
----
-
 # Computations and applications
 
 Hatcher §2.2 (pages 134–159), together with the selected sphere applications

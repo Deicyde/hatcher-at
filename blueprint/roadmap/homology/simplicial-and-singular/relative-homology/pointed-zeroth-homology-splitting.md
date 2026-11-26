@@ -1,11 +1,3 @@
----
-article_id: af_3c5607bf6881ebacd23e2767
-declaration: def
-origin: cited
-lean: Hatcher.Reduced.homologyZeroIso
-statement: formalized
----
-
 # Zeroth homology splits into reduced homology and the coefficient object
 
 **Hatcher, §2.1 (page 110).** For a space `X` with a chosen point and

@@ -1,9 +1,3 @@
----
-declaration: def
-origin: bridged
-article_id: af_c527f881a9eb90a3fe1f8fdd
----
-
 # The fixed one-disk class orders its two endpoints
 
 Construct an explicit ordering of the two actual endpoints of the standard one-disk so that its ordinary connecting map takes the current relative disk class to terminal point class minus initial point class in ordinary H₀ of the boundary. Preserve the fixed disk class.

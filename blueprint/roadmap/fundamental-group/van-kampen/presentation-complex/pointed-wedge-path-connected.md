@@ -1,12 +1,3 @@
----
-article_id: af_566c2d0d935658850d39e13f
-declaration: instance
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.PointedWedge.instPathConnectedSpace
----
-
 # Pointed wedges of path-connected spaces are path-connected
 
 For a family of path-connected spaces, equip `Hatcher.PointedWedge` with a

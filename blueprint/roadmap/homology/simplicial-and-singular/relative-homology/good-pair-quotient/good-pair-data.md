@@ -1,11 +1,3 @@
----
-article_id: af_ad99652fe9860290c388915f
-declaration: structure
-origin: cited
-statement: formalized
-lean: Hatcher.Relative.GoodPairData
----
-
 # Good pairs and neighborhood deformation retracts
 
 For `P : TopPair`, define `Hatcher.Relative.GoodPairData P` to contain a

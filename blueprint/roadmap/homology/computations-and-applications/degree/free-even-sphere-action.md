@@ -1,12 +1,3 @@
----
-article_id: af_abbd1071b7feae6c88eb97da
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.exists_freeSphereAction_iff_mulEquiv_zmodTwo
----
-
 # Only the antipodal group acts freely on an even sphere
 
 Let `G` be a nontrivial group, `0 < n`, and `Even n`. Prove Hatcher's

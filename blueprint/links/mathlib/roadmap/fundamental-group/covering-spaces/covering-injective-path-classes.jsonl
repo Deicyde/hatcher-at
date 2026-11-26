@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/fundamental-group/covering-spaces/covering-injective-path-classes.md"}], "object": [{"location": {"declaration": "IsCoveringMap.injective_path_homotopic_map", "module": "Mathlib.Topology.Homotopy.Lifting"}}], "id": "af_cf7c80b8e186853730545999"}

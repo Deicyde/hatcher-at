@@ -1,12 +1,3 @@
----
-article_id: af_0ec130d0961b57b7cd05f3c9
-declaration: def
-origin: bridged
-lean: Hatcher.Relative.relativeHomologySigmaIso
-statement: formalized
-proof: formalized
----
-
 # Relative homology commutes with exact coproducts
 
 Assume the coefficient category has exact coproducts of the size of the index

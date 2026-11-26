@@ -1,12 +1,3 @@
----
-article_id: af_07101a56629e9ad3a0c03550
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.positiveSkeletonRelativeHomology, Hatcher.ClassicalCW.positiveStandardDiskFundamentalClass, Hatcher.ClassicalCW.positiveSkeletonCellFundamentalClass
----
-
 # Positive-dimensional skeletal pairs have the cell basis
 
 For every n > 0 and classical CW complex X, Hₖ(Xⁿ,Xⁿ⁻¹;ℤ) vanishes when

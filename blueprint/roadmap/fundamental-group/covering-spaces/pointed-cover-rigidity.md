@@ -1,12 +1,3 @@
----
-article_id: af_748dca8af0bc5f4091a3db8f
-declaration: proposition
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.BasedConnectedCover.nonempty_iso_iff_range_eq
----
-
 # Equal image subgroups characterize pointed cover isomorphism
 
 **Hatcher, Proposition 1.37 (page 67).** Let `X` be path-connected and locally

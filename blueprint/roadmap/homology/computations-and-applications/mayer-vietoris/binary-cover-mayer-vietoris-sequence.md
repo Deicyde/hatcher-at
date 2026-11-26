@@ -1,12 +1,3 @@
----
-article_id: af_e0f7b901ba3a7f5ceb5ea0d6
-declaration: theorem
-origin: cited
-lean: Hatcher.MayerVietoris.sequence_exact
-statement: formalized
-proof: formalized
----
-
 # The binary-cover Mayer–Vietoris sequence
 
 Let `A B : Set X` satisfy `Hatcher.Excision.CoverCondition A B`. For every

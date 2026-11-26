@@ -1,12 +1,3 @@
----
-article_id: af_48c015e1354062483f49ed29
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.degree_antipodal
----
-
 # The antipodal map has degree determined by dimension
 
 Factor the antipodal homeomorphism of `Sⁿ` into the `n+1` coordinate

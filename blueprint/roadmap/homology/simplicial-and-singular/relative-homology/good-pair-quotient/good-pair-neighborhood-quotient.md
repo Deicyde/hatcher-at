@@ -1,12 +1,3 @@
----
-article_id: af_bb3f77cd307019c6adcf877c
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.GoodPairData.pointQuotientNeighborhoodProjection_isQuotientMap
----
-
 # Restricting the quotient to a good-pair neighborhood
 
 For `h : Hatcher.Relative.GoodPairData P`, let `qV` be the image of its chosen

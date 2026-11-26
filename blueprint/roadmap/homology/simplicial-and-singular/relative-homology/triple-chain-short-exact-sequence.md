@@ -1,12 +1,3 @@
----
-article_id: af_f2cf9ea8b806c2c89d563079
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.tripleChainComplexShortComplex_shortExact
----
-
 # Relative chains of a triple form a short exact sequence
 
 For a topological triple `(X,A,B)` and coefficients `R`, the canonical maps of

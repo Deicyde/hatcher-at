@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/homology/simplicial-and-singular/homotopy-equivalence-homology-iso.md"}], "object": [{"location": {"declaration": "Hatcher.Singular.homologyIsoOfHomotopyEquiv"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_709463f21814230fca81dc9f", "extensions": {"org.autoform": {"origin": "cited"}}}

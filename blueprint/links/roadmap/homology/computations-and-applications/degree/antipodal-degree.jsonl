@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/homology/computations-and-applications/degree/antipodal-degree.md"}], "object": [{"location": {"declaration": "Hatcher.Sphere.degree_antipodal"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_48c015e1354062483f49ed29", "extensions": {"org.autoform": {"origin": "cited"}}}

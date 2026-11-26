@@ -1,12 +1,3 @@
----
-article_id: af_5ef0b19d3507e0f51deef27d
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.presentationComplexFundamentalGroupEquiv
----
-
 # The presentation complex has the presented fundamental group
 
 Compute the fundamental group of the concrete presentation complex by the

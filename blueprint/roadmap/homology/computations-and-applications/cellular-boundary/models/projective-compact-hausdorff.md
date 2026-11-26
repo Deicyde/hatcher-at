@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: bridged
-article_id: af_41a52de8ed2c3d29dbb1017e
----
-
 # Finite complex projective spaces are compact and Hausdorff
 
 The actual quotient topology on ℂPⁿ is compact and Hausdorff for every n ∈ ℕ, including the singleton ℂP⁰.

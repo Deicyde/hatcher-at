@@ -1,9 +1,3 @@
----
-declaration: theorem
-origin: bridged
-article_id: af_fb8ba936f285a9a3f67861d1
----
-
 # A finite free abelian subquotient has at most the same number of generators
 
 Let F be a free abelian group with a basis of k elements, k ∈ ℕ. For subgroups K ≤ F and L ≤ K, construct a generating family of K/L indexed by at most k elements. Include k = 0; the quotient may have torsion.

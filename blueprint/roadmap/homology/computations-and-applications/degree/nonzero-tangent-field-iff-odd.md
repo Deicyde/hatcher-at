@@ -1,12 +1,3 @@
----
-article_id: af_f60a411fd48e65a2b5a72805
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.exists_nonvanishingTangentVectorField_iff_odd
----
-
 # A sphere has a nonvanishing tangent field exactly in odd dimension
 
 Assemble the two directions of Hatcher's Theorem 2.28. For `0 < n`, prove

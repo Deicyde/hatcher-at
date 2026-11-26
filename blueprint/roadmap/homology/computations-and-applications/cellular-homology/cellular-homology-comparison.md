@@ -1,12 +1,3 @@
----
-article_id: af_d17a273f91f8b9c2dc6da6d6
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.cellularHomologyComparison, Hatcher.ClassicalCW.cellularCyclesIso, Hatcher.ClassicalCW.cellularCyclesIso_hom_iCycles, Hatcher.ClassicalCW.cellularHomologyComparison_forward
----
-
 # Cellular homology agrees with singular homology
 
 **Hatcher, Theorem 2.35.** For every classical CW complex X and n ∈ ℕ,

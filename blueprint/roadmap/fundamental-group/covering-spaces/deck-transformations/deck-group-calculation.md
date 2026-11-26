@@ -1,12 +1,3 @@
----
-article_id: af_fb85ae24e0123ced981ca5c9
-declaration: def
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.BasedConnectedCover.normalizerQuotientEquivDeck
----
-
 # The deck group is the normalizer quotient
 
 **Hatcher, Proposition 1.39 (page 71).** Let `C` be a pointed path-connected

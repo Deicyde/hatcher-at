@@ -1,12 +1,3 @@
----
-article_id: af_b27bb3e374b92a7334095698
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.localDegree_punctured_homotopy_invariance
----
-
 # A puncture-preserving local homotopy preserves local degree
 
 For n > 0, let f and g be continuous self-maps of the standard n-sphere. Suppose U is open and contains x, and a continuous H : I × U → Sⁿ joins their restrictions. Assume H(t,x) = y and H(t,z) ≠ y for every t and every z in U other than x. Then x is an isolated preimage for both maps and their signed local degrees at x over y agree, independently of the witnesses.

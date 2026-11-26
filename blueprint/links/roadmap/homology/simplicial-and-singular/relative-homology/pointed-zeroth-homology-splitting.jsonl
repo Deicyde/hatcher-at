@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/homology/simplicial-and-singular/relative-homology/pointed-zeroth-homology-splitting.md"}], "object": [{"location": {"declaration": "Hatcher.Reduced.homologyZeroIso"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_3c5607bf6881ebacd23e2767", "extensions": {"org.autoform": {"origin": "cited"}}}

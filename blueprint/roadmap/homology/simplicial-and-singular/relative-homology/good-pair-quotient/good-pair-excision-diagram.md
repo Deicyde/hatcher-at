@@ -1,12 +1,3 @@
----
-article_id: af_9ac7fe6f41815e0f139260e2
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.GoodPairData.pointQuotientExcisionDiagram
----
-
 # The complementary excision diagram
 
 For chosen good-pair data, package Hatcher's page-124 comparison diagram from

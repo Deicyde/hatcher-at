@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/van-kampen/attach-two-cells-fundamental-group.md"}], "object": [{"location": {"declaration": "Hatcher.fundamentalGroup_quotient_of_attachTwoCells"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_603e02ac39cec77ac40e768f", "extensions": {"org.autoform": {"origin": "cited"}}}

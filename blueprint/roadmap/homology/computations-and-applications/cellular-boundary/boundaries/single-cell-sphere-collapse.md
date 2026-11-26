@@ -1,9 +1,3 @@
----
-declaration: def
-origin: bridged
-article_id: af_0f527fd2a8499cbc93b83802
----
-
 # Collapse the other cells onto one cell sphere
 
 For a positive-dimensional skeletal quotient and a selected cell β, construct the actual continuous map to that cell’s quotient sphere. Its composite with the selected characteristic quotient is the prescribed sphere identification; every other summand maps to the fixed point. Identify the quotient collapsing the complement of the selected open cell.

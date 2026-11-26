@@ -1,12 +1,3 @@
----
-article_id: af_4c3c37a7ddc05af3eb57338c
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.ConeAttachment.lowerStrongDeformationRetract
----
-
 # The base-side cone cover retracts onto the original space
 
 For a continuous attaching map `f : S → X`, the open member consisting of the

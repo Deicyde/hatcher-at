@@ -1,12 +1,3 @@
----
-article_id: af_38b9433863f982a08be4b162
-declaration: proposition
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Covering.exists_lift_iff_range_le
----
-
 # A map lifts exactly when its fundamental group lands in the covering subgroup
 
 **Hatcher, Proposition 1.33 (pages 61–62).** Let `Y` be path-connected and

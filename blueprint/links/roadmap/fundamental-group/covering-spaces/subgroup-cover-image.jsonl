@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/covering-spaces/subgroup-cover-image.md"}], "object": [{"location": {"declaration": "Hatcher.SubgroupCover.range_map_eq"}, "role": "states"}], "status": "formalized", "kind": "proposition", "id": "af_802f39c4c289595489455819", "extensions": {"org.autoform": {"origin": "cited"}}}

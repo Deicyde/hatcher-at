@@ -1,7 +1,3 @@
----
-article_id: af_354f1dc948b7b1d508d99160
----
-
 # Local degree and the sum over a finite fiber
 
 Hatcher §2.2, printed pages 135–136. This milestone orients the relative

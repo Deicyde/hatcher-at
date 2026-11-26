@@ -1,12 +1,3 @@
----
-article_id: af_15277fbc486e518fc1e1acf7
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.circlePowerMap_inversion_reflection_and_degree
----
-
 # Circle inversion is the standard coordinate reflection
 
 Identify the transported circle map P_{−1} with the standard reflection of S¹ that negates the imaginary, or second real, coordinate. Consequently its signed degree is −1.

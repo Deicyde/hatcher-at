@@ -1,12 +1,3 @@
----
-declaration: theorem
-origin: cited
-article_id: af_b823d91d6171945253f9061e
-lean: Hatcher.ClassicalCW.homologyCellBasisOfSparseCells
-statement: formalized
-proof: formalized
----
-
 # Gaps between cell dimensions give the cell basis in homology
 
 For every classical CW complex X with no adjacent occupied cell dimensions and every n ∈ ℕ, construct Hₙ(X;ℤ) as the free abelian group on the actual n-cells. Preserve those cell generators through the cellular/singular comparison. Include arbitrary cell sets, disconnected spaces and empty complexes.

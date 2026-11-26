@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../../roadmap/fundamental-group/van-kampen/cell-attachment-support/circle-well-pointed.md"}], "object": [{"location": {"declaration": "Hatcher.Circle.wellPointedAt_one"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_2386ef9a815b61ddee2179ef", "extensions": {"org.autoform": {"origin": "bridged"}}}

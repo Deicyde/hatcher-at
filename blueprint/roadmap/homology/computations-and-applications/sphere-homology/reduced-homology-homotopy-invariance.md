@@ -1,12 +1,3 @@
----
-article_id: af_aaaedd2fdc35d4e3dfcabaae
-declaration: theorem
-origin: cited
-lean: Hatcher.Reduced.homologyMap_eq_of_homotopy
-statement: formalized
-proof: formalized
----
-
 # Homotopic maps induce the same reduced-homology map
 
 Let `C` have a category structure, coproducts, a preadditive structure, and

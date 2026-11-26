@@ -1,12 +1,3 @@
----
-declaration: theorem
-origin: cited
-article_id: af_233a40fca7c1cbf0009d559b
-lean: Hatcher.ClassicalCW.homologyVanishingOfNoCells
-statement: formalized
-proof: formalized
----
-
 # Homology vanishes when its degree has no cells
 
 For every classical CW complex X and n ∈ ℕ, if X has no n-cells, its ordinary integral homology Hₙ(X;ℤ) is zero. Include n = 0, empty complexes and unbounded dimensions.

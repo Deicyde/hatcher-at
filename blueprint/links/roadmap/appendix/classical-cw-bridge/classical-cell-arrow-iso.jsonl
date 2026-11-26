@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/appendix/classical-cw-bridge/classical-cell-arrow-iso.md"}], "object": [{"location": {"declaration": "Hatcher.ClassicalCW.classicalCellArrowIso"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_1e6f9ec346e3b7485e19d9a3", "extensions": {"org.autoform": {"origin": "bridged"}}}

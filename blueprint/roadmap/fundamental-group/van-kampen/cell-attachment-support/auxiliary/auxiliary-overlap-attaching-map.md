@@ -1,12 +1,3 @@
----
-article_id: af_7e63b8ef03a5c3457a6322f0
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.VanKampen.AuxiliaryCellAttachment.intersectionMeridian_eq_attachingLoop
----
-
 # Overlap meridians recover the attaching loops
 
 For a family of attached `2`-cells, compare the meridian supplied by each

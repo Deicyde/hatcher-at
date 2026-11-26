@@ -1,12 +1,3 @@
----
-article_id: af_e05bd43fe7cbd9529f3e41d0
-declaration: corollary
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.subcomplexExcision_homologyMap_isIso
----
-
 # Excision holds for a union of CW subcomplexes
 
 **Hatcher, Corollary 2.24 (printed page 126).** Let a classical CW complex

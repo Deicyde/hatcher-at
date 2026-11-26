@@ -1,12 +1,3 @@
----
-article_id: af_9cc2a0377fff8b1774bfdf1f
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Excision.affineSubdivisionIter_diameter_le
----
-
 # Barycentric subdivision contracts simplex diameter
 
 For an affine `n`-simplex `s` in a real normed space and any choice `σ` of

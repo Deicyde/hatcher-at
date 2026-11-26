@@ -1,12 +1,3 @@
----
-article_id: af_51e0760947368340fe1d5c5f
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Circle.mapOfEq_degreeMap_degreeLoopClass_one
----
-
 # The degree-n circle map sends the generator to the degree-n loop
 
 For a natural number `n`, let `dₙ : S¹ → S¹` be the map `z ↦ zⁿ`. The

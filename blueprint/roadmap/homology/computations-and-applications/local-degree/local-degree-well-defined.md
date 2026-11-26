@@ -1,12 +1,3 @@
----
-article_id: af_900f5d8974f03b1b5ecf96b7
-declaration: theorem
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.localDegree_eq_neighborhoodLocalDegree
----
-
 # Local degree is independent of its neighborhood
 
 The intersection of any two local-degree neighborhoods is again an open

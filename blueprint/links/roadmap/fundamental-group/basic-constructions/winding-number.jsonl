@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/basic-constructions/winding-number.md"}], "object": [{"location": {"declaration": "Hatcher.Circle.windingNumber"}, "role": "states"}], "status": "formalized", "kind": "def", "id": "af_6b3c5494b72549253646f155", "extensions": {"org.autoform": {"origin": "bridged"}}}

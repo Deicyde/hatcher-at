@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/van-kampen/van-kampen-surjective.md"}], "object": [{"location": {"declaration": "Hatcher.VanKampen.coverMap_surjective"}, "role": "states"}], "status": "formalized", "kind": "theorem", "id": "af_5040a99f20e27330d5bb75a9", "extensions": {"org.autoform": {"origin": "cited"}}}

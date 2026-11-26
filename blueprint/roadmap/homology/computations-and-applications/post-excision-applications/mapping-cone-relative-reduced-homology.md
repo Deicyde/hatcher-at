@@ -1,11 +1,3 @@
----
-article_id: af_a2e49a25cd3a4caa14d957af
-declaration: def
-origin: cited
-statement: formalized
-lean: Hatcher.Relative.mappingConeHomologyIso
----
-
 # Relative homology is reduced homology of the mapping cone
 
 **Hatcher, §2.1 (page 125).** For every topological pair `P`, coefficient

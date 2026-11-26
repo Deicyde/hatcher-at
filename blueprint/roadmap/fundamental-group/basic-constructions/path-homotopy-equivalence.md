@@ -1,12 +1,3 @@
----
-article_id: af_01a39a5c18f0240f7888c0f7
-declaration: theorem
-origin: cited
-mathlib: true
-mathlib_declaration: Path.Homotopic.equivalence
-mathlib_file: Mathlib/Topology/Homotopy/Path.lean
----
-
 # Path homotopy is an equivalence relation
 
 **Hatcher, Proposition 1.2 (page 26).** Homotopy of paths relative to their

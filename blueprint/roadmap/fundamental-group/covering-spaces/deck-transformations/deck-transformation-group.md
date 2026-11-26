@@ -1,12 +1,3 @@
----
-article_id: af_ebb4b344828f45dcaaa53f6c
-declaration: def
-origin: cited
-mathlib: true
-mathlib_declaration: deck
-mathlib_file: Mathlib/Topology/Covering/Deck.lean
----
-
 # Deck transformations and normal covers
 
 For a map `p : E → X`, Mathlib v4.34.1 defines `deck p` as the subgroup of

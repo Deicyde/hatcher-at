@@ -1,12 +1,3 @@
----
-article_id: af_5f0a0a354967820017e486a7
-declaration: structure
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.ClassicalCW.RegularNeighborhoodSystem
----
-
 # A common regular-neighborhood system for subcomplexes
 
 For a classical CW complex `C`, construct one fixed-width regular-neighborhood

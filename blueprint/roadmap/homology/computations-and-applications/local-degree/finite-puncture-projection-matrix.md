@@ -1,12 +1,3 @@
----
-article_id: af_2420d65a757f7dd87b503542
-declaration: theorem
-origin: cited
-statement: formalized
-proof: formalized
-lean: Hatcher.Sphere.finitePunctureProjection_comp_summand
----
-
 # Finite-puncture projections have the diagonal matrix
 
 For a fiber point `x`, inclusion of complements defines Hatcher's projection

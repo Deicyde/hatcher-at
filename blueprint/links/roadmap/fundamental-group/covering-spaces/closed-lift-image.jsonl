@@ -1,0 +1,1 @@
+{"subject": [{"type": "generic", "uri": "../../../../roadmap/fundamental-group/covering-spaces/closed-lift-image.md"}], "object": [{"location": {"declaration": "Hatcher.Covering.mem_range_map_iff_monodromy_fixed"}, "role": "states"}], "status": "formalized", "kind": "proposition", "id": "af_c98f72c75c3f49caac29c0e7", "extensions": {"org.autoform": {"origin": "cited"}}}

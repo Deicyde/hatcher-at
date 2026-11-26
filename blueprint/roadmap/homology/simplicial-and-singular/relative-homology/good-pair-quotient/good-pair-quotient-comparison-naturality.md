@@ -1,12 +1,3 @@
----
-article_id: af_9896b1645c08fe4c85a03257
-declaration: def
-origin: bridged
-statement: formalized
-proof: formalized
-lean: Hatcher.Relative.goodPairPointQuotientRelativeHomologyNatIso
----
-
 # The good-pair quotient comparison is natural
 
 Restrict relative homology and reduced homology of the point quotient to the
